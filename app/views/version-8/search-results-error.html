@@ -1,0 +1,233 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search results
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container-fluid">
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+      
+          <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="search">Search</a></li>
+      <li class="nhsuk-breadcrumb__item">Search results</li>
+          </ol>
+
+        </div>
+      </div>
+  
+      <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="search-results">Back to search results</a></p>
+
+    </div>
+</nav>
+
+  <div class="nhsBSA-sidebar-container">
+
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+
+        <div class="nhsuk-width-container-fluid">
+
+          <div class="nhsuk-main-wrapper" id="maincontent">
+<div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">
+                  Search results
+                </h1>
+              </div>
+              <div class="nhsuk-grid-column-one-third">
+             <a href="create-person"><button  class="nhsuk-button" type="submit" style="float:right">
+  Create new patient record 
+</button></a>
+                
+</div>
+  
+            </div>
+            <hr style="border-bottom:4px solid #005eb8; margin:0">
+              
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                  <br>
+                  <br>
+                  <h2 class="nhsuk-heading-s">Showing results for <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right:20px; margin-left:5px;">Tony</span><span style="color: #354550;" class="nhsuk-tag nhsuk-tag--green">Smith</span></h2>
+                <table id="sortable" class="nhsuk-table nhsuk-table-u-margin-0 nhsuk-table-clickable main-table">
+
+                      <!-- TABLE START -->
+                      <thead class="nhsuk-table__head">
+                        <tr class="nhsuk-table__row">
+
+                          <th class="nhsuk-table__header" aria-sort="none" scope="col">
+                           First name
+                          </th>
+
+                          <th class="nhsuk-table__header" aria-sort="none" scope="col">
+                            Last name
+
+                          </th>
+
+                          
+                          <th class="nhsuk-table__header" aria-sort="none" scope="col">
+                            Date of birth
+                          </th>
+
+                            <th class="nhsuk-table__header" aria-sort="none" scope="col">
+                            Action
+                          </th>
+                            
+
+                        </tr>
+                      </thead>
+
+                      <tbody class="nhsuk-table__body nhsuk-body-">
+             
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">Tony</td>
+                          <td class="nhsuk-table__cell">Smith</td>
+                          <td class="nhsuk-table__cell">22/02/1984</td>
+               
+                        <td class="nhsuk-table__cell"><a href="person-details">View record</a></td>
+                        </tr>
+                            
+                            <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">Tony</td>
+                          <td class="nhsuk-table__cell">Smith</td>
+                          <td class="nhsuk-table__cell">22/02/1984</td>
+                   
+                        <td class="nhsuk-table__cell"><a href="person-details">View record</a></td>
+                            </tr>
+                            
+                            <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">Tony</td>
+                          <td class="nhsuk-table__cell">Smith</td>
+                          <td class="nhsuk-table__cell">22/02/1984</td>
+             
+                        <td class="nhsuk-table__cell"><a href="person-details">View record</a></td>
+                            </tr>
+                            
+                            <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">Tony</td>
+                          <td class="nhsuk-table__cell">Smith</td>
+                          <td class="nhsuk-table__cell">22/02/1984</td>
+                      
+                        <td class="nhsuk-table__cell"><a href="person-details">View record</a></td>
+                            </tr>
+
+
+                      </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        
+         <nav class="nhsuk-pagination" id="pagination-label">
+
+              <p class="nhsuk-u-visually-hidden" aria-labelledby="pagination-label">Pagination navigation</p>
+
+              <ul class="nhsuk-pagination__list">
+                <li class="nhsuk-pagination__item  nhsuk-pagination__item--prev">
+                  <a class="nhsuk-pagination__link" href="">Previous<span class="nhsuk-u-visually-hidden"> set of
+                      pages</span></a>
+                </li>
+
+                <li class="nhsuk-pagination__item nhsuk-pagination__item--active">1</li>
+
+                <li class="nhsuk-pagination__item"><a class="nhsuk-pagination__link" href="/page=2">2</a></li>
+
+                <li class="nhsuk-pagination__item"><a class="nhsuk-pagination__link" href="/page=3">3</a></li>
+
+                <li class="nhsuk-pagination__item  nhsuk-pagination__item--next">
+                  <a class="nhsuk-pagination__link" href="">Next<span class="nhsuk-u-visually-hidden"> set of
+                      pages</span></a>
+                </li>
+              </ul>
+              <p class="nhsuk-pagination__results">Showing <b>1</b> to <b>10</b> of <b>2,142</b> results</p>
+            </nav>
+
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="nhsBSA-sidebar-nav">
+
+        <div class="side-nav">
+
+            <h3>Filters</h3>
+
+            
+             <div class="nhsuk-form-group" style="width: 60%; margin-left:30px;">
+  <label class="nhsuk-label nhsuk-!-width-two-thirds" for="username">
+   First name
+  </label>
+  <input class="nhsuk-input nhsuk-!-width-two-thirds" id="username" name="username" type="email" data-validate="required" value="Tony">
+</div>
+            
+            <div class="nhsuk-form-group" style="width: 60%; margin-left:30px;">
+  <label class="nhsuk-label nhsuk-!-width-two-thirds" for="username">
+   Last name
+  </label>
+  <input class="nhsuk-input nhsuk-!-width-two-thirds" id="username" name="username" type="email" data-validate="required" value="Smith">
+</div>
+            
+  <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+
+            <div class="nhsuk-form-group" style="width: 60%; margin-left:30px;">
+
+              <div class="nhsuk-form-group nhsuk-form-group--error">
+                <label class="nhsuk-label nhsuk-!-width-two-thirds" for="username">
+                  Date of birth
+                 </label>
+                <span class="nhsuk-error-message" id="example-error">
+                  <span class="nhsuk-u-visually-hidden">Error:</span> Enter a real date
+                </span>
+                <input class="nhsuk-input nhsuk-!-width-two-thirds nhsuk-input--error" id="example" name="example" type="text" data-validate="required" aria-describedby="example-error" value="3">
+              </div>
+  
+</div>
+       <div class="nhsuk-form-group" style="width: 60%; margin-left:30px;">
+  <label class="nhsuk-label nhsuk-!-width-two-thirds" for="username">
+   Country
+  </label>
+  <input class="nhsuk-input nhsuk-!-width-two-thirds" id="username" name="username" type="email" data-validate="required" value="">
+</div>
+      
+<div class="nhsuk-form-group" style="width: 60%; margin-left:30px;">
+        <button  class="nhsuk-button" type="submit">
+ Search again
+</button>
+      </div>
+
+  </fieldset>
+                
+
+</div>
+        
+
+          <!-- <div class="action-buttons">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">Add note</button>
+            </div> -->
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}
