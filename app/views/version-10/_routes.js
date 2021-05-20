@@ -30,10 +30,10 @@ router.post('/select-entitlement', function (req, res) {
   const selectedRadio = req.body.entitlement;
 
   if (selectedRadio === "s2"){
-    res.redirect('address-details')
+    res.redirect('create-person-s2')
   }
   if (selectedRadio === "s1"){
-    res.redirect('uk-address')
+    res.redirect('create-person-s1')
   }
   if (selectedRadio === "ehic"){
     res.redirect('create-person-entitlement')
@@ -53,13 +53,39 @@ router.post('/have-s1', function (req, res) {
   const selectedRadio = req.body.s1;
 
   if (selectedRadio === "yes"){
-    res.redirect('s1-details')
+    res.redirect('so72-details')
   }
   if (selectedRadio === "no"){
     res.redirect('check-your-answers-no-s1')
   }
   else {
     res.redirect('have-s1')
+  }
+
+})
+
+//s1-status.html
+router.post('/s1-status', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "pensioner"){
+    res.redirect('s1-details-pensioner')
+  }
+  if (selectedRadio === "dependant of pensioner"){
+    res.redirect('s1-status')
+  }
+  if (selectedRadio === "posted worker"){
+    res.redirect('s1-status')
+  }
+  if (selectedRadio === "dependant of posted worker"){
+    res.redirect('s1-status')
+  }
+  if (selectedRadio === "dependant of EU insured person"){
+    res.redirect('s1-status')
+  }
+  else {
+    res.redirect('s1-status')
   }
 
 })
@@ -80,6 +106,59 @@ router.post('/registered', function (req, res) {
   }
 
 })
+
+//s1-eligibility.html
+router.post('/eligible-s1', function (req, res) {
+
+  const selectedRadio = req.body.s1;
+
+  if (selectedRadio === "yes"){
+    res.redirect('print-so71')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('close-s1-reason')
+  }
+  else {
+    res.redirect('s1-eligibility')
+  }
+
+})
+
+//received-so72.html
+router.post('/received-so72', function (req, res) {
+
+  const selectedRadio = req.body.s1;
+
+  if (selectedRadio === "yes"){
+    res.redirect('add-s1-entitlement')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('upload-negative-so73')
+  }
+  else {
+    res.redirect('received-so72')
+  }
+
+})
+
+//claim-print-again.html
+router.post('/print-again', function (req, res) {
+
+  const selectedRadio = req.body.print;
+
+  if (selectedRadio === "yes"){
+    res.redirect('claim-print-confirmation')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('claim-print')
+  }
+  else {
+    res.redirect('claim-print-again')
+  }
+
+})
+
+
 
 
 module.exports = router;
