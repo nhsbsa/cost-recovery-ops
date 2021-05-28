@@ -33,7 +33,7 @@ router.post('/select-entitlement', function (req, res) {
     res.redirect('create-person-s2')
   }
   if (selectedRadio === "s1"){
-    res.redirect('create-person-s1')
+    res.redirect('s1-status')
   }
   if (selectedRadio === "ehic"){
     res.redirect('create-person-entitlement')
@@ -70,19 +70,13 @@ router.post('/s1-status', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "pensioner"){
-    res.redirect('s1-details-pensioner')
-  }
-  if (selectedRadio === "dependant of pensioner"){
-    res.redirect('s1-status')
+    res.redirect('create-person-s1')
   }
   if (selectedRadio === "posted worker"){
-    res.redirect('s1-status')
-  }
-  if (selectedRadio === "dependant of posted worker"){
-    res.redirect('s1-status')
+    res.redirect('create-person-e106')
   }
   if (selectedRadio === "dependant of EU insured person"){
-    res.redirect('s1-status')
+    res.redirect('create-person-e109')
   }
   else {
     res.redirect('s1-status')
