@@ -152,6 +152,26 @@ router.post('/print-again', function (req, res) {
 
 })
 
+//dl1609-response.html
+router.post('/dl1609-response', function (req, res) {
+
+  const selectedRadio = req.body.e106;
+
+  if (selectedRadio === "change"){
+    res.redirect('person-details-e106-2')
+  }
+  if (selectedRadio === "dependant"){
+    res.redirect('create-dependant-e106')
+  }
+  if (selectedRadio === "cancel"){
+    res.redirect('create-person-e109')
+  }
+  else {
+    res.redirect('s1-status')
+  }
+
+})
+
 
 
 
