@@ -1,0 +1,254 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Enter institution name manually
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+   <div class="nhsuk-width-container-fluid">
+      <div class="nhsuk-grid-row">
+         <div class="nhsuk-grid-column-full">
+            <ol class="nhsuk-breadcrumb__list">
+               <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="search">Search</a></li>
+               <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="search-results">Search results</a></li>
+               <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="entitlements">Tony Smith (Entilements and treatments)</a></li>
+               <li class="nhsuk-breadcrumb__item">Add new entitlement</li>
+            </ol>
+         </div>
+      </div>
+      <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="search-results">Back to search results</a></p>
+   </div>
+ </nav>
+ <div class="nhsBSA-sidebar-container">
+   <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+         <div class="nhsuk-width-container-fluid">
+            <div class="nhsuk-main-wrapper" id="maincontent">
+               <div class="nhsuk-grid-row">
+                  <div class="nhsuk-grid-column-two-thirds">
+                     <h1 class="nhsuk-heading-xl">
+                        Add new entitlement for Tony Smith
+                     </h1>
+                  </div>
+                  <div class="nhsuk-grid-column-one-third">
+                  </div>
+               </div>
+               <hr style="border-bottom:4px solid #005eb8; margin:0">
+               <div class="nhsuk-scrollable-pane">
+                  <br>
+                  <div class="nhsuk-grid-row">
+                     <div class="nhsuk-grid-column-one-half">
+                        <div class="nhsuk-form-group">
+                           <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
+                              <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                              </legend>
+                              <div class="nhsuk-hint" id="contact-hint">
+                                 Select one option
+                              </div>
+                              <div class="nhsuk-radios nhsuk-radios--conditional">
+                                 <div class="nhsuk-radios__item">
+                                    <input class="nhsuk-radios__input" id="contact-1" name="contact" type="radio" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
+                                    <label class="nhsuk-label nhsuk-radios__label" for="contact-1">
+                                    S2
+                                    </label>
+                                 </div>
+                                 <div class="nhsuk-radios__item">
+                                    <input class="nhsuk-radios__input" id="contact-2" name="contact" type="radio" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
+                                    <label class="nhsuk-label nhsuk-radios__label" for="contact-2">
+                                    EHIC
+                                    </label>
+                                 </div>
+                                 <div class="nhsuk-radios__item">
+                                    <input class="nhsuk-radios__input" id="contact-3" name="contact" type="radio" value="text" aria-controls="conditional-contact-3" aria-expanded="false">
+                                    <label class="nhsuk-label nhsuk-radios__label" for="contact-3">
+                                    PRC
+                                    </label>
+                                 </div>
+                                 <br>
+                                 <div class="nhsuk-radios__conditional" id="conditional-contact-1">
+                                    <div class="nhsuk-form-group">
+                                       <div class="nhsuk-form-group">
+                                          <h2 class="nhsuk-heading-s">
+                                             Issuing member state
+                                          </h2>
+                                          <input class="nhsuk-input  nhsuk-input--width-20" id="country" name="country" type="text" value="">
+                                       </div>
+                                       <hr>
+                                       <div class="nhsuk-form-group">
+                                          <h2 class="nhsuk-heading-s">
+                                             Hospital provider
+                                          </h2>
+                                          <input class="nhsuk-input  nhsuk-input--width-20" id="hospitalprovider" name="hospitalprovider" type="text" value="">
+                                       </div>
+                                       <hr>
+                                       <div class="nhsuk-form-group">
+                                       <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                                          <legend class="nhsuk-fieldset__legend nhsuk-label--l">
+                                             <h3 class="nhsuk-heading-s" style="margin-bottom:0">
+                                                S2 issue date
+                                             </h3>
+                                          </legend>
+                                          <div class="nhsuk-date-input" id="example">
+                                             <div class="nhsuk-date-input__item">
+                                                <div class="nhsuk-form-group">
+                                                   <label class="nhsuk-label nhsuk-date-input__label" for="example-day">
+                                                   Day
+                                                   </label>
+                                                   <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-day" name="example-day" type="number" pattern="[0-9]*">
+                                                </div>
+                                             </div>
+                                             <div class="nhsuk-date-input__item">
+                                                <div class="nhsuk-form-group">
+                                                   <label class="nhsuk-label nhsuk-date-input__label" for="example-month">
+                                                   Month
+                                                   </label>
+                                                   <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-month" name="example-month" type="number" pattern="[0-9]*">
+                                                </div>
+                                             </div>
+                                             <div class="nhsuk-date-input__item">
+                                                <div class="nhsuk-form-group">
+                                                   <label class="nhsuk-label nhsuk-date-input__label" for="example-year">
+                                                   Year
+                                                   </label>
+                                                   <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="example-year" name="example-year" type="number" pattern="[0-9]*">
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </fieldset>
+                                       <hr>
+                                       <div class="nhsuk-grid-row">
+                                         <div class="nhsuk-grid-column-one-half">
+                                            <div class="nhsuk-form-group">
+                                               <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                                                  <legend class="nhsuk-fieldset__legend nhsuk-label--l">
+                                                     <h3 class="nhsuk-heading-s" style="margin-bottom:0">
+                                                        S2  start date
+                                                     </h3>
+                                                  </legend>
+                                                  <div class="nhsuk-date-input" id="example">
+                                                     <div class="nhsuk-date-input__item">
+                                                        <div class="nhsuk-form-group">
+                                                           <label class="nhsuk-label nhsuk-date-input__label" for="example-day">
+                                                           Day
+                                                           </label>
+                                                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-day" name="example-day" type="number" pattern="[0-9]*">
+                                                        </div>
+                                                     </div>
+                                                     <div class="nhsuk-date-input__item">
+                                                        <div class="nhsuk-form-group">
+                                                           <label class="nhsuk-label nhsuk-date-input__label" for="example-month">
+                                                           Month
+                                                           </label>
+                                                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-month" name="example-month" type="number" pattern="[0-9]*">
+                                                        </div>
+                                                     </div>
+                                                     <div class="nhsuk-date-input__item">
+                                                        <div class="nhsuk-form-group">
+                                                           <label class="nhsuk-label nhsuk-date-input__label" for="example-year">
+                                                           Year
+                                                           </label>
+                                                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="example-year" name="example-year" type="number" pattern="[0-9]*">
+                                                        </div>
+                                                     </div>
+                                                  </div>
+                                               </fieldset>
+                                            </div>
+                                         </div>
+                                         <div class="nhsuk-grid-column-one-half">
+                                            <div class="nhsuk-form-group">
+                                               <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                                                  <legend class="nhsuk-fieldset__legend nhsuk-label--l">
+                                                     <h3 class="nhsuk-heading-s" style="margin-bottom:0">
+                                                        S2 end date
+                                                     </h3>
+                                                  </legend>
+                                                  <div class="nhsuk-date-input" id="example">
+                                                     <div class="nhsuk-date-input__item">
+                                                        <div class="nhsuk-form-group">
+                                                           <label class="nhsuk-label nhsuk-date-input__label" for="example-day">
+                                                           Day
+                                                           </label>
+                                                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-day" name="example-day" type="number" pattern="[0-9]*">
+                                                        </div>
+                                                     </div>
+                                                     <div class="nhsuk-date-input__item">
+                                                        <div class="nhsuk-form-group">
+                                                           <label class="nhsuk-label nhsuk-date-input__label" for="example-month">
+                                                           Month
+                                                           </label>
+                                                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-month" name="example-month" type="number" pattern="[0-9]*">
+                                                        </div>
+                                                     </div>
+                                                     <div class="nhsuk-date-input__item">
+                                                        <div class="nhsuk-form-group">
+                                                           <label class="nhsuk-label nhsuk-date-input__label" for="example-year">
+                                                           Year
+                                                           </label>
+                                                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="example-year" name="example-year" type="number" pattern="[0-9]*">
+                                                        </div>
+                                                     </div>
+                                                  </div>
+                                               </fieldset>
+                                            </div>
+                                         </div>
+                                      </div>
+                                      <hr>
+                                       <div class="nhsuk-form-group">
+                                          <h2 class="nhsuk-heading-s">
+                                             Institution ID
+                                          </h2>
+                                          <input class="nhsuk-input  nhsuk-input--width-20" id="insID" name="insID" type="text" value="2832">
+                                       </div>
+                                       <div class="nhsuk-form-group">
+                                          <h2 class="nhsuk-heading-s">
+                                             Institution name
+                                          </h2>
+                                          <input class="nhsuk-input  nhsuk-input--width-20" id="insname" name="insname" type="text" value="">
+                                       </div>
+                                    </div>
+                                    <br>
+                                    <div class="action-buttons">
+                                       <a class="nhsuk-button nhsuk-button--primary" href="entitlements-s2-confirmation">Add S2</a>
+                                    </div>
+                                 </div>
+                                 <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-3">
+                                    <div class="nhsuk-form-group">
+                                       Not available yet
+                                    </div>
+                                 </div>
+                                 <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-2">
+                                    <div class="nhsuk-form-group">
+                                       Not available yet
+                                    </div>
+                                 </div>
+                              </div>
+                           </fieldset>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+ </div>
+
+{% endblock %}
+
