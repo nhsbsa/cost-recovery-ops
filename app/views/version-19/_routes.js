@@ -164,7 +164,7 @@ router.post('/dl1609-response', function (req, res) {
     res.redirect('create-dependant-e106')
   }
   if (selectedRadio === "cancel"){
-    res.redirect('create-person-e109')
+    res.redirect('#')
   }
   else {
     res.redirect('s1-status')
