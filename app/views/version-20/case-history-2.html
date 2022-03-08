@@ -1,0 +1,281 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Manage cost recovery
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container-fluid">
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+      
+          <ol class="nhsuk-breadcrumb__list">
+              <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="home">Home</a></li>
+            <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="search-results">Search results</a></li>
+            <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="person-details">Tony Smith(Personal details)</a></li>
+      <li class="nhsuk-breadcrumb__item">Tony Smith (Case history)</li>
+          </ol>
+
+        </div>
+      </div>
+  
+      <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="search-results">Back to search results</a></p>
+
+    </div>
+</nav>
+
+  <div class="nhsBSA-sidebar-container">
+
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+
+        <div class="nhsuk-width-container-fluid">
+
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {# <div class="nhsuk-grid-row">
+                    <div class="nhsuk-grid-column-full">
+
+                        <div class="panel panel-border-wide alert-default">
+                            <h2 class="nhsuk-heading-s nhsuk-u-padding-top-3 nhsuk-u-margin-bottom-3">English is their second language. May require an interpreter.</h2>
+                        </div>
+
+                    </div>
+                </div> #}
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl" style="margin-bottom: 5px;">
+                  Case history for Tony Smith
+                </h1>
+                <p><b>Person ID: 3432234</b></p>
+              </div>
+            
+            </div>
+            <hr style="border-bottom:4px solid #005eb8; margin:0">
+            <div class="nhsuk-scrollable-pane">
+                <br>
+               
+
+              <div class="nhsuk-scrollable-pane__wrapper">
+                <div class="nhsuk-tabs-container">
+
+
+                </div>
+
+                <div id="table-scroll" class="table-scroll">
+                  <div class="nhsuk-table-responsive nhsuk-u-margin-top-0 table-wrap">
+                      
+                    
+                    <table id="sortable" class="nhsuk-table nhsuk-table-u-margin-0 nhsuk-table-clickable main-table">
+
+                      <thead class="nhsuk-table__head">
+                        <tr class="nhsuk-table__row">
+
+
+                          <th class="nhsuk-table__header"  scope="col">
+                           Date and Time
+
+                          </th>
+
+                          <th class="nhsuk-table__header"  scope="col">
+                           Treatment ID/ Claim ID
+
+                          </th>
+                          <th class="nhsuk-table__header"  scope="col">
+                           Entitlement
+
+                          </th>
+
+                          <th class="nhsuk-table__header" scope="col">
+                           Description
+
+                          </th>
+                          <th class="nhsuk-table__header"  scope="col">
+                            Action
+                          </th>
+
+                          <th class="nhsuk-table__header fixed-side"  scope="col">
+                            Operator/OVM
+                          </th>
+
+      
+                        </tr>
+                      </thead>
+
+                      <tbody class="nhsuk-table__body nhsuk-body-">
+
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">15/06/2021 10:00</td>
+                          <td class="nhsuk-table__cell">-</td>
+                          <td class="nhsuk-table__cell">PRC</td>
+                          <td class="nhsuk-table__cell">First Name [James] Last Name [Wilson]<br> Pending Entitlement [Under review] </td>
+                          <td class="nhsuk-table__cell">Pending entitlement assigned</td>
+                          <td class="nhsuk-table__cell">joe.bloggs@nhs.net</td>
+                        </tr>
+
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">13/05/2021 11:05</td>
+                          <td class="nhsuk-table__cell">564512567</td>
+                          <td class="nhsuk-table__cell">EHIC</td>
+                          <td class="nhsuk-table__cell">First Name [James] Last Name [Wilson]<br> Ordinary Residency[Cancelled] Cancellation Reason[Person is ordinarily resident]</td>
+                          <td class="nhsuk-table__cell">Review Treatment cancelled </td>
+                          <td class="nhsuk-table__cell">sean.barnes@nhs.net</td>
+                        </tr> 
+                        
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">13/05/2021 11:03</td>
+                          <td class="nhsuk-table__cell">564512567</td>
+                          <td class="nhsuk-table__cell">EHIC</td>
+                          <td class="nhsuk-table__cell">First Name [James] Last Name [Wilson]<br> Ordinary Residency[Reviewed]</td>
+                          <td class="nhsuk-table__cell">Treatment reviewed</td>
+                          <td class="nhsuk-table__cell">sean.barnes@nhs.net</td>
+                        </tr>
+
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">13/05/2021 11:00</td>
+                          <td class="nhsuk-table__cell">564512567</td>
+                          <td class="nhsuk-table__cell">EHIC</td>
+                          <td class="nhsuk-table__cell">First Name [James] Last Name [Wilson] <br>Ordinary Residency [Under review] </td>
+                          <td class="nhsuk-table__cell">Review treatment Assigned</td>
+                          <td class="nhsuk-table__cell">sean.barnes@nhs.net</td>
+                        </tr>
+
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">15/04/2021 11:00</td>
+                          <td class="nhsuk-table__cell">564512434</td>
+                          <td class="nhsuk-table__cell">PRC</td>
+                          <td class="nhsuk-table__cell">Start date[04/07/2021] to [10/07/2021] <br> Reason[Treatment dates have changed]</td>
+                          <td class="nhsuk-table__cell">Treatment Details Update</td>
+                          <td class="nhsuk-table__cell">charlie.gibson@nhs.net</td>
+                        </tr>
+
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">15/03/2021 11:00</td>
+                          <td class="nhsuk-table__cell">564512419</td>
+                          <td class="nhsuk-table__cell">EHIC</td>
+                          <td class="nhsuk-table__cell">[Processed] to [Cancelled] Cancellation <br>Reason[Patient is ordinary resident]</td>
+                          <td class="nhsuk-table__cell">Treatment status change</td>
+                          <td class="nhsuk-table__cell">sean.barnes@nhs.net</td>
+                        </tr>
+
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">13/03/2021 10:00</td>
+                          <td class="nhsuk-table__cell">564512419</td>
+                          <td class="nhsuk-table__cell">EHIC</td>
+                          <td class="nhsuk-table__cell">Treatment start date [1/1/2021] Treatment <br>end date [10/04/2021] Status[Processed] additional cost[Confirmed]</td>
+                          <td class="nhsuk-table__cell">Additional Cost with new treatment</td>
+                          <td class="nhsuk-table__cell">OVM- jayden.cook@nhs.net</td>
+                        </tr>
+
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">12/03/2021 10:00</td>
+                          <td class="nhsuk-table__cell">564512419</td>
+                          <td class="nhsuk-table__cell">EHIC</td>
+                          <td class="nhsuk-table__cell">Treatment start date [1/1/2021] Treatment <br>end date [10/04/2021] status [Processed]</td>
+                          <td class="nhsuk-table__cell">Treatment added</td>
+                          <td class="nhsuk-table__cell">OVM- jayden.cook@nhs.net</td>
+                        </tr>
+
+
+                      
+                      </tbody>
+                    </table>
+
+
+                  </div>
+
+                </div>
+
+                <nav class="nhsuk-pagination" id="pagination-label">
+
+                  <p class="nhsuk-u-visually-hidden" aria-labelledby="pagination-label">Pagination navigation</p>
+    
+                  <ul class="nhsuk-pagination__list">
+                    <li class="nhsuk-pagination__item  nhsuk-pagination__item--prev">
+                      <a class="nhsuk-pagination__link" href="">Previous<span class="nhsuk-u-visually-hidden"> set of
+                          pages</span></a>
+                    </li>
+    
+                    <li class="nhsuk-pagination__item"><a class="nhsuk-pagination__link" href="case-history">1</a></li>
+
+                    <li class="nhsuk-pagination__item nhsuk-pagination__item--active">2</li>
+
+    
+                    <li class="nhsuk-pagination__item"><a class="nhsuk-pagination__link" href="case-history-3">3</a></li>
+    
+                    <li class="nhsuk-pagination__item  nhsuk-pagination__item--next">
+                      <a class="nhsuk-pagination__link" href="">Next<span class="nhsuk-u-visually-hidden"> set of
+                          pages</span></a>
+                    </li>
+                  </ul>
+                  <p class="nhsuk-pagination__results">Showing <b>1</b> to <b>10</b> of <b>2,142</b> results</p>
+                </nav>
+
+              </div>
+              <div></div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+     <!-- <div class="nhsBSA-sidebar-nav">
+
+        <div class="side-nav">
+
+          <h3>Tony Smith<span class="nhsuk-caption-m nhsuk-caption--bottom">
+              <span class="nhsuk-u-visually-hidden">
+                  -
+                </span>3432234</span>
+           </h3>
+
+          <ul>
+            <div id="options" class="options">
+              <li>
+                <a href="person-details">Person details</a>
+              </li>
+              <li>
+
+    </li>
+              <li>
+                <a href="entitlements">Entitlements and treatments</a>
+              </li>
+                <li>
+                <a href="case-history" class="active" >Case history</a>
+              </li>
+                <li>
+                <a href="disallowed-item">Accessibility needs</a>
+              </li>
+              
+            </div>
+          </ul>
+
+       
+        </div> -->
+
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}
