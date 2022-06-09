@@ -16,30 +16,29 @@ UK claims treatment forms
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
-{% block beforeContent %}{% endblock %}
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+    
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="uk-claims-search">UK claims (Search by claim ID)</a></li>
+          <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="claim-list-1">Search results</a></li>
+          <li class="nhsuk-breadcrumb__item">View Claim ID (Treatment forms)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="search-results">Back to UK claims (Create a new claim)</a></p>
+
+  </div>
+</nav>
+{% endblock %}
 
 <!-- Your page content goes inside the content block -->
 <!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
 {% block content %}
-
-<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
-    <div class="nhsuk-width-container-fluid">
-      <div class="nhsuk-grid-row">
-        <div class="nhsuk-grid-column-full">
-      
-          <ol class="nhsuk-breadcrumb__list">
-            <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="uk-claims-search">UK claims (Search by claim ID)</a></li>
-            <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="claim-list-1">Search results</a></li>
-            <li class="nhsuk-breadcrumb__item">View Claim ID (Treatment forms)</li>
-          </ol>
-        </div>
-      </div>
-  
-      <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="search-results">Back to UK claims (Create a new claim)</a></p>
-
-    </div>
-</nav>
-
   <div class="nhsBSA-sidebar-container">
 
     <div class="nhsBSA-sidebar-wrapper">
@@ -49,15 +48,7 @@ UK claims treatment forms
 
           <div class="nhsuk-main-wrapper" id="maincontent">
 
-            {# <div class="nhsuk-grid-row">
-                    <div class="nhsuk-grid-column-full">
 
-                        <div class="panel panel-border-wide alert-default">
-                            <h2 class="nhsuk-heading-s nhsuk-u-padding-top-3 nhsuk-u-margin-bottom-3">English is their second language. May require an interpreter.</h2>
-                        </div>
-
-                    </div>
-                </div> #}
 
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-one-third">
@@ -68,14 +59,14 @@ UK claims treatment forms
 
               <div class="nhsuk-grid-column-two-thirds">
                 <a href="#"><button  class="nhsuk-button nhsuk-button--secondary" type="submit" style="float: right;">
-                  Amend agreement type<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
+                  Print selected treatments<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
                 </button></a>
-                <a href="print-summary"><button  class="nhsuk-button" type="submit" style="float: right;  margin-right: 20px;">
-                Print<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
-                </button></a>
+
           
               </div>
           </div>
+
+          <!--start secondary navigation-->
           
             <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
               <ul class="nhsuk-secondary-navigation__list">
@@ -99,16 +90,24 @@ UK claims treatment forms
                   <span class="nhsuk-u-visually-hidden">View resubmissions for claim 9543</span>
                 </li>
 
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link"  href="claim-case-history">Claim history</a>
+                  <span class="nhsuk-u-visually-hidden">View claim history for claim 9543</span>
+                </li>
+
               </ul>
             </nav>
                   
                 <hr style="border-bottom:1px solid #ccc; margin:0">
+
+            <!--end secondary navigation-->
     <br><br>
+
+    <!-- start search-->
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-two-thirds">
     <div class="nhsuk-hint">
-      Search for a single treatment using the treatment ID number or the patient's last name. Search for up to 8 treatments at once by separating each treatment ID number with a comma. For example, 10637,16095,17011  
-    </div>
+      Search for a single treatment using the treatment ID number or patient's last name. Search for up to 8 treatments at once by separating each treatment ID number with a comma. For example, 10637,16095, 17011    </div>
 
     <form class="nhsuk-header__search-form nhsuk-header__search-form--search-results" id="search" action="/search/" method="get" role="search">
       <label class="nhsuk-u-visually-hidden" for="search-results-field">Search by treatment ID to add treatment for printing or to resub</label>
@@ -126,7 +125,9 @@ UK claims treatment forms
     </div>
     </div>
 
+    <!--end search-->
 
+<!--start filter-->
     <details class="nhsuk-details-1" >
       <summary class="nhsuk-details__summary-1">
         <span class="nhsuk-details__summary-text-1">
@@ -134,30 +135,43 @@ UK claims treatment forms
         </span>
       </summary>
       <div class="nhsuk-details__text">
-        <p>Select all agreements that you want to see the treatment forms for.</p>
-        <div class="nhsuk-checkboxes">
+       
+        <div class="nhsuk-form-group">
 
-          <div class="nhsuk-checkboxes__item" style="display:inline-block; margin-right: 20px;">
-            <input class="nhsuk-checkboxes__input" id="example-1" name="example" type="checkbox" value="TCA">
-            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
-              TCA
-            </label>
-          </div>
-    
-          <div class="nhsuk-checkboxes__item"  style="display:inline-block;">
-            <input class="nhsuk-checkboxes__input" id="example-2" name="example" type="checkbox" value="WA">
-            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-2">
-              WA
-            </label>
-          </div>
-    
+          <fieldset class="nhsuk-fieldset">
+            <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+              <h1 class="nhsuk-heading-xs">
+                Select the agreement that you want to see the treatment forms for.
+              </h1>
+            </legend>
+        
+            <div class="nhsuk-radios nhsuk-radios--inline">
+        
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-inline-1" name="example-inline" type="radio" value="tca">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-inline-1">
+                  TCA
+                </label>
+              </div>
+        
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-inline-2" name="example-inline" type="radio" value="wa">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-inline-2">
+                  WA
+                </label>
+              </div>
+        
+            </div>
+          </fieldset>
+        
         </div>
-        <br>
-        <a href="#"><button  class="nhsuk-button" type="submit">
+
+        <a href=""><button  class="nhsuk-button" type="submit">
           Apply
         </button></a>
       </div>
     </details>
+    <!--end filter-->
 
 
 <table id="sortable" class="nhsuk-table nhsuk-table-clickable main-table sortable">
@@ -196,7 +210,7 @@ UK claims treatment forms
                     </th>
                   
                     <th class="nhsuk-table__header"  scope="col">
-                      Cost (£)
+                      Cost(£)
           
                     </th>
           
@@ -229,7 +243,7 @@ UK claims treatment forms
                     <td class="nhsuk-table__cell" aria-hidden="true">S2</td>
                     <td class="nhsuk-table__cell" aria-hidden="true">953.00</td>  
                     <td class="nhsuk-table__cell" aria-hidden="true">TCA</td>   
-                    <td class="nhsuk-table__cell"><a href="entitlements-5">View patient record</a><span class="nhsuk-u-visually-hidden">for Laura Peteers</span></td>   
+                    <td class="nhsuk-table__cell"><a href="person-details">View patient record</a><span class="nhsuk-u-visually-hidden">for Laura Peteers</span></td>   
                     </tr>
           
                     <tr class="nhsuk-table__row">
@@ -246,7 +260,7 @@ UK claims treatment forms
                       <td class="nhsuk-table__cell" aria-hidden="true">S2</td>
                       <td class="nhsuk-table__cell" aria-hidden="true">10,888.45</td> 
                       <td class="nhsuk-table__cell" aria-hidden="true">WA</td>    
-                      <td class="nhsuk-table__cell"><a href="entitlements-5">View patient record</a><span class="nhsuk-u-visually-hidden">for Laura Peteers</span></td>
+                      <td class="nhsuk-table__cell"><a href="person-details">View patient record</a><span class="nhsuk-u-visually-hidden">for Laura Peteers</span></td>
                      </tr>
           
                       <tr class="nhsuk-table__row">
