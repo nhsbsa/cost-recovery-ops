@@ -6,16 +6,21 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.json()); // to support JSON bodies
 router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 
-//resub-cancel-journey.html
+// Run this code when a form is submitted to 'update-patient-details'
+router.post('/update-patient-details', function (req, res) {
 
-router.post('/resubCancelFlow', function (req, res) {
-  var resubCancelFlowChoice = req.session.data['cancelFlow']
+  // Make a variable and give it the value from 'reasons-for-contestation-update'
+  var updatePatientDetails = req.session.data['update-details']
 
-  if (resubCancelFlowChoice == "Yes") {
-    res.redirect('/version-20/resub-view-details')
+  // Check whether the variable matches a condition
+  if (updatePatientDetails == "Yes"){
+    // Send user to next page
+    res.redirect('/version-22/pb6/01/reasons-for-contestation-update-1')
   } else {
-    res.redirect('/version-20/resub-view-details')
+    // Send user to ineligible page
+    res.redirect('/search')
   }
+
 })
 
 module.exports = router;
