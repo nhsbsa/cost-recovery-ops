@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Update person details
+Create new resub
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -40,42 +40,58 @@ Update person details
 
                     <div class="nhsuk-grid-row">
                         <div class="nhsuk-grid-column-full">
-                            <form action="check-your-answers" method="post" class="form">
+                            <form action="check-your-answers-3" method="post" class="form">
                                 <div class="nhsuk-form-group">
 
                                     <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
                                       <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
                                         <h1 class="nhsuk-heading-xl">
-                                         Upload evidence
+                                         Reason(s) for editing
                                         </h1>
                                       </legend>
                                       <hr style="border-bottom:4px solid #005eb8; margin:0;"><br />
                                 
-                                     <p>
-                                        Please upload any evidence you have.<br /> If you do not have any then just click 'continue'
-                                    </p>
+                                      <div class="nhsuk-hint" id="example-hint">
+                                        Select all options that are relevant.
+                                      </div>
                                       <br >
-                                      <div class="nhsuk-form-group">
-                                        <div class="nhsuk-hint">
-                                          The selected file must be a PDF, BMP, PNG, JPG or JPEG and must be smaller than 10MB.
+                                
+                                      <div class="nhsuk-checkboxes">
+                                
+                                        <div class="nhsuk-checkboxes__item">
+                                          <input class="nhsuk-checkboxes__input" id="edit-reason-ms" name="edit-reason" type="checkbox" value="Member state provided updated details">
+                                          <label class="nhsuk-label nhsuk-checkboxes__label" for="edit-reason-ms">
+                                            Member state provided updated details
+                                          </label>
                                         </div>
-                                  
-                                        <input class="file-upload" id="file-upload" name="file-upload" type="file" aria-describedby="file-upload">
-      
+                                
+                                        <div class="nhsuk-checkboxes__item">
+                                          <input class="nhsuk-checkboxes__input" id="edit-reason-input" name="edit-reason" type="checkbox" value="Data input error">
+                                          <label class="nhsuk-label nhsuk-checkboxes__label" for="edit-reason-input">
+                                            Data input error
+                                          </label>
                                         </div>
                                 
 
-
+                                
+                                      </div>
+<br>
+                                      <div class="nhsuk-form-group">
+                                        <label class="nhsuk-label" for="edit-reason-other">
+                                          Other
+                                        </label>
+                                        <textarea class="nhsuk-textarea" id="edit-reason-other" name="edit-reason-other" rows="5" aria-describedby="edit-reason-other-hint" value="{{ data['edit-reason'] }}"></textarea>
+                                      </div>
                                     </fieldset>
                                 
                                   </div>
-<br />
+
                                 <button class="nhsuk-button nhsuk-button--primary" type="submit">
                                     Continue
                                 </button>
 
                             </form>
-                            <p><a href="resub-treatment-details-62999">Cancel</a></p>
+                            <p><a href="person-details-2">Cancel</a></p>
 
                         </div>
                     </div>
