@@ -6,21 +6,37 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.json()); // to support JSON bodies
 router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 
-// Run this code when a form is submitted to 'update-patient-details'
-router.post('/update-patient-details', function (req, res) {
 
-  // Make a variable and give it the value from 'reasons-for-contestation-update'
-  var updatePatientDetails = req.session.data['update-details']
 
-  // Check whether the variable matches a condition
-  if (updatePatientDetails == "Yes"){
-    // Send user to next page
-    res.redirect('/version-22/pb6/01/reasons-for-contestation-update-1')
-  } else {
-    // Send user to ineligible page
-    res.redirect('/search')
+//pb6/reasons-for-editing-radio-1.html
+router.post('/person-details-edit', function (req, res) {
+
+  const selectedRadio = req.body.editReason;
+
+  if (selectedRadio === "Data input error"){
+    res.redirect('/version-22/pb6/update-list-1')
+  }
+
+  else {
+    res.redirect('/version-22/pb6/update-list-2')
   }
 
 })
+
+//pb6/reasons-for-editing-radio-2.html
+router.post('/person-details-edit', function (req, res) {
+
+  const selectedRadio = req.body.editReason;
+
+  if (selectedRadio === "Data input error"){
+    res.redirect('/version-22/pb6/update-list-1')
+  }
+
+  else {
+    res.redirect('/version-22/pb6/update-list-2')
+  }
+
+})
+
 
 module.exports = router;
