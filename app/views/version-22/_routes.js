@@ -11,32 +11,22 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 //pb6/reasons-for-editing-radio-1.html
 router.post('/person-details-edit', function (req, res) {
 
-  const selectedRadio = req.body.editReason;
+  const selectedRadio = req.body.editReason; 
 
   if (selectedRadio === "Data input error"){
     res.redirect('/version-22/pb6/update-list-1')
   }
 
-  else {
+  if (selectedRadio === "Official name change"){
     res.redirect('/version-22/pb6/update-list-2')
+  }
+
+  else {
+    res.redirect('')
   }
 
 })
 
-//pb6/reasons-for-editing-radio-2.html
-router.post('/person-details-edit', function (req, res) {
-
-  const selectedRadio = req.body.editReason;
-
-  if (selectedRadio === "Data input error"){
-    res.redirect('/version-22/pb6/update-list-1')
-  }
-
-  else {
-    res.redirect('/version-22/pb6/update-list-2')
-  }
-
-})
 
 
 module.exports = router;
