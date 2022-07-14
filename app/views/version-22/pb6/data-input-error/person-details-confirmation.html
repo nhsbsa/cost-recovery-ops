@@ -19,12 +19,12 @@
       <div class="nhsuk-grid-column-full">
         <ol class="nhsuk-breadcrumb__list">
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="search">Search (Person)</a>
+            <a class="nhsuk-breadcrumb__link" href="">Search (Person)</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="search-results">Search results (Person)</a>
+            <a class="nhsuk-breadcrumb__link" href="">Search results (Person)</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">Laura Peteers (Person details)</li>
+          <li class="nhsuk-breadcrumb__item">{{ data['first-name'] }} {{ data['surname'] }} (Person details)</li>
         </ol>
       </div>
     </div>
@@ -43,6 +43,31 @@
       <div class="nhsuk-width-container-fluid">
         <div class="nhsuk-main-wrapper" id="maincontent">
 
+            <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-full">
+                  <div
+                    class="govuk-notification-banner govuk-notification-banner--success"
+                    role="alert"
+                    aria-labelledby="govuk-notification-banner-title"
+                    data-module="govuk-notification-banner"
+                  >
+                    <div class="govuk-notification-banner__header">
+                      <h2
+                        class="govuk-notification-banner__title"
+                        id="govuk-notification-banner-title"
+                      >
+                        Person details updated
+                      </h2>
+                    </div>
+                    <div class="govuk-notification-banner__content">
+                      <p class="govuk-notification-banner__heading">
+                        The person details for {{ data['first-name'] }} {{ data['surname'] }} have been udpated.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
               <h1 class="nhsuk-heading-xl">Person details</h1>
@@ -58,7 +83,7 @@
                 <div class="nhsuk-hint">
                   You can change or update any incorrect information.
                 </div>
-                <form action="reason-for-editing" method="post" class="form">
+                <form action="reasons-for-editing" method="post" class="form">
 
                 <div class="nhsuk-form-group">
                   <label class="nhsuk-label" for="first-name">
@@ -69,7 +94,7 @@
                   </div>
                   <input class="nhsuk-input nhsuk-input--width-20" id="first-name"
                     name="first-name" type="text" aria-describedby="example-with-hint-text-hint"
-                    value="Laura" />
+                    value="{{ data['first-name'] }}" />
                 </div>
 
                 <div class="nhsuk-form-group">
@@ -81,7 +106,7 @@
                   </div>
                   <input class="nhsuk-input nhsuk-input--width-20" id="surname"
                     name="surname" type="text" aria-describedby="example-with-hint-text-hint"
-                    value="Peteers" />
+                    value="{{ data['surname'] }}" />
                 </div>
 
                 <div class="nhsuk-form-group">
@@ -100,7 +125,7 @@
                             Day
                           </label>
                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dob-dd"
-                            name="dob-dd" type="text" pattern="[0-9]*" inputmode="numeric" value="22" />
+                            name="dob-dd" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ data['dob-dd'] }}" />
                         </div>
                       </div>
                       <div class="nhsuk-date-input__item">
@@ -109,7 +134,7 @@
                             Month
                           </label>
                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dob-mm"
-                            name="dob-mm" type="text" pattern="[0-9]*" inputmode="numeric" value="02" />
+                            name="dob-mm" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ data['dob-mm'] }}" />
                         </div>
                       </div>
                       <div class="nhsuk-date-input__item">
@@ -118,7 +143,7 @@
                             Year
                           </label>
                           <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dob-yyyy"
-                            name="dob-yyyy" type="text" pattern="[0-9]*" inputmode="numeric" value="1984" />
+                            name="dob-yyyy" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ data['dob-yyyy'] }}" />
                         </div>
                       </div>
                     </div>
@@ -132,7 +157,7 @@
                     Address line 1
                   </label>
                   <input class="nhsuk-input nhsuk-input--width-20" id="address1" name="address1" type="text"
-                    value="28 Place de la Madeleine" />
+                    value="{{ data['address1'] }}" />
                 </div>
 
                 <div class="nhsuk-form-group">
@@ -140,7 +165,7 @@
                     Address line 2 (Optional)
                   </label>
                   <input class="nhsuk-input nhsuk-input--width-20" id="address2" name="address2" type="text"
-                    value="Paris" />
+                    value="{{ data['address2'] }}" />
                 </div>
 
                 <div class="nhsuk-form-group">
@@ -148,7 +173,7 @@
                     Address line 3 (Optional)
                   </label>
                   <input class="nhsuk-input nhsuk-input--width-20" id="address3" name="address3"
-                    type="text" />
+                    type="text" value="{{ data['address3'] }}" />
                 </div>
 
                 <div class="nhsuk-form-group">
@@ -160,7 +185,7 @@
                 </div>
 
                 <button class="nhsuk-button" type="submit">
-                  Continue
+                  Save changes
                 </button>
                 </form>
               </div>
@@ -176,7 +201,7 @@
     <div class="nhsBSA-sidebar-nav">
       <div class="side-nav">
         <h3>
-          Laura Peteers<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          {{ data['first-name'] }} {{ data['surname'] }}<span class="nhsuk-caption-m nhsuk-caption--bottom">
             <span class="nhsuk-u-visually-hidden"> - </span>3432234</span>
         </h3>
         <ul>
