@@ -1,0 +1,229 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Update person details treatment list page
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    <div class="nhsuk-back-link">
+                        <a class="nhsuk-back-link__link" href="javascript:history.back()">
+                            <svg class="nhsuk-icon nhsuk-icon__chevron-left" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z">
+                                </path>
+                            </svg>
+                            Go back</a>
+                    </div>
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-full">
+                            <form action="upload-evidence" method="post" class="form">
+                                <div class="nhsuk-form-group">
+
+                                    <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+                                      <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                                        <h1 class="nhsuk-heading-l">
+                                            Person details update confirmation 
+                                        </h1>
+                                      </legend>
+                                      <hr style="border-bottom:4px solid #005eb8; margin:0;">
+
+                                      <div class="nhsuk-inset-text">
+                                        <span class="nhsuk-u-visually-hidden">Information: </span>
+                                        <p>This person has multiple treatments. Select the treatments you would like to update. Any related claims and resubs will also be updated.</p>
+                                      </div>
+                                      
+
+                                      <div class="nhsuk-card">
+                                        <div class="nhsuk-card__content">
+                                          <h3 class="nhsuk-card__heading">
+                                            Treatment details
+                                      
+                                          </h3>
+                                          <table id="sortable" class="nhsuk-table nhsuk-table-clickable main-table sortable">
+
+                                            <!-- TABLE START -->
+                                            <thead class="nhsuk-table__head">
+                                                <tr class="nhsuk-table__row">
+                                                    <th class="nhsuk-table__header" scope="col">
+                                                        <a href="#">Select all</a>
+                                                    </th>
+                                                    <th class="nhsuk-table__header" scope="col">
+                                                        Treatment ID
+                                                    </th>
+                                                    <th class="nhsuk-table__header" scope="col">
+                                                        Start date
+                                                    </th>
+                                                    <th class="nhsuk-table__header" aria-sort="none" scope="col">
+                                                        End date
+                                                    </th>
+                                                    <th class="nhsuk-table__header" scope="col">
+                                                        Entitlement
+                                                    </th>
+                                                    <th class="nhsuk-table__header" scope="col">
+                                                        Cost (£)
+                                                    </th>
+                                                    <th class="nhsuk-table__header" scope="col">
+                                                        Status
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                        
+                                            <tbody class="nhsuk-table__body ">
+                        
+                                                <tr class="nhsuk-table__row">
+                                                    <td>
+                                                        <div class="nhsuk-checkboxes">
+                                                          <div class="nhsuk-checkboxes__item">
+                                                            <input
+                                                              class="nhsuk-checkboxes__input"
+                                                              id="treatment-1"
+                                                              name="treatments"
+                                                              type="checkbox"
+                                                              value="62999"
+                                                            />
+                                                            <label
+                                                              class="nhsuk-label nhsuk-checkboxes__label"
+                                                              for="treatment-1"
+                                                            >
+                                                              <span class="nhsuk-u-visually-hidden"
+                                                                >Select treatment id 62999 for Laura Peteers</span
+                                                              >
+                                                            </label>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                    <td class="nhsuk-table__cell">
+                                                      62999 </td>
+                                                    <td class="nhsuk-table__cell">01/09/2021</td>
+                                                    <td class="nhsuk-table__cell">10/09/2021</td>
+                                                    <td class="nhsuk-table__cell">EHIC-Article 62</td>
+                                                    <td class="nhsuk-table__cell">75,000.00</td>
+                                                    <td class="nhsuk-table__cell"><strong strong style="color: #354550" ;
+                                                            class="nhsuk-tag no-caps nhsuk-tag--white">Contested</strong><span
+                                                            class="nhsuk-u-visually-hidden">Treatment 62832 has a contested status </span>
+                                                    </td>
+                
+                                                </tr>
+                        
+                                                <tr class="nhsuk-table__row">
+                                                    <td>
+                                                        <div class="nhsuk-checkboxes">
+                                                          <div class="nhsuk-checkboxes__item">
+                                                            <input
+                                                              class="nhsuk-checkboxes__input"
+                                                              id="treatment-2"
+                                                              name="treatments"
+                                                              type="checkbox"
+                                                              value="62998"
+                                                            />
+                                                            <label
+                                                              class="nhsuk-label nhsuk-checkboxes__label"
+                                                              for="treatment-2"
+                                                            >
+                                                              <span class="nhsuk-u-visually-hidden"
+                                                                >Select treatment id 6298 for Laura Peteers</span
+                                                              >
+                                                            </label>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                    <td class="nhsuk-table__cell">62998 </td>
+                                                    <td class="nhsuk-table__cell">01/08/2021</td>
+                                                    <td class="nhsuk-table__cell">10/08/2021</td>
+                                                    <td class="nhsuk-table__cell">EHIC-Article 62</td>
+                                                    <td class="nhsuk-table__cell">450.27</td>
+                                                    <td class="nhsuk-table__cell"><strong strong style="color: #354550" ;
+                                                            class="nhsuk-tag no-caps nhsuk-tag--white">Contested</strong><span
+                                                            class="nhsuk-u-visually-hidden">Treatment 62832 has a contested status </span>
+                                                    </td>
+                
+                                                </tr>
+                        
+                                                <tr class="nhsuk-table__row">
+                                                    <td>
+                                                        <div class="nhsuk-checkboxes">
+                                                          <div class="nhsuk-checkboxes__item">
+                                                            <input
+                                                              class="nhsuk-checkboxes__input"
+                                                              id="treatment-3"
+                                                              name="treatments"
+                                                              type="checkbox"
+                                                              value="62978"
+                                                            />
+                                                            <label
+                                                              class="nhsuk-label nhsuk-checkboxes__label"
+                                                              for="treatment-3"
+                                                            >
+                                                              <span class="nhsuk-u-visually-hidden"
+                                                                >Select treatment id 62978 for Laura Peteers</span
+                                                              >
+                                                            </label>
+                                                          </div>
+                                                        </div>
+                                                      </td>
+                                                    <td class="nhsuk-table__cell">62997 </td>
+                                                    <td class="nhsuk-table__cell">09/07/2021</td>
+                                                    <td class="nhsuk-table__cell">11/07/2021</td>
+                                                    <td class="nhsuk-table__cell">EHIC-Article 62</td>
+                                                    <td class="nhsuk-table__cell">1,638.88</td>
+                                                    <td class="nhsuk-table__cell"><strong strong style="color: #354550" ;
+                                                            class="nhsuk-tag no-caps nhsuk-tag--white">Contested</strong><span
+                                                            class="nhsuk-u-visually-hidden">Treatment 62832 has a contested status </span>
+                                                    </td>
+                
+                                                </tr>
+                        
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                      </div>
+
+
+                <br>
+                        
+                            
+
+                                    </fieldset>
+                                
+                                  </div>
+
+                                <button class="nhsuk-button nhsuk-button--primary" type="submit">
+                                    Continue
+                                </button>
+
+                            </form>
+                            <p><a href="person-details-6">Cancel</a></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
