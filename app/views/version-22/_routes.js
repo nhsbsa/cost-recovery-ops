@@ -27,7 +27,7 @@ router.post('/data-input-error-update-details', function (req, res) {
 })
 
 //pb6/data-input-error/cancel-journey.html
-router.post('/cancel-journey', function (req, res) {
+router.post('/data-input-error-cancel-journey', function (req, res) {
 
   const selectedRadio = req.body.cancelJourney; 
 
@@ -37,6 +37,44 @@ router.post('/cancel-journey', function (req, res) {
 
   if (selectedRadio === "No"){
     res.redirect('/version-22/pb6/data-input-error/update-details-confirmation')
+  }
+
+  else {
+    res.redirect('')
+  }
+
+})
+
+//pb6/change-of-address/update-details-confirmation.html
+router.post('/change-of-address-update-details', function (req, res) {
+
+  const selectedRadio = req.body.updateDetails;  
+
+  if (selectedRadio === "Yes"){
+    res.redirect('/version-22/pb6/change-of-address/check-your-answers')
+  }
+
+  if (selectedRadio === "No"){
+    res.redirect('/version-22/pb6/change-of-address/cancel-journey')
+  }
+
+  else {
+    res.redirect('')
+  }
+
+})
+
+//pb6/change-of-address/cancel-journey.html
+router.post('/change-of-address-cancel-journey', function (req, res) {
+
+  const selectedRadio = req.body.cancelJourney; 
+
+  if (selectedRadio === "Yes"){
+    res.redirect('/version-22/pb6/change-of-address/person-details')
+  }
+
+  if (selectedRadio === "No"){
+    res.redirect('/version-22/pb6/change-of-address/update-details-confirmation')
   }
 
   else {
