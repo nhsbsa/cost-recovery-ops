@@ -21,7 +21,7 @@ router.post('/data-input-error-update-details', function (req, res) {
   }
 
   else {
-    res.redirect('')
+    res.redirect('/version-22/pb6/data-input-error/update-details-confirmation')
   }
 
 })
@@ -40,7 +40,7 @@ router.post('/data-input-error-cancel-journey', function (req, res) {
   }
 
   else {
-    res.redirect('')
+    res.redirect('/version-22/pb6/data-input-error/cancel-journey')
   }
 
 })
@@ -59,7 +59,7 @@ router.post('/change-of-address-update-details', function (req, res) {
   }
 
   else {
-    res.redirect('')
+    res.redirect('/version-22/pb6/change-of-address/update-details-confirmation')
   }
 
 })
@@ -78,7 +78,7 @@ router.post('/change-of-address-cancel-journey', function (req, res) {
   }
 
   else {
-    res.redirect('')
+    res.redirect('/version-22/pb6/change-of-address/cancel-journey')
   }
 
 })
