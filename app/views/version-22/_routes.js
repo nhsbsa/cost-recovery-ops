@@ -7,18 +7,17 @@ router.use(bodyParser.json()); // to support JSON bodies
 router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 
 
+//pb6/data-input-error/update-details-confirmation.html
+router.post('/data-input-error-update-details', function (req, res) {
 
-//pb6/reasons-for-editing-radio-1.html
-router.post('/person-details-edit', function (req, res) {
+  const selectedRadio = req.body.updateDetails; 
 
-  const selectedRadio = req.body.editReason; 
-
-  if (selectedRadio === "Data input error"){
-    res.redirect('/version-22/pb6/update-list-1')
+  if (selectedRadio === "Yes"){
+    res.redirect('/version-22/pb6/data-input-error/check-your-answers')
   }
 
-  if (selectedRadio === "Official name change"){
-    res.redirect('/version-22/pb6/update-list-2')
+  if (selectedRadio === "No"){
+    res.redirect('/version-22/pb6/data-input-error/cancel-journey')
   }
 
   else {
@@ -26,6 +25,28 @@ router.post('/person-details-edit', function (req, res) {
   }
 
 })
+
+//pb6/data-input-error/cancel-journey.html
+router.post('/cancel-journey', function (req, res) {
+
+  const selectedRadio = req.body.cancelJourney; 
+
+  if (selectedRadio === "Yes"){
+    res.redirect('/version-22/pb6/data-input-error/person-details')
+  }
+
+  if (selectedRadio === "No"){
+    res.redirect('/version-22/pb6/data-input-error/update-details-confirmation')
+  }
+
+  else {
+    res.redirect('')
+  }
+
+})
+
+
+
 
 
 
