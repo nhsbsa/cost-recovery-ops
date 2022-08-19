@@ -33,6 +33,7 @@ router.use('/version-22', require('./views/version-22/_routes'));
 router.use('/version-22/pb6', require('./views/version-22/_routes'));
 router.use('/version-22/pb6/data-input-error', require('./views/version-22/_routes'));
 router.use('/version-22/pb6/change-of-address', require('./views/version-22/_routes'));
+router.use('/version-23/pb7/v1', require('./views/version-23/_routes'));
 
 
 module.exports = router;
