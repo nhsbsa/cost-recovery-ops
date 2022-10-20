@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-PRC details - Add new entitlement - Manage overseas entitlements and treatments - NHSBSA
+Check these details - Add new entitlement - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -28,7 +28,7 @@ PRC details - Add new entitlement - Manage overseas entitlements and treatments 
             <div class="nhsuk-width-container-fluid">
                 <div class="nhsuk-main-wrapper" id="maincontent">
 
-                    <!--back link-->
+                    <!-- start back link -->
                     <div class="nhsuk-back-link">
                         <a class="nhsuk-back-link__link" href="javascript:history.back()">
                             <svg class="nhsuk-icon nhsuk-icon__chevron-left" xmlns="http://www.w3.org/2000/svg"
@@ -39,52 +39,57 @@ PRC details - Add new entitlement - Manage overseas entitlements and treatments 
                             </svg>
                             Go back</a>
                     </div>
+                    <!-- end back link -->
 
-                    <!-- title block -->
+                    <!-- start title block -->
                     <div class="nhsuk-grid-row">
                         <div class="nhsuk-grid-column-full">
-                            <h1 class="nhsuk-heading-l">
-                                Passing Values Example 1 - Input 1
-                            </h1>
+                              <h3>Routing values example 2 - OUTPUT</h3>
                             <hr style="border-bottom:4px solid #005eb8; margin:0;"><br />
                         </div>
                     </div>
+                    <!-- end title block -->
 
-                    <!-- form -->
+                    <!-- start content -->
                     <div class="nhsuk-grid-row">
                         <div class="nhsuk-grid-column-full">
 
-                        <div class="nhsuk-grid-row">
-                            <div class="nhsuk-grid-column-two-thirds">
-                                <div class="nhsuk-form-group">
-                                    <span class="nhsuk-caption-l">
-                                        Malta Quota agreement details
-                                    </span>
+                            <!-- start check -->
+                            <div class="nhsuk-grid-row">
+                                <div class="nhsuk-grid-column-one-half">
 
-                                    <form action="quota-number-check" method="post">
+                                    <!--prc details-->
 
-                                    <h1 class="nhsuk-label-wrapper">
-                                        <label class="nhsuk-label nhsuk-label--l" for="quotaNumber">
-                                        What is this patient's Malta Quota number?
-                                        </label></h1>
-                                        <div class="nhsuk-hint" id="hint-text-quotaNumber">
-                                        The format should be YY/YY-NNN. For example, 20/21-001
+                                    
+                                    <dl class="nhsuk-summary-list">
+
+                                        <div class="nhsuk-summary-list__row">
+                                            <dt class="nhsuk-summary-list__key">
+                                                E-Schedule name
+                                            </dt>
+                                            <dd class="nhsuk-summary-list__value">
+                                                {% if data['e-schedule-name'] %}{{ data['e-schedule-name'] }}{% else %}E-Schedule name{% endif %}
+                                            </dd>
                                         </div>
-                                        <input class="nhsuk-input  nhsuk-input--width-20" id="quotaNumber" name="quotaNumber" type="text" value="{{ data['quotaNumber'] }}" >
+
+                                    </dl>
+
+                                    <br />
+
+                                    <a href="passing-values-2-input"><button class="nhsuk-button"
+                                            type="submit">
+                                            Save and submit
+                                        </button></a>
+
+                                   
                                 </div>
-                                <br>
-
-                                        {{ button({
-                                            "text": "Continue"
-                                            }) }}
-
-                                    </form>
-                                
                             </div>
-                        </div>
+
+                            <!--end check-->
 
                         </div>
                     </div>
+                    <!-- end content-->
 
                 </div>
             </div>

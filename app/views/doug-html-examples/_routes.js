@@ -25,5 +25,27 @@ router.get('/', function(req , res){
 
 })
 
+//add-new-entitlement.html
+router.post('/entitlement-example', function (req, res) {
+
+  const selectedRadio = req.body.entitlementType; 
+
+  if (selectedRadio === "S2/E112"){
+    res.redirect('routing-3-s2')
+  }
+
+  if (selectedRadio === "EHIC"){
+    res.redirect('routing-3-ehic')
+  }
+
+  if (selectedRadio === "PRC"){
+    res.redirect('routing-3-prc')
+  }
+
+  else {
+    res.redirect('routing-3-else-option')
+  }
+
+})
 
 module.exports = router;
