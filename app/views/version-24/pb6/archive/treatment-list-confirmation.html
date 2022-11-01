@@ -1,0 +1,242 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} Update person details - Official name change {% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+                <ol class="nhsuk-breadcrumb__list">
+                    <li class="nhsuk-breadcrumb__item">
+                        <a class="nhsuk-breadcrumb__link" href="">Search (Person)</a>
+                    </li>
+                    <li class="nhsuk-breadcrumb__item">
+                        <a class="nhsuk-breadcrumb__link" href="">Search results (Person)</a>
+                    </li>
+                    <li class="nhsuk-breadcrumb__item">Laura Peteers (Person details)</li>
+                </ol>
+            </div>
+        </div>
+
+        <p class="nhsuk-breadcrumb__back">
+            <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+        </p>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-full">
+                          <div
+                            class="govuk-notification-banner govuk-notification-banner--success"
+                            role="alert"
+                            aria-labelledby="govuk-notification-banner-title"
+                            data-module="govuk-notification-banner"
+                          >
+                            <div class="govuk-notification-banner__header">
+                              <h2
+                                class="govuk-notification-banner__title"
+                                id="govuk-notification-banner-title"
+                              >
+                                Person details updated
+                              </h2>
+                            </div>
+                            <div class="govuk-notification-banner__content">
+                              <p class="govuk-notification-banner__heading">
+                                Person details have been updated for treatment id(s) {{ data['treatments'] }}.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-full">
+                            <h1 class="nhsuk-heading-xl">Official name change</h1>
+                            <hr style="border-bottom: 4px solid #005eb8; margin: 0" /><br />
+                        </div>
+                    </div>
+
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-full">
+                            <form action="official-name-change-form" method="post" class="form">
+                                <div class="nhsuk-form-group">
+                                    <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+                                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                                          <h1 class="nhsuk-fieldset__heading">
+                                            Which treatments would you like to update?
+                                          </h1>
+                                        </legend>
+                                  
+                                        <div class="nhsuk-hint" id="example-hint">
+                                          Select all options that apply.
+                                        </div>
+                                <table id="sortable" class="nhsuk-table nhsuk-table-clickable main-table sortable">
+
+                                    <!-- TABLE START -->
+                                    <thead class="nhsuk-table__head">
+                                        <tr class="nhsuk-table__row">
+                                            <th class="nhsuk-table__header" scope="col">
+                                                <a href="#">Select all</a>
+                                            </th>
+                                            <th class="nhsuk-table__header" scope="col">
+                                                Treatment ID
+                                            </th>
+                                            <th class="nhsuk-table__header" scope="col">
+                                                First name
+                                            </th>
+                                            <th class="nhsuk-table__header" aria-sort="none" scope="col">
+                                                Last name
+                                            </th>
+                                            <th class="nhsuk-table__header" scope="col">
+                                                Start date
+                                            </th>
+                                            <th class="nhsuk-table__header" scope="col">
+                                                End date
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="nhsuk-table__body ">
+
+                                        <tr class="nhsuk-table__row">
+                                            <td>
+                                                <div class="nhsuk-checkboxes">
+                                                    <div class="nhsuk-checkboxes__item">
+                                                        <input class="nhsuk-checkboxes__input" id="treatment-1"
+                                                            name="treatments" type="checkbox" value="62999" />
+                                                        <label class="nhsuk-label nhsuk-checkboxes__label"
+                                                            for="treatment-1">
+                                                            <span class="nhsuk-u-visually-hidden">Select treatment id
+                                                                62999 for Laura Peteers</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="nhsuk-table__cell">
+                                                62999 </td>
+                                                <td class="nhsuk-table__cell">{{ data['first-name'] }}</td>
+                                                <td class="nhsuk-table__cell">{{ data['surname'] }}</td>
+                                            <td class="nhsuk-table__cell">01/09/2021</td>
+                                            <td class="nhsuk-table__cell">10/09/2021</td>
+
+
+                                        </tr>
+
+                                        <tr class="nhsuk-table__row">
+                                            <td>
+                                                <div class="nhsuk-checkboxes">
+                                                    <div class="nhsuk-checkboxes__item">
+                                                        <input class="nhsuk-checkboxes__input" id="treatment-2"
+                                                            name="treatments" type="checkbox" value="62998" />
+                                                        <label class="nhsuk-label nhsuk-checkboxes__label"
+                                                            for="treatment-2">
+                                                            <span class="nhsuk-u-visually-hidden">Select treatment id
+                                                                6298 for Laura Peteers</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="nhsuk-table__cell">62998 </td>
+                                            <td class="nhsuk-table__cell">{{ data['first-name'] }}</td>
+                                            <td class="nhsuk-table__cell">{{ data['surname'] }}</td>
+                                            <td class="nhsuk-table__cell">01/08/2021</td>
+                                            <td class="nhsuk-table__cell">10/08/2021</td>
+
+
+                                        </tr>
+
+                                        <tr class="nhsuk-table__row">
+                                            <td>
+                                                <div class="nhsuk-checkboxes">
+                                                    <div class="nhsuk-checkboxes__item">
+                                                        <input class="nhsuk-checkboxes__input" id="treatment-3"
+                                                            name="treatments" type="checkbox" value="62978" />
+                                                        <label class="nhsuk-label nhsuk-checkboxes__label"
+                                                            for="treatment-3">
+                                                            <span class="nhsuk-u-visually-hidden">Select treatment id
+                                                                62978 for Laura Peteers</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="nhsuk-table__cell">62997 </td>
+                                            <td class="nhsuk-table__cell">Laura</td>
+                                            <td class="nhsuk-table__cell">Peteers</td>
+                                            <td class="nhsuk-table__cell">09/07/2021</td>
+                                            <td class="nhsuk-table__cell">11/07/2021</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                </fieldset>
+                            </div>
+                                <button class="nhsuk-button nhsuk-button--primary" type="submit">
+                                    Continue
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <!--start left navigation-->
+        <div class="nhsBSA-sidebar-nav">
+            <div class="side-nav">
+                <h3>
+                    Laura Peteers<span class="nhsuk-caption-m nhsuk-caption--bottom">
+                        <span class="nhsuk-u-visually-hidden"> - </span>3432234</span>
+                </h3>
+                <ul>
+                    <div id="options" class="options">
+                        <li>
+                            <a href="person-details-5">Person details</a>
+                        </li>
+                        <li>
+                            <a class="active" href="treatment-list">Official name change</a>
+                        </li>
+                        <li></li>
+                        <li>
+                            <a href="">Entitlements and treatments along with linked Claim ID</a>
+                        </li>
+                        <li>
+                            <a href="">Resubs</a>
+                        </li>
+                        <li>
+                            <a href="">Case history</a>
+                        </li>
+
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <!--end left navigation-->
+    </div>
+</div>
+
+{% endblock %}
