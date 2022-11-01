@@ -36,6 +36,7 @@ router.use('/version-22/pb6/change-of-address', require('./views/version-22/_rou
 router.use('/version-23/pb7/v1', require('./views/version-23/_routes'));
 router.use('/version-23/pb7/v2', require('./views/version-23/_routes'));
 router.use('/version-23/pb7/v3', require('./views/version-23/_routes'));
+router.use('/version-24/pb7/v4', require('./views/version-24/_routes'));
 router.use('/doug-html-examples', require('./views/doug-html-examples/_routes'));
 
 module.exports = router;
