@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Search for a PRC institution name - Manage overseas entitlements and treatments - NHSBSA
+PRC Institution details search results - Add new entitlement - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -45,7 +45,7 @@ Search for a PRC institution name - Manage overseas entitlements and treatments 
                     <div class="nhsuk-grid-row">
                         <div class="nhsuk-grid-column-full">
                             <h1 class="nhsuk-heading-l">
-                                Search for a PRC institution in France (FR)
+                                PRC Institution details for France (FR)
                             </h1>
                             <hr style="border-bottom:4px solid #005eb8; margin:0;"><br />
                         </div>
@@ -60,7 +60,7 @@ Search for a PRC institution name - Manage overseas entitlements and treatments 
                             <nav class="nhsuk-secondary-navigation nav-tabs-bg" aria-label="Secondary navigation" style="background-color:#f0f4f5;">
                                 <ul class="nhsuk-secondary-navigation__list">
                                     <li class="nhsuk-secondary-navigation__item">
-                                        <a class="nhsuk-secondary-navigation__link"  href="add-prc-institution-details">Institution ID</a>
+                                        <a class="nhsuk-secondary-navigation__link" href="add-prc-institution-details">Institution ID</a>
                                     </li>
                                     <li class="nhsuk-secondary-navigation__item">
                                         <a class="nhsuk-secondary-navigation__link" aria-current="page" href="add-prc-institution-details-name">Institution name</a>
@@ -73,7 +73,7 @@ Search for a PRC institution name - Manage overseas entitlements and treatments 
                             <!-- start form -->
                             <div class="nhsuk-grid-row">
                                 <div class="nhsuk-grid-column-full">
-                                    <form action="add-prc-institution-details-name-search-results" method="post" class="form">
+                                    <form action="" method="post" class="form">
 
                                         <div class="nhsuk-grid-row">
                                             <div class="nhsuk-grid-column-full">
@@ -89,7 +89,7 @@ Search for a PRC institution name - Manage overseas entitlements and treatments 
                                                             The institution name can be found in the stamp on a PRC.
                                                         </div>
                                                         <input class="nhsuk-input nhsuk-input--width-20" id="institution-id"
-                                                            name="institution-id" type="text">
+                                                            name="institution-id" type="text" value="HEALTH INSURANCE AGENCY OF ISERE">
                                                     </div>
 
                                                 </fieldset>
@@ -106,11 +106,49 @@ Search for a PRC institution name - Manage overseas entitlements and treatments 
                                         </div>
 
                                     </form>
-                                    <p><a href="">Cancel</a></p>
+                                    <p><a href="add-prc-back-to-search-confirmation">Cancel</a></p><br /><br />
                                 </div>
                             </div>
                             <!--end form-->
 
+                            <div role="alert" class="nhsuk-label--m" id="non_zero_records">1 result found</div>
+                            <div class="nhsuk-hint">Select the correct institution to continue</div>
+                            <table role="table" class="nhsuk-table-responsive">
+                                <caption class="nhsuk-table__caption"></caption>
+                                <thead role="rowgroup" class="nhsuk-table__head">
+                                   <tr role="row">
+                                      <th role="columnheader" scope="col">Institution ID</th>
+                                      <th role="columnheader" scope="col">Institution name</th>
+                                      <th role="columnheader" scope="col">Institution address</th>
+                                      <th role="columnheader" scope="col">Action</th>
+                                   </tr>
+                                </thead>
+                                <tbody class="nhsuk-table__body">
+                                   <tr role="row" class="nhsuk-table__row">
+                                      <td role="cell" class="nhsuk-table__cell ">
+                                         <span class="nhsuk-table-responsive__heading">Institution ID</span>
+                                         <p id="institutionDTO.institutionNumber_0">0138100000 - CPAM ISERE</p>
+                                      </td>
+                                      <td role="cell" class="nhsuk-table__cell ">
+                                         <span class="nhsuk-table-responsive__heading">Institution name</span>
+                                         <p id="institutionDTO.institutionName_0">HEALTH INSURANCE AGENCY OF ISERE</p>
+                                      </td>
+                                      <td role="cell" class="nhsuk-table__cell ">
+                                         <span class="nhsuk-table-responsive__heading">Institution address</span>
+                                         <p id="institutionDTO.fullAddress_0">2 RUE DES ALLIES, 38045 GRENOBLE CEDEX 9</p>
+                                      </td>
+                                      <td role="cell" class="nhsuk-table__cell " value="0138100000">
+                                         <span class="nhsuk-table-responsive__heading">Action</span>
+                                         <a href="add-prc-upload" id="institutionDTO.institutionNumber_Select_0">
+                                            Select
+                                            <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                            <span class="nhsuk-u-visually-hidden">the institution with the identification number 0138100000</span>
+                                            
+                                         </a>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
 
                         </div>
                     </div>
