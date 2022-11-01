@@ -64,7 +64,7 @@ router.post('/entitlement-type-v4', function (req, res) {
   }
 
   if (selectedRadio === "PRC"){
-    res.redirect('/pb7/v4/add-prc-details')
+    res.redirect('/version-24/pb7/v4/add-prc-details')
   }
 
   else {
