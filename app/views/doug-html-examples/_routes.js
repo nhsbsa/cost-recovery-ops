@@ -25,7 +25,7 @@ router.get('/', function(req , res){
 
 })
 
-//add-new-entitlement.html
+//HTML routing example: add-new-entitlement.html
 router.post('/entitlement-example', function (req, res) {
 
   const selectedRadio = req.body.entitlementType; 
