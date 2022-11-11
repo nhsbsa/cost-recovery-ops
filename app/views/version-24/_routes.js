@@ -27,6 +27,29 @@ router.post('/duplicate-prc', function (req, res) {
 
 })
 
+//pb7/v4/add-new-entitlement-duplicate.html
+router.post('/entitlement-type-duplicate-v4', function (req, res) {
+
+  const selectedRadio = req.body.entitlementType; 
+
+  if (selectedRadio === "S2/E112"){
+    res.redirect('/version-24/pb7/v4/add-new-entitlement-duplicate')
+  }
+
+  if (selectedRadio === "EHIC"){
+    res.redirect('/version-24/pb7/v4/add-new-entitlement-duplicate')
+  }
+
+  if (selectedRadio === "PRC"){
+    res.redirect('/version-24/pb7/v4/add-prc-details-duplicate')
+  }
+
+  else {
+    res.redirect('/version-24/pb7/v4/add-new-entitlement-duplicate')
+  }
+
+})
+
 //pb7/v3/add-new-entitlement-duplicate.html
 router.post('/entitlement-type-duplicate-v3', function (req, res) {
 
