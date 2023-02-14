@@ -14,7 +14,7 @@ router.post('/duplicate-prc', function (req, res) {
 
   if (selectedRadio === "yes"){
     res.redirect('/version-23/pb7/v3/add-prc-institution-details-duplicate')
-  }
+  }ƒ
 
   if (selectedRadio === "no"){
     res.redirect('/version-23/pb7/v3/entitlements-treatments-with-prc')
@@ -79,7 +79,7 @@ router.post('/entitlement-type-v4', function (req, res) {
   const selectedRadio = req.body.entitlementType; 
 
   if (selectedRadio === "S2/E112"){
-    res.redirect('/version-24/pb7/v4/add-new-entitlement')
+    res.redirect('/version-24/s2-details')
   }
 
   if (selectedRadio === "EHIC"){
