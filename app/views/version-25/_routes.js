@@ -24,42 +24,36 @@ router.post('/select-decision', function (req, res) {
 
 })
 
-//create-person-entitlement.html
-router.post('/select-entitlement', function (req, res) {
+//s1-select-action.html
+router.post('/select-action', function (req, res) {
 
   const selectedRadio = req.body.entitlement;
 
-  if (selectedRadio === "s2"){
-    res.redirect('create-person-s2')
-  }
   if (selectedRadio === "s1"){
-    res.redirect('create-person-s1')
+    res.redirect('s1-reg-pin-name-dob')
   }
-  if (selectedRadio === "ehic"){
-    res.redirect('create-person-entitlement')
-  }
-  if (selectedRadio === "prc"){
-    res.redirect('create-person-entitlement')
+  if (selectedRadio === "s2"){
+    res.redirect('s1-cancel-search-pin')
   }
   else {
-    res.redirect('create-person-entitlement')
+    res.redirect('s1-reg-pin-name-dob')
   }
 
 })
 
-//have-s1.html
+//s1-have-s1.html
 router.post('/have-s1', function (req, res) {
 
   const selectedRadio = req.body.s1;
 
   if (selectedRadio === "yes"){
-    res.redirect('so72-details')
+    res.redirect('s1-so72-details')
   }
   if (selectedRadio === "no"){
-    res.redirect('check-your-answers-no-s1')
+    res.redirect('s1-check-your-answers-no-s1')
   }
   else {
-    res.redirect('have-s1')
+    res.redirect('s1-have-s1')
   }
 
 })
