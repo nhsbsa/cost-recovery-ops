@@ -39,6 +39,7 @@ router.use('/version-23/pb7/v3', require('./views/version-23/_routes'));
 router.use('/version-24/pb7/v4', require('./views/version-24/_routes'));
 router.use('/doug-html-examples', require('./views/doug-html-examples/_routes'));
 router.use('/version-25', require('./views/version-25/_routes'));
+router.use('/version-26/pb7/v4', require('./views/version-26/_routes'));
 
 module.exports = router;
 

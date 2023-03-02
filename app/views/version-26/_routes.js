@@ -33,19 +33,19 @@ router.post('/entitlement-type-duplicate-v4', function (req, res) {
   const selectedRadio = req.body.entitlementType; 
 
   if (selectedRadio === "S2/E112"){
-    res.redirect('/version-24/pb7/v4/add-new-entitlement-duplicate')
+    res.redirect('/version-26/pb7/v4/add-new-entitlement-duplicate')
   }
 
   if (selectedRadio === "EHIC"){
-    res.redirect('/version-24/pb7/v4/add-new-entitlement-duplicate')
+    res.redirect('/version-26/pb7/v4/add-new-entitlement-duplicate')
   }
 
   if (selectedRadio === "PRC"){
-    res.redirect('/version-24/pb7/v4/add-prc-details-duplicate')
+    res.redirect('/version-26/pb7/v4/add-prc-details-duplicate')
   }
 
   else {
-    res.redirect('/version-24/pb7/v4/add-new-entitlement-duplicate')
+    res.redirect('/version-26/pb7/v4/add-new-entitlement-duplicate')
   }
 
 })
@@ -79,19 +79,19 @@ router.post('/entitlement-type-v4', function (req, res) {
   const selectedRadio = req.body.entitlementType; 
 
   if (selectedRadio === "S2/E112"){
-    res.redirect('/version-24/s2-details')
+    res.redirect('/version-26/s2-details')
   }
 
   if (selectedRadio === "EHIC"){
-    res.redirect('/version-24/pb7/v4/add-new-entitlement')
+    res.redirect('/version-26/pb7/v4/add-new-entitlement')
   }
 
   if (selectedRadio === "PRC"){
-    res.redirect('/version-24/pb7/v4/add-prc-details')
+    res.redirect('/version-26/pb7/v4/add-prc-details')
   }
 
   else {
-    res.redirect('/version-24/pb7/v4/add-new-entitlement')
+    res.redirect('/version-26/pb7/v4/add-new-entitlement')
   }
 
 })
