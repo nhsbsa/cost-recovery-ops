@@ -1,0 +1,212 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} Person details page {% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="search">Search (Person)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="search-results-person">Search results (Person)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Laura Peteers (Person details)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-xl">Person details</h1>
+              </div>
+              <div class="nhsuk-grid-column-one-half" style="text-align:right;">
+                <a href="../../pb6/reason-for-editing">
+                <button class="nhsuk-button" type="submit">
+                  Edit person details
+                </button>
+                </a>
+              </div>
+            </div>
+            <div class="nhsuk-grid-column-full">
+              <hr style="border-bottom: 4px solid #005eb8; margin: 0" />
+              </div>
+          </div>
+
+
+          <div class="nhsuk-scrollable-pane">
+            <br />
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <div class="nhsuk-hint">
+                  You can change or update any incorrect information.
+                </div>
+                <form action="reason-for-editing" method="post" class="form">
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="first-name">
+                      First names (Given names/Forenames)
+                    </label>
+                    <div class="nhsuk-hint" id="first-name-hint-text">
+                      For example, Phillip John
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="first-name" name="first-name" type="text"
+                      aria-describedby="example-with-hint-text-hint" value="Laura" disabled />
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="surname">
+                      Last name (Name/Surname)
+                    </label>
+                    <div class="nhsuk-hint" id="surname-hint-text">
+                      For example, Smith
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="surname" name="surname" type="text"
+                      aria-describedby="example-with-hint-text-hint" value="Peteers" disabled />
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                      <legend class="nhsuk-fieldset__legend">
+                        <label class="nhsuk-label">Date of birth</label>
+                      </legend>
+                      <div class="nhsuk-hint" id="example-hint">
+                        For example, 15 10 1993
+                      </div>
+
+                      <div class="nhsuk-date-input" id="dob-dd">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="dob-dd">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dob-dd"
+                              name="dob-dd" type="text" pattern="[0-9]*" inputmode="numeric" value="22" disabled/>
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="dob-mm">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dob-mm"
+                              name="dob-mm" type="text" pattern="[0-9]*" inputmode="numeric" value="02" disabled/>
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="dob-yyyy">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dob-yyyy"
+                              name="dob-yyyy" type="text" pattern="[0-9]*" inputmode="numeric" value="1984" disabled />
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <h2 class="nhsuk-heading-m">Current address</h2>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="address1">
+                      Address line 1
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="address1" name="address1" type="text"
+                      value="28 Place de la Madeleine" disabled/>
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="address2">
+                      Address line 2 (Optional)
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="address2" name="address2" type="text"
+                      value="Paris" disabled />
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="address3">
+                      Address line 3 (Optional)
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="address3" name="address3" type="text" disabled/>
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="entitlement-country">
+                      Entitlement country
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="entitlement-country" name="entitlement-country"
+                      type="text" value="France (FR)" disabled />
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--start left navigation-->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          Laura Peteers<span class="nhsuk-caption-m nhsuk-caption--bottom">
+            <span class="nhsuk-u-visually-hidden"> - </span>3432234</span>
+        </h3>
+        <ul>
+          <div id="options" class="options">
+            <li>
+              <a class="active" href="#">Person details</a>
+            </li>
+            <li></li>
+            <li>
+              <a href="entitlements-treatments-no-prc">Entitlements and treatments along with linked Claim ID</a>
+            </li>
+            <li>
+              <a href="person-details-resubs">Resubs</a>
+            </li>
+            <li>
+              <a href="case-history-person">Case history</a>
+            </li>
+
+          </div>
+        </ul>
+      </div>
+    </div>
+    <!--end left navigation-->
+  </div>
+</div>
+
+{% endblock %}
