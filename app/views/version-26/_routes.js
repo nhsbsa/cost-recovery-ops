@@ -165,4 +165,20 @@ router.post('/entitlement-type', function (req, res) {
 
 })
 
+//pb7/v4/suspend-ovm-account.html
+router.post('/suspend-account', function (req, res) {
+
+  const selectedRadio = req.body.entitlementType; 
+
+  if (selectedRadio === "Yes"){
+    res.redirect('/version-26/pb7/v4/suspend-account-requests-approved')
+  }
+
+  if (selectedRadio === "No"){
+    res.redirect('/version-26/pb7/v4/suspend-account-requests-view-accepted')
+  }
+
+})
+
+
 module.exports = router;
