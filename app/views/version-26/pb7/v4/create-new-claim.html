@@ -1,0 +1,188 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search results page
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+   <div class="nhsuk-width-container-fluid">
+      <div class="nhsuk-grid-row">
+         <div class="nhsuk-grid-column-full">
+            <ol class="nhsuk-breadcrumb__list">
+               <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="uk-claims">UK claims
+                     (Search)</a></li>
+               <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link"
+                     href="search-results-uk-claims">Search results</a></li>
+               <li class="nhsuk-breadcrumb__item">Create new claim</li>
+            </ol>
+         </div>
+      </div>
+   </div>
+</nav>
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+   <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+
+         <div class="nhsuk-width-container-fluid">
+            <div class="nhsuk-main-wrapper">
+               <div class="nhsuk-grid-row">
+                  <div class="nhsuk-grid-column-full">
+                     <h1 class="nhsuk-heading-xl">Create a new claim</h1>
+                     <hr class="blue-horizontal-line">
+                     <br>
+
+                     <form action="/manage-overseas-entitlements-and-treatments/create-new-claim" method="post"
+                        autocomplete="off" onsubmit="document.getElementById('createNewClaimButton').disabled=true;">
+                        <input type="hidden" name="_csrf"
+                           value="8ZWDP8BebRVZyZDQGS2iAaWsGVL9jrsKvsLQZ0UdhcZK3N_FkKWzDPZmCSF0qvXkKQCWOJbKNDPLuo8niabnUiZ8vPd6vrz3">
+                        <div class="nhsuk-form-group">
+                           <div class="nhsuk-grid-row">
+                              <div class="nhsuk-grid-column-one-third">
+                                 <div class="nhsuk-form-group">
+                                    <label class="nhsuk-label" for="year">Year</label>
+                                    <div class="nhsuk-hint">For example, 2020.</div>
+                                    <input class="nhsuk-input nhsuk-input--width-5" id="year" type="text"
+                                       name="claimDTOForSearch.year" value="">
+                                 </div>
+                                 <div class="nhsuk-form-group">
+                                    <label class="nhsuk-label" for="month">Month</label> <select
+                                       class="nhsuk-select claim-months" id="month" name="claimDTOForSearch.month">
+                                       <option value="" selected="selected">Select</option>
+                                       <option value="January">January</option>
+                                       <option value="February">February</option>
+                                       <option value="March">March</option>
+                                       <option value="April">April</option>
+                                       <option value="May">May</option>
+                                       <option value="June">June</option>
+                                       <option value="July">July</option>
+                                       <option value="August">August</option>
+                                       <option value="September">September</option>
+                                       <option value="October">October</option>
+                                       <option value="November">November</option>
+                                       <option value="December">December</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <br>
+                           <div class="nhsuk-form-group ">
+                              <fieldset class="nhsuk-fieldset">
+                                 <legend class="nhsuk-label ">Entitlement - Article type </legend>
+                                 <div class="nhsuk-form-group ">
+                                    <div class="nhsuk-radios">
+
+                                       <div class="nhsuk-radios__item">
+                                          <input class="nhsuk-radios__input" id="entitlementArticleType"
+                                             name="claimDTOForSearch.entitlementArticleType" type="radio"
+                                             value="Article 62" checked="checked">
+                                          <label class="nhsuk-label nhsuk-radios__label"
+                                             for="entitlementArticleType">EHIC and PRC - Article 62</label>
+                                       </div>
+                                       <div class="nhsuk-radios__item">
+                                          <input class="nhsuk-radios__input" id="entitlementTypeName-s2"
+                                             name="claimDTOForSearch.entitlementArticleType" type="radio"
+                                             value="Article 20.2">
+                                          <label class="nhsuk-label nhsuk-radios__label"
+                                             for="entitlementTypeName-s2">S2/E112 - Article 20.2</label>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </fieldset>
+                           </div>
+                           <div class="nhsuk-form-group nhsuk-u-margin-top-4">
+                              <label class="nhsuk-label" for="displayName">Country</label>
+                              <div class="nhsuk-hint">For example, France</div>
+                              <label class="nhsuk-u-visually-hidden" for="displayName-select">Country</label>
+                              <div>
+                                 <div class="autocomplete__wrapper">
+                                    <div
+                                       style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin-bottom: -1px; margin-right: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">
+                                       <div id="displayName__status--A" role="status" aria-atomic="true"
+                                          aria-live="polite"></div>
+                                       <div id="displayName__status--B" role="status" aria-atomic="true"
+                                          aria-live="polite"></div>
+                                    </div><input aria-expanded="false" aria-owns="displayName__listbox"
+                                       aria-autocomplete="both" aria-describedby="displayName__assistiveHint"
+                                       autocomplete="off" class="autocomplete__input autocomplete__input--default"
+                                       id="displayName" name="" placeholder="" type="text" role="combobox">
+                                    <ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                                       id="displayName__listbox" role="listbox">
+                                       <li aria-selected="false" class="autocomplete__option"
+                                          id="displayName__option--0" role="option" tabindex="-1" aria-posinset="1"
+                                          aria-setsize="1">Enter country</li>
+                                    </ul><span id="displayName__assistiveHint" style="display: none;">When autocomplete
+                                       results are available use up and down arrows to review and enter to select. Touch
+                                       device users, explore by touch or with swipe gestures.</span>
+                                 </div>
+                              </div><select class="nhsuk-select" id="displayName-select"
+                                 name="searchCountryDTO.displayName" style="display: none;">
+                                 <option value="" selected="selected">Enter country</option>
+                                 <option value="Austria (AT)">Austria (AT)</option>
+                                 <option value="Belgium (BE)">Belgium (BE)</option>
+                                 <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                                 <option value="Switzerland (CH)">Switzerland (CH)</option>
+                                 <option value="Cyprus (CY)">Cyprus (CY)</option>
+                                 <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                                 <option value="Germany (DE)">Germany (DE)</option>
+                                 <option value="Denmark (DK)">Denmark (DK)</option>
+                                 <option value="Estonia (EE)">Estonia (EE)</option>
+                                 <option value="Spain (ES)">Spain (ES)</option>
+                                 <option value="Finland (FI)">Finland (FI)</option>
+                                 <option value="France (FR)">France (FR)</option>
+                                 <option value="Greece (GR)">Greece (GR)</option>
+                                 <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                                 <option value="Croatia (HR)">Croatia (HR)</option>
+                                 <option value="Hungary (HU)">Hungary (HU)</option>
+                                 <option value="Ireland (IE)">Ireland (IE)</option>
+                                 <option value="Iceland (IS)">Iceland (IS)</option>
+                                 <option value="Italy (IT)">Italy (IT)</option>
+                                 <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                                 <option value="Lithuania (LT)">Lithuania (LT)</option>
+                                 <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                                 <option value="Latvia (LV)">Latvia (LV)</option>
+                                 <option value="Malta (MT)">Malta (MT)</option>
+                                 <option value="Netherlands (NL)">Netherlands (NL)</option>
+                                 <option value="Norway (NO)">Norway (NO)</option>
+                                 <option value="Poland (PL)">Poland (PL)</option>
+                                 <option value="Portugal (PT)">Portugal (PT)</option>
+                                 <option value="Romania (RO)">Romania (RO)</option>
+                                 <option value="Sweden (SE)">Sweden (SE)</option>
+                                 <option value="Slovenia (SI)">Slovenia (SI)</option>
+                                 <option value="Slovakia (SK)">Slovakia (SK)</option>
+                              </select>
+                           </div>
+                        </div>
+                     </form>
+                     
+                     <a href="claim-treatments">
+                        <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                           Create claim
+                        </button>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}
