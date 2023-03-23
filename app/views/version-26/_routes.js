@@ -171,7 +171,7 @@ router.post('/suspend-account', function (req, res) {
   const selectedRadio = req.body.entitlementType; 
 
   if (selectedRadio === "Yes"){
-    res.redirect('/version-26/pb7/v4/suspend-account-requests-approved')
+    res.redirect('/version-26/pb7/v4/suspend-account-requests-suspended')
   }
 
   if (selectedRadio === "No"){
