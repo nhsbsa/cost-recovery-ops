@@ -152,6 +152,28 @@ router.post('/print-again', function (req, res) {
 
 })
 
+//create-person-entitlement.html
+router.post('/select-entitlement', function (req, res) {
+
+  const selectedRadio = req.body.entitlement;
+
+  if (selectedRadio === "s2"){
+    res.redirect('s1-details')
+  }
+  if (selectedRadio === "s1"){
+    res.redirect('s1-details')
+  }
+  if (selectedRadio === "ehic"){
+    res.redirect('s1-details')
+  }
+  if (selectedRadio === "prc"){
+    res.redirect('s1-details')
+  }
+  else {
+    res.redirect('s1-details')
+  }
+
+})
 
 
 
