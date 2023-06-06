@@ -180,5 +180,24 @@ router.post('/suspend-account', function (req, res) {
 
 })
 
+//pb7/v4/add-new-entitlement.html
+router.post('/uk-claims-search', function (req, res) {
+
+  const selectedRadio = req.body.entitlementType; 
+
+  if (selectedRadio === "EHICandPRC"){
+    res.redirect('/version-26/pb7/v4/search-results-uk-claims')
+  }
+
+  if (selectedRadio === "S2/E112"){
+    res.redirect('/version-26/pb7/v4/XXX')
+  }
+
+  else {
+    res.redirect('/version-26/pb7/v4/uk-claims')
+  }
+
+})
+
 
 module.exports = router;
