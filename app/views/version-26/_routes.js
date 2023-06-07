@@ -190,11 +190,11 @@ router.post('/uk-claims-search', function (req, res) {
   }
 
   if (selectedRadio === "S2/E112"){
-    res.redirect('/version-26/pb7/v4/XXX')
+    res.redirect('/version-26/pb7/v4/XXX-SET THIS UP-XXX')
   }
 
   else {
-    res.redirect('/version-26/pb7/v4/uk-claims')
+    res.redirect('/version-26/pb7/v4/search-results-uk-claims')
   }
 
 })
