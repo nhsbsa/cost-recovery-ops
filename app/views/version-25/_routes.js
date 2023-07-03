@@ -64,7 +64,7 @@ router.post('/s1-status', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "pensioner"){
-    res.redirect('s1-details-pensioner')
+    res.redirect('s1-reg-pin-name-dob')
   }
   if (selectedRadio === "dependant of pensioner"){
     res.redirect('s1-status')
