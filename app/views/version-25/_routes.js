@@ -175,6 +175,38 @@ router.post('/select-entitlement', function (req, res) {
 
 })
 
+//s1-or-s072-received.html
+router.post('/s1-or-s072-received', function (req, res) {
 
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-s072-details')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-create-person')
+  }
+  else {
+    res.redirect('s1-or-s072-received')
+  }
+
+})
+
+//add-new-entitlement.html
+router.post('/add-new-entitlement', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "s2/e122"){
+    res.redirect('s1-or-s072-received')
+  }
+  if (selectedRadio === "prc"){
+    res.redirect('s1-or-s072-received')
+  }
+  else {
+    res.redirect('s1-or-s072-received')
+  }
+
+})
 
 module.exports = router;
