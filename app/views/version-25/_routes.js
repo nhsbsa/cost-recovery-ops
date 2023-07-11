@@ -181,7 +181,7 @@ router.post('/s1-or-s072-received', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "yes"){
-    res.redirect('s1-s072-details')
+    res.redirect('s1-status')
   }
   if (selectedRadio === "no"){
     res.redirect('s1-create-person')
