@@ -64,7 +64,7 @@ router.post('/s1-status', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "pensioner"){
-    res.redirect('s1-reg-pin-name-dob')
+    res.redirect('s1-create-person2')
   }
   if (selectedRadio === "dependant of pensioner"){
     res.redirect('s1-status')
@@ -184,13 +184,30 @@ router.post('/s1-or-s072-received', function (req, res) {
     res.redirect('s1-status')
   }
   if (selectedRadio === "no"){
-    res.redirect('s1-create-person')
+    res.redirect('prefilled-fsa1-received')
   }
   else {
     res.redirect('s1-or-s072-received')
   }
 
 })
+
+//prefilled-fsa1-received.html
+router.post('/prefilled-fsa1-received', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-enter-fas1-details-previous-name')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-print-fas1-confirmation')
+  }
+  else {
+    res.redirect('prefilled-fsa1-received')
+  }
+
+  })
 
 //add-new-entitlement.html
 router.post('/add-new-entitlement', function (req, res) {
