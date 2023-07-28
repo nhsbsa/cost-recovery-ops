@@ -210,12 +210,12 @@ router.post('/prefilled-fsa1-received', function (req, res) {
   })
 
   //s1-create-person-dependent.html
-  router.post('/s1-create-person-dependent', function (req, res) {
+  router.post('/s1-fas1-create-person-dependent', function (req, res) {
   
     const selectedRadio = req.body.status;
   
     if (selectedRadio === "yes"){
-      res.redirect('s1-create-person-dependent')
+      res.redirect('s1-fas1-create-person-dependent')
     }
     if (selectedRadio === "no"){
       res.redirect('s1-fas1-check-your-answers')
@@ -227,12 +227,12 @@ router.post('/prefilled-fsa1-received', function (req, res) {
     })
 
     //s1-create-person-dependent-loop.html
-    router.post('/s1-create-person-dependent-loop', function (req, res) {
+    router.post('/s1-fas1-create-person-dependent-loop', function (req, res) {
     
       const selectedRadio = req.body.status;
     
       if (selectedRadio === "yes"){
-        res.redirect('s1-create-person-dependent')
+        res.redirect('s1-fas1-create-person-dependent')
       }
       if (selectedRadio === "no"){
         res.redirect('s1-fas1-check-your-answers-with-dependents')
