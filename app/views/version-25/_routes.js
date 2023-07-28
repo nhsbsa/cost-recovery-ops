@@ -209,39 +209,73 @@ router.post('/prefilled-fsa1-received', function (req, res) {
 
   })
 
-  //s1-create-person-dependent.html
-  router.post('/s1-fas1-create-person-dependent', function (req, res) {
-  
-    const selectedRadio = req.body.status;
-  
-    if (selectedRadio === "yes"){
-      res.redirect('s1-fas1-create-person-dependent')
-    }
-    if (selectedRadio === "no"){
-      res.redirect('s1-fas1-check-your-answers')
-    }
-    else {
-      res.redirect('s1-fas1-any-dependents')
-    }
-  
-    })
+//s1-fas1-create-person-dependent.html
+router.post('/s1-fas1-create-person-dependent', function (req, res) {
 
-    //s1-create-person-dependent-loop.html
-    router.post('/s1-fas1-create-person-dependent-loop', function (req, res) {
-    
-      const selectedRadio = req.body.status;
-    
-      if (selectedRadio === "yes"){
-        res.redirect('s1-fas1-create-person-dependent')
-      }
-      if (selectedRadio === "no"){
-        res.redirect('s1-fas1-check-your-answers-with-dependents')
-      }
-      else {
-        res.redirect('s1-fas1-any-dependents')
-      }
-    
-      })
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-fas1-create-person-dependent')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-fas1-check-your-answers')
+  }
+  else {
+    res.redirect('s1-fas1-any-dependents')
+  }
+
+})
+
+//s1-fas1-create-person-dependent-loop.html
+router.post('/s1-fas1-create-person-dependent-loop', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-fas1-create-person-dependent')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-fas1-check-your-answers-with-dependents')
+  }
+  else {
+    res.redirect('s1-fas1-any-more-dependents')
+  }
+
+})
+
+//s1-create-person-dependent.html
+router.post('/s1-create-person-dependent', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-create-person-dependent')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-check-your-answers-final')
+  }
+  else {
+    res.redirect('s1-any-dependents')
+  }
+
+})
+
+//s1-create-person-dependent-loop.html
+router.post('/s1-create-person-dependent-loop', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-create-person-dependent')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-check-your-answers-with-dependents')
+  }
+  else {
+    res.redirect('s1-any-more-dependents')
+  }
+
+})
 
 //add-new-entitlement.html
 router.post('/add-new-entitlement', function (req, res) {
