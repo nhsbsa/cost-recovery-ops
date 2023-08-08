@@ -184,7 +184,7 @@ router.post('/s1-or-s072-received', function (req, res) {
     res.redirect('s1-status')
   }
   if (selectedRadio === "no"){
-    res.redirect('prefilled-fsa1-received')
+    res.redirect('prefilled-fas1-received')
   }
   else {
     res.redirect('s1-or-s072-received')
@@ -192,19 +192,19 @@ router.post('/s1-or-s072-received', function (req, res) {
 
 })
 
-//prefilled-fsa1-received.html
-router.post('/prefilled-fsa1-received', function (req, res) {
+//prefilled-fas1-received.html
+router.post('/prefilled-fas1-received', function (req, res) {
 
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "yes"){
-    res.redirect('s1-enter-fas1-details-previous-name')
+    res.redirect('s1-fas1-details')
   }
   if (selectedRadio === "no"){
     res.redirect('s1-print-fas1-confirmation')
   }
   else {
-    res.redirect('prefilled-fsa1-received')
+    res.redirect('prefilled-fas1-received')
   }
 
   })
