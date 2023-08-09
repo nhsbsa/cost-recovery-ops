@@ -58,32 +58,6 @@ router.post('/have-s1', function (req, res) {
 
 })
 
-//s1-status.html
-router.post('/s1-status', function (req, res) {
-
-  const selectedRadio = req.body.status;
-
-  if (selectedRadio === "pensioner"){
-    res.redirect('s1-create-person2')
-  }
-  if (selectedRadio === "dependant of pensioner"){
-    res.redirect('s1-status')
-  }
-  if (selectedRadio === "posted worker"){
-    res.redirect('s1-status')
-  }
-  if (selectedRadio === "dependant of posted worker"){
-    res.redirect('s1-status')
-  }
-  if (selectedRadio === "dependant of EU insured person"){
-    res.redirect('s1-status')
-  }
-  else {
-    res.redirect('s1-status')
-  }
-
-})
-
 //s1-details.html
 router.post('/registered', function (req, res) {
 
@@ -181,7 +155,7 @@ router.post('/s1-or-s072-received', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "yes"){
-    res.redirect('s1-status')
+    res.redirect('s1-create-person2')
   }
   if (selectedRadio === "no"){
     res.redirect('prefilled-fas1-received')
