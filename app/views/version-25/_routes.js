@@ -308,6 +308,9 @@ router.post('/what-action-to-take', function (req, res) {
   if (selectedRadio === "AddNew"){
     res.redirect('what-action-to-take')
   }
+  if (selectedRadio === "DepDet"){
+    res.redirect('what-action-to-take')
+  }
   else {
     res.redirect('what-action-to-take')
   }
