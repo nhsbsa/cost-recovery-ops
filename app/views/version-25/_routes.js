@@ -294,4 +294,24 @@ router.post('/add-new-entitlement', function (req, res) {
 
 })
 
+//what-action-to-take.html
+router.post('/what-action-to-take', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "FAS1"){
+    res.redirect('what-action-to-take')
+  }
+  if (selectedRadio === "FAS1Form"){
+    res.redirect('what-action-to-take')
+  }
+  if (selectedRadio === "AddNew"){
+    res.redirect('what-action-to-take')
+  }
+  else {
+    res.redirect('what-action-to-take')
+  }
+
+})
+
 module.exports = router;
