@@ -15519,3 +15519,622 @@ Case History
     margin-bottom: 0;
     margin-top: 8px;
 }
+
+// Pagination
+
+.nhsuk-pagination {
+    // text-align: center;
+
+    @media (min-width: 40.0625em) {
+
+        // Alignment adjustments
+        // margin-left: - nhsuk-spacing(1);
+        // margin-right: - nhsuk-spacing(1);
+
+        // Hide whitespace between elements
+        font-size: 0;
+
+        // Trick to remove the need for floats
+        text-align: justify;
+
+        &:after {
+            content: '';
+            display: inline-block;
+            width: 100%;
+        }
+    }
+
+}
+
+.nhsuk-pagination__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media (min-width: 40.0625em) {
+        display: inline-block;
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+}
+
+.nhsuk-pagination__results {
+    @media (min-width: 40.0625em) {
+        display: inline-block;
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+}
+
+.nhsuk-pagination__item {
+    //@include govuk-font(19);
+    display: inline-block;
+}
+
+.nhsuk-pagination__item--active,
+.nhsuk-pagination__item--dots {
+    font-weight: bold;
+    height: 25px;
+    padding: nhsuk-spacing(1) nhsuk-spacing(2);
+    text-align: center;
+}
+
+.nhsuk-pagination__item--dots {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.nhsuk-pagination__item--prev .nhsuk-pagination__link:before,
+.nhsuk-pagination__item--next .nhsuk-pagination__link:after {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-style: solid;
+    color: govuk-colour("black");
+    background: transparent;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    content: "";
+}
+
+.nhsuk-pagination__item--prev .nhsuk-pagination__link:before {
+    border-width: 3px 0 0 3px;
+    margin-right: nhsuk-spacing(1);
+}
+
+.nhsuk-pagination__item--next .nhsuk-pagination__link:after {
+    border-width: 0 3px 3px 0;
+    margin-left: nhsuk-spacing(1);
+}
+
+.nhsuk-pagination__link {
+    display: block;
+    padding: nhsuk-spacing(1);
+    text-align: center;
+    text-decoration: none;
+    min-width: 25px;
+
+    &:link,
+    &:visited {
+        color: govuk-colour("blue");
+    }
+
+    &:hover {
+        color: govuk-colour("light-blue");
+    }
+
+    &:focus {
+        color: govuk-colour("black");
+    }
+
+}
+
+/* ==========================================================================
+   SECONDARY NAV
+  ========================================================================== */
+// Secondary nav component
+.nhsuk-secondary-navigation {
+    background-color: $color_nhsuk-white;
+}
+
+.nhsuk-secondary-navigation__container {
+    text-align: justify; // Trick to remove the need for floats
+    margin: 0 30px;
+}
+
+.nhsuk-secondary-navigation__nav {
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nhsuk-secondary-navigation__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nhsuk-secondary-navigation__item {
+    @include nhsuk-font($size: 19);
+    display: inline-block;
+    margin-right: nhsuk-spacing(4);
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.nhsuk-secondary-navigation__link {
+    display: block;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:link,
+    &:visited {
+        color: $color_nhsuk-blue;
+    }
+
+    &:focus {
+        color: black; // Focus colour on yellow should really be black.
+        position: relative; // Ensure focus sits above everything else.
+        z-index: 1;
+        box-shadow: none;
+    }
+
+    &[aria-current] {
+        color: $color_nhsuk-blue;
+        position: relative;
+        text-decoration: none;
+        font-weight: bold;
+
+        &:before {
+            background-color: $color_nhsuk-blue;
+            content: "";
+            display: block;
+            height: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        &:focus {
+            color: black; // Focus colour on yellow should really be black.
+            position: relative; // Ensure focus sits above everything else.
+            border: none;
+
+            &:before {
+                background-color: black;
+            }
+        }
+    }
+}
+
+// Details headings
+.nhsuk-details__above--third {
+    width: 33%;
+    display: inline-block;
+
+    .case-type-center {
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 0px;
+
+        &.case-stage-title {
+            margin-bottom: 32px;
+        }
+
+        &.status-title {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        &.edit-title {
+            margin-bottom: 32px;
+            text-align: right;
+        }
+    }
+}
+
+.nhsuk-details__above--quarter {
+    width: 24%;
+    display: inline-block;
+
+    .case-type-center {
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 0px;
+
+        &.case-stage-title {
+            margin-bottom: 32px;
+        }
+
+        &.status-title {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        &.edit-title {
+            margin-bottom: 32px;
+            text-align: right;
+        }
+    }
+}
+
+.nhsuk-details__above--half {
+    width: 50%;
+    display: inline-block;
+
+    .case-type-center {
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 0px;
+
+        &.case-stage-title {
+            margin-bottom: 32px;
+        }
+
+        &.status-title {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        &.edit-title {
+            margin-bottom: 32px;
+            text-align: right;
+        }
+    }
+}
+
+// expanders
+.nhsuk-expander-group {
+    width: 100%;
+    display: block;
+}
+
+.nhsuk-details__summary_flex {
+    display: flex;
+}
+
+.nhsuk-details__summary-text--third {
+    width: calc(33.33% - 5px);
+    display: inline-block;
+
+    .case-type-center {
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 0px;
+    }
+
+    a {
+        line-height: 15px;
+        float: right;
+        margin-bottom: 0px;
+    }
+}
+
+.nhsuk-details__summary-text--quarter {
+    width: 25%;
+    text-align: center;
+
+    &:first-child {
+        text-align: left;
+    }
+
+    &:last-child {
+        text-align: right;
+    }
+}
+
+.flex-set {
+    display: flex !important;
+}
+
+.nhsuk-details__summary-text-center {
+    text-align: center;
+}
+
+.nhsuk-details {
+    border-top: 4px solid transparent;
+    display: inline-block;
+    width: 100%;
+}
+
+.nhsuk-expander-group {
+    width: 100%;
+    display: block;
+}
+
+.nhsuk-details {
+    color: #212b32;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: block;
+}
+
+@media print {
+    .nhsuk-details {
+        color: #212b32;
+    }
+}
+
+@media (min-width: 40.0625em) {
+    .nhsuk-details {
+        margin-bottom: 24px;
+    }
+}
+
+@media (min-width: 40.0625em) {
+    .nhsuk-details {
+        font-size: 19px;
+        font-size: 1.1875rem;
+        line-height: 1.47368;
+    }
+}
+
+@media print {
+    .nhsuk-details {
+        font-size: 14pt;
+        line-height: 1.15;
+    }
+}
+
+.nhsuk-details__summary {
+    color: #005eb8;
+    /* [1] */
+    cursor: pointer;
+    display: inline-block;
+    /* [2] */
+    padding-left: 24px;
+    position: relative;
+    /* [3] */
+}
+
+.nhsuk-details__summary:hover {
+    color: #7C2855;
+}
+
+.nhsuk-details__summary:before {
+    bottom: 0;
+    content: '';
+    left: 0;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+    border-width: 7px 0 7px 12.124px;
+    border-left-color: inherit;
+}
+
+.nhsuk-details__summary:focus {
+    background-color: #ffeb3b;
+    box-shadow: 0 -2px #ffeb3b, 0 4px #212b32;
+    color: #212b32;
+    outline: 4px solid transparent;
+    text-decoration: none;
+}
+
+.nhsuk-details__summary:focus .nhsuk-icon {
+    fill: #212b32;
+}
+
+.nhsuk-details__summary:hover .nhsuk-details__summary-text,
+.nhsuk-details__summary:focus .nhsuk-details__summary-text {
+    text-decoration: none;
+}
+
+.nhsuk-details[open]>.nhsuk-details__summary:before {
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+    border-width: 12.124px 7px 0 7px;
+    border-top-color: inherit;
+}
+
+.nhsuk-details__summary-text {
+    text-decoration: underline;
+    /* [4] */
+}
+
+.nhsuk-details__summary::-webkit-details-marker {
+    display: none;
+    /* [5] */
+}
+
+.nhsuk-details__text {
+    border-left: 4px solid #d8dde0;
+    margin-top: 8px;
+    padding: 16px;
+    padding-left: 20px;
+    /* [6] */
+}
+
+.nhsuk-details__text>*:first-child {
+    margin-top: 0;
+}
+
+.nhsuk-details__text>*:last-child {
+    margin-bottom: 0;
+}
+
+/**
+ * Expander variation.
+ *
+ * 1. !important used because the icon is populated
+ *    by the JavaScript polyfill
+ * 2. Remove the default hover, focus and active
+ *    styles for this component.
+ * 3. -2px left margin to align the icon to the content.
+ * 4. When a group of details is used reduce the
+ *    margin between them so they sit together.
+ */
+.nhsuk-expander {
+    background-color: #ffffff;
+    border: 1px solid #d8dde0;
+    border-bottom-width: 4px;
+}
+
+.nhsuk-expander:hover {
+    border-color: #aeb7bd;
+}
+
+.nhsuk-expander .nhsuk-details__summary {
+    background-color: #ffffff;
+    border-top: 4px solid transparent;
+    display: block;
+    padding: 10px 14px 14px !important;
+}
+
+@media (max-width: 40.0525em) {
+    .nhsuk-expander .nhsuk-details__summary {
+        padding: 12px 16px 16px;
+    }
+}
+
+.nhsuk-expander .nhsuk-details__summary:before {
+    display: none !important;
+}
+
+.nhsuk-expander .nhsuk-details__summary:hover .nhsuk-details__summary-text {
+    color: #7C2855;
+}
+
+.nhsuk-expander .nhsuk-details__summary:focus {
+    box-shadow: none;
+}
+
+.nhsuk-expander .nhsuk-details__summary:focus .nhsuk-details__summary-text {
+    background-color: #ffeb3b;
+    box-shadow: 0 -2px #ffeb3b, 0 4px #212b32;
+    color: #212b32;
+    outline: 4px solid transparent;
+    text-decoration: none;
+    background: #ffeb3b url("data:image/svg+xml,%3Csvg class='nhsuk-icon nhsuk-icon__plus' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'%3E%3Ccircle cx='12' cy='12' r='10' fill='002f5c'%3E%3C/circle%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M12 8v8M8 12h8'%3E%3C/path%3E%3C/svg%3E%0A") left -2px center no-repeat;
+    background-size: 32px 32px;
+}
+
+.nhsuk-expander .nhsuk-details__summary-text {
+    background: url("data:image/svg+xml,%3Csvg class='nhsuk-icon nhsuk-icon__plus' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23005eb8'%3E%3C/circle%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M12 8v8M8 12h8'%3E%3C/path%3E%3C/svg%3E%0A") left -2px center no-repeat;
+    background-size: 32px 32px;
+    color: #005eb8;
+    cursor: pointer;
+    display: inline-block;
+    padding: 4px 4px 4px 38px;
+    position: relative;
+}
+
+.nhsuk-expander .nhsuk-details__text {
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 0;
+    border-left: 0;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+@media (min-width: 40.0625em) {
+    .nhsuk-expander .nhsuk-details__text {
+        padding-bottom: 24px;
+    }
+}
+
+@media (min-width: 40.0625em) {
+    .nhsuk-expander .nhsuk-details__text {
+        padding-left: 24px;
+    }
+}
+
+@media (min-width: 40.0625em) {
+    .nhsuk-expander .nhsuk-details__text {
+        padding-right: 24px;
+    }
+}
+
+@media (min-width: 40.0625em) {
+    .nhsuk-expander .nhsuk-details__text {
+        padding-top: 0;
+    }
+}
+
+.nhsuk-expander[open] {
+    border-bottom-width: 1px;
+}
+
+.nhsuk-expander[open] .nhsuk-details__summary:focus .nhsuk-details__summary-text {
+    background: #ffeb3b url("data:image/svg+xml,%3Csvg class='nhsuk-icon nhsuk-icon__minus' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'%3E%3Ccircle cx='12' cy='12' r='10' fill='002f5c'%3E%3C/circle%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M8 12h8'%3E%3C/path%3E%3C/svg%3E%0A") left -2px center no-repeat;
+    /* [3] */
+    background-size: 32px 32px;
+}
+
+.nhsuk-expander[open] .nhsuk-details__summary:focus:hover .nhsuk-details__summary-text {
+    text-decoration: none;
+}
+
+.nhsuk-expander[open] .nhsuk-details__summary-text {
+    background: url("data:image/svg+xml,%3Csvg class='nhsuk-icon nhsuk-icon__minus' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23005eb8'%3E%3C/circle%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M8 12h8'%3E%3C/path%3E%3C/svg%3E%0A") left -2px center no-repeat;
+    /* [3] */
+    background-size: 32px 32px;
+}
+
+.nhsuk-expander-group {
+    /* [4] */
+    margin-bottom: 16px;
+}
+
+.nhsuk-expander-group>.nhsuk-details {
+    margin-bottom: 8px;
+}
+
+@media (min-width: 40.0625em) {
+    .nhsuk-expander-group>.nhsuk-details {
+        margin-bottom: 8px;
+    }
+}
+
+@media (min-width: 40.0625em) {
+    .nhsuk-expander-group {
+        margin-bottom: 24px;
+    }
+}
+
+.nhsuk-details+h2,
+.nhsuk-details+.nhsuk-heading-l {
+    padding-top: 16px;
+}
+
+@media (min-width: 40.0625em) {
+
+    .nhsuk-details+h2,
+    .nhsuk-details+.nhsuk-heading-l {
+        padding-top: 24px;
+    }
+}
+
+.table-text-small {
+    font-size: 14px;
+    color: grey;
+}
