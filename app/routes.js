@@ -42,6 +42,7 @@ router.use('/version-25', require('./views/version-25/_routes'));
 router.use('/version-25/v1', require('./views/version-25/_routes'));
 router.use('/version-25/v2', require('./views/version-25/_routes'));
 router.use('/version-26/pb7/v4', require('./views/version-26/_routes'));
+router.use('/version-26/pb7/v5', require('./views/version-26/_routes'));
 
 module.exports = router;
 

@@ -27,25 +27,25 @@ router.post('/duplicate-prc', function (req, res) {
 
 })
 
-//pb7/v4/add-new-entitlement-duplicate.html
+//pb7/v5/add-new-entitlement-duplicate.html
 router.post('/entitlement-type-duplicate-v4', function (req, res) {
 
   const selectedRadio = req.body.entitlementType; 
 
   if (selectedRadio === "S2/E112"){
-    res.redirect('/version-26/pb7/v4/add-new-entitlement-duplicate')
+    res.redirect('add-new-entitlement-duplicate')
   }
 
   if (selectedRadio === "EHIC"){
-    res.redirect('/version-26/pb7/v4/add-new-entitlement-duplicate')
+    res.redirect('add-new-entitlement-duplicate')
   }
 
   if (selectedRadio === "PRC"){
-    res.redirect('/version-26/pb7/v4/add-prc-details-duplicate')
+    res.redirect('add-prc-details-duplicate')
   }
 
   else {
-    res.redirect('/version-26/pb7/v4/add-new-entitlement-duplicate')
+    res.redirect('add-new-entitlement-duplicate')
   }
 
 })
@@ -83,15 +83,15 @@ router.post('/entitlement-type-v4', function (req, res) {
   }
 
   if (selectedRadio === "EHIC"){
-    res.redirect('/version-26/pb7/v4/add-new-entitlement')
+    res.redirect('add-new-entitlement')
   }
 
   if (selectedRadio === "PRC"){
-    res.redirect('/version-26/pb7/v4/add-prc-details')
+    res.redirect('add-prc-details')
   }
 
   else {
-    res.redirect('/version-26/pb7/v4/add-new-entitlement')
+    res.redirect('add-new-entitlement')
   }
 
 })
@@ -171,11 +171,11 @@ router.post('/suspend-account', function (req, res) {
   const selectedRadio = req.body.entitlementType; 
 
   if (selectedRadio === "Yes"){
-    res.redirect('/version-26/pb7/v4/suspend-account-requests-suspended')
+    res.redirect('suspend-account-requests-suspended')
   }
 
   if (selectedRadio === "No"){
-    res.redirect('/version-26/pb7/v4/suspend-account-requests-view-accepted')
+    res.redirect('suspend-account-requests-view-accepted')
   }
 
 })
@@ -186,15 +186,15 @@ router.post('/uk-claims-search', function (req, res) {
   const selectedRadio = req.body.entitlementType; 
 
   if (selectedRadio === "EHICandPRC"){
-    res.redirect('/version-26/pb7/v4/search-results-uk-claims')
+    res.redirect('search-results-uk-claims')
   }
 
   if (selectedRadio === "S2/E112"){
-    res.redirect('/version-26/pb7/v4/XXX-SET THIS UP-XXX')
+    res.redirect('XXX-SET THIS UP-XXX')
   }
 
   else {
-    res.redirect('/version-26/pb7/v4/search-results-uk-claims')
+    res.redirect('search-results-uk-claims')
   }
 
 })
