@@ -19,24 +19,25 @@ Search results page
 {% block beforeContent %}
 <nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
    <div class="nhsuk-width-container-fluid">
-     <div class="nhsuk-grid-row">
-       <div class="nhsuk-grid-column-full">
- 
-         <ol class="nhsuk-breadcrumb__list">
-           <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="resubs-landing">UK claims
-               (Search)</a></li>
-           <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="claim-resubs-3">Search results</a>
-           </li>
-           <li class="nhsuk-breadcrumb__item">View Claim ID (Treatment forms)</li>
-         </ol>
-       </div>
-     </div>
- 
-     <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="person-record-resubs">Back to Tony
-         Smith (Resubs)</a></p>
- 
+      <div class="nhsuk-grid-row">
+         <div class="nhsuk-grid-column-full">
+
+            <ol class="nhsuk-breadcrumb__list">
+               <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="resubs-landing">UK claims
+                     (Search)</a></li>
+               <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="claim-resubs-3">Search
+                     results</a>
+               </li>
+               <li class="nhsuk-breadcrumb__item">View Claim ID (Treatment forms)</li>
+            </ol>
+         </div>
+      </div>
+
+      <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="person-record-resubs">Back to Tony
+            Smith (Resubs)</a></p>
+
    </div>
- </nav>
+</nav>
 {% endblock %}
 
 <!-- Your page content goes inside the content block -->
@@ -44,25 +45,31 @@ Search results page
 {% block content %}
 <main id="maincontent" role="main">
    <form class="nhsuk-header__search-form" id="search" method="post" role="search" name="action"
-      action="/version-26/pb7/v5/set-agreement-type"><input type="hidden" name="_csrf"
+      action="#"><input type="hidden" name="_csrf"
          value="sGA7Lorrz62HOb6-bBJvvn01VP_bCbVcMGZCYlocW5J1i3x90VALHbzTq5mqWtuKXD9bh05TeZ7tPYFxBwJ1Vzl9YqNF6R9P">
       <div class="nhsuk-width-container-fluid">
          <div class="nhsuk-main-wrapper" id="maincontent" style="padding-top: 32px;">
 
-
             <div class="nhsuk-grid-row">
-               <div class="nhsuk-grid-column-one-half">
-                  <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
-                     Claim ID 345680
-                  </h1>
+               <div class="nhsuk-grid-column-one-third">
+                 <h1 class="nhsuk-heading-l">
+                   Claim ID 345680
+                 </h1>
                </div>
-            </div>
+   
+               <div class="nhsuk-grid-column-two-thirds">
+                 <a href="#"><button class="nhsuk-button nhsuk-button--primary" type="submit" style="float: right; margin-bottom: 0;">
+                     Print selected treatments<span class="nhsuk-u-visually-hidden">for claim ID 345680</span>
+                   </button></a>
+               </div>
+             </div>
 
             <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
                <ul class="nhsuk-secondary-navigation__list">
 
                   <li class="nhsuk-secondary-navigation__item">
-                     <a class="nhsuk-secondary-navigation__link" aria-current="page" href="claim-treatment-form">Treatment forms</a>
+                     <a class="nhsuk-secondary-navigation__link" aria-current="page"
+                        href="claim-treatment-form">Treatment forms</a>
                   </li>
 
                   <li class="nhsuk-secondary-navigation__item">
@@ -71,11 +78,11 @@ Search results page
                      <span class="nhsuk-u-visually-hidden">View overseas visitor manager contact details</span>
                   </li>
 
-                  <li class="nhsuk-secondary-navigation__item">
+                  <!-- <li class="nhsuk-secondary-navigation__item">
                      <a class="nhsuk-secondary-navigation__link" href="claim-summary-for-new-print-options">Claim
                         summary</a>
                      <span class="nhsuk-u-visually-hidden">Claim summary</span>
-                  </li>
+                  </li> -->
 
                   <li class="nhsuk-secondary-navigation__item">
                      <a class="nhsuk-secondary-navigation__link" href="claim-actions">Claim
@@ -135,9 +142,57 @@ Search results page
                <div>
 
                </div>
-               <div>
-                  <br>
-               </div>
+               <br>
+
+               <!--start filter-->
+               <details class="nhsuk-details-1">
+                  <summary class="nhsuk-details__summary-1">
+                     <span class="nhsuk-details__summary-text-1">
+                        Filter by agreement
+                     </span>
+                  </summary>
+                  <div class="nhsuk-details__text">
+
+                     <div class="nhsuk-form-group">
+
+                        <fieldset class="nhsuk-fieldset">
+                           <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                              <h1 class="nhsuk-heading-xs">
+                                 Select the agreement that you want to see the treatment forms for.
+                              </h1>
+                           </legend>
+
+                           <div class="nhsuk-radios nhsuk-radios--inline">
+
+                              <div class="nhsuk-radios__item">
+                                 <input class="nhsuk-radios__input" id="example-inline-1" name="example-inline"
+                                    type="radio" value="tca">
+                                 <label class="nhsuk-label nhsuk-radios__label" for="example-inline-1">
+                                    TCA
+                                 </label>
+                              </div>
+
+                              <div class="nhsuk-radios__item">
+                                 <input class="nhsuk-radios__input" id="example-inline-2" name="example-inline"
+                                    type="radio" value="wa">
+                                 <label class="nhsuk-label nhsuk-radios__label" for="example-inline-2">
+                                    WA
+                                 </label>
+                              </div>
+
+                           </div>
+                        </fieldset>
+
+                     </div>
+
+                     <a href="#"><button class="nhsuk-button" type="submit" style="margin: 30px 0 0 0">
+                           Apply
+                        </button></a>
+                  </div>
+               </details>
+               <!--end filter-->
+
+
                <!-- search claim table -->
 
                <div class="nhsuk-grid-row">
@@ -153,212 +208,280 @@ Search results page
 
                      <div class="nhsuk-form-group">
                         <div class="nhsuk-table-responsive">
-                           <table role="table" class="nhsuk-table" id="claim-treatment-table">
-                              <caption class="nhsuk-table__caption"></caption>
-                              <thead role="rowgroup" class="nhsuk-table__head">
-                                 <tr role="row">
+                           <table id="sortable" class="nhsuk-table nhsuk-table-clickable main-table sortable">
 
-                                    <th role="columnheader" scope="col" id="treatment-id">Treatment ID</th>
-                                    <th role="columnheader" scope="col" id="first-name">First name</th>
-                                    <th role="columnheader" scope="col" id="last-name">Last name</th>
-                                    <th role="columnheader" scope="col" id="entitlement-type">Entitlement</th>
-                                    <th role="columnheader" scope="col" id="claim-cost">Cost(£)</th>
-                                    <th role="columnheader" scope="col" id="agreement-type">Agreement</th>
-                                    <th role="columnheader" scope="col" id="action">Actions</th>
+                              <!-- TABLE START -->
+                              <thead class="nhsuk-table__head" id="treatments">
+                                 <tr class="nhsuk-table__row">
+
+                                    <th class="nhsuk-table__header" scope="col">
+                                       <!--<div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                            <input class="nhsuk-checkboxes__input" id="example-1" name="example" type="checkbox" value="email">
+                                            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                              <span class="nhsuk-u-visually-hidden">Select all treatment forms for claim ID 9658. There are 500 treatment forms.</span>
+                                            </label>
+                                          </div></div> -->
+                                       <a href="#">Select all</a><span class="nhsuk-u-visually-hidden">Select all
+                                          treatment forms for claim
+                                          ID 9658. There are 500 treatment forms.</span>
+                                    </th>
+
+                                    <th class="nhsuk-table__header" scope="col">
+                                       Treatment ID
+
+                                    </th>
+
+                                    <th class="nhsuk-table__header" scope="col">
+                                       First name
+
+                                    </th>
+                                    <th class="nhsuk-table__header" aria-sort="none" scope="col">
+                                       Last name
+
+                                    </th>
+                                    <th class="nhsuk-table__header" scope="col">
+                                       Entitlement
+
+                                    </th>
+
+                                    <th class="nhsuk-table__header" scope="col">
+                                       Cost(£)
+
+                                    </th>
+
+                                    <th class="nhsuk-table__header" scope="col">
+                                       Agreement
+
+                                    </th>
+
+                                    <th class="nhsuk-table__header" scope="col">
+                                       Actions
+
+                                    </th>
+
                                  </tr>
                               </thead>
-                              <tbody class="nhsuk-table__body">
-                                 <tr role="row" class="nhsuk-table__row">
 
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Treatment ID</span>
-                                       <span id="treatmentID_0" class="responsive-table-values"
-                                          value="555902579">34193</span>
+                              <tbody class="nhsuk-table__body ">
+
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62999 for
+                                                   Laura Peteers, entitlement
+                                                   -S2 , Cost - £953.00, agreeement - TCA</span>
+                                             </label>
+                                          </div>
+                                       </div>
                                     </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">First name</span>
-                                       <span id="firstName_0" class="responsive-table-values" value="Phil">Phil</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Last name</span>
-                                       <span id="lastName_0" class="responsive-table-values" value="Moran">Moran</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Entitlement</span>
-                                       <span id="entitlement_0" class="responsive-table-values" value="EHIC">EHIC</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Cost (£)</span>
-                                       <span id="cost_0" class="responsive-table-values" value="10000.0">5,000.00</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Agreement</span>
-                                       <span id="agreement_0" class="responsive-table-values" value="">WA</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Actions</span>
-                                       <a href="/manage-overseas-entitlements-and-treatments/claims-view-patient-record?personId=222891230&amp;claimId=341516&amp;treatmentId=555902579"
-                                          id="viewPatientRecord_0" class="responsive-table-values">
-                                          View patient record
-                                          <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                                          <span class="nhsuk-u-visually-hidden">for treatment 555902579</span>
-                                       </a>
-                                    </td>
-                                 </tr>
-                                 <tr role="row" class="nhsuk-table__row">
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Treatment ID</span>
-                                       <span id="treatmentID_1" class="responsive-table-values"
-                                          value="555902580">38128</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">First name</span>
-                                       <span id="firstName_1" class="responsive-table-values"
-                                          value="Stephan">Stephan</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Last name</span>
-                                       <span id="lastName_1" class="responsive-table-values"
-                                          value="Dupont">Dupont</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Entitlement</span>
-                                       <span id="entitlement_1" class="responsive-table-values" value="EHIC">EHIC</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Cost (£)</span>
-                                       <span id="cost_1" class="responsive-table-values" value="137.0">137.00</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Agreement</span>
-                                       <span id="agreement_0" class="responsive-table-values" value="">WA</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Actions</span>
-                                       <a href="/manage-overseas-entitlements-and-treatments/claims-view-patient-record?personId=222891231&amp;claimId=341516&amp;treatmentId=555902580"
-                                          id="viewPatientRecord_1" class="responsive-table-values">
-                                          View patient record
-                                          <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                                          <span class="nhsuk-u-visually-hidden">for treatment 555902580</span>
-                                       </a>
-                                    </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62999 </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Laura</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Peteers</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">EHIC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">75,000.00</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">WA</td>
+                                    <td class="nhsuk-table__cell"><a href="person-details">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Laura Peteers</span></td>
                                  </tr>
 
-                                 <!-- GEORGES -->
-                                 <tr role="row" class="nhsuk-table__row">
-
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Treatment ID</span>
-                                       <span id="treatmentID_0" class="responsive-table-values"
-                                          value="555902579">47238</span>
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62956 for
+                                                   Laura Peteers, entitlement
+                                                   -S2 , Cost - £953.00, agreeement - WA</span>
+                                             </label>
+                                          </div>
+                                       </div>
                                     </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">First name</span>
-                                       <span id="firstName_0" class="responsive-table-values" value="Phil">Jonas</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Last name</span>
-                                       <span id="lastName_0" class="responsive-table-values"
-                                          value="Richter">Richter</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Entitlement</span>
-                                       <span id="entitlement_0" class="responsive-table-values" value="EHIC">EHIC</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Cost (£)</span>
-                                       <span id="cost_0" class="responsive-table-values" value="10000.0">750.00</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Agreement</span>
-                                       <span id="agreement_0" class="responsive-table-values" value="">TCA</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Actions</span>
-                                       <a href="/manage-overseas-entitlements-and-treatments/claims-view-patient-record?personId=222891230&amp;claimId=341516&amp;treatmentId=555902579"
-                                          id="viewPatientRecord_0" class="responsive-table-values">
-                                          View patient record
-                                          <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                                          <span class="nhsuk-u-visually-hidden">for treatment 555902579</span>
-                                       </a>
-                                    </td>
-                                 </tr>
-                                 </fieldset>
-                                 </td>
-                                 <td role="cell" class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Treatment ID</span>
-                                    <span id="treatmentID_0" class="responsive-table-values"
-                                       value="555902579">63880</span>
-                                 </td>
-                                 <td role="cell" class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">First name</span>
-                                    <span id="firstName_0" class="responsive-table-values" value="Phil">Klaus</span>
-                                 </td>
-                                 <td role="cell" class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Last name</span>
-                                    <span id="lastName_0" class="responsive-table-values" value="Richter">Ziegler</span>
-                                 </td>
-                                 <td role="cell" class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Entitlement</span>
-                                    <span id="entitlement_0" class="responsive-table-values" value="EHIC">PRC</span>
-                                 </td>
-                                 <td role="cell" class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Cost (£)</span>
-                                    <span id="cost_0" class="responsive-table-values" value="10000.0">850.00</span>
-                                 </td>
-                                 <td role="cell" class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Agreement</span>
-                                    <span id="agreement_0" class="responsive-table-values" value="">TCA</span>
-                                 </td>
-                                 <td role="cell" class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Actions</span>
-                                    <a href="/manage-overseas-entitlements-and-treatments/claims-view-patient-record?personId=222891230&amp;claimId=341516&amp;treatmentId=555902579"
-                                       id="viewPatientRecord_0" class="responsive-table-values">
-                                       View patient record
-                                       <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                                       <span class="nhsuk-u-visually-hidden">for treatment 555902579</span>
-                                    </a>
-                                 </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62998</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Laura</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Peteers</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">EHIC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">450.27</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">WA</td>
+                                    <td class="nhsuk-table__cell"><a href="person-details">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Laura Peteers</span></td>
                                  </tr>
 
-                                 <!-- LOUIS -->
-                                 <tr role="row" class="nhsuk-table__row">
-
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Treatment ID</span>
-                                       <span id="treatmentID_0" class="responsive-table-values"
-                                          value="47238">36783</span>
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62956 for
+                                                   Laura Peteers, entitlement
+                                                   -S2 , Cost - £953.00, agreeement - WA</span>
+                                             </label>
+                                          </div>
+                                       </div>
                                     </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">First name</span>
-                                       <span id="firstName_0" class="responsive-table-values" value="Phil">Louis</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Last name</span>
-                                       <span id="lastName_0" class="responsive-table-values" value="Moran">Victor</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Entitlement</span>
-                                       <span id="entitlement_0" class="responsive-table-values" value="EHIC">PRC</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Cost (£)</span>
-                                       <span id="cost_0" class="responsive-table-values" value="10000.0">996.55</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Agreement</span>
-                                       <span id="agreement_0" class="responsive-table-values" value="">WA</span>
-                                    </td>
-                                    <td role="cell" class="nhsuk-table__cell">
-                                       <span class="nhsuk-table-responsive__heading">Actions</span>
-                                       <a href="/manage-overseas-entitlements-and-treatments/claims-view-patient-record?personId=222891230&amp;claimId=341516&amp;treatmentId=555902579"
-                                          id="viewPatientRecord_0" class="responsive-table-values">
-                                          View patient record
-                                          <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                                          <span class="nhsuk-u-visually-hidden">for treatment 555902579</span>
-                                       </a>
-                                    </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62997</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Laura</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Peteers</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">EHIC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">1,638.88</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">WA</td>
+                                    <td class="nhsuk-table__cell"><a href="person-details">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Laura Peteers</span></td>
                                  </tr>
+
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62832 for Tony
+                                                   Smith, entitlement -S2
+                                                   , Cost - £13,875.99, agreeement - WA</span>
+                                             </label>
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62832</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Tony</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Smith</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">EHIC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">13,875.99</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">WA</td>
+                                    <td class="nhsuk-table__cell"><a href="#">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Tony smith</span></td>
+                                 </tr>
+
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62768 for
+                                                   Elise Vincent, entitlement
+                                                   -S2 , Cost - £953.00, agreeement - TCA</span>
+                                             </label>
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62768</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Elise</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Vincent</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">PRC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">953.00</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">TCA</td>
+                                    <td class="nhsuk-table__cell"><a href="#">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Elise Vincent</span></td>
+                                 </tr>
+
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62750 for
+                                                   Adrian Cornet, entitlement
+                                                   -S2 , Cost - £333.00, agreeement - TCA</span>
+                                             </label>
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62750</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Adrian</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Cornet</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">EHIC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">333.00</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">TCA</td>
+                                    <td class="nhsuk-table__cell"><a href="#">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Adrian Cornet</span></td>
+                                 </tr>
+
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62654 for
+                                                   Valentin Bertrand,
+                                                   entitlement -S2 , Cost - £789.98, agreeement - TCA</span>
+                                             </label>
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62654</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Valentin</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Bertrand</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">PRC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">789.98</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">TCA</td>
+                                    <td class="nhsuk-table__cell"><a href="#">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Valentin Bertrand</span></td>
+                                 </tr>
+
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62544 for Nora
+                                                   Rousseau, entitlement
+                                                   -S2 , Cost - £20,987.88, agreeement - WA</span>
+                                             </label>
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62544</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Nora</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Rousseau</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">PRC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">20,987.88</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">WA</td>
+                                    <td class="nhsuk-table__cell"><a href="#">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Nora Rousseau</span></td>
+                                 </tr>
+
+                                 <tr class="nhsuk-table__row">
+                                    <td>
+                                       <div class="nhsuk-checkboxes">
+                                          <div class="nhsuk-checkboxes__item">
+                                             <input class="nhsuk-checkboxes__input" id="example-1" name="example"
+                                                type="checkbox" value="email">
+                                             <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+                                                <span class="nhsuk-u-visually-hidden">Select treatment id 62523 for Nora
+                                                   Rousseau, entitlement
+                                                   -S2 , Cost - £20,987.88, agreeement - WA</span>
+                                             </label>
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">62523</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">Marie</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">LeBoeuf</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">EHIC</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">103.45</td>
+                                    <td class="nhsuk-table__cell" aria-hidden="true">WA</td>
+                                    <td class="nhsuk-table__cell"><a href="#">View patient record</a><span
+                                          class="nhsuk-u-visually-hidden">for Nora Rousseau</span></td>
+                                 </tr>
+
+
 
                               </tbody>
                            </table>
