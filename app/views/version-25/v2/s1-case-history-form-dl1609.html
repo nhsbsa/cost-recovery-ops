@@ -1,0 +1,221 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Manage cost recovery - S1
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+
+          <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="s1-search">Search</a></li>
+          <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="s1-search-results-person">Search
+              results</a></li>
+          <li class="nhsuk-breadcrumb__item">Documents for (person)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="search-results">Back to search
+        results</a></p>
+  </div>
+</nav>
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <div class="govuk-notification-banner govuk-notification-banner--success" role="alert"
+                aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+                <div class="govuk-notification-banner__header">
+                  <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    S1 registered successfully
+                  </h2>
+                </div>
+                <div class="govuk-notification-banner__content">
+                  <p class="govuk-notification-banner__heading">
+                    S1 has been registered.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+              <h1 class="nhsuk-heading-xl">
+                Documents for Douglas Caven
+              </h1>
+            </div>
+
+            <div class="nhsuk-grid-column-one-third">
+              <a href="s1-search"><button class="nhsuk-button" type="submit" style="float:right">
+                  Return to home page
+                </button></a>
+            </div>
+          </div>
+
+          <!--start secondary navigation-->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <nav class="nhsuk-secondary-navigation nav-tabs-bg" aria-label="Secondary navigation"
+                style="background-color:#f0f4f5;">
+                <ul class="nhsuk-secondary-navigation__list">
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" aria-current="Documents"
+                      href="s1-case-history-form-s071">Documents</a>
+                  </li>
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" aria-label="page" href="s1-case-history-form-history">Form history</a>
+                  </li>
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" aria-label="page" href="s1-case-history-person">Person history</a>
+                  </li>
+                </ul>
+              </nav>
+              <hr style="border-bottom:1px solid #ccc; margin:0 0 60px 0">
+            </div>
+          </div>
+          <!--end secondary navigation-->
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+              <table id="sortable"
+                class="nhsuk-table  nhsuk-table-u-margin-0 nhsuk-table-clickable main-table sortable">
+                <thead class="nhsuk-table__head">
+                  <tr class="nhsuk-table__row">
+                    <th class="nhsuk-table__header" scope="col">
+                      Form
+                    </th>
+                    <th class="nhsuk-table__header" scope="col">
+                      Description
+                    </th>
+                    <th class="nhsuk-table__header" scope="col">
+                      Status
+                    </th>
+                    <th class="nhsuk-table__header" scope="col">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody class="nhsuk-table__body ">
+
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">S073</td>
+                    <td class="nhsuk-table__cell">Acknowledgement to MS that S1 has been received</td>
+                    <td class="nhsuk-table__cell"><span style="color: #354550;" class="nhsuk-tag nhsuk-tag--yellow">Sent</span></td>
+                    <td class="nhsuk-table__cell"><a href="#"></a></td>
+                  </tr>
+
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">H002</td>
+                    <td class="nhsuk-table__cell">Cost recovery responses to H001 queries</td>
+                    <td class="nhsuk-table__cell"><span style="color: #354550;"
+                        class="nhsuk-tag nhsuk-tag--blue">Nothing sent</span></td>
+                    <td class="nhsuk-table__cell"><a href="#"></a></td>
+                  </tr>
+
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">H001</td>
+                    <td class="nhsuk-table__cell">Member state queries regarding S071</td>
+                    <td class="nhsuk-table__cell"><span style="color: #354550;"
+                        class="nhsuk-tag nhsuk-tag--orange">Nothing received</span></td>
+                    <td class="nhsuk-table__cell"><a href="#"></a></td>
+                  </tr>
+
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">S071</td>
+                    <td class="nhsuk-table__cell">Raise request for S1 with member state</td>
+                    <td class="nhsuk-table__cell"><span style="color: #354550;"
+                        class="nhsuk-tag nhsuk-tag--red">Not sent</span></td>
+                        <td></td>
+                  </tr>
+
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">FAS1</td>
+                    <td class="nhsuk-table__cell">Sent to person, requesting details to determine eligibility of S1</td>
+                    <td class="nhsuk-table__cell"><span style="color: #354550;"
+                        class="nhsuk-tag nhsuk-tag--red">Not sent</span></td>
+                        <td></td>
+                  </tr>
+
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">S1/S072</td>
+                    <td class="nhsuk-table__cell">Member state send S1 or S072</td>
+                    <td class="nhsuk-table__cell"><span style="color: #354550;" class="nhsuk-tag nhsuk-tag--green">Complete
+                    <td class="nhsuk-table__cell"><a href="#">Download</a></td>
+                  </tr>
+
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">DL1609</td>
+                    <td class="nhsuk-table__cell">Sent to person to confirm dependent details</td>
+                    <td class="nhsuk-table__cell"><span style="color: #354550;" class="nhsuk-tag nhsuk-tag--yellow">Sent
+                    <td class="nhsuk-table__cell"><a href="#"></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--start left navigation-->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          Douglas Caven<span class="nhsuk-caption-m nhsuk-caption--bottom">
+            <span class="nhsuk-u-visually-hidden"> - </span>3432234</span>
+        </h3>
+        <ul>
+          <div id="options" class="options">
+            <li>
+              <a href="s1-person-details">Person details</a>
+            </li>
+            <li>
+              <a href="s1-dependents-details">Dependents details</a>
+            </li>
+            <li>
+              <a href="entitlements-treatments-with-s1-confirmation">Entitlements and treatments along with linked Claim ID</a>
+            </li>
+            <li>
+              <a class="active" href="s1-case-history-form-s071">Case history</a>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <!--end left navigation-->
+
+  </div>
+</div>
+
+{% endblock %}

@@ -30,13 +30,13 @@ router.post('/select-action', function (req, res) {
   const selectedRadio = req.body.entitlement;
 
   if (selectedRadio === "s1"){
-    res.redirect('s1-reg-pin-name-dob')
+    res.redirect('s1-create-person')
   }
   if (selectedRadio === "s2"){
-    res.redirect('s1-cancel-search-pin')
+    res.redirect('s1-search-person')
   }
   else {
-    res.redirect('s1-reg-pin-name-dob')
+    res.redirect('s1-file-upload-2')
   }
 
 })
@@ -64,10 +64,10 @@ router.post('/registered', function (req, res) {
   const selectedRadio = req.body.registered;
 
   if (selectedRadio === "registered"){
-    res.redirect('s1-institution-id-search')
+    res.redirect('s1-add-institution-details-search-results')
   }
   if (selectedRadio === "not registered"){
-    res.redirect('not-registered-reason')
+    res.redirect('s1-details')
   }
   else {
     res.redirect('s1-details')
@@ -155,13 +155,13 @@ router.post('/s1-or-s072-received', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "yes"){
-    res.redirect('s1-create-person2')
+    res.redirect('s1-details')
   }
   if (selectedRadio === "no"){
-    res.redirect('prefilled-fas1-received')
+    res.redirect('s1-prefilled-fas1-received')
   }
   else {
-    res.redirect('s1-or-s072-received')
+    res.redirect('s1-prefilled-fas1-received')
   }
 
 })
@@ -172,10 +172,10 @@ router.post('/prefilled-fas1-received', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "yes"){
-    res.redirect('s1-fas1-details')
+    res.redirect('s1-what-path-to-take')
   }
   if (selectedRadio === "no"){
-    res.redirect('s1-print-fas1-confirmation')
+    res.redirect('s1-print-fas1-instructions')
   }
   else {
     res.redirect('prefilled-fas1-received')
