@@ -172,7 +172,7 @@ router.post('/prefilled-fas1-received', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "yes"){
-    res.redirect('s1-what-path-to-take')
+    res.redirect('s1-fas1-details')
   }
   if (selectedRadio === "no"){
     res.redirect('s1-print-fas1-instructions')
