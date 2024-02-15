@@ -24,7 +24,7 @@ router.post('/select-decision', function (req, res) {
 
 })
 
-//s1-select-action.html
+//select-action.html
 router.post('/select-action', function (req, res) {
 
   const selectedRadio = req.body.entitlement;
@@ -33,10 +33,16 @@ router.post('/select-action', function (req, res) {
     res.redirect('s1-create-person')
   }
   if (selectedRadio === "s2"){
-    res.redirect('s1-search-person')
+    res.redirect('s1-select-action')
+  }
+  if (selectedRadio === "s3"){
+    res.redirect('s1-create-person-dependent')
+  }
+  if (selectedRadio === "s4"){
+    res.redirect('s1-select-action')
   }
   else {
-    res.redirect('s1-file-upload-2')
+    res.redirect('s1-select-action')
   }
 
 })
@@ -287,6 +293,23 @@ router.post('/what-action-to-take', function (req, res) {
   }
   else {
     res.redirect('what-action-to-take')
+  }
+
+})
+
+//s1-any-dependent.html
+router.post('/s1-any-dependent', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-print-dl1609-instructions')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-check-your-answers-final')
+  }
+  else {
+    res.redirect('s1-any-dependents')
   }
 
 })
