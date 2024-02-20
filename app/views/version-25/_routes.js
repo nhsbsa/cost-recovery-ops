@@ -33,13 +33,10 @@ router.post('/select-action', function (req, res) {
     res.redirect('s1-create-person')
   }
   if (selectedRadio === "s2"){
-    res.redirect('s1-select-action')
+    res.redirect('s1-search-person-cancellation')
   }
   if (selectedRadio === "s3"){
-    res.redirect('s1-create-person-dependent')
-  }
-  if (selectedRadio === "s4"){
-    res.redirect('s1-select-action')
+    res.redirect('s1-search-person-s1')
   }
   else {
     res.redirect('s1-select-action')
@@ -310,6 +307,29 @@ router.post('/s1-any-dependent', function (req, res) {
   }
   else {
     res.redirect('s1-any-dependents')
+  }
+
+})
+
+//s1-entitlement-treatment-cancelled-reason.html
+router.post('/s1-entitlement-treatment-cancelled-reason', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "entitlementCancelReason"){
+    res.redirect('s1-entitlements-treatments-cancelled-s1-confirmation')
+  }
+  if (selectedRadio === "entitlementCancelReason-2"){
+    res.redirect('s1-entitlements-treatments-cancelled-s1-confirmation')
+  }
+  if (selectedRadio === "entitlementCancelReason-3"){
+    res.redirect('s1-entitlements-treatments-cancelled-s1-confirmation')
+  }
+  if (selectedRadio === "entitlementCancelReason-4"){
+    res.redirect('s1-entitlements-treatments-cancelled-s1-confirmation')
+  }
+  else {
+    res.redirect('s1-entitlements-treatments-cancelled-s1-confirmation')
   }
 
 })
