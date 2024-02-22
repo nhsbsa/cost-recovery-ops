@@ -38,6 +38,9 @@ router.post('/select-action', function (req, res) {
   if (selectedRadio === "s3"){
     res.redirect('s1-search-person-s1')
   }
+  if (selectedRadio === "s4"){
+    res.redirect('s1-select-action')
+  }
   else {
     res.redirect('s1-select-action')
   }
