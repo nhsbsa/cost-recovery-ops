@@ -39,7 +39,7 @@ router.post('/select-action', function (req, res) {
     res.redirect('s1-search-person-s1')
   }
   if (selectedRadio === "s4"){
-    res.redirect('s1-select-action')
+    res.redirect('s1-case-history-dp-dependant-history')
   }
   else {
     res.redirect('s1-select-action')
