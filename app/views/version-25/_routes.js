@@ -184,7 +184,7 @@ router.post('/prefilled-fas1-received', function (req, res) {
     res.redirect('s1-print-fas1-instructions')
   }
   else {
-    res.redirect('prefilled-fas1-received')
+    res.redirect('s1-prefilled-fas1-received')
   }
 
   })
@@ -306,10 +306,10 @@ router.post('/s1-any-dependent', function (req, res) {
     res.redirect('s1-print-dl1609-instructions')
   }
   if (selectedRadio === "no"){
-    res.redirect('s1-check-your-answers-final')
+    res.redirect('s1-case-history-form-s1')
   }
   else {
-    res.redirect('s1-any-dependents')
+    res.redirect('s1-do-you-have-dependents')
   }
 
 })
@@ -333,6 +333,23 @@ router.post('/s1-entitlement-treatment-cancelled-reason', function (req, res) {
   }
   else {
     res.redirect('s1-entitlements-treatments-cancelled-s1-confirmation')
+  }
+
+})
+
+//dl1609-posted.html
+router.post('/dl1609-posted', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-case-history-form-dl1609-complete')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-case-history-form-dl1609')
+  }
+  else {
+    res.redirect('s1-has-dl1609-been-posted')
   }
 
 })
