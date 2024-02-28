@@ -370,4 +370,21 @@ router.post('/s071-posted', function (req, res) {
   }
 
 })
+
+//fas1-posted.html
+router.post('/fas1-posted', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-case-history-form-fas1-complete')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-case-history-form-fas1')
+  }
+  else {
+    res.redirect('s1-has-fas1-been-posted')
+  }
+
+})
 module.exports = router;
