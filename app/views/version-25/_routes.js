@@ -306,7 +306,7 @@ router.post('/s1-any-dependent', function (req, res) {
     res.redirect('s1-print-dl1609-instructions')
   }
   if (selectedRadio === "no"){
-    res.redirect('s1-case-history-form-s1')
+    res.redirect('s1-print-s073-instructions')
   }
   else {
     res.redirect('s1-do-you-have-dependents')
@@ -387,4 +387,22 @@ router.post('/fas1-posted', function (req, res) {
   }
 
 })
+
+//s073-posted.html
+router.post('/s073-posted', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-case-history-form-s073-complete')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-case-history-form-s073')
+  }
+  else {
+    res.redirect('s1-has-s073-been-posted')
+  }
+
+})
+
 module.exports = router;
