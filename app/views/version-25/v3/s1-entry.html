@@ -1,0 +1,216 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search person page
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+
+          <li class="nhsuk-breadcrumb__item">Home page</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="s1-entry">Back to search
+        results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<main
+tabindex="-1"
+role="main"
+id="maincontent">
+<section class="nhsuk-hero">
+   <div class="nhsuk-width-container nhsuk-hero--border">
+      <div class="nhsuk-grid-row">
+         <div class="nhsuk-grid-column-two-thirds">
+            
+               <div class="nhsuk-hero__wrapper app-hero__wrapper">
+                  <h1
+                     class="nhsuk-heading-l"
+                     style="margin-bottom: 10px">Add or update treatment details or update S1 details</h1>
+                  <br>
+                  <a href="s1-search">   
+                    <button
+                     class="nhsuk-button nhsuk-button--reverse" style="margin-bottom:0" type="submit">S1 process</button>
+                    </button>
+                   </a>
+
+                   <a href="#">   
+                    <button
+                     class="nhsuk-button nhsuk-button--reverse" style="margin-left:25px; margin-bottom:0" type="submit">Everything else</button>
+                    </button>
+                   </a>
+               </div>
+
+         </div>
+      </div>
+   </div>
+</section>
+
+
+<!-- Back to home page
+  
+<div class="nhsuk-main-wrapper ">
+   <div class="nhsuk-width-container">
+      <a
+         class="side-nav li a"
+         id="back-to-homepage"
+         href="s1-entry">Back to home page</a>
+   </div>
+</div>
+
+Back to home page -->
+</main>
+
+<footer>
+<div
+   class="nhsuk-footer"
+   id="nhsuk-footer">
+   <div class="nhsuk-width-container">
+      <h2 class="nhsuk-u-visually-hidden">Support links</h2>
+      <ul class="nhsuk-footer__list footer-links-custom">
+         <li class="nhsuk-footer__list-item">
+            <a
+               class="nhsuk-footer__list-item-link"
+               id="footer-link-privacy-policy"
+               target="_blank"
+               href="https://www.nhsbsa.nhs.uk/our-policies/privacy"
+               rel="noopener noreferrer"
+               for="privacy-policy">
+               Privacy policy
+               <span
+                  class="nhsuk-u-visually-hidden"
+                  target="_blank"> (opens in a new tab)</span>
+            </a>
+         </li>
+         <li class="nhsuk-footer__list-item">
+            <a
+               class="nhsuk-footer__list-item-link"
+               id="footer-link-cookies"
+               target="_blank"
+               href="https://www.nhsbsa.nhs.uk/our-policies/cookies"
+               rel="noopener noreferrer"
+               for="cookies">
+               Cookies
+               <span
+                  class="nhsuk-u-visually-hidden"
+                  target="_blank"> (opens in a new tab)</span>
+            </a>
+         </li>
+         <li class="nhsuk-footer__list-item">
+            <a
+               class="nhsuk-footer__list-item-link"
+               id="footer-link-terms"
+               target="_blank"
+               href="https://www.nhsbsa.nhs.uk/our-policies/terms-and-conditions"
+               rel="noopener noreferrer"
+               for="Terms and conditions">
+               Terms and conditions
+               <span
+                  class="nhsuk-u-visually-hidden"
+                  target="_blank"> (opens in a new tab)</span>
+            </a>
+         </li>
+         <li class="nhsuk-footer__list-item">
+            <a
+               class="nhsuk-footer__list-item-link"
+               id="footer-link-accessibility"
+               target="_blank"
+               href="https://nhsbsauk.sharepoint.com/sites/Accessibility/SitePages/Accessibility-statement-for-Overseas-Healthcare-Services.aspx"
+               rel="noopener noreferrer"
+               for="Accessibility statement">
+               Accessibility statement
+               <span
+                  class="nhsuk-u-visually-hidden"
+                  target="_blank"> (opens in a new tab)</span>
+            </a>
+         </li>
+         <li class="nhsuk-footer__list-item">
+            <a
+               class="nhsuk-footer__list-item-link"
+               target="_blank"
+               href="https://www.nhsbsa.nhs.uk/contact-us/freedom-information"
+               id="foiLink">
+               Freedom of information
+               <span
+                  class="nhsuk-u-visually-hidden"
+                  target="_blank"> (opens in a new tab)</span>
+            </a>
+         </li>
+         <li class="nhsuk-footer__list-item">
+            <span style="color: #5e686e">Built by the </span>
+            <a
+               class="nhsuk-footer__list-item-link"
+               id="footer-link-nhs-business-service-authority"
+               target="_blank"
+               href="http://www.nhsbsa.nhs.uk"
+               rel="noopener noreferrer"
+               for="NHS Business Services Authority">
+               NHS Business Services Authority
+               <span
+                  class="nhsuk-u-visually-hidden"
+                  target="_blank"> (opens in a new tab)</span>
+            </a>
+         </li>
+         <li class="nhsuk-footer__list-item">
+            <p class="app-ogl-footer--text">
+               <br>
+               <span style="font-size: 17px; color: #5e686e">
+                  <svg
+                     xmlns="http://www.w3.org/2000/svg"
+                     height="17"
+                     width="41"
+                     focusable="false"
+                     viewBox="0 0 483.2 195.7">
+                                      <path
+                        fill="currentColor"
+                        d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"></path>
+                                  </svg>
+                  All content is available under the
+                  <a
+                     class="nhsuk-footer__list-item-link"
+                     id="footer-link-open-government-licence"
+                     target="_blank"
+                     href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                     rel="noopener noreferrer"
+                     for="Open Government Licence v3.0">
+                      Open Government Licence v3.0<span
+                         class="nhsuk-u-visually-hidden"
+                         target="_blank"> (opens in a new tab) 
+                         </span></a>, except where otherwise stated.
+               </span>
+            </p>
+         </li>
+      </ul>
+   </div>
+</div>
+</footer>
+
+</body>
+</html>
+  {% endblock %}

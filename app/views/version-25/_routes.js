@@ -30,16 +30,16 @@ router.post('/select-action', function (req, res) {
   const selectedRadio = req.body.entitlement;
 
   if (selectedRadio === "s1"){
-    res.redirect('s1-create-person')
+    res.redirect('s1-prefilled-s072-received')
   }
   if (selectedRadio === "s2"){
-    res.redirect('s1-search-person-cancellation')
+    res.redirect('s1-select-action')
   }
   if (selectedRadio === "s3"){
-    res.redirect('s1-search-person-s1')
+    res.redirect('s1-select-action')
   }
   if (selectedRadio === "s4"){
-    res.redirect('s1-case-history-dp-dependant-history')
+    res.redirect('s1-select-action')
   }
   else {
     res.redirect('s1-select-action')
@@ -401,6 +401,214 @@ router.post('/s073-posted', function (req, res) {
   }
   else {
     res.redirect('s1-has-s073-been-posted')
+  }
+
+})
+
+//version-25/v3/s1-add-new-entitlement.html
+router.post('/entitlement-type-s1', function (req, res) {
+
+  const selectedRadio = req.body.entitlementType; 
+
+  if (selectedRadio === "S2/E112"){
+    res.redirect('s1-add-new-entitlement')
+  }
+
+  if (selectedRadio === "PRC"){
+    res.redirect('s1-add-new-entitlement')
+  }
+
+  if (selectedRadio === "S1"){
+    res.redirect('s1-select-s1-or-fas1-action')
+  }
+
+  else {
+    res.redirect('s1-add-new-entitlement')
+  }
+
+})
+
+//version-25/v3/s1-select-fas1-or-s1-action.html
+router.post('/select-s1-or-fas1', function (req, res) {
+
+  const selectedRadio = req.body.actionType; 
+
+  if (selectedRadio === "S1"){
+    res.redirect('s1-select-action')
+  }
+
+  if (selectedRadio === "FAS1"){
+    res.redirect('s1-search-person')
+  }
+
+  else {
+    res.redirect('s1-select-s1-or-fas1-action')
+  }
+
+})
+
+//version-25/v3/prefilled-fas1-received-v3.html
+router.post('/prefilled-fas1-received-v3', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-fas1-details')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-print-fas1-instructions')
+  }
+  else {
+    res.redirect('s1-prefilled-fas1-received-v3')
+  }
+
+  })
+
+  //version-25/v3/fas1-posted-v3.html
+router.post('/fas1-posted-v3', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-case-history-form-fas1-complete')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-case-history-form-fas1')
+  }
+  else {
+    res.redirect('s1-has-fas1-been-posted')
+  }
+
+})
+
+
+//version-25/v3/s071-posted-v3.html
+router.post('/s071-posted-v3', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-case-history-form-s071-complete')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-case-history-form-s071')
+  }
+  else {
+    res.redirect('s1-has-s071-been-posted')
+  }
+
+})
+
+//select-source.html
+router.post('/select-source', function (req, res) {
+
+  const selectedRadio = req.body.entitlement;
+
+  if (selectedRadio === "Member state"){
+    res.redirect('s1-prefilled-fas1-received-v4')
+  }
+  if (selectedRadio === "Individual"){
+    res.redirect('s1-prefilled-fas1-received-v4')
+  }
+  if (selectedRadio === "DWP"){
+    res.redirect('s1-prefilled-fas1-received-v4')
+  }
+  if (selectedRadio === "Overseas visitor manager"){
+    res.redirect('s1-prefilled-fas1-received-v4')
+  }
+  if (selectedRadio === "GP"){
+    res.redirect('s1-prefilled-fas1-received-v4')
+  }
+  else {
+    res.redirect('s1-prefilled-fas1-received-v4')
+  }
+
+})
+
+
+//select-action-criteria.html
+router.post('/select-action-criteria', function (req, res) {
+
+  const selectedRadio = req.body.entitlement;
+
+  if (selectedRadio === "Yes"){
+    res.redirect('s1-fas1-check-your-answers')
+  }
+  if (selectedRadio === "No"){
+    res.redirect('s1-reason-for-rejection')
+  }
+  else {
+    res.redirect('s1-fas1-does-person-meet-criteria')
+  }
+
+})
+
+//version-25/v3/prefilled-fas1-received-v4.html
+router.post('/prefilled-fas1-received-v4', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-fas1-details')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-contact-method-question')
+  }
+  else {
+    res.redirect('s1-prefilled-fas1-received-v4')
+  }
+
+  })
+
+//version-25/v3/contact-method-question.html
+router.post('/contact-method-question', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "Email"){
+    res.redirect('s1-send-email-instructions')
+  }
+  if (selectedRadio === "Post"){
+    res.redirect('s1-print-fas1-instructions')
+  }
+  else {
+    res.redirect('s1-contact-method-question')
+  }
+
+  })
+
+
+//version-25/v3/prefilled-s072-received.html
+router.post('/prefilled-s072-received', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "yes"){
+    res.redirect('s1-details')
+  }
+  if (selectedRadio === "no"){
+    res.redirect('s1-prefilled-s072-received')
+  }
+  else {
+    res.redirect('s1-prefilled-s072-received')
+  }
+
+  })
+
+
+//select-s072-action-criteria.html
+router.post('/select-s072-action-criteria', function (req, res) {
+
+  const selectedRadio = req.body.entitlement;
+
+  if (selectedRadio === "Yes"){
+    res.redirect('s1-check-your-s1-answers')
+  }
+  if (selectedRadio === "No"){
+    res.redirect('s1-reason-for-s1-rejection')
+  }
+  else {
+    res.redirect('s1-s072-does-person-meet-criteria')
   }
 
 })
