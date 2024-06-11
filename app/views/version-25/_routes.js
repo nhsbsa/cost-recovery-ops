@@ -434,11 +434,11 @@ router.post('/select-s1-or-fas1', function (req, res) {
   const selectedRadio = req.body.actionType; 
 
   if (selectedRadio === "S1"){
-    res.redirect('s1-select-action')
+    res.redirect('s1-select-source-s1')
   }
 
   if (selectedRadio === "FAS1"){
-    res.redirect('s1-search-person')
+    res.redirect('s1-select-source')
   }
 
   else {
@@ -505,22 +505,22 @@ router.post('/select-source', function (req, res) {
   const selectedRadio = req.body.entitlement;
 
   if (selectedRadio === "Member state"){
-    res.redirect('s1-prefilled-fas1-received-v4')
+    res.redirect('s1-search-person')
   }
   if (selectedRadio === "Individual"){
-    res.redirect('s1-prefilled-fas1-received-v4')
+    res.redirect('s1-search-person')
   }
   if (selectedRadio === "DWP"){
-    res.redirect('s1-prefilled-fas1-received-v4')
+    res.redirect('s1-search-person')
   }
   if (selectedRadio === "Overseas visitor manager"){
-    res.redirect('s1-prefilled-fas1-received-v4')
+    res.redirect('s1-search-person')
   }
   if (selectedRadio === "GP"){
-    res.redirect('s1-prefilled-fas1-received-v4')
+    res.redirect('s1-search-person')
   }
   else {
-    res.redirect('s1-prefilled-fas1-received-v4')
+    res.redirect('s1-search-person')
   }
 
 })
@@ -566,7 +566,7 @@ router.post('/contact-method-question', function (req, res) {
   const selectedRadio = req.body.status;
 
   if (selectedRadio === "Email"){
-    res.redirect('s1-send-email-instructions')
+    res.redirect('s1-enter-email-address')
   }
   if (selectedRadio === "Post"){
     res.redirect('s1-print-fas1-instructions')
@@ -609,6 +609,49 @@ router.post('/select-s072-action-criteria', function (req, res) {
   }
   else {
     res.redirect('s1-s072-does-person-meet-criteria')
+  }
+
+})
+
+//version-25/v3/contact-method-question-rej.html
+router.post('/contact-method-question-rej', function (req, res) {
+
+  const selectedRadio = req.body.status;
+
+  if (selectedRadio === "Email"){
+    res.redirect('s1-enter-email-address-rej')
+  }
+  if (selectedRadio === "Post"){
+    res.redirect('s1-contact-method-question-rej')
+  }
+  else {
+    res.redirect('s1-contact-method-question-rej')
+  }
+
+  })
+
+//select-source.html
+router.post('/select-source-s1', function (req, res) {
+
+  const selectedRadio = req.body.entitlement;
+
+  if (selectedRadio === "Member state"){
+    res.redirect('s1-search-person-s1')
+  }
+  if (selectedRadio === "Individual"){
+    res.redirect('s1-search-person-s1')
+  }
+  if (selectedRadio === "DWP"){
+    res.redirect('s1-search-person-s1')
+  }
+  if (selectedRadio === "Overseas visitor manager"){
+    res.redirect('s1-search-person-s1')
+  }
+  if (selectedRadio === "GP"){
+    res.redirect('s1-search-person-s1')
+  }
+  else {
+    res.redirect('s1-search-person-s1')
   }
 
 })
