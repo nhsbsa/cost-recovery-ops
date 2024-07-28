@@ -1,37 +1,41 @@
 {% extends '../s1/_form.html' %} 
-{% set title %}Personal details of the holder{% endset %}
+{% set title %}Personal details{% endset %}
  {% set caption = "Register S1" %}
  
  {% block form %}
 
 <div class="nhsuk-grid-column-two-thirds">
   <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
-    <form action="s1-entitlement-details" method="post">
+    <form action="s1-address-lookup" method="post">
       <div class="nhsuk-form-group">
-        <label class="nhsuk-label" for="1"> Personal identification number in the competent member state </label>
+        <label class="nhsuk-label nhsuk-label--s" for="1"> Personal identification number in the competent member state </label>
     
         <input class="nhsuk-input nhsuk-input--width-10" id="1" name="1" type="text" value="" />
       </div>
     
       <div class="nhsuk-form-group">
-        <label class="nhsuk-label" for="1"> First name (Given names or forenames) </label>
+        <label class="nhsuk-label nhsuk-label--s" for="1"> First name (Given names or forenames) </label>
         <div class="nhsuk-hint" id="example-hint">For example, ph or Phillip</div>
         <input class="nhsuk-input nhsuk-input--width-20" id="1" name="1" type="text" value="" />
       </div>
       <div class="nhsuk-form-group">
-        <label class="nhsuk-label" for="1"> Last name (Name or surname) </label>
+        <label class="nhsuk-label nhsuk-label--s" for="1"> Last name (Name or surname) </label>
         <div class="nhsuk-hint" id="example-hint">For example, sm or Smith</div>
         <input class="nhsuk-input nhsuk-input--width-20" id="1" name="1" type="text" value="" />
       </div>
       <div class="nhsuk-form-group">
-        <label class="nhsuk-label" for="1"> Surname at birth </label>
+        <label class="nhsuk-label nhsuk-label--s" for="1"> First name at birth (optional) </label>
+        <div class="nhsuk-hint" id="example-hint">if different</div>
+        <input class="nhsuk-input nhsuk-input--width-20" id="1" name="1" type="text" value="" />
+      </div>
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label nhsuk-label--s" for="1"> Last name at birth (optional) </label>
         <div class="nhsuk-hint" id="example-hint">if different</div>
         <input class="nhsuk-input nhsuk-input--width-20" id="1" name="1" type="text" value="" />
       </div>
     
       <div class="nhsuk-form-group">
-        <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
-          <label class="nhsuk-label" for="example"> Date of birth </label>
+          <label class="nhsuk-label nhsuk-label--s" for="example"> Date of birth </label>
           <div class="nhsuk-hint" id="example-hint">For example, 15 3 1984</div>
           <div class="nhsuk-date-input" id="example">
             <div class="nhsuk-date-input__item">
@@ -53,39 +57,48 @@
               </div>
             </div>
           </div>
-          <h3 class="nhsuk-heading-m nhsuk-u-padding-top-5">Address in the State of residence</h3>
-          <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="address-town"> Address line 1 </label>
-            <input class="nhsuk-input nhsuk-input--width-20" id="address-town" name="address-town" type="text" />
-          </div>
-          <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="address-town"> Address line 2 (optional) </label>
-            <input class="nhsuk-input nhsuk-input--width-20" id="address-town" name="address-town" type="text" />
-          </div>
-          <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="address-town"> Address line 3 (optional) </label>
-            <input class="nhsuk-input nhsuk-input--width-20" id="address-town" name="address-town" type="text" />
-          </div>
-          <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="address-town"> Town or city </label>
-            <input class="nhsuk-input nhsuk-input--width-20" id="address-town" name="address-town" type="text" />
-          </div>
-          <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="address-town"> Postcode </label>
-            <input class="nhsuk-input nhsuk-input--width-10" id="address-town" name="address-town" type="text" />
-          </div>
-          <div class="nhsuk-form-group">
-            <label class="nhsuk-label" for="address-town"> Entitlement country </label>
-            <div class="nhsuk-hint" id="example-hint">For example, France</div>
-            <input class="nhsuk-input nhsuk-input--width-20" id="address-town" name="address-town" type="text" />
-          </div>
-        </fieldset>
-      </div>
+        </div>
+        <div class="nhsuk-form-group">
+
+          <label class="nhsuk-label nhsuk-label--s" for="1"> Sex </label>
+
+        
+            <div class="nhsuk-radios">
+        
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-hints-1" name="example-hints" type="radio" value="yes">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-hints-1">
+                  Male
+                </label>
+              </div>
+        
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-hints-2" name="example-hints" type="radio" value="no">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-hints-2">
+                  Female
+                </label>
+              </div>
+        
+              <div class="nhsuk-radios__item">
+                <input class="nhsuk-radios__input" id="example-hints-3" name="example-hints" type="radio" value="not sure">
+                <label class="nhsuk-label nhsuk-radios__label" for="example-hints-3">
+                 Unknown
+                </label>
+              </div>
+        
+            </div>
+        
+        </div>
+         
+
 
         <button class="nhsuk-button" type="submit">Continue</button>
 
     
       <p><a href="cancel-entitlement">Cancel</a></p>
+
+      </div>
+
     
 
 
