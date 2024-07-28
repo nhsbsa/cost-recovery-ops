@@ -1,24 +1,34 @@
 {% extends '../s1/_form.html' %} 
-{% set title %}Confirm that S073 has been sent to member state?{% endset %} 
+{% set title %}When was the S073 sent to the member state?{% endset %} 
 {% set caption = "Register S1" %} 
 {% set hidecaption = true %} 
 {% block form %}
 
 <div class="nhsuk-grid-column-two-thirds">
   <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
-    <div class="nhsuk-hint" id="contact-hint">Select one option</div>
-    <form action="s1-entitlement" method="post">
+    <form action="s1-entitlement-updated" method="post">
       <div class="nhsuk-form-group">
-        <div class="nhsuk-radios">
-          <div class="nhsuk-radios__item">
-            <input class="nhsuk-radios__input" id="ehic" name="entitlement" type="radio" value="ehic" aria-controls="conditional-contact-2" aria-expanded="false" />
-            <label class="nhsuk-label nhsuk-radios__label" for="ehic"> Yes </label>
+        <label class="nhsuk-label" for="example-start-date-day">Date S073 was sent</label>
+        <div class="nhsuk-hint" id="example-start-date-hint">For example, 15 3 2024</div>
+        <div class="nhsuk-date-input" id="example-start-date">
+          <div class="nhsuk-date-input__item">
+            <div class="nhsuk-form-group">
+              <label class="nhsuk-label nhsuk-date-input__label" for="example-start-date-day">Day</label>
+              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-start-date-day" name="example-start-date-day" type="number" pattern="[0-9]*" value="" />
+            </div>
           </div>
-          <div class="nhsuk-radios__item">
-            <input class="nhsuk-radios__input" id="s1" name="entitlement" type="radio" value="s1" aria-controls="conditional-contact-1" aria-expanded="false" />
-            <label class="nhsuk-label nhsuk-radios__label" for="s1"> No </label>
+          <div class="nhsuk-date-input__item">
+            <div class="nhsuk-form-group">
+              <label class="nhsuk-label nhsuk-date-input__label" for="example-start-date-month">Month</label>
+              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="example-start-date-month" name="example-start-date-month" type="number" pattern="[0-9]*" value="" />
+            </div>
           </div>
-  
+          <div class="nhsuk-date-input__item">
+            <div class="nhsuk-form-group">
+              <label class="nhsuk-label nhsuk-date-input__label" for="example-start-date-year">Year</label>
+              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="example-start-date-year" name="example-start-date-year" type="number" pattern="[0-9]*" value="" />
+            </div>
+          </div>
         </div>
       </div>
       <button class="nhsuk-button" data-module="nhsuk-button" type="submit">Continue</button>
