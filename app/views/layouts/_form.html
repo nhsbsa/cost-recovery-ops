@@ -1,0 +1,56 @@
+<!-- Extends the layout from /docs/views/template.html -->
+{% extends "layout-sidebar.html" %}
+
+
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+     <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+           <div class="nhsuk-main-wrapper" id="maincontent">
+              <div class="nhsuk-grid-row">
+                <div class="{% if not fullWidth %}nhsuk-grid-column-two-thirds{% else %}nhsuk-grid-column-full{% endif %}">
+
+                {% if not hideTitle %}
+                      {% include 'includes/_back.html' %}
+                      {%- if not hidecaption -%}
+                          <span class="nhsuk-caption-l"> {{ caption or 'Caption' }} </span>
+                        {% endif %}
+                      
+                        <h1 class="nhsuk-heading-xl nhsuk-u-margin-bottom-3">
+                          {{ title or 'h1 Header' }}
+                        </h1>
+                    </div>             
+                 {% endif %}
+          
+                  {% if showCard %}
+                  <div class="nhsuk-card confirmation">
+                    <div class="nhsuk-card__content confirm">
+                      <h1 class="nhsuk-card__heading">
+                        {{ cardTitle or 'cardTitle' }}  
+                      </h1>
+                      <br /> 
+                      <h2><span class="nhsuk-caption-l">Personal identification number:</span>1234567</h3>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+              </div>
+       
+                <div class="nhsuk-grid-row">
+
+                    {% block form %}{% endblock %}
+
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+   
+{% endblock %}
