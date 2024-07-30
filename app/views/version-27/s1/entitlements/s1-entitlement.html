@@ -1,138 +1,43 @@
-{% extends 'layouts/_patient-record-template.html' %}
-{% set title %}S1 entitlement{% endset %}
-
-
+{% extends 'layouts/_patient-record-template.html' %} 
+{% set title %}S1 entitlement{% endset %} 
 
 {% block form %}
-      
-   
+
 {% set status %}
-<strong class="nhsuk-tag nhsuk-tag--yellow">
-  In progress
-</strong>
+<strong class="nhsuk-tag nhsuk-tag--yellow"> In progress </strong>
 {% endset %}
 
 <div class="nhsuk-card">
   <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
     <!--Start of card header-->
     <div class="nhsuk-grid-row">
-
-
       <div class="nhsuk-grid-column-full">
-
-
-        {{ summaryList({
-          rows: [
-            {
-              key: {
-                text: "Entitlement type"
-              },
-              value: {
-                text: "S1"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: " ",
-                    visuallyHiddenText: "name"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Start date"
-              },
-              value: {
-                text: "4 June 2024"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: " ",
-                    visuallyHiddenText: "date of birth"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "End date"
-              },
-              value: {
-                html: " "
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: " ",
-                    visuallyHiddenText: " "
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Status"
-              },
-              value: {
-                html: status
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: " ",
-                    visuallyHiddenText: "contact details"
-                  }
-                ]
-              }
-            }
-          ]
-        }) }}
-
+        {{ summaryList({ rows: [ { key: { text: "Entitlement type" }, value: { text: "S1" }, actions: { items: [ { href: "#", text: " ", visuallyHiddenText: "name" } ] } }, { key: { text: "Start date" }, value: { text: "4 June 2024" }, actions: { items: [ { href: "#", text: " ", visuallyHiddenText: "date of birth" } ] } }, { key: { text: "End date" }, value: { html: " " }, actions: { items: [ { href: "#", text: " ", visuallyHiddenText: " " } ] } }, { key: { text: "Status" }, value: { html: status }, actions: { items: [ { href: "#", text: " ", visuallyHiddenText: "contact details" } ] } } ] })
+        }}
       </div>
-
     </div>
-
-
   </div>
-</div>      
+</div>
 
 <div class="nhsuk-tabs" data-module="nhsuk-tabs">
-  <h2 class="nhsuk-tabs__title">
-      Contents
-  </h2>
+  <h2 class="nhsuk-tabs__title">Contents</h2>
 
   <!-- Start of tab titles -->
   <ul class="nhsuk-tabs__list">
-      <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
-          <a class="nhsuk-tabs__tab" href="#summary">
-              Task list
-          </a>
-      </li>
-      <li class="nhsuk-tabs__list-item">
-          <a class="nhsuk-tabs__tab" href="#notes">
-              Entitlement details
-          </a>
-      </li>
-      <li class="nhsuk-tabs__list-item">
-          <a class="nhsuk-tabs__tab" href="#history">
-              Documents
-          </a>
-      </li>
-      <li class="nhsuk-tabs__list-item ">
-          <a class="nhsuk-tabs__tab" href="#import">
-              Notes
-          </a>
-      </li>
-      <li class="nhsuk-tabs__list-item ">
-        <a class="nhsuk-tabs__tab" href="#import">
-            Treatments
-        </a>
+    <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
+      <a class="nhsuk-tabs__tab" href="#summary"> Task list </a>
+    </li>
+    <li class="nhsuk-tabs__list-item">
+      <a class="nhsuk-tabs__tab" href="#notes"> Entitlement details </a>
+    </li>
+    <li class="nhsuk-tabs__list-item">
+      <a class="nhsuk-tabs__tab" href="#history"> Documents </a>
+    </li>
+    <li class="nhsuk-tabs__list-item">
+      <a class="nhsuk-tabs__tab" href="#import"> Notes </a>
+    </li>
+    <li class="nhsuk-tabs__list-item">
+      <a class="nhsuk-tabs__tab" href="#import"> Treatments </a>
     </li>
   </ul>
   <!-- End of tab titles -->
@@ -140,85 +45,60 @@
   <!-- *** Start of summary tab content *** -->
   <div class="nhsuk-tabs__panel" id="summary">
     <div class="nhsuk-grid-row">
-
       <div class="nhsuk-grid-column-full">
-  
         <!-- Change the page title here -->
-        <h3 class="nhsuk-heading-l">
-                    Task list
-        </h3>
-        {% include '../s1/tabs/_task-list.html' %}
-
-  
-     
-  
-      </div>  
-  
+        {% include '../../s1/entitlements/tabs/_task-list.html' %}
+      </div>
     </div>
-
   </div>
   <!-- *** End of summary tab *** -->
 
   <!-- *** Start of notes tab *** -->
-  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">
-    {% include '../s1/tabs/_entitlement.html' %}
-
-  </div>
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">{% include '../../s1/entitlements/tabs/_entitlement.html' %}</div>
   <!-- *** End of notes tab *** -->
 
   <!-- *** Start of docs tab *** -->
-  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="history">
-      {% include '../s1/tabs/_documents.html' %}
-
-  </div>
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="history">{% include '../../s1/entitlements/tabs/_documents.html' %}</div>
   <!-- *** End of docs tab *** -->
 
   <!-- *** Start of treatments notes tab *** -->
-  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="import">
-    Notes
-  </div>
-  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="treatments">
-    treatments
-  </div>
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="import">Notes</div>
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="treatments">treatments</div>
   <!-- *** End of imported invoice tab *** -->
-
 </div>
 <script>
-
-document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     // Get all the tab links
-    const tabs = document.querySelectorAll('.nhsuk-tabs__tab');
+    const tabs = document.querySelectorAll(".nhsuk-tabs__tab");
     // Get all the tab panels
-    const panels = document.querySelectorAll('.nhsuk-tabs__panel');
+    const panels = document.querySelectorAll(".nhsuk-tabs__panel");
 
     // Function to hide all panels and remove selected class from all tabs
     function hideAllPanels() {
-        panels.forEach(panel => panel.classList.add('nhsuk-tabs__panel--hidden'));
-        tabs.forEach(tab => tab.parentElement.classList.remove('nhsuk-tabs__list-item--selected'));
+      panels.forEach((panel) => panel.classList.add("nhsuk-tabs__panel--hidden"));
+      tabs.forEach((tab) => tab.parentElement.classList.remove("nhsuk-tabs__list-item--selected"));
     }
 
     // Function to show a specific panel
     function showPanel(panelId) {
-        const panel = document.querySelector(panelId);
-        panel.classList.remove('nhsuk-tabs__panel--hidden');
+      const panel = document.querySelector(panelId);
+      panel.classList.remove("nhsuk-tabs__panel--hidden");
     }
 
     // Add click event to each tab
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default link behavior
-            hideAllPanels(); // Hide all panels
-            tab.parentElement.classList.add('nhsuk-tabs__list-item--selected'); // Mark the clicked tab as selected
-            showPanel(tab.getAttribute('href')); // Show the clicked tab's panel
-        });
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default link behavior
+        hideAllPanels(); // Hide all panels
+        tab.parentElement.classList.add("nhsuk-tabs__list-item--selected"); // Mark the clicked tab as selected
+        showPanel(tab.getAttribute("href")); // Show the clicked tab's panel
+      });
     });
 
     // Initially show the summary tab
     hideAllPanels();
-    document.querySelector('#summary').classList.remove('nhsuk-tabs__panel--hidden');
-    document.querySelector('a[href="#summary"]').parentElement.classList.add('nhsuk-tabs__list-item--selected');
-});
-
-
+    document.querySelector("#summary").classList.remove("nhsuk-tabs__panel--hidden");
+    document.querySelector('a[href="#summary"]').parentElement.classList.add("nhsuk-tabs__list-item--selected");
+  });
 </script>
- {% endblock %}
+{% endblock %}
