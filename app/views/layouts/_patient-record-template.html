@@ -1,8 +1,11 @@
 
 {% extends "template-sidebar.html" %}
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} {{ title or 'pageHeader' }} {% endblock %}
 
 
 {% block content %}
+{% include 'layouts/_patient-record-breadcrumb.html' %}
 
 <div class="nhsBSA-sidebar-container">
   <div class="nhsBSA-sidebar-wrapper">
@@ -35,6 +38,6 @@
 <!--end left navigation-->
 </div>
 </div>
-
+{{ data | log }}
    
 {% endblock %}

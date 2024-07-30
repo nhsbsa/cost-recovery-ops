@@ -1,5 +1,6 @@
 {% extends 'layouts/_patient-record-template.html' %} 
 {% set title %}S1 entitlement{% endset %} 
+{% set entitlementDetailsS1 = 'true' %}
 
 {% block form %}
 
@@ -28,13 +29,13 @@
       <a class="nhsuk-tabs__tab" href="#summary"> Task list </a>
     </li>
     <li class="nhsuk-tabs__list-item">
-      <a class="nhsuk-tabs__tab" href="#notes"> Entitlement details </a>
+      <a class="nhsuk-tabs__tab" href="#entitlement"> Entitlement details </a>
     </li>
     <li class="nhsuk-tabs__list-item">
-      <a class="nhsuk-tabs__tab" href="#history"> Documents </a>
+      <a class="nhsuk-tabs__tab" href="#documents"> Documents </a>
     </li>
     <li class="nhsuk-tabs__list-item">
-      <a class="nhsuk-tabs__tab" href="#import"> Notes </a>
+      <a class="nhsuk-tabs__tab" href="#notes"> Notes </a>
     </li>
     <li class="nhsuk-tabs__list-item">
       <a class="nhsuk-tabs__tab" href="#import"> Treatments </a>
@@ -47,22 +48,32 @@
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full">
         <!-- Change the page title here -->
-        {% include '../../s1/entitlements/tabs/_task-list.html' %}
+        {% include '../account/entitlement-content/sections/_task-list.html' %}
       </div>
     </div>
   </div>
   <!-- *** End of summary tab *** -->
 
-  <!-- *** Start of notes tab *** -->
-  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">{% include '../../s1/entitlements/tabs/_entitlement.html' %}</div>
+  <!-- *** Start of entitlement tab *** -->
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="entitlement">
+    {% include '../account/entitlement-content/sections/_entitlement.html' %}
+  </div>
   <!-- *** End of notes tab *** -->
 
-  <!-- *** Start of docs tab *** -->
-  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="history">{% include '../../s1/entitlements/tabs/_documents.html' %}</div>
+  <!-- *** Start of documents tab *** -->
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
+    {% include '../account/entitlement-content/sections/_documents.html' %}
+  </div>
   <!-- *** End of docs tab *** -->
 
-  <!-- *** Start of treatments notes tab *** -->
-  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="import">Notes</div>
+  <!-- *** Start of notes tab *** -->
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">
+    {% include '../account/entitlement-content/sections/_notes.html' %}
+  </div>
+    <!-- *** End of notes tab *** -->
+  
+    <!-- *** Start of treatments tab *** -->
+
   <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="treatments">treatments</div>
   <!-- *** End of imported invoice tab *** -->
 </div>

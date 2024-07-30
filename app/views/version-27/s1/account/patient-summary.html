@@ -1,5 +1,6 @@
-{% extends '../s1/_patient-record-template.html' %}
-{% set title %}Patient record{% endset %}
+{% extends 'layouts/_patient-record-template.html' %}
+{% set title %}Patient summary{% endset %}
+{% set patientSummary = 'true' %}
 
 
 
@@ -12,9 +13,9 @@
     <!--Start of card header-->
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-two-thirds">
-        <h3 class="nhsuk-heading-l">
+        <!-- <h3 class="nhsuk-heading-l">
           Patient details
-        </h3>
+        </h3> -->
 
       </div>
       <div class="nhsuk-grid-column-one-third">
@@ -68,7 +69,10 @@
                 text: "Address"
               },
               value: {
-                html: "Avendaño 90, <br>Abrucena,<br> Spain "
+                html: "1 Washington Street<br>
+                Worcester<br>
+                WR1 1NL<br>
+                United Kingdom"
               },
               actions: {
                 items: [
@@ -79,30 +83,10 @@
                   }
                 ]
               }
-            },
-            {
-              key: {
-                text: "Entitlement country"
-              },
-              value: {
-                html: 'Spain'
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: " ",
-                    visuallyHiddenText: "contact details"
-                  }
-                ]
-              }
-            }
+            } 
           ]
         }) }}
-        {{ button({
-          "text": "Update details"
-        
-        }) }}
+        <p><a href="patient-details">View patient details</a></p>
       </div>
 
     </div>
@@ -118,7 +102,7 @@
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-two-thirds">
         <h3 class="nhsuk-heading-l">
-          Active entitlements
+           Entitlements
         </h3>
 
       </div>
@@ -152,10 +136,10 @@
         S1
       </td>
       <td role="cell" class="nhsuk-table__cell">
-        -
+        4 June 2024
       </td>
       <td role="cell" class="nhsuk-table__cell">
-        -
+        
       </td>
       <td role="cell" class="nhsuk-table__cell">
         <strong class="nhsuk-tag nhsuk-tag--yellow">
@@ -212,10 +196,8 @@
   </tbody>
 </table>
 <br>
-{{ button({
-  "text": "Add an entitlement"
-        
-}) }}
+<p><a href="#">View all entitlements</a></p>
+
       </div>
 
     </div>

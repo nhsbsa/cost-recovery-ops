@@ -51,25 +51,73 @@
     </tr>
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
-        <a href="#">Send S073 registration confirmation to member state</a>
+
+        {%- if data['s073'] == 'complete' -%}
+          Send S073 registration confirmation to member state
+        {%- else -%}
+          <a href="../account/entitlement-content/journeys/s073-confirm">Send S073 registration confirmation to member state</a>
+        {%- endif -%}
+    
+
+
       </td>
       <td role="cell" class="nhsuk-table__cell">
-        
+        {%- if data['s073'] == 'complete' -%}
+          15/07/2024
+        {%- endif -%}
       </td>
       <td role="cell" class="nhsuk-table__cell">
-        <strong strong="" style="color: #354550" ;="" class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+
+        {%- if data['s073'] == 'complete' -%}
+          <span class=" nhsuk-body ">Completed</span>
+
+       {%- else -%}
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+       {%- endif -%}
       </td>
     </tr>
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
-        <a href="#">Print and send DL1609 to Juan Sanchez</a>
+
+      {%- if data['dl1609'] == 'complete' -%}
+        Print and send DL1609 to Juan Sanchez
+      {%- else -%}
+      <a href="../account/entitlement-content/journeys/dl1609-print">Print and send DL1609 to Juan Sanchez</a>
+      {%- endif -%}        
       </td>
       <td role="cell" class="nhsuk-table__cell">
+        {%- if data['dl1609'] == 'complete' -%}
+          16/07/2024
+      {%- endif -%}
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        {%- if data['dl1609'] == 'complete' -%}
+          <span class=" nhsuk-body ">Completed</span>
+
+       {%- else -%}
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+       {%- endif -%}     
+       </td>
+    </tr>
+    {%- if data['dl1609'] == 'complete' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+
+      <a href="#">Did we receive the DL1609 from person?</a>
         
       </td>
       <td role="cell" class="nhsuk-table__cell">
-        <strong strong="" style="color: #354550" ;="" class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+
       </td>
+      <td role="cell" class="nhsuk-table__cell">
+
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+        
+       </td>
     </tr>
+    {%- endif -%}     
+
   </tbody>
 </table>
