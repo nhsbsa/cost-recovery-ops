@@ -1,0 +1,36 @@
+{% extends 'layouts/_form.html' %}
+ {% set title %}Have we received the DL1609?{% endset %} 
+ {% set hidecaption = true %} 
+ 
+ {% block form %}
+<div class="nhsuk-grid-column-two-thirds">
+  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
+    <form method="post" >
+      <input type="hidden" id="custId" name="s073" value="complete" />
+      <div class="nhsuk-form-group">
+
+
+        {% from 'radios/macro.njk' import radios %}
+
+        {{ radios({
+          "idPrefix": "dl1609",
+          "name": "dl1609",
+          "items": [
+            {
+              "value": "yes",
+              "text": "Yes"
+            },
+            {
+              "value": "no",
+              "text": "No"
+            }
+          ]
+        }) }}
+      
+      </div>
+
+      <button class="nhsuk-button" type="submit">Continue</button>
+    </form>
+  </fieldset>
+</div>
+{% endblock %}
