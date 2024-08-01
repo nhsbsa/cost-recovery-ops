@@ -19,6 +19,18 @@ router.post([/contacted-the-ovm-additional-info/], function(req, res){
       
   }
 })
+// OVM
+router.post([/contacted-the-ovm-additional/], function(req, res){
+  var ovm2 = req.session.data['ovm2'];
+  
+  if (ovm2 == 'yes'){
+      res.redirect('contacted-the-ovm-additional-information2');
+  } else if (ovm2 == 'no'){
+      res.redirect('contacted-the-ovm-5-more');
+  } else {
+      
+  }
+})
 
 
 
