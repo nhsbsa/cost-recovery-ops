@@ -7,6 +7,19 @@ router.use(bodyParser.json()); // to support JSON bodies
 router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 
 
+// OVM
+router.post([/contacted-the-ovm-additional-info/], function(req, res){
+  var ovm = req.session.data['ovm'];
+  
+  if (ovm == 'yes'){
+      res.redirect('enter-details');
+  } else if (hasDL1609 == 'no'){
+      res.redirect('send-another-form');
+  } else {
+      
+  }
+})
+
 
 // Register s1 
 // Have we received the DL1609?

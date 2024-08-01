@@ -72,37 +72,35 @@ Create new resub
                 
                 <div class="nhsuk-grid-row">
                   <div class="nhsuk-grid-column-two-thirds">
-
-                    <div class="nhsuk-form-group">
-
-                      <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
-                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-                        </legend>
                         <div class="nhsuk-hint" id="select-option-hint">Select an option</div>
-               
-                        <div class="nhsuk-radios">
-                           <div class="nhsuk-radios__item">
-                              <input class="nhsuk-radios__input" id="1" name="info" type="radio" value="s2" aria-controls="conditional-contact-1" aria-expanded="false">
-                              <label class="nhsuk-label nhsuk-radios__label" for="1">
-                              Yes
-                              </label>
-                           </div>
-                           <div class="nhsuk-radios__item">
-                            <input class="nhsuk-radios__input" id="2" name="info" type="radio" value="s1" aria-controls="conditional-contact-1" aria-expanded="false">
-                            <label class="nhsuk-label nhsuk-radios__label" for="2">
-                            No
-                            </label>
-                         </div>
-                
-                            
-                        </div>
-                     </fieldset>
+
+                        <form method="post" >
+                          <input type="hidden" id="custId" name="s073" value="complete" />
+                          <div class="nhsuk-form-group">
                     
-                    </div>
+                    
+                    
+                            {{ radios({
+                              "idPrefix": "ovm",
+                              "name": "ovm",
+                              "items": [
+                                {
+                                  "value": "yes",
+                                  "text": "Yes"
+                                },
+                                {
+                                  "value": "no",
+                                  "text": "No"
+                                }
+                              ]
+                            }) }}
+                          
+                          </div>
+                    
+                          <button class="nhsuk-button" type="submit">Continue</button>
+                        </form>
                
-              <a href="contacted-the-ovm-2-more"><button  class="nhsuk-button nhsuk-button--primary" type="submit">
-                Continue
-              </button></a>
+             
 
                     </div>
 
