@@ -8,7 +8,19 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 
 
 
-// DL1609 journey
+// Register s1 
+// Have we received the DL1609?
+router.post([/have-dependants/], function(req, res){
+  var dependants = req.session.data['dependants'];
+  
+  if (dependants == 'yes'){
+      res.redirect('check-your-answers');
+  } else if (dependants == 'no'){
+      res.redirect('check-your-answers');
+  } else {
+      
+  }
+})
 
 
 // Have we received the DL1609?
