@@ -21,6 +21,7 @@
     </li>
   </ul>
 </ol> -->
+
 <table role="table" class="nhsuk-table-responsive">
   <caption class="nhsuk-table__caption">S1 registration tasklist </caption>
   <thead role="rowgroup" class="nhsuk-table__head">
@@ -37,17 +38,51 @@
     </tr>
   </thead>
   <tbody class="nhsuk-table__body">
+
+
+
+    {%- if data['dl1609'] == 'complete' -%}
+
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
-        S1/S072 details registered
+
+
+      <a href="../account/entitlement-content/journeys/dl1609/received-dl1609">Did we receive the DL1609 from person?</a>
+        
       </td>
-      <td role="cell" class="nhsuk-table__cell ">
-        12/07/2024
-      </td>
-      <td role="cell" class="nhsuk-table__cell ">
-        <span class=" nhsuk-body ">Completed</span>
+      <td role="cell" class="nhsuk-table__cell">
 
       </td>
+      <td role="cell" class="nhsuk-table__cell">
+
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+        
+       </td>
+    </tr>
+    {%- endif -%}   
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+      {%- if data['dl1609'] == 'complete' -%}
+        Print and send DL1609 to Juan Sanchez
+      {%- else -%}
+      <a href="../account/entitlement-content/journeys/dl1609-print">Print and send DL1609 to Juan Sanchez</a>
+      {%- endif -%}        
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        {%- if data['dl1609'] == 'complete' -%}
+          16/07/2024
+      {%- endif -%}
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        {%- if data['dl1609'] == 'complete' -%}
+          <span class=" nhsuk-body ">Completed</span>
+
+       {%- else -%}
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+       {%- endif -%}     
+       </td>
     </tr>
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
@@ -75,49 +110,18 @@
          <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
        {%- endif -%}
       </td>
-    </tr>
+    </tr>  
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
-
-      {%- if data['dl1609'] == 'complete' -%}
-        Print and send DL1609 to Juan Sanchez
-      {%- else -%}
-      <a href="../account/entitlement-content/journeys/dl1609-print">Print and send DL1609 to Juan Sanchez</a>
-      {%- endif -%}        
+        S1/S072 details registered
       </td>
-      <td role="cell" class="nhsuk-table__cell">
-        {%- if data['dl1609'] == 'complete' -%}
-          16/07/2024
-      {%- endif -%}
+      <td role="cell" class="nhsuk-table__cell ">
+        12/07/2024
       </td>
-      <td role="cell" class="nhsuk-table__cell">
-        {%- if data['dl1609'] == 'complete' -%}
-          <span class=" nhsuk-body ">Completed</span>
+      <td role="cell" class="nhsuk-table__cell ">
+        <span class=" nhsuk-body ">Completed</span>
 
-       {%- else -%}
-         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
-       {%- endif -%}     
-       </td>
+      </td>
     </tr>
-    {%- if data['dl1609'] == 'complete' -%}
-
-    <tr role="row" class="nhsuk-table__row">
-      <td role="cell" class="nhsuk-table__cell">
-
-
-      <a href="../account/entitlement-content/journeys/dl1609/received-dl1609">Did we receive the DL1609 from person?</a>
-        
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-
-         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
-        
-       </td>
-    </tr>
-    {%- endif -%}     
-
   </tbody>
 </table>
