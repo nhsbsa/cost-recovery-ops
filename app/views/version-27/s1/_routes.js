@@ -12,18 +12,22 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 
 // Create new patient record 
 router.post([/search-results-none/], function(req, res){
-      res.redirect('../s072-registration/choose-entitlement');
+      res.redirect('../s072-registration/choose-option');
 })
 
 
+// Select entitlement or enquiry  
+router.post([/choose-option/], function(req, res){
+  res.redirect('choose-entitlement');
+})
 // Select entitlement 
 router.post([/choose-entitlement/], function(req, res){
-  res.redirect('select-source');
-})
-// Select entitlement 
-router.post([/select-source/], function(req, res){
   res.redirect('create-person');
 })
+// // Select entitlement 
+// router.post([/select-source/], function(req, res){
+//   res.redirect('create-person');
+// })
 // Select entitlement 
 router.post([/create-person/], function(req, res){
   res.redirect('address-lookup');
@@ -116,24 +120,61 @@ router.post([/confirmation/], function(req, res){
 })
 
 
-// After s072 registration
+// Tasklist - After s072 registration
 
+// Send S073 to member state 
+router.post([/s073-confirm/], function(req, res){
+  const data = req.session.data;
+  data.sendS073 = 'true';
+  res.redirect('../../s1-entitlement');
+})
 
+// Send DL1609 
+router.post([/dl1609-print/], function(req, res){
+  const data = req.session.data;
+  data.sendDl1609 = 'true';
+  res.redirect('../../../s1-entitlement');
+})
 
 // Have we received the DL1609?
 router.post([/received-dl1609/], function(req, res){
   var hasDL1609 = req.session.data['dl1609'];
   
   if (hasDL1609 == 'yes'){
-      res.redirect('enter-details');
+      res.redirect('s1-eligible');
   } else if (hasDL1609 == 'no'){
-      res.redirect('send-another-form');
+      res.redirect('resend-dl1609');
+  } else {
+      
+  }
+})
+// Is the applicant eligible for dl1609?
+router.post([/s1-eligible/], function(req, res){
+  var isEligible = req.session.data['s1Eligble'];
+  
+  if (isEligible == 'yes'){
+      res.redirect('enter-details');
+  } else if (isEligible == 'no'){
+      res.redirect('cancel-s1');
   } else {
       
   }
 })
 
 
+// Resend DL1609 
+router.post([/resend-dl1609/], function(req, res){
+  const data = req.session.data;
+  data.resendDl1609 = 'true';
+  res.redirect('../../../s1-entitlement');
+})
+
+// cancel S1 
+router.post([/cancel-s1/], function(req, res){
+  const data = req.session.data;
+  data.cancelS1 = 'true';
+  res.redirect('../../../s1-entitlement');
+})
 
 
 

@@ -23,77 +23,7 @@
 </ol> -->
 
 <table role="table" class="nhsuk-table-responsive">
-  <caption class="nhsuk-table__caption">To complete </caption>
-  <thead role="rowgroup" class="nhsuk-table__head">
-    <tr role="row">
-      <th role="columnheader" class="" scope="col">
-        Task
-      </th>
-  
-   
-    </tr>
-  </thead>
-  <tbody class="nhsuk-table__body">
-
-
-
-    {%- if data['sendDl1609'] == 'true' -%}
-
-    <tr role="row" class="nhsuk-table__row">
-      <td role="cell" class="nhsuk-table__cell">
-
-
-      <a href="../account/entitlement-content/journeys/dl1609/received-dl1609">Record DL1609 response</a>
-        
-      </td>
-    
-  
-    </tr>
-    {%- endif -%}   
-    
-
-
-
-    {%- if data['sendDl1609'] != 'true' -%}
-
-    <tr role="row" class="nhsuk-table__row">
-      <td role="cell" class="nhsuk-table__cell">
-
-     
-      <a href="../account/entitlement-content/journeys/dl1609/dl1609-print">Confirm DL1609 has been sent to main S1 holder</a>
-          
-      </td>
-     
-  
-    </tr>
-    {%- endif -%}     
-
-   
-   
-    {%- if data['sendS073'] != 'true' -%}
-
-    <tr role="row" class="nhsuk-table__row">
-      <td role="cell" class="nhsuk-table__cell">
-
-    
-          <a href="../account/entitlement-content/journeys/s073-confirm">Confirm S073 has been sent to member state</a>
-   
-    
-
-
-      </td>
-  
- 
-    </tr>  
-    {%- endif -%}     
-
-  </tbody>
-</table>
-
-<br><br>
-
-<table role="table" class="nhsuk-table-responsive">
-  <caption class="nhsuk-table__caption">Completed </caption>
+  <caption class="nhsuk-table__caption">S1 registration tasklist </caption>
   <thead role="rowgroup" class="nhsuk-table__head">
     <tr role="row">
       <th role="columnheader" class="" scope="col">
@@ -102,62 +32,117 @@
       <th role="columnheader" class="" scope="col">
         Date 
       </th>
-   
+      <th role="columnheader" class="" scope="col">
+        Status
+      </th>
     </tr>
   </thead>
   <tbody class="nhsuk-table__body">
-    {%- if data['resendDl1609'] == 'true' -%}
 
-    <tr role="row" class="nhsuk-table__row">
-      <td role="cell" class="nhsuk-table__cell">
 
-         DL1609 resent main S1 holder       
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-          17/07/2024
-    
-      </td>
-   
-    </tr>
-    {%- endif -%}  
 
     {%- if data['sendDl1609'] == 'true' -%}
 
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
 
-        DL1609 sent to main S1 holder		       
+
+      <a href="../account/entitlement-content/journeys/dl1609/received-dl1609">Received DL1609 from main applicant?</a>
+        
       </td>
       <td role="cell" class="nhsuk-table__cell">
+
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+        
+       </td>
+    </tr>
+    {%- endif -%}   
+    {%- if data['resendDl1609'] == 'true' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+         DL1609 resent to main applicant       
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+          17/07/2024
+    
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+          <span class=" nhsuk-body ">Completed</span>
+
+      
+       </td>
+    </tr>
+    {%- endif -%}   
+
+
+
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+      {%- if data['sendDl1609'] == 'true' -%}
+         DL1609 sent to main applicant
+      {%- else -%}
+      <a href="../account/entitlement-content/journeys/dl1609/dl1609-print">Print and send DL1609 to main applicant</a>
+      {%- endif -%}        
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        {%- if data['sendDl1609'] == 'true' -%}
           16/07/2024
-    
+      {%- endif -%}
       </td>
-     
-    </tr>
-    {%- endif -%} 
-    {%- if data['sendS073'] == 'true' -%}
+      <td role="cell" class="nhsuk-table__cell">
+        {%- if data['sendDl1609'] == 'true' -%}
+          <span class=" nhsuk-body ">Completed</span>
 
+       {%- else -%}
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+       {%- endif -%}     
+       </td>
+    </tr>
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
 
-        S073 registration confirmation sent to member state	       
+        {%- if data['sendS073'] == 'true' -%}
+          S073 registration confirmation sent to member state
+        {%- else -%}
+          <a href="../account/entitlement-content/journeys/s073-confirm">Send S073 registration confirmation to member state</a>
+        {%- endif -%}
+    
+
+
       </td>
       <td role="cell" class="nhsuk-table__cell">
+        {%- if data['sendS073'] == 'true' -%}
           15/07/2024
-    
+        {%- endif -%}
       </td>
-     
-    </tr>
-    {%- endif -%} 
- 
+      <td role="cell" class="nhsuk-table__cell">
+
+        {%- if data['sendS073'] == 'true' -%}
+          <span class=" nhsuk-body ">Completed</span>
+
+       {%- else -%}
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+       {%- endif -%}
+      </td>
+    </tr>  
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
-        S1/S072 registered
+        S1/S072 form registered
       </td>
       <td role="cell" class="nhsuk-table__cell ">
         12/07/2024
       </td>
-    
+      <td role="cell" class="nhsuk-table__cell ">
+        <span class=" nhsuk-body ">Completed</span>
+
+      </td>
     </tr>
   </tbody>
 </table>

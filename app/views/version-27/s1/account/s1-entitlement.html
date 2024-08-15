@@ -1,10 +1,4 @@
-{% extends 'layouts/_patient-record-template.html' %} 
-{% set title %}S1 entitlement{% endset %} 
-{% set entitlementDetailsS1 = 'true' %}
-
-{% block form %}
-
-{% set status %}
+{% extends 'layouts/_patient-record-template.html' %} {% set title %}S1 entitlement{% endset %} {% set entitlementDetailsS1 = 'true' %} {% block form %} {% set status %}
 <strong class="nhsuk-tag nhsuk-tag--yellow"> In progress </strong>
 {% endset %}
 
@@ -13,8 +7,42 @@
     <!--Start of card header-->
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full">
-        {{ summaryList({ rows: [ { key: { text: "Entitlement type" }, value: { text: "S1" }, actions: { items: [ { href: "#", text: " ", visuallyHiddenText: "name" } ] } }, { key: { text: "Start date" }, value: { text: "4 June 2024" }, actions: { items: [ { href: "#", text: " ", visuallyHiddenText: "date of birth" } ] } }, { key: { text: "End date" }, value: { html: " " }, actions: { items: [ { href: "#", text: " ", visuallyHiddenText: " " } ] } }, { key: { text: "Status" }, value: { html: status }, actions: { items: [ { href: "#", text: " ", visuallyHiddenText: "contact details" } ] } } ] })
-        }}
+        <dl class="nhsuk-summary-list">
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">Entitlement type</dt>
+            <dd class="nhsuk-summary-list__value">S1</dd>
+
+            <dd class="nhsuk-summary-list__actions"></dd>
+          </div>
+
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">Start date</dt>
+            <dd class="nhsuk-summary-list__value">4 June 2024</dd>
+
+            <dd class="nhsuk-summary-list__actions"></dd>
+          </div>
+
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">End date</dt>
+            <dd class="nhsuk-summary-list__value"></dd>
+
+            <dd class="nhsuk-summary-list__actions"></dd>
+          </div>
+
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">Status</dt>
+            <dd class="nhsuk-summary-list__value">
+
+                {%- if data['cancelS1'] == 'true' -%}
+                 <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
+                {%- else -%}
+                  <strong class="nhsuk-tag nhsuk-tag--yellow"> In progress </strong>
+                {%- endif -%}
+            </dd>
+
+            <dd class="nhsuk-summary-list__actions"></dd>
+          </div>
+        </dl>
       </div>
     </div>
   </div>
@@ -40,7 +68,6 @@
     <li class="nhsuk-tabs__list-item">
       <a class="nhsuk-tabs__tab" href="#notes"> Notes </a>
     </li>
-
   </ul>
 
   <!-- *** Start of tasklist tab content *** -->
@@ -54,19 +81,15 @@
 
   <!-- *** Start of entitlement tab *** -->
   <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="entitlement">
-    <h2 class="nhsuk-heading-s"> Entitlement details</h2>
+    <h2 class="nhsuk-heading-s">Entitlement details</h2>
 
     {% include '../account/entitlement-content/sections/_entitlement.html' %}
   </div>
 
-
   <!-- *** Start of Dependants tab *** -->
 
   <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="dependants">
-
-
     {% include '../account/entitlement-content/sections/_dependants.html' %}
-
   </div>
   <!-- *** End of imported dependants tab *** -->
 
@@ -80,13 +103,11 @@
 
   <!-- *** Start of notes tab *** -->
   <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">
-    <h2 class="nhsuk-heading-s ">Notes</h2>
+    <h2 class="nhsuk-heading-s">Notes</h2>
 
     {% include '../account/entitlement-content/sections/_notes.html' %}
   </div>
-    <!-- *** End of notes tab *** -->
-  
-
+  <!-- *** End of notes tab *** -->
 </div>
 <script>
   document.addEventListener("DOMContentLoaded", function () {

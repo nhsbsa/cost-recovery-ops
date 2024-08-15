@@ -1,20 +1,23 @@
 {% extends 'layouts/_form.html' %}
- {% set title %}Send another form?{% endset %} 
+ {% set title %}Is the main S1 holder eligible for an S1?{% endset %} 
  {% set hidecaption = true %} 
  
  {% block form %}
+
 <div class="nhsuk-grid-column-two-thirds">
   <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
     <form method="post" >
       <input type="hidden" id="custId" name="s073" value="complete" />
       <div class="nhsuk-form-group">
+        <p>Based on the information provided in the DL1609 is the main S1 holder eligible for an S1 entitlement.</p>
+    <div class="nhsuk-hint" id="contact-hint">Select one option</div>
 
 
         {% from 'radios/macro.njk' import radios %}
 
         {{ radios({
-          "idPrefix": "dl1609",
-          "name": "dl1609",
+          "idPrefix": "s1Eligble",
+          "name": "s1Eligble",
           "items": [
             {
               "value": "yes",
