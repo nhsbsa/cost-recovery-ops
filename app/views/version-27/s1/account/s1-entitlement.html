@@ -35,8 +35,13 @@
 
                 {%- if data['cancelS1'] == 'true' -%}
                  <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
-                {%- else -%}
-                  <strong class="nhsuk-tag nhsuk-tag--yellow"> In progress </strong>
+                 {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' and data['dl1609Complete'] != 'true'  -%}
+                 <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
+                 {%- elif data['dl1609Complete'] == 'true' -%}
+                 <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
+                 {%- else -%}
+                 <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
+
                 {%- endif -%}
             </dd>
 

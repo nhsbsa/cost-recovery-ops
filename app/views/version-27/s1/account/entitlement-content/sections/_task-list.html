@@ -21,6 +21,8 @@
     </li>
   </ul>
 </ol> -->
+{% if data['cancelS1'] != 'true' and data['dl1609Complete'] != 'true' %}
+
 
 <table role="table" class="nhsuk-table-responsive">
   <caption class="nhsuk-table__caption">To complete </caption>
@@ -35,9 +37,21 @@
   </thead>
   <tbody class="nhsuk-table__body">
 
+    {%- if data['secondResendDl1609'] == 'true' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
 
 
-    {%- if data['sendDl1609'] == 'true' -%}
+      <a href="../account/entitlement-content/journeys/dl1609/received-dl1609">Record DL1609 response</a>
+        
+      </td>
+    
+  
+    </tr>
+    {%- endif -%}  
+
+    {%- if data['sendDl1609'] == 'true' and data['resendDl1609'] != 'true' -%}
 
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
@@ -51,6 +65,17 @@
     </tr>
     {%- endif -%}   
     
+    {%- if data['resendDl1609'] == 'true' and data['secondResendDl1609'] != 'true' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+        <a href="../account/entitlement-content/journeys/dl1609/resend-dl1609-new">Confirm DL1609 has been sent to main S1 holder</a>
+      </td>
+    
+   
+    </tr>
+    {%- endif -%}  
 
 
 
@@ -91,35 +116,80 @@
 </table>
 
 <br><br>
+{%- endif -%}  
 
 <table role="table" class="nhsuk-table-responsive">
-  <caption class="nhsuk-table__caption">Completed </caption>
+  <caption class="nhsuk-table__caption">History </caption>
   <thead role="rowgroup" class="nhsuk-table__head">
     <tr role="row">
       <th role="columnheader" class="" scope="col">
-        Task
+        Description
       </th>
       <th role="columnheader" class="" scope="col">
-        Date 
+        Date actioned
       </th>
    
     </tr>
   </thead>
   <tbody class="nhsuk-table__body">
+    {%- if data['dl1609Complete'] == 'true' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+        DL1609 registered 	       
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+          19/07/2024
+    
+      </td>
+     
+    </tr>
+    {%- endif -%} 
+    {%- if data['cancelS1'] == 'true' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+        S1 cancelled - main S1 holder ineligible 	       
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+          18/07/2024
+    
+      </td>
+     
+    </tr>
+    {%- endif -%} 
+    {%- if data['secondResendDl1609'] == 'true' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+        DL1609 resent to main S1 holder		       
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+          18/07/2024
+    
+      </td>
+     
+    </tr>
+    {%- endif -%} 
+
     {%- if data['resendDl1609'] == 'true' -%}
 
     <tr role="row" class="nhsuk-table__row">
       <td role="cell" class="nhsuk-table__cell">
 
-         DL1609 resent main S1 holder       
+        DL1609 not received from the main S1 holder		       
       </td>
       <td role="cell" class="nhsuk-table__cell">
           17/07/2024
     
       </td>
-   
+     
     </tr>
-    {%- endif -%}  
+    {%- endif -%} 
+
 
     {%- if data['sendDl1609'] == 'true' -%}
 
@@ -143,7 +213,7 @@
         S073 registration confirmation sent to member state	       
       </td>
       <td role="cell" class="nhsuk-table__cell">
-          15/07/2024
+          16/07/2024
     
       </td>
      

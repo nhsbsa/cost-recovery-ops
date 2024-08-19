@@ -1,13 +1,28 @@
 {% extends 'layouts/_patient-record-template.html' %}
-{% set title %}Entitlements{% endset %}
+{% set title %}Entitlements and enquiries{% endset %}
 {% set entitlementDetails = 'true' %}
 
 
 
 {% block form %}
            
-   
-   
+<div class="nhsuk-grid-row">
+
+  <div class="nhsuk-grid-column-two-thirds">
+    <h1 class="nhsuk-heading-l ">
+      Entitlements
+    </h1>
+  </div>
+
+  <div class="nhsuk-grid-column-one-third">
+    <a href="">
+      <button style="float:right;" class="nhsuk-button" data-module="nhsuk-button" type="submit">
+        Add entitlement
+      </button>
+    </a>
+  </div>
+
+</div>   
 <div class="nhsuk-card">
   <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
     <!--Start of card header-->
@@ -49,9 +64,17 @@
         
       </td>
       <td role="cell" class="nhsuk-table__cell">
-        <strong class="nhsuk-tag nhsuk-tag--yellow">
-          In progress
-        </strong>
+
+        {%- if data['cancelS1'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
+        {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
+        {%- elif data['dl1609Complete'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
+        {%- else -%}
+        <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
+
+       {%- endif -%}
       </td>
       <td role="cell" class="nhsuk-table__cell">
         <a href="s1-entitlement">
@@ -70,7 +93,7 @@
       </td>
       <td role="cell" class="nhsuk-table__cell">
         <strong class="nhsuk-tag nhsuk-tag--green">
-          Issued
+          Registered
         </strong>
       </td>
       <td role="cell" class="nhsuk-table__cell">
@@ -130,5 +153,25 @@
    
 
   </div>
+  
 </div>
+<hr>
+<div class="nhsuk-grid-row">
+
+  <div class="nhsuk-grid-column-two-thirds">
+    <h1 class="nhsuk-heading-l ">
+      S1 enquiries
+    </h1>
+  </div>
+
+  <div class="nhsuk-grid-column-one-third">
+    <a href="">
+      <button style="float:right;" class="nhsuk-button" data-module="nhsuk-button" type="submit">
+        Create S1 enquiry
+      </button>
+    </a>
+  </div>
+
+</div>
+<p>There are no enquiries</p>
 {% endblock %}

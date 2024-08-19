@@ -142,9 +142,17 @@
         
       </td>
       <td role="cell" class="nhsuk-table__cell">
-        <strong class="nhsuk-tag nhsuk-tag--yellow">
-          In progress
-        </strong>
+
+        {%- if data['cancelS1'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
+        {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
+        {%- elif data['dl1609Complete'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
+        {%- else -%}
+        <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
+
+       {%- endif -%}
       </td>
       <td role="cell" class="nhsuk-table__cell">
         <a href="s1-entitlement">
@@ -163,7 +171,7 @@
       </td>
       <td role="cell" class="nhsuk-table__cell">
         <strong class="nhsuk-tag nhsuk-tag--green">
-          Issued
+          Registered
         </strong>
       </td>
       <td role="cell" class="nhsuk-table__cell">

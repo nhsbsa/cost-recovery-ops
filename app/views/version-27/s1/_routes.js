@@ -135,7 +135,12 @@ router.post([/dl1609-print/], function(req, res){
   data.sendDl1609 = 'true';
   res.redirect('../../../s1-entitlement');
 })
-
+// resendSend DL1609 
+router.post([/resend-dl1609-new/], function(req, res){
+  const data = req.session.data;
+  data.secondResendDl1609 = 'true';
+  res.redirect('../../../s1-entitlement');
+})
 // Have we received the DL1609?
 router.post([/received-dl1609/], function(req, res){
   var hasDL1609 = req.session.data['dl1609'];
@@ -153,14 +158,49 @@ router.post([/s1-eligible/], function(req, res){
   var isEligible = req.session.data['s1Eligble'];
   
   if (isEligible == 'yes'){
-      res.redirect('enter-details');
+      res.redirect('enter-details-main');
   } else if (isEligible == 'no'){
       res.redirect('cancel-s1');
   } else {
       
   }
 })
+// Enter and add to main S1 holder details  
+router.post([/enter-details-main/], function(req, res){
+  const data = req.session.data;
 
+  res.redirect('address-dl1609');
+})
+// confirm or change address  
+router.post([/address-dl1609/], function(req, res){
+  const data = req.session.data;
+
+  res.redirect('enter-employment-details-main');
+})
+// Enter and add to main S1 holder details  
+router.post([/enter-employment-details-main/], function(req, res){
+  const data = req.session.data;
+
+  res.redirect('dependants-dl1609');
+})
+// Add dependants to s1  
+router.post([/dependants-dl1609/], function(req, res){
+  res.redirect('cya-1609');
+
+})
+// Dl1609 answers  
+router.post([/cya-1609/], function(req, res){
+  res.redirect('confirm-dl1609');
+
+})
+
+// // Dl1609 answers  
+router.post([/confirm-dl1609/], function(req, res){
+  const data = req.session.data;
+  data.dl1609Complete = 'true';
+  res.redirect('../../../s1-entitlement');
+
+})
 
 // Resend DL1609 
 router.post([/resend-dl1609/], function(req, res){
