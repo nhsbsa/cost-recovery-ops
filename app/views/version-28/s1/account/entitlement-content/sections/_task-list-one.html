@@ -1,0 +1,148 @@
+<!-- <ol class="app-task-list">
+  <h2 class="app-task-list__section">S1 registration</h2>
+  <ul class="app-task-list__items">
+    <li class="app-task-list__item">
+      <span class="app-task-list__task-name">
+         S1/S072 details registered 
+      </span>
+<span class="app-task-list__task-tag nhsuk-body nhsuk-u-font-size-16" id="practice-staff-started">Completed</span>
+    </li>
+    <li class="app-task-list__item">
+      <span class="app-task-list__task-name">
+        <a href="confirm-so73" aria-describedby="company-information-completed"> Send S073 registration confirmation to member state </a>
+      </span>
+      <strong class="nhsuk-tag nhsuk-tag--blue app-task-list__task-tag" id="practice-staff-started">Incomplete</strong>
+    </li>
+    <li class="app-task-list__item">
+      <span class="app-task-list__task-name">
+        <a href="#" aria-describedby="company-information-completed"> Print and send DL1609 to Juan Sanchez </a>
+      </span>
+      <strong class="nhsuk-tag nhsuk-tag--blue app-task-list__task-tag" id="practice-staff-started">Incomplete</strong>
+    </li>
+  </ul>
+</ol> -->
+
+<table role="table" class="nhsuk-table-responsive">
+  <caption class="nhsuk-table__caption">S1 registration tasklist </caption>
+  <thead role="rowgroup" class="nhsuk-table__head">
+    <tr role="row">
+      <th role="columnheader" class="" scope="col">
+        Task
+      </th>
+      <th role="columnheader" class="" scope="col">
+        Date 
+      </th>
+      <th role="columnheader" class="" scope="col">
+        Status
+      </th>
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+
+
+
+    {%- if data['sendDl1609'] == 'true' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+
+      <a href="../account/entitlement-content/journeys/dl1609/received-dl1609">Received DL1609 from main applicant?</a>
+        
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+        
+       </td>
+    </tr>
+    {%- endif -%}   
+    {%- if data['resendDl1609'] == 'true' -%}
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+         DL1609 resent to main applicant       
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+          17/07/2024
+    
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+          <span class=" nhsuk-body ">Completed</span>
+
+      
+       </td>
+    </tr>
+    {%- endif -%}   
+
+
+
+
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+      {%- if data['sendDl1609'] == 'true' -%}
+         DL1609 sent to main applicant
+      {%- else -%}
+      <a href="../account/entitlement-content/journeys/dl1609/dl1609-print">Print and send DL1609 to main applicant</a>
+      {%- endif -%}        
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        {%- if data['sendDl1609'] == 'true' -%}
+          16/07/2024
+      {%- endif -%}
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        {%- if data['sendDl1609'] == 'true' -%}
+          <span class=" nhsuk-body ">Completed</span>
+
+       {%- else -%}
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+       {%- endif -%}     
+       </td>
+    </tr>
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+
+        {%- if data['sendS073'] == 'true' -%}
+          S073 registration confirmation sent to member state
+        {%- else -%}
+          <a href="../account/entitlement-content/journeys/s073-confirm">Send S073 registration confirmation to member state</a>
+        {%- endif -%}
+    
+
+
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        {%- if data['sendS073'] == 'true' -%}
+          15/07/2024
+        {%- endif -%}
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+
+        {%- if data['sendS073'] == 'true' -%}
+          <span class=" nhsuk-body ">Completed</span>
+
+       {%- else -%}
+         <strong class="nhsuk-tag no-caps nhsuk-tag--blue">Incomplete</strong>
+       {%- endif -%}
+      </td>
+    </tr>  
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+        S1/S072 form registered
+      </td>
+      <td role="cell" class="nhsuk-table__cell ">
+        12/07/2024
+      </td>
+      <td role="cell" class="nhsuk-table__cell ">
+        <span class=" nhsuk-body ">Completed</span>
+
+      </td>
+    </tr>
+  </tbody>
+</table>

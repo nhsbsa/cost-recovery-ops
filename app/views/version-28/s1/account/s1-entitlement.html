@@ -1,0 +1,152 @@
+{% extends 'layouts/_patient-record-template.html' %} {% set title %}S1 entitlement{% endset %} {% set entitlementDetailsS1 = 'true' %} {% block form %} {% set status %}
+<strong class="nhsuk-tag nhsuk-tag--yellow"> In progress </strong>
+{% endset %}
+
+<div class="nhsuk-card">
+  <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
+    <!--Start of card header-->
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <dl class="nhsuk-summary-list">
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">Entitlement type</dt>
+            <dd class="nhsuk-summary-list__value">S1</dd>
+
+            <dd class="nhsuk-summary-list__actions"></dd>
+          </div>
+
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">Start date</dt>
+            <dd class="nhsuk-summary-list__value">4 June 2024</dd>
+
+            <dd class="nhsuk-summary-list__actions"></dd>
+          </div>
+
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">End date</dt>
+            <dd class="nhsuk-summary-list__value"></dd>
+
+            <dd class="nhsuk-summary-list__actions"></dd>
+          </div>
+
+          <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">Status</dt>
+            <dd class="nhsuk-summary-list__value">
+
+                {%- if data['cancelS1'] == 'true' -%}
+                 <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
+                 {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' and data['dl1609Complete'] != 'true'  -%}
+                 <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
+                 {%- elif data['dl1609Complete'] == 'true' -%}
+                 <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
+                 {%- else -%}
+                 <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
+
+                {%- endif -%}
+            </dd>
+
+            <dd class="nhsuk-summary-list__actions"></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nhsuk-tabs" data-module="nhsuk-tabs">
+  <h2 class="nhsuk-tabs__title">Contents</h2>
+
+  <!-- Start of tab titles -->
+  <ul class="nhsuk-tabs__list">
+    <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
+      <a class="nhsuk-tabs__tab" href="#summary"> Task list </a>
+    </li>
+    <li class="nhsuk-tabs__list-item">
+      <a class="nhsuk-tabs__tab" href="#entitlement"> Entitlement details </a>
+    </li>
+    <li class="nhsuk-tabs__list-item">
+      <a class="nhsuk-tabs__tab" href="#dependants"> Dependants </a>
+    </li>
+    <li class="nhsuk-tabs__list-item">
+      <a class="nhsuk-tabs__tab" href="#documents"> Documents </a>
+    </li>
+    <li class="nhsuk-tabs__list-item">
+      <a class="nhsuk-tabs__tab" href="#notes"> Notes </a>
+    </li>
+  </ul>
+
+  <!-- *** Start of tasklist tab content *** -->
+  <div class="nhsuk-tabs__panel" id="summary">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        {% include '../account/entitlement-content/sections/_task-list.html' %}
+      </div>
+    </div>
+  </div>
+
+  <!-- *** Start of entitlement tab *** -->
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="entitlement">
+    <h2 class="nhsuk-heading-s">Entitlement details</h2>
+
+    {% include '../account/entitlement-content/sections/_entitlement.html' %}
+  </div>
+
+  <!-- *** Start of Dependants tab *** -->
+
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="dependants">
+    {% include '../account/entitlement-content/sections/_dependants.html' %}
+  </div>
+  <!-- *** End of imported dependants tab *** -->
+
+  <!-- *** Start of documents tab *** -->
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
+    <h2 class="nhsuk-heading-s">Documents</h2>
+
+    {% include '../account/entitlement-content/sections/_documents.html' %}
+  </div>
+  <!-- *** End of docs tab *** -->
+
+  <!-- *** Start of notes tab *** -->
+  <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">
+    <h2 class="nhsuk-heading-s">Notes</h2>
+
+    {% include '../account/entitlement-content/sections/_notes.html' %}
+  </div>
+  <!-- *** End of notes tab *** -->
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get all the tab links
+    const tabs = document.querySelectorAll(".nhsuk-tabs__tab");
+    // Get all the tab panels
+    const panels = document.querySelectorAll(".nhsuk-tabs__panel");
+
+    // Function to hide all panels and remove selected class from all tabs
+    function hideAllPanels() {
+      panels.forEach((panel) => panel.classList.add("nhsuk-tabs__panel--hidden"));
+      tabs.forEach((tab) => tab.parentElement.classList.remove("nhsuk-tabs__list-item--selected"));
+    }
+
+    // Function to show a specific panel
+    function showPanel(panelId) {
+      const panel = document.querySelector(panelId);
+      panel.classList.remove("nhsuk-tabs__panel--hidden");
+    }
+
+    // Add click event to each tab
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default link behavior
+        hideAllPanels(); // Hide all panels
+        tab.parentElement.classList.add("nhsuk-tabs__list-item--selected"); // Mark the clicked tab as selected
+        showPanel(tab.getAttribute("href")); // Show the clicked tab's panel
+      });
+    });
+
+    // Initially show the summary tab
+    hideAllPanels();
+    document.querySelector("#summary").classList.remove("nhsuk-tabs__panel--hidden");
+    document.querySelector('a[href="#summary"]').parentElement.classList.add("nhsuk-tabs__list-item--selected");
+  });
+</script>
+{% endblock %}

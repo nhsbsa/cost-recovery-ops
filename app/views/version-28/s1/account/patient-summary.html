@@ -1,0 +1,217 @@
+{% extends 'layouts/_patient-record-template.html' %}
+{% set title %}Person summary{% endset %}
+{% set patientSummary = 'true' %}
+
+
+
+{% block form %}
+           
+   
+   
+<div class="nhsuk-card">
+  <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
+    <!--Start of card header-->
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-two-thirds">
+        <!-- <h3 class="nhsuk-heading-l">
+          Patient details
+        </h3> -->
+
+      </div>
+      <div class="nhsuk-grid-column-one-third">
+
+        <span class="" style="float:right">
+   
+        </span>
+
+      </div>
+      <div class="nhsuk-grid-column-full">
+
+
+        {{ summaryList({
+          rows: [
+            {
+              key: {
+                text: "Name"
+              },
+              value: {
+                text: "Juan Sanchez"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "#",
+                    text: " ",
+                    visuallyHiddenText: "name"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Date of birth"
+              },
+              value: {
+                text: "15 March 1984"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "#",
+                    text: " ",
+                    visuallyHiddenText: "date of birth"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Address"
+              },
+              value: {
+                html: "1 Washington Street<br>
+                Worcester<br>
+                WR1 1NL<br>
+                United Kingdom"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "#",
+                    text: " ",
+                    visuallyHiddenText: "contact information"
+                  }
+                ]
+              }
+            } 
+          ]
+        }) }}
+        <p><a href="patient-details">View person details</a></p>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>     
+   
+
+<div class="nhsuk-card">
+  <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
+    <!--Start of card header-->
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-two-thirds">
+        <h3 class="nhsuk-heading-l">
+           Entitlements
+        </h3>
+
+      </div>
+
+      <div class="nhsuk-grid-column-full">
+
+
+        <table role="table" class="nhsuk-table-responsive">
+  <thead role="rowgroup" class="nhsuk-table__head">
+    <tr role="row">
+      <th role="columnheader" class="" scope="col">
+        Entitlement
+      </th>
+      <th role="columnheader" class="" scope="col">
+        Start date
+      </th>
+      <th role="columnheader" class="" scope="col">
+        End date
+      </th>
+      <th role="columnheader" class="" scope="col">
+        Status
+      </th>
+      <th role="columnheader" class="" scope="col">
+        
+      </th>
+    </tr>
+  </thead>
+  <tbody class="nhsuk-table__body">
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+        S1
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        4 June 2024
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+
+        {%- if data['cancelS1'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
+        {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
+        {%- elif data['dl1609Complete'] == 'true' -%}
+        <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
+        {%- else -%}
+        <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
+
+       {%- endif -%}
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        <a href="s1-entitlement">
+          View details</span>
+        </a>
+    </tr> 
+    <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+        EHIC
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        31/01/2024
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        31/01/2026
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        <strong class="nhsuk-tag nhsuk-tag--green">
+          Registered
+        </strong>
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        <a href="#">
+          View details</span>
+        </a>
+    </tr>
+    <!-- <tr role="row" class="nhsuk-table__row">
+      <td role="cell" class="nhsuk-table__cell">
+        PRC
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        31/01/2023
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        01/03/2024
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        <strong class="nhsuk-tag nhsuk-tag--red">
+          Cancelled
+        </strong>
+      </td>
+      <td role="cell" class="nhsuk-table__cell">
+        <a href="#">
+          View details</span>
+        </a>
+      </td>
+    </tr> -->
+
+  </tbody>
+</table>
+<br>
+<p><a href="entitlement-details">View all entitlements</a></p>
+
+      </div>
+
+    </div>
+
+   
+
+  </div>
+</div>
+{% endblock %}
