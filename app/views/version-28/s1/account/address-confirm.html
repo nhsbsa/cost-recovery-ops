@@ -1,0 +1,108 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Look for an address - Create a new person record - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                            Create a new person record
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Confirm {% if data['first-name'] %}{{ data['first-name'] }}{% else %}John{% endif %}'s home address
+                    </h1>
+   
+                    <form action="resident-since" method="post">
+
+
+                      <div class="nhsuk-inset-text">
+                        <span class="nhsuk-u-visually-hidden">Address: </span>
+                        <p>
+                          {% if data['address-building-name'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-postcode'] or data['address-country'] %}
+                            {% if data['address-building-name'] %}
+                              {{ data['address-building-name'] }}<br>
+                            {% endif %}
+                            {% if data['address-line-2'] %}
+                              {{ data['address-line-2'] }}<br>
+                            {% endif %}
+                            {% if data['address-line-3'] %}
+                              {{ data['address-line-3'] }}<br>
+                            {% endif %}
+                            {% if data['address-town'] %}
+                              {{ data['address-town'] }}<br>
+                            {% endif %}
+                            {% if data['address-postcode'] %}
+                              {{ data['address-postcode'] }}<br>
+                            {% endif %}
+                            {% if data['address-country'] %}
+                              {{ data['address-country'] }}
+                            {% endif %}
+                          {% else %}
+                            1 Washington Street<br>
+                            Worcester<br>
+                            WR1 1NL<br>
+                            United Kingdom
+                          {% endif %}
+                        </p>
+                      </div>
+                      
+
+                    <div class="button-container">
+                      <form action="../account/create-person-record-cya">
+                        <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                          Use this address
+                        </button>
+                      </form>
+          
+                      <form action="../account/address-lookup">
+                        <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                          Look up a different address
+                        </button>
+                      </form>
+                    </div>
+
+                    
+                    <p><a href="address-manual">Enter address manually</a></p>
+
+                      <p><a href="../search/patient-search">Cancel</a></p>
+
+                    </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

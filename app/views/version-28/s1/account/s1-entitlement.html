@@ -1,57 +1,8 @@
-{% extends 'layouts/_patient-record-template.html' %} {% set title %}S1 entitlement{% endset %} {% set entitlementDetailsS1 = 'true' %} {% block form %} {% set status %}
+{% extends 'layouts/_patient-record-template.html' %} {% set title %}Entitlements{% endset %} {% set entitlementDetailsS1 = 'true' %} {% block form %} {% set status %}
 <strong class="nhsuk-tag nhsuk-tag--yellow"> In progress </strong>
 {% endset %}
 
-<div class="nhsuk-card">
-  <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
-    <!--Start of card header-->
-    <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-full">
-        <dl class="nhsuk-summary-list">
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">Entitlement type</dt>
-            <dd class="nhsuk-summary-list__value">S1</dd>
 
-            <dd class="nhsuk-summary-list__actions"></dd>
-          </div>
-
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">Start date</dt>
-            <dd class="nhsuk-summary-list__value">4 June 2024</dd>
-
-            <dd class="nhsuk-summary-list__actions"></dd>
-          </div>
-
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">End date</dt>
-            <dd class="nhsuk-summary-list__value"></dd>
-
-            <dd class="nhsuk-summary-list__actions"></dd>
-          </div>
-
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">Status</dt>
-            <dd class="nhsuk-summary-list__value">
-
-                {%- if data['cancelS1'] == 'true' -%}
-                 <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
-                 {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' and data['dl1609Complete'] != 'true'  -%}
-                 <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
-                 {%- elif data['dl1609Complete'] == 'true' -%}
-                 <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
-                 {%- else -%}
-                 <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
-
-                {%- endif -%}
-            </dd>
-
-            <dd class="nhsuk-summary-list__actions"></dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="nhsuk-tabs" data-module="nhsuk-tabs">
   <h2 class="nhsuk-tabs__title">Contents</h2>

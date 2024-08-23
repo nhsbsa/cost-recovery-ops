@@ -1,0 +1,410 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Reason for editing - Update person details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                            Create a new person record
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Personal details
+                    </h1>
+
+                    
+                        
+                    <form action="address-lookup" method="post">
+
+                        <!--div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="pin-input-label">
+                              Personal identification number (PIN)
+                            </label>
+                            <div class="nhsuk-hint" id="pin-input-hint">
+                                For example, 1234567890
+                              </div>
+                            <input class="nhsuk-input nhsuk-input--width-10" id="pin" name="pin" type="number">
+                          </div>
+                          <hr-->
+
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="first-name-input-label">
+                             First name
+                            </label>
+                            <div class="nhsuk-hint" id="pin-input-hint">
+                                Include any middle names. For example, Sarah Jane.
+                              </div>
+                            <input class="nhsuk-input nhsuk-input--width-20" id="first-name" name="first-name" type="text">
+                          </div>
+
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="last-name-input-label">
+                             Last name
+                            </label>
+                            <input class="nhsuk-input nhsuk-input--width-20" id="last-name" name="last-name" type="text">
+                          </div>
+
+
+                          <!--div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="birth-first-name-label">
+                              First names at birth (optional)
+                            </label>
+                            <div class="nhsuk-hint" id="birth-first-name-hint">
+                                You can include middle names. For example, Sarah Jane
+                              </div>
+                            <input class="nhsuk-input nhsuk-input--width-20" id="birth-first-name" name="birth-first-name" type="text">
+                          </div-->
+
+
+                          <!--div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="birth-last-name-label">
+                              Last name at birth (optional)
+                            </label>
+                            <input class="nhsuk-input nhsuk-input--width-20" id="birth-last-name" name="birth-last-name" type="text">
+                          </div-->
+
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="dob-label">
+                                Date of birth
+                              </label>
+                            <div class="nhsuk-hint" id="dob-hint">
+                                For example, 15 3 1984
+                            </div>
+                            <div class="nhsuk-date-input">
+                                <div class="nhsuk-date-input__item">
+                                  <label id="dob-day-label" class="nhsuk-label nhsuk-date-input__label" for="dob-day">Day</label> 
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dob-day" name="dob-day" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
+                                </div>
+                    
+                                <div class="nhsuk-date-input__item">
+                                  <label id="dob-month-label" class="nhsuk-label nhsuk-date-input__label" for="dob-month">Month</label>
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dob-month" name="dob-month" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
+                                </div>
+                    
+                                <div class="nhsuk-date-input__item">
+                                  <label id="dob-year-label" class="nhsuk-label nhsuk-date-input__label" for="dob-year">Year</label>
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dob-year" name="dob-year" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="4" oninput="this.value=this.value.slice(0,this.maxLength)">
+                                </div>
+                            </div>
+                          </div>
+
+
+                          <!--div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="birth-last-name-label">
+                                Gender
+                              </label>
+                            <div class="nhsuk-radios">
+                                <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="gender-male" name="gender-selection" type="radio" value="Male">
+                                <label class="nhsuk-label nhsuk-radios__label" for="gender-male">
+                                    Male
+                                </label>
+                                </div>
+                        
+                                <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="gender-female" name="gender-selection" type="radio" value="Female">
+                                <label class="nhsuk-label nhsuk-radios__label" for="gender-female">
+                                    Female
+                                </label>
+                                </div>
+                        
+                                <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="gender-unknown" name="gender-selection" type="radio" value="Unknown">
+                                <label class="nhsuk-label nhsuk-radios__label" for="gender-unknown">
+                                    Unknown
+                                </label>
+                                </div>
+                            </div>
+                          </div-->
+                          
+
+
+                          <!--div class="nhsuk-form-group">
+                            <label class="nhsuk-label" id="nationality-label" for="nationality">
+                                Nationality (optional)
+                            </label>
+                            <input class="nhsuk-input nhsuk-input--width-20" list="nationalities" id="nationality" name="nationality">
+                            <datalist id="nationalities">
+                                <option id="1" value="Afghan">Afghan</option>
+                                <option id="2" value="Albanian">Albanian</option>
+                                <option id="3" value="Algerian">Algerian</option>
+                                <option id="4" value="American">American</option>
+                                <option id="5" value="Andorran">Andorran</option>
+                                <option id="6" value="Angolan">Angolan</option>
+                                <option id="7" value="Antiguan or Barbudan">Antiguan or Barbudan</option>
+                                <option id="8" value="Argentine">Argentine</option>
+                                <option id="9" value="Armenian">Armenian</option>
+                                <option id="10" value="Australian">Australian</option>
+                                <option id="11" value="Austrian">Austrian</option>
+                                <option id="12" value="Azerbaijani">Azerbaijani</option>
+                                <option id="13" value="Bahamian">Bahamian</option>
+                                <option id="14" value="Bahraini">Bahraini</option>
+                                <option id="15" value="Bangladeshi">Bangladeshi</option>
+                                <option id="16" value="Barbadian">Barbadian</option>
+                                <option id="17" value="Belarusian">Belarusian</option>
+                                <option id="18" value="Belgian">Belgian</option>
+                                <option id="19" value="Belizean">Belizean</option>
+                                <option id="20" value="Beninese">Beninese</option>
+                                <option id="21" value="Bhutanese">Bhutanese</option>
+                                <option id="22" value="Bolivian">Bolivian</option>
+                                <option id="23" value="Bosnian or Herzegovinian">Bosnian or Herzegovinian</option>
+                                <option id="24" value="Botswanan">Botswanan</option>
+                                <option id="25" value="Brazilian">Brazilian</option>
+                                <option id="26" value="British">British</option>
+                                <option id="27" value="Bruneian">Bruneian</option>
+                                <option id="28" value="Bulgarian">Bulgarian</option>
+                                <option id="29" value="Burkinabé">Burkinabé</option>
+                                <option id="30" value="Burmese">Burmese</option>
+                                <option id="31" value="Burundian">Burundian</option>
+                                <option id="32" value="Cambodian">Cambodian</option>
+                                <option id="33" value="Cameroonian">Cameroonian</option>
+                                <option id="34" value="Canadian">Canadian</option>
+                                <option id="35" value="Cape Verdean">Cape Verdean</option>
+                                <option id="36" value="Central African">Central African</option>
+                                <option id="37" value="Chadian">Chadian</option>
+                                <option id="38" value="Chilean">Chilean</option>
+                                <option id="39" value="Chinese">Chinese</option>
+                                <option id="40" value="Colombian">Colombian</option>
+                                <option id="41" value="Comorian">Comorian</option>
+                                <option id="42" value="Congolese (Congo-Brazzaville)">Congolese (Congo-Brazzaville)</option>
+                                <option id="43" value="Congolese (Congo-Kinshasa)">Congolese (Congo-Kinshasa)</option>
+                                <option id="44" value="Costa Rican">Costa Rican</option>
+                                <option id="45" value="Croatian">Croatian</option>
+                                <option id="46" value="Cuban">Cuban</option>
+                                <option id="47" value="Cypriot">Cypriot</option>
+                                <option id="48" value="Czech">Czech</option>
+                                <option id="49" value="Danish">Danish</option>
+                                <option id="50" value="Djiboutian">Djiboutian</option>
+                                <option id="51" value="Dominican (Dominica)">Dominican (Dominica)</option>
+                                <option id="52" value="Dominican (Dominican Republic)">Dominican (Dominican Republic)</option>
+                                <option id="53" value="East Timorese">East Timorese</option>
+                                <option id="54" value="Ecuadorian">Ecuadorian</option>
+                                <option id="55" value="Egyptian">Egyptian</option>
+                                <option id="56" value="Emirati">Emirati</option>
+                                <option id="57" value="Equatorial Guinean">Equatorial Guinean</option>
+                                <option id="58" value="Eritrean">Eritrean</option>
+                                <option id="59" value="Estonian">Estonian</option>
+                                <option id="60" value="Eswatini (Swazi)">Eswatini (Swazi)</option>
+                                <option id="61" value="Ethiopian">Ethiopian</option>
+                                <option id="62" value="Fijian">Fijian</option>
+                                <option id="63" value="Finnish">Finnish</option>
+                                <option id="64" value="French">French</option>
+                                <option id="65" value="Gabonese">Gabonese</option>
+                                <option id="66" value="Gambian">Gambian</option>
+                                <option id="67" value="Georgian">Georgian</option>
+                                <option id="68" value="German">German</option>
+                                <option id="69" value="Ghanaian">Ghanaian</option>
+                                <option id="70" value="Greek">Greek</option>
+                                <option id="71" value="Grenadian">Grenadian</option>
+                                <option id="72" value="Guatemalan">Guatemalan</option>
+                                <option id="73" value="Guinean">Guinean</option>
+                                <option id="74" value="Guinean-Bissau">Guinean-Bissau</option>
+                                <option id="75" value="Guyanese">Guyanese</option>
+                                <option id="76" value="Haitian">Haitian</option>
+                                <option id="77" value="Honduran">Honduran</option>
+                                <option id="78" value="Hungarian">Hungarian</option>
+                                <option id="79" value="Icelandic">Icelandic</option>
+                                <option id="80" value="Indian">Indian</option>
+                                <option id="81" value="Indonesian">Indonesian</option>
+                                <option id="82" value="Iranian">Iranian</option>
+                                <option id="83" value="Iraqi">Iraqi</option>
+                                <option id="84" value="Irish">Irish</option>
+                                <option id="85" value="Israeli">Israeli</option>
+                                <option id="86" value="Italian">Italian</option>
+                                <option id="87" value="Ivorian">Ivorian</option>
+                                <option id="88" value="Jamaican">Jamaican</option>
+                                <option id="89" value="Japanese">Japanese</option>
+                                <option id="90" value="Jordanian">Jordanian</option>
+                                <option id="91" value="Kazakhstani">Kazakhstani</option>
+                                <option id="92" value="Kenyan">Kenyan</option>
+                                <option id="93" value="Kiribati">Kiribati</option>
+                                <option id="94" value="Kosovar">Kosovar</option>
+                                <option id="95" value="Kuwaiti">Kuwaiti</option>
+                                <option id="96" value="Kyrgyz">Kyrgyz</option>
+                                <option id="97" value="Laotian">Laotian</option>
+                                <option id="98" value="Latvian">Latvian</option>
+                                <option id="99" value="Lebanese">Lebanese</option>
+                                <option id="100" value="Liberian">Liberian</option>
+                                <option id="101" value="Libyan">Libyan</option>
+                                <option id="102" value="Liechtenstein citizen">Liechtenstein citizen</option>
+                                <option id="103" value="Lithuanian">Lithuanian</option>
+                                <option id="104" value="Luxembourger">Luxembourger</option>
+                                <option id="105" value="Malagasy">Malagasy</option>
+                                <option id="106" value="Malawian">Malawian</option>
+                                <option id="107" value="Malaysian">Malaysian</option>
+                                <option id="108" value="Maldivian">Maldivian</option>
+                                <option id="109" value="Malian">Malian</option>
+                                <option id="110" value="Maltese">Maltese</option>
+                                <option id="111" value="Marshallese">Marshallese</option>
+                                <option id="112" value="Mauritanian">Mauritanian</option>
+                                <option id="113" value="Mauritian">Mauritian</option>
+                                <option id="114" value="Mexican">Mexican</option>
+                                <option id="115" value="Micronesian">Micronesian</option>
+                                <option id="116" value="Moldovan">Moldovan</option>
+                                <option id="117" value="Monegasque">Monegasque</option>
+                                <option id="118" value="Mongolian">Mongolian</option>
+                                <option id="119" value="Montenegrin">Montenegrin</option>
+                                <option id="120" value="Moroccan">Moroccan</option>
+                                <option id="121" value="Mozambican">Mozambican</option>
+                                <option id="122" value="Namibian">Namibian</option>
+                                <option id="123" value="Nauruan">Nauruan</option>
+                                <option id="124" value="Nepalese">Nepalese</option>
+                                <option id="125" value="Dutch">Dutch</option>
+                                <option id="126" value="New Zealander">New Zealander</option>
+                                <option id="127" value="Nicaraguan">Nicaraguan</option>
+                                <option id="128" value="Nigerien">Nigerien</option>
+                                <option id="129" value="Nigerian">Nigerian</option>
+                                <option id="130" value="North Korean">North Korean</option>
+                                <option id="131" value="North Macedonian">North Macedonian</option>
+                                <option id="132" value="Norwegian">Norwegian</option>
+                                <option id="133" value="Omani">Omani</option>
+                                <option id="134" value="Pakistani">Pakistani</option>
+                                <option id="135" value="Palauan">Palauan</option>
+                                <option id="136" value="Palestinian">Palestinian</option>
+                                <option id="137" value="Panamanian">Panamanian</option>
+                                <option id="138" value="Papua New Guinean">Papua New Guinean</option>
+                                <option id="139" value="Paraguayan">Paraguayan</option>
+                                <option id="140" value="Peruvian">Peruvian</option>
+                                <option id="141" value="Filipino">Filipino</option>
+                                <option id="142" value="Polish">Polish</option>
+                                <option id="143" value="Portuguese">Portuguese</option>
+                                <option id="144" value="Qatari">Qatari</option>
+                                <option id="145" value="Romanian">Romanian</option>
+                                <option id="146" value="Russian">Russian</option>
+                                <option id="147" value="Rwandan">Rwandan</option>
+                                <option id="148" value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                                <option id="149" value="Saint Lucian">Saint Lucian</option>
+                                <option id="150" value="Saint Vincentian">Saint Vincentian</option>
+                                <option id="151" value="Samoan">Samoan</option>
+                                <option id="152" value="San Marinese">San Marinese</option>
+                                <option id="153" value="Sao Tomean">Sao Tomean</option>
+                                <option id="154" value="Saudi">Saudi</option>
+                                <option id="155" value="Senegalese">Senegalese</option>
+                                <option id="156" value="Serbian">Serbian</option>
+                                <option id="157" value="Seychellois">Seychellois</option>
+                                <option id="158" value="Sierra Leonean">Sierra Leonean</option>
+                                <option id="159" value="Singaporean">Singaporean</option>
+                                <option id="160" value="Slovak">Slovak</option>
+                                <option id="161" value="Slovenian">Slovenian</option>
+                                <option id="162" value="Solomon Islander">Solomon Islander</option>
+                                <option id="163" value="Somali">Somali</option>
+                                <option id="164" value="South African">South African</option>
+                                <option id="165" value="South Korean">South Korean</option>
+                                <option id="166" value="South Sudanese">South Sudanese</option>
+                                <option id="167" value="Spanish">Spanish</option>
+                                <option id="168" value="Sri Lankan">Sri Lankan</option>
+                                <option id="169" value="Sudanese">Sudanese</option>
+                                <option id="170" value="Surinamese">Surinamese</option>
+                                <option id="171" value="Swedish">Swedish</option>
+                                <option id="172" value="Swiss">Swiss</option>
+                                <option id="173" value="Syrian">Syrian</option>
+                                <option id="174" value="Taiwanese">Taiwanese</option>
+                                <option id="175" value="Tajikistani">Tajikistani</option>
+                                <option id="176" value="Tanzanian">Tanzanian</option>
+                                <option id="177" value="Thai">Thai</option>
+                                <option id="178" value="Togolese">Togolese</option>
+                                <option id="179" value="Tongan">Tongan</option>
+                                <option id="180" value="Trinidadian or Tobagonian">Trinidadian or Tobagonian</option>
+                                <option id="181" value="Tunisian">Tunisian</option>
+                                <option id="182" value="Turkish">Turkish</option>
+                                <option id="183" value="Turkmen">Turkmen</option>
+                                <option id="184" value="Tuvaluan">Tuvaluan</option>
+                                <option id="185" value="Ugandan">Ugandan</option>
+                                <option id="186" value="Ukrainian">Ukrainian</option>
+                                <option id="187" value="Uruguayan">Uruguayan</option>
+                                <option id="188" value="Uzbekistani">Uzbekistani</option>
+                                <option id="189" value="Vanuatuan">Vanuatuan</option>
+                                <option id="190" value="Venezuelan">Venezuelan</option>
+                                <option id="191" value="Vietnamese">Vietnamese</option>
+                                <option id="192" value="Yemeni">Yemeni</option>
+                                <option id="193" value="Zambian">Zambian</option>
+                                <option id="194" value="Zimbabwean">Zimbabwean</option>
+                            </datalist>
+                        </div-->
+
+                        <!--div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="residency-label">
+                                Resident in country since (optional)
+                                </label>
+                            <div class="nhsuk-hint" id="residency-hint">
+                                For example, 2 10 2023
+                            </div>
+                            <div class="nhsuk-date-input">
+                                <div class="nhsuk-date-input__item">
+                                    <label id="residency-day-label" class="nhsuk-label nhsuk-date-input__label" for="residency-day">Day</label> 
+                                    <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="residency-day" name="residency-day" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
+                                </div>
+                    
+                                <div class="nhsuk-date-input__item">
+                                    <label id="residency-month-label" class="nhsuk-label nhsuk-date-input__label" for="residency-month">Month</label>
+                                    <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="residency-month" name="residency-month" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
+                                </div>
+                    
+                                <div class="nhsuk-date-input__item">
+                                    <label id="residency-year-label" class="nhsuk-label nhsuk-date-input__label" for="residency-year">Year</label>
+                                    <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="residency-year" name="residency-year" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="4" oninput="this.value=this.value.slice(0,this.maxLength)">
+                                </div>
+                            </div>
+                        </div-->
+
+                          
+                        <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
+                            Continue
+                        </button>
+
+                        <p><a href="../search/patient-search">Cancel</a></p>
+
+                    </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#nationalityDrop')
+  })
+</script>
+{% endblock %}

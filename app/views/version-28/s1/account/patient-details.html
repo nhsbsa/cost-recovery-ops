@@ -1,114 +1,487 @@
-{% extends 'layouts/_patient-record-template.html' %}
-{% set title %}Person details{% endset %}
-{% set patientDetails = 'true' %}
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
 
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} Person details page {% endblock %}
 
-{% block form %}
-           
-   
-   
-<div class="nhsuk-card">
-  <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
-    <!--Start of card header-->
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
     <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-two-thirds">
-        <!-- <h3 class="nhsuk-heading-l">
-          Patient summary
-        </h3> -->
-
-      </div>
       <div class="nhsuk-grid-column-full">
-        <h2 class="nhsuk-heading-m">Person details</h2>
-
-        <dl class="nhsuk-summary-list">
-  
-  
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">First name</dt>
-            <dd class="nhsuk-summary-list__value">Juan</dd>
-  
-            <dd class="nhsuk-summary-list__actions">
-              <a href="#"> Change<span class="nhsuk-u-visually-hidden"> First name</span> </a>
-            </dd>
-          </div>
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">Last name</dt>
-            <dd class="nhsuk-summary-list__value">Sanchez</dd>
-  
-            <dd class="nhsuk-summary-list__actions">
-              <a href="#"> Change<span class="nhsuk-u-visually-hidden">Last name</span> </a>
-            </dd>
-          </div>
-          <!-- <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">First name at birth (if different)</dt>
-            <dd class="nhsuk-summary-list__value"></dd>
-  
-            <dd class="nhsuk-summary-list__actions">
-              <a href="#"> Change<span class="nhsuk-u-visually-hidden">Last name</span> </a>
-            </dd>
-          </div> -->
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">Last name at birth (if different)</dt>
-            <dd class="nhsuk-summary-list__value"></dd>
-  
-            <dd class="nhsuk-summary-list__actions">
-              <a href="#"> Change<span class="nhsuk-u-visually-hidden">Last name</span> </a>
-            </dd>
-          </div>
-  
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">Date of birth</dt>
-            <dd class="nhsuk-summary-list__value">1 January 1980</dd>
-  
-            <dd class="nhsuk-summary-list__actions">
-              <a href="#"> Change<span class="nhsuk-u-visually-hidden">Date of birth</span> </a>
-            </dd>
-          </div>
-          <!-- <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">Sex</dt>
-            <dd class="nhsuk-summary-list__value">Male</dd>
-  
-            <dd class="nhsuk-summary-list__actions">
-              <a href="#"> Change<span class="nhsuk-u-visually-hidden">Date of birth</span> </a>
-            </dd>
-          </div> -->
-  
-                </dl>
-  
-        <h2 class="nhsuk-heading-m">Address details</h2>
-  
-        <dl class="nhsuk-summary-list">
-          <div class="nhsuk-summary-list__row">
-            <dt class="nhsuk-summary-list__key">Address</dt>
-            <dd class="nhsuk-summary-list__value">
-              1 Washington Street<br>
-              Worcester<br>
-              WR1 1NL<br>
-              United Kingdom
-           
-            </dd>
-            <dd class="nhsuk-summary-list__actions">
-              <a href="#"> Change<span class="nhsuk-u-visually-hidden"> uk address</span> </a>
-            </dd>
-          </div>
-  
-      
-        </dl>
-    
-  
-       
-  
-
-
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/patient-search">Search</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../account/patient-summary">Overview</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../account/patient-details">Personal details</a>
+          </li>
+        </ol>
       </div>
-
     </div>
 
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          
+      
+          
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Personal details</h1>
+            </div>
+          </div>
+      
+      
+          <!-- Tabs -->
+          <div class="nhsuk-tabs" data-module="nhsuk-tabs">
+            <h2 class="nhsuk-tabs__title">Personal details content</h2>
+
+            <ul class="nhsuk-tabs__list">
+              <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
+                <a class="nhsuk-tabs__tab" href="#personal-details">Personal details</a>
+              </li>
+              <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
+                <a class="nhsuk-tabs__tab" href="#additional-personal-details">Additional personal details</a>
+              </li>
+              <li class="nhsuk-tabs__list-item">
+                <a class="nhsuk-tabs__tab" href="#addresses">Addresses</a>
+              </li>
+              <li class="nhsuk-tabs__list-item">
+                <a class="nhsuk-tabs__tab" href="#contact-details">Contact details</a>
+              </li>
+              <li class="nhsuk-tabs__list-item">
+                <a class="nhsuk-tabs__tab" href="#documents">Documents</a>
+              </li>
+              <li class="nhsuk-tabs__list-item">
+                <a class="nhsuk-tabs__tab" href="#notes">Notes</a>
+              </li>
+            </ul>
+
+            <!-- Tab content -->
+            <div class="nhsuk-tabs__panel" id="personal-details">
+              <!-- Personal details tab content starts -->
+              <h3 class="nhsuk-heading-l">Personal details</h3>
+                <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Person ID
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        123456
+                      </dd>
+                    </div>
+                  
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        First name
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        John
+                      </dd>
+                    </div>
+                  
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Last name
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Doe
+                      </dd>
+                    </div>
+              
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date of birth
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        4 January 1973
+                      </dd>
+                    </div>
+                  </dl>
+                  <p><a href="">Change personal details</a></p>
+                </div>
+                <!-- Personal details tabs content ends -->
+
+              <div class="nhsuk-tabs__panel" id="additional-personal-details">
+                <!-- Additional personal details tab content starts -->
+                <h3 class="nhsuk-heading-l">Additional personal details</h3>
+                  <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First name at birth (optional)
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Not provided
+                        </dd>
+                      </div>
+                
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name at birth (optional)
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Not provided
+                        </dd>
+                      </div>
+                
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Gender
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Male
+                        </dd>
+                      </div>
+                
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Nationality (optional)
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          French
+                        </dd>
+                      </div>
+                    </dl>
+                    <p><a href="">Change additional personal details</a></p>
+                  </div>
+                  <!-- Additional personal details tabs content ends -->
+
+
+              <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="addresses">
+                <!-- Addresses tab content starts -->
+                <h3 class="nhsuk-heading-l">Address history</h3>
+
+                <h2 class="nhsuk-heading-m">Current address</h2>
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Home address<br>
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                          {% if data['address-building-name'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-postcode'] or data['address-country'] %}
+                          {% if data['address-building-name'] %}
+                            {{ data['address-building-name'] }}<br>
+                          {% endif %}
+                          {% if data['address-line-2'] %}
+                            {{ data['address-line-2'] }}<br>
+                          {% endif %}
+                          {% if data['address-line-3'] %}
+                            {{ data['address-line-3'] }}<br>
+                          {% endif %}
+                          {% if data['address-town'] %}
+                            {{ data['address-town'] }}<br>
+                          {% endif %}
+                          {% if data['address-postcode'] %}
+                            {{ data['address-postcode'] }}<br>
+                          {% endif %}
+                          {% if data['address-country'] %}
+                            {{ data['address-country'] }}
+                          {% endif %}
+                        {% else %}
+                          1 Washington Street<br>
+                          Worcester<br>
+                          WR1 1NL<br>
+                          United Kingdom
+                        {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="#">
+                        Change<span class="nhsuk-u-visually-hidden">current address</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Resident in country since
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      2 February 2024
+                    </dd>
+                  
+                  <dd class="nhsuk-summary-list__actions">
+                    <a href="#">
+                      Change<span class="nhsuk-u-visually-hidden">residency</span>
+                    </a>
+                  </dd>
+                </div>
+                </dl>
+
+
+                <h2 class="nhsuk-heading-m">Previous addresses</h2>
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Previous address
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      Building name or number, TS1 1ET
+                      <details class="nhsuk-details">
+                        <summary class="nhsuk-details__summary">
+                          <span class="nhsuk-details__summary-text">
+                            View full address
+                          </span>
+                        </summary>
+                        <div class="nhsuk-details__text">
+                          Building name or number<br>
+                          Address line 2<br>
+                          Address line 3<br>
+                          Town or city<br>
+                          TS1 1ET<br>
+                          Country
+                        </div>
+                      </details>
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="#">
+                        Change<span class="nhsuk-u-visually-hidden">previous address</span>
+                      </a>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+              <!-- Addresses tab content ends -->
+
+
+              <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="contact-details">
+                <!-- Contact details tab content starts -->
+                <h3 class="nhsuk-heading-l">Contact details</h3>
+                  <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Mobile number
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          (+44)7123456789
+                        </dd>
+                      </div>
+                    
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Email address
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          john.doe@gmail.com
+                        </dd>
+                      </div>
+                    </dl>
+                    <p><a href="">Change contact details</a></p>
+              </div>
+              <!-- Contact details tab content ends -->
+
+
+              <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
+                <!-- Documents tab content starts -->
+                <table role="table" id="documentsTable" class="nhsuk-table-responsive">
+                  <h3 class="nhsuk-heading-l">Documents<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+                
+                  <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+                      <th role="columnheader" class="" scope="col">
+                        Document title
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Date uploaded
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Uploaded by
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Current status
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Document type
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                
+                  <tbody class="nhsuk-table__body">
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Document title</span>
+                        <span>john-doe-FAS1Q.pdf</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date uploaded</span>
+                        <span>15/08/2024</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Uploaded by</span>
+                        <span>Dave Smith</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Current status</span>
+                        <span>Received</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Document type</span>
+                        <span>FAS1Q</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Actions</span>
+                        <a href="">View</a> or 
+                        <a href="/version-28/s1/account/remove-personal-details-document">remove</span></a>
+                      </td>
+                    </tr>   
+                  </tbody>
+                </table>
+                
+                <button class="nhsuk-button nhsuk-u-margin-top-5" data-module="nhsuk-button" type="submit">
+                  Add a new document
+                </button>
+              </div>
+              <!-- Documents tab content ends -->
+
+
+              <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">
+                <!-- Notes tab content starts -->
+                <h3 class="nhsuk-heading-l">Notes</h3>
+
+              <div class="nhsuk-form-group" id="filterNotes-group">
+                <label class="nhsuk-label" for="filter-notes">
+                Filter notes
+                </label>
+                <div id="filterNotes-container"></div>
+                <input class="nhsuk-input" id="example" name="filter-notes" type="text" value="">
+              </div>
+
+              <a href="#">
+                <button class="nhsuk-button nhsuk-button--secondary nhsuk-u-margin-right-4" data-module="nhsuk-button" type="submit" value="Search" id="searchButton">Apply filter </button>
+              <a class="nhsuk-button" style="float: right;" href="/version-28/s1/account/personal-details-note" data-module="nhsuk-button" type="submit" id="addNote-button">Add a new note</a>
+              <p><a href="/version-28/s1/account/patient-details#tab-Notes" id="clearButton">Reset filter</a></p>
+
+              <hr>
+
+              {% if data['new-note'] == 'yes' %}
+              <h3>New note title</h3>
+              <p>Added by <b>Joe Bloggs</b><br>
+              <span id="currentDate1"></span></p>
+              <p>{{ data['note'] }}</p>
+              <hr>
+              {% endif %}
+              
+              <h3>Example note title</h3>
+              <p>Added by <b>Dave Smith</b><br>
+              16/08/2024 at 15:13</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </div>
+              <!-- Notes tab content ends -->
+
+            </div>
+            <!-- End of Tabs -->
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a href="patient-summary">Overview</a></li>
+          <li><a class="active" href="patient-details">Personal details</a></li>
+          <li><a href="entitlement-details">Entitlements and enquiries</a></li>
+          <li><a href="resubmissions">Resubmissions</a></li>
+          <li><a href="case-history">Case history</a></li>
+          <li><a href="documents">Documents</a></li>
+          <li><a href="notes">Notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
 
   </div>
-</div>     
-   
+</div>
+<!-- End of main content -->
+      
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".nhsuk-tabs__tab");
+    const panels = document.querySelectorAll(".nhsuk-tabs__panel");
+
+    function hideAllPanels() {
+      panels.forEach(panel => panel.classList.add("nhsuk-tabs__panel--hidden"));
+      tabs.forEach(tab => tab.parentElement.classList.remove("nhsuk-tabs__list-item--selected"));
+    }
+
+    function showPanel(panelId) {
+      const panel = document.querySelector(panelId);
+      if (panel) {
+        panel.classList.remove("nhsuk-tabs__panel--hidden");
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", function (event) {
+        event.preventDefault();
+        hideAllPanels();
+        tab.parentElement.classList.add("nhsuk-tabs__list-item--selected");
+        showPanel(tab.getAttribute("href"));
+      });
+    });
+
+    // Initially show the Personal details tab
+    hideAllPanels();
+    showPanel("#personal-details");
+    document.querySelector('a[href="#personal-details"]').parentElement.classList.add("nhsuk-tabs__list-item--selected");
+  });
 
 
+ // Current Date and Time
+
+  // JavaScript code
+  var currentDateElement = document.getElementById("currentDate1");
+
+  // Get the current date
+  var currentDate = new Date();
+
+  // Format the date as desired
+  var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+  var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+
+  // Format the time as desired
+  var timeOptions = { hour: 'numeric', minute: 'numeric', hour24: true };
+  var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+
+  // Combine date and time
+  var formattedDateTime = formattedDate + ' at ' + formattedTime;
+
+  // Set the formatted date and time as the content of the element
+  currentDateElement.textContent = formattedDateTime;
+</script>
 {% endblock %}

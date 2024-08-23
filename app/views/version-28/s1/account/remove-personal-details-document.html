@@ -1,0 +1,192 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Remove document - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="remove-personal-details-document" method="post">
+
+                                <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person ID - 123456</p>
+                  
+                                <div class="nhsuk-form-group">
+                                  <label class="nhsuk-label" for="nhsbsa-comments">
+                                    <h1 class="nhsuk-heading-xl">Are you sure you want to remove this document?</h1>
+                                  </label>
+
+                                  <dl class="nhsuk-summary-list">
+
+                                    <div class="nhsuk-summary-list__row">
+                                      <dt class="nhsuk-summary-list__key">
+                                        Document title
+                                      </dt>
+                                      <dd class="nhsuk-summary-list__value">
+                                        john-doe-FAS1Q.pdf
+                                      </dd>
+                                    </div>
+                                  
+                                    <div class="nhsuk-summary-list__row">
+                                      <dt class="nhsuk-summary-list__key">
+                                        Date uploaded
+                                      </dt>
+                                      <dd class="nhsuk-summary-list__value">
+                                        15 August 2024
+                                      </dd>
+                                    </div>
+                                  
+                                    <div class="nhsuk-summary-list__row">
+                                      <dt class="nhsuk-summary-list__key">
+                                        Uploaded by
+                                      </dt>
+                                      <dd class="nhsuk-summary-list__value">
+                                        Dave Smith
+                                      </dd>
+                                    </div>
+                                  
+                                    <div class="nhsuk-summary-list__row">
+                                      <dt class="nhsuk-summary-list__key">
+                                        Current status
+                                      </dt>
+                                      <dd class="nhsuk-summary-list__value">
+                                        Received
+                                      </dd>
+                                    </div>
+
+                                    <div class="nhsuk-summary-list__row">
+                                      <dt class="nhsuk-summary-list__key">
+                                        Document type
+                                      </dt>
+                                      <dd class="nhsuk-summary-list__value">
+                                        FAS1Q
+                                      </dd>
+                                    </div>
+                                  </dl>       
+                                  
+                                  <div class="nhsuk-inset-text">
+                                    <span class="nhsuk-u-visually-hidden">Information: </span>
+                                    <p>By removing this document, you will be removing all of the attached details.</p>
+                                  </div>
+
+                                  <div class="nhsuk-radios">
+                                    <div class="nhsuk-radios__item">
+                                      <input class="nhsuk-radios__input" id="remove-personal-details-document-yes" name="remove-personal-details-document" type="radio" value="yes">
+                                      <label class="nhsuk-label nhsuk-radios__label" for="remove-personal-details-document-yes">
+                                        Yes
+                                      </label>
+                                    </div>
+                    
+                                    <div class="nhsuk-radios__item">
+                                      <input class="nhsuk-radios__input" id="remove-personal-details-document-no" name="remove-personal-details-document" type="radio" value="no">
+                                      <label class="nhsuk-label nhsuk-radios__label" for="remove-personal-details-document-no">
+                                        No
+                                      </label>
+                                    </div>
+                    
+                                  </div>
+                                </div>
+      
+                                    <button class="nhsuk-button" style="margin-top: 15px;"  type="submit">
+                                        Save and continue
+                                    </button>
+
+                                    <p><a href="patient-details">Cancel</a></p>
+
+                                  </div>
+                                </div>
+
+                            </form>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+<script>
+  const textarea = document.querySelector('#personalDetailsComment');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 500;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 500);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
+
+{% endblock %}

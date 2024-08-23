@@ -46,6 +46,8 @@ router.use('/version-26/pb7/v4', require('./views/version-26/_routes'));
 router.use('/version-26/pb7/v5', require('./views/version-26/_routes'));
 router.use('/version-27/s1', require('./views/version-27/s1/_routes'));
 router.use('/version-27/ovm', require('./views/version-27/ovm/_routes'));
+router.use('/version-28/s1', require('./views/version-28/s1/_routes'));
+router.use('/version-28/ovm', require('./views/version-28/ovm/_routes'));
 
 module.exports = router;
 

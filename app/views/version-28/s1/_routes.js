@@ -16,33 +16,35 @@ router.post([/search-results-none/], function(req, res){
 })
 
 
-// Select entitlement or enquiry  
-router.post([/choose-option/], function(req, res){
-  res.redirect('choose-entitlement');
+
+// Select source
+router.post([/which-entitlement/], function(req, res){
+  res.redirect('which-source');
 })
+
 // Select entitlement 
-router.post([/choose-entitlement/], function(req, res){
-  res.redirect('create-person');
-})
-// // Select entitlement 
-// router.post([/select-source/], function(req, res){
-//   res.redirect('create-person');
-// })
-// Select entitlement 
-router.post([/create-person/], function(req, res){
-  res.redirect('address-lookup');
-})
-// Address lookup 
-router.post([/address-lookup/], function(req, res){
-  res.redirect('address-confirm');
-})
-// Manual address lookup 
-router.post([/address-manual/,/address-confirm/], function(req, res){
+router.post([/which-source/], function(req, res){
   res.redirect('entitlement-details');
 })
-// Entitlement details 
+
+// Institute details 
 router.post([/entitlement-details/], function(req, res){
   res.redirect('institute-details');
+})
+
+// Institution search results (to show functionality)
+router.post([/institute-details/], function(req, res){
+  res.redirect('institution-search-results');
+})
+
+// Check your answers - Adding an entitlement
+router.post([/institution-search-results/], function(req, res){
+  res.redirect('new-s1-s073-entitlement-cya');
+})
+
+// Confirmation - S1/S072 entitlement added to person record
+router.post([/new-s1-s072-entitlement-cya/], function(req, res){
+  res.redirect('confirmation-s1-s072-added');
 })
 
 
@@ -217,6 +219,52 @@ router.post([/cancel-s1/], function(req, res){
 })
 
 
+// Remove document from Personal Details section
+router.post([/remove-personal-details-document/], function(req, res){
+
+  const removeDocument = req.session.data['remove-document']
+
+  if (removeDocument === 'yes') {
+      res.redirect('/version-28/s1/account/patient-details#tab-Documents')
+  } else {
+      res.redirect('/version-28/s1/account/patient-details#tab-Documents')
+  }
+
+
+})
+
+// Remove document from Entitlements section
+router.post([/remove-entitlements-document/], function(req, res){
+
+  const removeDocument = req.session.data['remove-document']
+
+  if (removeDocument === 'yes') {
+      res.redirect('/version-28/s1/account/entitlements-details#tab-Documents')
+  } else {
+      res.redirect('/version-28/s1/account/entitlements-details#tab-Documents')
+  }
+
+
+})
+
+
+// Add note to personal details
+router.post([/personal-details-note/], function(req, res){
+
+  req.session.data['new-note'] = 'yes'
+
+  res.redirect('/version-28/s1/account/patient-details#tab-Notes');
+
+})
+
+// Add note to entitlements section
+router.post([/entitlements-note/], function(req, res){
+
+  req.session.data['new-note'] = 'yes'
+
+  res.redirect('/version-28/s1/account/entitlement-details#tab-notes');
+
+})
 
 // Communication module for OVMs to resubs
 

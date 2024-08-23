@@ -1,217 +1,201 @@
-{% extends 'layouts/_patient-record-template.html' %}
-{% set title %}Person summary{% endset %}
-{% set patientSummary = 'true' %}
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
 
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} Person details page {% endblock %}
 
-{% block form %}
-           
-   
-   
-<div class="nhsuk-card">
-  <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
-    <!--Start of card header-->
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
     <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-two-thirds">
-        <!-- <h3 class="nhsuk-heading-l">
-          Patient details
-        </h3> -->
-
-      </div>
-      <div class="nhsuk-grid-column-one-third">
-
-        <span class="" style="float:right">
-   
-        </span>
-
-      </div>
       <div class="nhsuk-grid-column-full">
-
-
-        {{ summaryList({
-          rows: [
-            {
-              key: {
-                text: "Name"
-              },
-              value: {
-                text: "Juan Sanchez"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: " ",
-                    visuallyHiddenText: "name"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Date of birth"
-              },
-              value: {
-                text: "15 March 1984"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: " ",
-                    visuallyHiddenText: "date of birth"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Address"
-              },
-              value: {
-                html: "1 Washington Street<br>
-                Worcester<br>
-                WR1 1NL<br>
-                United Kingdom"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: " ",
-                    visuallyHiddenText: "contact information"
-                  }
-                ]
-              }
-            } 
-          ]
-        }) }}
-        <p><a href="patient-details">View person details</a></p>
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/patient-search">Search</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../account/patient-summary">Overview</a>
+          </li>
+        </ol>
       </div>
-
     </div>
 
-
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
   </div>
-</div>     
-   
+</nav>
+{% endblock %}
 
-<div class="nhsuk-card">
-  <div class="nhsuk-card__content nhsuk-u-padding-bottom-1">
-    <!--Start of card header-->
-    <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-two-thirds">
-        <h3 class="nhsuk-heading-l">
-           Entitlements
-        </h3>
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+      
+          
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Person overview</h1>
+            </div>
+          </div>
+            
 
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content nhsuk-u-padding-bottom-5">
+                    <h3 class="nhsuk-heading-l">Personal details</h3>
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Person ID</dt>
+                        <dd class="nhsuk-summary-list__value">123456</dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Full name</dt>
+                        <dd class="nhsuk-summary-list__value">John Doe</dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Date of birth</dt>
+                        <dd class="nhsuk-summary-list__value">4 January 1973</dd>
+                      </div>
+                    </dl>
+                    <p><a href="patient-details">View all personal details</a></p>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+              <!-- Entitlements -->
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-full">
+                  <div class="nhsuk-card">
+                      <div class="nhsuk-card__content nhsuk-u-padding-bottom-5">
+                          <h3 class="nhsuk-heading-l">Entitlements</h3>
+                          <table role="table" class="nhsuk-table-responsive">
+                              <thead role="rowgroup" class="nhsuk-table__head">
+                                  <tr role="row">
+                                      <th role="columnheader" scope="col">Entitlement type</th>
+                                      <th role="columnheader" scope="col">Date issued</th>
+                                      <th role="columnheader" scope="col">Start date</th>
+                                      <th role="columnheader" scope="col">End date (optional)</th>
+                                      <th role="columnheader" scope="col">Main or dependant</th>
+                                      <th role="columnheader" scope="col">Registration country</th>
+                                      <th role="columnheader" scope="col">Status</th>
+                                  </tr>
+                              </thead>
+                              <tbody class="nhsuk-table__body">
+                                  <tr role="row">
+                                      <td role="cell" class="nhsuk-table__cell" id="entitlement-type">S1</td>
+                                      <td role="cell" class="nhsuk-table__cell" id="date-issued">01/01/2024</td>
+                                      <td role="cell" class="nhsuk-table__cell" id="start-date">07/01/2024</td>
+                                      <td role="cell" class="nhsuk-table__cell" id="end-date"><span class="nhsuk-u-visually-hidden">Not provided</span></td>
+                                      <td role="cell" class="nhsuk-table__cell" id="main-or-dependant">Main</td>
+                                      <td role="cell" class="nhsuk-table__cell" id="registration-country">France</td>
+                                      <td role="cell" class="nhsuk-table__cell" id="status">
+                                        {%- if data['cancelS1'] == 'true' -%}
+                                        <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
+                                        {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' -%}
+                                        <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
+                                        {%- elif data['dl1609Complete'] == 'true' -%}
+                                        <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
+                                        {%- else -%}
+                                        <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
+                                      {%- endif -%}</td>
+                                  </tr>
+
+                                  <tr role="row">
+                                    <td role="cell" class="nhsuk-table__cell" id="entitlement-type">EHIC</td>
+                                    <td role="cell" class="nhsuk-table__cell" id="date-issued">18/03/2023</td>
+                                    <td role="cell" class="nhsuk-table__cell" id="start-date">18/03/2023</td>
+                                    <td role="cell" class="nhsuk-table__cell" id="end-date"><span class="nhsuk-u-visually-hidden">Not provided</span></td>
+                                    <td role="cell" class="nhsuk-table__cell" id="main-or-dependant">Main</td>
+                                    <td role="cell" class="nhsuk-table__cell" id="registration-country">France</td>
+                                    <td role="cell" class="nhsuk-table__cell" id="status">
+                                      {%- if data['cancelS1'] == 'true' -%}
+                                      <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
+                                      {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' -%}
+                                      <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
+                                      {%- elif data['dl1609Complete'] == 'true' -%}
+                                      <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
+                                      {%- else -%}
+                                      <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
+                                    {%- endif -%}
+                                    </td>
+                                </tr>
+                                  <!-- More rows as needed -->
+                              </tbody>
+                          </table>
+                          <br>
+                          <p><a href="entitlement-details">View all entitlements</a></p>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+               <!-- Resubmissions and Case history side by side -->
+                <div class="nhsuk-grid-row">
+                  <div class="nhsuk-grid-column-one-half">
+                      <!-- Resubmissions -->
+                      <div class="nhsuk-card">
+                          <div class="nhsuk-card__content nhsuk-u-padding-bottom-5">
+                              <h3 class="nhsuk-heading-l">Resubmissions</h3>
+                              <!-- Add Resubmissions content here -->
+                              <p><a href="patient-details">View all resubmissions</a></p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="nhsuk-grid-column-one-half">
+                      <!-- Case history -->
+                      <div class="nhsuk-card">
+                          <div class="nhsuk-card__content nhsuk-u-padding-bottom-5">
+                              <h3 class="nhsuk-heading-l">Case history</h3>
+                              <!-- Add Case history content here -->
+                              <p><a href="patient-details">View all case history</a></p>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- End Main content -->
+
+
+          </div>
       </div>
-
-      <div class="nhsuk-grid-column-full">
-
-
-        <table role="table" class="nhsuk-table-responsive">
-  <thead role="rowgroup" class="nhsuk-table__head">
-    <tr role="row">
-      <th role="columnheader" class="" scope="col">
-        Entitlement
-      </th>
-      <th role="columnheader" class="" scope="col">
-        Start date
-      </th>
-      <th role="columnheader" class="" scope="col">
-        End date
-      </th>
-      <th role="columnheader" class="" scope="col">
-        Status
-      </th>
-      <th role="columnheader" class="" scope="col">
-        
-      </th>
-    </tr>
-  </thead>
-  <tbody class="nhsuk-table__body">
-    <tr role="row" class="nhsuk-table__row">
-      <td role="cell" class="nhsuk-table__cell">
-        S1
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        4 June 2024
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-
-        {%- if data['cancelS1'] == 'true' -%}
-        <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
-        {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' -%}
-        <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
-        {%- elif data['dl1609Complete'] == 'true' -%}
-        <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
-        {%- else -%}
-        <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
-
-       {%- endif -%}
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        <a href="s1-entitlement">
-          View details</span>
-        </a>
-    </tr> 
-    <tr role="row" class="nhsuk-table__row">
-      <td role="cell" class="nhsuk-table__cell">
-        EHIC
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        31/01/2024
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        31/01/2026
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        <strong class="nhsuk-tag nhsuk-tag--green">
-          Registered
-        </strong>
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        <a href="#">
-          View details</span>
-        </a>
-    </tr>
-    <!-- <tr role="row" class="nhsuk-table__row">
-      <td role="cell" class="nhsuk-table__cell">
-        PRC
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        31/01/2023
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        01/03/2024
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        <strong class="nhsuk-tag nhsuk-tag--red">
-          Cancelled
-        </strong>
-      </td>
-      <td role="cell" class="nhsuk-table__cell">
-        <a href="#">
-          View details</span>
-        </a>
-      </td>
-    </tr> -->
-
-  </tbody>
-</table>
-<br>
-<p><a href="entitlement-details">View all entitlements</a></p>
-
-      </div>
-
     </div>
 
-   
+       <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a class="active" href="patient-summary">Overview</a></li>
+          <li><a href="patient-details">Personal details</a></li>
+          <li><a href="entitlement-details">Entitlements and enquiries</a></li>
+          <li><a href="resubmissions">Resubmissions</a></li>
+          <li><a href="case-history">Case history</a></li>
+          <li><a href="documents">Documents</a></li>
+          <li><a href="notes">Notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
 
   </div>
 </div>
+<!-- End of main content -->
 {% endblock %}
