@@ -7,15 +7,41 @@ router.use(bodyParser.json()); // to support JSON bodies
 router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 
 
-// Register s1  // 
+// Search for a person & create a new person record // 
 
+// Enter person's name and DOB
+router.post([/create-person-record/], function(req, res){
+  res.redirect('address-lookup');
+})
 
-// Create new patient record 
-router.post([/search-results-none/], function(req, res){
-      res.redirect('../s072-registration/choose-option');
+// Lookup person's address
+router.post([/address-lookup/], function(req, res){
+  res.redirect('address-confirm');
+})
+
+// Enter the person's address manually
+router.post([/address-manual/], function(req, res){
+  res.redirect('resident-since');
+})
+
+// Confirm the person's address
+router.post([/address-confirm/], function(req, res){
+  res.redirect('resident-since');
+})
+
+// Enter how long the person has been resident in given country
+router.post([/resident-since/], function(req, res){
+  res.redirect('create-person-record-cya');
+})
+
+// Check your answers
+router.post([/create-person-record-cya/], function(req, res){
+      res.redirect('confirmation-person-record-created');
 })
 
 
+
+// Add a new entitlement to a person's record //
 
 // Select source
 router.post([/which-entitlement/], function(req, res){
@@ -110,16 +136,6 @@ router.post([/dependant-check-answers/], function(req, res){
   }
 })
 
-
-// Check your answers 
-router.post([/check-your-answers/], function(req, res){
-  res.redirect('confirmation');
-})
-
-// so72 confirmation 
-router.post([/confirmation/], function(req, res){
-  res.redirect('../account/s1-entitlement');
-})
 
 
 // Tasklist - After s072 registration

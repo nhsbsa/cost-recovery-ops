@@ -36,8 +36,15 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
 
                         <body class="nhsuk-caption-xl">
                           <span id="person-record-created-name">Name:</span>
-                          <h1 class="nhsuk-heading-l">John Doe</h1>
+                          <h1 class="nhsuk-heading-l">
+                            {% if data['first-name'] and data['last-name'] %}
+                              {{ data['first-name'] }} {{ data['last-name'] }}
+                            {% else %}
+                              John Doe
+                            {% endif %}
+                          </h1>
                         </body>
+                        
 
                         <body class="nhsuk-caption-xl">
                           <span id="person-record-created-name">ID number:</span>
@@ -58,7 +65,7 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                           </button>
                         </form>
             
-                        <form action="../../s1/s072/which-entitlement">
+                        <form action="../../s1/s072-registration/which-entitlement">
                           <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
                             Add an entitlement
                           </button>
@@ -70,7 +77,7 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                     
 
                   </div>
-
+                
                 </div>
             </div>
         </div>
