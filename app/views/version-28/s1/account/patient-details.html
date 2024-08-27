@@ -66,9 +66,6 @@
               <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
                 <a class="nhsuk-tabs__tab" href="#personal-details">Personal details</a>
               </li>
-              <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
-                <a class="nhsuk-tabs__tab" href="#additional-personal-details">Additional personal details</a>
-              </li>
               <li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#addresses">Addresses</a>
               </li>
@@ -99,10 +96,19 @@
                   
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        First name
+                        First names
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         John
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        First names at birth
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
                       </dd>
                     </div>
                   
@@ -114,6 +120,15 @@
                         Doe
                       </dd>
                     </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Last name at birth
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                      </dd>
+                    </div>
               
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
@@ -123,54 +138,28 @@
                         4 January 1973
                       </dd>
                     </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Sex
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Nationality
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                      </dd>
+                    </div>
                   </dl>
-                  <p><a href="">Change personal details</a></p>
+                  <p><a href="update-personal-details">Update personal details</a></p>
                 </div>
                 <!-- Personal details tabs content ends -->
-
-              <div class="nhsuk-tabs__panel" id="additional-personal-details">
-                <!-- Additional personal details tab content starts -->
-                <h3 class="nhsuk-heading-l">Additional personal details</h3>
-                  <dl class="nhsuk-summary-list">
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          First name at birth (optional)
-                        </dt>
-                        <dd class="nhsuk-summary-list__value">
-                          Not provided
-                        </dd>
-                      </div>
-                
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          Last name at birth (optional)
-                        </dt>
-                        <dd class="nhsuk-summary-list__value">
-                          Not provided
-                        </dd>
-                      </div>
-                
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          Gender
-                        </dt>
-                        <dd class="nhsuk-summary-list__value">
-                          Male
-                        </dd>
-                      </div>
-                
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          Nationality (optional)
-                        </dt>
-                        <dd class="nhsuk-summary-list__value">
-                          French
-                        </dd>
-                      </div>
-                    </dl>
-                    <p><a href="">Change additional personal details</a></p>
-                  </div>
-                  <!-- Additional personal details tabs content ends -->
 
 
               <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="addresses">
@@ -184,18 +173,18 @@
                       Home address<br>
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                          {% if data['address-building-name'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-postcode'] or data['address-country'] %}
-                          {% if data['address-building-name'] %}
-                            {{ data['address-building-name'] }}<br>
+                          {% if data['address-line-1'] or data['address-line-2'] or data['address-town'] or data['address-region'] or data['address-postcode'] or data['address-country'] %}
+                          {% if data['address-line-1'] %}
+                            {{ data['address-line-1'] }}<br>
                           {% endif %}
                           {% if data['address-line-2'] %}
                             {{ data['address-line-2'] }}<br>
                           {% endif %}
-                          {% if data['address-line-3'] %}
-                            {{ data['address-line-3'] }}<br>
-                          {% endif %}
                           {% if data['address-town'] %}
                             {{ data['address-town'] }}<br>
+                          {% endif %}
+                          {% if data['address-region'] %}
+                            {{ data['address-region'] }}<br>
                           {% endif %}
                           {% if data['address-postcode'] %}
                             {{ data['address-postcode'] }}<br>
@@ -241,7 +230,7 @@
                       Previous address
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      Building name or number, TS1 1ET
+                      Address line 1, Postcode
                       <details class="nhsuk-details">
                         <summary class="nhsuk-details__summary">
                           <span class="nhsuk-details__summary-text">
@@ -249,9 +238,8 @@
                           </span>
                         </summary>
                         <div class="nhsuk-details__text">
-                          Building name or number<br>
+                          Address line 1<br>
                           Address line 2<br>
-                          Address line 3<br>
                           Town or city<br>
                           TS1 1ET<br>
                           Country

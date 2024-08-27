@@ -66,7 +66,7 @@ Look for an address - Create a new person record - Manage overseas entitlements 
 
 
                           <div class="nhsuk-summary-list__row">
-                            <dt class="nhsuk-summary-list__key">First name</dt>
+                            <dt class="nhsuk-summary-list__key">First names</dt>
                             <dd class="nhsuk-summary-list__value">
                               {% if data['first-name'] %}
                                 {{ data['first-name'] }}
@@ -178,11 +178,6 @@ Look for an address - Create a new person record - Manage overseas entitlements 
 
                         </dl>
 
-                          
-
-       
-
-                          
 
                           <h2 class="nhsuk-heading-m">Address details</h2>
 
@@ -190,18 +185,18 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                             <div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">Address</dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['address-building-name'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-postcode'] or data['address-country'] %}
-                                  {% if data['address-building-name'] %}
-                                    {{ data['address-building-name'] }}<br>
+                                {% if data['address-line-1'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-region'] or data['address-postcode'] or data['address-country'] %}
+                                  {% if data['address-line-1'] %}
+                                    {{ data['address-line-1'] }}<br>
                                   {% endif %}
                                   {% if data['address-line-2'] %}
                                     {{ data['address-line-2'] }}<br>
                                   {% endif %}
-                                  {% if data['address-line-3'] %}
-                                    {{ data['address-line-3'] }}<br>
-                                  {% endif %}
                                   {% if data['address-town'] %}
                                     {{ data['address-town'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-region'] %}
+                                    {{ data['address-region'] }}<br>
                                   {% endif %}
                                   {% if data['address-postcode'] %}
                                     {{ data['address-postcode'] }}<br>
@@ -223,21 +218,35 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                             </div>
                           
 
-                          <div class="nhsuk-summary-list__row">
-                            <dt class="nhsuk-summary-list__key">Resident in country since (optional)</dt>
-                            <dd class="nhsuk-summary-list__value">
-                                {% if data['residency-day'] and data['residency-month'] and data['residency-year'] %}
-                                    {{ data['residency-day'] }} {{ data['residency-month'] }} {{ data['residency-year'] }}
-                                {% else %}
-                                    2 July 2024
-                                {% endif %}
-                            </dd>
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">Resident in country since (optional)</dt>
+                              <dd class="nhsuk-summary-list__value" id="formatted-date">
+                                  {% if data['residency-day'] and data['residency-month'] and data['residency-year'] %}
+                                      {% set day = data['residency-day'] %}
+                                      {% set month = data['residency-month'] | int %}
+                                      {% set year = data['residency-year'] %}
                           
-                            <dd class="nhsuk-summary-list__actions">
-                              <a href="create-person-record#residency-day"> Change<span class="nhsuk-u-visually-hidden">resident in country since</span> </a>
-                            </dd>
-                          </div>
-                        </dl>
+                                      {# Define month names #}
+                                      {% set month_names = [
+                                          "January", "February", "March", "April", "May", "June",
+                                          "July", "August", "September", "October", "November", "December"
+                                      ] %}
+                          
+                                      {# Get the month name #}
+                                      {% set month_name = month_names[month - 1] %}
+                          
+                                      {# Display the date in the format "day month year" #}
+                                      {{ day | int }} {{ month_name }} {{ year }}
+                                  {% else %}
+                                      2 July 2024
+                                  {% endif %}
+                              </dd>
+                          
+                              <dd class="nhsuk-summary-list__actions">
+                                  <a href="create-person-record#residency-day">Change<span class="nhsuk-u-visually-hidden">resident in country since</span></a>
+                              </dd>
+                          </div>                          
+                          </dl>                          
       
                           <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
                             Save and continue
@@ -254,4 +263,30 @@ Look for an address - Create a new person record - Manage overseas entitlements 
     </div>
   </div>
 </div>
+
 {% endblock %}
+
+{% block pageScripts %}
+<script>
+  function formatDate(day, month, year) {
+    // Add one month to the current month
+    let newMonth = parseInt(month) + 1;
+    let newYear = parseInt(year);
+
+    // Check if the new month exceeds 12 (December)
+    if (newMonth > 12) {
+        newMonth = 1; // Reset to January
+        newYear += 1; // Increment the year
+    }
+
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthName = months[newMonth - 1]; // Get the new month name
+    return `${parseInt(day)} ${monthName} ${newYear}`;
+}
+</script>
+{% endblock %}
+

@@ -9,28 +9,8 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 
 // Search for a person & create a new person record // 
 
-// Enter person's name and DOB
+// Enter person's name, DOB and address
 router.post([/create-person-record/], function(req, res){
-  res.redirect('address-lookup');
-})
-
-// Lookup person's address
-router.post([/address-lookup/], function(req, res){
-  res.redirect('address-confirm');
-})
-
-// Enter the person's address manually
-router.post([/address-manual/], function(req, res){
-  res.redirect('resident-since');
-})
-
-// Confirm the person's address
-router.post([/address-confirm/], function(req, res){
-  res.redirect('resident-since');
-})
-
-// Enter how long the person has been resident in given country
-router.post([/resident-since/], function(req, res){
   res.redirect('create-person-record-cya');
 })
 
@@ -39,6 +19,13 @@ router.post([/create-person-record-cya/], function(req, res){
       res.redirect('confirmation-person-record-created');
 })
 
+
+// Personal details tabs //
+
+// Check your answers
+router.post([/update-personal-details/], function(req, res){
+  res.redirect('patient-details');
+})
 
 
 // Add a new entitlement to a person's record //
