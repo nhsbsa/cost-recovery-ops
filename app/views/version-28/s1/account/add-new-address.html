@@ -1,0 +1,378 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Add new address - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <h1 class="app-page-heading">
+                        Add a new address
+                    </h1>
+
+                    
+                    <form action="add-new-address" method="post">
+
+                      
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-address-line-1-label">
+                          Address line 1
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-address-line-1" name="new-address-line-1" type="text"  autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-address-line-2-label">
+                          Address line 2 (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-address-line-2" name="new-address-line-2" type="text"  autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-address-town-label">
+                          Town or city
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-address-town" name="new-address-town" type="text" autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-address-region-label">
+                          County, province or region (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-address-region" name="new-address-region" type="text" autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-address-postcode-label">
+                          Postcode (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-input--width-10" id="new-address-postcode" name="new-address-postcode" type="text"  autocomplete="cc-csc">
+                      </div>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" id="new-address-country-label" for="new-address-country">
+                            Country
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" list="countries" id="new-address-country" name="new-address-country">
+                        <datalist id="countries">
+                          <option id="afghanistan" value="Afghanistan">
+                          <option id="albania" value="Albania">
+                          <option id="algeria" value="Algeria">
+                          <option id="andorra" value="Andorra">
+                          <option id="angola" value="Angola">
+                          <option id="antigua-barbuda" value="Antigua and Barbuda">
+                          <option id="argentina" value="Argentina">
+                          <option id="armenia" value="Armenia">
+                          <option id="australia" value="Australia">
+                          <option id="austria" value="Austria">
+                          <option id="azerbaijan" value="Azerbaijan">
+                          <option id="bahamas" value="Bahamas">
+                          <option id="bahrain" value="Bahrain">
+                          <option id="bangladesh" value="Bangladesh">
+                          <option id="barbados" value="Barbados">
+                          <option id="belarus" value="Belarus">
+                          <option id="belgium" value="Belgium">
+                          <option id="belize" value="Belize">
+                          <option id="benin" value="Benin">
+                          <option id="bhutan" value="Bhutan">
+                          <option id="bolivia" value="Bolivia">
+                          <option id="bosnia-herzegovina" value="Bosnia and Herzegovina">
+                          <option id="botswana" value="Botswana">
+                          <option id="brazil" value="Brazil">
+                          <option id="brunei" value="Brunei">
+                          <option id="bulgaria" value="Bulgaria">
+                          <option id="burkina-faso" value="Burkina Faso">
+                          <option id="burundi" value="Burundi">
+                          <option id="cabo-verde" value="Cabo Verde">
+                          <option id="cambodia" value="Cambodia">
+                          <option id="cameroon" value="Cameroon">
+                          <option id="canada" value="Canada">
+                          <option id="central-african-republic" value="Central African Republic">
+                          <option id="chad" value="Chad">
+                          <option id="chile" value="Chile">
+                          <option id="china" value="China">
+                          <option id="colombia" value="Colombia">
+                          <option id="comoros" value="Comoros">
+                          <option id="congo" value="Congo (Congo-Brazzaville)">
+                          <option id="costa-rica" value="Costa Rica">
+                          <option id="croatia" value="Croatia">
+                          <option id="cuba" value="Cuba">
+                          <option id="cyprus" value="Cyprus">
+                          <option id="czech-republic" value="Czech Republic">
+                          <option id="democratic-republic-of-the-congo" value="Democratic Republic of the Congo">
+                          <option id="denmark" value="Denmark">
+                          <option id="djibouti" value="Djibouti">
+                          <option id="dominica" value="Dominica">
+                          <option id="dominican-republic" value="Dominican Republic">
+                          <option id="ecuador" value="Ecuador">
+                          <option id="egypt" value="Egypt">
+                          <option id="el-salvador" value="El Salvador">
+                          <option id="equatorial-guinea" value="Equatorial Guinea">
+                          <option id="eritrea" value="Eritrea">
+                          <option id="estonia" value="Estonia">
+                          <option id="eswatini" value="Eswatini">
+                          <option id="ethiopia" value="Ethiopia">
+                          <option id="fiji" value="Fiji">
+                          <option id="finland" value="Finland">
+                          <option id="france" value="France">
+                          <option id="gabon" value="Gabon">
+                          <option id="gambia" value="Gambia">
+                          <option id="georgia" value="Georgia">
+                          <option id="germany" value="Germany">
+                          <option id="ghana" value="Ghana">
+                          <option id="greece" value="Greece">
+                          <option id="grenada" value="Grenada">
+                          <option id="guatemala" value="Guatemala">
+                          <option id="guinea" value="Guinea">
+                          <option id="guinea-bissau" value="Guinea-Bissau">
+                          <option id="guyana" value="Guyana">
+                          <option id="haiti" value="Haiti">
+                          <option id="honduras" value="Honduras">
+                          <option id="hungary" value="Hungary">
+                          <option id="iceland" value="Iceland">
+                          <option id="india" value="India">
+                          <option id="indonesia" value="Indonesia">
+                          <option id="iran" value="Iran">
+                          <option id="iraq" value="Iraq">
+                          <option id="ireland" value="Ireland">
+                          <option id="israel" value="Israel">
+                          <option id="italy" value="Italy">
+                          <option id="jamaica" value="Jamaica">
+                          <option id="japan" value="Japan">
+                          <option id="jordan" value="Jordan">
+                          <option id="kazakhstan" value="Kazakhstan">
+                          <option id="kenya" value="Kenya">
+                          <option id="kiribati" value="Kiribati">
+                          <option id="kuwait" value="Kuwait">
+                          <option id="kyrgyzstan" value="Kyrgyzstan">
+                          <option id="laos" value="Laos">
+                          <option id="latvia" value="Latvia">
+                          <option id="lebanon" value="Lebanon">
+                          <option id="lesotho" value="Lesotho">
+                          <option id="liberia" value="Liberia">
+                          <option id="libya" value="Libya">
+                          <option id="liechtenstein" value="Liechtenstein">
+                          <option id="lithuania" value="Lithuania">
+                          <option id="luxembourg" value="Luxembourg">
+                          <option id="madagascar" value="Madagascar">
+                          <option id="malawi" value="Malawi">
+                          <option id="malaysia" value="Malaysia">
+                          <option id="maldives" value="Maldives">
+                          <option id="mali" value="Mali">
+                          <option id="malta" value="Malta">
+                          <option id="marshall-islands" value="Marshall Islands">
+                          <option id="mauritania" value="Mauritania">
+                          <option id="mauritius" value="Mauritius">
+                          <option id="mexico" value="Mexico">
+                          <option id="micronesia" value="Micronesia">
+                          <option id="moldova" value="Moldova">
+                          <option id="monaco" value="Monaco">
+                          <option id="mongolia" value="Mongolia">
+                          <option id="montenegro" value="Montenegro">
+                          <option id="morocco" value="Morocco">
+                          <option id="mozambique" value="Mozambique">
+                          <option id="myanmar" value="Myanmar (formerly Burma)">
+                          <option id="namibia" value="Namibia">
+                          <option id="nauru" value="Nauru">
+                          <option id="nepal" value="Nepal">
+                          <option id="netherlands" value="Netherlands">
+                          <option id="new-zealand" value="New Zealand">
+                          <option id="nicaragua" value="Nicaragua">
+                          <option id="niger" value="Niger">
+                          <option id="nigeria" value="Nigeria">
+                          <option id="north-korea" value="North Korea">
+                          <option id="north-macedonia" value="North Macedonia (formerly Macedonia)">
+                          <option id="norway" value="Norway">
+                          <option id="oman" value="Oman">
+                          <option id="pakistan" value="Pakistan">
+                          <option id="palau" value="Palau">
+                          <option id="palestine" value="Palestine State">
+                          <option id="panama" value="Panama">
+                          <option id="papua-new-guinea" value="Papua New Guinea">
+                          <option id="paraguay" value="Paraguay">
+                          <option id="peru" value="Peru">
+                          <option id="philippines" value="Philippines">
+                          <option id="poland" value="Poland">
+                          <option id="portugal" value="Portugal">
+                          <option id="qatar" value="Qatar">
+                          <option id="romania" value="Romania">
+                          <option id="russia" value="Russia">
+                          <option id="rwanda" value="Rwanda">
+                          <option id="saint-kitts-nevis" value="Saint Kitts and Nevis">
+                          <option id="saint-lucia" value="Saint Lucia">
+                          <option id="saint-vincent-grenadines" value="Saint Vincent and the Grenadines">
+                          <option id="samoa" value="Samoa">
+                          <option id="san-marino" value="San Marino">
+                          <option id="sao-tome-principe" value="Sao Tome and Principe">
+                          <option id="saudi-arabia" value="Saudi Arabia">
+                          <option id="senegal" value="Senegal">
+                          <option id="serbia" value="Serbia">
+                          <option id="seychelles" value="Seychelles">
+                          <option id="sierra-leone" value="Sierra Leone">
+                          <option id="singapore" value="Singapore">
+                          <option id="slovakia" value="Slovakia">
+                          <option id="slovenia" value="Slovenia">
+                          <option id="solomon-islands" value="Solomon Islands">
+                          <option id="somalia" value="Somalia">
+                          <option id="south-africa" value="South Africa">
+                          <option id="south-korea" value="South Korea">
+                          <option id="south-sudan" value="South Sudan">
+                          <option id="spain" value="Spain">
+                          <option id="sri-lanka" value="Sri Lanka">
+                          <option id="sudan" value="Sudan">
+                          <option id="suriname" value="Suriname">
+                          <option id="sweden" value="Sweden">
+                          <option id="switzerland" value="Switzerland">
+                          <option id="syria" value="Syria">
+                          <option id="taiwan" value="Taiwan">
+                          <option id="tajikistan" value="Tajikistan">
+                          <option id="tanzania" value="Tanzania">
+                          <option id="thailand" value="Thailand">
+                          <option id="timor-leste" value="Timor-Leste">
+                          <option id="togo" value="Togo">
+                          <option id="tonga" value="Tonga">
+                          <option id="trinidad-tobago" value="Trinidad and Tobago">
+                          <option id="tunisia" value="Tunisia">
+                          <option id="turkey" value="Turkey">
+                          <option id="turkmenistan" value="Turkmenistan">
+                          <option id="tuvalu" value="Tuvalu">
+                          <option id="uganda" value="Uganda">
+                          <option id="ukraine" value="Ukraine">
+                          <option id="united-arab-emirates" value="United Arab Emirates">
+                          <option id="united-kingdom" value="United Kingdom">
+                          <option id="united-states" value="United States of America">
+                          <option id="uruguay" value="Uruguay">
+                          <option id="uzbekistan" value="Uzbekistan">
+                          <option id="vanuatu" value="Vanuatu">
+                          <option id="vatican-city" value="Vatican City">
+                          <option id="venezuela" value="Venezuela">
+                          <option id="vietnam" value="Vietnam">
+                          <option id="yemen" value="Yemen">
+                          <option id="zambia" value="Zambia">
+                          <option id="zimbabwe" value="Zimbabwe">
+                      </datalist>
+                    </div>
+
+                    <hr>
+
+                    <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="residency-label">
+                            Resident in country since
+                        </label>
+                        <div class="nhsuk-hint" id="residency-hint">
+                            For example, 2 10 2023
+                        </div>
+                        <div class="nhsuk-date-input">
+                            <div class="nhsuk-date-input__item">
+                                <label id="residency-day-label" class="nhsuk-label nhsuk-date-input__label" for="residency-day">Day</label>
+                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
+                                       id="residency-day"
+                                       name="residency-day"
+                                       type="number"
+                                       pattern="[0-9]*"
+                                       inputmode="numeric"
+                                       maxlength="2"
+                                       oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                            </div>
+                    
+                            <div class="nhsuk-date-input__item">
+                                <label id="residency-month-label" class="nhsuk-label nhsuk-date-input__label" for="residency-month">Month</label>
+                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
+                                       id="residency-month"
+                                       name="residency-month"
+                                       type="number"
+                                       pattern="[0-9]*"
+                                       inputmode="numeric"
+                                       maxlength="2"
+                                       oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                            </div>
+                    
+                            <div class="nhsuk-date-input__item">
+                                <label id="residency-year-label" class="nhsuk-label nhsuk-date-input__label" for="residency-year">Year</label>
+                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4"
+                                       id="residency-year"
+                                       name="residency-year"
+                                       type="number"
+                                       pattern="[0-9]*"
+                                       inputmode="numeric"
+                                       maxlength="4"
+                                       oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                            </div>
+                        </div>
+                    </div>
+
+                  
+                        
+                                            
+                    <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
+                        Save and continue
+                    </button>
+
+                    <p><a href="../search/patient-search">Cancel</a></p>
+
+                    </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#nationalityDrop')
+  })
+</script>
+
+<!-- Date format -->
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("residency-day").value;
+    const month = document.getElementById("residency-month").value;
+    const year = document.getElementById("residency-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "2 July 2024";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
+</script>
+{% endblock %}

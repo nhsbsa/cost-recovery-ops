@@ -22,9 +22,67 @@ router.post([/create-person-record-cya/], function(req, res){
 
 // Personal details tabs //
 
-// Check your answers
+// Update personal details
 router.post([/update-personal-details/], function(req, res){
-  res.redirect('patient-details');
+
+  req.session.data['updated-personal-details'] = 'yes'
+
+  res.redirect('/version-28/s1/account/patient-details#tab-personal-details');
+
+})
+
+// Update current address
+router.post([/update-current-address/], function(req, res){
+
+  req.session.data['update-current-address'] = 'yes'
+
+  res.redirect('/version-28/s1/account/patient-details#tab-addresses');
+
+})
+
+// Add a new address
+router.post([/add-new-address/], function(req, res){
+
+  req.session.data['add-new-address'] = 'yes'
+
+  res.redirect('/version-28/s1/account/patient-details#tab-addresses');
+
+})
+
+// Add contact details
+router.post([/add-contact-details/], function(req, res){
+
+  req.session.data['add-contact-details'] = 'yes'
+
+  res.redirect('/version-28/s1/account/patient-details#tab-contact-details');
+
+})
+
+// Upload a new document
+router.post([/upload-personal-details-document/], function(req, res){
+
+  req.session.data['upload-new-document'] = 'yes'
+
+  res.redirect('/version-28/s1/account/patient-details#tab-documents');
+
+})
+
+// Add note to personal details
+router.post([/personal-details-note/], function(req, res){
+
+  req.session.data['new-personal-details-note'] = 'yes'
+
+  res.redirect('/version-28/s1/account/patient-details#tab-Notes');
+
+})
+
+// Add note to entitlements section
+router.post([/entitlements-note/], function(req, res){
+
+  req.session.data['new-entitlement-note'] = 'yes'
+
+  res.redirect('/version-28/s1/account/entitlement-details#tab-notes');
+
 })
 
 
@@ -251,23 +309,7 @@ router.post([/remove-entitlements-document/], function(req, res){
 })
 
 
-// Add note to personal details
-router.post([/personal-details-note/], function(req, res){
 
-  req.session.data['new-note'] = 'yes'
-
-  res.redirect('/version-28/s1/account/patient-details#tab-Notes');
-
-})
-
-// Add note to entitlements section
-router.post([/entitlements-note/], function(req, res){
-
-  req.session.data['new-note'] = 'yes'
-
-  res.redirect('/version-28/s1/account/entitlement-details#tab-notes');
-
-})
 
 // Communication module for OVMs to resubs
 

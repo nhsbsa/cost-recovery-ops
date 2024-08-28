@@ -44,7 +44,7 @@ Look for an address - Create a new person record - Manage overseas entitlements 
    
                     <form action="confirmation-person-record-created" method="post">
 
-                      <h2 class="nhsuk-heading-m">Personal details</h2>
+                      
 
                         <dl class="nhsuk-summary-list">
 
@@ -133,10 +133,24 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                             <dt class="nhsuk-summary-list__key">Date of birth</dt>
                             <dd class="nhsuk-summary-list__value">
                                 {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
-                                    {{ data['dob-day'] }} {{ data['dob-month'] }} {{ data['dob-year'] }}
-                                {% else %}
-                                    4 January 1973
-                                {% endif %}
+                                      {% set day = data['dob-day'] %}
+                                      {% set month = data['dob-month'] | int %}
+                                      {% set year = data['dob-year'] %}
+                          
+                                      {# Define month names #}
+                                      {% set month_names = [
+                                          "January", "February", "March", "April", "May", "June",
+                                          "July", "August", "September", "October", "November", "December"
+                                      ] %}
+                          
+                                      {# Get the month name #}
+                                      {% set month_name = month_names[month - 1] %}
+                          
+                                      {# Display the date in the format "day month year" #}
+                                      {{ day | int }} {{ month_name }} {{ year }}
+                                  {% else %}
+                                      4 January 1973
+                                  {% endif %}
                             </dd>
                           
                             <dd class="nhsuk-summary-list__actions">
@@ -176,12 +190,7 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                             </dd>
                           </div-->
 
-                        </dl>
-
-
-                          <h2 class="nhsuk-heading-m">Address details</h2>
-
-                          <dl class="nhsuk-summary-list">
+                          
                             <div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">Address</dt>
                               <dd class="nhsuk-summary-list__value">
@@ -218,7 +227,7 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                             </div>
                           
 
-                            <div class="nhsuk-summary-list__row">
+                            <!--div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">Resident in country since (optional)</dt>
                               <dd class="nhsuk-summary-list__value" id="formatted-date">
                                   {% if data['residency-day'] and data['residency-month'] and data['residency-year'] %}
@@ -245,7 +254,7 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                               <dd class="nhsuk-summary-list__actions">
                                   <a href="create-person-record#residency-day">Change<span class="nhsuk-u-visually-hidden">resident in country since</span></a>
                               </dd>
-                          </div>                          
+                          </div-->                          
                           </dl>                          
       
                           <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
@@ -267,6 +276,7 @@ Look for an address - Create a new person record - Manage overseas entitlements 
 {% endblock %}
 
 {% block pageScripts %}
+<!-- Date format -->
 <script>
   function formatDate(day, month, year) {
     // Add one month to the current month

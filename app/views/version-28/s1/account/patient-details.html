@@ -72,9 +72,9 @@
               <li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#contact-details">Contact details</a>
               </li>
-              <li class="nhsuk-tabs__list-item">
+              <!--li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#documents">Documents</a>
-              </li>
+              </li-->
               <li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#notes">Notes</a>
               </li>
@@ -87,7 +87,7 @@
                 <dl class="nhsuk-summary-list">
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Person ID
+                        Person record ID
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         123456
@@ -99,16 +99,24 @@
                         First names
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        John
+                        {% if data['first-name'] %}
+                          {{ data['first-name'] }}
+                        {% else %}
+                          John
+                        {% endif %}
                       </dd>
                     </div>
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        First names at birth
+                        First names at birth, if different
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% if data['birth-first-name'] %}
+                          {{ data['birth-first-name'] }}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
                       </dd>
                     </div>
                   
@@ -117,16 +125,24 @@
                         Last name
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        Doe
+                        {% if data['last-name'] %}
+                          {{ data['last-name'] }}
+                        {% else %}
+                          Doe
+                        {% endif %}
                       </dd>
                     </div>
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Last name at birth
+                        Last name at birth, if different
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% if data['birth-last-name'] %}
+                          {{ data['birth-last-name'] }}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
                       </dd>
                     </div>
               
@@ -135,7 +151,25 @@
                         Date of birth
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        4 January 1973
+                        {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
+                          {% set day = data['dob-day'] %}
+                          {% set month = data['dob-month'] | int %}
+                          {% set year = data['dob-year'] %}
+              
+                          {# Define month names #}
+                          {% set month_names = [
+                              "January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"
+                          ] %}
+              
+                          {# Get the month name #}
+                          {% set month_name = month_names[month - 1] %}
+              
+                          {# Display the date in the format "day month year" #}
+                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% else %}
+                          4 January 1973
+                        {% endif %}
                       </dd>
                     </div>
 
@@ -144,16 +178,24 @@
                         Sex
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% if data['sex'] %}
+                          {{ data['sex'] }}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
                       </dd>
                     </div>
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Nationality
+                        Country of nationality
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% if data['nationality'] %}
+                          {{ data['nationality'] }}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
                       </dd>
                     </div>
                   </dl>
@@ -166,31 +208,39 @@
                 <!-- Addresses tab content starts -->
                 <h3 class="nhsuk-heading-l">Address history</h3>
 
-                <h2 class="nhsuk-heading-m">Current address</h2>
-                <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Home address<br>
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                          {% if data['address-line-1'] or data['address-line-2'] or data['address-town'] or data['address-region'] or data['address-postcode'] or data['address-country'] %}
-                          {% if data['address-line-1'] %}
-                            {{ data['address-line-1'] }}<br>
-                          {% endif %}
-                          {% if data['address-line-2'] %}
-                            {{ data['address-line-2'] }}<br>
-                          {% endif %}
-                          {% if data['address-town'] %}
-                            {{ data['address-town'] }}<br>
-                          {% endif %}
-                          {% if data['address-region'] %}
-                            {{ data['address-region'] }}<br>
-                          {% endif %}
-                          {% if data['address-postcode'] %}
-                            {{ data['address-postcode'] }}<br>
-                          {% endif %}
-                          {% if data['address-country'] %}
-                            {{ data['address-country'] }}
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Current address
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['add-new-address'] == 'yes' %}
+                          {% if data['new-address-line-1'] or data['new-address-line-2'] or data['new-address-town'] or data['new-address-region'] or data['new-address-postcode'] or data['new-address-country'] %}
+                            {% if data['new-address-line-1'] %}
+                              {{ data['new-address-line-1'] }}<br>
+                            {% endif %}
+                            {% if data['new-address-line-2'] %}
+                              {{ data['new-address-line-2'] }}<br>
+                            {% endif %}
+                            {% if data['new-address-town'] %}
+                              {{ data['new-address-town'] }}<br>
+                            {% endif %}
+                            {% if data['new-address-region'] %}
+                              {{ data['new-address-region'] }}<br>
+                            {% endif %}
+                            {% if data['new-address-postcode'] %}
+                              {{ data['new-address-postcode'] }}<br>
+                            {% endif %}
+                            {% if data['new-address-country'] %}
+                              {{ data['new-address-country'] }}
+                            {% endif %}
+                          {% else %}
+                            8 Rothbury Terrace<br>
+                            Heaton<br>
+                            Newcastle upon Tyne<br>
+                            Tyne and Wear<br>
+                            NE6 5XH<br>
+                            United Kingdom
                           {% endif %}
                         {% else %}
                           1 Washington Street<br>
@@ -198,61 +248,134 @@
                           WR1 1NL<br>
                           United Kingdom
                         {% endif %}
-                    </dd>
-                    <dd class="nhsuk-summary-list__actions">
-                      <a href="#">
-                        Change<span class="nhsuk-u-visually-hidden">current address</span>
-                      </a>
-                    </dd>
-                  </div>
-
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Resident in country since
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      2 February 2024
-                    </dd>
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="update-current-address">
+                          Change<span class="nhsuk-u-visually-hidden">current address</span>
+                        </a>
+                      </dd>
+                    </div>
                   
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="#">
-                      Change<span class="nhsuk-u-visually-hidden">residency</span>
-                    </a>
-                  </dd>
-                </div>
-                </dl>
-
-
-                <h2 class="nhsuk-heading-m">Previous addresses</h2>
-                <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Previous address
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      Address line 1, Postcode
-                      <details class="nhsuk-details">
-                        <summary class="nhsuk-details__summary">
-                          <span class="nhsuk-details__summary-text">
-                            View full address
-                          </span>
-                        </summary>
-                        <div class="nhsuk-details__text">
-                          Address line 1<br>
-                          Address line 2<br>
-                          Town or city<br>
-                          TS1 1ET<br>
-                          Country
-                        </div>
-                      </details>
-                    </dd>
-                    <dd class="nhsuk-summary-list__actions">
-                      <a href="#">
-                        Change<span class="nhsuk-u-visually-hidden">previous address</span>
-                      </a>
-                    </dd>
-                  </div>
-                </dl>
+                    {% if data['add-new-address'] == 'yes' %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Resident in country since
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['residency-day'] and data['residency-month'] and data['residency-year'] %}
+                          {% set day = data['residency-day'] %}
+                          {% set month = data['residency-month'] | int %}
+                          {% set year = data['residency-year'] %}
+                          
+                          {% set month_names = [
+                            "January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                          ] %}
+                          
+                          {% set month_name = month_names[month - 1] %}
+                          
+                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="update-current-address">
+                          Change<span class="nhsuk-u-visually-hidden">period of residency</span>
+                        </a>
+                      </dd>
+                    </div>
+                    {% else %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Resident in country since
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['residency-day'] and data['residency-month'] and data['residency-year'] %}
+                          {% set day = data['residency-day'] %}
+                          {% set month = data['residency-month'] | int %}
+                          {% set year = data['residency-year'] %}
+                          
+                          {% set month_names = [
+                            "January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                          ] %}
+                          
+                          {% set month_name = month_names[month - 1] %}
+                          
+                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="update-current-address">
+                          Change<span class="nhsuk-u-visually-hidden">period of residency</span>
+                        </a>
+                      </dd>
+                    </div>
+                    {% endif %}
+                  </dl>
+                  
+                  {% if data['add-new-address'] == 'yes' %}
+                  <h3>Previous addresses</h3>
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Previous address
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          1 Washington Street, United Kingdom
+                          <details class="nhsuk-details">
+                            <summary class="nhsuk-details__summary">
+                              <span class="nhsuk-details__summary-text">
+                                View full address
+                              </span>
+                            </summary>
+                            <div class="nhsuk-details__text">
+                              {% if data['previous-address-line-1'] or data['previous-address-line-2'] or data['previous-address-town'] or data['previous-address-region'] or data['previous-address-postcode'] or data['previous-address-country'] %}
+                                {% if data['previous-address-line-1'] %}
+                                  {{ data['previous-address-line-1'] }}<br>
+                                {% endif %}
+                                {% if data['previous-address-line-2'] %}
+                                  {{ data['previous-address-line-2'] }}<br>
+                                {% endif %}
+                                {% if data['previous-address-town'] %}
+                                  {{ data['previous-address-town'] }}<br>
+                                {% endif %}
+                                {% if data['previous-address-region'] %}
+                                  {{ data['previous-address-region'] }}<br>
+                                {% endif %}
+                                {% if data['previous-address-postcode'] %}
+                                  {{ data['previous-address-postcode'] }}<br>
+                                {% endif %}
+                                {% if data['previous-address-country'] %}
+                                  {{ data['previous-address-country'] }}
+                                {% endif %}
+                              {% else %}
+                              1 Washington Street<br>
+                              Worcester<br>
+                              WR1 1NL<br>
+                              United Kingdom
+                              {% endif %}
+                            </div>
+                          </details>
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="change-previous-address-1">
+                            Change<span class="nhsuk-u-visually-hidden">previous address</span>
+                          </a>
+                        </dd>
+                      </div>
+                    </dl>
+                  {% endif %}
+                  
+                  <a href="add-new-address">
+                    <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                      Add a new address
+                    </button>
+                  </a>
+                  
               </div>
               <!-- Addresses tab content ends -->
 
@@ -260,13 +383,24 @@
               <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="contact-details">
                 <!-- Contact details tab content starts -->
                 <h3 class="nhsuk-heading-l">Contact details</h3>
+
+                {% if data['add-contact-details'] == 'yes' %}
                   <dl class="nhsuk-summary-list">
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
-                          Mobile number
+                          Telephone number
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          (+44)7123456789
+                          {% if data['telephone-number'] %}
+                            {{ data['telephone-number'] }}
+                          {% else %}
+                            (+44)7123456789
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="change-contact-details">
+                            Change<span class="nhsuk-u-visually-hidden">telephone number</span>
+                          </a>
                         </dd>
                       </div>
                     
@@ -275,17 +409,37 @@
                           Email address
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          john.doe@gmail.com
+                          {% if data['email-address'] %}
+                            {{ data['email-address'] }}
+                          {% else %}
+                            john.doe@gmail.com
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="change-contact-details">
+                            Change<span class="nhsuk-u-visually-hidden">email address</span>
+                          </a>
                         </dd>
                       </div>
                     </dl>
-                    <p><a href="">Change contact details</a></p>
+
+                    {% else %}    
+                    <p>No contact details have been added.</p>
+                     
+                    <a href="add-contact-details">
+                      <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                        Add contact details
+                      </button>
+                    </a>
+                    {% endif %}  
               </div>
               <!-- Contact details tab content ends -->
 
 
-              <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
-                <!-- Documents tab content starts -->
+              <!--div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
+                
+
+                {% if data['upload-new-document'] == 'yes' %}
                 <table role="table" id="documentsTable" class="nhsuk-table-responsive">
                   <h3 class="nhsuk-heading-l">Documents<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
                 
@@ -342,11 +496,28 @@
                     </tr>   
                   </tbody>
                 </table>
+                <br>
+                {% else %}  
+                <h3 class="nhsuk-heading-l">Documents</h3>
                 
-                <button class="nhsuk-button nhsuk-u-margin-top-5" data-module="nhsuk-button" type="submit">
-                  Add a new document
-                </button>
-              </div>
+                <p>No documents have been uploaded.</p>
+                {% endif %}
+
+                     
+                {% if data['add-new-document'] == 'yes' %}
+                <a href="upload-personal-details-document">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Upload a new document
+                  </button>
+                </a>
+                {% else %}
+                <a href="upload-personal-details-document">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Upload a document
+                  </button>
+                </a>
+                {% endif %}
+              </div-->
               <!-- Documents tab content ends -->
 
 
@@ -354,6 +525,7 @@
                 <!-- Notes tab content starts -->
                 <h3 class="nhsuk-heading-l">Notes</h3>
 
+                {% if data['new-personal-details-note'] == 'yes' %}
               <div class="nhsuk-form-group" id="filterNotes-group">
                 <label class="nhsuk-label" for="filter-notes">
                 Filter notes
@@ -368,20 +540,26 @@
               <p><a href="/version-28/s1/account/patient-details#tab-Notes" id="clearButton">Reset filter</a></p>
 
               <hr>
+              {% else %}
+              <p>No notes have been added to this person's record.</p>
+              <a class="nhsuk-button" href="/version-28/s1/account/personal-details-note" data-module="nhsuk-button" type="submit" id="addNote-button">Add a new note</a>
+              {% endif %}
 
-              {% if data['new-note'] == 'yes' %}
+
+              {% if data['new-personal-details-note'] == 'yes' %}
               <h3>New note title</h3>
               <p>Added by <b>Joe Bloggs</b><br>
               <span id="currentDate1"></span></p>
-              <p>{{ data['note'] }}</p>
+              <p>{% if data['note'] %}
+                {{ data['note'] }}
+                {% else %}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {% endif %}
+              </p>
               <hr>
               {% endif %}
               
-              <h3>Example note title</h3>
-              <p>Added by <b>Dave Smith</b><br>
-              16/08/2024 at 15:13</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </div>
+             </div>
               <!-- Notes tab content ends -->
 
             </div>
@@ -405,8 +583,6 @@
           <li><a href="entitlement-details">Entitlements and enquiries</a></li>
           <li><a href="resubmissions">Resubmissions</a></li>
           <li><a href="case-history">Case history</a></li>
-          <li><a href="documents">Documents</a></li>
-          <li><a href="notes">Notes</a></li>
         </ul>
       </div>
     </div>
@@ -415,8 +591,9 @@
   </div>
 </div>
 <!-- End of main content -->
+{% endblock %}
       
-
+{% block pageScripts %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const tabs = document.querySelectorAll(".nhsuk-tabs__tab");
@@ -471,5 +648,28 @@
 
   // Set the formatted date and time as the content of the element
   currentDateElement.textContent = formattedDateTime;
+</script>
+
+<!-- Date format -->
+<script>
+  function formatDate(day, month, year) {
+    // Add one month to the current month
+    let newMonth = parseInt(month) + 1;
+    let newYear = parseInt(year);
+
+    // Check if the new month exceeds 12 (December)
+    if (newMonth > 12) {
+        newMonth = 1; // Reset to January
+        newYear += 1; // Increment the year
+    }
+
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthName = months[newMonth - 1]; // Get the new month name
+    return `${parseInt(day)} ${monthName} ${newYear}`;
+}
 </script>
 {% endblock %}
