@@ -198,6 +198,21 @@
                         {% endif %}
                       </dd>
                     </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        UK National Insurance Number (NINO)
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['UK-national-insurance-number'] %}
+                          {{ data['UK-national-insurance-number'] }}
+                        {% else %}
+                          QQ 12 34 56 A
+                        {% endif %}
+                      </dd>
+                    </div>
+
+
                   </dl>
                   <p><a href="update-personal-details">Update personal details</a></p>
                 </div>
@@ -319,63 +334,103 @@
                   
                   {% if data['add-new-address'] == 'yes' %}
                   <h3>Previous addresses</h3>
-                    <dl class="nhsuk-summary-list">
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          Previous address
-                        </dt>
-                        <dd class="nhsuk-summary-list__value">
-                          1 Washington Street, United Kingdom
-                          <details class="nhsuk-details">
-                            <summary class="nhsuk-details__summary">
-                              <span class="nhsuk-details__summary-text">
-                                View full address
-                              </span>
-                            </summary>
-                            <div class="nhsuk-details__text">
-                              {% if data['previous-address-line-1'] or data['previous-address-line-2'] or data['previous-address-town'] or data['previous-address-region'] or data['previous-address-postcode'] or data['previous-address-country'] %}
-                                {% if data['previous-address-line-1'] %}
-                                  {{ data['previous-address-line-1'] }}<br>
-                                {% endif %}
-                                {% if data['previous-address-line-2'] %}
-                                  {{ data['previous-address-line-2'] }}<br>
-                                {% endif %}
-                                {% if data['previous-address-town'] %}
-                                  {{ data['previous-address-town'] }}<br>
-                                {% endif %}
-                                {% if data['previous-address-region'] %}
-                                  {{ data['previous-address-region'] }}<br>
-                                {% endif %}
-                                {% if data['previous-address-postcode'] %}
-                                  {{ data['previous-address-postcode'] }}<br>
-                                {% endif %}
-                                {% if data['previous-address-country'] %}
-                                  {{ data['previous-address-country'] }}
-                                {% endif %}
-                              {% else %}
-                              1 Washington Street<br>
-                              Worcester<br>
-                              WR1 1NL<br>
-                              United Kingdom
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Previous address
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+
+                        {% if data['change-previous-address-1'] == 'yes' and (data['updated-previous-address-line-1'] or data['updated-previous-address-country']) %}
+                          {# Display the updated previous address #}
+                          {% if data['updated-previous-address-line-1'] %}
+                            {{ data['updated-previous-address-line-1'] }},
+                          {% endif %}
+                          {% if data['updated-previous-address-country'] %}
+                            {{ data['updated-previous-address-country'] }}
+                          {% endif %}
+                        {% else %}
+                          {# Display the original previous address if not updated #}
+                          {% if data['previous-current-address-line-1'] %}
+                            {{ data['previous-current-address-line-1'] }},
+                          {% endif %}
+                          {% if data['previous-current-address-country'] %}
+                            {{ data['previous-current-address-country'] }}
+                          {% else %}
+                            1 Washington Street, United Kingdom
+                          {% endif %}
+                        {% endif %}
+                        
+                        <details class="nhsuk-details">
+                          <summary class="nhsuk-details__summary">
+                            <span class="nhsuk-details__summary-text">
+                              View full address
+                            </span>
+                          </summary>
+                          <div class="nhsuk-details__text">
+                            {% if data['change-previous-address-1'] == 'yes' and (data['updated-previous-address-line-1'] or data['updated-previous-address-country']) %}
+                              {% if data['updated-previous-address-line-1'] %}
+                                {{ data['updated-previous-address-line-1'] }}<br>
                               {% endif %}
-                            </div>
-                          </details>
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <a href="change-previous-address-1">
-                            Change<span class="nhsuk-u-visually-hidden">previous address</span>
-                          </a>
-                        </dd>
-                      </div>
-                    </dl>
-                  {% endif %}
-                  
-                  <a href="add-new-address">
-                    <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
-                      Add a new address
-                    </button>
-                  </a>
-                  
+                              {% if data['updated-previous-address-line-2'] %}
+                                {{ data['updated-previous-address-line-2'] }}<br>
+                              {% endif %}
+                              {% if data['updated-previous-address-town'] %}
+                                {{ data['updated-previous-address-town'] }}<br>
+                              {% endif %}
+                              {% if data['updated-previous-address-region'] %}
+                                {{ data['updated-previous-address-region'] }}<br>
+                              {% endif %}
+                              {% if data['updated-previous-address-postcode'] %}
+                                {{ data['updated-previous-address-postcode'] }}<br>
+                              {% endif %}
+                              {% if data['updated-previous-address-country'] %}
+                                {{ data['updated-previous-address-country'] }}
+                              {% endif %}
+                            {% else %}
+                              {# Show original full previous address #}
+                              {% if data['previous-current-address-line-1'] %}
+                                {{ data['previous-current-address-line-1'] }}<br>
+                              {% endif %}
+                              {% if data['previous-current-address-line-2'] %}
+                                {{ data['previous-current-address-line-2'] }}<br>
+                              {% endif %}
+                              {% if data['previous-current-address-town'] %}
+                                {{ data['previous-current-address-town'] }}<br>
+                              {% endif %}
+                              {% if data['previous-current-address-region'] %}
+                                {{ data['previous-current-address-region'] }}<br>
+                              {% endif %}
+                              {% if data['previous-current-address-postcode'] %}
+                                {{ data['previous-current-address-postcode'] }}<br>
+                              {% endif %}
+                              {% if data['previous-current-address-country'] %}
+                                {{ data['previous-current-address-country'] }}
+                              {% else %}
+                                1 Washington Street<br>
+                                Worcester<br>
+                                WR1 1NL<br>
+                                United Kingdom
+                              {% endif %}
+                            {% endif %}
+                          </div>
+                        </details>
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="change-previous-address-1">
+                          Change<span class="nhsuk-u-visually-hidden">previous address</span>
+                        </a>
+                      </dd>
+                    </div>
+                  </dl>
+                {% endif %}
+
+                <a href="add-new-address">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Add a new address
+                  </button>
+                </a>
+
               </div>
               <!-- Addresses tab content ends -->
 

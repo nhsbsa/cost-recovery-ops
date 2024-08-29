@@ -49,6 +49,15 @@ router.post([/add-new-address/], function(req, res){
 
 })
 
+// Change previous address 1
+router.post([/change-previous-address-1/], function(req, res){
+
+  req.session.data['change-previous-address-1'] = 'yes'
+
+  res.redirect('/version-28/s1/account/patient-details#tab-addresses');
+
+})
+
 // Add contact details
 router.post([/add-contact-details/], function(req, res){
 

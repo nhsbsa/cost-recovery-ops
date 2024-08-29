@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Add new address - Manage overseas entitlements and treatments - NHSBSA
+Change previous address - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -35,53 +35,53 @@ Add new address - Manage overseas entitlements and treatments - NHSBSA
                     }) }}
 
                     <h1 class="app-page-heading">
-                        Add a new address
+                        Change previous address
                     </h1>
 
                     
-                    <form action="add-new-address" method="post">
+                    <form action="change-previous-address-1" method="post">
 
                       
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-line-1-label">
+                        <label class="nhsuk-label" for="updated-previous-address-line-1-label">
                           Address line 1
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-address-line-1" name="new-address-line-1" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="updated-previous-address-line-1" name="updated-previous-address-line-1" type="text"  autocomplete="cc-csc" value="1 Washington Street">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-line-2-label">
+                        <label class="nhsuk-label" for="updated-previous-address-line-2-label">
                           Address line 2 (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-address-line-2" name="new-address-line-2" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="updated-previous-address-line-2" name="updated-previous-address-line-2" type="text"  autocomplete="cc-csc">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-town-label">
+                        <label class="nhsuk-label" for="updated-previous-address-town-label">
                           Town or city
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-address-town" name="new-address-town" type="text" autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="updated-previous-address-town" name="updated-previous-address-town" type="text" autocomplete="cc-csc" value="Worcester">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-region-label">
+                        <label class="nhsuk-label" for="updated-previous-address-region-label">
                           County, province or region (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-address-region" name="new-address-region" type="text" autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="updated-previous-address-region" name="updated-previous-address-region" type="text" autocomplete="cc-csc">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-postcode-label">
+                        <label class="nhsuk-label" for="updated-previous-address-postcode-label">
                           Postcode (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-input--width-10" id="new-address-postcode" name="new-address-postcode" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-input--width-10" id="updated-previous-address-postcode" name="updated-previous-address-postcode" type="text"  autocomplete="cc-csc" value="WR1 1NL">
                       </div>
 
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" id="new-address-country-label" for="new-address-country">
+                        <label class="nhsuk-label" id="updated-previous-address-country-label" for="updated-previous-address-country">
                             Country
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" list="countries" id="new-address-country" name="new-address-country">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" list="countries" id="updated-previous-address-country" name="updated-previous-address-country" value="United Kingdom">
                         <datalist id="countries">
                           <option id="afghanistan" value="Afghanistan">
                           <option id="albania" value="Albania">
@@ -281,56 +281,6 @@ Add new address - Manage overseas entitlements and treatments - NHSBSA
                       </datalist>
                     </div>
 
-                    <hr>
-
-                    <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="residency-label">
-                            Resident in country since
-                        </label>
-                        <div class="nhsuk-hint" id="residency-hint">
-                            For example, 2 10 2023
-                        </div>
-                        <div class="nhsuk-date-input">
-                            <div class="nhsuk-date-input__item">
-                                <label id="residency-day-label" class="nhsuk-label nhsuk-date-input__label" for="residency-day">Day</label>
-                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
-                                       id="residency-day"
-                                       name="residency-day"
-                                       type="number"
-                                       pattern="[0-9]*"
-                                       inputmode="numeric"
-                                       maxlength="2"
-                                       oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
-                            </div>
-                    
-                            <div class="nhsuk-date-input__item">
-                                <label id="residency-month-label" class="nhsuk-label nhsuk-date-input__label" for="residency-month">Month</label>
-                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
-                                       id="residency-month"
-                                       name="residency-month"
-                                       type="number"
-                                       pattern="[0-9]*"
-                                       inputmode="numeric"
-                                       maxlength="2"
-                                       oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
-                            </div>
-                    
-                            <div class="nhsuk-date-input__item">
-                                <label id="residency-year-label" class="nhsuk-label nhsuk-date-input__label" for="residency-year">Year</label>
-                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4"
-                                       id="residency-year"
-                                       name="residency-year"
-                                       type="number"
-                                       pattern="[0-9]*"
-                                       inputmode="numeric"
-                                       maxlength="4"
-                                       oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
-                            </div>
-                        </div>
-                    </div>
-
-                  
-                        
                                             
                     <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
                         Save and continue
