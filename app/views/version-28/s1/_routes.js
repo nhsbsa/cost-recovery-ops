@@ -31,10 +31,10 @@ router.post([/update-personal-details/], function(req, res){
 
 })
 
-// Update current address
-router.post([/update-current-address/], function(req, res){
+// Change current address
+router.post([/change-current-address/], function(req, res){
 
-  req.session.data['update-current-address'] = 'yes'
+  req.session.data['change-current-address'] = 'yes'
 
   res.redirect('/version-28/s1/account/patient-details#tab-addresses');
 
@@ -44,15 +44,6 @@ router.post([/update-current-address/], function(req, res){
 router.post([/add-new-address/], function(req, res){
 
   req.session.data['add-new-address'] = 'yes'
-
-  res.redirect('/version-28/s1/account/patient-details#tab-addresses');
-
-})
-
-// Change previous address 1
-router.post([/change-previous-address-1/], function(req, res){
-
-  req.session.data['change-previous-address-1'] = 'yes'
 
   res.redirect('/version-28/s1/account/patient-details#tab-addresses');
 

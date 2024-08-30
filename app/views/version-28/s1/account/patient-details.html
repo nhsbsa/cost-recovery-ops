@@ -207,7 +207,7 @@
                         {% if data['UK-national-insurance-number'] %}
                           {{ data['UK-national-insurance-number'] }}
                         {% else %}
-                          QQ 12 34 56 A
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
                       </dd>
                     </div>
@@ -219,220 +219,172 @@
                 <!-- Personal details tabs content ends -->
 
 
-              <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="addresses">
-                <!-- Addresses tab content starts -->
-                <h3 class="nhsuk-heading-l">Address history</h3>
-
+                <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="addresses">
+                  <!-- Addresses tab content starts -->
+                  <h3 class="nhsuk-heading-l">Address history</h3>
+              
                   <dl class="nhsuk-summary-list">
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Current address
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['add-new-address'] == 'yes' %}
-                          {% if data['new-address-line-1'] or data['new-address-line-2'] or data['new-address-town'] or data['new-address-region'] or data['new-address-postcode'] or data['new-address-country'] %}
-                            {% if data['new-address-line-1'] %}
-                              {{ data['new-address-line-1'] }}<br>
-                            {% endif %}
-                            {% if data['new-address-line-2'] %}
-                              {{ data['new-address-line-2'] }}<br>
-                            {% endif %}
-                            {% if data['new-address-town'] %}
-                              {{ data['new-address-town'] }}<br>
-                            {% endif %}
-                            {% if data['new-address-region'] %}
-                              {{ data['new-address-region'] }}<br>
-                            {% endif %}
-                            {% if data['new-address-postcode'] %}
-                              {{ data['new-address-postcode'] }}<br>
-                            {% endif %}
-                            {% if data['new-address-country'] %}
-                              {{ data['new-address-country'] }}
-                            {% endif %}
-                          {% else %}
-                            8 Rothbury Terrace<br>
-                            Heaton<br>
-                            Newcastle upon Tyne<br>
-                            Tyne and Wear<br>
-                            NE6 5XH<br>
-                            United Kingdom
-                          {% endif %}
-                        {% else %}
-                          1 Washington Street<br>
-                          Worcester<br>
-                          WR1 1NL<br>
-                          United Kingdom
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <a href="update-current-address">
-                          Change<span class="nhsuk-u-visually-hidden">current address</span>
-                        </a>
-                      </dd>
-                    </div>
-                  
-                    {% if data['add-new-address'] == 'yes' %}
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Resident in country since
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['residency-day'] and data['residency-month'] and data['residency-year'] %}
-                          {% set day = data['residency-day'] %}
-                          {% set month = data['residency-month'] | int %}
-                          {% set year = data['residency-year'] %}
-                          
-                          {% set month_names = [
-                            "January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"
-                          ] %}
-                          
-                          {% set month_name = month_names[month - 1] %}
-                          
-                          {{ day | int }} {{ month_name }} {{ year }}
-                        {% else %}
-                          <span class="nhsuk-u-visually-hidden">Not provided</span>
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <a href="update-current-address">
-                          Change<span class="nhsuk-u-visually-hidden">period of residency</span>
-                        </a>
-                      </dd>
-                    </div>
-                    {% else %}
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Resident in country since
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['residency-day'] and data['residency-month'] and data['residency-year'] %}
-                          {% set day = data['residency-day'] %}
-                          {% set month = data['residency-month'] | int %}
-                          {% set year = data['residency-year'] %}
-                          
-                          {% set month_names = [
-                            "January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"
-                          ] %}
-                          
-                          {% set month_name = month_names[month - 1] %}
-                          
-                          {{ day | int }} {{ month_name }} {{ year }}
-                        {% else %}
-                          <span class="nhsuk-u-visually-hidden">Not provided</span>
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <a href="update-current-address">
-                          Change<span class="nhsuk-u-visually-hidden">period of residency</span>
-                        </a>
-                      </dd>
-                    </div>
-                    {% endif %}
-                  </dl>
-                  
-                  {% if data['add-new-address'] == 'yes' %}
-                  <h3>Previous addresses</h3>
-                  <dl class="nhsuk-summary-list">
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Previous address
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-
-                        {% if data['change-previous-address-1'] == 'yes' and (data['updated-previous-address-line-1'] or data['updated-previous-address-country']) %}
-                          {# Display the updated previous address #}
-                          {% if data['updated-previous-address-line-1'] %}
-                            {{ data['updated-previous-address-line-1'] }},
-                          {% endif %}
-                          {% if data['updated-previous-address-country'] %}
-                            {{ data['updated-previous-address-country'] }}
-                          {% endif %}
-                        {% else %}
-                          {# Display the original previous address if not updated #}
-                          {% if data['previous-current-address-line-1'] %}
-                            {{ data['previous-current-address-line-1'] }},
-                          {% endif %}
-                          {% if data['previous-current-address-country'] %}
-                            {{ data['previous-current-address-country'] }}
-                          {% else %}
-                            1 Washington Street, United Kingdom
-                          {% endif %}
-                        {% endif %}
-                        
-                        <details class="nhsuk-details">
-                          <summary class="nhsuk-details__summary">
-                            <span class="nhsuk-details__summary-text">
-                              View full address
-                            </span>
-                          </summary>
-                          <div class="nhsuk-details__text">
-                            {% if data['change-previous-address-1'] == 'yes' and (data['updated-previous-address-line-1'] or data['updated-previous-address-country']) %}
-                              {% if data['updated-previous-address-line-1'] %}
-                                {{ data['updated-previous-address-line-1'] }}<br>
-                              {% endif %}
-                              {% if data['updated-previous-address-line-2'] %}
-                                {{ data['updated-previous-address-line-2'] }}<br>
-                              {% endif %}
-                              {% if data['updated-previous-address-town'] %}
-                                {{ data['updated-previous-address-town'] }}<br>
-                              {% endif %}
-                              {% if data['updated-previous-address-region'] %}
-                                {{ data['updated-previous-address-region'] }}<br>
-                              {% endif %}
-                              {% if data['updated-previous-address-postcode'] %}
-                                {{ data['updated-previous-address-postcode'] }}<br>
-                              {% endif %}
-                              {% if data['updated-previous-address-country'] %}
-                                {{ data['updated-previous-address-country'] }}
-                              {% endif %}
-                            {% else %}
-                              {# Show original full previous address #}
-                              {% if data['previous-current-address-line-1'] %}
-                                {{ data['previous-current-address-line-1'] }}<br>
-                              {% endif %}
-                              {% if data['previous-current-address-line-2'] %}
-                                {{ data['previous-current-address-line-2'] }}<br>
-                              {% endif %}
-                              {% if data['previous-current-address-town'] %}
-                                {{ data['previous-current-address-town'] }}<br>
-                              {% endif %}
-                              {% if data['previous-current-address-region'] %}
-                                {{ data['previous-current-address-region'] }}<br>
-                              {% endif %}
-                              {% if data['previous-current-address-postcode'] %}
-                                {{ data['previous-current-address-postcode'] }}<br>
-                              {% endif %}
-                              {% if data['previous-current-address-country'] %}
-                                {{ data['previous-current-address-country'] }}
+                      <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                              Current address
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                              {% if data['add-new-address'] == 'yes' %}
+                                  {# New address added, display the new address #}
+                                  {% if data['new-address-line-1'] %}
+                                      {{ data['new-address-line-1'] }}<br>
+                                  {% endif %}
+                                  {% if data['new-address-line-2'] %}
+                                      {{ data['new-address-line-2'] }}<br>
+                                  {% endif %}
+                                  {% if data['new-address-town'] %}
+                                      {{ data['new-address-town'] }}<br>
+                                  {% endif %}
+                                  {% if data['new-address-region'] %}
+                                      {{ data['new-address-region'] }}<br>
+                                  {% endif %}
+                                  {% if data['new-address-postcode'] %}
+                                      {{ data['new-address-postcode'] }}<br>
+                                  {% endif %}
+                                  {% if data['new-address-country'] %}
+                                      {{ data['new-address-country'] }}
+                                  {% endif %}
+                              {% elseif data['change-current-address'] == 'yes' %}
+                                  {# Current address changed, display the updated address #}
+                                  {% if data['change-address-line-1'] %}
+                                      {{ data['change-address-line-1'] }}<br>
+                                  {% endif %}
+                                  {% if data['change-address-line-2'] %}
+                                      {{ data['change-address-line-2'] }}<br>
+                                  {% endif %}
+                                  {% if data['change-address-town'] %}
+                                      {{ data['change-address-town'] }}<br>
+                                  {% endif %}
+                                  {% if data['change-address-region'] %}
+                                      {{ data['change-address-region'] }}<br>
+                                  {% endif %}
+                                  {% if data['change-address-postcode'] %}
+                                      {{ data['change-address-postcode'] }}<br>
+                                  {% endif %}
+                                  {% if data['change-address-country'] %}
+                                      {{ data['change-address-country'] }}
+                                  {% endif %}
                               {% else %}
-                                1 Washington Street<br>
-                                Worcester<br>
-                                WR1 1NL<br>
-                                United Kingdom
+                                  {# Display the default or original address #}
+                                  1 Washington Street<br>
+                                  Worcester<br>
+                                  WR1 1NL<br>
+                                  United Kingdom
                               {% endif %}
-                            {% endif %}
-                          </div>
-                        </details>
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <a href="change-previous-address-1">
-                          Change<span class="nhsuk-u-visually-hidden">previous address</span>
-                        </a>
-                      </dd>
-                    </div>
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                              <a href="change-current-address">
+                                  Change<span class="nhsuk-u-visually-hidden"> current address</span>
+                              </a>
+                          </dd>
+                      </div>
+              
+                      <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                              Resident in country since
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                              {% if data['change-current-address'] == 'yes' %}
+                                  {# Residency date changed, display the new date #}
+                                  {% set day = data['change-residency-day'] %}
+                                  {% set month = data['change-residency-month'] | int %}
+                                  {% set year = data['change-residency-year'] %}
+                              {% elseif data['residency-day'] and data['residency-month'] and data['residency-year'] %}
+                                  {# Display existing residency date #}
+                                  {% set day = data['residency-day'] %}
+                                  {% set month = data['residency-month'] | int %}
+                                  {% set year = data['residency-year'] %}
+                              {% else %}
+                                  <span class="nhsuk-u-visually-hidden">Not provided</span>
+                              {% endif %}
+                              
+                              {% if day and month and year %}
+                                  {% set month_names = [
+                                      "January", "February", "March", "April", "May", "June",
+                                      "July", "August", "September", "October", "November", "December"
+                                  ] %}
+                                  {% set month_name = month_names[month - 1] %}
+                                  {{ day | int }} {{ month_name }} {{ year }}
+                              {% endif %}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                              <a href="change-current-address">
+                                  Change<span class="nhsuk-u-visually-hidden"> period of residency</span>
+                              </a>
+                          </dd>
+                      </div>
                   </dl>
-                {% endif %}
-
-                <a href="add-new-address">
-                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
-                    Add a new address
-                  </button>
-                </a>
-
+              
+                  {% if data['add-new-address'] == 'yes' %}
+                      <h3>Previous addresses</h3>
+                      <dl class="nhsuk-summary-list">
+                          <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                  Previous address
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                  {% if data['change-current-address'] == 'yes' %}
+                                    {% if data['change-address-line-1'] %}
+                                        {{ data['change-address-line-1'] }},
+                                    {% endif %}
+                                    {% if data['change-address-country'] %}
+                                        {{ data['change-address-country'] }}
+                                    {% else %}
+                                        1 Washington Street, United Kingdom
+                                    {% endif %}
+                                  {% endif %}
+                                  <details class="nhsuk-details">
+                                      <summary class="nhsuk-details__summary">
+                                          <span class="nhsuk-details__summary-text">
+                                              View full address
+                                          </span>
+                                      </summary>
+                                      <div class="nhsuk-details__text">
+                                        {% if data['change-current-address'] == 'yes' %}
+                                          {% if data['change-address-line-1'] %}
+                                              {{ data['change-address-line-1'] }}<br>
+                                          {% endif %}
+                                          {% if data['change-address-line-2'] %}
+                                              {{ data['change-address-line-2'] }}<br>
+                                          {% endif %}
+                                          {% if data['change-address-town'] %}
+                                              {{ data['change-address-town'] }}<br>
+                                          {% endif %}
+                                          {% if data['change-address-region'] %}
+                                              {{ data['change-address-region'] }}<br>
+                                          {% endif %}
+                                          {% if data['change-address-postcode'] %}
+                                              {{ data['change-address-postcode'] }}<br>
+                                          {% endif %}
+                                          {% if data['change-address-country'] %}
+                                              {{ data['change-address-country'] }}
+                                          {% else %}
+                                              1 Washington Street<br>
+                                              Worcester<br>
+                                              WR1 1NL<br>
+                                              United Kingdom
+                                          {% endif %}
+                                        {% endif %}
+                                      </div>
+                                  </details>
+                              </dd>
+                          </div>
+                      </dl>
+                  {% endif %}
+              
+                  <a href="add-new-address">
+                      <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                          Add a new address
+                      </button>
+                  </a>
               </div>
               <!-- Addresses tab content ends -->
+              
 
 
               <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="contact-details">
