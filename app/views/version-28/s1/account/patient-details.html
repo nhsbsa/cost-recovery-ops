@@ -22,7 +22,7 @@
             <a class="nhsuk-breadcrumb__link" href="../search/patient-search">Search</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="../search/search-results">Search results</a>
+            <a class="nhsuk-breadcrumb__link" href="../search/search-results-none">Search results</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
             <a class="nhsuk-breadcrumb__link" href="../account/patient-summary">Overview</a>
@@ -69,10 +69,10 @@
               <li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#addresses">Addresses</a>
               </li>
-              <li class="nhsuk-tabs__list-item">
+              <!--li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#contact-details">Contact details</a>
               </li>
-              <!--li class="nhsuk-tabs__list-item">
+              <li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#documents">Documents</a>
               </li-->
               <li class="nhsuk-tabs__list-item">
@@ -212,8 +212,21 @@
                       </dd>
                     </div>
 
+                  
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Email address
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['email-address'] %}
+                        {{ data['email-address'] }}
+                      {% else %}
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                      {% endif %}
+                    </dd>
+                  </div>
+                </dl>
 
-                  </dl>
                   <p><a href="update-personal-details">Update personal details</a></p>
                 </div>
                 <!-- Personal details tabs content ends -->
@@ -387,60 +400,7 @@
               
 
 
-              <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="contact-details">
-                <!-- Contact details tab content starts -->
-                <h3 class="nhsuk-heading-l">Contact details</h3>
-
-                {% if data['add-contact-details'] == 'yes' %}
-                  <dl class="nhsuk-summary-list">
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          Telephone number
-                        </dt>
-                        <dd class="nhsuk-summary-list__value">
-                          {% if data['telephone-number'] %}
-                            {{ data['telephone-number'] }}
-                          {% else %}
-                            (+44)7123456789
-                          {% endif %}
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <a href="change-contact-details">
-                            Change<span class="nhsuk-u-visually-hidden">telephone number</span>
-                          </a>
-                        </dd>
-                      </div>
-                    
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          Email address
-                        </dt>
-                        <dd class="nhsuk-summary-list__value">
-                          {% if data['email-address'] %}
-                            {{ data['email-address'] }}
-                          {% else %}
-                            john.doe@gmail.com
-                          {% endif %}
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <a href="change-contact-details">
-                            Change<span class="nhsuk-u-visually-hidden">email address</span>
-                          </a>
-                        </dd>
-                      </div>
-                    </dl>
-
-                    {% else %}    
-                    <p>No contact details have been added.</p>
-                     
-                    <a href="add-contact-details">
-                      <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
-                        Add contact details
-                      </button>
-                    </a>
-                    {% endif %}  
-              </div>
-              <!-- Contact details tab content ends -->
+              
 
 
               <!--div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
