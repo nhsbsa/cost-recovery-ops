@@ -40,7 +40,7 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
 
                       <h1 class="app-page-heading">
                         <span class="nhsuk-caption-l">
-                            S1/S072
+                            S1/S072 entitlement
                             <span class="nhsuk-u-visually-hidden"> - </span>
                         </span>
                         Entitlement details
@@ -50,10 +50,9 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                     <div class="nhsuk-form-group">
                       <label class="nhsuk-label" for="entitlement-pin-label"> Personal Identification Number (PIN) </label>
                       <div class="nhsuk-hint" id="entitlement-pin"></div>
-                      <input class="nhsuk-input nhsuk-input--width-10" id="1" name="entitlement-pin" type="text"  />
+                      <input class="nhsuk-input nhsuk-input--width-10" id="entitlement-pin" name="entitlement-pin" type="text"  />
                     </div>
 
-                    <hr>
 
                     <div class="nhsuk-form-group">
                             <label class="nhsuk-label" id="country-of-issue" for="country-of-issue">
@@ -414,5 +413,54 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
     autoselect : true,  
     selectElement : document.querySelector('#country-of-issue')
   })
+</script>
+
+<!-- Date formats -->
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("s1-entitlement-issue-date-day").value;
+    const month = document.getElementById("s1-entitlement-issue-date-month").value;
+    const year = document.getElementById("s1-entitlement-issue-date-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "2 July 2024";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
+</script>
+
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("s1-entitlement-start-date-day").value;
+    const month = document.getElementById("s1-entitlement-start-date-month").value;
+    const year = document.getElementById("s1-entitlement-start-date-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "2 July 2024";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
+</script>
+
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("s1-entitlement-end-date-day").value;
+    const month = document.getElementById("s1-entitlement-end-date-month").value;
+    const year = document.getElementById("s1-entitlement-end-date-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "2 July 2024";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
 </script>
 {% endblock %}

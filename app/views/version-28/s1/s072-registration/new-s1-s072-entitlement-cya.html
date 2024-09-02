@@ -58,13 +58,16 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                             S1/S072
                           {% endif %}
                         </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          
+                        </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Source of information</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['entitlement'] %}
-                            {{ data['entitlement'] }}
+                          {% if data['source-of-information'] %}
+                            {{ data['source-of-information'] }}
                           {% else %}
                             Member State (MS)
                           {% endif %}
@@ -86,7 +89,7 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                         </dd>
 
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details"> Change<span class="nhsuk-u-visually-hidden">personal identification number</span> </a>
+                          <a href="entitlement-details#entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">personal identification number</span> </a>
                         </dd>
                       </div>
 
@@ -101,52 +104,94 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                         </dd>
 
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details"> Change<span class="nhsuk-u-visually-hidden">country of issue</span> </a>
+                          <a href="entitlement-details#country-of-issue"> Change<span class="nhsuk-u-visually-hidden">country of issue</span> </a>
                         </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Issue date</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-entitlement-issue-date-day'] and data['s1-entitlement-issue-date--month'] and data['s1-entitlement-issue-date--year'] %}
-                            {{ data['s1-entitlement-issue-date--day'] }} {{ data['s1-entitlement-issue-date--month'] }} {{ data['s1-entitlement-issue-date--year'] }}
+                          {% if data['s1-entitlement-issue-date-day'] and data['s1-entitlement-issue-date-month'] and data['s1-entitlement-issue-date-year'] %}
+                            {% set day = data['s1-entitlement-issue-date-day'] %}
+                            {% set month = data['s1-entitlement-issue-date-month'] | int %}
+                            {% set year = data['s1-entitlement-issue-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
                           {% else %}
                             5 August 2024
                           {% endif %}
                         </dd>
 
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details"> Change<span class="nhsuk-u-visually-hidden">issue date</span> </a>
+                          <a href="entitlement-details#s1-entitlement-issue-date-day"> Change<span class="nhsuk-u-visually-hidden">issue date</span> </a>
                         </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Start date</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-entitlement-start-date-day'] and data['s1-entitlement-start-date--month'] and data['s1-entitlement-start-date--year'] %}
-                            {{ data['s1-entitlement-start-date--day'] }} {{ data['s1-entitlement-start-date--month'] }} {{ data['s1-entitlement-start-date--year'] }}
+                          {% if data['s1-entitlement-start-date-day'] and data['s1-entitlement-start-date-month'] and data['s1-entitlement-start-date-year'] %}
+                            {% set day = data['s1-entitlement-start-date-day'] %}
+                            {% set month = data['s1-entitlement-start-date-month'] | int %}
+                            {% set year = data['s1-entitlement-start-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
                           {% else %}
                             16 August 2024
                           {% endif %}
                         </dd>
 
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details"> Change<span class="nhsuk-u-visually-hidden">start date</span> </a>
+                          <a href="entitlement-details#s1-entitlement-start-date-day"> Change<span class="nhsuk-u-visually-hidden">start date</span> </a>
                         </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">End date</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date--month'] and data['s1-entitlement-end-date--year'] %}
-                            {{ data['s1-entitlement-end-date--day'] }} {{ data['s1-entitlement-end-date--month'] }} {{ data['s1-entitlement-end-date--year'] }}
+                          {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
+                            {% set day = data['s1-entitlement-end-date-day'] %}
+                            {% set month = data['s1-entitlement-end-date-month'] | int %}
+                            {% set year = data['s1-entitlement-end-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
                           {% else %}
                             Not provided
                           {% endif %}
                         </dd>
 
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details"> Change<span class="nhsuk-u-visually-hidden">end date</span> </a>
+                          <a href="entitlement-details#s1-entitlement-end-date-day">Change<span class="nhsuk-u-visually-hidden">end date</span> </a>
                         </dd>
                       </div>
 
@@ -161,7 +206,7 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                         </dd>
 
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details"> Change<span class="nhsuk-u-visually-hidden">citizen status</span> </a>
+                          <a href="entitlement-details#s1-entitlement-citizen-status"> Change<span class="nhsuk-u-visually-hidden">citizen status</span> </a>
                         </dd>
                       </div>
 
@@ -176,7 +221,7 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                         </dd>
 
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details"> Change<span class="nhsuk-u-visually-hidden">if receiving long term benefits in cash</span> </a>
+                          <a href="entitlement-details#receive-long-term-benefits"> Change<span class="nhsuk-u-visually-hidden">if receiving long term benefits in cash</span> </a>
                         </dd>
                       </div>
                     </dl>
@@ -237,4 +282,29 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Date format -->
+<script>
+  function formatDate(day, month, year) {
+    // Add one month to the current month
+    let newMonth = parseInt(month) + 1;
+    let newYear = parseInt(year);
+
+    // Check if the new month exceeds 12 (December)
+    if (newMonth > 12) {
+        newMonth = 1; // Reset to January
+        newYear += 1; // Increment the year
+    }
+
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthName = months[newMonth - 1]; // Get the new month name
+    return `${parseInt(day)} ${monthName} ${newYear}`;
+}
+</script>
 {% endblock %}
