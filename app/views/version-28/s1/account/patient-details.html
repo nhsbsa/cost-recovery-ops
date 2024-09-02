@@ -315,15 +315,6 @@
                               {% else %}
                                   <span class="nhsuk-u-visually-hidden">Not provided</span>
                               {% endif %}
-                              
-                              {% if day and month and year %}
-                                  {% set month_names = [
-                                      "January", "February", "March", "April", "May", "June",
-                                      "July", "August", "September", "October", "November", "December"
-                                  ] %}
-                                  {% set month_name = month_names[month - 1] %}
-                                  {{ day | int }} {{ month_name }} {{ year }}
-                              {% endif %}
                           </dd>
                           <dd class="nhsuk-summary-list__actions">
                               <a href="change-current-address">
@@ -620,8 +611,8 @@
 <!-- Date format -->
 <script>
   function formatDate(day, month, year) {
-    // Add one month to the current month
-    let newMonth = parseInt(month) + 1;
+    
+    let newMonth = parseInt(month);
     let newYear = parseInt(year);
 
     // Check if the new month exceeds 12 (December)
