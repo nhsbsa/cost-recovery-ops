@@ -84,7 +84,8 @@
               <div class="nhsuk-card">
                   <div class="nhsuk-card__content nhsuk-u-padding-bottom-5">
                       <h3 class="nhsuk-heading-l">Entitlements</h3>
-                      <!--table role="table" class="nhsuk-table-responsive">
+                      {% if data['add-new-entitlement'] == 'yes' %}
+                      <table role="table" class="nhsuk-table-responsive">
                           <thead role="rowgroup" class="nhsuk-table__head">
                               <tr role="row">
                                   <th role="columnheader" scope="col">Entitlement type</th>
@@ -115,37 +116,18 @@
                                     <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
                                   {%- endif -%}</td>
                               </tr>
-
-                              <tr role="row">
-                                <td role="cell" class="nhsuk-table__cell" id="entitlement-type">EHIC</td>
-                                <td role="cell" class="nhsuk-table__cell" id="date-issued">18/03/2023</td>
-                                <td role="cell" class="nhsuk-table__cell" id="start-date">18/03/2023</td>
-                                <td role="cell" class="nhsuk-table__cell" id="end-date"><span class="nhsuk-u-visually-hidden">Not provided</span></td>
-                                <td role="cell" class="nhsuk-table__cell" id="main-or-dependant">Main</td>
-                                <td role="cell" class="nhsuk-table__cell" id="registration-country">France</td>
-                                <td role="cell" class="nhsuk-table__cell" id="status">
-                                  {%- if data['cancelS1'] == 'true' -%}
-                                  <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
-                                  {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' -%}
-                                  <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
-                                  {%- elif data['dl1609Complete'] == 'true' -%}
-                                  <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
-                                  {%- else -%}
-                                  <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
-                                {%- endif -%}
-                                </td>
-                            </tr>
-                              
                           </tbody>
                       </table>
                       <br>
-                      <p><a href="entitlement-details">View all entitlements</a></p-->
+                      <p><a href="entitlement-details">View all entitlements</a></p>
+                      {% else %}
                         <p><b>No entitlements have been added to this person's record.</b></p>
                         <a href="../s072-registration/which-entitlement">
                           <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
                             Add an entitlement
                           </button>
                         </a>
+                      {% endif %}
                   </div>
               </div>
             </div>
@@ -190,7 +172,6 @@
           <li><a class="active" href="patient-summary">Overview</a></li>
           <li><a href="patient-details">Personal details</a></li>
           <li><a href="entitlement-details">Entitlements and enquiries</a></li>
-          <li><a href="resubmissions">Resubmissions</a></li>
           <li><a href="case-history">Case history</a></li>
         </ul>
       </div>

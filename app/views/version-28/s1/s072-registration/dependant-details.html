@@ -1,62 +1,196 @@
-{% extends 'layouts/_form.html' %} 
-{% set title = "Add dependant details" %} 
-{% set caption = "S1/S072 registration" %} 
-{% block form %}
+<!-- Use this page as the index for your project -->
 
-<div class="nhsuk-grid-column-two-thirds">
-  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
-    <form method="post">
-      <div class="nhsuk-form-group">
-        <label class="nhsuk-label nhsuk-label--s" for="1"> Personal identification number in the competent member state </label>
-        <div class="nhsuk-hint" id="example-hint"></div>
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
-        <input class="nhsuk-input nhsuk-input--width-10" id="dependantPin" name="dependantPin" type="text" value="" />
-      </div>
- 
-      <hr>
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
 
-      <div class="nhsuk-form-group">
-        <label class="nhsuk-label nhsuk-label--s" for="1"> First name (Given names or forenames) </label>
-        <div class="nhsuk-hint" id="example-hint">For example, ph or Phillip</div>
-        <input class="nhsuk-input nhsuk-input--width-20" id="dependantFirstName" name="dependantFirstName" type="text" value="" />
-      </div>
-      <div class="nhsuk-form-group">
-        <label class="nhsuk-label nhsuk-label--s" for="1"> Last name (Name or surname) </label>
-        <div class="nhsuk-hint" id="example-hint">For example, sm or Smith</div>
-        <input class="nhsuk-input nhsuk-input--width-20" id="dependantLastName" name="dependantLastName" type="text" value="" />
-      </div>
-      <div class="nhsuk-form-group">
-        <label class="nhsuk-label nhsuk-label--s" for="1"> Last name at birth (optional) </label>
-        <div class="nhsuk-hint" id="example-hint">if different</div>
-        <input class="nhsuk-input nhsuk-input--width-20" id="dependantNameBirth" name="dependantNameBirth" type="text" value="" />
-      </div>
-      <hr>
-      <div class="nhsuk-form-group">
-        <label class="nhsuk-label nhsuk-label--s" for="example"> Date of birth </label>
-        <div class="nhsuk-hint" id="example-hint">For example, 15 3 1984</div>
-        <div class="nhsuk-date-input" id="example">
-          <div class="nhsuk-date-input__item">
-            <div class="nhsuk-form-group">
-              <label class="nhsuk-label nhsuk-date-input__label" for="example-day"> Day </label>
-              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dependantDay" name="dependantDay" type="number" pattern="[0-9]*" value="" />
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Input dependant's details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="dependant-details" method="post">
+
+                      <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                            Dependant details
+                        <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Add dependant details
+                      </h1>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" id="relationship-to-main-label" for="relationship-to-main">
+                          Relationship to Main
+                        </label>
+                        <div class="nhsuk-hint" id="relationship-to-main-input-hint">
+                          For example, Wife
+                        </div>
+                      
+                        <div class="nhsuk-radios nhsuk-radios--conditional">
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="relationship-to-main-husband" name="relationship-to-main" type="radio" value="Husband">
+                            <label class="nhsuk-label nhsuk-radios__label" id="email-no" for="relationship-to-main-husband">Husband</label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="relationship-to-main-wife" name="relationship-to-main" type="radio" value="Wife">
+                            <label class="nhsuk-label nhsuk-radios__label" id="email-no" for="relationship-to-main-wife">Wife</label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="relationship-to-main-son" name="relationship-to-main" type="radio" value="Son">
+                            <label class="nhsuk-label nhsuk-radios__label" id="email-no" for="relationship-to-main-son">Son</label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="relationship-to-main-daughter" name="relationship-to-main" type="radio" value="Daughter">
+                            <label class="nhsuk-label nhsuk-radios__label" id="email-no" for="relationship-to-main-daughter">Daughter</label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="relationship-to-main-grandson" name="relationship-to-main" type="radio" value="Grandson">
+                            <label class="nhsuk-label nhsuk-radios__label" id="email-no" for="relationship-to-main-grandson">Grandson</label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="relationship-to-main-granddaughter" name="relationship-to-main" type="radio" value="Granddaughter">
+                            <label class="nhsuk-label nhsuk-radios__label" id="email-no" for="relationship-to-main-granddaughter">Granddaughter</label>
+                          </div>
+                      
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="relationship-to-main-other" name="relationship-to-main" type="radio" value="Other" aria-controls="conditional-contact-7" aria-expanded="true">
+                            <label class="nhsuk-label nhsuk-radios__label" for="relationship-to-main-other">
+                              Other
+                            </label>
+                          </div>
+                          <div class="nhsuk-radios__conditional" id="conditional-contact-7">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label" for="email">
+                                Enter the type of relationship to the Main
+                              </label>
+                              <input class="nhsuk-input nhsuk-u-width-two-thirds" id="other-relationship-type" name="other-relationship-type" type="text" value="">
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-first-name-input-label">
+                          First names (Given names or forenames)
+                        </label>
+                        <div class="nhsuk-hint" id="dependant-first-name-input-hint">
+                          For example, ph or Phillipa
+                        </div>
+                        <input class="nhsuk-input nhsuk-input--width-20" id="dependant-first-name" name="dependant-first-name" type="text">
+                      </div>
+
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-last-name-input-label">
+                          Last name (Name or surname)
+                        </label>
+                        <div class="nhsuk-hint" id="dependant-last-name-input-hint">
+                          For example, sm or Smith
+                        </div>
+                        <input class="nhsuk-input nhsuk-input--width-20" id="dependant-last-name" name="dependant-last-name" type="text">
+                      </div>
+
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-birth-last-name-label">
+                          Last name at birth (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-input--width-20" id="dependant-birth-last-name" name="dependant-birth-last-name" type="text">
+                      </div>
+
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-dob-label">
+                            Date of birth
+                          </label>
+                        <div class="nhsuk-hint" id="dependant-dob-hint">
+                            For example, 15 3 1984
+                        </div>
+                        <div class="nhsuk-date-input">
+                            <div class="nhsuk-date-input__item">
+                              <label id="dob-day-label" class="nhsuk-label nhsuk-date-input__label" for="dependant-dob-day">Day</label> 
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dependant-dob-day" name="dependant-dob-day" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
+                            </div>
+                
+                            <div class="nhsuk-date-input__item">
+                              <label id="dob-month-label" class="nhsuk-label nhsuk-date-input__label" for="dependant-dob-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dependant-dob-month" name="dependant-dob-month" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)">
+                            </div>
+                
+                            <div class="nhsuk-date-input__item">
+                              <label id="dob-year-label" class="nhsuk-label nhsuk-date-input__label" for="dependant-dob-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dependant-dob-year" name="dependant-dob-year" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="4" oninput="this.value=this.value.slice(0,this.maxLength)">
+                            </div>
+                        </div>
+                      </div>
+
+
+                    <button class="nhsuk-button nhsuk-u-margin-top-3" data-module="nhsuk-button" type="submit">Continue</button>
+
+                    <p><a href="../account/entitlement-details">Cancel</a></p>
+
+                    </form>
+
+                  </div>
+
+                </div>
             </div>
-          </div>
-          <div class="nhsuk-date-input__item">
-            <div class="nhsuk-form-group">
-              <label class="nhsuk-label nhsuk-date-input__label" for="example-month"> Month </label>
-              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dependantMonth" name="dependantMonth" type="number" pattern="[0-9]*" value="" />
-            </div>
-          </div>
-          <div class="nhsuk-date-input__item">
-            <div class="nhsuk-form-group">
-              <label class="nhsuk-label nhsuk-date-input__label" for="example-year"> Year </label>
-              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dependantYear" name="dependantYear" type="number" pattern="[0-9]*" value="" />
-            </div>
-          </div>
         </div>
-      </div>
-      <button class="nhsuk-button nhsuk-u-margin-top-3" data-module="nhsuk-button" type="submit">Continue</button>
-    </form>
-  </fieldset>
+    </div>
 </div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Date format -->
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("dependant-dob-day").value;
+    const month = document.getElementById("dependant-dob-month").value;
+    const year = document.getElementById("dependant-dob-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "29 December 1975";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
+</script>
 {% endblock %}

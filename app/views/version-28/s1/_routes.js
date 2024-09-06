@@ -88,99 +88,94 @@ router.post([/entitlements-note/], function(req, res){
 
 // Add a new entitlement to a person's record //
 
-// Select source
+// Select entitlement 
 router.post([/which-entitlement/], function(req, res){
   res.redirect('which-source');
 })
 
-// Select entitlement 
+// Select source
 router.post([/which-source/], function(req, res){
   res.redirect('entitlement-details');
 })
 
-// Institute details 
+// Input entitlement details
 router.post([/entitlement-details/], function(req, res){
-  res.redirect('institute-details');
+  res.redirect('search-institution-ID');
 })
 
-// Institution search results (to show functionality)
-router.post([/institute-details/], function(req, res){
-  res.redirect('institution-search-results');
+// Search by institution ID (to show functionality)
+router.post([/search-institution-ID/], function(req, res){
+  res.redirect('institution-ID-search-results');
 })
 
-// Check your answers - Adding an entitlement
-router.post([/institution-search-results/], function(req, res){
+// Search by institution name (to show functionality)
+router.post([/search-institution-name/], function(req, res){
+  res.redirect('institution-name-search-results');
+})
+
+// Institution ID search results
+router.post([/institution-ID-search-results/], function(req, res){
   res.redirect('new-s1-s073-entitlement-cya');
 })
 
-// Confirmation - S1/S072 entitlement added to person record
+// Institution name search results
+router.post([/institution-name-search-results/], function(req, res){
+  res.redirect('new-s1-s073-entitlement-cya');
+})
+
+// Check your answers so far
 router.post([/new-s1-s072-entitlement-cya/], function(req, res){
-  res.redirect('confirmation-s1-s072-added');
+  res.redirect('add-dependant');
 })
 
-
-
-// Have dependants 
-router.post([/have-dependants/], function(req, res){
-  var dependants = req.session.data['dependants'];
+// Do you want to add dependants?
+router.post([/add-dependant/], function(req, res){
+  var addDependant = req.session.data['add-dependant'];
   
-  if (dependants == 'yes'){
+  if (addDependant == 'Yes'){
       res.redirect('dependant-details');
-  } else if (dependants == 'no'){
-      res.redirect('check-your-answers');
   } else {
-      
+      res.redirect('confirmation-S1-S072-added');
   }
 })
 
-// Check dependant address 
+// Enter dependant's address
 router.post([/dependant-details/], function(req, res){
-  const data = req.session.data;
-  data.dependantName = `${req.body['dependantFirstName']} ${req.body['dependantLastName']}`
-
-    res.redirect('dependant-check-address');
-    
+  res.redirect('same-address');
 })
 
-// Add address 
-router.post([/dependant-check-address/], function(req, res){
-  var address = req.session.data['checkDependantAddress'];
+// Does the dependant live at the same address as the Main?
+router.post([/same-address/], function(req, res){
+  var sameAddress = req.session.data['same-address-as-Main'];
   
-  if (address == 'no'){
+  if (sameAddress == 'Yes'){
+      res.redirect('dependant-details-cya');
+  } else {
       res.redirect('dependant-address');
-  } else if (address == 'yes'){
-      res.redirect('dependant-check-answers');
-  } else {
-      
   }
 })
-// Check dependant address 
+
+// Enter dependant's address
 router.post([/dependant-address/], function(req, res){
-
-    res.redirect('dependant-confirm');
-    
+  res.redirect('dependant-details-cya');
 })
-// Check dependant address 
-router.post([/dependant-confirm/], function(req, res){
 
-    res.redirect('dependant-check-answers');
-    
+// Check your answers
+router.post([/dependant-details-cya/], function(req, res){
+  res.redirect('confirmation-S1-S072-added');
 })
 
 
-// Review dependants details before continuing 
-router.post([/dependant-check-answers/], function(req, res){
-  var addMore = req.session.data['addAnotherDependant'];
-  
-  if (addMore == 'no'){
-      res.redirect('check-your-answers');
-  } else if (addMore == 'yes'){
-      res.redirect('dependant-details');
-  } else {
-      
-  }
-})
+// DL1609 screens //
 
+// Print and send DL1609, alongside adding a note to record
+router.post([/print-DL1609/], function(req, res){
+
+  req.session.data['DL1609-note'] = 'yes'
+
+  res.redirect('/version-28/s1/account/entitlement-details#tab-Notes');
+
+})
 
 
 // Tasklist - After s072 registration

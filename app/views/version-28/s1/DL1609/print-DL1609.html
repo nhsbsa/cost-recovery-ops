@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Reason for editing - Update person details - Manage overseas entitlements and treatments - NHSBSA
+Print DL1609 - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -34,64 +34,49 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                       "text": "Go back"
                     }) }}
 
-                    
-                        
-                    <form action="entitlements-note" method="post">
+                    <h1 class="app-page-heading">
+                      Print and send the DL1609
+                    </h1>
+   
+                    <form action="print-DL1609" method="post">
 
-                                <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person ID - 123456</p>
-                  
-                                <div class="nhsuk-form-group">
-                                  <label class="nhsuk-label" for="nhsbsa-comments">
-                                    <h1 class="nhsuk-heading-xl">Add a note</h1>
-                                  </label>
+                      <p>Print the DL1609 and send it to John Doe. Once you have sent the DL1609, add a note to John Doe's record to let others know this action has been completed.</p>
+                      
+                      <button class="nhsuk-button nhsuk-button--secondary" style="margin-bottom: 65px;" data-module="nhsuk-button" type="submit">
+                        Print DL1609
+                      </button>
+                      
 
-                                  <div class="nhsuk-form-group">
-                                    <label class="nhsuk-label" for="noteType-label">
-                                      Note type
-                                    </label>
-                                  <select class="nhsuk-select" id="noteTypes-list" name="note-type">
-                                    <option value="">Select...</option>
-                                    <option id="39" value="Option 1">Option 1
-                                    <option id="41" value="Option 2">Option 2
-                                    <option id="53" value="Option 3">Option 3
-                                    </select>
-                                    </div>
-                                  
+                      <h2 class="nhsuk-heading-l">Add a note</h2>
 
-                                    <div class="nhsuk-form-group">
-                                      <label class="nhsuk-label" for="notes">
-                                        Comments
-                                      </label>
-                                      <div class="nhsuk-hint" id="note-hint">
-                                        These will display in Entitlements under the Notes tab.
-                                      </div>
-                                      
-                                      <textarea class="nhsuk-textarea" id="personalDetailsComment" name="note" rows="8"></textarea>
-                                      <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">500 characters remaining</p>
-                                      <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 500 characters</p>
-                                    </div>                            
-      
-                                    <button class="nhsuk-button" type="submit">
-                                        Save and continue
-                                    </button>
-
-                                    <p><a href="patient-details">Cancel</a></p>
-
-                                  </div>
-                                </div>
-
-                            </form>
-                            
-
+                      <div class="nhsuk-form-group">
+                        <div class="nhsuk-hint" id="note-hint">
+                          This will display in X under the Notes tab.
                         </div>
-                    </div>
+                        
+                        <textarea class="nhsuk-textarea" id="DL1609Note" name="DL1609-note" rows="8"></textarea>
+                        <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">500 characters remaining.</p>
+                        <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 500 characters.</p>
+                      </div>  
+
+                      <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
+                        Save and continue
+                      </button>
+
+                      <p><a href="../account/entitlement-details">Cancel</a></p>
+
+                    </form>
+
+                  </div>
+
                 </div>
             </div>
         </div>
-    
+    </div>
+</div>
 
 <script>
-  const textarea = document.querySelector('#personalDetailsComment');
+  const textarea = document.querySelector('#DL1609Note');
   const countRemaining = document.getElementById('charactersRemaining');
   const staticMsg = document.querySelector('#char-count-screen-reader');
   const maxCharacters = 500;
@@ -143,5 +128,4 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
     updateScreenReaderMessage();
   });
 </script>
-
 {% endblock %}
