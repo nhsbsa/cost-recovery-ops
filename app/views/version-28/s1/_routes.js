@@ -160,9 +160,17 @@ router.post([/dependant-address/], function(req, res){
   res.redirect('dependant-details-cya');
 })
 
-// Check your answers
-router.post([/dependant-details-cya/], function(req, res){
-  res.redirect('confirmation-S1-S072-added');
+// Remove dependant
+router.post([/remove-dependant/], (req, res) => {
+
+  const removeDependant = req.session.data['remove-dependant']
+
+  if (removeDependant === 'Yes') {
+    res.redirect('dependant-details-cya')
+  } else {
+    res.redirect('dependant-details-cya')
+  }
+
 })
 
 

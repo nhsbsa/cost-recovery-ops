@@ -40,18 +40,18 @@ Print DL1609 - Manage overseas entitlements and treatments - NHSBSA
    
                     <form action="print-DL1609" method="post">
 
-                      <p>Print the DL1609 and send it to John Doe. Once you have sent the DL1609, add a note to John Doe's record to let others know this action has been completed.</p>
+                      <p>Print the DL1609 and send it to {% if data['first-name'] %}{{ data['first-name'] }}{% else %}John Doe{% endif %}. Once you have sent the DL1609, add a note to {% if data['first-name'] %}{{ data['first-name'] }}{% else %}John Doe{% endif %}'s record to let others know this action has been completed.</p>
                       
                       <button class="nhsuk-button nhsuk-button--secondary" style="margin-bottom: 65px;" data-module="nhsuk-button" type="submit">
                         Print DL1609
                       </button>
                       
 
-                      <h2 class="nhsuk-heading-l">Add a note</h2>
+                      <h2 class="nhsuk-heading-l">Add a note (optional)</h2>
 
                       <div class="nhsuk-form-group">
                         <div class="nhsuk-hint" id="note-hint">
-                          This will display in X under the Notes tab.
+                          For example, you might want to record XYZ. This will display in the Entitlement section under the Notes tab.
                         </div>
                         
                         <textarea class="nhsuk-textarea" id="DL1609Note" name="DL1609-note" rows="8"></textarea>
