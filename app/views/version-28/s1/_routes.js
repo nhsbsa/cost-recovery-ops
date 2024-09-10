@@ -174,6 +174,28 @@ router.post([/remove-dependant/], (req, res) => {
 })
 
 
+// Entitlements section - S1 Entitlement //
+
+// Update S1 entitlement details
+router.post([/update-S1-entitlement-details/], function(req, res){
+
+  req.session.data['update-S1-entitlement-details'] = 'yes'
+
+  res.redirect('/version-28/s1/account/entitlement-content/S1-entitlement-details#tab-entitlement-details');
+
+})
+
+// Update S1 entitlement details
+router.post([/change-S1-entitlement-institution-details/], function(req, res){
+
+  req.session.data['update-S1-entitlement-institution-details'] = 'yes'
+
+  res.redirect('/version-28/s1/account/entitlement-content/S1-entitlement-details#tab-institution-details');
+
+})
+
+
+
 // DL1609 screens //
 
 // Print and send DL1609, alongside adding a note to record

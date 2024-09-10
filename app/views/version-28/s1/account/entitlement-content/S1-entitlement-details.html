@@ -19,16 +19,16 @@
       <div class="nhsuk-grid-column-full">
         <ol class="nhsuk-breadcrumb__list">
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="../search/search-by-person">Search</a>
+            <a class="nhsuk-breadcrumb__link" href="../../search/search-by-person">Search</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="../search/search-results">Search results</a>
+            <a class="nhsuk-breadcrumb__link" href="../../search/search-results">Search results</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="../account/patient-summary">Overview</a>
+            <a class="nhsuk-breadcrumb__link" href="../patient-summary">Overview</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="../account/entitlement-details">Entitlements</a>
+            <a class="nhsuk-breadcrumb__link" href="../entitlement-details">Entitlements</a>
           </li>
         </ol>
       </div>
@@ -83,6 +83,7 @@
               </li>
             </ul>
 
+
             <!-- Tab content -->
             <div class="nhsuk-tabs__panel" id="entitlement-details">
               <!-- Entitlement details tab content starts -->
@@ -102,24 +103,46 @@
                         Date issued
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['s1-entitlement-issue-date-day'] and data['s1-entitlement-issue-date-month'] and data['s1-entitlement-issue-date-year'] %}
-                          {% set day = data['s1-entitlement-issue-date-day'] %}
-                          {% set month = data['s1-entitlement-issue-date-month'] | int %}
-                          {% set year = data['s1-entitlement-issue-date-year'] %}
-              
-                          {# Define month names #}
-                          {% set month_names = [
-                              "January", "February", "March", "April", "May", "June",
-                              "July", "August", "September", "October", "November", "December"
-                          ] %}
-              
-                          {# Get the month name #}
-                          {% set month_name = month_names[month - 1] %}
-              
-                          {# Display the date in the format "day month year" #}
-                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% if data['update-S1-entitlement-details'] == 'Yes' %}
+                          {% if data['updated-s1-entitlement-issue-date-day'] and data['updated-s1-entitlement-issue-date-month'] and data['updated-s1-entitlement-issue-date-year'] %}
+                              {% set day = data['updated-s1-entitlement-issue-date-day'] %}
+                              {% set month = data['updated-s1-entitlement-issue-date-month'] | int %}
+                              {% set year = data['updated-s1-entitlement-issue-date-year'] %}
+                  
+                              {# Define month names #}
+                              {% set month_names = [
+                                  "January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"
+                              ] %}
+                  
+                              {# Get the month name #}
+                              {% set month_name = month_names[month - 1] %}
+                  
+                              {# Display the date in the format "day month year" #}
+                              {{ day | int }} {{ month_name }} {{ year }}
+                            {% else %}
+                              30 August 2024
+                            {% endif %}
                         {% else %}
-                          30 August 2024
+                          {% if data['s1-entitlement-issue-date-day'] and data['s1-entitlement-issue-date-month'] and data['s1-entitlement-issue-date-year'] %}
+                            {% set day = data['s1-entitlement-issue-date-day'] %}
+                            {% set month = data['s1-entitlement-issue-date-month'] | int %}
+                            {% set year = data['s1-entitlement-issue-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
+                          {% else %}
+                            30 August 2024
+                          {% endif %}
                         {% endif %}
                       </dd>
                     </div>
@@ -130,10 +153,11 @@
                         Start date
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['s1-entitlement-start-date-day'] and data['s1-entitlement-start-date-month'] and data['s1-entitlement-start-date-year'] %}
-                          {% set day = data['s1-entitlement-start-date-day'] %}
-                          {% set month = data['s1-entitlement-start-date-month'] | int %}
-                          {% set year = data['s1-entitlement-start-date-year'] %}
+                        {% if data['update-S1-entitlement-details'] == 'Yes' %}
+                          {% if data['updated-s1-entitlement-start-date-day'] and data['updated-s1-entitlement-start-date-month'] and data['updated-s1-entitlement-start-date-year'] %}
+                          {% set day = data['updated-s1-entitlement-start-date-day'] %}
+                          {% set month = data['updated-s1-entitlement-start-date-month'] | int %}
+                          {% set year = data['updated-s1-entitlement-start-date-year'] %}
               
                           {# Define month names #}
                           {% set month_names = [
@@ -148,6 +172,27 @@
                           {{ day | int }} {{ month_name }} {{ year }}
                         {% else %}
                           5 September 2024
+                      {% endif %}
+                        {% else %}
+                          {% if data['s1-entitlement-start-date-day'] and data['s1-entitlement-start-date-month'] and data['s1-entitlement-start-date-year'] %}
+                            {% set day = data['s1-entitlement-start-date-day'] %}
+                            {% set month = data['s1-entitlement-start-date-month'] | int %}
+                            {% set year = data['s1-entitlement-start-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
+                          {% else %}
+                            5 September 2024
+                          {% endif %}
                         {% endif %}
                       </dd>
                     </div>
@@ -158,24 +203,46 @@
                         End date (optional)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
-                          {% set day = data['s1-entitlement-end-date-day'] %}
-                          {% set month = data['s1-entitlement-end-date-month'] | int %}
-                          {% set year = data['s1-entitlement-end-date-year'] %}
-              
-                          {# Define month names #}
-                          {% set month_names = [
-                              "January", "February", "March", "April", "May", "June",
-                              "July", "August", "September", "October", "November", "December"
-                          ] %}
-              
-                          {# Get the month name #}
-                          {% set month_name = month_names[month - 1] %}
-              
-                          {# Display the date in the format "day month year" #}
-                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% if data['update-S1-entitlement-details'] == 'Yes' %}
+                          {% if data['updated-s1-entitlement-end-date-day'] and data['updated-s1-entitlement-end-date-month'] and data['updated-s1-entitlement-end-date-year'] %}
+                            {% set day = data['updated-s1-entitlement-end-date-day'] %}
+                            {% set month = data['updated-s1-entitlement-end-date-month'] | int %}
+                            {% set year = data['updated-s1-entitlement-end-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
+                          {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %}
                         {% else %}
-                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
+                            {% set day = data['s1-entitlement-end-date-day'] %}
+                            {% set month = data['s1-entitlement-end-date-month'] | int %}
+                            {% set year = data['s1-entitlement-end-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
+                          {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %}
                         {% endif %}
                       </dd>
                     </div>
@@ -186,10 +253,18 @@
                         Citizen status
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['s1-entitlement-citizen-status'] %}
-                          {{ data['s1-entitlement-citizen-status'] }}
+                        {% if data['update-S1-entitlement-details'] == 'Yes' %}
+                          {% if data['updated-s1-entitlement-citizen-status'] %}
+                            {{ data['updated-s1-entitlement-citizen-status'] }}
+                          {% else %}
+                            Insured person
+                          {% endif %}
                         {% else %}
-                          Insured person
+                          {% if data['s1-entitlement-citizen-status'] %}
+                            {{ data['s1-entitlement-citizen-status'] }}
+                          {% else %}
+                            Insured person
+                          {% endif %}
                         {% endif %}
                       </dd>
                     </div>
@@ -200,10 +275,18 @@
                         Country of issue
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['country-of-issue'] %}
-                          {{ data['country-of-issue'] }}
+                        {% if data['update-S1-entitlement-details'] == 'Yes' %}
+                          {% if data['updated-S1-entitlement-country-of-issue'] %}
+                            {{ data['updated-S1-entitlement-country-of-issue'] }}
+                          {% else %}
+                            France
+                          {% endif %}
                         {% else %}
-                          France
+                          {% if data['S1-entitlement-country-of-issue'] %}
+                            {{ data['S1-entitlement-country-of-issue'] }}
+                          {% else %}
+                            France
+                          {% endif %}
                         {% endif %}
                       </dd>
                     </div>
@@ -223,8 +306,8 @@
                 </dl>
                 
                     <div class="button-container">
-                      <a href="../account/update-S1-entitlement-details"><button style="margin-right:20px;" class="nhsuk-button" type="submit">Update entitlement details</button></a>
-                      <a href="../account/cancel-S1-entitlement"><button class="nhsuk-button nhsuk-button--warning" data-module="nhsuk-button" type="submit">Cancel entitlement</button></a>
+                      <a href="../entitlement-content/update-S1-entitlement-details"><button style="margin-right:20px;" class="nhsuk-button" type="submit">Update entitlement details</button></a>
+                      <a href="../entitlement-content/cancel-S1-entitlement"><button class="nhsuk-button nhsuk-button--warning" data-module="nhsuk-button" type="submit">Cancel entitlement</button></a>
                     </div>
               </div>
               <!-- Entitlement details tab content ends -->
@@ -256,15 +339,17 @@
                         Institution address
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        13 Rue de Nesmond
-                        14400 Bayeux
+                        13 Rue de Nesmond<br>
+                        Bayeux<br>
+                        Normandy<br>
+                        14400<br>
                         France
                       </dd>
                     </div>
                 </dl>
 
                     <div class="button-container">
-                      <a href="../account/update-S1-institution-details"><button style="margin-right:20px;" class="nhsuk-button" type="submit">Update institution details</button></a>
+                      <a href="../entitlement-content/change-S1-entitlement-institution-details"><button style="margin-right:20px;" class="nhsuk-button" type="submit">Change institution details</button></a>
                     </div>
 
               </div>
@@ -707,10 +792,10 @@
           <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
         </h3>
         <ul id="options" class="options">
-          <li><a href="patient-summary">Overview</a></li>
-          <li><a href="patient-details">Personal details</a></li>
-          <li><a class="active" href="entitlement-details">Entitlements and enquiries</a></li>
-          <li><a href="case-history">Case history</a></li>
+          <li><a href="../patient-summary">Overview</a></li>
+          <li><a href="../patient-details">Personal details</a></li>
+          <li><a class="active" href="../entitlement-details">Entitlements and enquiries</a></li>
+          <li><a href="../case-history">Case history</a></li>
         </ul>
       </div>
     </div>
