@@ -94,13 +94,72 @@
                         Entitlement type
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        S1
+                        S1/S072
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
                       </dd>
                     </div>
+
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Entitlement status
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        <strong class="nhsuk-tag nhsuk-tag--yellow">
+                          Action required
+                        </strong>
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
+                      </dd>
+                    </div>
+
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Personal identification number (PIN)
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        1123456789
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="#">
+                          Change<span class="nhsuk-u-visually-hidden">personal identification number</span>
+                        </a>
+                      </dd>
+                    </div>
+
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Country of issue
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['update-S1-entitlement-details'] == 'Yes' %}
+                          {% if data['updated-S1-entitlement-country-of-issue'] %}
+                            {{ data['updated-S1-entitlement-country-of-issue'] }}
+                          {% else %}
+                            France
+                          {% endif %}
+                        {% else %}
+                          {% if data['S1-entitlement-country-of-issue'] %}
+                            {{ data['S1-entitlement-country-of-issue'] }}
+                          {% else %}
+                            France
+                          {% endif %}
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
+                      </dd>
+                    </div>
+
                   
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Date issued
+                        Issue date
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         {% if data['update-S1-entitlement-details'] == 'Yes' %}
@@ -144,6 +203,9 @@
                             30 August 2024
                           {% endif %}
                         {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
                       </dd>
                     </div>
 
@@ -195,6 +257,9 @@
                           {% endif %}
                         {% endif %}
                       </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
+                      </dd>
                     </div>
 
 
@@ -245,6 +310,9 @@
                           {% endif %}
                         {% endif %}
                       </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
+                      </dd>
                     </div>
 
 
@@ -267,46 +335,15 @@
                           {% endif %}
                         {% endif %}
                       </dd>
-                    </div>
-
-
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Country of issue
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['update-S1-entitlement-details'] == 'Yes' %}
-                          {% if data['updated-S1-entitlement-country-of-issue'] %}
-                            {{ data['updated-S1-entitlement-country-of-issue'] }}
-                          {% else %}
-                            France
-                          {% endif %}
-                        {% else %}
-                          {% if data['S1-entitlement-country-of-issue'] %}
-                            {{ data['S1-entitlement-country-of-issue'] }}
-                          {% else %}
-                            France
-                          {% endif %}
-                        {% endif %}
-                      </dd>
-                    </div>
-
-
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Entitlement status
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        <strong class="nhsuk-tag nhsuk-tag--yellow">
-                          Action required
-                        </strong>
+                      <dd class="nhsuk-summary-list__actions">
+                        
                       </dd>
                     </div>
 
                 </dl>
                 
                     <div class="button-container">
-                      <a href="../entitlement-content/update-S1-entitlement-details"><button style="margin-right:20px;" class="nhsuk-button" type="submit">Update entitlement details</button></a>
+                      <!--a href="../entitlement-content/update-S1-entitlement-details"><button style="margin-right:20px;" class="nhsuk-button" type="submit">Update entitlement details</button></a-->
                       <a href="../entitlement-content/cancel-S1-entitlement"><button class="nhsuk-button nhsuk-button--warning" data-module="nhsuk-button" type="submit">Cancel entitlement</button></a>
                     </div>
               </div>

@@ -177,7 +177,7 @@ router.post([/remove-dependant/], (req, res) => {
 // Entitlements section - S1 Entitlement //
 
 // Update S1 entitlement details
-router.post([/update-S1-entitlement-details/], function(req, res){
+router.post([/change-S1-entitlement-details/], function(req, res){
 
   req.session.data['update-S1-entitlement-details'] = 'yes'
 
@@ -203,7 +203,7 @@ router.post([/print-DL1609/], function(req, res){
 
   req.session.data['DL1609-note'] = 'yes'
 
-  res.redirect('/version-28/s1/account/entitlement-details#tab-Notes');
+  res.redirect('/version-28/s1/account/entitlement-details?add-new-entitlement=yes');
 
 })
 
