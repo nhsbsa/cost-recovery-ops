@@ -53,14 +53,14 @@
           
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
-              <h1 class="nhsuk-heading-xl">S1 entitlement</h1>
+              <h1 class="nhsuk-heading-xl">S1/S072 entitlement</h1>
             </div>
           </div>
       
       
           <!-- Tabs -->
           <div class="nhsuk-tabs" data-module="nhsuk-tabs">
-            <h2 class="nhsuk-tabs__title">S1 entitlement</h2>
+            <h2 class="nhsuk-tabs__title">S1/S072 entitlement</h2>
 
             <ul class="nhsuk-tabs__list">
               <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
@@ -71,9 +71,6 @@
               </li>
               <li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#dependants">Dependants</a>
-              </li>
-              <li class="nhsuk-tabs__list-item">
-                <a class="nhsuk-tabs__tab" href="#treatments">Treatments</a>
               </li>
               <li class="nhsuk-tabs__list-item">
                 <a class="nhsuk-tabs__tab" href="#documents">Documents</a>
@@ -646,7 +643,7 @@
                 <!-- Notes tab content starts -->
                 <h3 class="nhsuk-heading-l">Notes</h3>
 
-                {% if data['new-entitlements-note'] == 'yes' %}
+                {% if data['new-entitlements-note'] == 'yes' or data ['DL1609-note'] == 'yes' %}
               <div class="nhsuk-form-group" id="filterNotes-group">
                 <label class="nhsuk-label" for="filter-notes">
                 Filter notes
@@ -667,18 +664,24 @@
               {% endif %}
 
 
-              {% if data['new-entitlements-note'] == 'yes' %}
+              {% if data['new-entitlements-note'] == 'yes' or data['new-DL1609-note'] == 'yes' %}
               <h3>New note title</h3>
               <p>Added by <b>Joe Bloggs</b><br>
               <span id="currentDate1"></span></p>
-              <p>{% if data['note'] %}
-                {{ data['note'] }}
+              
+              <p>
+                {% if data['note'] %}
+                  {{ data['note'] }}
+                {% elif data['DL1609-note'] %}
+                  {{ data['DL1609-note'] }}
                 {% else %}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 {% endif %}
               </p>
+              
               <hr>
               {% endif %}
+
               
              </div>
               <!-- Notes tab content ends -->

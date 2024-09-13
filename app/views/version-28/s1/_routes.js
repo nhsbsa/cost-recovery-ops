@@ -135,7 +135,7 @@ router.post([/add-dependant/], function(req, res){
   if (addDependant == 'Yes'){
       res.redirect('dependant-details');
   } else {
-      res.redirect('confirmation-S1-S072-added');
+      res.redirect('/version-28/s1/s072-registration/confirmation-S1-S072-added');
   }
 })
 
@@ -201,7 +201,7 @@ router.post([/change-S1-entitlement-institution-details/], function(req, res){
 // Print and send DL1609, alongside adding a note to record
 router.post([/print-DL1609/], function(req, res){
 
-  req.session.data['DL1609-note'] = 'yes'
+  req.session.data['new-DL1609-note'] = 'yes'
 
   res.redirect('/version-28/s1/account/entitlement-details?add-new-entitlement=yes');
 
