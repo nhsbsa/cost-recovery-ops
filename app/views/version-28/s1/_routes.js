@@ -135,7 +135,7 @@ router.post([/add-dependant/], function(req, res){
   if (addDependant == 'Yes'){
       res.redirect('dependant-details');
   } else {
-      res.redirect('/version-28/s1/s072-registration/confirmation-S1-S072-added');
+      res.redirect('/version-28/s1/s072-registration/confirmation-s1-s072-added');
   }
 })
 
