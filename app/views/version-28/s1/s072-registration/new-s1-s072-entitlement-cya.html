@@ -94,7 +94,7 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                       </div>
 
                       <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">Country of issue</dt>
+                        <dt class="nhsuk-summary-list__key">Issue country</dt>
                         <dd class="nhsuk-summary-list__value">
                           {% if data['S1-entitlement-country-of-issue'] %}
                             {{ data['S1-entitlement-country-of-issue'] }}
@@ -290,23 +290,19 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
 <!-- Date format -->
 <script>
   function formatDate(day, month, year) {
-    // Add one month to the current month
-    let newMonth = parseInt(month) + 1;
-    let newYear = parseInt(year);
-
-    // Check if the new month exceeds 12 (December)
-    if (newMonth > 12) {
-        newMonth = 1; // Reset to January
-        newYear += 1; // Increment the year
-    }
-
     const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ];
+    
+    // Make sure month is parsed as an integer to avoid issues with string numbers.
+    let newMonth = parseInt(month, 10);
+    let newYear = parseInt(year, 10);
 
-    const monthName = months[newMonth - 1]; // Get the new month name
-    return `${parseInt(day)} ${monthName} ${newYear}`;
-}
+    const monthName = months[newMonth - 1]; // Convert month number to month name
+
+    // Format the date as "DD Month YYYY"
+    return `${parseInt(day, 10)} ${monthName} ${newYear}`;
+  }
 </script>
 {% endblock %}

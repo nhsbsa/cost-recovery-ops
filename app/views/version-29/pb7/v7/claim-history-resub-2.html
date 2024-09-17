@@ -1,0 +1,224 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Create new resub
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="#">Resubs (Pending)</a></li>
+          <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="#">View Claim ID
+              (Resubmissions)</a></li>
+          <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link"
+              href="claim-treatments-resubid-print-option">View Resub ID (Treatments linked to resub)</a></li>
+          <li class="nhsuk-breadcrumb__item">View details (Evidence)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="person-record-resubs">Back to Tony
+        Smith (Resubs)</a></p>
+
+  </div>
+</nav>
+
+<div class="nhsBSA-sidebar-container">
+
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+
+      <div class="nhsuk-width-container-fluid">
+
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          {# <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+
+              <div class="panel panel-border-wide alert-default">
+                <h2 class="nhsuk-heading-s nhsuk-u-padding-top-3 nhsuk-u-margin-bottom-3">English is their second
+                  language. May require an interpreter.</h2>
+              </div>
+
+            </div>
+          </div> #}
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+              <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                 Resub ID 7790999: Claim ID 345721 (Treatment ID 556107288) - Treatment history
+              </h1>
+            </div>
+            </div>
+
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="resub-details-print-option-resub-2">Treatment details</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="#">Reason for contestation</a>
+                <span class="nhsuk-u-visually-hidden">View overseas visitor manager contact details</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="#">Contact the OVM</a>
+                <span class="nhsuk-u-visually-hidden">Claim summary</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="#">Request for a PRC</a>
+                <span class="nhsuk-u-visually-hidden">View overseas visitor manager contact details</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" 
+                  href="claim-documents-print-option">Evidence</a>
+                <span class="nhsuk-u-visually-hidden">Evidence</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="#">OVM details</a>
+                <span class="nhsuk-u-visually-hidden">Claim history</span>
+              </li>
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="#">History</a>
+                <span class="nhsuk-u-visually-hidden">Claim history</span>
+              </li>
+
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <br><br>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h3>Treatment history</h3>
+
+              <div class="nhsuk-table-responsive">
+               <table role="table" class="nhsuk-table" id="claim-treatment-table">
+                   
+                   <caption class="nhsuk-table__caption"></caption>
+                   <thead role="rowgroup" class="nhsuk-table__head">
+                      <tr role="row">
+                         <th role="columnheader" scope="col" id="treatment-id">Resub ID</th>
+                         <th role="columnheader" scope="col" id="first-name">Initial cost</th>
+                         <th role="columnheader" scope="col" id="last-name">Withdrawn cost</th>
+                         <th role="columnheader" scope="col" id="entitlement-type">Current cost</th>
+                         <th role="columnheader" scope="col" id="agreement-type">Status</th>
+                         <th role="columnheader" scope="col" id="action">Actions</th>
+                      </tr>
+                   </thead>
+                   <tbody class="nhsuk-table__body">
+
+                      <tr role="row" class="nhsuk-table__row">
+                        
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                            <span id="treatmentID_1" class="responsive-table-values" value="555902580">7790992</span>
+                         </td>
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">First name</span>
+                            <span id="firstName_1" class="responsive-table-values" value="Moran">75,000.00</span>
+                         </td>
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Last name</span>
+                            <span id="lastName_1" class="responsive-table-values" value="Phil">2,000.00</span>
+                         </td>
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                            <span id="entitlement_1" class="responsive-table-values" value="EHIC">73,000.00</span>
+                         </td>
+          
+                         </td>
+                            <td class="nhsuk-table__cell"><strong strong="" class="nhsuk-tag no-caps nhsuk-tag">Ready to print</strong></td>
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Actions</span>
+                            <a href="resub-details-print-option" id="viewPatientRecord_1" class="responsive-table-values">
+                               View resub
+                               <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                               <span class="nhsuk-u-visually-hidden">for treatment 555902580</span>
+                            </a>
+                         </td>
+                      </tr>
+                      <tr role="row" class="nhsuk-table__row">
+                        
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                            <span id="treatmentID_1" class="responsive-table-values" value="555902580">7790999</span>
+                         </td>
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">First name</span>
+                            <span id="firstName_1" class="responsive-table-values" value="Moran">75,000.00</span>
+                         </td>
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Last name</span>
+                            <span id="lastName_1" class="responsive-table-values" value="Phil"></span>
+                         </td>
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                            <span id="entitlement_1" class="responsive-table-values" value="EHIC">63,000.00</span>
+                         </td>
+                 
+                            <td class="nhsuk-table__cell"><strong strong="" style="color: #354550" ;="" class="nhsuk-tag no-caps nhsuk-tag--green">In progress</strong></td>
+                         <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Actions</span>
+                            <a href="resub-details-print-option-resub-2" id="viewPatientRecord_1" class="responsive-table-values">
+                               View resub
+                               <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                               <span class="nhsuk-u-visually-hidden">for treatment 555902580</span>
+                            </a>
+                         </td>
+                      </tr>
+                   </tbody>
+                </table>
+                <div>
+                   <nav class="nhsuk-pagination" role="navigation" aria-label="Pagination">
+
+
+                   </nav>
+                </div>
+             </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+
+{% endblock %}

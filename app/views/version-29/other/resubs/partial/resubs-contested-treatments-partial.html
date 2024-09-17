@@ -1,0 +1,342 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claims treatment forms
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container-fluid">
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+      
+          <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="#">Resubs (Pending)</a></li>
+            <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="#">View Claim ID (Resubmissions)</a></li>
+            <li class="nhsuk-breadcrumb__item">View Resub ID (Treatments linked to resub)</li>
+          </ol>
+        </div>
+      </div>
+  
+      <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="claim-list">Back to Search results</a></p>
+
+    </div>
+</nav>
+
+  <div class="nhsBSA-sidebar-container">
+
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+
+        <div class="nhsuk-width-container-fluid">
+
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {# <div class="nhsuk-grid-row">
+                    <div class="nhsuk-grid-column-full">
+
+                        <div class="panel panel-border-wide alert-default">
+                            <h2 class="nhsuk-heading-s nhsuk-u-padding-top-3 nhsuk-u-margin-bottom-3">English is their second language. May require an interpreter.</h2>
+                        </div>
+
+                    </div>
+                </div> #}
+
+                <div class="nhsuk-grid-row">
+                  <div class="nhsuk-grid-column-one-half">
+                    <h1 class="nhsuk-heading-l">
+                      Resub ID 7790992: Claim ID 345721:  Treatment linked to resub
+
+                    </h1>
+                  </div>  
+                 
+                  <div class="nhsuk-grid-column-one-half">
+<a href="resubs-peer-review-confirmation"><button  class="nhsuk-button" type="submit" style="float: right;  margin-right: 20px;">
+    Ready for peer review <span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
+    </button></a>
+                    </div>
+              </div>
+
+          
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item tab-header__navigation-item__item--current">
+                   <a id="menu_treatment_forms" class="nhsuk-secondary-navigation__link"
+                      href="claim-treatments-resubid-print-option">
+                      Treatment linked to resub
+                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                      <span class="nhsuk-u-visually-hidden">tab to search for treatment records for the claim
+                         341516</span>
+                   </a>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                   <a id="menu_action" class="nhsuk-secondary-navigation__link"
+                      href="resub-claim-documents">
+                      Resubmission documents
+                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                      <span class="nhsuk-u-visually-hidden">tab to complete any outstanding actions for the
+                         claim 341516</span>
+                   </a>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                   <a id="menu_claim_summary" class="nhsuk-secondary-navigation__link"
+                      href="resubs-summary-complete">
+                      Resubmission summary
+                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                      <span class="nhsuk-u-visually-hidden">tab to view the overall summary for claim
+                         341516</span>
+                   </a>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                   <a id="menu_case_history" class="nhsuk-secondary-navigation__link"
+                      href="#">
+                      <span>Resubmission history</span>
+                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                      <span class="nhsuk-u-visually-hidden">tab to view all resubs received for claim
+                         341516</span>
+                   </a>
+                </li>
+             </ul>
+                  
+                <hr style="border-bottom:1px solid #ccc; margin:0">
+    <br><br>
+
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-two-thirds">
+    <div class="nhsuk-hint">
+     Search for a single treatment using the treatment ID number or patient's last name. Search for up to 8 treatments at once by separating each treatment ID number with a comma. For example, 10637,16095,17011
+    </div>
+
+    <form class="nhsuk-header__search-form nhsuk-header__search-form--search-results" id="search" action="/search/" method="get" role="search">
+      <label class="nhsuk-u-visually-hidden" for="search-results-field">Search by treatment ID to add treatment for printing or to resub</label>
+      <input class="nhsuk-search__input" id="search-results-field" name="search-field" type="search" placeholder="" value="" autocomplete="off">
+      <a class="nhsuk-search__submit" href="#">
+        <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z"></path>
+        </svg>
+        <span class="nhsuk-u-visually-hidden">Search</span>
+        </a>
+  
+    </form>
+
+
+    </div>
+    </div>
+
+
+    <details class="nhsuk-details-1" >
+      <summary class="nhsuk-details__summary-1">
+        <span class="nhsuk-details__summary-text-1">
+          Filter by status
+        </span>
+      </summary>
+      <div class="nhsuk-details__text">
+        <p>Select all statuses that you want to see the treatments for.</p>
+        <div class="nhsuk-checkboxes">
+
+          <div class="nhsuk-checkboxes__item">
+            <input class="nhsuk-checkboxes__input" id="example-1" name="example" type="checkbox">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-1">
+              Contested
+            </label>
+          </div>
+    
+          <div class="nhsuk-checkboxes__item">
+            <input class="nhsuk-checkboxes__input" id="example-2" name="example" type="checkbox">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-2">
+              Waiting for OVM
+            </label>
+          </div>
+
+          <div class="nhsuk-checkboxes__item">
+            <input class="nhsuk-checkboxes__input" id="example-3" name="example" type="checkbox">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-3">
+              Waiting for PRC
+            </label>
+          </div>
+
+          <div class="nhsuk-checkboxes__item">
+            <input class="nhsuk-checkboxes__input" id="example-4" name="example" type="checkbox">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-4">
+              Maintained
+            </label>
+          </div>
+
+          <div class="nhsuk-checkboxes__item">
+            <input class="nhsuk-checkboxes__input" id="example-5" name="example" type="checkbox">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-5">
+              Partial
+            </label>
+          </div>
+
+          <div class="nhsuk-checkboxes__item">
+            <input class="nhsuk-checkboxes__input" id="example-6" name="example" type="checkbox">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="example-6">
+              Withdrawn
+            </label>
+          </div>
+
+        </div>
+        <br>
+        <a href="resubs-contested-treatments-partial-filtered"><button  class="nhsuk-button" type="submit">
+          Apply
+        </button></a>
+      </div>
+    </details>
+    <div class="nhsuk-table-responsive">
+      <table role="table" class="nhsuk-table" id="claim-treatment-table">
+         <br>
+         <caption class="nhsuk-table__caption"></caption>
+         <thead role="rowgroup" class="nhsuk-table__head">
+            <tr role="row">
+               <th role="columnheader" scope="col" id="treatment-id">Treatment ID</th>
+               <th role="columnheader" scope="col" id="first-name">First name</th>
+               <th role="columnheader" scope="col" id="last-name">Last name</th>
+               <th role="columnheader" scope="col" id="entitlement-type">Entitlement</th>
+               <th role="columnheader" scope="col" id="claim-cost">Current cost (£)	</th>
+               <th role="columnheader" scope="col" id="agreement-type">Status</th>
+               <th role="columnheader" scope="col" id="action">Action</th>
+            </tr>
+         </thead>
+         <tbody class="nhsuk-table__body">
+            
+            <tr role="row" class="nhsuk-table__row">
+              
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span id="treatmentID_1" class="responsive-table-values"
+                     value="555902580">556107288</span>
+               </td>
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First name</span>
+                  <span id="firstName_1" class="responsive-table-values"
+                     value="Moran">Jonas</span>
+               </td>
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span id="lastName_1" class="responsive-table-values"
+                     value="Phil">Richter</span>
+               </td>
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span id="entitlement_1" class="responsive-table-values"
+                     value="EHIC">EHIC</span>
+               </td>
+      
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span id="cost_1" class="responsive-table-values"
+                     value="750.0">75,000.00</span>
+               </td>
+               <td class="nhsuk-table__cell"><strong  strong style="color: #354550"; class="nhsuk-tag no-caps nhsuk-tag--purple">Partial</strong><span class="nhsuk-u-visually-hidden">Treatment 62956 has a maintained status </span></td>
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Actions</span>
+                  <a href="resub-details-print-option-partial"
+                     id="viewPatientRecord_1" class="responsive-table-values">
+                     View treatment
+                     <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                     <span class="nhsuk-u-visually-hidden">for treatment 555902580</span>
+                  </a>
+               </td>
+            </tr>
+            <tr role="row" class="nhsuk-table__row">
+              
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span id="treatmentID_1" class="responsive-table-values"
+                     value="555902580">556102342</span>
+               </td>
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First name</span>
+                  <span id="firstName_1" class="responsive-table-values"
+                     value="Moran">Mary</span>
+               </td>
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span id="lastName_1" class="responsive-table-values"
+                     value="Phil">Smith</span>
+               </td>
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span id="entitlement_1" class="responsive-table-values"
+                     value="EHIC">PRC</span>
+               </td>
+       
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span id="cost_1" class="responsive-table-values"
+                     value="750.0">25,000.00</span>
+               </td>
+                  <td class="nhsuk-table__cell"><strong strong="" style="color: #354550" ;="" class="nhsuk-tag no-caps nhsuk-tag--blue">Maintained</strong></td>
+               <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Actions</span>
+                  <a href="#"
+                     id="viewPatientRecord_1" class="responsive-table-values">
+                     View treatment
+                     <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                     <span class="nhsuk-u-visually-hidden">for treatment 555902580</span>
+                  </a>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div>
+ 
+
+    </div>
+
+  </div>
+
+</div>
+      
+    <!-- <div class="nhsBSA-sidebar-nav">
+
+        <div class="side-nav">
+    
+  
+              <ul>
+            <div id="options" class="options">
+              <h3 class="nhsuk-heading-xs">Browse</h3>
+                <li>
+                <a href="search">Search</a>
+              </li>
+              
+                
+                   <h3 class="nhsuk-heading-xs">Actions</h3>
+                            
+                <li>
+                <a href="account-requests" >Account requests<span class="notification-badge" style="background-color: #005eb8">2 </span></a>
+                    <a href="flagged-records" >Review treatments<span class="notification-badge" style="background-color: #005eb8">4 </span></a>
+                    <a href="uk-claims" class="active">UK claims</a>
+              </li>
+              
+            </div>
+          </ul>
+
+    </div>
+  </div> -->
+
+  </div>
+
+{% endblock %}
+
+

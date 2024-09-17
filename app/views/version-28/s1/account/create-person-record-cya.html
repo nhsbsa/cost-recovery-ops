@@ -291,27 +291,17 @@ Look for an address - Create a new person record - Manage overseas entitlements 
 {% endblock %}
 
 {% block pageScripts %}
-<!-- Date format -->
+<!-- Date Format -->
 <script>
   function formatDate(day, month, year) {
-    // Add one month to the current month
-    let newMonth = parseInt(month) + 1;
-    let newYear = parseInt(year);
-
-    // Check if the new month exceeds 12 (December)
-    if (newMonth > 12) {
-        newMonth = 1; // Reset to January
-        newYear += 1; // Increment the year
-    }
-
     const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ];
 
-    const monthName = months[newMonth - 1]; // Get the new month name
-    return `${parseInt(day)} ${monthName} ${newYear}`;
-}
+    const monthName = months[parseInt(month, 10) - 1]; // Convert month number to month name
+    return `${parseInt(day, 10)} ${monthName} ${parseInt(year, 10)}`; // Format as "DD Month YYYY"
+  }
 </script>
 {% endblock %}
 

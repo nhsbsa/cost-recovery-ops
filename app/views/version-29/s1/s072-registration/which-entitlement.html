@@ -1,0 +1,83 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Select entitlement - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="which-entitlement" method="post">
+
+                      <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                            Add an entitlement
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Which entitlement do you want to add?
+                    </h1>
+
+                    <div class="nhsuk-form-group">
+                      <div class="nhsuk-radios">
+                        
+                        <div class="nhsuk-radios__item">
+                          <input class="nhsuk-radios__input" id="S1" name="entitlement-type" type="radio" value="S1/S072" aria-controls="conditional-contact-1" aria-expanded="false">
+                          <label class="nhsuk-label nhsuk-radios__label" for="S1">S1/S072</label>
+                        </div>
+                        
+                        <div class="nhsuk-radios__item">
+                          <input class="nhsuk-radios__input" id="S2" name="entitlement-type" type="radio" value="S2/E112" aria-controls="conditional-contact-2" aria-expanded="false">
+                          <label class="nhsuk-label nhsuk-radios__label" for="S2">S2/E112</label>
+                        </div>
+
+                        <div class="nhsuk-radios__item">
+                          <input class="nhsuk-radios__input" id="PRC" name="entitlement-type" type="radio" value="PRC" aria-controls="conditional-contact-2" aria-expanded="false">
+                          <label class="nhsuk-label nhsuk-radios__label" for="PRC">PRC</label>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <button class="nhsuk-button nhsuk-u-margin-top-3" data-module="nhsuk-button" type="submit">Continue</button>
+
+                    <p><a href="../account/entitlement-details">Cancel</a></p>
+
+                    </form>
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

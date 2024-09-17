@@ -1,0 +1,307 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Look for an address - Create a new person record - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                            Create a new person record
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Check your answers
+                    </h1>
+   
+                    <form action="confirmation-person-record-created" method="post">
+
+                      
+
+                        <dl class="nhsuk-summary-list">
+
+
+                          <!--div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Personal identification number (PIN)</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['pin'] %}
+                                {{ data['pin'] }}
+                              {% else %}
+                                1234567890
+                              {% endif %}
+                            </dd>
+                            
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record"> Change<span class="nhsuk-u-visually-hidden">personal identification number (PIN)</span> </a>
+                            </dd>
+                          </div-->
+
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">First names</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['first-name'] %}
+                                {{ data['first-name'] }}
+                              {% else %}
+                                John
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record#first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
+                            </dd>
+                          </div>
+
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Last name</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['last-name'] %}
+                                {{ data['last-name'] }}
+                              {% else %}
+                                Doe
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record#last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
+                            </dd>
+                          </div>
+
+
+                          <!--div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">First name at birth</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['birth-first-name'] %}
+                                {{ data['birth-first-name'] }}
+                              {% else %}
+                                Not provided
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record#birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
+                            </dd>
+                          </div-->
+
+
+                          <!--div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Last name</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['birth-last-name'] %}
+                                {{ data['birth-last-name'] }}
+                              {% else %}
+                                Not provided
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record#birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
+                            </dd>
+                          </div-->
+
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date of birth</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
+                                      {% set day = data['dob-day'] %}
+                                      {% set month = data['dob-month'] | int %}
+                                      {% set year = data['dob-year'] %}
+                          
+                                      {# Define month names #}
+                                      {% set month_names = [
+                                          "January", "February", "March", "April", "May", "June",
+                                          "July", "August", "September", "October", "November", "December"
+                                      ] %}
+                          
+                                      {# Get the month name #}
+                                      {% set month_name = month_names[month - 1] %}
+                          
+                                      {# Display the date in the format "day month year" #}
+                                      {{ day | int }} {{ month_name }} {{ year }}
+                                  {% else %}
+                                      4 January 1973
+                                  {% endif %}
+                            </dd>
+                          
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record#dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
+                            </dd>
+                          </div>
+
+
+                          <!--div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Gender</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['gender-selection'] %}
+                                {{ data['gender-selection'] }}
+                              {% else %}
+                                Male
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record#gender-male"> Change<span class="nhsuk-u-visually-hidden">gender</span> </a>
+                            </dd>
+                          </div-->
+
+
+                          <!--div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Nationality</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['nationality'] %}
+                                {{ data['nationality'] }}
+                              {% else %}
+                                French
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record#nationality"> Change<span class="nhsuk-u-visually-hidden">nationality</span> </a>
+                            </dd>
+                          </div-->
+
+
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">Home address</dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['address-line-1'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-region'] or data['address-postcode'] or data['address-country'] %}
+                                  {% if data['address-line-1'] %}
+                                    {{ data['address-line-1'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-line-2'] %}
+                                    {{ data['address-line-2'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-town'] %}
+                                    {{ data['address-town'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-region'] %}
+                                    {{ data['address-region'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-postcode'] %}
+                                    {{ data['address-postcode'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-country'] %}
+                                    {{ data['address-country'] }}
+                                  {% endif %}
+                                {% else %}
+                                  1 Washington Street<br>
+                                  Worcester<br>
+                                  WR1 1NL<br>
+                                  United Kingdom
+                                {% endif %}
+                              </dd>
+
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="address-lookup#postcode"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                              </dd>
+                            </div>
+                          
+
+                            <!--div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">Resident in country since (optional)</dt>
+                              <dd class="nhsuk-summary-list__value" id="formatted-date">
+                                  {% if data['residency-day'] and data['residency-month'] and data['residency-year'] %}
+                                      {% set day = data['residency-day'] %}
+                                      {% set month = data['residency-month'] | int %}
+                                      {% set year = data['residency-year'] %}
+                          
+                                      {# Define month names #}
+                                      {% set month_names = [
+                                          "January", "February", "March", "April", "May", "June",
+                                          "July", "August", "September", "October", "November", "December"
+                                      ] %}
+                          
+                                      {# Get the month name #}
+                                      {% set month_name = month_names[month - 1] %}
+                          
+                                      {# Display the date in the format "day month year" #}
+                                      {{ day | int }} {{ month_name }} {{ year }}
+                                  {% else %}
+                                      2 July 2024
+                                  {% endif %}
+                              </dd>
+                          
+                              <dd class="nhsuk-summary-list__actions">
+                                  <a href="create-person-record#residency-day">Change<span class="nhsuk-u-visually-hidden">resident in country since</span></a>
+                              </dd>
+                          </div-->     
+                          
+                          <!--div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">UK National Insurance Number (NINO)</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['UK-national-insurance-number'] %}
+                                {{ data['UK-national-insurance-number'] }}
+                              {% else %}
+                                Not provided
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="create-person-record#UK-national-insurance-number"> Change<span class="nhsuk-u-visually-hidden">UK national insurance number</span> </a>
+                            </dd>
+                          </div-->
+                          </dl>                          
+      
+                          <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
+                            Save and continue
+                          </button>
+
+                          <p><a href="../search/search-by-person">Cancel</a></p>
+
+                    </form>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Date Format -->
+<script>
+  function formatDate(day, month, year) {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthName = months[parseInt(month, 10) - 1]; // Convert month number to month name
+    return `${parseInt(day, 10)} ${monthName} ${parseInt(year, 10)}`; // Format as "DD Month YYYY"
+  }
+</script>
+{% endblock %}
+

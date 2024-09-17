@@ -1,0 +1,45 @@
+
+{% extends "template-sidebar.html" %}
+{% block beforeContent %}
+  {% include '../s1/_patient-record-breadcrumb.html' %}
+{% endblock %} 
+
+{% block pageTitle %}
+  {{ title or 'h1 Header' }}
+{% endblock %}
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+          {% if showBackLink %}
+          {% from 'back-link/macro.njk' import backLink %}
+        
+            {{ backLink({
+              "href": backHTML if backText else "javascript:history.go(-1)",
+              html: backText if backText else 'Go Back'
+            }) }}
+        {% endif %}
+         
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+              <h1 class="nhsuk-heading-xl"> {{ title or 'pageHeader' }}
+              </h1>
+            </div>
+          </div>
+
+      {% block form %}{% endblock %}
+    </div>
+  </div>
+</div>
+<!--start left navigation-->
+{% include '../s1/_patient-record-sidebar.html' %}
+
+<!--end left navigation-->
+</div>
+</div>
+
+   
+{% endblock %}
