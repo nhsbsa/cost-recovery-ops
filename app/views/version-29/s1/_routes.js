@@ -34,9 +34,9 @@ router.post([/update-personal-details/], function(req, res){
 // Change current address
 router.post([/change-current-address/], function(req, res){
 
-  req.session.data['change-current-address'] = 'yes'
+  req.session.data['change-address'] = 'yes'
 
-  res.redirect('/version-29/s1/account/personal-details#tab-addresses');
+  res.redirect('/version-29/s1/account/personal-details#tab-address');
 
 })
 
