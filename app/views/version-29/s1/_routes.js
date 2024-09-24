@@ -94,9 +94,26 @@ router.post([/which-entitlement/], function(req, res){
 })
 
 // Select source
-router.post([/which-source/], function(req, res){
+router.post([/which-source/], function(req, res) {
+  // Capture form data from the POST request
+  const sourceOfInformation = req.body['source-of-information'];
+  const otherSourceOfInformationName = req.body['other-source-of-information-name'];
+
+  // Store the data in the session object
+  req.session.data = req.session.data || {}; // Initialize session data if not already present
+  req.session.data['source-of-information'] = sourceOfInformation;
+
+  // If 'Other' is selected, store the additional input field data
+  if (sourceOfInformation === 'Other') {
+    req.session.data['other-source-of-information-name'] = otherSourceOfInformationName;
+  } else {
+    // Clear previous "Other" field data if a different option is selected
+    req.session.data['other-source-of-information-name'] = '';
+  }
+
+  // Redirect to the next step
   res.redirect('entitlement-details');
-})
+});
 
 // Input entitlement details
 router.post([/entitlement-details/], function(req, res){
@@ -191,6 +208,40 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
   req.session.data['update-s1-entitlement-institution-details'] = 'yes'
 
   res.redirect('/version-29/s1/account/entitlement-content/s1-entitlement-details#tab-institution-details');
+
+})
+
+// Enter dependant's details
+router.post([/s1-dependant-details/], function(req, res){
+  res.redirect('s1-same-address');
+})
+
+// Does the dependant live at the same address as the Main?
+router.post([/s1-same-address/], function(req, res){
+  var sameAddress = req.session.data['same-address-as-Main'];
+  
+  if (sameAddress == 'Yes'){
+      res.redirect('s1-dependant-details-cya');
+  } else {
+      res.redirect('s1-dependant-address');
+  }
+})
+
+// Enter dependant's address
+router.post([/s1-dependant-address/], function(req, res){
+  res.redirect('s1-dependant-details-cya');
+})
+
+// Remove dependant
+router.post([/s1-remove-dependant/], (req, res) => {
+
+  const removeDependant = req.session.data['remove-dependant']
+
+  if (removeDependant === 'Yes') {
+    res.redirect('s1-dependant-details-cya')
+  } else {
+    res.redirect('s1-dependant-details-cya')
+  }
 
 })
 

@@ -66,17 +66,19 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Source of information</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['source-of-information'] %}
+                          {% if data['source-of-information'] == 'Other' %}
+                            {{ data['other-source-of-information-name'] | default("DWP") }}
+                          {% elif data['source-of-information'] %}
                             {{ data['source-of-information'] }}
                           {% else %}
                             Member State (MS)
                           {% endif %}
                         </dd>
-
                         <dd class="nhsuk-summary-list__actions">
                           <a href="which-source"> Change<span class="nhsuk-u-visually-hidden">source of information</span> </a>
                         </dd>
-                      </div>
+                    </div>
+                    
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Personal identification number (PIN)</dt>

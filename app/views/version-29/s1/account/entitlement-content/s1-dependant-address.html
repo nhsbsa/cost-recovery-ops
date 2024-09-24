@@ -1,0 +1,156 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+What is the dependant's address? - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+          <div class="nhsuk-width-container-fluid">
+              <div class="nhsuk-main-wrapper" id="maincontent">
+                  
+                <div class="nhsuk-grid-column-two-thirds">
+                  
+                  {{ backLink({
+                    "href": "javascript:history.go(-1)",
+                    "text": "Go back"
+                  }) }}
+
+                  
+                      
+                  <form action="s1-dependant-address" method="post">
+
+                    <h1 class="app-page-heading">
+                      <span class="nhsuk-caption-l">
+                          Dependant details
+                      <span class="nhsuk-u-visually-hidden"> - </span>
+                      </span>
+                      Enter {% if data['dependant-first-name'] %}{{ data['dependant-first-name'] }}{% else %}Jane{% endif %}'s home address
+                    </h1>
+
+                      
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-address-line-1-label">
+                          Address line 1
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dependant-address-line-1" name="dependant-address-line-1" type="text"  autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-address-line-2-label">
+                          Address line 2 (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dependant-address-line-2" name="dependant-address-line-2" type="text"  autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-address-town-label">
+                          Town or city
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dependant-address-town" name="dependant-address-town" type="text" autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-address-region-label">
+                          County, province or region (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dependant-address-region" name="dependant-address-region" type="text" autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="dependant-address-postcode-label">
+                          Postcode (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-input--width-10" id="dependant-address-postcode" name="dependant-address-postcode" type="text"  autocomplete="cc-csc">
+                      </div>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" id="dependant-address-country-label" for="dependant-address-country">
+                            Country
+                        </label>
+                        <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="dependant-address-country" name="dependant-address-country">
+                        <datalist id="countries">
+                          <option value="" selected="selected"></option>
+                          <option value="Austria">Austria</option>
+                          <option value="Belgium">Belgium</option>
+                          <option value="Bulgaria">Bulgaria</option>
+                          <option value="Croatia">Croatia</option>
+                          <option value="Cyprus">Cyprus</option>
+                          <option value="Czech Republic">Czech Republic</option>
+                          <option value="Denmark">Denmark</option>
+                          <option value="Estonia">Estonia</option>
+                          <option value="Finland">Finland</option>
+                          <option value="France">France</option>
+                          <option value="Germany">Germany</option>
+                          <option value="Gibraltar">Gibraltar</option>
+                          <option value="Greece">Greece</option>
+                          <option value="Hungary">Hungary</option>
+                          <option value="Iceland">Iceland</option>
+                          <option value="Ireland">Ireland</option>
+                          <option value="Italy">Italy</option>
+                          <option value="Latvia">Latvia</option>
+                          <option value="Liechtenstein">Liechtenstein</option>
+                          <option value="Lithuania">Lithuania</option>
+                          <option value="Luxembourg">Luxembourg</option>
+                          <option value="Malta">Malta</option>
+                          <option value="Netherlands">Netherlands</option>
+                          <option value="Norway">Norway</option>
+                          <option value="Poland">Poland</option>
+                          <option value="Portugal">Portugal</option>
+                          <option value="Romania">Romania</option>
+                          <option value="Slovakia">Slovakia</option>
+                          <option value="Slovenia">Slovenia</option>
+                          <option value="Spain">Spain</option>
+                          <option value="Sweden">Sweden</option>
+                          <option value="Switzerland">Switzerland</option>
+                        </datalist>                        
+                    </div>
+
+                  
+                        
+                                            
+                    <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
+                        Save and continue
+                    </button>
+
+                    <p><a href="s1-entitlement-details">Cancel</a></p>
+
+                    </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#nationalityDrop')
+  })
+</script>
+{% endblock %}
