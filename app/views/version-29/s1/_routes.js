@@ -88,9 +88,20 @@ router.post([/entitlements-note/], function(req, res){
 
 // Add a new entitlement to a person's record //
 
-// Select entitlement 
+// Select entitlement
 router.post([/which-entitlement/], function(req, res){
-  res.redirect('which-source');
+  res.redirect('which-s1-entitlement');
+})
+
+// Select specific S1 entitlement
+router.post([/which-s1-entitlement/], function(req, res){
+  var s1EntitlementType = req.session.data['s1-entitlement-type'];
+  
+  if (s1EntitlementType == 'S1/S072'){
+      res.redirect('which-source');
+  } else {
+      res.redirect('/version-29/s1/s072-registration/entitlement-details');
+  }
 })
 
 // Select source
@@ -211,26 +222,56 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
 
 })
 
+
+
+// DL1609 screens //
+
+// Download and send DL1609, alongside adding a note to record
+router.post([/download-dl1609/], function(req, res){
+
+  req.session.data['new-DL609-note'] = 'yes'
+
+  res.redirect('/version-29/s1/account/entitlement-details?add-new-entitlement=yes');
+
+})
+
+
+// Entitlements and enquiries section //
+
+// Add a dependant journey //
+
+// Search for a dependant
+router.post([/s1-dependant-search/], function(req, res){
+  res.redirect('s1-dependant-search-results');
+})
+
+// Confirmation - Dependant added to S1/S072 entitlement
+router.post([/view-dependant-details/], function(req, res){
+  res.redirect('confirmation-dependant-added');
+})
+
 // Enter dependant's details
-router.post([/s1-dependant-details/], function(req, res){
-  res.redirect('s1-same-address');
+router.post([/s1-create-new-dependant-record/], function(req, res){
+  res.redirect('dependant-same-address');
 })
 
 // Does the dependant live at the same address as the Main?
-router.post([/s1-same-address/], function(req, res){
-  var sameAddress = req.session.data['same-address-as-Main'];
+router.post([/dependant-same-address/], function(req, res){
+  var dependantSameAddress = req.session.data['dependant-same-address-as-main'];
   
-  if (sameAddress == 'Yes'){
+  if (dependantSameAddress == 'Yes'){
       res.redirect('s1-dependant-details-cya');
   } else {
-      res.redirect('s1-dependant-address');
+      res.redirect('manual-dependant-address');
   }
 })
 
 // Enter dependant's address
-router.post([/s1-dependant-address/], function(req, res){
+router.post([/manual-dependant-address/], function(req, res){
   res.redirect('s1-dependant-details-cya');
 })
+
+
 
 // Remove dependant
 router.post([/s1-remove-dependant/], (req, res) => {
@@ -242,19 +283,6 @@ router.post([/s1-remove-dependant/], (req, res) => {
   } else {
     res.redirect('s1-dependant-details-cya')
   }
-
-})
-
-
-
-// DL1609 screens //
-
-// Download and send DL1609, alongside adding a note to record
-router.post([/download-dl1609/], function(req, res){
-
-  req.session.data['new-DL609-note'] = 'yes'
-
-  res.redirect('/version-29/s1/account/entitlement-details?add-new-entitlement=yes');
 
 })
 
