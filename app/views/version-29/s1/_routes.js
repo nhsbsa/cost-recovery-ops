@@ -27,7 +27,15 @@ router.post([/update-personal-details/], function(req, res){
 
   req.session.data['updated-personal-details'] = 'yes'
 
-  res.redirect('/version-29/s1/account/personal-details#tab-personal-details');
+  res.redirect('/version-29/s1/account/personal-details-comment');
+})
+
+// Add comments alongside updates made to personal details
+router.post([/personal-details-comment/], function(req, res){
+
+  req.session.data['add-personal-details-comment'] = 'yes'
+
+  res.redirect('/version-29/s1/account/case-history');
 
 })
 
@@ -36,18 +44,37 @@ router.post([/change-current-address/], function(req, res){
 
   req.session.data['change-address'] = 'yes'
 
-  res.redirect('/version-29/s1/account/personal-details#tab-address');
+  res.redirect('/version-29/s1/account/change-current-address-comment');
 
 })
 
-// Add a new address
-router.post([/add-new-address/], function(req, res){
+// Add comments alongside change to current address
+router.post([/change-current-address-comment/], function(req, res){
 
-  req.session.data['add-new-address'] = 'yes'
+  req.session.data['add-address-change-comment'] = 'yes'
 
-  res.redirect('/version-29/s1/account/personal-details#tab-addresses');
+  res.redirect('/version-29/s1/account/case-history');
 
 })
+
+// Change date of residency in UK
+router.post([/change-date-of-residency-uk/], function(req, res){
+
+  req.session.data['change-date-of-residency-uk'] = 'yes'
+
+  res.redirect('/version-29/s1/account/change-date-of-residency-uk-comment');
+
+})
+
+// Add comments alongside change to residency in UK date
+router.post([/change-date-of-residency-uk-comment/], function(req, res){
+
+  req.session.data['add-residency-change-comment'] = 'yes'
+
+  res.redirect('/version-29/s1/account/case-history');
+
+})
+
 
 // Add contact details
 router.post([/add-contact-details/], function(req, res){

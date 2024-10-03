@@ -41,132 +41,7 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
                     
                     <form action="change-current-address" method="post">
 
-                      {% if data['add-new-address'] == 'yes' %}
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-line-1-label">
-                          Address line 1
-                        </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-address-line-1" name="new-address-line-1" type="text"  autocomplete="cc-csc" value="8 Rothbury Terrace">
-                      </div>
-              
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-line-2-label">
-                          Address line 2 (optional)
-                        </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-address-line-2" name="new-address-line-2" type="text"  autocomplete="cc-csc" value="Heaton">
-                      </div>
-              
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-town-label">
-                          Town or city
-                        </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-address-town" name="new-address-town" type="text" autocomplete="cc-csc" value="Newcastle upon Tyne">
-                      </div>
-              
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-region-label">
-                          County, province or region (optional)
-                        </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-address-region" name="new-address-region" type="text" autocomplete="cc-csc" value="Tyne and Wear">
-                      </div>
-              
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-address-postcode-label">
-                          Postcode (optional)
-                        </label>
-                        <input class="nhsuk-input nhsuk-input--width-10" id="new-address-postcode" name="new-address-postcode" type="text"  autocomplete="cc-csc" value="NE6 5XH">
-                      </div>
-
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" id="new-address-country-label" for="new-address-country">
-                            Country
-                        </label>
-                        <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="new-address-country" name="new-address-country" value="United Kingdom">
-                        <datalist id="countries">
-                          <option value="" selected="selected"></option>
-                          <option value="Austria">Austria</option>
-                          <option value="Belgium">Belgium</option>
-                          <option value="Bulgaria">Bulgaria</option>
-                          <option value="Croatia">Croatia</option>
-                          <option value="Cyprus">Cyprus</option>
-                          <option value="Czech Republic">Czech Republic</option>
-                          <option value="Denmark">Denmark</option>
-                          <option value="Estonia">Estonia</option>
-                          <option value="Finland">Finland</option>
-                          <option value="France">France</option>
-                          <option value="Germany">Germany</option>
-                          <option value="Gibraltar">Gibraltar</option>
-                          <option value="Greece">Greece</option>
-                          <option value="Hungary">Hungary</option>
-                          <option value="Iceland">Iceland</option>
-                          <option value="Ireland">Ireland</option>
-                          <option value="Italy">Italy</option>
-                          <option value="Latvia">Latvia</option>
-                          <option value="Liechtenstein">Liechtenstein</option>
-                          <option value="Lithuania">Lithuania</option>
-                          <option value="Luxembourg">Luxembourg</option>
-                          <option value="Malta">Malta</option>
-                          <option value="Netherlands">Netherlands</option>
-                          <option value="Norway">Norway</option>
-                          <option value="Poland">Poland</option>
-                          <option value="Portugal">Portugal</option>
-                          <option value="Romania">Romania</option>
-                          <option value="Slovakia">Slovakia</option>
-                          <option value="Slovenia">Slovenia</option>
-                          <option value="Spain">Spain</option>
-                          <option value="Sweden">Sweden</option>
-                          <option value="Switzerland">Switzerland</option>
-                        </datalist>                        
-                    </div>
-
-                    <hr>
-
-                    <div class="nhsuk-form-group">
-                      <label class="nhsuk-label" for="residency-label">
-                          Date of residency in UK
-                      </label>
-                      <div class="nhsuk-hint" id="residency-hint">
-                          For example, 2 10 2023
-                      </div>
-                      <div class="nhsuk-date-input">
-                          <div class="nhsuk-date-input__item">
-                              <label id="residency-day-label" class="nhsuk-label nhsuk-date-input__label" for="residency-day">Day</label>
-                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
-                                     id="residency-day"
-                                     name="residency-day"
-                                     type="number"
-                                     pattern="[0-9]*"
-                                     inputmode="numeric"
-                                     maxlength="2"
-                                     oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();" value="">
-                          </div>
-                  
-                          <div class="nhsuk-date-input__item">
-                              <label id="residency-month-label" class="nhsuk-label nhsuk-date-input__label" for="residency-month">Month</label>
-                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
-                                     id="residency-month"
-                                     name="residency-month"
-                                     type="number"
-                                     pattern="[0-9]*"
-                                     inputmode="numeric"
-                                     maxlength="2"
-                                     oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();" value="">
-                          </div>
-                  
-                          <div class="nhsuk-date-input__item">
-                              <label id="residency-year-label" class="nhsuk-label nhsuk-date-input__label" for="residency-year">Year</label>
-                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4"
-                                     id="residency-year"
-                                     name="residency-year"
-                                     type="number"
-                                     pattern="[0-9]*"
-                                     inputmode="numeric"
-                                     maxlength="4"
-                                     oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();" value="">
-                          </div>
-                      </div>
-                  </div>
-                  {% else %}
+                     
                       
                       <div class="nhsuk-form-group">
                         <label class="nhsuk-label" for="update-address-line-1-label">
@@ -407,7 +282,7 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
                       </datalist>
                     </div>
 
-                    <hr>
+                    <!--hr>
 
                     <div class="nhsuk-form-group">
                       <label class="nhsuk-label" for="change-residency-label">
@@ -453,12 +328,11 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
                                      oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
                           </div>
                       </div>
-                  </div>
-                  {% endif %}
+                  </div-->
                         
                                             
                     <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
-                        Save and continue
+                        Continue
                     </button>
 
                     <p><a href="../account/personal-details">Cancel</a></p>
