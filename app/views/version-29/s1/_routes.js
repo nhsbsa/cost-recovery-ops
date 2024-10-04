@@ -22,20 +22,44 @@ router.post([/create-person-record-cya/], function(req, res){
 
 // Personal details tabs //
 
-// Update personal details
-router.post([/update-personal-details/], function(req, res){
+// Change basic personal details
+router.post([/change-basic-personal-details/], function(req, res){
 
-  req.session.data['updated-personal-details'] = 'yes'
+  req.session.data['change-basic-personal-details'] = 'yes'
 
-  res.redirect('/version-29/s1/account/personal-details-comment');
+  res.redirect('/version-29/s1/account/basic-personal-details-comment');
 })
 
-// Add comments alongside updates made to personal details
-router.post([/personal-details-comment/], function(req, res){
+// Add comments alongside change made to basic personal details
+router.post([/basic-personal-details-comment/], function(req, res){
 
-  req.session.data['add-personal-details-comment'] = 'yes'
+  req.session.data['add-basic-personal-details-comment'] = 'yes'
 
-  res.redirect('/version-29/s1/account/case-history');
+  res.redirect('/version-29/s1/account/personal-details');
+
+})
+
+// Change additional personal details
+router.post([/change-additional-personal-details/], function(req, res){
+
+  req.session.data['change-additional-personal-details'] = 'yes'
+
+  res.redirect('/version-29/s1/account/additional-personal-details-change-reason');
+})
+
+// Select the reason for the change to the additional personal details
+router.post([/additional-personal-details-change-reason/], function(req, res){
+
+  res.redirect('/version-29/s1/account/additional-personal-details-comment');
+
+})
+
+// Add comments alongside change made to basic personal details
+router.post([/additional-personal-details-comment/], function(req, res){
+
+  req.session.data['add-additional-personal-details-comment'] = 'yes'
+
+  res.redirect('/version-29/s1/account/personal-details');
 
 })
 

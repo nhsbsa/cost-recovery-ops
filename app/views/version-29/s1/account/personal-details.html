@@ -67,7 +67,6 @@
             <!-- Tab content -->
             <div class="nhsuk-tabs__panel" id="personal-details">
               <!-- Personal details tab content starts -->
-              
                 <dl class="nhsuk-summary-list">
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
@@ -76,8 +75,15 @@
                       <dd class="nhsuk-summary-list__value">
                         123456
                       </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a class="app-link--copy" href="javascript:void(0);" aria-live="assertive" onclick="copyValue(this)">Copy<span class="nhsuk-u-visually-hidden">person record ID</span></a>
+                      </dd>
                     </div>
-                  
+                </dl>
+                    
+
+                <h2 class="nhsuk-heading-m">Basic details</h2>
+                <dl class="nhsuk-summary-list">
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
                         First names
@@ -88,6 +94,9 @@
                         {% else %}
                           John
                         {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
                       </dd>
                     </div>
 
@@ -102,6 +111,9 @@
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
                       </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
+                      </dd>
                     </div>
                   
                     <div class="nhsuk-summary-list__row">
@@ -115,6 +127,9 @@
                           Doe
                         {% endif %}
                       </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
+                      </dd>
                     </div>
 
                     <div class="nhsuk-summary-list__row">
@@ -127,6 +142,9 @@
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
                       </dd>
                     </div>
               
@@ -155,8 +173,18 @@
                           4 January 1973
                         {% endif %}
                       </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
+                      </dd>
                     </div>
+                </dl>
 
+                <p><a href="change-basic-personal-details">Change basic details</a></p>
+                <br>
+
+
+                <h2 class="nhsuk-heading-m">Additional details</h2>
+                <dl class="nhsuk-summary-list">
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
                         Sex
@@ -211,7 +239,11 @@
                   </div>
                 </dl>
 
-                  <p><a href="update-personal-details">Update personal details</a></p>
+                {% if data['change-additional-personal-details'] == 'yes' %}
+                <p><a href="change-additional-personal-details">Change additional details</a></p>
+                {% else %}
+                <p><a href="change-additional-personal-details">Add additional details</a></p>
+                {% endif %}
                 </div>
                 <!-- Personal details tabs content ends -->
 
@@ -262,41 +294,43 @@
                 
               
                     <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          Date of residency in UK
+                      <dt class="nhsuk-summary-list__key">
+                        Date of residency in UK
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                          {% set month_names = {
-                              '1': 'January',
-                              '2': 'February',
-                              '3': 'March',
-                              '4': 'April',
-                              '5': 'May',
-                              '6': 'June',
-                              '7': 'July',
-                              '8': 'August',
-                              '9': 'September',
-                              '10': 'October',
-                              '11': 'November',
-                              '12': 'December'
-                          } %}
-                      
-                          {% if data['change-address'] == 'yes' and data['change-residency-day'] and data['change-residency-month'] and data['change-residency-year'] %}
-                              {# Convert day and month to integers to handle leading zeroes #}
-                              {{ data['change-residency-day'] | int }} {{ month_names[data['change-residency-month'] | int] }} {{ data['change-residency-year'] }}
+                        {% set month_names = {
+                          '1': 'January',
+                          '2': 'February',
+                          '3': 'March',
+                          '4': 'April',
+                          '5': 'May',
+                          '6': 'June',
+                          '7': 'July',
+                          '8': 'August',
+                          '9': 'September',
+                          '10': 'October',
+                          '11': 'November',
+                          '12': 'December'
+                        } %}
+                    
+                        {% if data['change-date-of-residency-uk'] == 'yes' %}
+                          {% if data['change-residency-day'] and data['change-residency-month'] and data['change-residency-year'] %}
+                            {{ data['change-residency-day'] | int }} {{ month_names[data['change-residency-month'] | int] }} {{ data['change-residency-year'] }}
                           {% elseif data['residency-day'] and data['residency-month'] and data['residency-year'] %}
-                              {# Convert day and month to integers to handle leading zeroes #}
-                              {{ data['residency-day'] | int }} {{ month_names[data['residency-month'] | int] }} {{ data['residency-year'] }}
+                            {{ data['residency-day'] | int }} {{ month_names[data['residency-month'] | int] }} {{ data['residency-year'] }}
                           {% else %}
-                              <span class="nhsuk-u-visually-hidden">Not provided</span>
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
                           {% endif %}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                          <a href="change-date-of-residency-uk">
-                              Change<span class="nhsuk-u-visually-hidden"> date of residency in UK</span>
-                          </a>
-                      </dd>                      
-                    </div>
+                        <a href="change-date-of-residency-uk">
+                          Change<span class="nhsuk-u-visually-hidden"> date of residency in UK</span>
+                        </a>
+                      </dd>
+                    </div>                    
                   </dl>
               
                   
@@ -493,35 +527,95 @@
     showPanel("#personal-details");
     document.querySelector('a[href="#personal-details"]').parentElement.classList.add("nhsuk-tabs__list-item--selected");
   });
-
-
- // Current Date and Time
-
-  // JavaScript code
-  var currentDateElement = document.getElementById("currentDate1");
-
-  // Get the current date
-  var currentDate = new Date();
-
-  // Format the date as desired
-  var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-  var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
-
-  // Format the time as desired
-  var timeOptions = { hour: 'numeric', minute: 'numeric', hour24: true };
-  var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
-
-  // Combine date and time
-  var formattedDateTime = formattedDate + ' at ' + formattedTime;
-
-  // Set the formatted date and time as the content of the element
-  currentDateElement.textContent = formattedDateTime;
 </script>
 
-<!-- Date format -->
+<!-- Moved the style block outside of the script tags -->
+<style>
+.app-link--copy, .app-link--copy:link, .app-link--copy:active, .app-link--copy:visited, .app-link--copy:hover {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  border-bottom-color: #007f3b;
+  box-shadow: 0 2px 0 #007f3b;
+  margin-bottom: 16px;
+  text-transform: none;
+  background-color: #fff;
+  border: 1px solid #007f3b;
+  color: #007f3b;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+.app-link--copy:hover {
+  background-color: #f0f4f5;
+}
+.app-link--copy:focus {
+  background-color: #ffeb3b;
+  box-shadow: 0 -2px #ffeb3b, 0 4px #212b32;
+  color: #212b32;
+  outline: 4px solid rgba(0, 0, 0, 0);
+  text-decoration: none;
+  border-color: #ffeb3b;
+}
+</style>
+
 <script>
-  function formatDate(day, month, year) {
-    
+var lastClickedButton = null;
+
+function copyValue(element) {
+    var valueElement = element.closest('.nhsuk-summary-list__row').querySelector('.nhsuk-summary-list__value');
+    var valueToCopy = valueElement.textContent.trim();
+
+    // Create a temporary textarea to copy the value to the clipboard
+    var tempTextarea = document.createElement('textarea');
+    tempTextarea.value = valueToCopy;
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextarea);
+
+    // Reset the text of the previously clicked button
+    if (lastClickedButton) {
+      lastClickedButton.textContent = 'Copy';
+    }
+
+    element.textContent = 'Copied';
+    element.focus();
+    lastClickedButton = element;
+}
+</script>
+
+<script>
+// Current Date and Time
+
+document.addEventListener("DOMContentLoaded", function () {
+  var currentDateElement = document.getElementById("currentDate1");
+
+  if (currentDateElement) {
+    // Get the current date
+    var currentDate = new Date();
+
+    // Format the date as desired
+    var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+    var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+
+    // Format the time as desired
+    var timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true }; // Fixed hour24 to hour12
+    var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+
+    // Combine date and time
+    var formattedDateTime = formattedDate + ' at ' + formattedTime;
+
+    // Set the formatted date and time as the content of the element
+    currentDateElement.textContent = formattedDateTime;
+  }
+});
+</script>
+
+<script>
+// Date format function
+function formatDate(day, month, year) {
     let newMonth = parseInt(month);
     let newYear = parseInt(year);
 
@@ -540,4 +634,5 @@
     return `${parseInt(day)} ${monthName} ${newYear}`;
 }
 </script>
+
 {% endblock %}
