@@ -1,0 +1,795 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} Person details page {% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+                <ol class="nhsuk-breadcrumb__list">
+                    <li class="nhsuk-breadcrumb__item">
+                        <a class="nhsuk-breadcrumb__link" href="search">Search (Person)</a>
+                    </li>
+                    <li class="nhsuk-breadcrumb__item">
+                        <a class="nhsuk-breadcrumb__link" href="person-details">Search results (Person)</a>
+                    </li>
+                    <li class="nhsuk-breadcrumb__item">Laura Peteers (Entitlements and treatments)</li>
+                </ol>
+            </div>
+        </div>
+
+        <p class="nhsuk-breadcrumb__back">
+            <a class="nhsuk-breadcrumb__backlink" href="search-results">Back to search results</a>
+        </p>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-two-thirds">
+                            <h1 class="nhsuk-heading-xl">Entitlements and treatments</h1>
+                        </div>
+                        <div class="nhsuk-grid-column-one-third" style="text-align:right;">
+                            <button id="add_new_entitlement" class="nhsuk-button nhsuk-button--primary">Add new
+                                entitlement</button>
+                        </div>
+                    </div>
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-full">
+                            <hr style="border-bottom: 4px solid #005eb8; margin:0;" />
+                            <p style="padding-top:24px;">Select an entitlement to view treatments</p>
+
+                            <!--start of ehic-->
+                            <h2 class="nhsuk-heading-m" id="entitlement-ehic">EHIC</h2>
+                            <div class="nhsuk-card">
+                                <div class="nhsuk-card__content">
+                                    <details class="nhsuk-details-1">
+                                        <summary class="nhsuk-details__summary-1">
+                                            <span class="nhsuk-details__summary-text-1">
+                                                EHIC - Valid: until 31/12/2025 - France (FR)
+                                            </span>
+                                        </summary>
+                                        <div class="nhsuk-details__text">
+                                            <div class="nhsuk-action-link">
+                                                <a class="nhsuk-action-link__link" href="person-entitlements-details-ehic">
+                                                    <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        aria-hidden="true" width="36" height="36">
+                                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path
+                                                            d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z">
+                                                        </path>
+                                                    </svg>
+                                                    <span class="nhsuk-action-link__text">View entitlement
+                                                        details</span>
+                                                </a>
+                                            </div>
+                                            <div class="nhsuk-table-responsive">
+                                                <table id="EHIC_treatments_table" role="table">
+                                                    <caption class="nhsuk-table__caption"></caption>
+                                                    <thead role="rowgroup" class="nhsuk-table__head">
+                                                        <tr role="row">
+                                                            <th role="columnheader" scope="col">Treatment ID</th>
+                                                            <th role="columnheader" scope="col">Start date</th>
+                                                            <th role="columnheader" scope="col">End date</th>
+                                                            <th role="columnheader" scope="col">Cost (£)</th>
+                                                            <th role="columnheader" scope="col">Status</th>
+                                                            <th role="columnheader" scope="col">Claim ID</th>
+                                                            <th class="nhsuk-table__header" scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="nhsuk-table__body">
+                                                        <tr role="row" class="nhsuk-table__row">
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Treatment
+                                                                    ID</span>
+                                                                <p id="treatmentDTO.treatmentId_555557967_EHIC_0">
+                                                                    62999</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Start
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.startDate.dateString_555557967_EHIC_0">
+                                                                    01/06/2022</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">End
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.endDate.dateString_555557967_EHIC_0">
+                                                                    05/06/2022</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Cost
+                                                                    (£)</span>
+                                                                <p id="treatmentDTO.treatmentCost_555557967_EHIC_0">
+                                                                    953.00</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                    <strong class="nhsuk-tag no-caps"
+                                                                    id="treatmentDTO.status_555557967_EHIC_0">Claimed</strong>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Claim
+                                                                    ID</span>
+                                                                    <a href="claim-treatment-forms-1">
+                                                                <span id="claimId_555557967_EHIC_0">9543</span></a>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading">Action</span>
+                                                                <p>
+                                                                    <a id="treatmentId_Link_555557967" href="#">
+                                                                        View treatment
+                                                                        <span
+                                                                            class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                        <span class="nhsuk-u-visually-hidden">treatment
+                                                                            details with treatment id 555,557,967</span>
+                                                                    </a>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="nhsuk-table__row">
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Treatment
+                                                                    ID</span>
+                                                                <p id="treatmentDTO.treatmentId_555557868_EHIC_1">
+                                                                    62956</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Start
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.startDate.dateString_555557868_EHIC_1">
+                                                                    01/10/2021</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">End
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.endDate.dateString_555557868_EHIC_1">
+                                                                    10/10/2021</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Cost
+                                                                    (£)</span>
+                                                                <p id="treatmentDTO.treatmentCost_555557868_EHIC_1">
+                                                                    10,888.45</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                <strong class="nhsuk-tag no-caps"
+                                                                    id="treatmentDTO.status_555557868_EHIC_1">Claimed</strong>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Claim
+                                                                    ID</span>
+                                                                <a href="claim-treatment-forms-1" id="claimId_555557868_EHIC_1">
+                                                                    <span>9543</span>
+                                                                    <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                    <span class="nhsuk-u-visually-hidden">claim ID can
+                                                                        be viewed</span>
+                                                                </a>
+
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading">Action</span>
+                                                                <p>
+                                                                    <a id="treatmentId_Link_555557868" href="#">
+                                                                        View treatment
+                                                                        <span
+                                                                            class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                        <span class="nhsuk-u-visually-hidden">treatment
+                                                                            details with treatment id 555,557,868</span>
+                                                                    </a>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="nhsuk-table__row">
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Treatment
+                                                                    ID</span>
+                                                                <p id="treatmentDTO.treatmentId_555557876_EHIC_2">
+                                                                    62946</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Start
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.startDate.dateString_555557876_EHIC_2">
+                                                                    10/02/2022</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">End
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.endDate.dateString_555557876_EHIC_2">
+                                                                    13/02/2022</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Cost
+                                                                    (£)</span>
+                                                                <p id="treatmentDTO.treatmentCost_555557876_EHIC_2">
+                                                                    100.00</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                <strong class="nhsuk-tag no-caps nhsuk-tag--green"
+                                                                    id="treatmentDTO.status_555557876_EHIC_2">Processed</strong>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Claim
+                                                                    ID</span>
+
+                                                                <span id="claimId_555557876_EHIC_2">-</span>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading">Action</span>
+                                                                <p>
+                                                                    <a id="treatmentId_Link_555557876" href="#">
+                                                                        View treatment
+                                                                        <span
+                                                                            class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                        <span class="nhsuk-u-visually-hidden">treatment
+                                                                            details with treatment id 555,557,876</span>
+                                                                    </a>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="nhsuk-table__row">
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Treatment
+                                                                    ID</span>
+                                                                <p id="treatmentDTO.treatmentId_555557871_EHIC_3">
+                                                                    61784</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Start
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.startDate.dateString_555557871_EHIC_3">
+                                                                    01/10/2020</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">End
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.endDate.dateString_555557871_EHIC_3">
+                                                                    22/10/2020</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Cost
+                                                                    (£)</span>
+                                                                <p id="treatmentDTO.treatmentCost_555557871_EHIC_3">
+                                                                    300.00</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                <strong class="nhsuk-tag no-caps nhsuk-tag--green"
+                                                                    id="treatmentDTO.status_555557871_EHIC_3">Processed</strong>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Claim
+                                                                    ID</span>
+
+                                                                <span id="claimId_555557871_EHIC_3">-</span>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading">Action</span>
+                                                                <p>
+                                                                    <a id="treatmentId_Link_555557871" href="#">
+                                                                        View treatment
+                                                                        <span
+                                                                            class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                        <span class="nhsuk-u-visually-hidden">treatment
+                                                                            details with treatment id 555,557,871</span>
+                                                                    </a>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="nhsuk-table__row">
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Treatment
+                                                                    ID</span>
+                                                                <p id="treatmentDTO.treatmentId_555557879_EHIC_4">
+                                                                   61125</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Start
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.startDate.dateString_555557879_EHIC_4">
+                                                                    21/04/2022</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">End
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.endDate.dateString_555557879_EHIC_4">
+                                                                    30/04/2022</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Cost
+                                                                    (£)</span>
+                                                                <p id="treatmentDTO.treatmentCost_555557879_EHIC_4">
+                                                                    100.00</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                <strong class="nhsuk-tag no-caps nhsuk-tag--green"
+                                                                    id="treatmentDTO.status_555557879_EHIC_4">Processed</strong>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Claim
+                                                                    ID</span>
+
+                                                                <span id="claimId_555557879_EHIC_4">-</span>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading">Action</span>
+                                                                <p>
+                                                                    <a id="treatmentId_Link_555557879" href="#">
+                                                                        View treatment
+                                                                        <span
+                                                                            class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                        <span class="nhsuk-u-visually-hidden">treatment
+                                                                            details with treatment id 555,557,879</span>
+                                                                    </a>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+
+                            <!--end of ehic-->
+                            <!--start prc-->
+                            <h2 class="nhsuk-heading-m" id="entitlement-prc">PRC</h2>
+                            <!--start card-->
+                            <div class="nhsuk-card">
+                                <div class="nhsuk-card__content">
+                                    <details class="nhsuk-details-1">
+                                        <summary class="nhsuk-details__summary-1">
+                                            <span class="nhsuk-details__summary-text-1">
+                                                PRC - Valid: 02/08/2021 to 03/08/2021 - France (FR)
+                                            </span>
+                                        </summary>
+                                        <div class="nhsuk-details__text">
+                                            <div class="nhsuk-action-link">
+                                                <a class="nhsuk-action-link__link" href="#">
+                                                    <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        aria-hidden="true" width="36" height="36">
+                                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path
+                                                            d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z">
+                                                        </path>
+                                                    </svg>
+                                                    <span class="nhsuk-action-link__text">View entitlement
+                                                        details</span>
+                                                </a>
+                                            </div>
+                                            <div class="nhsuk-table-responsive">
+                                                <table id="PRC_treatments_table" role="table">
+                                                    <caption class="nhsuk-table__caption"></caption>
+                                                    <thead role="rowgroup" class="nhsuk-table__head">
+                                                        <tr role="row">
+                                                            <th role="columnheader" scope="col">Treatment ID</th>
+                                                            <th role="columnheader" scope="col">Start date</th>
+                                                            <th role="columnheader" scope="col">End date</th>
+                                                            <th role="columnheader" scope="col">Cost (£)</th>
+                                                            <th role="columnheader" scope="col">Status</th>
+                                                            <th role="columnheader" scope="col">Claim ID</th>
+                                                            <th class="nhsuk-table__header" scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="nhsuk-table__body">
+                                                        <tr role="row" class="nhsuk-table__row">
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Treatment
+                                                                    ID</span>
+                                                                <p id="treatmentDTO.treatmentId_555557943_PRC_0">
+                                                                    555558574</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Start
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.startDate.dateString_555557943_PRC_0">
+                                                                    02/08/2021</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">End
+                                                                    date</span>
+                                                                <p id="treatmentDTO.endDate.dateString_555557943_PRC_0">
+                                                                   03/08/2021</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Cost
+                                                                    (£)</span>
+                                                                <p id="treatmentDTO.treatmentCost_555557943_PRC_0">
+                                                                    315.00</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                <strong class="nhsuk-tag no-caps"
+                                                                    id="treatmentDTO.status_555557943_PRC_0">Claimed</strong>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Claim
+                                                                    ID</span>
+                                                                <a href="#" id="claimId_555557943_PRC_0">
+                                                                    <span>444438</span>
+                                                                    <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                    <span class="nhsuk-u-visually-hidden">claim ID can
+                                                                        be viewed</span>
+                                                                </a>
+
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading">Action</span>
+                                                                <p>
+                                                                    <a id="treatmentId_Link_555557943" href="#">
+                                                                        View treatment
+                                                                        <span
+                                                                            class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                        <span class="nhsuk-u-visually-hidden">treatment
+                                                                            details with treatment id 555,557,943</span>
+                                                                    </a>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                            <!--end card-->
+                                                        <!--start card-->
+                                                        <div class="nhsuk-card">
+                                                            <div class="nhsuk-card__content">
+                                                                <details class="nhsuk-details-1">
+                                                                    <summary class="nhsuk-details__summary-1">
+                                                                        <span class="nhsuk-details__summary-text-1">
+                                                                            PRC - Valid: 19/03/2021 to24/03/2021 - France (FR)
+                                                                        </span>
+                                                                    </summary>
+                                                                    <div class="nhsuk-details__text">
+                                                                        <div class="nhsuk-action-link">
+                                                                            <a class="nhsuk-action-link__link" href="#">
+                                                                                <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle"
+                                                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                                    aria-hidden="true" width="36" height="36">
+                                                                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                                                                    <path
+                                                                                        d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z">
+                                                                                    </path>
+                                                                                </svg>
+                                                                                <span class="nhsuk-action-link__text">View entitlement
+                                                                                    details</span>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="nhsuk-table-responsive">
+                                                                            <table id="PRC_treatments_table" role="table">
+                                                                                <caption class="nhsuk-table__caption"></caption>
+                                                                                <thead role="rowgroup" class="nhsuk-table__head">
+                                                                                    <tr role="row">
+                                                                                        <th role="columnheader" scope="col">Treatment ID</th>
+                                                                                        <th role="columnheader" scope="col">Start date</th>
+                                                                                        <th role="columnheader" scope="col">End date</th>
+                                                                                        <th role="columnheader" scope="col">Cost (£)</th>
+                                                                                        <th role="columnheader" scope="col">Status</th>
+                                                                                        <th role="columnheader" scope="col">Claim ID</th>
+                                                                                        <th class="nhsuk-table__header" scope="col">Action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody class="nhsuk-table__body">
+                                                                                    <tr role="row" class="nhsuk-table__row">
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">Treatment
+                                                                                                ID</span>
+                                                                                            <p id="treatmentDTO.treatmentId_555557943_PRC_0">
+                                                                                                555557943</p>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">Start
+                                                                                                date</span>
+                                                                                            <p
+                                                                                                id="treatmentDTO.startDate.dateString_555557943_PRC_0">
+                                                                                                19/03/2021</p>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">End
+                                                                                                date</span>
+                                                                                            <p id="treatmentDTO.endDate.dateString_555557943_PRC_0">
+                                                                                               21/03/2021</p>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">Cost
+                                                                                                (£)</span>
+                                                                                            <p id="treatmentDTO.treatmentCost_555557943_PRC_0">
+                                                                                                205.00</p>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span
+                                                                                                class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                                            <strong class="nhsuk-tag no-caps"
+                                                                                                id="treatmentDTO.status_555557943_PRC_0">Claimed</strong>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">Claim
+                                                                                                ID</span>
+                                                                                            <a href="#" id="claimId_555557943_PRC_0">
+                                                                                                <span>333396</span>
+                                                                                                <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                                                <span class="nhsuk-u-visually-hidden">claim ID can
+                                                                                                    be viewed</span>
+                                                                                            </a>
+                            
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span
+                                                                                                class="nhsuk-table-responsive__heading">Action</span>
+                                                                                            <p>
+                                                                                                <a id="treatmentId_Link_555557943" href="#">
+                                                                                                    View treatment
+                                                                                                    <span
+                                                                                                        class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                                                    <span class="nhsuk-u-visually-hidden">treatment
+                                                                                                        details with treatment id 555,557,943</span>
+                                                                                                </a>
+                                                                                            </p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr role="row" class="nhsuk-table__row">
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">Treatment
+                                                                                                ID</span>
+                                                                                            <p id="treatmentDTO.treatmentId_555557943_PRC_0">
+                                                                                                555557942</p>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">Start
+                                                                                                date</span>
+                                                                                            <p
+                                                                                                id="treatmentDTO.startDate.dateString_555557943_PRC_0">
+                                                                                                19/03/2021</p>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">End
+                                                                                                date</span>
+                                                                                            <p id="treatmentDTO.endDate.dateString_555557943_PRC_0">
+                                                                                               24/03/2021</p>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">Cost
+                                                                                                (£)</span>
+                                                                                            <p id="treatmentDTO.treatmentCost_555557943_PRC_0">
+                                                                                                754.00</p>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span
+                                                                                                class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                                            <strong class="nhsuk-tag no-caps"
+                                                                                                id="treatmentDTO.status_555557943_PRC_0">Claimed</strong>
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span class="nhsuk-table-responsive__heading">Claim
+                                                                                                ID</span>
+                                                                                            <a href="#" id="claimId_555557943_PRC_0">
+                                                                                                <span>333396</span>
+                                                                                                <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                                                <span class="nhsuk-u-visually-hidden">claim ID can
+                                                                                                    be viewed</span>
+                                                                                            </a>
+                            
+                                                                                        </td>
+                                                                                        <td role="cell" class="nhsuk-table__cell">
+                                                                                            <span
+                                                                                                class="nhsuk-table-responsive__heading">Action</span>
+                                                                                            <p>
+                                                                                                <a id="treatmentId_Link_555557943" href="#">
+                                                                                                    View treatment
+                                                                                                    <span
+                                                                                                        class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                                                    <span class="nhsuk-u-visually-hidden">treatment
+                                                                                                        details with treatment id 555,557,943</span>
+                                                                                                </a>
+                                                                                            </p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                            
+                                                                    </div>
+                                                                </details>
+                                                            </div>
+                                                        </div>
+                                                        <!--end card-->
+                            <!--end prc-->
+
+                            <!--start s2/e112-->
+                            <h2 class="nhsuk-heading-m" id="entitlement-s2">S2-E112</h2>
+                            <div class="nhsuk-card">
+                                <div class="nhsuk-card__content">
+                                    <details class="nhsuk-details-1">
+                                        <summary class="nhsuk-details__summary-1">
+                                            <span class="nhsuk-details__summary-text-1">
+                                                S2/E112 - Valid: 12/12/2025 to 01/01/2019 - France (FR)
+                                            </span>
+                                        </summary>
+                                        <div class="nhsuk-details__text">
+                                            <div class="nhsuk-action-link">
+                                                <a class="nhsuk-action-link__link" href="#">
+                                                    <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        aria-hidden="true" width="36" height="36">
+                                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path
+                                                            d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z">
+                                                        </path>
+                                                    </svg>
+                                                    <span class="nhsuk-action-link__text">View entitlement
+                                                        details</span>
+                                                </a>
+                                            </div>
+                                            <div class="nhsuk-table-responsive">
+                                                <table id="S2/E112_treatments_table" role="table">
+                                                    <caption class="nhsuk-table__caption"></caption>
+                                                    <thead role="rowgroup" class="nhsuk-table__head">
+                                                        <tr role="row">
+                                                            <th role="columnheader" scope="col">Treatment ID</th>
+                                                            <th role="columnheader" scope="col">Start date</th>
+                                                            <th role="columnheader" scope="col">End date</th>
+                                                            <th role="columnheader" scope="col">Cost (£)</th>
+                                                            <th role="columnheader" scope="col">Status</th>
+                                                            <th role="columnheader" scope="col">Claim ID</th>
+                                                            <th class="nhsuk-table__header" scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="nhsuk-table__body">
+                                                        <tr role="row" class="nhsuk-table__row">
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Treatment
+                                                                    ID</span>
+                                                                <p id="treatmentDTO.treatmentId_555557944_S2/E112_0">
+                                                                    555557944</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Start
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.startDate.dateString_555557944_S2/E112_0">
+                                                                    03/09/2020</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">End
+                                                                    date</span>
+                                                                <p
+                                                                    id="treatmentDTO.endDate.dateString_555557944_S2/E112_0">
+                                                                    13/09/2020</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Cost
+                                                                    (£)</span>
+                                                                <p id="treatmentDTO.treatmentCost_555557944_S2/E112_0">
+                                                                    210.00</p>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading table-heading-responsive">Status</span>
+                                                                <strong class="nhsuk-tag no-caps nhsuk-tag--green"
+                                                                    id="treatmentDTO.status_555557944_S2/E112_0">Processed</strong>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span class="nhsuk-table-responsive__heading">Claim
+                                                                    ID</span>
+
+                                                                <span id="claimId_555557944_S2/E112_0">-</span>
+                                                            </td>
+                                                            <td role="cell" class="nhsuk-table__cell">
+                                                                <span
+                                                                    class="nhsuk-table-responsive__heading">Action</span>
+                                                                <p>
+                                                                    <a id="treatmentId_Link_555557944" href="#">
+                                                                        View treatment
+                                                                        <span
+                                                                            class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                                        <span class="nhsuk-u-visually-hidden">treatment
+                                                                            details with treatment id 555,557,944</span>
+                                                                    </a>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                            <!--end s2/e112-->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--start left navigation-->
+        <div class="nhsBSA-sidebar-nav">
+            <div class="side-nav">
+                <h3>
+                    Laura Peteers<span class="nhsuk-caption-m nhsuk-caption--bottom">
+                        <span class="nhsuk-u-visually-hidden"> - </span>3432234</span>
+                </h3>
+                <ul>
+                    <div id="options" class="options">
+                        <li>
+                            <a href="person-details">Person details</a>
+                        </li>
+                        <li></li>
+                        <li>
+                            <a class="active" href="person-entitlements-treatments">Entitlements and treatments along
+                                with linked Claim ID</a>
+                        </li>
+                        <li>
+                            <a href="person-details-resubs">Resubs</a>
+                        </li>
+                        <li>
+                            <a href="case-history-person">Case history</a>
+                        </li>
+
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <!--end left navigation-->
+    </div>
+</div>
+
+{% endblock %}
