@@ -1,0 +1,204 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} Entitlement details page {% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+                <ol class="nhsuk-breadcrumb__list">
+                    <li class="nhsuk-breadcrumb__item">
+                        <a class="nhsuk-breadcrumb__link" href="search">Search (Person)</a>
+                    </li>
+                    <li class="nhsuk-breadcrumb__item">
+                        <a class="nhsuk-breadcrumb__link" href="search-results">Search results (Person)</a>
+                    </li>
+                    <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="entitlements-treatments-with-prc">Laura Peteers (Entitlements and treatments)</a></li>
+                    <li class="nhsuk-breadcrumb__item">Entitlement details (PRC)</li>
+                </ol>
+            
+            </div>
+        </div>
+
+        <p class="nhsuk-breadcrumb__back">
+            <a class="nhsuk-breadcrumb__backlink" href="search-results">Back to search results</a>
+        </p>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-full">
+                            <h1 class="nhsuk-heading-xl">PRC</h1>
+                        </div>
+                    </div>
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-full">
+                            <hr style="border-bottom: 4px solid #005eb8; margin:0;" />
+
+                            <div class="nhsuk-inset-text">
+                                <span class="nhsuk-u-visually-hidden">Information: </span>
+                                <p>This PRC has been cancelled because {{ data['entitlementCancelReason'] }}.</p>
+                              </div>
+                            <h2 class="nhsuk-heading-m" style="padding-top:24px;"
+                            >Valid from 06/09/2021 to 10/09/2021 </h2>
+                            <br />
+                            <div class="nhsuk-grid-row">
+                                <div class="nhsuk-grid-column-two-thirds">
+                                   <h2 class="nhsuk-heading-m">Card holder related information</h2>
+                                   
+                                   <dl class="nhsuk-summary-list">
+
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Issuing country</dt>
+                                         <dd id="country" class="nhsuk-summary-list__value">France (FR)</dd>
+                                         <dd class="nhsuk-summary-list__actions"></dd>
+                                      </div>
+
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Given names</dt>
+                                         <dd id="lastName" class="nhsuk-summary-list__value">Laura</dd>
+                                         <dd class="nhsuk-summary-list__actions"></dd>
+                                      </div>
+
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Name</dt>
+                                         <dd id="firstName" class="nhsuk-summary-list__value">Peteers</dd>
+                                         <dd class="nhsuk-summary-list__actions"></dd>
+                                      </div>
+
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Date of birth</dt>
+                                         <dd id="dateOfBirth" class="nhsuk-summary-list__value">22/02/1984</dd>
+                                         <dd class="nhsuk-summary-list__actions"></dd>
+                                      </div>
+
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Personal Identification Number</dt>
+                                         <dd id="PIN" class="nhsuk-summary-list__value">12345678901234567890</dd>
+                                         <dd class="nhsuk-summary-list__actions">
+                                            <a href="update-pin">
+                                              Change<span class="nhsuk-u-visually-hidden"> personal identification number</span>
+                                            </a>
+                                          </dd>
+                                      </div>
+
+                                   </dl>
+                                   <h2 class="nhsuk-heading-m">Competent institution related information</h2>
+                                   
+                                   <dl class="nhsuk-summary-list">
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Identification number of the institution</dt>
+                                         
+                                         <dd id="instNumber" class="nhsuk-summary-list__value">0138100000 - CPAM ISERE</dd>
+                                         
+                                      </div>
+                                      
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Name of the institution</dt>
+                                         <dd id="instName" class="nhsuk-summary-list__value">HEALTH INSURANCE AGENCY OF ISERE</dd>
+                                      </div>
+                                      
+                                   </dl>
+                                   <div>
+                                      <h2 class="nhsuk-heading-m">Card related information</h2>
+                                      <dl class="nhsuk-summary-list">
+                                         <div class="nhsuk-summary-list__row">
+                                            <dt class="nhsuk-summary-list__key">Identification number of the card</dt>
+                                            <dd id="entitlementNumber" class="nhsuk-summary-list__value">112233445566778899</dd>
+                                         </div>
+                                         <div class="nhsuk-summary-list__row">
+                                            <dt class="nhsuk-summary-list__key">Expiry date</dt>
+                                            <dd id="expiryDate" class="nhsuk-summary-list__value">10/09/2021</dd>
+                                         </div>
+                                      </dl>
+                                   </div>
+
+                                   <h2 class="nhsuk-heading-m">Certificate details</h2>
+                                   
+                                   <dl class="nhsuk-summary-list">
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Valid from</dt>
+                                         
+                                         <dd id="instNumber" class="nhsuk-summary-list__value">06/09/2021</dd>
+                                         
+                                      </div>
+                                      
+                                      <div class="nhsuk-summary-list__row">
+                                         <dt class="nhsuk-summary-list__key">Valid to</dt>
+                                         <dd id="instName" class="nhsuk-summary-list__value">10/09/2021</dd>
+                                      </div>
+
+                                      <div class="nhsuk-summary-list__row">
+                                        <dt class="nhsuk-summary-list__key">Issue date</dt>
+                                        <dd id="instName" class="nhsuk-summary-list__value">06/09/2021</dd>
+                                     </div>
+                                      
+                                   </dl>
+                                   
+                                   
+                                </div>
+                             </div>
+                           
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--start left navigation-->
+        <div class="nhsBSA-sidebar-nav">
+            <div class="side-nav">
+                <h3>
+                    Laura Peteers<span class="nhsuk-caption-m nhsuk-caption--bottom">
+                        <span class="nhsuk-u-visually-hidden"> - </span>3432234</span>
+                </h3>
+                <ul>
+                    <div id="options" class="options">
+                        <li>
+                            <a  href="person-details">Person details</a>
+                          </li>
+                          <li></li>
+                          <li>
+                            <a class="active" href="entitlements-treatments-cancelled-prc">Entitlements and treatments along with linked Claim ID</a>
+                          </li>
+                          <li>
+                            <a href="person-details-resubs">Resubs</a>
+                          </li>
+                          <li>
+                            <a href="case-history-person">Case history</a>
+                          </li>
+
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <!--end left navigation-->
+    </div>
+</div>
+
+{% endblock %}
