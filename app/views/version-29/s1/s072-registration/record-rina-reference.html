@@ -1,0 +1,163 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Confirmation - S1/S072 entitlement added to person record - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+
+                                <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person ID - 123456</p>
+                  
+                                <div class="nhsuk-form-group">
+                                  <label class="nhsuk-label" for="nhsbsa-comments">
+                                    <h1 class="nhsuk-heading-xl">Record the RINA reference number</h1>
+                                  </label>
+                                  
+                                  <p>Enter the RINA reference number to confirm the S073 has been sent to the Member State.</p>
+                                  
+
+                                  <div class="nhsuk-form-group">
+                                    <label class="nhsuk-label" for="rina-reference-number-label">
+                                      RINA reference number
+                                    </label>
+                                    <div class="nhsuk-hint" id="rina-reference-number-input-hint">
+                                      This is typically made up of XYZ. For example, 12345.
+                                    </div>
+                                    <input class="nhsuk-input nhsuk-input--width-10" id="rina-reference-number" name="rina-reference-number" type="text">
+                                  </div>
+
+                                  <br>
+                                  
+
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label" for="notes">
+                                       <h2>Add a note (optional)</h2> 
+                                      </label>
+                                      <div class="nhsuk-hint" id="note-hint">
+                                        For example, you might want to XYZ.<br>
+                                        This will display in the Notes section.
+                                      </div>
+                                      
+                                      <textarea class="nhsuk-textarea" id="personalDetailsComment" name="rina-reference-note" rows="8"></textarea>
+                                      <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">500 characters remaining</p>
+                                      <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 500 characters</p>
+                                    </div>   
+
+                                    <br>
+
+                                    <p>Select Save and continue to download and send the DL1609. Otherwise, select Go to entitlement details. Any details you have entered on this screen will be saved and recorded.</p>
+      
+                                    <div class="button-container">
+                                      <form action="../dl1609/download-dl1609">
+                                        <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px; nhsuk-u-margin-top-4" type="submit">
+                                          Save and continue
+                                        </button>
+                                      </form>
+                          
+                                      <form action="../account/entitlement-content/S1-entitlement-details">
+                                        <button class="nhsuk-button nhsuk-button--secondary nhsuk-u-margin-top-4" data-module="nhsuk-button" type="submit">
+                                          Go to entitlement details
+                                        </button>
+                                      </form>
+                                    </div>
+
+                                    <p><a href="../account/entitlement-details?add-new-entitlement=yes">Cancel</a></p>
+
+                                  </div>
+                                </div>
+
+                           
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+<script>
+  const textarea = document.querySelector('#personalDetailsComment');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 500;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 500);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
+
+{% endblock %}

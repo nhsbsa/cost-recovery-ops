@@ -30,43 +30,52 @@ Confirmation - S1/S072 entitlement added to person record - Manage overseas enti
                   <div class="nhsuk-grid-column-two-thirds">
     
                       <div class="done-panel">
-                        <h3 class="nhsuk-heading-xl" id="person-record-confirmation">
+                        <h1 class="nhsuk-heading-xl" id="person-record-confirmation">
+                          {% if data['add-dependant'] == 'yes' %}
+                          <span class="done-tick" id="done-tick">S1/S072 entitlement and dependant added</span>
+                          {% else %}
                           <span class="done-tick" id="done-tick">S1/S072 entitlement added</span>
-                        </h3>
+                          {% endif %}
+                        </h1>
 
-                        <body class="nhsuk-caption-xl">
-                          <span id="person-record-created-name">Personal record:</span>
-                          <h1 class="nhsuk-heading-l">John Doe</h1>
+                        <body class="nhsuk-caption-l">
+                          <span id="person-record-created-name">Name:</span>
+                          <h2 class="nhsuk-heading-m">John Doe</h2>
                         </body>
 
-                        <body class="nhsuk-caption-xl">
-                          <span id="person-record-created-name">Personal identification number:</span>
-                          <h1 class="nhsuk-heading-l">12345678</h1>
+                        <body class="nhsuk-caption-l">
+                          <span id="person-record-created-name">Person record ID:</span>
+                          <h2 class="nhsuk-heading-m">123456</h2>
+                        </body>
+
+                        <body class="nhsuk-caption-l">
+                          <span id="person-record-created-name">Personal identification number (PIN):</span>
+                          <h2 class="nhsuk-heading-m">12345678</h2>
                         </body>
 
                       </div>
 
                       <h3 class="nhsuk-heading-m">Next steps:</h3>
                       <ul>
-                        <li>Send the S073 registration confirmation to the Member State via RINA</li>
-                        <li>Copy the RINA reference number and make a note to let others know the S073 registration confirmation has been sent to the Member State</li>
+                        <li>Send the S073 registration confirmation to Member State via RINA</li>
+                        <li>Record the RINA reference number in the Notes section to confirm the S073 has been sent to the Member State</li>
                         <li>Download and send the DL1609 to X team who will print this document and send it to John Doe on your behalf</li>
                       </ul>
 
 
 
                       <div class="button-container">
-                        <form action="https://rina.nhsbsa.nhs.uk">
+                        <form action="record-rina-reference">
                           <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
-                            Send S073
+                            Record RINA reference
                           </button>
                         </form>
             
-                        <form action="../../s1/dl1609/download-dl1609">
+                        <!--form action="../../s1/dl1609/download-dl1609">
                           <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
                             Download and send the DL1609
                           </button>
-                        </form>
+                        </form-->
                       </div>
 
                       <p><a href="../account/entitlement-details?add-new-entitlement=yes">Return to Entitlements and enquiries</a></p>

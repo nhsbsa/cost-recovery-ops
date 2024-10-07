@@ -202,6 +202,21 @@ router.post([/institution-name-search-results/], function(req, res){
   res.redirect('new-s1-s073-entitlement-cya');
 })
 
+// Institution ID search results - not found (to show functionality)
+router.post([/institution-ID-search-results-none/], function(req, res){
+  res.redirect('add-new-institution-details');
+})
+
+// Institution ID search results - not found (to show functionality)
+router.post([/institution-name-search-results-none/], function(req, res){
+  res.redirect('add-new-institution-details');
+})
+
+// Institution ID search results - not found (to show functionality)
+router.post([/add-new-institution-details/], function(req, res){
+  res.redirect('new-s1-s072-entitlement-cya');
+})
+
 // Check your answers so far
 router.post([/new-s1-s072-entitlement-cya/], function(req, res){
   res.redirect('add-dependant');
@@ -212,10 +227,20 @@ router.post([/add-dependant/], function(req, res){
   var addDependant = req.session.data['add-dependant'];
   
   if (addDependant == 'Yes'){
-      res.redirect('dependant-details');
+      res.redirect('search-for-dependant');
   } else {
       res.redirect('/version-29/s1/s072-registration/confirmation-s1-s072-added');
   }
+})
+
+// Search for a dependant
+router.post([/search-for-dependant/], function(req, res){
+  res.redirect('search-for-dependant-results');
+})
+
+// View dependant's personal details and add dependant to entitlement
+router.post([/dependant-personal-details/], function(req, res){
+  res.redirect('confirmation-s1-s072-added');
 })
 
 // Enter dependant's address
