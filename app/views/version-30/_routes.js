@@ -199,5 +199,19 @@ router.post('/uk-claims-search', function (req, res) {
 
 })
 
+//v1/suspend-ovm-account.html
+router.post('/remove-treatment', function (req, res) {
+
+  const selectedRadio = req.body.entitlementType; 
+
+  if (selectedRadio === "Yes"){
+    res.redirect('resubs-contested-treatments-removed')
+  }
+
+  if (selectedRadio === "No"){
+    res.redirect('resubs-contested-treatments-add')
+  }
+
+})
 
 module.exports = router;
