@@ -467,15 +467,15 @@
                   </tbody>
                 </table>
 
-                <a href="s1-dependant-search" class="nhsuk-button nhsuk-u-margin-top-5" role="button" data-module="nhsuk-button">
+                <a href="s1-dependant-search" class="nhsuk-button" role="button" data-module="nhsuk-button">
                   Add another dependant
                 </a>
 
                 {% else %}
                 <h3 class="nhsuk-heading-l">Dependants</h3>
-                <p>No dependants have been added to this person's record.</p>
+                <p>No dependants have been added to this person's entitlement.</p>
 
-                <a href="s1-dependant-search" class="nhsuk-button nhsuk-u-margin-top-5" role="button" data-module="nhsuk-button">
+                <a href="s1-dependant-search" class="nhsuk-button" role="button" data-module="nhsuk-button">
                   Add a dependant
                 </a>
                 {% endif %} 
@@ -486,7 +486,7 @@
 
             <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
                 <!-- Documents tab content starts -->
-                {% if data['upload-new-document'] == 'yes' %}
+                {% if data['upload-s1-document'] == 'yes' %}
                 <table role="table" id="documentsTable" class="nhsuk-table-responsive">
                   <h3 class="nhsuk-heading-l">Documents<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
                 
@@ -501,9 +501,9 @@
                       <th role="columnheader" class="" scope="col">
                         Uploaded by
                       </th>
-                      <th role="columnheader" class="" scope="col">
+                      <!--th role="columnheader" class="" scope="col">
                         Current status
-                      </th>
+                      </th-->
                       <th role="columnheader" class="" scope="col">
                         Document type
                       </th>
@@ -517,28 +517,34 @@
                     <tr role="row" class="nhsuk-table__row">
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Document title</span>
-                        <span>john-doe-FAS1Q.pdf</span>
+                        <span>john-doe-DL1609.pdf</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date uploaded</span>
-                        <span>15/08/2024</span>
+                        <span>11/10/2024</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Uploaded by</span>
-                        <span>Dave Smith</span>
+                        <span>Joe Bloggs</span>
                       </td>
-                      <td role="cell" class="nhsuk-table__cell">
+                      <!--td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Current status</span>
                         <span>Received</span>
-                      </td>
+                      </td-->
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Document type</span>
-                        <span>FAS1Q</span>
+                        <span>
+                          {% if data['s1-document-type'] %}
+                            <p>{{ data['s1-document-type'] }}</p>
+                          {% else %}
+                            DL1609
+                          {% endif %}
+                        </span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Actions</span>
-                        <a href="">View</a> or 
-                        <a href="/version-29/s1/account/remove-personal-details-document">remove</span></a>
+                        <a href="#">View</a> or 
+                        <a href="#">remove</span></a>
                       </td>
                     </tr>   
                   </tbody>
@@ -547,18 +553,18 @@
                 {% else %}  
                 <h3 class="nhsuk-heading-l">Documents</h3>
                 
-                <p>No documents have been uploaded to this person's record.</p>
+                <p>No documents have been uploaded.</p>
                 {% endif %}
 
                      
-                {% if data['add-new-document'] == 'yes' %}
-                <a href="upload-entitlements-document">
+                {% if data['upload-s1-document'] == 'yes' %}
+                <a href="/version-29/s1/account/entitlement-content/s1-upload-document">
                   <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
                     Upload a new document
                   </button>
                 </a>
                 {% else %}
-                <a href="upload-entitlement-document">
+                <a href="/version-29/s1/account/entitlement-content/s1-upload-document">
                   <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
                     Upload a document
                   </button>
@@ -667,7 +673,7 @@
                   </table>
               
                 {% else %}
-                  <p>No notes have been added to this entitlement.</p>
+                  <p>No notes have been added.</p>
                   <a class="nhsuk-button" href="/version-29/s1/account/entitlement-content/s1-entitlement-note" id="addNote-button">Add a new note</a>
                 {% endif %}
               </div>

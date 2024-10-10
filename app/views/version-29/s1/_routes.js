@@ -373,6 +373,16 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
 
 })
 
+// Upload documents //
+
+// Upload document
+router.post([/s1-upload-document/], function(req, res){
+
+  req.session.data['upload-s1-document'] = 'yes'
+
+  res.redirect('/version-29/s1/account/entitlement-content/s1-entitlement-details');
+
+})
 
 // Add notes for various items //
 

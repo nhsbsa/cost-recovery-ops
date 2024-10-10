@@ -46,16 +46,20 @@ Add a note - Manage overseas entitlements and treatments - NHSBSA
                                   </label>
 
                                   <div class="nhsuk-form-group">
-                                    <label class="nhsuk-label" for="noteType-label">
+                                    <label class="nhsuk-label" id="note-type-label" for="note-type">
                                       Note type
                                     </label>
-                                    <select class="nhsuk-select" id="noteTypes-list" name="note-type">
-                                      <option value="">Select...</option>
-                                      <option id="general-note" value="General">General note</option>
-                                      <option id="s073-record-rina-reference" value="S073">S073</option>
-                                      <option id="dl1609" value="DL1609">DL1609</option>
-                                      <option id="s071" value="S071">S071</option>
-                                    </select>
+                                    <input class="nhsuk-input nhsuk-input--width-20" list="notes" id="note-type-drop" name="note-type">
+                                    <datalist id="notes">
+                                        <option value="" selected="selected"></option>
+                                        <option id="general" value="General note">General note</option>
+                                        <option id="s071" value="S071">S071</option>
+                                        <option id="s072" value="S072">S072</option>
+                                        <option id="s073-record-rina-reference" value="S073">S073</option>
+                                        <option id="dl1609" value="DL1609">DL1609</option>
+                                        <option id="fas1q" value="FAS1Q">FAS1Q</option>
+                                        <option id="x009" value="X009">X009</option>
+                                    </datalist>
                                   </div>
                                   
 
@@ -90,7 +94,9 @@ Add a note - Manage overseas entitlements and treatments - NHSBSA
             </div>
         </div>
     
+{% endblock %}
 
+{% block pageScripts %}
 <script>
   const textarea = document.querySelector('#s1EntitlementNote');
   const countRemaining = document.getElementById('charactersRemaining');
@@ -145,4 +151,12 @@ Add a note - Manage overseas entitlements and treatments - NHSBSA
   });
 </script>
 
+<!-- autocomplete js -->
+<script type="text/javascript">
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue : '',
+      autoselect : true,  
+      selectElement : document.querySelector('#note-type-drop')
+    })
+  </script>
 {% endblock %}
