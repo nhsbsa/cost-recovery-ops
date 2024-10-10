@@ -7,6 +7,69 @@ router.use(bodyParser.json()); // to support JSON bodies
 router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 
 
+// Entitlements and enquiries section //
+
+// Add a dependant journey //
+
+// Search for a dependant
+router.post([/s1-dependant-search/], function(req, res){
+  res.redirect('s1-dependant-search-results');
+})
+
+
+
+// Check dependant's details
+router.post([/s1-dependant-personal-details/], function(req, res) {
+  // Log the value of the action field
+  console.log(req.body.action);
+
+  // Mark the dependant as added
+  req.session.data['s1-add-dependant'] = 'Yes';
+
+  // Check the button action and redirect accordingly
+  res.redirect('/version-29/s1/account/entitlement-content/s1-confirmation-dependant-added');
+});
+
+// Enter dependant's details
+router.post([/s1-create-new-dependant-record/], function(req, res){
+  res.redirect('s1-dependant-address-same');
+})
+
+// Does the dependant live at the same address as the Main?
+router.post([/s1-dependant-address-same/], function(req, res) {
+  const sameAddressAsMain = req.session.data['dependant-address-same-as-main'];
+  
+  if (sameAddressAsMain === 'Yes'){
+    res.redirect('/version-29/s1/account/entitlement-content/s1-dependant-details-check');
+  } else {
+    res.redirect('/version-29/s1/account/entitlement-content/s1-manual-dependant-address');
+  }
+})
+
+// Enter dependant's address
+router.post([/s1-manual-dependant-address/], function(req, res){
+  res.redirect('s1-dependant-details-check');
+})
+
+// Check dependant's details
+router.post([/s1-dependant-details-check/], function(req, res) {
+  // Log the value of the action field
+  console.log(req.body.action);
+
+  // Mark the dependant as added
+  req.session.data['s1-add-dependant'] = 'Yes';
+
+  // Check the button action and redirect accordingly
+  if (req.body.action === 'add') {
+    res.redirect('/version-29/s1/account/entitlement-content/s1-create-new-dependant-record?number-of-dependants=2');
+  } else {
+    res.redirect('/version-29/s1/account/entitlement-content/s1-confirmation-dependant-added');
+  }
+});
+
+
+
+
 // Search for a person & create a new person record // 
 
 // Enter person's name, DOB and address
@@ -128,11 +191,21 @@ router.post([/personal-details-note/], function(req, res){
 })
 
 // Add note to entitlements section
-router.post([/entitlements-note/], function(req, res){
+router.post([/s1-entitlement-note/], function(req, res){
 
-  req.session.data['new-entitlement-note'] = 'yes'
+  // Retrieve the submitted note and note type
+  const noteType = req.body['note-type'];
+  const note = req.body['note'];
 
-  res.redirect('/version-29/s1/account/entitlement-details#tab-notes');
+  // Store these in the session or database
+  req.session.data['note-type'] = noteType;
+  req.session.data['note'] = note;
+
+  // Set flag that a new S1 entitlement note was added
+  req.session.data['new-s1-entitlement-note'] = 'yes';
+
+  // Redirect to the S1/S072 entitlement details screen and the tab that displays the notes table
+  res.redirect('/version-29/s1/account/entitlement-content/s1-entitlement-details#tab-notes');
 
 })
 
@@ -250,12 +323,12 @@ router.post([/dependant-details/], function(req, res){
 
 // Does the dependant live at the same address as the Main?
 router.post([/same-address/], function(req, res){
-  var sameAddress = req.session.data['same-address-as-Main'];
+  const sameAddress = req.session.data['same-address-as-main'];
   
-  if (sameAddress == 'Yes'){
-      res.redirect('dependant-details-cya');
+  if (sameAddress === 'Yes'){
+    res.redirect('/version-29/s1/s072-registration/dependant-details-cya');
   } else {
-      res.redirect('dependant-address');
+    res.redirect('/version-29/s1/s072-registration/dependant-address');
   }
 })
 
@@ -276,6 +349,8 @@ router.post([/remove-dependant/], (req, res) => {
   }
 
 })
+
+
 
 
 // Entitlements section - S1 Entitlement //
@@ -299,53 +374,58 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
 })
 
 
+// Add notes for various items //
 
-// DL1609 screens //
+// Send the S073 registration confirmation, record the RINA reference number and add a note (optional)
+router.post([/s073-record-rina-reference/], function(req, res){
 
-// Download and send DL1609, alongside adding a note to record
+// Mark the S073 task as completed
+req.session.data['send-s073'] = "completed";
+
+// Retrieve the submitted RINA reference number and optional comments
+const rinaReferenceNumber = req.body['rina-reference-number'];
+const rinaReferenceComments = req.body['s073-rina-reference-comments'];
+
+// Store these values in the session
+req.session.data['rina-reference-number'] = rinaReferenceNumber;
+req.session.data['s073-rina-reference-comments'] = rinaReferenceComments;
+
+// Set flag that a new S073 RINA reference note was added
+req.session.data['new-s073-rina-reference-note'] = 'yes';
+
+// Redirect to the S1 entitlement details screen with the "completed" tag and open the notes tab where RINA reference number and optional comments should display in the notes table
+  res.redirect('/version-29/s1/account/entitlement-content/s1-entitlement-details');
+
+})
+
+
+// Send the DL1609, and add a note (optional)
 router.post([/download-dl1609/], function(req, res){
 
-  req.session.data['new-DL609-note'] = 'yes'
-
-  res.redirect('/version-29/s1/account/entitlement-details?add-new-entitlement=yes');
-
-})
-
-
-// Entitlements and enquiries section //
-
-// Add a dependant journey //
-
-// Search for a dependant
-router.post([/s1-dependant-search/], function(req, res){
-  res.redirect('s1-dependant-search-results');
-})
-
-// Confirmation - Dependant added to S1/S072 entitlement
-router.post([/view-dependant-details/], function(req, res){
-  res.redirect('confirmation-dependant-added');
-})
-
-// Enter dependant's details
-router.post([/s1-create-new-dependant-record/], function(req, res){
-  res.redirect('dependant-same-address');
-})
-
-// Does the dependant live at the same address as the Main?
-router.post([/dependant-same-address/], function(req, res){
-  var dependantSameAddress = req.session.data['dependant-same-address-as-main'];
+  // Mark the DL1609 task as completed
+  req.session.data['send-dl1609'] = "completed";
   
-  if (dependantSameAddress == 'Yes'){
-      res.redirect('s1-dependant-details-cya');
-  } else {
-      res.redirect('manual-dependant-address');
-  }
-})
+  // Retrieve the submitted DL1609 comments (if any)
+  const dl1609Comments = req.body['dl1609-comments'];
+  
+  // Store these values in the session
+  req.session.data['dl1609-comments'] = dl1609Comments;
+  
+  // Set flag that a new DL1609 note was added
+  req.session.data['new-dl1609-note'] = 'yes';
 
-// Enter dependant's address
-router.post([/manual-dependant-address/], function(req, res){
-  res.redirect('s1-dependant-details-cya');
-})
+  // Set dl1609-sent flag to "Yes" to enable the "Confirm entitlement details" link and update status
+  req.session.data['dl1609-sent'] = 'Yes';
+  
+  // Redirect to the S1 entitlement details screen
+  res.redirect('/version-29/s1/account/entitlement-content/s1-entitlement-details');
+  
+});
+
+
+
+
+
 
 
 

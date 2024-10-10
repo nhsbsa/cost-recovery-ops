@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Confirmation - S1/S072 entitlement added to person record - Manage overseas entitlements and treatments - NHSBSA
+Add a note - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -35,68 +35,53 @@ Confirmation - S1/S072 entitlement added to person record - Manage overseas enti
                     }) }}
 
                     
+                        
+                    <form action="s1-entitlement-note" method="post">
 
                                 <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person ID - 123456</p>
                   
                                 <div class="nhsuk-form-group">
                                   <label class="nhsuk-label" for="nhsbsa-comments">
-                                    <h1 class="nhsuk-heading-xl">Record the RINA reference number</h1>
+                                    <h1 class="nhsuk-heading-xl">Add a note</h1>
                                   </label>
-                                  
-                                  <p>Enter the RINA reference number to confirm the S073 has been sent to the Member State.</p>
-                                  
 
                                   <div class="nhsuk-form-group">
-                                    <label class="nhsuk-label" for="rina-reference-number-label">
-                                      RINA reference number
+                                    <label class="nhsuk-label" for="noteType-label">
+                                      Note type
                                     </label>
-                                    <div class="nhsuk-hint" id="rina-reference-number-input-hint">
-                                      This is typically made up of XYZ. For example, 12345.
-                                    </div>
-                                    <input class="nhsuk-input nhsuk-input--width-10" id="rina-reference-number" name="rina-reference-number" type="text">
+                                    <select class="nhsuk-select" id="noteTypes-list" name="note-type">
+                                      <option value="">Select...</option>
+                                      <option id="general-note" value="General">General note</option>
+                                      <option id="s073-record-rina-reference" value="S073">S073</option>
+                                      <option id="dl1609" value="DL1609">DL1609</option>
+                                      <option id="s071" value="S071">S071</option>
+                                    </select>
                                   </div>
-
-                                  <br>
                                   
 
                                     <div class="nhsuk-form-group">
                                       <label class="nhsuk-label" for="notes">
-                                       <h2>Add a note (optional)</h2> 
+                                        Comments
                                       </label>
                                       <div class="nhsuk-hint" id="note-hint">
-                                        For example, you might want to XYZ.<br>
-                                        This will display in the Notes section.
+                                        These will display under the Notes tab.
                                       </div>
                                       
-                                      <textarea class="nhsuk-textarea" id="personalDetailsComment" name="rina-reference-note" rows="8"></textarea>
+                                      <textarea class="nhsuk-textarea" id="s1EntitlementNote" name="note" rows="8"></textarea>
                                       <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">500 characters remaining</p>
                                       <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 500 characters</p>
-                                    </div>   
-
-                                    <br>
-
-                                    <p>Select Save and continue to download and send the DL1609. Otherwise, select Go to entitlement details. Any details you have entered on this screen will be saved and recorded.</p>
+                                    </div>                            
       
-                                    <div class="button-container">
-                                      <form action="../dl1609/download-dl1609">
-                                        <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px; nhsuk-u-margin-top-4" type="submit">
-                                          Save and continue
-                                        </button>
-                                      </form>
-                          
-                                      <form action="../account/entitlement-content/S1-entitlement-details">
-                                        <button class="nhsuk-button nhsuk-button--secondary nhsuk-u-margin-top-4" data-module="nhsuk-button" type="submit">
-                                          Go to entitlement details
-                                        </button>
-                                      </form>
-                                    </div>
+                                    <button class="nhsuk-button" type="submit">
+                                        Save and continue
+                                    </button>
 
-                                    <p><a href="../account/entitlement-details?add-new-entitlement=yes">Cancel</a></p>
+                                    <p><a href="personal-details">Cancel</a></p>
 
                                   </div>
                                 </div>
 
-                           
+                            </form>
                             
 
                         </div>
@@ -107,7 +92,7 @@ Confirmation - S1/S072 entitlement added to person record - Manage overseas enti
     
 
 <script>
-  const textarea = document.querySelector('#personalDetailsComment');
+  const textarea = document.querySelector('#s1EntitlementNote');
   const countRemaining = document.getElementById('charactersRemaining');
   const staticMsg = document.querySelector('#char-count-screen-reader');
   const maxCharacters = 500;

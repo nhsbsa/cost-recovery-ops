@@ -42,6 +42,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                         Check your answers
                     </h1>
    
+                    <form action="s1-dependant-details-check" method="post">
 
                     <!-- Dependant 1 details -->
                     {% if data['number-of-dependants'] != '2' or data['remove-dependant'] == 'Yes' %}
@@ -58,7 +59,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#dependant-s1-entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">Personal identification number (PIN)</span> </a>
+                              <a href="s1-create-new-dependant-record#dependant-s1-entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">Personal identification number (PIN)</span> </a>
                             </dd>
                           </div>
 
@@ -66,15 +67,15 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <div class="nhsuk-summary-list__row">
                             <dt class="nhsuk-summary-list__key">Relationship to Main</dt>
                             <dd class="nhsuk-summary-list__value">
-                              {% if data['relationship-to-main'] %}
-                                {{ data['relationship-to-main'] }}
+                              {% if data['s1-entitlement-relationship-to-main'] %}
+                                {{ data['s1-entitlement-relationship-to-main'] }}
                               {% else %}
                                 Wife
                               {% endif %}
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#relationship-to-main"> Change<span class="nhsuk-u-visually-hidden">the relationship to the Main</span> </a>
+                              <a href="s1-create-new-dependant-record#s1-entitlement-relationship-to-main"> Change<span class="nhsuk-u-visually-hidden">the relationship to the Main</span> </a>
                             </dd>
                           </div>
 
@@ -90,7 +91,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
+                              <a href="s1-create-new-dependant-record#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
                             </dd>
                           </div>
 
@@ -106,7 +107,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
+                              <a href="s1-create-new-dependant-record#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
                             </dd>
                           </div>
 
@@ -122,7 +123,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
+                              <a href="s1-create-new-dependant-record#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
                             </dd>
                           </div-->
 
@@ -138,7 +139,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
+                              <a href="s1-create-new-dependant-record#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
                             </dd>
                           </div>
 
@@ -168,7 +169,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
                           
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
+                              <a href="s1-create-new-dependant-record#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
                             </dd>
                           </div>
 
@@ -184,7 +185,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">country of nationality</span> </a>
+                              <a href="s1-create-new-dependant-record#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">country of nationality</span> </a>
                             </dd>
                           </div>
 
@@ -200,7 +201,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-details#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">sex</span> </a>
+                              <a href="s1-create-new-dependant-record#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">sex</span> </a>
                             </dd>
                           </div>
 
@@ -212,15 +213,15 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <div class="nhsuk-summary-list__row">
                             <dt class="nhsuk-summary-list__key">Same home address as Main</dt>
                             <dd class="nhsuk-summary-list__value">
-                              {% if data['same-address-as-Main'] %}
-                                {{ data['same-address-as-Main'] }}
+                              {% if data['dependant-address-same-as-main'] %}
+                                {{ data['dependant-address-same-as-main'] }}
                               {% else %}
                                 Yes
                               {% endif %}
                             </dd>
 
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="same-address"> Change<span class="nhsuk-u-visually-hidden">home address</span> </a>
+                              <a href="s1-dependant-address-same"> Change<span class="nhsuk-u-visually-hidden">home address</span> </a>
                             </dd>
                           </div>
 
@@ -228,7 +229,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <div class="nhsuk-summary-list__row">
                             <dt class="nhsuk-summary-list__key">Home address</dt>
                             <dd class="nhsuk-summary-list__value">
-                              {% if data['same-address-as-Main'] == 'Yes' %}
+                              {% if data['dependant-address-same-as-main'] == 'Yes' %}
                                 1 Washington Street, United Kingdom
                                 {% else %}
                                   {% if data['dependant-address-line-1'] or data['dependant-address-country'] %}
@@ -245,7 +246,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                       </span>
                                   </summary>
                                   <div class="nhsuk-details__text">
-                                  {% if data['same-address-as-Main'] == 'Yes' %}
+                                  {% if data['dependant-address-same-as-main'] == 'Yes' %}
                                     1 Washington Street<br>
                                     Worcester<br>
                                     WR1 1NL<br>
@@ -282,7 +283,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
                           
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="dependant-address#dependant-address-line-1">Change<span class="nhsuk-u-visually-hidden">home address</span></a>
+                              <a href="s1-dependant-address-same">Change<span class="nhsuk-u-visually-hidden">home address</span></a>
                             </dd>
                           </div>
                           
@@ -325,22 +326,22 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-s1-entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">Personal identification number (PIN)</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-s1-entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">Personal identification number (PIN)</span> </a>
                                   </dd>
                                 </div>
 
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Relationship to Main</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['relationship-to-main'] %}
-                                      {{ data['relationship-to-main'] }}
+                                    {% if data['s1-entitlement-relationship-to-main'] %}
+                                      {{ data['s1-entitlement-relationship-to-main'] }}
                                     {% else %}
                                       Wife
                                     {% endif %}
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#relationship-to-main"> Change<span class="nhsuk-u-visually-hidden">the relationship to the Main</span> </a>
+                                    <a href="s1-create-new-dependant-record#s1-entitlement-relationship-to-main"> Change<span class="nhsuk-u-visually-hidden">the relationship to the Main</span> </a>
                                   </dd>
                                 </div>
     
@@ -356,7 +357,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
                                   </dd>
                                 </div>
     
@@ -372,7 +373,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
                                   </dd>
                                 </div>
     
@@ -388,7 +389,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
                                   </dd>
                                 </div-->
     
@@ -404,7 +405,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
                                   </dd>
                                 </div>
     
@@ -434,7 +435,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
                                 
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
                                   </dd>
                                 </div>
 
@@ -450,7 +451,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">country of nationality</span> </a>
+                                    <a href="s1-create-new-dependant-record#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">country of nationality</span> </a>
                                   </dd>
                                 </div>
       
@@ -466,7 +467,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">sex</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-s1-entitlement-sex-selection"> Change<span class="nhsuk-u-visually-hidden">sex</span> </a>
                                   </dd>
                                 </div>
       
@@ -479,15 +480,15 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Same home address as Main</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['same-address-as-Main'] %}
-                                      {{ data['same-address-as-Main'] }}
+                                    {% if data['dependant-address-same-as-main'] %}
+                                      {{ data['dependant-address-same-as-main'] }}
                                     {% else %}
                                       Yes
                                     {% endif %}
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="same-address"> Change<span class="nhsuk-u-visually-hidden">home address</span> </a>
+                                    <a href="s1-dependant-address-same"> Change<span class="nhsuk-u-visually-hidden">home address</span> </a>
                                   </dd>
                                 </div>
     
@@ -495,7 +496,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Home address</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['same-address-as-Main'] == 'Yes' %}
+                                    {% if data['dependant-address-same-as-main'] == 'Yes' %}
                                       1 Washington Street, United Kingdom
                                       {% else %}
                                         {% if data['dependant-address-line-1'] or data['dependant-address-country'] %}
@@ -512,7 +513,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                             </span>
                                         </summary>
                                         <div class="nhsuk-details__text">
-                                        {% if data['same-address-as-Main'] == 'Yes' %}
+                                        {% if data['dependant-address-same-as-main'] == 'Yes' %}
                                           1 Washington Street<br>
                                           Worcester<br>
                                           WR1 1NL<br>
@@ -549,7 +550,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
                                 
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-address#dependant-address-line-1">Change<span class="nhsuk-u-visually-hidden">home address</span></a>
+                                    <a href="s1-dependant-address-same">Change<span class="nhsuk-u-visually-hidden">home address</span></a>
                                   </dd>
                                 </div>
                                 
@@ -586,22 +587,22 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-s1-entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">Personal identification number (PIN)</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-s1-entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">Personal identification number (PIN)</span> </a>
                                   </dd>
                                 </div>
 
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Relationship to Main</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['relationship-to-main'] %}
-                                      {{ data['relationship-to-main'] }}
+                                    {% if data['s1-entitlement-relationship-to-main'] %}
+                                      {{ data['s1-entitlement-relationship-to-main'] }}
                                     {% else %}
                                       Son
                                     {% endif %}
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#relationship-to-main"> Change<span class="nhsuk-u-visually-hidden">the relationship to the Main</span> </a>
+                                    <a href="s1-create-new-dependant-record#s1-entitlement-relationship-to-main"> Change<span class="nhsuk-u-visually-hidden">the relationship to the Main</span> </a>
                                   </dd>
                                 </div>
       
@@ -617,7 +618,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
                                   </dd>
                                 </div>
       
@@ -633,7 +634,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
                                   </dd>
                                 </div>
       
@@ -649,7 +650,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
                                   </dd>
                                 </div-->
       
@@ -665,7 +666,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
                                   </dd>
                                 </div>
       
@@ -695,7 +696,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
                                 
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
+                                    <a href="s1-create-new-dependant-record#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
                                   </dd>
                                 </div>
 
@@ -711,7 +712,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">country of nationality</span> </a>
+                                    <a href="s1-create-new-dependant-record#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">country of nationality</span> </a>
                                   </dd>
                                 </div>
       
@@ -727,7 +728,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-details#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">sex</span> </a>
+                                    <a href="s1-create-new-dependant-record#s1-entitlement-dependant-nationality"> Change<span class="nhsuk-u-visually-hidden">sex</span> </a>
                                   </dd>
                                 </div>
       
@@ -740,15 +741,15 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Same home address as Main</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['same-address-as-Main'] %}
-                                      {{ data['same-address-as-Main'] }}
+                                    {% if data['dependant-address-same-as-main'] == 'Yes' %}
+                                      Yes
                                     {% else %}
                                       Yes
                                     {% endif %}
                                   </dd>
       
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="same-address"> Change<span class="nhsuk-u-visually-hidden">home address</span> </a>
+                                    <a href="s1-dependant-address-same"> Change<span class="nhsuk-u-visually-hidden">home address</span> </a>
                                   </dd>
                                 </div>
       
@@ -773,7 +774,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                             </span>
                                         </summary>
                                         <div class="nhsuk-details__text">
-                                        {% if data['same-address-as-Main'] == 'Yes' %}
+                                        {% if data['dependant-address-same-as-main'] == 'Yes' %}
                                           1 Washington Street<br>
                                           Worcester<br>
                                           WR1 1NL<br>
@@ -810,7 +811,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                   </dd>
                                 
                                   <dd class="nhsuk-summary-list__actions">
-                                    <a href="dependant-address#dependant-address-line-1">Change<span class="nhsuk-u-visually-hidden">home address</span></a>
+                                    <a href="s1-dependant-address-same">Change<span class="nhsuk-u-visually-hidden">home address</span></a>
                                   </dd>
                                 </div>
                               </dl>
@@ -825,24 +826,26 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 
       
                           <div class="button-container">
-                            <form action="confirmation-dependant-added">
-                              <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                            <button style="margin-right:20px; margin-top: 30px;" class="nhsuk-button" name="action" value="save" type="submit">
                                 Save and continue
-                              </button>
-                            </form>
-                
-                            <form action="s1-create-new-dependant-record?number-of-dependants=2">
-                              <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                            </button>
+                        
+                            {% if data['number-of-dependants'] != '2' %}
+                            <button style="margin-top: 30px;" class="nhsuk-button nhsuk-button--secondary" name="action" value="add" type="submit">
                                 Add another dependant
-                              </button>
-                            </form>
-                          </div>
+                            </button>
+                            {% endif %}
+                        </div>
+                        
+                        
 
                           <p><a href="s1-entitlement-details">Cancel</a></p>
 
                     
 
                 </div>
+
+              </form>
 
               </div>
           </div>
