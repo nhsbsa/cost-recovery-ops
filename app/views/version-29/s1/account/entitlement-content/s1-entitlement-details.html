@@ -119,7 +119,7 @@
                         Personal identification number (PIN)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'Yes' %}
+                        {% if data['update-s1-entitlement-details'] == 'yes' %}
                           {% if data['updated-s1-entitlement-country-of-issue'] %}
                             {{ data['updated-s1-entitlement-country-of-issue'] }}
                           {% else %}
@@ -129,7 +129,7 @@
                           {% if data['s1-entitlement-country-of-issue'] %}
                             {{ data['s1-entitlement-country-of-issue'] }}
                           {% else %}
-                          1123456789
+                          1234567890
                           {% endif %}
                         {% endif %}
                       </dd>
@@ -146,7 +146,7 @@
                         Issue country
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'Yes' %}
+                        {% if data['update-s1-entitlement-details'] == 'yes' %}
                           {% if data['updated-s1-entitlement-country-of-issue'] %}
                             {{ data['updated-s1-entitlement-country-of-issue'] }}
                           {% else %}
@@ -171,7 +171,7 @@
                         Issue date
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'Yes' %}
+                        {% if data['update-s1-entitlement-details'] == 'yes' %}
                           {% if data['updated-s1-entitlement-issue-date-day'] and data['updated-s1-entitlement-issue-date-month'] and data['updated-s1-entitlement-issue-date-year'] %}
                               {% set day = data['updated-s1-entitlement-issue-date-day'] %}
                               {% set month = data['updated-s1-entitlement-issue-date-month'] | int %}
@@ -224,7 +224,7 @@
                         Start date
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'Yes' %}
+                        {% if data['update-s1-entitlement-details'] == 'yes' %}
                           {% if data['updated-s1-entitlement-start-date-day'] and data['updated-s1-entitlement-start-date-month'] and data['updated-s1-entitlement-start-date-year'] %}
                           {% set day = data['updated-s1-entitlement-start-date-day'] %}
                           {% set month = data['updated-s1-entitlement-start-date-month'] | int %}
@@ -277,7 +277,7 @@
                         End date (optional)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'Yes' %}
+                        {% if data['update-s1-entitlement-details'] == 'yes' %}
                           {% if data['updated-s1-entitlement-end-date-day'] and data['updated-s1-entitlement-end-date-month'] and data['updated-s1-entitlement-end-date-year'] %}
                             {% set day = data['updated-s1-entitlement-end-date-day'] %}
                             {% set month = data['updated-s1-entitlement-end-date-month'] | int %}
@@ -330,7 +330,7 @@
                         Citizen status
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'Yes' %}
+                        {% if data['update-s1-entitlement-details'] == 'yes' %}
                           {% if data['updated-s1-entitlement-citizen-status'] %}
                             {{ data['updated-s1-entitlement-citizen-status'] }}
                           {% else %}
@@ -403,7 +403,7 @@
 
             <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="dependants">
               <!-- Dependants tab content starts -->
-              {% if data['add-dependant'] == 'Yes' or data['s1-add-dependant'] == 'Yes' %}
+              {% if data['add-dependant'] == 'yes' or data['s1-add-dependant'] == 'yes' %}
               <h3 class="nhsuk-heading-l">Dependants<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
                 <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
                 
@@ -413,7 +413,7 @@
                         Relationship to Main
                       </th>
                       <th role="columnheader" class="" scope="col">
-                        Personal ID
+                        Person record ID
                       </th>
                       <th role="columnheader" class="" scope="col">
                         First name
@@ -440,7 +440,7 @@
                         <span>Wife</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Personal ID</span>
+                        <span class="nhsuk-table-responsive__heading">Person record ID</span>
                         <span>112345</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
@@ -465,6 +465,42 @@
                       </td>
                     </tr>   
                   </tbody>
+
+                  {% if data['number-of-dependants'] == '2' %}
+                  <tbody class="nhsuk-table__body">
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Relationship to Main</span>
+                        <span>Son</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Person record ID</span>
+                        <span>111345</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">First name</span>
+                        <span>Joe</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Last name</span>
+                        <span>Bloggs</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date of birth</span>
+                        <span>14/09/1999</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>France</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Actions</span>
+                        <a href="#">View</a>
+                      </td>
+                    </tr>   
+                  </tbody>
+                {% endif %}
+
                 </table>
 
                 <a href="s1-dependant-search" class="nhsuk-button" style="margin-top: 30px;" role="button" data-module="nhsuk-button">
@@ -588,11 +624,14 @@
                     <label class="nhsuk-label" id="filter-notes-by-type-label" for="filter-notes-by-type">Filter notes by type</label>
                     <input class="nhsuk-input nhsuk-input--width-20" list="note-types" id="note-type-drop" name="note-type">
                     <datalist id="note-types">
-                      <option value="">Select...</option>
-                      <option id="general-note" value="General">General</option>
-                      <option id="s073-record-rina-reference" value="S073">S073</option>
-                      <option id="dl1609" value="DL1609">DL1609</option>
+                      <option value="" selected="selected"></option>
+                      <option id="general" value="General note">General note</option>
                       <option id="s071" value="S071">S071</option>
+                      <option id="s072" value="S072">S072</option>
+                      <option id="s073" value="S073">S073</option>
+                      <option id="dl1609" value="DL1609">DL1609</option>
+                      <option id="fas1q" value="FAS1Q">FAS1Q</option>
+                      <option id="x009" value="X009">X009</option>
                     </datalist>            
                   </div>
               
@@ -802,7 +841,7 @@
                     <tr role="row" class="nhsuk-table__row">
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Task</span>
-                        {% if data['dl1609-sent'] == 'Yes' %}
+                        {% if data['dl1609-sent'] == 'yes' %}
                         <a href="#">Confirm entitlement details</a>
                         {% else %}
                         <a href="#" class="disabled-link" onclick="return false;">Confirm entitlement details</a>
@@ -810,7 +849,7 @@
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Actioned by</span>
-                        {% if data['dl1609-sent'] == 'Yes' %}
+                        {% if data['dl1609-sent'] == 'yes' %}
                         <span class="nhsuk-u-visually-hidden">Not actioned</span>
                         {% else %}
                         <span class="nhsuk-u-visually-hidden">Not actioned</span>
@@ -818,7 +857,7 @@
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date actioned</span>
-                        {% if data['dl1609-sent'] == 'Yes' %}
+                        {% if data['dl1609-sent'] == 'yes' %}
                         <span class="nhsuk-u-visually-hidden">Not actioned</span>
                         {% else %}
                         <span class="nhsuk-u-visually-hidden">Not actioned</span>
@@ -826,7 +865,7 @@
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Current status</span>
-                        {% if data['dl1609-sent'] == 'Yes' %}
+                        {% if data['dl1609-sent'] == 'yes' %}
                         <strong class="nhsuk-tag nhsuk-tag--blue">
                           Not started
                         </strong>

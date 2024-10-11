@@ -44,7 +44,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
    
 
                     <!-- Dependant 1 details -->
-                    {% if data['number-of-dependants'] != '2' or data['remove-dependant'] == 'Yes' %}
+                    {% if data['number-of-dependants'] != '2' or data['remove-dependant'] == 'yes' %}
                         <dl class="nhsuk-summary-list">
 
                           <div class="nhsuk-summary-list__row">
@@ -53,7 +53,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                               {% if data['dependant-s1-entitlement-pin'] %}
                                 {{ data['dependant-s1-entitlement-pin'] }}
                               {% else %}
-                                1234567890
+                                0987654321
                               {% endif %}
                             </dd>
 
@@ -213,11 +213,12 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                             <dt class="nhsuk-summary-list__key">Same home address as Main</dt>
                             <dd class="nhsuk-summary-list__value">
                               {% if data['same-address-as-main'] %}
-                                {{ data['same-address-as-main'] }}
+                                {{ data['same-address-as-main'] | capitalize }}
                               {% else %}
                                 Yes
                               {% endif %}
                             </dd>
+                        
 
                             <dd class="nhsuk-summary-list__actions">
                               <a href="same-address"> Change<span class="nhsuk-u-visually-hidden">home address</span> </a>
@@ -228,7 +229,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <div class="nhsuk-summary-list__row">
                             <dt class="nhsuk-summary-list__key">Home address</dt>
                             <dd class="nhsuk-summary-list__value">
-                              {% if data['same-address-as-main'] == 'Yes' %}
+                              {% if data['same-address-as-main'] == 'yes' %}
                                 1 Washington Street, United Kingdom
                                 {% else %}
                                   {% if data['dependant-address-line-1'] or data['dependant-address-country'] %}
@@ -245,7 +246,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                       </span>
                                   </summary>
                                   <div class="nhsuk-details__text">
-                                  {% if data['same-address-as-main'] == 'Yes' %}
+                                  {% if data['same-address-as-main'] == 'yes' %}
                                     1 Washington Street<br>
                                     Worcester<br>
                                     WR1 1NL<br>
@@ -495,7 +496,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Home address</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['same-address-as-main'] == 'Yes' %}
+                                    {% if data['same-address-as-main'] == 'yes' %}
                                       1 Washington Street, United Kingdom
                                       {% else %}
                                         {% if data['dependant-address-line-1'] or data['dependant-address-country'] %}
@@ -512,7 +513,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                             </span>
                                         </summary>
                                         <div class="nhsuk-details__text">
-                                        {% if data['same-address-as-main'] == 'Yes' %}
+                                        {% if data['same-address-as-main'] == 'yes' %}
                                           1 Washington Street<br>
                                           Worcester<br>
                                           WR1 1NL<br>
@@ -743,7 +744,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                     {% if data['same-address-as-main'] %}
                                       {{ data['same-address-as-main'] }}
                                     {% else %}
-                                      Yes
+                                      yes
                                     {% endif %}
                                   </dd>
       
@@ -756,7 +757,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Home address</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['same-address-as-main'] == 'Yes' %}
+                                    {% if data['same-address-as-main'] == 'yes' %}
                                       1 Washington Street, United Kingdom
                                       {% else %}
                                         {% if data['dependant-address-line-1'] or data['dependant-address-country'] %}
@@ -773,7 +774,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                             </span>
                                         </summary>
                                         <div class="nhsuk-details__text">
-                                        {% if data['same-address-as-main'] == 'Yes' %}
+                                        {% if data['same-address-as-main'] == 'yes' %}
                                           1 Washington Street<br>
                                           Worcester<br>
                                           WR1 1NL<br>

@@ -45,7 +45,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                     <form action="s1-dependant-details-check" method="post">
 
                     <!-- Dependant 1 details -->
-                    {% if data['number-of-dependants'] != '2' or data['remove-dependant'] == 'Yes' %}
+                    {% if data['number-of-dependants'] != '2' or data['remove-dependant'] == 'yes' %}
                         <dl class="nhsuk-summary-list">
 
                           <div class="nhsuk-summary-list__row">
@@ -54,7 +54,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                               {% if data['dependant-s1-entitlement-pin'] %}
                                 {{ data['dependant-s1-entitlement-pin'] }}
                               {% else %}
-                                1234567890
+                                0987654321
                               {% endif %}
                             </dd>
 
@@ -212,13 +212,13 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                         <dl class="nhsuk-summary-list">
                           <div class="nhsuk-summary-list__row">
                             <dt class="nhsuk-summary-list__key">Same home address as Main</dt>
-                            <dd class="nhsuk-summary-list__value">
-                              {% if data['dependant-address-same-as-main'] %}
-                                {{ data['dependant-address-same-as-main'] }}
-                              {% else %}
-                                Yes
-                              {% endif %}
-                            </dd>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['same-address-as-main'] %}
+                                  {{ data['same-address-as-main'] | capitalize }}
+                                {% else %}
+                                  Yes
+                                {% endif %}
+                              </dd>
 
                             <dd class="nhsuk-summary-list__actions">
                               <a href="s1-dependant-address-same"> Change<span class="nhsuk-u-visually-hidden">home address</span> </a>
@@ -229,7 +229,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <div class="nhsuk-summary-list__row">
                             <dt class="nhsuk-summary-list__key">Home address</dt>
                             <dd class="nhsuk-summary-list__value">
-                              {% if data['dependant-address-same-as-main'] == 'Yes' %}
+                              {% if data['dependant-address-same-as-main'] == 'yes' %}
                                 1 Washington Street, United Kingdom
                                 {% else %}
                                   {% if data['dependant-address-line-1'] or data['dependant-address-country'] %}
@@ -246,7 +246,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                       </span>
                                   </summary>
                                   <div class="nhsuk-details__text">
-                                  {% if data['dependant-address-same-as-main'] == 'Yes' %}
+                                  {% if data['dependant-address-same-as-main'] == 'yes' %}
                                     1 Washington Street<br>
                                     Worcester<br>
                                     WR1 1NL<br>
@@ -306,7 +306,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <details class="nhsuk-details nhsuk-expander">
                             <summary class="nhsuk-details__summary">
                               <span class="nhsuk-details__summary-text">
-                                1234567890 - Jane Doe
+                                0987654321 - Jane Doe
                               </span>
                             </summary>
 
@@ -321,7 +321,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                     {% if data['dependant-s1-entitlement-pin'] %}
                                       {{ data['dependant-s1-entitlement-pin'] }}
                                     {% else %}
-                                      1234567890
+                                      0987654321
                                     {% endif %}
                                   </dd>
       
@@ -496,7 +496,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Home address</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['dependant-address-same-as-main'] == 'Yes' %}
+                                    {% if data['dependant-address-same-as-main'] == 'yes' %}
                                       1 Washington Street, United Kingdom
                                       {% else %}
                                         {% if data['dependant-address-line-1'] or data['dependant-address-country'] %}
@@ -513,7 +513,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                             </span>
                                         </summary>
                                         <div class="nhsuk-details__text">
-                                        {% if data['dependant-address-same-as-main'] == 'Yes' %}
+                                        {% if data['dependant-address-same-as-main'] == 'yes' %}
                                           1 Washington Street<br>
                                           Worcester<br>
                                           WR1 1NL<br>
@@ -567,7 +567,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <details class="nhsuk-details nhsuk-expander">
                             <summary class="nhsuk-details__summary">
                               <span class="nhsuk-details__summary-text">
-                                0987654321 - Joe Bloggs
+                                0098765432 - Joe Bloggs
                               </span>
                             </summary>
 
@@ -582,7 +582,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                     {% if data['dependant-s1-entitlement-pin'] %}
                                       {{ data['dependant-s1-entitlement-pin'] }}
                                     {% else %}
-                                      0987654321
+                                      0098765432
                                     {% endif %}
                                   </dd>
       
@@ -741,7 +741,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Same home address as Main</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['dependant-address-same-as-main'] == 'Yes' %}
+                                    {% if data['dependant-address-same-as-main'] == 'yes' %}
                                       Yes
                                     {% else %}
                                       Yes
@@ -757,7 +757,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                 <div class="nhsuk-summary-list__row">
                                   <dt class="nhsuk-summary-list__key">Home address</dt>
                                   <dd class="nhsuk-summary-list__value">
-                                    {% if data['same-address-as-Main'] == 'Yes' %}
+                                    {% if data['same-address-as-Main'] == 'yes' %}
                                       1 Washington Street, United Kingdom
                                       {% else %}
                                         {% if data['dependant-address-line-1'] or data['dependant-address-country'] %}
@@ -774,7 +774,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                                             </span>
                                         </summary>
                                         <div class="nhsuk-details__text">
-                                        {% if data['dependant-address-same-as-main'] == 'Yes' %}
+                                        {% if data['dependant-address-same-as-main'] == 'yes' %}
                                           1 Washington Street<br>
                                           Worcester<br>
                                           WR1 1NL<br>

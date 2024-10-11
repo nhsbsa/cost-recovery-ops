@@ -24,7 +24,7 @@ router.post([/s1-dependant-personal-details/], function(req, res) {
   console.log(req.body.action);
 
   // Mark the dependant as added
-  req.session.data['s1-add-dependant'] = 'Yes';
+  req.session.data['s1-add-dependant'] = 'yes';
 
   // Check the button action and redirect accordingly
   res.redirect('/version-29/s1/account/entitlement-content/s1-confirmation-dependant-added');
@@ -39,7 +39,7 @@ router.post([/s1-create-new-dependant-record/], function(req, res){
 router.post([/s1-dependant-address-same/], function(req, res) {
   const sameAddressAsMain = req.session.data['dependant-address-same-as-main'];
   
-  if (sameAddressAsMain === 'Yes'){
+  if (sameAddressAsMain === 'yes'){
     res.redirect('/version-29/s1/account/entitlement-content/s1-dependant-details-check');
   } else {
     res.redirect('/version-29/s1/account/entitlement-content/s1-manual-dependant-address');
@@ -57,7 +57,7 @@ router.post([/s1-dependant-details-check/], function(req, res) {
   console.log(req.body.action);
 
   // Mark the dependant as added
-  req.session.data['s1-add-dependant'] = 'Yes';
+  req.session.data['s1-add-dependant'] = 'yes';
 
   // Check the button action and redirect accordingly
   if (req.body.action === 'add') {
@@ -299,7 +299,7 @@ router.post([/new-s1-s072-entitlement-cya/], function(req, res){
 router.post([/add-dependant/], function(req, res){
   var addDependant = req.session.data['add-dependant'];
   
-  if (addDependant == 'Yes'){
+  if (addDependant == 'yes'){
       res.redirect('search-for-dependant');
   } else {
       res.redirect('/version-29/s1/s072-registration/confirmation-s1-s072-added');
@@ -313,7 +313,15 @@ router.post([/search-for-dependant/], function(req, res){
 
 // View dependant's personal details and add dependant to entitlement
 router.post([/dependant-personal-details/], function(req, res){
-  res.redirect('confirmation-s1-s072-added');
+
+   // Log the value of the action field
+   console.log(req.body.action);
+
+   // Mark the dependant as added
+   req.session.data['add-dependant'] = 'yes';
+ 
+   // Check the button action and redirect accordingly
+  res.redirect('/version-29/s1/s072-registration/confirmation-s1-s072-added');
 })
 
 // Enter dependant's address
@@ -325,7 +333,7 @@ router.post([/dependant-details/], function(req, res){
 router.post([/same-address/], function(req, res){
   const sameAddress = req.session.data['same-address-as-main'];
   
-  if (sameAddress === 'Yes'){
+  if (sameAddress === 'yes'){
     res.redirect('/version-29/s1/s072-registration/dependant-details-cya');
   } else {
     res.redirect('/version-29/s1/s072-registration/dependant-address');
@@ -342,7 +350,7 @@ router.post([/remove-dependant/], (req, res) => {
 
   const removeDependant = req.session.data['remove-dependant']
 
-  if (removeDependant === 'Yes') {
+  if (removeDependant === 'yes') {
     res.redirect('dependant-details-cya')
   } else {
     res.redirect('dependant-details-cya')
@@ -425,7 +433,7 @@ router.post([/download-dl1609/], function(req, res){
   req.session.data['new-dl1609-note'] = 'yes';
 
   // Set dl1609-sent flag to "Yes" to enable the "Confirm entitlement details" link and update status
-  req.session.data['dl1609-sent'] = 'Yes';
+  req.session.data['dl1609-sent'] = 'yes';
   
   // Redirect to the S1 entitlement details screen
   res.redirect('/version-29/s1/account/entitlement-content/s1-entitlement-details');
@@ -444,7 +452,7 @@ router.post([/s1-remove-dependant/], (req, res) => {
 
   const removeDependant = req.session.data['remove-dependant']
 
-  if (removeDependant === 'Yes') {
+  if (removeDependant === 'yes') {
     res.redirect('s1-dependant-details-cya')
   } else {
     res.redirect('s1-dependant-details-cya')
