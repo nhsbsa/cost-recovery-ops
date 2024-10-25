@@ -1,0 +1,153 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Update personal details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <h1 class="app-page-heading">
+                      Change personal details
+                    </h1>
+
+                    
+                    <form action="change-basic-personal-details" method="post">
+          
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="first-name-input-label">
+                              First names (Given names or forenames)
+                            </label>
+                            <div class="nhsuk-hint" id="first-name-input-hint">
+                              For example, ph or Phillip
+                            </div>
+                            <input class="nhsuk-input nhsuk-input--width-20" id="first-name" name="first-name" type="text" value="John">
+                          </div>
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="birth-first-name-input-label">
+                             First names at birth, if different
+                            </label>
+                            <input class="nhsuk-input nhsuk-input--width-20" id="birth-first-name" name="birth-first-name" type="text">
+                          </div>
+
+                          <br>
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="last-name-input-label">
+                              Last name (Name or surname)
+                            </label>
+                            <div class="nhsuk-hint" id="last-name-input-hint">
+                              For example, sm or Smith
+                            </div>
+                            <input class="nhsuk-input nhsuk-input--width-20" id="last-name" name="last-name" type="text" value="Doe">
+                          </div>
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="birth-last-name-input-label">
+                             Last name at birth, if different
+                            </label>
+                            <input class="nhsuk-input nhsuk-input--width-20" id="birth-last-name" name="birth-last-name" type="text">
+                          </div>
+
+                          <br>
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="dob-label">
+                                Date of birth
+                              </label>
+                            <div class="nhsuk-hint" id="dob-hint">
+                                For example, 15 3 1984
+                            </div>
+                            <div class="nhsuk-date-input">
+                                <div class="nhsuk-date-input__item">
+                                  <label id="dob-day-label" class="nhsuk-label nhsuk-date-input__label" for="dob-day">Day</label> 
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dob-day" name="dob-day" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)" value="4">
+                                </div>
+                    
+                                <div class="nhsuk-date-input__item">
+                                  <label id="dob-month-label" class="nhsuk-label nhsuk-date-input__label" for="dob-month">Month</label>
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dob-month" name="dob-month" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength)" value="1">
+                                </div>
+                    
+                                <div class="nhsuk-date-input__item">
+                                  <label id="dob-year-label" class="nhsuk-label nhsuk-date-input__label" for="dob-year">Year</label>
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dob-year" name="dob-year" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="4" oninput="this.value=this.value.slice(0,this.maxLength)" value="1973">
+                                </div>
+                            </div>
+                          </div>
+
+                          
+                        
+                                            
+                    <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
+                        Continue
+                    </button>
+
+                    <p><a href="../account/personal-details">Cancel</a></p>
+
+                    </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#nationalityDrop')
+  })
+</script>
+
+<!-- DOB format -->
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("residency-day").value;
+    const month = document.getElementById("residency-month").value;
+    const year = document.getElementById("residency-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "2 July 2024";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
+</script>
+{% endblock %}

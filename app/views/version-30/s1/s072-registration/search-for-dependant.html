@@ -1,0 +1,202 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Reason for editing - Update person details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="search-for-dependant" method="post">
+
+                      <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                          S1/S072 entitlement registration
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Search for a dependant using personal details
+                      </h1>
+
+
+                    <p><b>Enter at least 2 pieces of information, then select Search.</b></p>
+
+                    
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label" for="dependant-firstName-label">
+                            First names (Given names or forenames)
+                          </label>
+                          <div class="nhsuk-hint" id="dependant-firstName-hint">
+                            For example, ph or Phillip
+                          </div>
+                          <input class="nhsuk-input nhsuk-input--width-20" id="search-dependant-first-name" name="search-dependant-first-name" type="text">
+                        </div>
+          
+                    
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label" for="dependant-lastName-label">
+                            Last name (Name or surname)
+                          </label>
+                          <div class="nhsuk-hint" id="dependant-lastName-hint">
+                            For example, sm or Smith
+                          </div>
+                          <input class="nhsuk-input nhsuk-input--width-20" id="search-dependant-last-name" name="search-dependant-last-name" type="text">
+                        </div>
+
+
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label" for="dependant-birth-last-Name-label">
+                            Last name at birth, if different
+                          </label>
+                          <div class="nhsuk-hint" id="dependant-birth-last-name-hint">
+                            For example, jo or Jones
+                          </div>
+                          <input class="nhsuk-input nhsuk-input--width-20" id="search-dependant-birth-last-name" name="search-dependant-birth-last-name" type="text">
+                        </div>
+          
+                    
+                        <div class="nhsuk-form-group">
+                          <fieldset class="nhsuk-fieldset" aria-describedby="dependant-dob-hint" role="group">
+                            <label class="nhsuk-label" for="search-dependant-dob-label">
+                              Date of birth
+                            </label>
+                            <div class="nhsuk-hint" id="search-dependant-dob-hint">
+                              For example, 15 10 1984
+                            </div>
+                            <div class="nhsuk-date-input" id="dependant-dob">
+                              <div class="nhsuk-date-input__item">
+                                <div class="nhsuk-form-group">
+                                  <label class="nhsuk-label nhsuk-date-input__label" for="search-dependant-dob-day-label">
+                                    Day
+                                  </label>
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="search-dependant-dob-day"
+                                    name="dependant-dob-day" type="number" pattern="[0-9]*" value="">
+                                </div>
+                              </div>
+                              <div class="nhsuk-date-input__item">
+                                <div class="nhsuk-form-group">
+                                  <label class="nhsuk-label nhsuk-date-input__label" for="search-dependant-dob-month-label">
+                                    Month
+                                  </label>
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="search-dependant-dob-month"
+                                    name="dependant-dob-month" type="number" pattern="[0-9]*" value="">
+                                </div>
+                              </div>
+                              <div class="nhsuk-date-input__item">
+                                <div class="nhsuk-form-group">
+                                  <label class="nhsuk-label nhsuk-date-input__label" for="search-dependant-dob-year-label">
+                                    Year
+                                  </label>
+                                  <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="search-dependant-dob-year"
+                                    name="dependant-dob-year" type="number" pattern="[0-9]*" value="">
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+          
+          
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" id="dependant-nationality-label" for="dependant-nationality" class="form-label">
+                        Country of nationality
+                      </label>
+                      <div class="nhsuk-hint" id="nationality-hint">
+                        For example, France
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="dependant-nationality-drop" name="dependant-nationality">
+                      <datalist id="countries">
+                        <option value="" selected="selected"></option>
+                        <option value="Austria (AT)">Austria (AT)</option>
+                        <option value="Belgium (BE)">Belgium (BE)</option>
+                        <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                        <option value="Croatia (HR)">Croatia (HR)</option>
+                        <option value="Cyprus (CY)">Cyprus (CY)</option>
+                        <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                        <option value="Denmark (DK)">Denmark (DK)</option>
+                        <option value="Estonia (EE)">Estonia (EE)</option>
+                        <option value="Finland (FI)">Finland (FI)</option>
+                        <option value="France (FR)">France (FR)</option>
+                        <option value="Germany (DE)">Germany (DE)</option>
+                        <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                        <option value="Greece (GR)">Greece (GR)</option>
+                        <option value="Hungary (HU)">Hungary (HU)</option>
+                        <option value="Iceland (IS)">Iceland (IS)</option>
+                        <option value="Ireland (IE)">Ireland (IE)</option>
+                        <option value="Italy (IT)">Italy (IT)</option>
+                        <option value="Latvia (LV)">Latvia (LV)</option>
+                        <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                        <option value="Lithuania (LT)">Lithuania (LT)</option>
+                        <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                        <option value="Malta (MT)">Malta (MT)</option>
+                        <option value="Netherlands (NL)">Netherlands (NL)</option>
+                        <option value="Norway (NO)">Norway (NO)</option>
+                        <option value="Poland (PL)">Poland (PL)</option>
+                        <option value="Portugal (PT)">Portugal (PT)</option>
+                        <option value="Romania (RO)">Romania (RO)</option>
+                        <option value="Slovakia (SK)">Slovakia (SK)</option>
+                        <option value="Slovenia (SI)">Slovenia (SI)</option>
+                        <option value="Spain (ES)">Spain (ES)</option>
+                        <option value="Sweden (SE)">Sweden (SE)</option>
+                        <option value="Switzerland (CH)">Switzerland (CH)</option>
+                      </datalist>            
+                   </div>
+          
+                    
+                    <a href="search-for-dependant-results" class="nhsuk-button nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-2">
+                     Search
+                    </a>
+                
+                    <p class="nhsuk-u-margin-top-4">
+                      <p><a href="../account/entitlements-and-enquiries">Cancel</a></p>
+                    </p>
+                
+
+                    </form>
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#dependant-nationality-drop')
+  })
+</script>
+{% endblock %}
