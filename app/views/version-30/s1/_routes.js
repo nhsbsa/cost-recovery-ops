@@ -74,6 +74,24 @@ router.post([/s1-dependant-details-check/], function(req, res) {
 
 // Enter person's name, DOB and address
 router.post([/create-person-record/], function(req, res){
+  res.redirect('add-address');
+})
+
+// Do you know the person's address?
+router.post([/add-address/], (req, res) => {
+
+  const knowAddress = req.session.data['know-address']
+
+  if (knowAddress === 'yes') {
+    res.redirect('enter-address')
+  } else {
+    res.redirect('create-person-record-cya')
+  }
+
+})
+
+// Enter person's name, DOB and address
+router.post([/enter-address/], function(req, res){
   res.redirect('create-person-record-cya');
 })
 

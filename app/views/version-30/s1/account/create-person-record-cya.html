@@ -190,9 +190,24 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                             </dd>
                           </div-->
 
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Current address known</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['know-address'] == 'yes' %}
+                                Yes
+                              {% else %}
+                                No
+                              {% endif %}
+                            </dd>
 
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="add-address"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                            </dd>
+                          </div>
+
+                          {% if data['know-address'] == 'yes' %}
                             <div class="nhsuk-summary-list__row">
-                              <dt class="nhsuk-summary-list__key">Current address (optional)</dt>
+                              <dt class="nhsuk-summary-list__key">Current address</dt>
                               <dd class="nhsuk-summary-list__value">
                                 {% if data['address-line-1'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-region'] or data['address-postcode'] or data['address-country'] %}
                                   {% if data['address-line-1'] %}
@@ -200,6 +215,9 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                                   {% endif %}
                                   {% if data['address-line-2'] %}
                                     {{ data['address-line-2'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-line-3'] %}
+                                    {{ data['address-line-3'] }}<br>
                                   {% endif %}
                                   {% if data['address-town'] %}
                                     {{ data['address-town'] }}<br>
@@ -222,9 +240,10 @@ Look for an address - Create a new person record - Manage overseas entitlements 
                               </dd>
 
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="address-lookup#postcode"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                                <a href="enter-address"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
                               </dd>
                             </div>
+                            {% endif %}
                           
 
                             <!--div class="nhsuk-summary-list__row">
