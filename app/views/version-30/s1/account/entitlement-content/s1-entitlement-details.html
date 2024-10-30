@@ -134,18 +134,10 @@
                         Personal identification number (PIN)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'yes' %}
-                          {% if data['updated-s1-entitlement-country-of-issue'] %}
-                            {{ data['updated-s1-entitlement-country-of-issue'] }}
-                          {% else %}
-                            France
-                          {% endif %}
-                        {% else %}
-                          {% if data['s1-entitlement-country-of-issue'] %}
-                            {{ data['s1-entitlement-country-of-issue'] }}
-                          {% else %}
+                        {% if data['entitlement-for'] == 'Main' or data['s1-entitlement-type'] == '+S072 (from an FAS1Q enquiry)' %}
                           1234567890
-                          {% endif %}
+                        {% else %}
+                          0987654321
                         {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
@@ -341,28 +333,22 @@
 
 
                     <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Citizen status
-                      </dt>
+                      <dt class="nhsuk-summary-list__key">Citizen status</dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'yes' %}
-                          {% if data['updated-s1-entitlement-citizen-status'] %}
-                            {{ data['updated-s1-entitlement-citizen-status'] }}
-                          {% else %}
-                            Insured person
-                          {% endif %}
+                        {% if data['updated-s1-entitlement-citizen-status'] %}
+                          {{ data['updated-s1-entitlement-citizen-status'] }}
+                        {% elif data['entitlement-for'] == 'Dependant' %}
+                          Family member of insured person
                         {% else %}
-                          {% if data['s1-entitlement-citizen-status'] %}
-                            {{ data['s1-entitlement-citizen-status'] }}
-                          {% else %}
-                            Insured person
-                          {% endif %}
+                          Insured person
                         {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                        
+                        <!-- Add any actions here if needed for interaction -->
                       </dd>
                     </div>
+                    
+                    
 
                 </dl>
                 
