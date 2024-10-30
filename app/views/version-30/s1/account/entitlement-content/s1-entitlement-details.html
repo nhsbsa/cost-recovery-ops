@@ -82,7 +82,7 @@
                 <dl class="nhsuk-summary-list">
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        S1 entitlement type
+                        S1 registration type
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         {% if data['s1-entitlement-type'] %}
@@ -595,7 +595,7 @@
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date actioned</span>
                         {% if data['send-s073'] == 'completed' %}
-                          11/10/2024
+                          29/10/2024
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not actioned</span>
                         {% endif %}
@@ -615,6 +615,7 @@
                     </tr>   
                   </tbody>
 
+                  {% if (data['s1-entitlement-type'] == 'S1/S072' and data['entitlement-for'] == 'Main') or data['s1-entitlement-type'] == 'E109' %}
                   <tbody class="nhsuk-table__body">
                     <tr role="row" class="nhsuk-table__row">
                       <td role="cell" class="nhsuk-table__cell">
@@ -636,7 +637,7 @@
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date actioned</span>
                         {% if data['send-dl1609'] == 'completed' %}
-                          11/10/2024
+                          29/10/2024
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not actioned</span>
                         {% endif %}
@@ -655,8 +656,9 @@
                       </td>
                     </tr>   
                   </tbody>
+                  {% endif %}
 
-                  <tbody class="nhsuk-table__body">
+                  <!--tbody class="nhsuk-table__body">
                     <tr role="row" class="nhsuk-table__row">
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Task</span>
@@ -695,7 +697,7 @@
                         {% endif %}
                       </td>
                     </tr>   
-                  </tbody>
+                  </tbody-->
 
                 </table>
               </div>

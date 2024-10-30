@@ -252,44 +252,46 @@
                   
                   <dl class="nhsuk-summary-list">
                     <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                            Current address
-                        </dt>
-                        <dd class="nhsuk-summary-list__value">
-                            {% if data['change-address'] == 'yes' %}
-                                {# Check if any of the address fields have been updated, otherwise fallback to default #}
-                                {% if data['change-address-line-1'] or data['change-address-line-2'] or data['change-address-town'] or data['change-address-region'] or data['change-address-postcode'] or data['change-address-country'] %}
-                                    {{ data['change-address-line-1'] }}<br>
-                                    {% if data['change-address-line-2'] %}
-                                        {{ data['change-address-line-2'] }}<br>
-                                    {% endif %}
-                                    {{ data['change-address-town'] }}<br>
-                                    {% if data['change-address-region'] %}
-                                        {{ data['change-address-region'] }}<br>
-                                    {% endif %}
-                                    {{ data['change-address-postcode'] }}<br>
-                                    {{ data['change-address-country'] }}
-                                {% else %}
-                                    8 Rothbury Terrace<br>
-                                    Heaton<br>
-                                    Newcastle upon Tyne<br>
-                                    Tyne and Wear<br>
-                                    NE6 5XH<br>
-                                    United Kingdom
-                                {% endif %}
-                            {% else %}
-                                1 Washington Street<br>
-                                Worcester<br>
-                                WR1 1NL<br>
-                                United Kingdom
-                            {% endif %}
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                            <a href="change-current-address">
-                                Change<span class="nhsuk-u-visually-hidden"> current address</span>
-                            </a>
-                        </dd>
-                    </div>
+                      <dt class="nhsuk-summary-list__key">
+                          Current address
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                          {% if data['change-address'] == 'yes' %}
+                              {# Check if any of the address fields have been updated, otherwise fallback to default #}
+                              {% if data['change-address-line-1'] or data['change-address-line-2'] or data['change-address-line-3'] or data['change-address-town'] or data['change-address-region'] or data['change-address-postcode'] or data['change-address-country'] %}
+                                  {{ data['change-address-line-1'] }}<br>
+                                  
+                                  {% if data['change-address-line-2'] %}
+                                      {{ data['change-address-line-2'] }}<br>
+                                  {% endif %}
+                                  
+                                  {% if data['change-address-line-3'] %}
+                                      {{ data['change-address-line-3'] }}<br>
+                                  {% endif %}
+                                  
+                                  {{ data['change-address-town'] }}<br>
+                                  
+                                  {% if data['change-address-region'] %}
+                                      {{ data['change-address-region'] }}<br>
+                                  {% endif %}
+                                  
+                                  {{ data['change-address-postcode'] }}<br>
+                                  {{ data['change-address-country'] }}
+                              {% endif %}
+                          {% else %}
+                              1 Washington Street<br>
+                              Worcester<br>
+                              WR1 1NL<br>
+                              United Kingdom
+                          {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                          <a href="change-current-address">
+                              Change<span class="nhsuk-u-visually-hidden"> current address</span>
+                          </a>
+                      </dd>
+                  </div>
+                  
                 
               
                     <div class="nhsuk-summary-list__row">

@@ -239,7 +239,7 @@ router.post([/which-entitlement/], function(req, res){
 router.post([/which-s1-entitlement/], function(req, res) {
   var s1EntitlementType = req.session.data['s1-entitlement-type'];
   
-  if (s1EntitlementType === 'E109' || s1EntitlementType === '+S072') {
+  if (s1EntitlementType === 'E109' || s1EntitlementType === '+S072 (from an FAS1Q enquiry)') {
     res.redirect('entitlement-details');
   } else {
     res.redirect('/version-30/s1/s072-registration/entitlement-for');
@@ -378,6 +378,11 @@ req.session.data['new-s073-rina-reference-note'] = 'yes';
   res.redirect('/version-30/s1/account/entitlement-content/s1-entitlement-details');
 
 })
+
+router.get('/version-30/s1/account/notes', function(req, res) {
+  res.render('/version-30/s1/account/notes', { data: req.session.data });
+});
+
 
 
 // Send the DL1609, and add a note (optional)

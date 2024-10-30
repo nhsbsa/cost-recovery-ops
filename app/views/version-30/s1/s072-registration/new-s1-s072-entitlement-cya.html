@@ -64,7 +64,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                       </div>
 
                       <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">S1 entitlement type</dt>
+                        <dt class="nhsuk-summary-list__key">S1 registration type</dt>
                         <dd class="nhsuk-summary-list__value">
                           {% if data['s1-entitlement-type'] %}
                             {{ data['s1-entitlement-type'] }}
@@ -91,7 +91,17 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <a href="entitlement-for"> Change<span class="nhsuk-u-visually-hidden">entitlement for</span> </a>
                         </dd>
                       </div>
-                      {% elif data['s1-entitlement-type'] == '+S072' %}
+                      {% elif data['s1-entitlement-type'] == '+S072 (from an FAS1Q enquiry)' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Entitlement for</dt>
+                        <dd class="nhsuk-summary-list__value">
+                            Main
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          
+                        </dd>
+                      </div>
+                      {% elif data['s1-entitlement-type'] == 'E109' %}
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Entitlement for</dt>
                         <dd class="nhsuk-summary-list__value">
@@ -234,8 +244,8 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Citizen status</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-entitlement-citizen-status'] %}
-                            {{ data['s1-entitlement-citizen-status'] }}
+                          {% if data['entitlement-for'] == 'Dependant' %}
+                            Family member of insured person
                           {% else %}
                             Insured person
                           {% endif %}
