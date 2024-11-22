@@ -47,8 +47,50 @@
 
           
       
+          {% if data['change-basic-personal-details'] == 'yes' %}
+          <div>
+                        
+            <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+               <div class="govuk-notification-banner__header">
+                  <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
+               </div>
+               <div class="govuk-notification-banner__content">
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">{% if data['first-name'] %}{{ data['first-name'] }}{% else %}John{% endif %} {% if data['last-name'] %}{{ data['last-name'] }}{% else %}Doe{% endif %}’s personal details have been changed across all entitlements, claims, and resubmissions. All claim documents have been regenerated to reflect these changes.</span>
+               </div>
+            </div>
+         
+          </div>
+          {% endif %}
+
+          {% if data['change-additional-personal-details'] == 'yes' %}
+          <div>
+                        
+            <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+               <div class="govuk-notification-banner__header">
+                  <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
+               </div>
+               <div class="govuk-notification-banner__content">
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">{% if data['first-name'] %}{{ data['first-name'] }}{% else %}John{% endif %} {% if data['last-name'] %}{{ data['last-name'] }}{% else %}Doe{% endif %}’s personal details have been changed.</span>
+               </div>
+            </div>
+         
+          </div>
+          {% endif %}
           
-          
+          {% if data['change-address'] == 'yes' or data['change-date-of-residency-uk'] == 'yes' %}
+          <div>
+                        
+            <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+               <div class="govuk-notification-banner__header">
+                  <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
+               </div>
+               <div class="govuk-notification-banner__content">
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">{% if data['first-name'] %}{{ data['first-name'] }}{% else %}John{% endif %} {% if data['last-name'] %}{{ data['last-name'] }}{% else %}Doe{% endif %}’s address details have been changed.</span>
+               </div>
+            </div>
+         
+          </div>
+          {% endif %}
       
       
           <!-- Tabs -->
