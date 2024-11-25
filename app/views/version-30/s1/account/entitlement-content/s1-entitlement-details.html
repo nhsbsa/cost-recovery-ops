@@ -119,14 +119,25 @@
                         Entitlement status
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        <strong class="nhsuk-tag nhsuk-tag--yellow">
-                          Registered - action required
-                        </strong>
+                        <!-- If all tasks in task list are completed, the status tag should change to 'Registered' in a green colour -->
+                        {% if (data['s1-entitlement-type'] == 'S1/S072' and data['entitlement-for'] == 'Main' and data['send-s073'] == 'completed' and data['send-dl1609'] == 'completed') 
+                              or (data['s1-entitlement-type'] == 'E109' and data['send-s073'] == 'completed' and data['send-dl1609'] == 'completed') 
+                              or (data['s1-entitlement-type'] == 'S1/S072' and data['entitlement-for'] == 'Dependant' and data['send-s073'] == 'completed') 
+                              or (data['s1-entitlement-type'] == '+S072 (from an FAS1Q enquiry)' and data['send-s073'] == 'completed') %}
+                          <strong class="nhsuk-tag nhsuk-tag--green">
+                            Registered
+                          </strong>
+                        {% else %}
+                          <strong class="nhsuk-tag nhsuk-tag--yellow">
+                            Registered - action required
+                          </strong>
+                        {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                        
+                        <!-- Optional actions can go here if needed -->
                       </dd>
                     </div>
+                    
 
 
                     <div class="nhsuk-summary-list__row">
@@ -363,35 +374,60 @@
             <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="institution-details">
               <!-- Institution details tab content starts -->
                 <dl class="nhsuk-summary-list">
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Institution ID
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Institution ID
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['change-s1-entitlement-institution-details'] == 'yes' and data['updated-s1-entitlement-institution-ID'] %}
+                        {{ data['updated-s1-entitlement-institution-ID'] }}
+                      {% else %}
                         0305300000
-                      </dd>
-                    </div>
+                      {% endif %}
+                    </dd>
+                  </div>
 
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Institution name
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Institution name
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['change-s1-entitlement-institution-details'] == 'yes' and data['updated-s1-entitlement-institution-name'] %}
+                        {{ data['updated-s1-entitlement-institution-name'] }}
+                      {% else %}
                         Caisse Regionale des Professions Liberales D'ile de France
-                      </dd>
-                    </div>
+                      {% endif %}
+                    </dd>
+                  </div>
 
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Institution address
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Institution address
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['change-s1-entitlement-institution-details'] == 'yes' 
+                            and data['updated-s1-entitlement-institution-address-line-1'] 
+                            and data['updated-s1-entitlement-institution-address-town'] 
+                            and data['updated-s1-entitlement-institution-address-postcode'] 
+                            and data['updated-s1-entitlement-institution-address-country'] %}
+                        {{ data['updated-s1-entitlement-institution-address-line-1'] }}<br>
+                        {% if data['updated-s1-entitlement-institution-address-line-2'] %}
+                          {{ data['updated-s1-entitlement-institution-address-line-2'] }}<br>
+                        {% endif %}
+                        {{ data['updated-s1-entitlement-institution-address-town'] }}<br>
+                        {% if data['updated-s1-entitlement-institution-address-region'] %}
+                          {{ data['updated-s1-entitlement-institution-address-region'] }}<br>
+                        {% endif %}
+                        {{ data['updated-s1-entitlement-institution-address-postcode'] }}<br>
+                        {{ data['updated-s1-entitlement-institution-address-country'] }}
+                      {% else %}
                         22 Rue Violet<br>
                         Paris<br>
                         75015<br>
                         France
-                      </dd>
-                    </div>
+                      {% endif %}
+                    </dd>
+                  </div>                  
                 </dl>
 
                     <div class="button-container">

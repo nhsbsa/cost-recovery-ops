@@ -71,9 +71,23 @@
                     <div class="nhsuk-expander-group">
                       <details class="nhsuk-details nhsuk-expander">
                         <summary class="nhsuk-details__summary">
-                          <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" aria-label="S1/S072 - Valid: 05/09/2024 - France (FR)">S1/S072 - Valid: 05/09/2024 - France (FR)</span>
-                            <strong class="nhsuk-tag no-caps nhsuk-tag--yellow" style="float: right; margin-right: 20px; margin-top: 8px; display: block;" id="entitlement-status-tag">Registered - action required</strong>
-                        </summary>
+                          <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" aria-label="S1/S072 - Valid: 05/09/2024 - France (FR)">
+                            S1/S072 - Valid: 05/09/2024 - France (FR)
+                          </span>
+                          {% if (data['s1-entitlement-type'] == 'S1/S072' and data['entitlement-for'] == 'Main' and data['send-s073'] == 'completed' and data['send-dl1609'] == 'completed') 
+                                or (data['s1-entitlement-type'] == 'E109' and data['send-s073'] == 'completed' and data['send-dl1609'] == 'completed') 
+                                or (data['s1-entitlement-type'] == 'S1/S072' and data['entitlement-for'] == 'Dependant' and data['send-s073'] == 'completed') 
+                                or (data['s1-entitlement-type'] == '+S072 (from an FAS1Q enquiry)' and data['send-s073'] == 'completed') %}
+                            <strong class="nhsuk-tag no-caps nhsuk-tag--green" style="float: right; margin-right: 20px; margin-top: 8px; display: block;" id="entitlement-status-tag">
+                              Registered
+                            </strong>
+                          {% else %}
+                            <strong class="nhsuk-tag no-caps nhsuk-tag--yellow" style="float: right; margin-right: 20px; margin-top: 8px; display: block;" id="entitlement-status-tag">
+                              Registered - action required
+                            </strong>
+                          {% endif %}
+                        </summary>                        
+                        
 
 
                         <div class="nhsuk-details__text">

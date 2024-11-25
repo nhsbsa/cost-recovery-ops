@@ -338,7 +338,7 @@ router.post([/change-s1-entitlement-details/], function(req, res){
 // Change S1 entitlement institution details
 router.post([/change-s1-entitlement-institution-details/], function(req, res){
 
-  req.session.data['update-s1-entitlement-institution-details'] = 'yes'
+  req.session.data['change-s1-entitlement-institution-details'] = 'yes'
 
   res.redirect('/version-30/s1/account/entitlement-content/s1-entitlement-details#tab-institution-details');
 
