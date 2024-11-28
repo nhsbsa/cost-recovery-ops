@@ -84,7 +84,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                         <table role="table" class="nhsuk-table-responsive">
                           <thead role="rowgroup" class="nhsuk-table__head">
                             <tr role="row">
-                              <th role="columnheader" scope="col" style="width: 18%;">Date and time</th>
+                              <th role="columnheader" scope="col" style="width: 20%;">Date and time</th>
                               <th role="columnheader" scope="col" style="width: 20%;">Added by</th>
                               <th role="columnheader" scope="col" style="width: 20%;">Note type</th>
                               <th role="columnheader" scope="col">Comments</th>
@@ -102,11 +102,13 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                                 <p>Joe Bloggs</p>
                               </td>
                               <td role="cell" class="nhsuk-table__cell">
-                                <p>{{ data['note-type'] | default('General note') }}</p>
+                                <p>{{ data['note-type'] if data['note-type'] else 'General note' }}</p>
                               </td>
                               <td role="cell" class="nhsuk-table__cell">
-                                <p><b>RINA reference number: {{ data['rina-ref-number'] | default('654321') }}</b></p>
-                                <p>{{ data['note'] | default('This is what the comments would look like.') }}</p>
+                                {% if data['rina-ref-number'] %}
+                                  <p><b>RINA reference number: {{ data['rina-ref-number'] }}</b></p>
+                                {% endif %}
+                                <p>{{ data['note'] if data['note'] else 'This is what the comments would look like.' }}</p>
                               </td>
                             </tr>
                             {% endif %}
@@ -124,8 +126,11 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                                 <p>DL1609</p>
                               </td>
                               <td role="cell" class="nhsuk-table__cell">
-                                <p>{{ data['dl1609-comments'] | default('Sent the DL1609 to the office to be printed and sent off this morning.') }}</p>
-                              </td>
+                                <!-- Only display comments if they are present -->
+                                {% if data['dl1609-comments'] %}
+                                  <p>{{ data['dl1609-comments'] }}</p>
+                                {% endif %}
+                               </td>
                             </tr>
                             {% endif %}
                     
@@ -142,7 +147,14 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                                 <p>S073</p>
                               </td>
                               <td role="cell" class="nhsuk-table__cell">
-                                <p><b>RINA reference number: {{ data['rina-reference-number'] }}</b></p>
+                                <p><b>
+                                RINA reference number: 
+                                {% if data['rina-reference-number'] %}
+                                  {{ data['rina-reference-number'] }}
+                                {% else %}
+                                  654321
+                                {% endif %}
+                                </b></p>
                                 <!-- Only display comments if they are present -->
                                 {% if data['s073-rina-reference-comments'] %}
                                   <p>{{ data['s073-rina-reference-comments'] }}</p>
