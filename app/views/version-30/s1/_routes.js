@@ -357,6 +357,12 @@ router.post([/s1-upload-document/], function(req, res){
 
 // Add notes for various items //
 
+router.get('/version-30/s1/account/notes', function(req, res) {
+  console.log(req.session.data); // Debugging line
+  res.render('/version-30/s1/account/notes', { data: req.session.data });
+});
+
+
 // Send the S073 registration confirmation, record the RINA reference number and add a note (optional)
 router.post([/s073-record-rina-reference/], function(req, res){
 
