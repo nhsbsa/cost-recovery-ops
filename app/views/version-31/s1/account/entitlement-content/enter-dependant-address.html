@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-What is the dependant's address? - Manage overseas entitlements and treatments - NHSBSA
+Add address - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -22,71 +22,80 @@ What is the dependant's address? - Manage overseas entitlements and treatments -
 <!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
 {% block content %}
 <div class="nhsBSA-sidebar-container">
-  <div class="nhsBSA-sidebar-wrapper">
-      <div class="nhsBSA-sidebar-content">
-          <div class="nhsuk-width-container-fluid">
-              <div class="nhsuk-main-wrapper" id="maincontent">
-                  
-                <div class="nhsuk-grid-column-two-thirds">
-                  
-                  {{ backLink({
-                    "href": "javascript:history.go(-1)",
-                    "text": "Go back"
-                  }) }}
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
 
-                  
-                      
-                  <form action="s1-manual-dependant-address" method="post">
+                    <form action="enter-dependant-address" method="post">
 
+                    <span class="nhsuk-caption-l">
+                        Create a new person record
+                        <span class="nhsuk-u-visually-hidden"> - </span>
+                    </span>
                     <h1 class="app-page-heading">
-                      <span class="nhsuk-caption-l">
-                          Dependant details
-                      <span class="nhsuk-u-visually-hidden"> - </span>
-                      </span>
-                      Enter {% if data['dependant-first-name'] %}{{ data['dependant-first-name'] }}{% else %}Jane{% endif %}'s home address
+                        Enter {% if data['first-name'] %}{{ data['first-name'] }}{% else %}Jane{% endif %}'s current address
                     </h1>
 
-                      
+                    <div class="nhsuk-inset-text">
+                      <span class="nhsuk-u-visually-hidden">Information: </span>
+                      <p>You must enter Address line 1 and Country. If you do not know this information, select Go back.</p>
+                    </div>
+
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="dependant-address-line-1-label">
+                        <label class="nhsuk-label" for="address-line-1-label">
                           Address line 1
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dependant-address-line-1" name="dependant-address-line-1" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dependent-address-line-1" name="dependent-address-line-1" type="text"  autocomplete="cc-csc">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="dependant-address-line-2-label">
+                        <label class="nhsuk-label" for="address-line-2-label">
                           Address line 2 (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dependant-address-line-2" name="dependant-address-line-2" type="text"  autocomplete="cc-csc">
-                      </div>
-              
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="dependant-address-town-label">
-                          Town or city
-                        </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dependant-address-town" name="dependant-address-town" type="text" autocomplete="cc-csc">
-                      </div>
-              
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="dependant-address-region-label">
-                          County, province or region (optional)
-                        </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dependant-address-region" name="dependant-address-region" type="text" autocomplete="cc-csc">
-                      </div>
-              
-                      <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="dependant-address-postcode-label">
-                          Postcode (optional)
-                        </label>
-                        <input class="nhsuk-input nhsuk-input--width-10" id="dependant-address-postcode" name="dependant-address-postcode" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dependent-address-line-2" name="dependent-address-line-2" type="text"  autocomplete="cc-csc">
                       </div>
 
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" id="dependant-address-country-label" for="dependant-address-country">
+                        <label class="nhsuk-label" for="address-line-3-label">
+                          Address line 3 (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dependent-address-line-3" name="dependent-address-line-3" type="text"  autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-address-town-label">
+                          Town or city (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dependent-address-town" name="dependent-address-town" type="text" autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-address-region-label">
+                          County, province or region (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dependent-address-region" name="dependent-address-region" type="text" autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-address-postcode-label">
+                          Postcode (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-input--width-10" id="dependent-address-postcode" name="dependent-address-postcode" type="text"  autocomplete="cc-csc">
+                      </div>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" id="address-country-label" for="dependent-address-country">
                             Country
                         </label>
-                        <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="dependant-address-country" name="dependant-address-country">
+                        <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="dependent-address-country" name="dependent-address-country">
                         <datalist id="countries">
                           <option value="" selected="selected"></option>
                           <option value="Austria">Austria</option>
@@ -121,17 +130,16 @@ What is the dependant's address? - Manage overseas entitlements and treatments -
                           <option value="Spain">Spain</option>
                           <option value="Sweden">Sweden</option>
                           <option value="Switzerland">Switzerland</option>
-                        </datalist>                        
+                          <option value="United Kingdom (UK)">United Kingdom (UK)</option>
+                        </datalist>                              
                     </div>
 
-                  
-                        
                                             
                     <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
                         Continue
                     </button>
 
-                    <p><a href="s1-entitlement-details">Cancel</a></p>
+                    <p><a href="../account/entitlement-details">Cancel</a></p>
 
                     </form>
 
@@ -152,5 +160,22 @@ What is the dependant's address? - Manage overseas entitlements and treatments -
     autoselect : true,  
     selectElement : document.querySelector('#nationalityDrop')
   })
+</script>
+
+<!-- Date format -->
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("residency-day").value;
+    const month = document.getElementById("residency-month").value;
+    const year = document.getElementById("residency-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "2 July 2024";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
 </script>
 {% endblock %}

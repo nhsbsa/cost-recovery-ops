@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Notes - Manage overseas entitlements and treatments - NHSBSA
+Documents - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 {% block beforeContent %}
@@ -28,7 +28,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
             <a class="nhsuk-breadcrumb__link" href="../search/search-results-none">Search results</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="../account/documents-download">Documents</a>
+            <a class="nhsuk-breadcrumb__link" href="../account/documents">Documents</a>
           </li>
         </ol>
       </div>
@@ -54,32 +54,53 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
             </div>
           </div>
 
-          <!--start secondary navigation-->
-          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
-            <ul class="nhsuk-secondary-navigation__list">
-              <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link"  href="documents-download">Download</a>
-              </li>
+          <!--div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+                
+            <h2 class="nhsuk-heading-l">Generate a document</h2>
 
-              <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="documents-upload">Uploaded</a>
-              </li>
-            </ul>
-          </nav>
-          <!--end secondary navigation-->
+            <div class="nhsuk-form-group">
+              <label class="nhsuk-label" id="document-type-label" for="document-type" class="form-label">
+                Select a document
+              </label>
+              <input class="nhsuk-input nhsuk-input--width-20" list="documents" id="DownloadDocumentType-Drop" name="document-type">
+              <datalist id="documents">
+                <option value="" selected="selected"></option>
+                <option value="FAS1Q">FAS1Q</option>
+                <option value="DL1609">DL1609</option>
+                <option value="Example">Example</option>
+                <option value="Example 2">Example 2</option>
+                <option value="Example 3">Example 3</option>
+              </datalist>            
+            </div>
+  
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <a href="#">
+                  <button class="nhsuk-button nhsuk-button--secondary nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Generate
+                  </button>
+                </a>
+              </div>
+            </div>
 
-          <hr class="gray-horizontal-line">
-            <br>
-            <br>
+            </div>
+          </div>
+
+          
+
+          <hr class="gray-horizontal-line" style="margin-top: 50px; margin-bottom: 50px;"-->
+            
 
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
+              <h2 class="nhsuk-heading-l">Uploaded documents</h2>
               <div style="background-color: white; padding: 20px; border: 1px solid #ddd;">
                 <br>
                    
                   
                       <!-- Documents content begins -->
-                      {% if data['upload-s1-document'] == 'yes' %}
+                      {% if data['upload-new-document'] == 'yes' %}
                       <table role="table" id="documentsTable" class="nhsuk-table-responsive">
                       
                         <thead role="rowgroup" class="nhsuk-table__head">
@@ -98,6 +119,9 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                             </th>
                             <th role="columnheader" class="" scope="col">
                               Document type
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                              Comments (optional)
                             </th>
                             <th role="columnheader" class="" scope="col">
                               Actions
@@ -126,12 +150,21 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Document type</span>
                               <span>
-                                {% if data['s1-document-type'] %}
-                                  <p>{{ data['s1-document-type'] }}</p>
+                                {% if data['document-type'] %}
+                                  <p>{{ data['document-type'] }}</p>
                                 {% else %}
                                   DL1609
                                 {% endif %}
                               </span>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Comments (optional)</span>
+                              <!-- Only display comments if they are present -->
+                              {% if data['document-comments'] %}
+                                <p>{{ data['document-comments'] }}</p>
+                                {% else %}
+                              <p>None provided</p>
+                            {% endif %}
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Actions</span>
@@ -148,14 +181,14 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                       {% endif %}
 
                           
-                      {% if data['upload-s1-document'] == 'yes' %}
-                      <a href="/version-31/s1/account/entitlement-content/s1-upload-document">
+                      {% if data['upload-new-document'] == 'yes' %}
+                      <a href="/version-31/s1/account/upload-document">
                         <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
                           Upload a new document
                         </button>
                       </a>
                       {% else %}
-                      <a href="/version-31/s1/account/entitlement-content/s1-upload-document">
+                      <a href="/version-31/s1/account/upload-document">
                         <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
                           Upload a document
                         </button>

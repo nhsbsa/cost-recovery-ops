@@ -32,24 +32,25 @@ router.post([/s1-dependant-personal-details/], function(req, res) {
 
 // Enter dependant's details
 router.post([/s1-create-new-dependant-record/], function(req, res){
-  res.redirect('s1-dependant-address-same');
+  res.redirect('add-dependant-address');
 })
 
 // Does the dependant live at the same address as the Main?
-router.post([/s1-dependant-address-same/], function(req, res) {
-  const sameAddressAsMain = req.session.data['dependant-address-same-as-main'];
+router.post([/add-dependant-address/], function(req, res) {
+  const addDependantAddress = req.session.data['add-dependant-address'];
   
-  if (sameAddressAsMain === 'yes'){
-    res.redirect('/version-31/s1/account/entitlement-content/s1-dependant-details-check');
+  if (addDependantAddress === 'yes'){
+    res.redirect('/version-31/s1/account/entitlement-content/enter-dependant-address');
   } else {
-    res.redirect('/version-31/s1/account/entitlement-content/s1-manual-dependant-address');
+    res.redirect('/version-31/s1/account/entitlement-content/s1-dependant-details-check');
   }
 })
 
 // Enter dependant's address
-router.post([/s1-manual-dependant-address/], function(req, res){
+router.post([/enter-dependant-address/], function(req, res){
   res.redirect('s1-dependant-details-check');
 })
+
 
 // Check dependant's details
 router.post([/s1-dependant-details-check/], function(req, res) {
@@ -190,42 +191,6 @@ router.post([/add-contact-details/], function(req, res){
 
 })
 
-// Upload a new document
-router.post([/upload-personal-details-document/], function(req, res){
-
-  req.session.data['upload-new-document'] = 'yes'
-
-  res.redirect('/version-31/s1/account/personal-details#tab-documents');
-
-})
-
-// Add note to personal details
-router.post([/personal-details-note/], function(req, res){
-
-  req.session.data['new-personal-details-note'] = 'yes'
-
-  res.redirect('/version-31/s1/account/personal-details#tab-Notes');
-
-})
-
-// Add note to entitlements section
-router.post([/s1-entitlement-note/], function(req, res){
-
-  // Retrieve the submitted note and note type
-  const noteType = req.body['note-type'];
-  const note = req.body['note'];
-
-  // Store these in the session or database
-  req.session.data['note-type'] = noteType;
-  req.session.data['note'] = note;
-
-  // Set flag that a new S1 entitlement note was added
-  req.session.data['new-s1-entitlement-note'] = 'yes';
-
-  // Redirect to the S1/S072 entitlement details screen and the tab that displays the notes table
-  res.redirect('/version-31/s1/account/notes');
-
-})
 
 
 // Add a new entitlement to a person's record //
@@ -321,9 +286,6 @@ router.post([/new-s1-s072-entitlement-cya/], function(req, res){
 
 
 
-
-
-
 // Entitlements section - S1 Entitlement //
 
 // Change S1 entitlement details
@@ -344,79 +306,67 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
 
 })
 
+
 // Upload documents //
 
 // Upload document
-router.post([/s1-upload-document/], function(req, res){
+router.post([/upload-document/], function(req, res){
 
-  req.session.data['upload-s1-document'] = 'yes'
+  // Retrieve the document type
+  const documentType = req.body['document-type'];
 
+  // Store the document type in the session or database
+  req.session.data['document-type'] = documentType;
+
+res.redirect('/version-31/s1/account/document-comments');
+
+})
+
+
+// Upload a new document - comments
+router.post([/document-comments/], function(req, res){
+
+  // Retrieve the document comments
+  const comments = req.body['document-comments'];
+
+  // Store these in the session or database
+  req.session.data['document-comments'] = comments;
+
+  // Set flag that a new document was uploaded
+  req.session.data['upload-new-document'] = 'yes'
+
+  // Redirect to the S1/S072 entitlement details screen and the tab that displays the notes table
   res.redirect('/version-31/s1/account/documents');
 
 })
 
-// Add notes for various items //
+
+
+// Notes section //
 
 router.get('/version-31/s1/account/notes', function(req, res) {
   console.log(req.session.data); // Debugging line
   res.render('/version-31/s1/account/notes', { data: req.session.data });
 });
 
+// Add a new note
+router.post([/add-note/], function(req, res){
 
-// Send the S073 registration confirmation, record the RINA reference number and add a note (optional)
-router.post([/s073-record-rina-reference/], function(req, res){
+  // Retrieve the submitted note and note type
+  const noteType = req.body['note-type'];
+  const note = req.body['note'];
 
-// Mark the S073 task as completed
-req.session.data['send-s073'] = "completed";
+  // Store these in the session or database
+  req.session.data['note-type'] = noteType;
+  req.session.data['note'] = note;
 
-// Retrieve the submitted RINA reference number and optional comments
-const rinaReferenceNumber = req.body['rina-reference-number'];
-const rinaReferenceComments = req.body['s073-rina-reference-comments'];
+  // Set flag that a new S1 entitlement note was added
+  req.session.data['new-note'] = 'yes';
 
-// Store these values in the session
-req.session.data['rina-reference-number'] = rinaReferenceNumber;
-req.session.data['s073-rina-reference-comments'] = rinaReferenceComments;
-
-// Set flag that a new S073 RINA reference note was added
-req.session.data['new-s073-rina-reference-note'] = 'yes';
-
-// Redirect to the S1 entitlement details screen with the "completed" tag and open the notes tab where RINA reference number and optional comments should display in the notes table
-  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details');
+  // Redirect to the S1/S072 entitlement details screen and the tab that displays the notes table
+  res.redirect('/version-31/s1/account/notes');
 
 })
-
-router.get('/version-31/s1/account/notes', function(req, res) {
-  res.render('/version-31/s1/account/notes', { data: req.session.data });
-});
-
-
-
-// Send the DL1609, and add a note (optional)
-router.post([/download-dl1609/], function(req, res){
-
-  // Mark the DL1609 task as completed
-  req.session.data['send-dl1609'] = "completed";
-  
-  // Retrieve the submitted DL1609 comments (if any)
-  const dl1609Comments = req.body['dl1609-comments'];
-  
-  // Store these values in the session
-  req.session.data['dl1609-comments'] = dl1609Comments;
-  
-  // Set flag that a new DL1609 note was added
-  req.session.data['new-dl1609-note'] = 'yes';
-
-  // Set dl1609-sent flag to "Yes" to enable the "Confirm entitlement details" link and update status
-  req.session.data['dl1609-sent'] = 'yes';
-  
-  // Redirect to the S1 entitlement details screen
-  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details');
-  
-});
-
-
-
-
 
 
 
@@ -435,130 +385,20 @@ router.post([/s1-remove-dependant/], (req, res) => {
 })
 
 
-// Tasklist - After s072 registration
-
-// Send S073 to member state 
-router.post([/s073-confirm/], function(req, res){
-  const data = req.session.data;
-  data.sendS073 = 'true';
-  res.redirect('../../s1-entitlement');
-})
-
-// Send DL1609 
-router.post([/dl1609-print/], function(req, res){
-  const data = req.session.data;
-  data.sendDl1609 = 'true';
-  res.redirect('../../../s1-entitlement');
-})
-// resendSend DL1609 
-router.post([/resend-dl1609-new/], function(req, res){
-  const data = req.session.data;
-  data.secondResendDl1609 = 'true';
-  res.redirect('../../../s1-entitlement');
-})
-// Have we received the DL1609?
-router.post([/received-dl1609/], function(req, res){
-  var hasDL1609 = req.session.data['dl1609'];
-  
-  if (hasDL1609 == 'yes'){
-      res.redirect('s1-eligible');
-  } else if (hasDL1609 == 'no'){
-      res.redirect('resend-dl1609');
-  } else {
-      
-  }
-})
-// Is the applicant eligible for dl1609?
-router.post([/s1-eligible/], function(req, res){
-  var isEligible = req.session.data['s1Eligble'];
-  
-  if (isEligible == 'yes'){
-      res.redirect('enter-details-main');
-  } else if (isEligible == 'no'){
-      res.redirect('cancel-s1');
-  } else {
-      
-  }
-})
-// Enter and add to main S1 holder details  
-router.post([/enter-details-main/], function(req, res){
-  const data = req.session.data;
-
-  res.redirect('address-dl1609');
-})
-// confirm or change address  
-router.post([/address-dl1609/], function(req, res){
-  const data = req.session.data;
-
-  res.redirect('enter-employment-details-main');
-})
-// Enter and add to main S1 holder details  
-router.post([/enter-employment-details-main/], function(req, res){
-  const data = req.session.data;
-
-  res.redirect('dependants-dl1609');
-})
-// Add dependants to s1  
-router.post([/dependants-dl1609/], function(req, res){
-  res.redirect('cya-1609');
-
-})
-// Dl1609 answers  
-router.post([/cya-1609/], function(req, res){
-  res.redirect('confirm-dl1609');
-
-})
-
-// // Dl1609 answers  
-router.post([/confirm-dl1609/], function(req, res){
-  const data = req.session.data;
-  data.dl1609Complete = 'true';
-  res.redirect('../../../s1-entitlement');
-
-})
-
-// Resend DL1609 
-router.post([/resend-dl1609/], function(req, res){
-  const data = req.session.data;
-  data.resendDl1609 = 'true';
-  res.redirect('../../../s1-entitlement');
-})
-
-// cancel S1 
-router.post([/cancel-s1/], function(req, res){
-  const data = req.session.data;
-  data.cancelS1 = 'true';
-  res.redirect('../../../s1-entitlement');
-})
-
-
 // Remove document from Personal Details section
-router.post([/remove-personal-details-document/], function(req, res){
+router.post([/remove-document/], function(req, res){
 
   const removeDocument = req.session.data['remove-document']
 
   if (removeDocument === 'yes') {
-      res.redirect('/version-31/s1/account/personal-details#tab-Documents')
+      res.redirect('/version-31/s1/account/documents')
   } else {
-      res.redirect('/version-31/s1/account/personal-details#tab-Documents')
+      res.redirect('/version-31/s1/account/documents')
   }
 
 
 })
 
-// Remove document from Entitlements section
-router.post([/remove-entitlements-document/], function(req, res){
-
-  const removeDocument = req.session.data['remove-document']
-
-  if (removeDocument === 'yes') {
-      res.redirect('/version-31/s1/account/entitlements-details#tab-Documents')
-  } else {
-      res.redirect('/version-31/s1/account/entitlements-details#tab-Documents')
-  }
-
-
-})
 
 
 

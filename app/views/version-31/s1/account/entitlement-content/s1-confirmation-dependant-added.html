@@ -29,36 +29,67 @@ Confirmation - S1/S072 entitlement added to person record - Manage overseas enti
                     
                   <div class="nhsuk-grid-column-two-thirds">
     
-                      <div class="done-panel">
-                        <h3 class="nhsuk-heading-xl" id="person-record-confirmation">
-                          {% if data['number-of-dependants'] == '2' %}
-                          <span class="done-tick" id="done-tick">Dependants added to John Doe's S1/S072 entitlement</span>
-                          {% else %}
+                    <div class="done-panel">
+                      <h3 class="nhsuk-heading-xl" id="person-record-confirmation">
+                        {% if data['add-dependant'] == 'Yes' and data['number-of-dependants'] == '2' %}
+                          <span class="done-tick" id="done-tick">S1/S072 entitlement registered and dependants added</span>
+                        {% elif data['add-dependant'] == 'Yes' and data['number-of-dependants'] == '1' %}
+                          <span class="done-tick" id="done-tick">S1/S072 entitlement registered and dependant added</span>
+                        {% else %}
                           <span class="done-tick" id="done-tick">Dependant added to John Doe's S1/S072 entitlement</span>
-                          {% endif %}
-                        </h3>
-                      </div>
+                        {% endif %}
+                      </h3>
+                    </div>
+                    
 
-                      <h3 class="nhsuk-heading-m">Next steps:</h3>
+                      {% if data['add-dependant'] == 'Yes' %}
+                      <h3 class="nhsuk-heading-m">What happens next:</h3>
+
+                      <p>You now need to send the S073 registration confirmations to the Member State via RINA for the Main Insurer.</p>
+                      
+                      <p>You then need to send an S071 request to the Member State via RINA for the dependant.</p>
+                      
+                      <p>You can add notes, for example to:</p>
+
                       <ul>
-                        <li>Send an S071 to the Member State via RINA. Make a note to let others know you have done this.</li>
+                        <li>record a RINA reference number</li>
+                        <li>confirm the S073 was sent to the Member state</li>
+                        <li>confirm the S071 request was sent to the Member state and you are awaiting a response</li>
                       </ul>
 
-
+                      <p>Add a note now or later.</p>
 
                       <div class="button-container">
-                        <form action="#">
-                          <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
-                            Add note
+                        <form action="../../s1/account/add-note?add-s1-entitlement=yes">
+                          <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                            Add a note
                           </button>
                         </form>
             
-                        <form action="s1-entitlement-details">
-                          <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-                            Return to S1/S072 entitlement details
+                        <form action="../account/entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
+                          <button style="margin-top:10px; margin-bottom:60px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                            Go to S1/S072 entitlement details
                           </button>
                         </form>
                       </div>
+                      {% else %}
+                      <div class="button-container">
+                        <form action="../../account/entitlement-content/s1-entitlement-details">
+                          <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                            Return to S1/S072 entitlement details
+                          </button>
+                        </form>
+            
+                        <form action="#">
+                          <button style="margin-top:10px; margin-bottom:60px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                            Go to Dependant's person record
+                          </button>
+                        </form>
+                      </div>
+                      {% endif %}
+
+
+                      
 
                   </div>
 

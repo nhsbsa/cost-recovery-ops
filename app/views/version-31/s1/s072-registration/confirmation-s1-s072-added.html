@@ -63,11 +63,10 @@ Confirmation - S1/S072 entitlement added to person record - Manage overseas enti
 
                       </div>
 
+                      {% if data['entitlement-for'] == 'Main' %}
                       <h3 class="nhsuk-heading-m">What happens next:</h3>
 
                       <p>You now need to send the S073 registration confirmation to the Member State via RINA.</p>
-
-                      <p>You may also need to send a DL1609. You should download the DL1609 and send it to Office Support. They will print the DL1609 and send it to the entitlement holder.</p>
 
                       <p>You can add notes, for example to:</p>
 
@@ -78,23 +77,35 @@ Confirmation - S1/S072 entitlement added to person record - Manage overseas enti
                       </ul>
 
                       <p>Add a note now or later.</p>
+                      {% else %}
+                      <h3 class="nhsuk-heading-m">What happens next:</h3>
+
+                      <p>You now need to send the S073 registration confirmation to the Member State via RINA.</p>
+
+                      <p>You can add a note, for example to:</p>
+
+                      <ul>
+                        <li>record a RINA reference number</li>
+                        <li>confirm the S073 was sent to the Member state</li>
+                      </ul>
+
+                      <p>Add a note now or later.</p>
+                      {% endif %}
 
 
                       <div class="button-container">
-                        <form action="#">
-                          <button style="margin-right:20px; margin-top:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
-                            Download DL1609
-                          </button>
-                        </form>
-            
-                        <form action="../../s1/account/s1-entitlement-note?add-new-entitlement=yes">
-                          <button style="margin-top:20px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                        <form action="../../s1/account/add-note?add-s1-entitlement=yes">
+                          <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
                             Add a note
                           </button>
                         </form>
+            
+                        <form action="../account/entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
+                          <button style="margin-top:10px; margin-bottom:60px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                            Go to S1/S072 entitlement details
+                          </button>
+                        </form>
                       </div>
-
-                      <p><a href="../account/entitlement-content/s1-entitlement-details?add-new-entitlement=yes">Go to S1/S072 entitlement details</a></p>
 
                   </div>
 

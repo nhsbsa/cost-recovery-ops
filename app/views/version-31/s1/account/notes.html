@@ -61,7 +61,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
 
                       
                       <!-- Notes tab content begins -->
-                      {% if data['new-s1-entitlement-note'] == 'yes' or data['new-s073-rina-reference-note'] == 'yes' or (data['new-dl1609-note'] == 'yes' and data['dl1609-comments']) %}
+                      {% if data['new-note'] == 'yes' %}
                       
                       <details class="nhsuk-details" style="margin-left: -20px; margin-top: -30px; margin-bottom: 10px;">
                         <summary class="nhsuk-details__summary">
@@ -120,12 +120,19 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                               </div>
 
                               <div class="nhsuk-checkboxes__item">
-                                <input class="nhsuk-checkboxes__input" id="entitlement-type-prc" name="filter-notes-by-entitlement-type" type="checkbox" value="PRC">
-                                <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-prc">
-                                  PRC
+                                <input class="nhsuk-checkboxes__input" id="entitlement-type-ehic" name="filter-notes-by-entitlement-type" type="checkbox" value="EHIC">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-ehic">
+                                  EHIC
                                 </label>
                               </div>
+
+                            <div class="nhsuk-checkboxes__item">
+                              <input class="nhsuk-checkboxes__input" id="entitlement-type-prc" name="filter-notes-by-entitlement-type" type="checkbox" value="PRC">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-prc">
+                                PRC
+                              </label>
                             </div>
+                          </div>
 
                           </div>
                         </div>
@@ -160,7 +167,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                         </div>
                       </details>
 
-                      <a class="nhsuk-button" href="/version-31/s1/account/s1-entitlement-note">Add a new note</a>
+                      <a class="nhsuk-button" href="/version-31/s1/account/add-note">Add a new note</a>
                     
                       <table role="table" class="nhsuk-table-responsive">
                         <thead role="rowgroup" class="nhsuk-table__head">
@@ -176,7 +183,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                         <tbody class="nhsuk-table__body">
                       
                           <!-- S1 entitlement note -->
-                          {% if data['new-s1-entitlement-note'] == 'yes' %}
+                          {% if data['new-note'] == 'yes' %}
                           <tr role="row" class="nhsuk-table__row">
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -203,8 +210,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Actions</span>
-                              <a href="#">Edit</a> or 
-                              <a href="#">remove</span></a>
+                              <a href="#">Remove</span></a>
                             </td>
                           </tr>
                           {% endif %}
@@ -240,8 +246,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                               </td>
                               <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Actions</span>
-                                <a href="#">Edit</a> or 
-                                <a href="#">remove</span></a>
+                                <a href="#">Remove</span></a>
                               </td>
                             </tr>
                             {% endif %}
@@ -280,8 +285,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                               </td>
                               <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Actions</span>
-                                <a href="#">Edit</a> or 
-                                <a href="#">remove</span></a>
+                                <a href="#">Remove</span></a>
                               </td>
                             </tr>
                             {% endif %}
@@ -291,7 +295,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                     
                       {% else %}
                         <p>No notes have been added.</p>
-                        <a class="nhsuk-button" href="/version-31/s1/account/s1-entitlement-note" id="addNote-button">Add a new note</a>
+                        <a class="nhsuk-button" href="/version-31/s1/account/add-note" id="addNote-button">Add a new note</a>
                       {% endif %}
                     
                 </div>
@@ -314,9 +318,9 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
         </h3>
         <ul id="options" class="options">
           <li><a href="personal-details">Personal details</a></li>
-          <li><a href="entitlements">Entitlements</a></li>
+          <li><a href="entitlements-and-treatments">Entitlements and treatments</a></li>
           <li><a href="record-history">Record history</a></li>
-          <li><a href="documents-download">Documents</a></li>
+          <li><a href="documents">Documents</a></li>
           <li><a class="active" href="notes">Notes</a></li>
         </ul>
       </div>
