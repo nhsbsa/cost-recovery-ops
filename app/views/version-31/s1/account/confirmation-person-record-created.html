@@ -34,6 +34,7 @@ Confirmation - New person record created - Manage overseas entitlements and trea
                           <span class="done-tick" id="done-tick">New person record created</span>
                         </h3>
 
+                        {% if data['first-name'] == 'John' or data['first-name'] == 'john' and data['last-name'] == 'Doe' or data['last-name'] == 'doe' %}
                         <body class="nhsuk-caption-xl">
                           <span id="person-record-created-name">Name:</span>
                           <h1 class="nhsuk-heading-l">
@@ -70,6 +71,81 @@ Confirmation - New person record created - Manage overseas entitlements and trea
 
                       <p><a href="../search/search-by-person">Return to Search</a></p>
 
+                      {% elif data['first-name']|lower == 'jane' or data['last-name']|lower == 'doe' %}
+                      <body class="nhsuk-caption-xl">
+                        <span id="person-record-created-name">Name:</span>
+                        <h1 class="nhsuk-heading-l">
+                          {% if data['first-name'] and data['last-name'] %}
+                            {{ data['first-name'] }} {{ data['last-name'] }}
+                          {% else %}
+                            Jane Doe
+                          {% endif %}
+                        </h1>
+                      </body>
+                      
+
+                      <body class="nhsuk-caption-xl">
+                        <span id="person-record-created-name">Person record ID number:</span>
+                        <h1 class="nhsuk-heading-l">123456</h1>
+                      </body>
+                    </div>
+
+                    
+
+                    <div class="button-container">
+                      <form action="../../s1/account/dependant-s1/s1-s072-registration/which-entitlement">
+                        <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                          Register an entitlement
+                        </button>
+                      </form>
+          
+                      <form action="../account/dependant-s1/personal-details">
+                        <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                          Go to person's record
+                        </button>
+                      </form>
+                    </div>
+
+                    <p><a href="../search/search-by-person">Return to Search</a></p>
+                    
+                    
+                    {% else%}
+                    <body class="nhsuk-caption-xl">
+                      <span id="person-record-created-name">Name:</span>
+                      <h1 class="nhsuk-heading-l">
+                        {% if data['first-name'] and data['last-name'] %}
+                          {{ data['first-name'] }} {{ data['last-name'] }}
+                        {% else %}
+                          John Doe
+                        {% endif %}
+                      </h1>
+                    </body>
+                    
+
+                    <body class="nhsuk-caption-xl">
+                      <span id="person-record-created-name">Person record ID number:</span>
+                      <h1 class="nhsuk-heading-l">111111</h1>
+                    </body>
+                  </div>
+
+                  
+
+                  <div class="button-container">
+                    <form action="../../s1/s072-registration/which-entitlement">
+                      <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                        Register an entitlement
+                      </button>
+                    </form>
+        
+                    <form action="../account/personal-details">
+                      <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                        Go to person's record
+                      </button>
+                    </form>
+                  </div>
+
+                  <p><a href="../search/search-by-person">Return to Search</a></p>
+                  {% endif %}
                     
 
                   </div>

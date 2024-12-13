@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Select who the entitlement is for - Manage overseas entitlements and treatments - NHSBSA
+Select entitlement - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -36,64 +36,48 @@ Select who the entitlement is for - Manage overseas entitlements and treatments 
 
                     
                         
-                    <form action="entitlement-for" method="post">
+                    <form action="which-entitlement" method="post">
 
                       <h1 class="app-page-heading">
                         <span class="nhsuk-caption-l">
-                          S1/S072 entitlement registration
+                            Register an entitlement
                             <span class="nhsuk-u-visually-hidden"> - </span>
                         </span>
-                        Who is the entitlement for?
-                      </h1>
+                        Which entitlement do you want to register?
+                    </h1>
 
-                    
                     <div class="nhsuk-form-group">
                       <div class="nhsuk-radios">
+                        
                         <div class="nhsuk-radios__item">
-                          <input class="nhsuk-radios__input" id="entitlement-for-main" name="entitlement-for" type="radio" value="Main" aria-controls="conditional-contact-1" aria-expanded="false" />
-                          <label class="nhsuk-label nhsuk-radios__label" for="entitlement-for-main">Main</label>
+                          <input class="nhsuk-radios__input" id="S1" name="entitlement-type" type="radio" value="S1/S072" aria-controls="conditional-contact-1" aria-expanded="false">
+                          <label class="nhsuk-label nhsuk-radios__label" for="S1">S1/S072</label>
+                        </div>
+                        
+                        <div class="nhsuk-radios__item">
+                          <input class="nhsuk-radios__input" id="S2" name="entitlement-type" type="radio" value="S2/E112" aria-controls="conditional-contact-2" aria-expanded="false">
+                          <label class="nhsuk-label nhsuk-radios__label" for="S2">S2/E112</label>
                         </div>
 
                         <div class="nhsuk-radios__item">
-                          <input class="nhsuk-radios__input" id="entitlement-for-dependant" name="entitlement-for" type="radio" value="Dependant" aria-controls="conditional-contact-2" aria-expanded="false" />
-                          <label class="nhsuk-label nhsuk-radios__label" for="entitlement-for-dependant">Dependant</label>
+                          <input class="nhsuk-radios__input" id="PRC" name="entitlement-type" type="radio" value="PRC" aria-controls="conditional-contact-2" aria-expanded="false">
+                          <label class="nhsuk-label nhsuk-radios__label" for="PRC">PRC</label>
                         </div>
                       </div>
                     </div>
-                    
-                      
 
 
-                      <button class="nhsuk-button nhsuk-u-margin-top-3" data-module="nhsuk-button" type="submit">Continue</button>
+                    <button class="nhsuk-button nhsuk-u-margin-top-3" data-module="nhsuk-button" type="submit">Continue</button>
 
-                      <p><a href="../account/entitlements-and-enquiries">Cancel</a></p>
+                    <p><a href="../account/entitlements-and-enquiries">Cancel</a></p>
 
                     </form>
 
                   </div>
 
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-{% endblock %}
-
-{% block pageScripts %}
-<script>
-  // Get the radio buttons and the conditional field
-  const radios = document.querySelectorAll('input[name="source-of-information"]');
-  const otherField = document.getElementById('conditional-contact-4');
-
-  // Add change event listener to the radio buttons
-  radios.forEach(radio => {
-    radio.addEventListener('change', function() {
-      if (this.value === 'Other') {
-        otherField.style.display = 'block'; // Show "Other" field if "Other" is selected
-      } else {
-        otherField.style.display = 'none';  // Hide the "Other" field if another option is selected
-      }
-    });
-  });
-</script>
 {% endblock %}

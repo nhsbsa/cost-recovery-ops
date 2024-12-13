@@ -1,0 +1,117 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Confirmation - S1/S072 entitlement added to person record - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+    
+                      <div class="done-panel">
+                        <h1 class="nhsuk-heading-xl" id="person-record-confirmation">
+                          <span class="done-tick" id="done-tick">S1/S072 entitlement registered</span>
+                        </h1>
+
+                        <body class="nhsuk-caption-l">
+                          <span id="person-record-created-name">Name:</span>
+                          {% if data['s1-entitlement-type'] == 'E109' or data['entitlement-for'] == 'Dependant' %}
+                          <h2 class="nhsuk-heading-m">Jane Doe</h2>
+                          {% else %}
+                          <h2 class="nhsuk-heading-m">John Doe</h2>
+                          {% endif %}
+                        </body>
+
+                        <body class="nhsuk-caption-l">
+                          <span id="person-record-created-name">Person record ID:</span>
+                          {% if data['s1-entitlement-type'] == 'E109' or data['entitlement-for'] == 'Dependant' %}
+                          <h2 class="nhsuk-heading-m">654321</h2>
+                          {% else %}
+                          <h2 class="nhsuk-heading-m">123456</h2>
+                          {% endif %}
+                        </body>
+
+                        <body class="nhsuk-caption-l">
+                          <span id="person-record-created-name">Personal identification number (PIN):</span>
+                          {% if data['s1-entitlement-type'] == 'E109' or data['entitlement-for'] == 'Dependant' %}
+                          <h2 class="nhsuk-heading-m">0987654321</h2>
+                          {% else %}
+                          <h2 class="nhsuk-heading-m">1234567890</h2>
+                          {% endif %}
+                        </body>
+
+                      </div>
+
+                      {% if data['entitlement-for'] == 'Main' %}
+                      <h3 class="nhsuk-heading-m">What happens next:</h3>
+
+                      <p>You now need to send the S073 registration confirmation to the Member State via RINA.</p>
+
+                      <p>You can add notes, for example to:</p>
+
+                      <ul>
+                        <li>record a RINA reference number</li>
+                        <li>confirm the S073 was sent to the Member state</li>
+                        <li>record that the DL1609 was sent and you are awaiting a response</li>
+                      </ul>
+
+                      <p>Add a note now or later.</p>
+                      {% else %}
+                      <h3 class="nhsuk-heading-m">What happens next:</h3>
+
+                      <p>You now need to send the S073 registration confirmation to the Member State via RINA.</p>
+
+                      <p>You can add a note, for example to:</p>
+
+                      <ul>
+                        <li>record a RINA reference number</li>
+                        <li>confirm the S073 was sent to the Member state</li>
+                      </ul>
+
+                      <p>Add a note now or later.</p>
+                      {% endif %}
+
+
+                      <div class="button-container">
+                        <form action="/version-31/s1/account/dependant-s1/add-note?add-s1-entitlement=yes">
+                          <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                            Add a note
+                          </button>
+                        </form>
+            
+                        <form action="../../dependant-s1/s1-entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
+                          <button style="margin-top:10px; margin-bottom:60px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                            Go to S1/S072 entitlement details
+                          </button>
+                        </form>
+                      </div>
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
