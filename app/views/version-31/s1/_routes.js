@@ -12,8 +12,8 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 // S1/S072 Registration - Main //
 
 // Select entitlement
-router.post([/which-entitlement/], function(req, res){
-  res.redirect('which-s1-entitlement');
+router.post(/which-entitlement/, function(req, res){
+  res.redirect('/version-31/s1/s072-registration/which-s1-entitlement');
 })
 
 // Select specific S1 entitlement
@@ -21,7 +21,7 @@ router.post([/which-s1-entitlement/], function(req, res) {
   var s1EntitlementType = req.session.data['s1-entitlement-type'];
   
   if (s1EntitlementType === 'E109' || s1EntitlementType === '+S072 (from an FAS1Q enquiry)') {
-    res.redirect('entitlement-details');
+    res.redirect('/version-31/s1/s072-registration/entitlement-details');
   } else {
     res.redirect('/version-31/s1/s072-registration/entitlement-for');
   }
@@ -52,52 +52,52 @@ router.post([/which-source/], function(req, res) {
   }
 
   // Redirect to the next step
-  res.redirect('entitlement-details');
+  res.redirect('/version-31/s1/s072-registration/entitlement-details');
 });
 
 // Input entitlement details
 router.post([/entitlement-details/], function(req, res){
-  res.redirect('search-institution-ID');
+  res.redirect('/version-31/s1/s072-registration/search-institution-ID');
 })
 
 // Search by institution ID (to show functionality)
 router.post([/search-institution-ID/], function(req, res){
-  res.redirect('institution-ID-search-results');
+  res.redirect('/version-31/s1/s072-registration/institution-ID-search-results');
 })
 
 // Search by institution name (to show functionality)
 router.post([/search-institution-name/], function(req, res){
-  res.redirect('institution-name-search-results');
+  res.redirect('/version-31/s1/s072-registration/institution-name-search-results');
 })
 
 // Institution ID search results
 router.post([/institution-ID-search-results/], function(req, res){
-  res.redirect('new-s1-s073-entitlement-cya');
+  res.redirect('/version-31/s1/s072-registration/new-s1-s073-entitlement-cya');
 })
 
 // Institution name search results
 router.post([/institution-name-search-results/], function(req, res){
-  res.redirect('new-s1-s073-entitlement-cya');
+  res.redirect('/version-31/s1/s072-registration/new-s1-s073-entitlement-cya');
 })
 
 // Institution ID search results - not found (to show functionality)
 router.post([/institution-ID-search-results-none/], function(req, res){
-  res.redirect('add-new-institution-details');
+  res.redirect('/version-31/s1/s072-registration/add-new-institution-details');
 })
 
 // Institution ID search results - not found (to show functionality)
 router.post([/institution-name-search-results-none/], function(req, res){
-  res.redirect('add-new-institution-details');
+  res.redirect('/version-31/s1/s072-registration/add-new-institution-details');
 })
 
 // Institution ID search results - not found (to show functionality)
 router.post([/add-new-institution-details/], function(req, res){
-  res.redirect('new-s1-s072-entitlement-cya');
+  res.redirect('/version-31/s1/s072-registration/new-s1-s072-entitlement-cya');
 })
 
 // Check your answers
 router.post([/new-s1-s072-entitlement-cya/], function(req, res){
-  res.redirect('confirmation-s1-s072-added');
+  res.redirect('/version-31/s1/s072-registration/confirmation-s1-s072-added');
 })
 
 
@@ -106,7 +106,7 @@ router.post([/new-s1-s072-entitlement-cya/], function(req, res){
 
 // Select entitlement
 router.post([/which-entitlement/], function(req, res){
-  res.redirect('which-s1-entitlement');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/which-s1-entitlement');
 })
 
 // Select specific S1 entitlement
@@ -114,83 +114,61 @@ router.post([/which-s1-entitlement/], function(req, res) {
   var s1EntitlementType = req.session.data['s1-entitlement-type'];
   
   if (s1EntitlementType === 'E109') {
-    res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/entitlement-details');
+    res.redirect('/version-31/s1/account/dependant/s1-s072-registration/entitlement-details');
   } else {
-    res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/entitlement-for');
+    res.redirect('/version-31/s1/account/dependant/s1-s072-registration/entitlement-for');
   }
 })
 
 
 // Select who the entitlement is for
 router.post([/entitlement-for/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/entitlement-details');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/entitlement-details');
 })
-
-// Select source
-router.post([/which-source/], function(req, res) {
-  // Capture form data from the POST request
-  const sourceOfInformation = req.body['source-of-information'];
-  const otherSourceOfInformationName = req.body['other-source-of-information-name'];
-
-  // Store the data in the session object
-  req.session.data = req.session.data || {}; // Initialize session data if not already present
-  req.session.data['source-of-information'] = sourceOfInformation;
-
-  // If 'Other' is selected, store the additional input field data
-  if (sourceOfInformation === 'Other') {
-    req.session.data['other-source-of-information-name'] = otherSourceOfInformationName;
-  } else {
-    // Clear previous "Other" field data if a different option is selected
-    req.session.data['other-source-of-information-name'] = '';
-  }
-
-  // Redirect to the next step
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/entitlement-details');
-});
 
 // Input entitlement details
 router.post([/entitlement-details/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/search-institution-ID');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/search-institution-ID');
 })
 
 // Search by institution ID (to show functionality)
 router.post([/search-institution-ID/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/institution-ID-search-results');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/institution-ID-search-results');
 })
 
 // Search by institution name (to show functionality)
 router.post([/search-institution-name/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/institution-name-search-results');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/institution-name-search-results');
 })
 
 // Institution ID search results
 router.post([/institution-ID-search-results/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/entitlement-details-cya');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/entitlement-details-cya');
 })
 
 // Institution name search results
 router.post([/institution-name-search-results/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/entitlement-details-cya');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/entitlement-details-cya');
 })
 
 // Institution ID search results - not found (to show functionality)
 router.post([/institution-ID-search-results-none/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/add-new-institution-details');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/add-new-institution-details');
 })
 
 // Institution ID search results - not found (to show functionality)
 router.post([/institution-name-search-results-none/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/add-new-institution-details');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/add-new-institution-details');
 })
 
 // Institution ID search results - not found (to show functionality)
 router.post([/add-new-institution-details/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/entitlement-details-cya');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/entitlement-details-cya');
 })
 
 // Check your answers
 router.post([/entitlement-details-cya/], function(req, res){
-  res.redirect('/version-31/s1/account/dependant-s1/s1-s072-registration/confirmation-s1-s072-added');
+  res.redirect('/version-31/s1/account/dependant/s1-s072-registration/confirmation-s1-s072-added');
 })
 
 
@@ -287,6 +265,7 @@ router.post([/create-person-record-cya/], function(req, res){
 })
 
 
+
 // Personal details tabs //
 
 // Change basic personal details
@@ -330,53 +309,93 @@ router.post([/additional-personal-details-comment/], function(req, res){
 
 })
 
-// Change current address
-router.post([/change-current-address/], function(req, res){
+router.post([/change-current-address/], function (req, res) {
+  // Set session variable indicating the address change process has started
+  req.session.data['change-address'] = 'yes';
 
-  req.session.data['change-address'] = 'yes'
+  // Save the new address temporarily in session data
+  req.session.data['new-address'] = req.body['new-address'];
 
+  // Redirect to the comment screen
   res.redirect('/version-31/s1/account/change-current-address-comment');
-
-})
+});
 
 // Add comments alongside change to current address
-router.post([/change-current-address-comment/], function(req, res){
+router.post([/change-current-address-comment/], function (req, res) {
+  // Save the comment for the address change
+  req.session.data['address-change-comment'] = req.body['address-change-comment'];
 
-  req.session.data['add-address-change-comment'] = 'yes'
+  // Update the current address with the new address
+  req.session.data['current-address'] = req.session.data['new-address'];
 
-  res.redirect('/version-31/s1/account/case-history');
+  // Add a log entry in the case history
+  const caseHistoryEntry = {
+    action: 'Address changed',
+    details: {
+      oldAddress: req.session.data['previous-address'],
+      newAddress: req.session.data['current-address'],
+      comment: req.session.data['address-change-comment']
+    },
+    timestamp: new Date().toISOString()
+  };
+  req.session.data['case-history-person'] = req.session.data['case-history-person'] || [];
+  req.session.data['case-history-person'].push(caseHistoryEntry);
 
-})
+  // Redirect back to address details with updated data
+  res.redirect('/version-31/s1/account/personal-details');
+});
 
-// Change date of residency in UK
-router.post([/change-date-of-residency-uk/], function(req, res){
-
-  req.session.data['change-date-of-residency-uk'] = 'yes'
-
-  res.redirect('/version-31/s1/account/change-date-of-residency-uk-comment');
-
-})
-
-// Add comments alongside change to residency in UK date
-router.post([/change-date-of-residency-uk-comment/], function(req, res){
-
-  req.session.data['add-residency-change-comment'] = 'yes'
-
-  res.redirect('/version-31/s1/account/case-history');
-
-})
-
-
-// Add contact details
-router.post([/add-contact-details/], function(req, res){
-
-  req.session.data['add-contact-details'] = 'yes'
-
-  res.redirect('/version-31/s1/account/personal-details#tab-contact-details');
-
-})
+// View case history section
+router.get('/version-31/s1/account/case-history-person', function (req, res) {
+  res.render('version-31/s1/account/case-history-person', {
+    history: req.session.data['case-history-person']
+  });
+});
 
 
+
+router.post([/change-date-of-residency-uk/], function (req, res) {
+  // Set session variable indicating the address change process has started
+  req.session.data['change-date-of-residency-uk'] = 'yes';
+
+  // Save the new address temporarily in session data
+  req.session.data['new-date-of-residency-uk'] = req.body['new-date-of-residency-uk'];
+
+  // Redirect to the comment screen
+  res.redirect('/version-31/s1/account/change-current-address-comment');
+});
+
+// Add comments alongside change to current UK residency date
+router.post([/change-date-of-residency-uk-comment/], function (req, res) {
+  // Save the comment for the address change
+  req.session.data['uk-residency-change-comment'] = req.body['uk-residency-change-comment'];
+
+  // Update the current UK residency date with the new UK residency date
+  req.session.data['current-uk-residency-date'] = req.session.data['new-uk-residency-date'];
+
+  // Add a log entry in the case history
+  const caseHistoryEntry = {
+    action: 'Date of UK residency changed',
+    details: {
+      oldUKResidencyDate: req.session.data['previous-uk-residency-date'],
+      newUKResidencyDate: req.session.data['current-uk-residency-date'],
+      comment: req.session.data['uk-residency-date-change-comment']
+    },
+    timestamp: new Date().toISOString()
+  };
+  req.session.data['case-history-person'] = req.session.data['case-history-person'] || [];
+  req.session.data['case-history-person'].push(caseHistoryEntry);
+
+  // Redirect back to personal details with updated data
+  res.redirect('/version-31/s1/account/personal-details');
+});
+
+// View case history section
+router.get('/version-31/s1/account/case-history-person', function (req, res) {
+  res.render('version-31/s1/account/case-history-person', {
+    history: req.session.data['case-history-person']
+  });
+});
 
 
 
