@@ -70,7 +70,7 @@
                 <a class="nhsuk-tabs__tab" href="#institution-details">Institution details</a>
               </li>
               <li class="nhsuk-tabs__list-item">
-                <a class="nhsuk-tabs__tab" href="#dependants">Dependants</a>
+                <a class="nhsuk-tabs__tab" href="#main-dependants">Main/Dependants</a>
               </li>
             </ul>
 
@@ -441,17 +441,14 @@
             <!-- Instituion details tab content ends -->
 
 
-            <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="dependants">
-              <!-- Dependants tab content starts -->
-              {% if data['add-dependant'] == 'yes' or data['s1-add-dependant'] == 'yes' %}
-              <h3 class="nhsuk-heading-l">Dependants<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+            <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="main-dependants">
+              <!-- Main/Dependants tab content starts -->
+              
+              <h3 class="nhsuk-heading-l">Main<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+              {% if data['add-main'] == 'yes' %}
                 <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
-                
                   <thead role="rowgroup" class="nhsuk-table__head">
                     <tr role="row">
-                      <th role="columnheader" class="" scope="col">
-                        Relationship to Main
-                      </th>
                       <th role="columnheader" class="" scope="col">
                         Person record ID
                       </th>
@@ -476,16 +473,12 @@
                   <tbody class="nhsuk-table__body">
                     <tr role="row" class="nhsuk-table__row">
                       <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Relationship to Main</span>
-                        <span>Wife</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Person record ID</span>
-                        <span>112345</span>
+                        <span>123456</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">First name</span>
-                        <span>Jane</span>
+                        <span>John</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Last name</span>
@@ -493,7 +486,7 @@
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date of birth</span>
-                        <span>29/12/1975</span>
+                        <span>04/01/1973</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Country</span>
@@ -505,29 +498,61 @@
                       </td>
                     </tr>   
                   </tbody>
+                </table>
+                {% else %}
+                <p>No Main Insurers have been added to this entitlement.</p>
+                <a href="../../search/search-by-person" class="nhsuk-button" role="button" data-module="nhsuk-button">
+                  Add a Main Insurer
+                </a>
 
-                  {% if data['number-of-dependants'] == '2' %}
+                <hr>
+                {% endif %}
+
+                
+
+                <h3 style="margin-top: 60px;" class="nhsuk-heading-l">Dependants<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+                {% if data['add-dependant'] == 'yes' %}
+                <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
+                  <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+                      <th role="columnheader" class="" scope="col">
+                        Person record ID
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        First name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Last name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Date of birth
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Country
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                
                   <tbody class="nhsuk-table__body">
                     <tr role="row" class="nhsuk-table__row">
                       <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Relationship to Main</span>
-                        <span>Son</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Person record ID</span>
-                        <span>111345</span>
+                        <span>123456</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">First name</span>
-                        <span>Joe</span>
+                        <span>John</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Last name</span>
-                        <span>Bloggs</span>
+                        <span>Doe</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date of birth</span>
-                        <span>14/09/1999</span>
+                        <span>04/01/1973</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Country</span>
@@ -539,25 +564,20 @@
                       </td>
                     </tr>   
                   </tbody>
-                {% endif %}
-
                 </table>
 
-                <a href="s1-dependant-search" class="nhsuk-button" style="margin-top: 30px;" role="button" data-module="nhsuk-button">
-                  Add another dependant
+                <a href="../../search/search-by-person" class="nhsuk-button" style="margin-top: 40px;" role="button" data-module="nhsuk-button">
+                  Add another Dependant
                 </a>
-
                 {% else %}
-                <h3 class="nhsuk-heading-l">Dependants</h3>
-                <p>No dependants have been added to this person's entitlement.</p>
-
-                <a href="s1-dependant-search" class="nhsuk-button" role="button" data-module="nhsuk-button">
-                  Add a dependant
+                <p>No Dependants have been added to this entitlement.</p>
+                <a href="../../search/search-by-person" class="nhsuk-button" role="button" data-module="nhsuk-button">
+                  Add a Dependant
                 </a>
-                {% endif %} 
+                {% endif %}
                      
               </div>
-            <!-- Dependants tab content ends -->
+            <!-- Main/Dependants tab content ends -->
 
 
               

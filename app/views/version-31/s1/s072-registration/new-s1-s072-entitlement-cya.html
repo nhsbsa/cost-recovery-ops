@@ -127,17 +127,26 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Personal identification number (PIN)</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['entitlement-pin'] %}
-                            {{ data['entitlement-pin'] }}
-                          {% else %}
-                            1234567890
+                          {% if data['entitlement-for'] == 'Main' %}
+                            {% if data['s1-entitlement-pin'] %}
+                              {{ data['s1-entitlement-pin'] }}
+                            {% else %}
+                              1234567890
+                            {% endif %}
+                          {% elif data['entitlement-for'] == 'Dependant' %}
+                            {% if data['s1-entitlement-pin'] %}
+                              {{ data['s1-entitlement-pin'] }}
+                            {% else %}
+                              0987654321
+                            {% endif %}
                           {% endif %}
                         </dd>
-
+                      
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details#entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">personal identification number</span> </a>
+                          <a href="entitlement-details#s1-entitlement-pin"> Change<span class="nhsuk-u-visually-hidden">personal identification number</span> </a>
                         </dd>
                       </div>
+                      
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Issue country</dt>
