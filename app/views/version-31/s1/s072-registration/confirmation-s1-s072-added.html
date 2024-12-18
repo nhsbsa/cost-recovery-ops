@@ -28,50 +28,64 @@ Confirmation - S1/S072 entitlement added to person record - Manage overseas enti
                 <div class="nhsuk-main-wrapper" id="maincontent">
                     
                   <div class="nhsuk-grid-column-two-thirds">
-    
+
+                    {% if data['s1-entitlement-type'] == 'E109' or data['entitlement-for'] == 'Dependant' %}
                       <div class="done-panel">
                         <h1 class="nhsuk-heading-xl" id="person-record-confirmation">
                           <span class="done-tick" id="done-tick">S1/S072 entitlement registered</span>
                         </h1>
-
+                        
                         <body class="nhsuk-caption-l">
                           <span id="person-record-created-name">Name:</span>
-                          {% if data['s1-entitlement-type'] == 'E109' or data['entitlement-for'] == 'Dependant' %}
                           <h2 class="nhsuk-heading-m">Jane Doe</h2>
-                          {% else %}
-                          <h2 class="nhsuk-heading-m">John Doe</h2>
-                          {% endif %}
                         </body>
 
                         <body class="nhsuk-caption-l">
                           <span id="person-record-created-name">Person record ID:</span>
-                          {% if data['s1-entitlement-type'] == 'E109' or data['entitlement-for'] == 'Dependant' %}
                           <h2 class="nhsuk-heading-m">654321</h2>
-                          {% else %}
-                          <h2 class="nhsuk-heading-m">123456</h2>
-                          {% endif %}
                         </body>
 
                         <body class="nhsuk-caption-l">
                           <span id="person-record-created-name">Personal identification number (PIN):</span>
-                          {% if data['s1-entitlement-type'] == 'E109' or data['entitlement-for'] == 'Dependant' %}
                           <h2 class="nhsuk-heading-m">0987654321</h2>
-                          {% else %}
-                          <h2 class="nhsuk-heading-m">1234567890</h2>
-                          {% endif %}
                         </body>
-
                       </div>
 
-                      
-
-
-                      
-                        <form action="../account/entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
+                        <form action="../account/dependant/s1-entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
                           <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
                             Go to S1/S072 entitlement details
                           </button>
                         </form>
+
+                        {% else %}
+
+                        <div class="done-panel">
+                          <h1 class="nhsuk-heading-xl" id="person-record-confirmation">
+                            <span class="done-tick" id="done-tick">S1/S072 entitlement registered</span>
+                          </h1>
+
+                          <body class="nhsuk-caption-l">
+                            <span id="person-record-created-name">Name:</span>
+                            <h2 class="nhsuk-heading-m">John Doe</h2>
+                          </body>
+
+                          <body class="nhsuk-caption-l">
+                            <span id="person-record-created-name">Person record ID:</span>
+                            <h2 class="nhsuk-heading-m">123456</h2>
+                          </body>
+
+                          <body class="nhsuk-caption-l">
+                            <span id="person-record-created-name">Personal identification number (PIN):</span>
+                            <h2 class="nhsuk-heading-m">1234567890</h2>
+                          </body>
+                        </div>
+
+                          <form action="../account/entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
+                            <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                              Go to S1/S072 entitlement details
+                            </button>
+                          </form>
+                          {% endif %}
 
                   </div>
 

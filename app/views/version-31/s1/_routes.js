@@ -9,6 +9,21 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 
 // Entitlements and enquiries section //
 
+// Dependant record //
+// Add a note
+router.post([/add-note-dependant/], function(req, res) {
+  console.log('Adding note to Dependant record...');
+  console.log('Note Type:', req.body['dependant-note-type']);
+  console.log('Note:', req.body['dependant-note']);
+
+  req.session.data['dependant-note-type'] = req.body['dependant-note-type'];
+  req.session.data['dependant-note'] = req.body['dependant-note'];
+  req.session.data['dependant-new-note'] = 'yes';
+
+  console.log('Redirecting to Dependant notes...');
+  res.redirect('/version-31/s1/account/dependant/notes');
+});
+
 // S1/S072 Registration - Main //
 
 // Select entitlement
@@ -101,6 +116,27 @@ router.post([/new-s1-s072-entitlement-cya/], function(req, res){
 })
 
 
+// Main record //
+// Add a new note
+router.post([/add-note/], function(req, res) {
+  // Retrieve the submitted note and note type
+  const noteType = req.body['note-type'];
+  const note = req.body['note'];
+
+  // Store these in the session or database
+  req.session.data['note-type'] = noteType;
+  req.session.data['note'] = note;
+
+  // Set flag that a new note was added
+  req.session.data['new-note'] = 'yes';
+
+  // Redirect back to the Main record notes screen
+  res.redirect('/version-31/s1/account/notes');
+});
+
+
+
+
 
 // S1/S072 entitlement registration - Dependant //
 
@@ -170,6 +206,11 @@ router.post([/add-new-institution-details/], function(req, res){
 router.post([/entitlement-details-cya/], function(req, res){
   res.redirect('/version-31/s1/account/dependant/s1-s072-registration/confirmation-s1-s072-added');
 })
+
+
+
+
+
 
 
 // Add a dependant journey //
@@ -457,31 +498,7 @@ router.post([/document-comments/], function(req, res){
 
 
 
-// Notes section //
 
-router.get('/version-31/s1/account/notes', function(req, res) {
-  console.log(req.session.data); // Debugging line
-  res.render('/version-31/s1/account/notes', { data: req.session.data });
-});
-
-// Add a new note
-router.post([/add-note/], function(req, res){
-
-  // Retrieve the submitted note and note type
-  const noteType = req.body['note-type'];
-  const note = req.body['note'];
-
-  // Store these in the session or database
-  req.session.data['note-type'] = noteType;
-  req.session.data['note'] = note;
-
-  // Set flag that a new S1 entitlement note was added
-  req.session.data['new-note'] = 'yes';
-
-  // Redirect to the S1/S072 entitlement details screen and the tab that displays the notes table
-  res.redirect('/version-31/s1/account/notes');
-
-})
 
 
 

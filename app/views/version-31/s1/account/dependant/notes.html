@@ -61,7 +61,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
 
                       
                       <!-- Notes tab content begins -->
-                      {% if data['new-note'] == 'yes' %}
+                      {% if data['dependant-new-note'] == 'yes' %}
                       
                       <details class="nhsuk-details" style="margin-left: -20px; margin-top: -30px; margin-bottom: 10px;">
                         <summary class="nhsuk-details__summary">
@@ -162,12 +162,12 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                     
                         <button class="nhsuk-button nhsuk-button--secondary" style="margin-top: 20px;" id="applyFilterButton">Apply filter</button>
                         
-                        <p><a href="/version-31/s1/account/entitlement-content/s1-entitlement-details#tab-Notes" id="clearButton">Reset filter</a></p>
+                        <p><a href="#" id="clearButton">Reset filter</a></p>
 
                         </div>
                       </details>
 
-                      <a class="nhsuk-button" href="/version-31/s1/account/dependant/add-note">Add a new note</a>
+                      <a class="nhsuk-button" href="/version-31/s1/account/dependant/add-note-dependant">Add a new note</a>
                     
                       <table role="table" class="nhsuk-table-responsive">
                         <thead role="rowgroup" class="nhsuk-table__head">
@@ -183,7 +183,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                         <tbody class="nhsuk-table__body">
                       
                           <!-- S1 entitlement note -->
-                          {% if data['new-note'] == 'yes' %}
+                          {% if data['dependant-new-note'] == 'yes' %}
                           <tr role="row" class="nhsuk-table__row">
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -206,7 +206,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                               {% if data['rina-ref-number'] %}
                                 <p><b>RINA reference number: {{ data['rina-ref-number'] }}</b></p>
                               {% endif %}
-                              <p>{{ data['note'] if data['note'] else 'This is what the comments would look like.' }}</p>
+                              <p>{{ data['dependant-note'] if data['dependant-note'] else 'This is what the comments would look like.' }}</p>
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Actions</span>
@@ -295,7 +295,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                     
                       {% else %}
                         <p>No notes have been added.</p>
-                        <a class="nhsuk-button" href="/version-31/s1/account/dependant/add-note" id="addNote-button">Add a new note</a>
+                        <a class="nhsuk-button" href="/version-31/s1/account/dependant/add-note-dependant" id="addNote-button">Add a new note</a>
                       {% endif %}
                     
                 </div>
