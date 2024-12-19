@@ -688,7 +688,7 @@
                         Date of birth
                       </th>
                       <th role="columnheader" class="" scope="col">
-                        Country
+                        Relationship
                       </th>
                       <th role="columnheader" class="" scope="col">
                         Action
@@ -715,12 +715,18 @@
                         <span>04/01/1973</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Country</span>
-                        <span>France</span>
+                        <span class="nhsuk-table-responsive__heading">Relationship</span>
+                        {% if data ['dr-main-relationship'] %}
+                            {{ data['dr-main-relationship'] }}
+                          {% else %}
+                            Husband
+                          {% endif %}
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Actions</span>
                         <a href="../../personal-details">View</a>
+                        or<br>
+                        <a href="dr-change-relationship">Change relationship</a>
                       </td>
                     </tr>   
                   </tbody>
