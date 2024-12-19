@@ -85,11 +85,7 @@
                         S1 registration type
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['s1-entitlement-type'] %}
-                          {{ data['s1-entitlement-type'] }}
-                        {% else %}
-                          S1/S072
-                        {% endif %}
+                        S1/S072
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
                         
@@ -102,11 +98,7 @@
                         Entitlement for
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['entitlement-for'] %}
-                          {{ data['entitlement-for'] }}
-                        {% else %}
-                          Main
-                        {% endif %}
+                        Main
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
                         
@@ -135,10 +127,18 @@
                         Personal identification number (PIN)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['entitlement-for'] == 'Main' or data['s1-entitlement-type'] == '+S072 (from an FAS1Q enquiry)' %}
-                          1234567890
+                        {% if data['update-s1-entitlement-details'] == 'yes' %}
+                          {% if data['updated-s1-entitlement-pin'] %}
+                            {{ data['updated-s1-entitlement-pin'] }}
+                          {% else %}
+                            1234567890
+                          {% endif %}
                         {% else %}
-                          0987654321
+                          {% if data['s1-entitlement-pin'] %}
+                            {{ data['s1-entitlement-pin'] }}
+                          {% else %}
+                            1234567890
+                          {% endif %}
                         {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
@@ -336,18 +336,8 @@
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">Citizen status</dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['entitlement-for'] == 'Main' %} 
-                          {% if data['s1-entitlement-citizen-status'] %}
-                            {{ data['s1-entitlement-citizen-status'] }}
-                          {% else %}
-                            Pensioner
-                          {% endif %}
-                        {% elif data['entitlement-for'] == 'Dependant' %}
-                          {% if data['s1-entitlement-citizen-status'] %}
-                            {{ data['s1-entitlement-citizen-status'] }}
-                          {% else %}
-                            Family member of pensioner
-                          {% endif %}
+                        {% if data['s1-entitlement-citizen-status'] %}
+                          {{ data['s1-entitlement-citizen-status'] }}
                         {% else %}
                           Pensioner
                         {% endif %}
@@ -356,9 +346,6 @@
                         <!-- Add any actions here if needed for interaction -->
                       </dd>
                     </div>
-                    
-                    
-
                 </dl>
                 
               </div>
@@ -497,7 +484,7 @@
                 </table>
                 {% else %}
                 <p>No Main Insurers have been added to this entitlement.</p>
-                <a href="../../search/search-by-person" class="nhsuk-button" role="button" data-module="nhsuk-button">
+                <a href="person-search?search-for=Main" class="nhsuk-button" role="button" onclick="setType('main-insurer')">
                   Add a Main Insurer
                 </a>
 
@@ -524,7 +511,7 @@
                         Date of birth
                       </th>
                       <th role="columnheader" class="" scope="col">
-                        Country
+                        Relationship
                       </th>
                       <th role="columnheader" class="" scope="col">
                         Action
@@ -536,11 +523,11 @@
                     <tr role="row" class="nhsuk-table__row">
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Person record ID</span>
-                        <span>123456</span>
+                        <span>654321</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">First name</span>
-                        <span>John</span>
+                        <span>Jane</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Last name</span>
@@ -548,26 +535,34 @@
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date of birth</span>
-                        <span>04/01/1973</span>
+                        <span>29/12/1975</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Country</span>
-                        <span>France</span>
-                      </td>
+                        <span class="nhsuk-table-responsive__heading">Relationship</span>
+                        <span>
+                          {% if data ['dependant-relationship'] %}
+                            {{ data['dependant-relationship'] }}
+                          {% else %}
+                            Wife
+                          {% endif %}
+                        </span>
+                      </td>                      
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Actions</span>
-                        <a href="#">View</a>
+                        <a href="../dependant/personal-details">View record</a>
+                        or<br>
+                        <a href="change-relationship">Change relationship</a>
                       </td>
                     </tr>   
                   </tbody>
                 </table>
 
-                <a href="../../search/search-by-person" class="nhsuk-button" style="margin-top: 40px;" role="button" data-module="nhsuk-button">
+                <a href="person-search?search-for=Dependant" class="nhsuk-button" style="margin-top: 40px;" role="button" onclick="setType('dependant')">
                   Add another Dependant
                 </a>
                 {% else %}
                 <p>No Dependants have been added to this entitlement.</p>
-                <a href="../../search/search-by-person" class="nhsuk-button" role="button" data-module="nhsuk-button">
+                <a href="person-search?search-for=Dependant" class="nhsuk-button" role="button" onclick="setType('dependant')">
                   Add a Dependant
                 </a>
                 {% endif %}

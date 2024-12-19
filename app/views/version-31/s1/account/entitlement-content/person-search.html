@@ -12,11 +12,41 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Reason for editing - Update person details - Manage overseas entitlements and treatments - NHSBSA
+Search for a person - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
-{% block beforeContent %}{% endblock %}
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../search/search-by-person">Search</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../search/search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../entitlements-and-treatments">Entitlements and treatments</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="s1-entitlement-details">S1/S072 entitlement details</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="person-search">Search</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
 
 <!-- Your page content goes inside the content block -->
 <!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
@@ -36,15 +66,15 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
 
                     
                         
-                    <form action="search-for-dependant" method="post">
+                    <form action="person-search" method="post">
 
                       <h1 class="app-page-heading">
-                        <span class="nhsuk-caption-l">
-                          S1/S072 entitlement registration
-                            <span class="nhsuk-u-visually-hidden"> - </span>
-                        </span>
-                        Search for a dependant using personal details
-                      </h1>
+                        {% if data['search-for'] == 'Main' %}
+                          <span id="dynamic-heading">Search for a main insurer using personal details</span>
+                        {% else %}
+                          <span id="dynamic-heading">Search for a dependant using personal details</span>
+                        {% endif %}
+                      </h1>                      
 
 
                     <p><b>Enter at least 2 pieces of information, then select Search.</b></p>
@@ -124,70 +154,87 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
                         </div>
           
           
-                    <div class="nhsuk-form-group">
-                      <label class="nhsuk-label" id="dependant-nationality-label" for="dependant-nationality" class="form-label">
-                        Country of nationality
-                      </label>
-                      <div class="nhsuk-hint" id="nationality-hint">
-                        For example, France
-                      </div>
-                      <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="dependant-nationality-drop" name="dependant-nationality">
-                      <datalist id="countries">
-                        <option value="" selected="selected"></option>
-                        <option value="Austria (AT)">Austria (AT)</option>
-                        <option value="Belgium (BE)">Belgium (BE)</option>
-                        <option value="Bulgaria (BG)">Bulgaria (BG)</option>
-                        <option value="Croatia (HR)">Croatia (HR)</option>
-                        <option value="Cyprus (CY)">Cyprus (CY)</option>
-                        <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
-                        <option value="Denmark (DK)">Denmark (DK)</option>
-                        <option value="Estonia (EE)">Estonia (EE)</option>
-                        <option value="Finland (FI)">Finland (FI)</option>
-                        <option value="France (FR)">France (FR)</option>
-                        <option value="Germany (DE)">Germany (DE)</option>
-                        <option value="Gibraltar (GI)">Gibraltar (GI)</option>
-                        <option value="Greece (GR)">Greece (GR)</option>
-                        <option value="Hungary (HU)">Hungary (HU)</option>
-                        <option value="Iceland (IS)">Iceland (IS)</option>
-                        <option value="Ireland (IE)">Ireland (IE)</option>
-                        <option value="Italy (IT)">Italy (IT)</option>
-                        <option value="Latvia (LV)">Latvia (LV)</option>
-                        <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
-                        <option value="Lithuania (LT)">Lithuania (LT)</option>
-                        <option value="Luxembourg (LU)">Luxembourg (LU)</option>
-                        <option value="Malta (MT)">Malta (MT)</option>
-                        <option value="Netherlands (NL)">Netherlands (NL)</option>
-                        <option value="Norway (NO)">Norway (NO)</option>
-                        <option value="Poland (PL)">Poland (PL)</option>
-                        <option value="Portugal (PT)">Portugal (PT)</option>
-                        <option value="Romania (RO)">Romania (RO)</option>
-                        <option value="Slovakia (SK)">Slovakia (SK)</option>
-                        <option value="Slovenia (SI)">Slovenia (SI)</option>
-                        <option value="Spain (ES)">Spain (ES)</option>
-                        <option value="Sweden (SE)">Sweden (SE)</option>
-                        <option value="Switzerland (CH)">Switzerland (CH)</option>
-                      </datalist>            
-                   </div>
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label" id="entitlement-country-label" for="entitlement-country" class="form-label">
+                            Entitlement country
+                          </label>
+                          <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country">
+                          <datalist id="countries">
+                            <option value="" selected="selected"></option>
+                            <option value="Austria (AT)">Austria (AT)</option>
+                            <option value="Belgium (BE)">Belgium (BE)</option>
+                            <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                            <option value="Croatia (HR)">Croatia (HR)</option>
+                            <option value="Cyprus (CY)">Cyprus (CY)</option>
+                            <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                            <option value="Denmark (DK)">Denmark (DK)</option>
+                            <option value="Estonia (EE)">Estonia (EE)</option>
+                            <option value="Finland (FI)">Finland (FI)</option>
+                            <option value="France (FR)">France (FR)</option>
+                            <option value="Germany (DE)">Germany (DE)</option>
+                            <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                            <option value="Greece (GR)">Greece (GR)</option>
+                            <option value="Hungary (HU)">Hungary (HU)</option>
+                            <option value="Iceland (IS)">Iceland (IS)</option>
+                            <option value="Ireland (IE)">Ireland (IE)</option>
+                            <option value="Italy (IT)">Italy (IT)</option>
+                            <option value="Latvia (LV)">Latvia (LV)</option>
+                            <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                            <option value="Lithuania (LT)">Lithuania (LT)</option>
+                            <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                            <option value="Malta (MT)">Malta (MT)</option>
+                            <option value="Netherlands (NL)">Netherlands (NL)</option>
+                            <option value="Norway (NO)">Norway (NO)</option>
+                            <option value="Poland (PL)">Poland (PL)</option>
+                            <option value="Portugal (PT)">Portugal (PT)</option>
+                            <option value="Romania (RO)">Romania (RO)</option>
+                            <option value="Slovakia (SK)">Slovakia (SK)</option>
+                            <option value="Slovenia (SI)">Slovenia (SI)</option>
+                            <option value="Spain (ES)">Spain (ES)</option>
+                            <option value="Sweden (SE)">Sweden (SE)</option>
+                            <option value="Switzerland (CH)">Switzerland (CH)</option>
+                            <option value="United Kingdom (UK)">United Kingdom (UK)</option>
+                          </datalist>            
+                       </div>
           
                     
-                    <a href="search-for-dependant-results" class="nhsuk-button nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-2">
+                    <a href="person-search-results" class="nhsuk-button nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-2">
                      Search
                     </a>
                 
                     <p class="nhsuk-u-margin-top-4">
-                      <p><a href="../account/entitlements-and-enquiries">Cancel</a></p>
+                      <p><a href="s1-entitlement-details">Cancel</a></p>
                     </p>
-                
+                <br>
 
                     </form>
-
                   </div>
 
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
+      </div>
+  
+      <!-- Left-hand navigation -->
+      <div class="nhsBSA-sidebar-nav">
+        <div class="side-nav">
+          <h3>
+            John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+            <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+          </h3>
+          <ul id="options" class="options">
+            <li><a href="../personal-details">Personal details</a></li>
+            <li><a class="active" href="../entitlements-and-treatments?add-s1-entitlement=yes">Entitlements and treatments</a></li>
+            <li><a href="../case-history-person">Case history</a></li>
+            <!--li><a href="../document">Documents</a></li-->
+            <li><a href="../notes">Notes</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- End of navigation -->
+          
+  </div>
 </div>
+<!-- End of main content -->
 {% endblock %}
 
 {% block pageScripts %}
@@ -196,7 +243,7 @@ Reason for editing - Update person details - Manage overseas entitlements and tr
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue : '',
     autoselect : true,  
-    selectElement : document.querySelector('#dependant-nationality-drop')
+    selectElement : document.querySelector('#entitlement-country-drop')
   })
 </script>
 {% endblock %}

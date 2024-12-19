@@ -24,6 +24,29 @@ router.post([/add-note-dependant/], function(req, res) {
   res.redirect('/version-31/s1/account/dependant/notes');
 });
 
+// Link a Main/Dependant - On Dependant record //
+// How is the Dependant related to the Main Insurer?
+router.post([/dr-select-relationship/], function(req, res) {
+
+  req.session.data['dr-add-main'] = 'yes'
+  
+  res.redirect('/version-31/s1/account/dependant/s1-entitlement-content/s1-entitlement-details');
+});
+
+// Change dependant relationship to Main Insurer
+router.post([/dr-change-relationship/], function(req, res) {
+
+  req.session.data['dr-add-main'] = 'yes'
+
+  req.session.data['dr-change-main-relationship'] = 'yes'
+
+  // Save the new relationship temporarily in session data
+  req.session.data['dr-new-relationship'] = req.body['dr-new-relationship'];
+  
+  res.redirect('/version-31/s1/account/dependant/s1-entitlement-content/s1-entitlement-details');
+});
+
+
 // S1/S072 Registration - Main //
 
 // Select entitlement
@@ -36,6 +59,7 @@ router.post([/which-s1-entitlement/], function(req, res) {
   var s1EntitlementType = req.session.data['s1-entitlement-type'];
   
   if (s1EntitlementType === 'E109' || s1EntitlementType === '+S072 (from an FAS1Q enquiry)') {
+    req.session.data['add-e109-entitlement'] = 'yes'
     res.redirect('/version-31/s1/s072-registration/entitlement-details');
   } else {
     res.redirect('/version-31/s1/s072-registration/entitlement-for');
@@ -135,6 +159,40 @@ router.post([/add-note/], function(req, res) {
 });
 
 
+// Link a Main/Dependant
+// Search for person
+router.post([/person-search/], function(req, res){
+  res.redirect('/version-31/s1/account/entitlement-content/person-search-results');
+})
+
+// Search results
+router.post([/person-search-results/], function(req, res){
+  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details');
+})
+
+// How is the Dependant related to the Main Insurer?
+router.post([/select-relationship/], function(req, res) {
+
+  req.session.data['add-dependant'] = 'yes'
+  
+  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details');
+});
+
+// Change dependant relationship to Main Insurer
+router.post([/change-relationship/], function(req, res) {
+
+  req.session.data['add-dependant'] = 'yes'
+
+  req.session.data['change-dependant-relationship'] = 'yes'
+
+  // Save the new relationship temporarily in session data
+  req.session.data['new-relationship'] = req.body['new-relationship'];
+  
+  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details');
+});
+
+
+
 
 
 
@@ -150,6 +208,7 @@ router.post([/which-s1-entitlement/], function(req, res) {
   var s1EntitlementType = req.session.data['s1-entitlement-type'];
   
   if (s1EntitlementType === 'E109') {
+    req.session.data['add-e109-entitlement'] = 'yes'
     res.redirect('/version-31/s1/account/dependant/s1-s072-registration/entitlement-details');
   } else {
     res.redirect('/version-31/s1/account/dependant/s1-s072-registration/entitlement-for');
@@ -213,12 +272,6 @@ router.post([/entitlement-details-cya/], function(req, res){
 
 
 
-// Add a dependant journey //
-
-// Search for a dependant
-router.post([/s1-dependant-search/], function(req, res){
-  res.redirect('s1-dependant-search-results');
-})
 
 
 
@@ -449,7 +502,10 @@ router.post([/change-s1-entitlement-details/], function(req, res){
 
   req.session.data['update-s1-entitlement-details'] = 'yes'
 
-  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details#tab-entitlement-details');
+  // Save the new PIN temporarily in session data
+  req.session.data['updated-s1-entitlement-pin'] = req.body['updated-s1-entitlement-pin'];
+
+  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details');
 
 })
 
@@ -458,7 +514,7 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
 
   req.session.data['change-s1-entitlement-institution-details'] = 'yes'
 
-  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details#tab-institution-details');
+  res.redirect('/version-31/s1/account/entitlement-content/s1-entitlement-details');
 
 })
 
