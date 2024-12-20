@@ -671,7 +671,7 @@
               <!-- Main/Dependants tab content starts -->
               
               <h3 class="nhsuk-heading-l">Main<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
-              {% if data['dr-add-main'] == 'yes' %}
+              {% if data['add-dependant'] == 'yes' or data['dr-add-main'] == 'yes'%}
                 <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
                   <thead role="rowgroup" class="nhsuk-table__head">
                     <tr role="row">
@@ -724,17 +724,18 @@
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Actions</span>
-                        <a href="../../personal-details">View</a>
+                        <a href="../../personal-details">View record</a>
                         or<br>
                         <a href="dr-change-relationship">Change relationship</a>
                       </td>
                     </tr>   
                   </tbody>
                 </table>
+
                 {% else %}
-                <p>No Main Insurers have been added to this entitlement.</p>
+                <p>No main insurers have been added to this entitlement.</p>
                 <a href="person-search?search-for=Main" class="nhsuk-button" role="button" data-module="nhsuk-button">
-                  Add a Main Insurer
+                  Add a main insurer
                 </a>
 
                 <hr>
@@ -800,12 +801,12 @@
                 </table>
 
                 <a href="person-search?search-for=Dependant" class="nhsuk-button" style="margin-top: 40px;" role="button" onclick="setType('dependant')">
-                  Add another Dependant
+                  Add another dependant
                 </a>
                 {% else %}
-                <p>No Dependants have been added to this entitlement.</p>
+                <p>No dependants have been added to this entitlement.</p>
                 <a href="person-search?search-for=Dependant" class="nhsuk-button" role="button" onclick="setType('dependant')">
-                  Add a Dependant
+                  Add a dependant
                 </a>
                 {% endif %}
                      
@@ -837,11 +838,11 @@
     <span class="nhsuk-u-visually-hidden"> - </span>654321</span>
   </h3>
   <ul id="options" class="options">
-    <li><a href="../personal-details?add-s1-entitlement=yes&entitlement-for=Dependant">Personal details</a></li>
-    <li><a class="active" href="../entitlements-and-treatments?add-s1-entitlement=yes&entitlement-for=Dependant">Entitlements and treatments</a></li>
-    <li><a href="../record-history?add-s1-entitlement=yes&entitlement-for=Dependant">Record history</a></li>
+    <li><a href="../personal-details">Personal details</a></li>
+    <li><a class="active" href="../entitlements-and-treatments">Entitlements and treatments</a></li>
+    <li><a href="../case-history">Case history</a></li>
     <!--li><a href="../documents?add-s1-entitlement=yes">Documents</a></li-->
-    <li><a href="../notes?add-s1-entitlement=yes&entitlement-for=Dependant&entitlement-for=Dependant">Notes</a></li>
+    <li><a href="../notes">Notes</a></li>
   </ul>
 </div>
 </div>

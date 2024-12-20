@@ -79,6 +79,92 @@
 
 
                     <!-- Start of S1/S072 entitlements card -->
+                    {% if data['add-e109-entitlement'] == 'yes' %}
+                    <div class="nhsuk-card">
+                      <div class="nhsuk-card__content">
+                        <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                          <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-e109-entitlements">E109 entitlements</h2>
+                        </div>
+
+                        <hr class="gray-horizontal-line">
+                        <br>
+                    
+                        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                          <details class="nhsuk-details">
+                            <summary aria-label="View E109 entitlement history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_e109_entitlements_Link">View E109 entitlement history</span>
+                            </summary>
+                        
+                            <div class="nhsuk-details__text" style="margin-top: 30px;">
+                              <table class="nhsuk-table-responsive" id="entitlement-history-e109-entitlements-table" style="margin-bottom: 9px;">
+                                <thead class="nhsuk-table__head">
+                                  <tr>
+                                    <th scope="col">Date and time</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Updated by</th>
+                                    <th scope="col">Comments</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="nhsuk-table__body">
+                                  <!-- Most recent update shown at the top of the table -->
+                                  {% if data['dr-add-main'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateE109Main"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Added a main insurer</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateE109"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Registered</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                      </div>
+
+                  <br>
+
+                  </div>
+                    </div>
+
+                  <!-- End of E109 entitlements card -->
+
+
+                    <!-- Start of S1/S072 entitlements card -->
+                    {% elif data['add-s1-entitlement'] == 'yes' and data['entitlement-for'] == 'Dependant' %}
                     <div class="nhsuk-card">
                       <div class="nhsuk-card__content">
                         <div class="nhsuk-grid-row" style="margin-left: 2px;">
@@ -95,7 +181,6 @@
                             </summary>
                         
                             <div class="nhsuk-details__text" style="margin-top: 30px;">
-                              {% if data['add-s1-entitlement'] == 'yes' %}
                               <table class="nhsuk-table-responsive" id="entitlement-history-s1-s072-entitlements-table" style="margin-bottom: 9px;">
                                 <thead class="nhsuk-table__head">
                                   <tr>
@@ -106,7 +191,29 @@
                                   </tr>
                                 </thead>
                                 <tbody class="nhsuk-table__body">
-                                  
+                                  <!-- most recent update at top of table -->
+                                  {% if data['add-dependant'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateS1Dependant"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Added as a dependant</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -129,10 +236,6 @@
                                   </tr>
                                 </tbody>
                               </table>
-                              {% else %}
-                                <br>
-                                None provided.
-                              {% endif %}
                             </div>
 
                       </div>
@@ -141,148 +244,9 @@
 
                   </div>
                     </div>
-
+                  {% endif %}
                   <!-- End of S1/S072 entitlements card -->
 
-
-
-                   <!-- Start of EHIC entitlements card -->
-                   <div class="nhsuk-card">
-                    <div class="nhsuk-card__content">
-                      <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                        <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-EHIC-entitlements">EHIC entitlements</h2>
-                      </div>
-
-                      <hr class="gray-horizontal-line">
-                      <br>
-                  
-                      <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-                        <details class="nhsuk-details">
-                          <summary aria-label="View EHIC entitlement history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                            <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_EHIC_entitlements_Link">View EHIC entitlement history</span>
-                          </summary>
-                      
-                          <div class="nhsuk-details__text" style="margin-top: 30px;">
-                            
-                            <table class="nhsuk-table-responsive" id="entitlement-history-EHIC-entitlements-table" style="margin-bottom: 9px;">
-                              <thead class="nhsuk-table__head">
-                                <tr>
-                                  <th scope="col">Date and time</th>
-                                  <th scope="col">Action</th>
-                                  <th scope="col">Updated by</th>
-                                  <th scope="col">Comments</th>
-                                </tr>
-                              </thead>
-                              <tbody class="nhsuk-table__body">
-                                
-                                <tr class="nhsuk-table__row">
-                                  <td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                    <p> 1 January 2020<br>
-                                    at 17:35 pm</span></p>
-                                  </td>
-                                  <td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Action</span>
-                                    <p>Registered</p>
-                                  </td>
-                                  <td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                    <p id="person-history-ehic-entitlements-updated-by">joebloggs@nhs.net</p>
-                                  </td>
-                                  <td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Comments</span>
-                                    <p id="person-history-ehic-entitlements-updated-by">
-                                      None provided
-                                    </p>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-
-                    </div>
-
-                <br>
-
-                </div>
-                  </div>
-
-                <!-- End of EHIC entitlements card -->
-
-
-
-
-                <!-- Start of PRC entitlements card -->
-                <div class="nhsuk-card">
-                  <div class="nhsuk-card__content">
-                    <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                      <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-PRC-entitlements">PRC entitlements</h2>
-                    </div>
-
-                    <hr class="gray-horizontal-line">
-                    <br>
-                
-                    <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-                      <details class="nhsuk-details">
-                        <summary aria-label="View PRC entitlement history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                          <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_PRC_entitlements_Link">View PRC entitlement history</span>
-                        </summary>
-                    
-                        <div class="nhsuk-details__text" style="margin-top: 30px;">
-                          
-                          <table class="nhsuk-table-responsive" id="entitlement-history-prc-entitlements-table" style="margin-bottom: 9px;">
-                            <thead class="nhsuk-table__head">
-                              <tr>
-                                <th scope="col">Date and time</th>
-                                <th scope="col">Action</th>
-                                <th scope="col">Updated by</th>
-                                <th scope="col">Comments</th>
-                              </tr>
-                            </thead>
-                            <tbody class="nhsuk-table__body">
-                              
-                              <tr class="nhsuk-table__row">
-                                <td class="nhsuk-table__cell">
-                                  <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                  <p> 1 January 2020<br>
-                                  at 10:13 am</span></p>
-                                </td>
-                                <td class="nhsuk-table__cell">
-                                  <span class="nhsuk-table-responsive__heading">Action</span>
-                                  <p>Registered</p>
-                                </td>
-                                <td class="nhsuk-table__cell">
-                                  <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                  <p id="person-history-prc-entitlements-updated-by">joebloggs@nhs.net</p>
-                                </td>
-                                <td class="nhsuk-table__cell">
-                                  <span class="nhsuk-table-responsive__heading">Comments</span>
-                                  <p id="person-history-prc-entitlements-updated-by">
-                                    None provided
-                                  </p>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-
-                  </div>
-
-              <br>
-
-              </div>
-                </div>
-
-              <!-- End of PRC entitlements card -->
-
-
-
-                
-                  
-
-
-
-              
                   
           </div>
         </div>
@@ -343,9 +307,10 @@ function setCurrentDateTime(elementId) {
 
   // Set the date for each item
   document.addEventListener("DOMContentLoaded", function () {
+    setCurrentDateTime("currentDateE109Main");  // Update to E109 entitlements for adding a Main insurer
+    setCurrentDateTime("currentDateE109");      // For E109 entitlements
+    setCurrentDateTime("currentDateS1Dependant");  // Update to S1/S072 entitlements for being added as a dependant
     setCurrentDateTime("currentDateS1");      // For S1/S072 entitlements
-    setCurrentDateTime("currentDateEHIC");      // For EHIC entitlements
-    setCurrentDateTime("currentDatePRC");  // For PRC entitlements
   });
 </script>
 {% endblock %}
