@@ -7,7 +7,7 @@ router.use(bodyParser.json()); // to support JSON bodies
 router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 
 
-// Entitlements and enquiries section //
+// Entitlements and treatments section //
 
 // Dependant record //
 // Add a note
