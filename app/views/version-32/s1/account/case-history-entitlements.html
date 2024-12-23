@@ -1,0 +1,331 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} Person details page {% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-by-person">Search</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-results-none">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../account/case-history-person">Case history</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+            
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Case history - entitlements</h1>
+            </div>
+          </div>
+           
+            <!--start secondary navigation-->
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="case-history-person">Person history</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="case-history-entitlements">Entitlement history</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="#">Treatment history</a>
+              </li>
+            </ul>
+          </nav>
+          <!--end secondary navigation-->
+
+
+            <hr class="gray-horizontal-line">
+            <br>
+            <br>
+            
+               <div class="nhsuk-grid-row">
+                  <div class="nhsuk-grid-column-full">
+
+                    <!-- Start of S1/S072 entitlements card -->
+                    {% if data['add-e109-entitlement'] == 'yes' %}
+                    <div class="nhsuk-card">
+                      <div class="nhsuk-card__content">
+                        <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                          <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-e109-entitlements">Dependant E109 entitlements</h2>
+                        </div>
+
+                        <hr class="gray-horizontal-line">
+                        <br>
+                    
+                        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                          <details class="nhsuk-details">
+                            <summary aria-label="View Dependant E109 entitlement history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_e109_entitlements_Link">View Dependant E109 entitlement history</span>
+                            </summary>
+                        
+                            <div class="nhsuk-details__text" style="margin-top: 30px;">
+                              <table class="nhsuk-table-responsive" id="entitlement-history-e109-entitlements-table" style="margin-bottom: 9px;">
+                                <thead class="nhsuk-table__head">
+                                  <tr>
+                                    <th scope="col">Date and time</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Updated by</th>
+                                    <th scope="col">Comments</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="nhsuk-table__body">
+                                  <!-- Most recent update shown at the top of the table -->
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateE109Main"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Added a main insurer</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateE109"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Registered</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                      </div>
+
+                  <br>
+
+                  </div>
+                    </div>
+
+                  <!-- End of E109 entitlements card -->
+
+
+                    <!-- Start of S1/S072 entitlements card -->
+                    {% elif data['add-s1-entitlement'] == 'yes' %}
+                    <div class="nhsuk-card">
+                      <div class="nhsuk-card__content">
+                        <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                          <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-s1-s072-entitlements">S1/S072 entitlements</h2>
+                        </div>
+
+                        <hr class="gray-horizontal-line">
+                        <br>
+                    
+                        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                          <details class="nhsuk-details">
+                            <summary aria-label="View S1/S072 entitlement history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_s1_s072_entitlements_Link">View S1/S072 entitlement history</span>
+                            </summary>
+                        
+                            <div class="nhsuk-details__text" style="margin-top: 30px;">
+                              <table class="nhsuk-table-responsive" id="entitlement-history-s1-s072-entitlements-table" style="margin-bottom: 9px;">
+                                <thead class="nhsuk-table__head">
+                                  <tr>
+                                    <th scope="col">Date and time</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Updated by</th>
+                                    <th scope="col">Comments</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="nhsuk-table__body">
+                                  <!-- most recent update at top of table -->
+                                  {% if data['add-dependant'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateS1Dependant"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Added a dependant</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateS1"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Registered</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                      </div>
+
+                  <br>
+
+                  </div>
+                    </div>
+                  
+                  <!-- End of S1/S072 entitlements card -->
+
+
+                  {% else %}
+                  <p>No entitlements have been added.</p>
+                  {% endif %}
+
+                  
+                   
+
+                
+                  
+
+
+
+              
+                  
+          </div>
+        </div>
+
+               </div>
+
+
+          </div>
+        </div>
+
+          
+      
+      
+
+    <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a href="personal-details">Personal details</a></li>
+          <li><a href="entitlements-and-treatments">Entitlements and treatments</a></li>
+          <li><a class="active" href="case-history-person">Case history</a></li>
+          <!--li><a href="documents">Documents</a></li-->
+          <li><a href="notes">Notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
+
+  </div>
+</div>
+<!-- End of main content -->
+{% endblock %}
+      
+{% block pageScripts %}
+<script>
+// Function to set the current date and time
+function setCurrentDateTime(elementId) {
+    var dateElement = document.getElementById(elementId);
+  
+    if (dateElement) {
+      var currentDate = new Date();
+  
+      var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+      var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+  
+      var timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+      var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+  
+      var formattedDateTime = formattedDate + ' at ' + formattedTime;
+  
+      dateElement.textContent = formattedDateTime;
+    }
+  }
+
+  // Set the date for each item
+  document.addEventListener("DOMContentLoaded", function () {
+    setCurrentDateTime("currentDateE109Main");  // Update to E109 entitlements for adding a Main insurer
+    setCurrentDateTime("currentDateE109");      // For Dependant E109 entitlements
+    setCurrentDateTime("currentDateS1Dependant");  // Update to S1/S072 entitlements for adding a dependant
+    setCurrentDateTime("currentDateS1");      // For S1/S072 entitlements
+    setCurrentDateTime("currentDateEHIC");      // For EHIC entitlements
+    setCurrentDateTime("currentDatePRC");  // For PRC entitlements
+
+  });
+</script>
+{% endblock %}

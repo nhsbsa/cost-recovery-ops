@@ -54,6 +54,8 @@ router.use('/version-30/resubmissions/v1', require('./views/version-30/_routes')
 router.use('/version-30/s1', require('./views/version-30/s1/_routes'));
 router.use('/version-31/resubmissions/v1', require('./views/version-31/_routes'));
 router.use('/version-31/s1', require('./views/version-31/s1/_routes'));
+router.use('/version-32/resubmissions/v1', require('./views/version-32/_routes'));
+router.use('/version-32/s1', require('./views/version-32/s1/_routes'));
 
 module.exports = router;
 

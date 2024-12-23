@@ -1,0 +1,101 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Confirmation - S1/S072 entitlement added to person record - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+    
+                    <div class="done-panel">
+                      <h3 class="nhsuk-heading-xl" id="person-record-confirmation">
+                        {% if data['add-dependant'] == 'Yes' and data['number-of-dependants'] == '2' %}
+                          <span class="done-tick" id="done-tick">S1/S072 entitlement registered and dependants added</span>
+                        {% elif data['add-dependant'] == 'Yes' and data['number-of-dependants'] == '1' %}
+                          <span class="done-tick" id="done-tick">S1/S072 entitlement registered and dependant added</span>
+                        {% else %}
+                          <span class="done-tick" id="done-tick">Dependant added to John Doe's S1/S072 entitlement</span>
+                        {% endif %}
+                      </h3>
+                    </div>
+                    
+
+                      {% if data['add-dependant'] == 'Yes' %}
+                      <h3 class="nhsuk-heading-m">What happens next:</h3>
+
+                      <p>You now need to send the S073 registration confirmations to the Member State via RINA for the Main Insurer.</p>
+                      
+                      <p>You then need to send an S071 request to the Member State via RINA for the dependant.</p>
+                      
+                      <p>You can add notes, for example to:</p>
+
+                      <ul>
+                        <li>record a RINA reference number</li>
+                        <li>confirm the S073 was sent to the Member state</li>
+                        <li>confirm the S071 request was sent to the Member state and you are awaiting a response</li>
+                      </ul>
+
+                      <p>Add a note now or later.</p>
+
+                      <div class="button-container">
+                        <form action="../../s1/account/add-note?add-s1-entitlement=yes">
+                          <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                            Add a note
+                          </button>
+                        </form>
+            
+                        <form action="../account/entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
+                          <button style="margin-top:10px; margin-bottom:60px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                            Go to S1/S072 entitlement details
+                          </button>
+                        </form>
+                      </div>
+                      {% else %}
+                      <div class="button-container">
+                        <form action="../../account/entitlement-content/s1-entitlement-details">
+                          <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                            Return to S1/S072 entitlement details
+                          </button>
+                        </form>
+            
+                        <form action="#">
+                          <button style="margin-top:10px; margin-bottom:60px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                            Go to Dependant's person record
+                          </button>
+                        </form>
+                      </div>
+                      {% endif %}
+
+
+                      
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

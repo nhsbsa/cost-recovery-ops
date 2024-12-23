@@ -160,15 +160,25 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Citizen status</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-entitlement-citizen-status'] %}
-                            {{ data['s1-entitlement-citizen-status'] }}
+                          {% if data['s1-entitlement-type'] == 'E109' %}
+                            {% if data['s1-entitlement-citizen-status'] %}
+                              {{ data['s1-entitlement-citizen-status'] }}
+                            {% else %}
+                              Family member of insured person
+                            {% endif %}
                           {% else %}
-                            Family member of pensioner
+                            {% if data['s1-entitlement-citizen-status'] %}
+                              {{ data['s1-entitlement-citizen-status'] }}
+                            {% else %}
+                              Family member of pensioner
+                            {% endif %}
                           {% endif %}
                         </dd>
-
+                        
                         <dd class="nhsuk-summary-list__actions">
-                          <a href="entitlement-details#s1-entitlement-citizen-status"> Change<span class="nhsuk-u-visually-hidden">citizen status</span> </a>
+                          <a href="entitlement-details#s1-entitlement-citizen-status"> 
+                            Change<span class="nhsuk-u-visually-hidden"> citizen status</span> 
+                          </a>
                         </dd>
                       </div>
 
