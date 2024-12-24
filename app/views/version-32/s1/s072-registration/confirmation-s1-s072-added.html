@@ -51,19 +51,25 @@ Confirmation - S1/S072 entitlement added to person record - Manage overseas enti
                         </body>
                       </div>
 
-                        {% if data['s1-entitlement-type'] == 'E109' %}
-                        <form action="../account/dependant/s1-entitlement-content/s1-entitlement-details?add-e109-entitlement=yes">
+                      {% if data['s1-entitlement-type'] == 'E109' %}
+                      <form action="../account/dependant/s1-entitlement-content/s1-entitlement-details?add-e109-entitlement=yes">
+                        <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                          Link main insurer
+                        </button>
+                      </form>
+                      {% elif data ['add-dependant'] == 'yes' %}
+                      <form action="../account/dependant/s1-entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
+                        <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                          Go to S1/S072 entitlement details
+                        </button>
+                      </form>
+                      {% else %}
+                        <form action="../account/dependant/s1-entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
                           <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
                             Link main insurer
                           </button>
                         </form>
-                        {% else %}
-                          <form action="../account/dependant/s1-entitlement-content/s1-entitlement-details?add-s1-entitlement=yes">
-                            <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
-                              Link main insurer
-                            </button>
-                          </form>
-                          {% endif %}
+                        {% endif %}
 
                         {% else %}
 
