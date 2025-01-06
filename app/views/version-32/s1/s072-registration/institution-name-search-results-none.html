@@ -87,11 +87,15 @@ Search for an institution by institution name - Manage overseas entitlements and
                         <div role="alert" class="nhsuk-label--m" id="non_zero_records">
                           <h2 class="nhsuk-label--m">No results found</h2>
                         </div>
-                        <p><a href="/version-32/s1/s072-registration/search-institution-name">Clear search results</a></p>
                       </div>
                       
 
                       <div class="nhsuk-inset-text">
+                        {% if data['entitlement-type'] == 'S1/S072' %}
+                        <span class="nhsuk-u-visually-hidden">Information: </span>
+                        <p>You cannot register this S1/S072 without a valid institution.</p>
+                        <p>Check you entered the correct institution ID or institution name and country of issue and search again. Go back to <a href="entitlement-details">entitlement details</a> to check country of issue.</p>
+                        {% else %}
                         <span class="nhsuk-u-visually-hidden">Information: </span>
                         <p>Check the country of issue you have added is correct. If you need to change it, Go back.</p>
                         <p>If you are sure the country of issue and the institution’s identification number is correct, you can still add the institution by selecting Select.</p>
@@ -132,6 +136,7 @@ Search for an institution by institution name - Manage overseas entitlements and
                           </tr>
                         </tbody>
                       </table>
+                      {% endif %}
                     </div>
 
 
