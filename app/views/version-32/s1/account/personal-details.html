@@ -130,8 +130,10 @@
                         First names
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['first-name'] %}
-                          {{ data['first-name'] }}
+                        {% if data['change-basic-personal-details'] == 'yes' %}
+                          {% if data['first-name'] %}
+                            {{ data['first-name'] }}
+                          {% endif %}
                         {% else %}
                           John
                         {% endif %}
@@ -146,11 +148,13 @@
                         First names at birth, if different
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['birth-first-name'] %}
-                          {{ data['birth-first-name'] }}
+                        {% if data['change-basic-personal-details'] == 'yes' %}
+                          {% if data['birth-first-name'] %}
+                            {{ data['birth-first-name'] }}
+                          {% endif %}
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
-                        {% endif %}
+                        {% endif %} 
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
                         
@@ -162,8 +166,10 @@
                         Last name
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['last-name'] %}
-                          {{ data['last-name'] }}
+                        {% if data['change-basic-personal-details'] == 'yes' %}
+                          {% if data['last-name'] %}
+                            {{ data['last-name'] }}
+                          {% endif %}
                         {% else %}
                           Doe
                         {% endif %}
@@ -178,10 +184,12 @@
                         Last name at birth, if different
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['birth-last-name'] %}
-                          {{ data['birth-last-name'] }}
-                        {% else %}
-                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% if data['change-basic-personal-details'] == 'yes' %}
+                          {% if data['birth-last-name'] %}
+                            {{ data['birth-last-name'] }}
+                            {% endif %}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
@@ -194,22 +202,24 @@
                         Date of birth
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
-                          {% set day = data['dob-day'] %}
-                          {% set month = data['dob-month'] | int %}
-                          {% set year = data['dob-year'] %}
-              
-                          {# Define month names #}
-                          {% set month_names = [
-                              "January", "February", "March", "April", "May", "June",
-                              "July", "August", "September", "October", "November", "December"
-                          ] %}
-              
-                          {# Get the month name #}
-                          {% set month_name = month_names[month - 1] %}
-              
-                          {# Display the date in the format "day month year" #}
-                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% if data['change-basic-personal-details'] == 'yes' %}
+                          {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
+                            {% set day = data['dob-day'] %}
+                            {% set month = data['dob-month'] | int %}
+                            {% set year = data['dob-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
+                          {% endif %}
                         {% else %}
                           4 January 1973
                         {% endif %}
@@ -231,8 +241,10 @@
                         Sex
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['sex'] %}
-                          {{ data['sex'] }}
+                        {% if data['change-additional-personal-details'] == 'yes' %}
+                          {% if data['sex'] %}
+                            {{ data['sex'] }}
+                          {% endif %}
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -247,8 +259,10 @@
                         Country of nationality
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['nationality'] %}
-                          {{ data['nationality'] }}
+                        {% if data['change-additional-personal-details'] == 'yes' %}
+                          {% if data['nationality'] %}
+                            {{ data['nationality'] }}
+                          {% endif %}
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -263,8 +277,10 @@
                         UK National Insurance Number (NINO)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['UK-national-insurance-number'] %}
-                          {{ data['UK-national-insurance-number'] }}
+                        {% if data['change-additional-personal-details'] == 'yes' %}
+                          {% if data['UK-national-insurance-number'] %}
+                            {{ data['UK-national-insurance-number'] }}
+                          {% endif %}
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -280,8 +296,10 @@
                       Email address
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['email-address'] %}
-                        {{ data['email-address'] }}
+                      {% if data['change-additional-personal-details'] == 'yes' %}
+                        {% if data['email-address'] %}
+                          {{ data['email-address'] }}
+                        {% endif %}
                       {% else %}
                         <span class="nhsuk-u-visually-hidden">Not provided</span>
                       {% endif %}
@@ -333,9 +351,9 @@
                                   {{ data['change-address-country'] }}
                               {% endif %}
                           {% else %}
-                            17 Rue des Lais de Mer<br>
-                            Normandy<br>
-                            France
+                              17 Rue de Lais de Mair<br>
+                              Normandy<br>
+                              France (FR)
                           {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
