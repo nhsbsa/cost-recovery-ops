@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Person summary - Manage overseas entitlements and treatments - NHSBSA
+Person record - Jane Doe - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -35,7 +35,7 @@ Person summary - Manage overseas entitlements and treatments - NHSBSA
             <a class="nhsuk-breadcrumb__link" href="s1-entitlement-details">S1/S072 entitlement details</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="main-record-summary">Main person summary</a>
+            <a class="nhsuk-breadcrumb__link" href="main-record-summary">Person record (Jane Doe)</a>
           </li>
         </ol>
       </div>
@@ -73,7 +73,7 @@ Person summary - Manage overseas entitlements and treatments - NHSBSA
                       </div>
                     </div>
 
-                    <form action="dependant-personal-details" method="post">
+                    <form action="main-person-summary" method="post">
    
                         <h2 class="nhsuk-heading-m">Personal details</h2>
                        
@@ -128,7 +128,7 @@ Person summary - Manage overseas entitlements and treatments - NHSBSA
                           <div class="nhsuk-summary-list__row">
                             <dt class="nhsuk-summary-list__key">Country of nationality</dt>
                             <dd class="nhsuk-summary-list__value">
-                                France
+                                France (FR)
                             </dd>
                           </div>
 
@@ -161,17 +161,82 @@ Person summary - Manage overseas entitlements and treatments - NHSBSA
                             </dd>
                           </div>   
                         </dl>  
-    
-                        <div class="nhsuk-inset-text">
-                          <span class="nhsuk-u-visually-hidden">Information: </span>
-                          <p>If the details do not match, select Go back.</p>
-                        </div>
-    
-                        <a href="select-relationship" class="nhsuk-button"  role="button" onclick="setType('dependant')">
-                          Add main insurer
-                        </a>
 
-                        <p><a href="s1-entitlement-details">Cancel</a></p>
+                        <br>
+    
+                        <h2 class="nhsuk-heading-m">S1/S072 entitlements</h2>
+
+                        <div class="nhsuk-hint">Select and link to the main insurer's S1/S072 entitlement.</div>
+
+
+                        <!--details class="nhsuk-details" style="background-color: #f0f4f5; padding: 0px 0px 0px">
+                          <summary class="nhsuk-details__summary">
+                            <span class="nhsuk-details__summary-text">
+                              If the main insurer does not have a valid S1/S072
+                            </span>
+                          </summary>
+                          <div class="nhsuk-details__text">
+                            <p>This may be because their entitlement has not been created. If so, search for the main insurer's person record and create their S1/S072. From the main insurer's entitlement you can link to the dependant's entitlement.</p>
+                          </div>
+                        </details-->
+
+                        <table role="table" id="entitlementsTable" class="nhsuk-table-responsive">
+                          <!-- TABLE START -->
+                          <thead class="nhsuk-table__head">
+                              <tr class="nhsuk-table__row">
+                                  <th class="nhsuk-table__header" aria-sort="none" scope="col">Entitlement type</th>
+                                  <th class="nhsuk-table__header" aria-sort="none" scope="col">Main or dependant</th>
+                                  <th class="nhsuk-table__header" aria-sort="none" scope="col">Issue date</th>
+                                  <th class="nhsuk-table__header" aria-sort="none" scope="col">Citizen status</th>
+                                  <th class="nhsuk-table__header" aria-sort="none" scope="col">Start date</th>
+                                  <th class="nhsuk-table__header" aria-sort="none" scope="col">End date</th>
+                                  <th class="nhsuk-table__header" aria-sort="none" scope="col">Entitlement country</th>
+                                  <th class="nhsuk-table__header" aria-sort="none" scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody class="nhsuk-table__body nhsuk-body-">
+                              <tr class="nhsuk-table__row">
+                                <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Entitlement type</span>
+                                  <span>S1/S072</span>
+                                </td>
+                                <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Main or dependant</span>
+                                  <span>Main</span>
+                                </td>
+                                <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Issue date</span>
+                                  <span>30/09/2024</span>
+                                </td>
+                                <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Citizen status</span>
+                                  <span>Pensioner</span>
+                                </td>
+                                <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Start date</span>
+                                  <span>05/10/2024</span>
+                                </td>
+                                <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">End date</span>
+                                  <span>-</span>
+                                </td>
+                                <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Entitlement country</span>
+                                  <span>France (FR)</span>
+                                </td>
+                                <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Action</span>
+                                  <a href="s1-entitlement-details?dr-add-main=yes">Select</a><span class="nhsuk-u-visually-hidden">S1/S072 entitlement</span>
+                                </td>
+                              </tr>
+                          </tbody>
+                        </table>
+
+                        
+    
+                        <p>
+                          <a href="s1-entitlement-details" style="display: inline-block; margin-top: 40px;">Cancel</a>
+                        </p>
     
                         </form>
     

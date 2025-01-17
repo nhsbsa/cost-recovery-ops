@@ -70,7 +70,7 @@
                 <a class="nhsuk-tabs__tab" href="#institution-details">Institution details</a>
               </li>
               <li class="nhsuk-tabs__list-item">
-                <a class="nhsuk-tabs__tab" href="#main-dependants">Main/Dependants</a>
+                <a class="nhsuk-tabs__tab" href="#main-insurer">Main insurer</a>
               </li>
             </ul>
 
@@ -79,7 +79,7 @@
             <div class="nhsuk-tabs__panel" id="entitlement-details">
               <!-- Entitlement details tab content starts -->
                 
-              {% if data['s1-entitlement-type'] == 'E109' %}
+              {% if data['s1-entitlement-type'] == 'E109' or data['dr-add-e109-entitlement'] == 'yes' %}
                 <dl class="nhsuk-summary-list">
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
@@ -112,12 +112,18 @@
                         Entitlement status
                       </dt>
                       <dd class="nhsuk-summary-list__value">
+                        {% if data['dr-cancel-e109-entitlement'] == 'yes' %}
+                        <strong class="nhsuk-tag nhsuk-tag--red">
+                          Cancelled
+                        </strong>
+                        {% else %}
                         <strong class="nhsuk-tag nhsuk-tag--green">
                           Registered
                         </strong>
+                        {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-
+  
                       </dd>
                     </div>
                     
@@ -146,13 +152,13 @@
                           {% if data['updated-s1-entitlement-country-of-issue'] %}
                             {{ data['updated-s1-entitlement-country-of-issue'] }}
                           {% else %}
-                            France
+                            France (FR)
                           {% endif %}
                         {% else %}
                           {% if data['s1-entitlement-country-of-issue'] %}
                             {{ data['s1-entitlement-country-of-issue'] }}
                           {% else %}
-                            France
+                            France (FR)
                           {% endif %}
                         {% endif %}
                       </dd>
@@ -290,50 +296,77 @@
                         End date (optional)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['update-s1-entitlement-details'] == 'yes' %}
+                        {% if data['dr-cancel-e109-entitlement'] == 'yes' %}
+                          {# Check if cancellation date is provided #}
+                          {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                            {% set day = data['entitlement-end-date-day'] %}
+                            {% set month = data['entitlement-end-date-month'] | int %}
+                            {% set year = data['entitlement-end-date-year'] %}
+                            
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                            
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                            
+                            {# Display the cancellation date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
+                          {% else %}
+                            {# Display fallback date if no cancellation date is entered #}
+                            13 January 2024
+                          {% endif %}
+                        {% elif data['update-s1-entitlement-details'] == 'yes' %}
+                          {# Check if update date is provided #}
                           {% if data['updated-s1-entitlement-end-date-day'] and data['updated-s1-entitlement-end-date-month'] and data['updated-s1-entitlement-end-date-year'] %}
                             {% set day = data['updated-s1-entitlement-end-date-day'] %}
                             {% set month = data['updated-s1-entitlement-end-date-month'] | int %}
                             {% set year = data['updated-s1-entitlement-end-date-year'] %}
-                
+                            
                             {# Define month names #}
                             {% set month_names = [
                                 "January", "February", "March", "April", "May", "June",
                                 "July", "August", "September", "October", "November", "December"
                             ] %}
-                
+                            
                             {# Get the month name #}
                             {% set month_name = month_names[month - 1] %}
-                
-                            {# Display the date in the format "day month year" #}
+                            
+                            {# Display the update date in the format "day month year" #}
                             {{ day | int }} {{ month_name }} {{ year }}
                           {% else %}
-                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                            {# Display fallback date if no update date is entered #}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
                           {% endif %}
                         {% else %}
+                          {# Default case when there is no cancellation or update #}
                           {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
                             {% set day = data['s1-entitlement-end-date-day'] %}
                             {% set month = data['s1-entitlement-end-date-month'] | int %}
                             {% set year = data['s1-entitlement-end-date-year'] %}
-                
+                            
                             {# Define month names #}
                             {% set month_names = [
                                 "January", "February", "March", "April", "May", "June",
                                 "July", "August", "September", "October", "November", "December"
                             ] %}
-                
+                            
                             {# Get the month name #}
                             {% set month_name = month_names[month - 1] %}
-                
-                            {# Display the date in the format "day month year" #}
+                            
+                            {# Display the entitlement end date in the format "day month year" #}
                             {{ day | int }} {{ month_name }} {{ year }}
                           {% else %}
-                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
                           {% endif %}
                         {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                        
+                        <a href="#">
+                          Change<span class="nhsuk-u-visually-hidden">entitlement end date</span>
+                        </a>
                       </dd>
                     </div>
                 </dl>
@@ -371,9 +404,15 @@
                       Entitlement status
                     </dt>
                     <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-cancel-s1-entitlement'] == 'yes' %}
+                      <strong class="nhsuk-tag nhsuk-tag--red">
+                        Cancelled
+                      </strong>
+                      {% else %}
                       <strong class="nhsuk-tag nhsuk-tag--green">
                         Registered
                       </strong>
+                      {% endif %}
                     </dd>
                     <dd class="nhsuk-summary-list__actions">
 
@@ -406,13 +445,13 @@
                         {% if data['updated-s1-entitlement-country-of-issue'] %}
                           {{ data['updated-s1-entitlement-country-of-issue'] }}
                         {% else %}
-                          France
+                          France (FR)
                         {% endif %}
                       {% else %}
                         {% if data['s1-entitlement-country-of-issue'] %}
                           {{ data['s1-entitlement-country-of-issue'] }}
                         {% else %}
-                          France
+                          France (FR)
                         {% endif %}
                       {% endif %}
                     </dd>
@@ -550,50 +589,77 @@
                       End date (optional)
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['update-s1-entitlement-details'] == 'yes' %}
+                      {% if data['dr-cancel-s1-entitlement'] == 'yes' %}
+                        {# Check if cancellation date is provided #}
+                        {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                          {% set day = data['entitlement-end-date-day'] %}
+                          {% set month = data['entitlement-end-date-month'] | int %}
+                          {% set year = data['entitlement-end-date-year'] %}
+                          
+                          {# Define month names #}
+                          {% set month_names = [
+                              "January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"
+                          ] %}
+                          
+                          {# Get the month name #}
+                          {% set month_name = month_names[month - 1] %}
+                          
+                          {# Display the cancellation date in the format "day month year" #}
+                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% else %}
+                          {# Display fallback date if no cancellation date is entered #}
+                          13 January 2024
+                        {% endif %}
+                      {% elif data['update-s1-entitlement-details'] == 'yes' %}
+                        {# Check if update date is provided #}
                         {% if data['updated-s1-entitlement-end-date-day'] and data['updated-s1-entitlement-end-date-month'] and data['updated-s1-entitlement-end-date-year'] %}
                           {% set day = data['updated-s1-entitlement-end-date-day'] %}
                           {% set month = data['updated-s1-entitlement-end-date-month'] | int %}
                           {% set year = data['updated-s1-entitlement-end-date-year'] %}
-              
+                          
                           {# Define month names #}
                           {% set month_names = [
                               "January", "February", "March", "April", "May", "June",
                               "July", "August", "September", "October", "November", "December"
                           ] %}
-              
+                          
                           {# Get the month name #}
                           {% set month_name = month_names[month - 1] %}
-              
-                          {# Display the date in the format "day month year" #}
+                          
+                          {# Display the update date in the format "day month year" #}
                           {{ day | int }} {{ month_name }} {{ year }}
                         {% else %}
-                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {# Display fallback date if no update date is entered #}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
                       {% else %}
+                        {# Default case when there is no cancellation or update #}
                         {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
                           {% set day = data['s1-entitlement-end-date-day'] %}
                           {% set month = data['s1-entitlement-end-date-month'] | int %}
                           {% set year = data['s1-entitlement-end-date-year'] %}
-              
+                          
                           {# Define month names #}
                           {% set month_names = [
                               "January", "February", "March", "April", "May", "June",
                               "July", "August", "September", "October", "November", "December"
                           ] %}
-              
+                          
                           {# Get the month name #}
                           {% set month_name = month_names[month - 1] %}
-              
-                          {# Display the date in the format "day month year" #}
+                          
+                          {# Display the entitlement end date in the format "day month year" #}
                           {{ day | int }} {{ month_name }} {{ year }}
                         {% else %}
-                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
                       {% endif %}
                     </dd>
                     <dd class="nhsuk-summary-list__actions">
-                      
+                      <a href="#">
+                        Change<span class="nhsuk-u-visually-hidden">entitlement end date</span>
+                      </a>
                     </dd>
                   </div>
               </dl>
@@ -656,7 +722,7 @@
                         22 Rue Violet<br>
                         Paris<br>
                         75015<br>
-                        France
+                        France (FR)
                       {% endif %}
                     </dd>
                   </div>                  
@@ -667,10 +733,10 @@
 
 
 
-            <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="main-dependants">
-              <!-- Main/Dependants tab content starts -->
+            <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="main-insurer">
+              <!-- Main insurer tab content starts -->
               
-              <h3 class="nhsuk-heading-l">Main<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+              <h3 class="nhsuk-heading-l">Main insurer<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
               {% if data['add-dependant'] == 'yes' or data['dr-add-main'] == 'yes'%}
                 <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
                   <thead role="rowgroup" class="nhsuk-table__head">
@@ -688,9 +754,6 @@
                         Date of birth
                       </th>
                       <th role="columnheader" class="" scope="col">
-                        Relationship
-                      </th>
-                      <th role="columnheader" class="" scope="col">
                         Action
                       </th>
                     </tr>
@@ -715,103 +778,24 @@
                         <span>04/01/1973</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Relationship</span>
-                        {% if data ['dr-main-relationship'] %}
-                            {{ data['dr-main-relationship'] }}
-                          {% else %}
-                            Husband
-                          {% endif %}
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Actions</span>
+                        <span class="nhsuk-table-responsive__heading">Action</span>
                         <a href="../../personal-details">View record</a>
-                        or<br>
-                        <a href="dr-change-relationship">Change relationship</a>
                       </td>
                     </tr>   
                   </tbody>
                 </table>
 
                 {% else %}
-                <p>No main insurers have been added to this entitlement.</p>
-                <a href="person-search?search-for=Main" class="nhsuk-button" role="button" data-module="nhsuk-button">
-                  Add a main insurer
+                <p>There is no main insurer linked to this entitlement.</p>
+                <a href="person-search?search-for=Main" class="nhsuk-button" role="button" onclick="setType('main-insurer')">
+                  Link to main insurer
                 </a>
 
-                <hr>
                 {% endif %}
 
-                
-
-
-                <h3 style="margin-top: 60px;" class="nhsuk-heading-l">Dependants<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
-              {% if data['dr-add-dependant'] == 'yes' %}
-                <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
-                  <thead role="rowgroup" class="nhsuk-table__head">
-                    <tr role="row">
-                      <th role="columnheader" class="" scope="col">
-                        Person record ID
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        First name
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Last name
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Date of birth
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Country
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                
-                  <tbody class="nhsuk-table__body">
-                    <tr role="row" class="nhsuk-table__row">
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Person record ID</span>
-                        <span>123456</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">First name</span>
-                        <span>John</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Last name</span>
-                        <span>Doe</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Date of birth</span>
-                        <span>04/01/1973</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Country</span>
-                        <span>France</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Actions</span>
-                        <a href="#">View</a>
-                      </td>
-                    </tr>   
-                  </tbody>
-                </table>
-
-                <a href="person-search?search-for=Dependant" class="nhsuk-button" style="margin-top: 40px;" role="button" onclick="setType('dependant')">
-                  Add another dependant
-                </a>
-                {% else %}
-                <p>No dependants have been added to this entitlement.</p>
-                <a href="person-search?search-for=Dependant" class="nhsuk-button" role="button" onclick="setType('dependant')">
-                  Add a dependant
-                </a>
-                {% endif %}
                      
               </div>
-            <!-- Main/Dependants tab content ends -->
+            <!-- Main insurer tab content ends -->
 
 
             

@@ -26,22 +26,10 @@ router.post([/add-note-dependant/], function(req, res) {
 
 // Link a Main/Dependant - On Dependant record //
 // How is the Dependant related to the Main Insurer?
-router.post([/dr-select-relationship/], function(req, res) {
+router.post([/main-person-summary/], function(req, res) {
 
   req.session.data['dr-add-main'] = 'yes'
-  
-  res.redirect('/version-32/s1/account/dependant/s1-entitlement-content/s1-entitlement-details');
-});
-
-// Change dependant relationship to Main Insurer
-router.post([/dr-change-relationship/], function(req, res) {
-
-  req.session.data['dr-add-main'] = 'yes'
-
-  req.session.data['dr-change-main-relationship'] = 'yes'
-
-  // Save the new relationship temporarily in session data
-  req.session.data['dr-new-relationship'] = req.body['dr-new-relationship'];
+  req.session.data['add-main'] = 'yes'
   
   res.redirect('/version-32/s1/account/dependant/s1-entitlement-content/s1-entitlement-details');
 });
@@ -54,12 +42,11 @@ router.post(/which-entitlement/, function(req, res){
   res.redirect('/version-32/s1/s072-registration/which-s1-entitlement');
 })
 
-// Select specific S1 entitlement
+// Select type of S1 entitlement
 router.post([/which-s1-entitlement/], function(req, res) {
   var s1EntitlementType = req.session.data['s1-entitlement-type'];
   
-  if (s1EntitlementType === 'E109' || s1EntitlementType === '+S072 (from an FAS1Q enquiry)') {
-    req.session.data['add-e109-entitlement'] = 'yes'
+  if (s1EntitlementType === 'E109') {
     res.redirect('/version-32/s1/s072-registration/entitlement-details');
   } else {
     res.redirect('/version-32/s1/s072-registration/entitlement-for');
@@ -69,7 +56,7 @@ router.post([/which-s1-entitlement/], function(req, res) {
 
 // Select who the entitlement is for
 router.post([/entitlement-for/], function(req, res){
-  res.redirect('entitlement-details');
+  res.redirect('/version-32/s1/s072-registration/entitlement-details');
 })
 
 // Select source
@@ -203,15 +190,14 @@ router.post([/which-entitlement/], function(req, res){
   res.redirect('/version-32/s1/account/dependant/s1-s072-registration/which-s1-entitlement');
 })
 
-// Select specific S1 entitlement
+// Select type of S1 entitlement
 router.post([/which-s1-entitlement/], function(req, res) {
   var s1EntitlementType = req.session.data['s1-entitlement-type'];
   
   if (s1EntitlementType === 'E109') {
-    req.session.data['add-e109-entitlement'] = 'yes'
-    res.redirect('/version-32/s1/account/dependant/s1-s072-registration/entitlement-details');
+    res.redirect('/version-32/s1/account/dependant/s072-registration/entitlement-details');
   } else {
-    res.redirect('/version-32/s1/account/dependant/s1-s072-registration/entitlement-for');
+    res.redirect('/version-32/s1/account/dependant/s072-registration/entitlement-for');
   }
 })
 
@@ -263,9 +249,9 @@ router.post([/add-new-institution-details/], function(req, res){
 
 // Check your answers
 router.post([/entitlement-details-cya/], function(req, res){
+  req.session.data['dr-add-e109-entitlement'] = 'yes'
   res.redirect('/version-32/s1/account/dependant/s1-s072-registration/confirmation-s1-s072-added');
 })
-
 
 
 
@@ -517,6 +503,194 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
   res.redirect('/version-32/s1/account/entitlement-content/s1-entitlement-details');
 
 })
+
+
+
+// S1 Cancellations //
+
+// Dependant's record
+// Select who is cancelling the entitlement
+router.post([/dr-cancellation-source/], function(req, res) {
+
+  // Save the source in session data
+  req.session.data['cancelled-by'] = req.body['cancelled-by'];
+  
+  res.redirect('/version-32/s1/account/dependant/cancellations/dr-entitlement-end-date');
+});
+
+router.post([/dr-entitlement-end-date/], function(req, res) {
+  // Extract day, month, and year from the request body
+  const day = req.body['entitlement-end-date-day'];
+  const month = req.body['entitlement-end-date-month'];
+  const year = req.body['entitlement-end-date-year'];
+
+  // Combine to form the full date (or use a default if not provided)
+  const entitlementEndDate = day && month && year ? `${day}/${month}/${year}` : '13/01/2025';
+
+  // Save the formatted date in session data
+  req.session.data['entitlement-end-date'] = entitlementEndDate;
+
+  // Redirect to the next step in the journey
+  res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-reason');
+});
+
+// Select the cancellation reason
+router.post([/dr-cancellation-reason/], (req, res) => {
+  const { 'cancellation-reason': cancellationReason } = req.body; // Destructure cancellation reason from the request body
+
+  // Save the cancellation reason in session data
+  req.session.data['cancellation-reason'] = cancellationReason;
+
+  // Redirection logic based on the cancellation reason
+  if (cancellationReason === 'The entitlement holder has died' || cancellationReason === 'The dependant’s main insurer has died') {
+    res.redirect('/version-32/s1/account/dependant/cancellations/dr-date-entitlement-holder-died');
+  } else if (cancellationReason === 'Other') {
+    res.redirect('/version-32/s1/account/dependant/cancellations/dr-other-cancellation-comments');
+  } else if (
+    cancellationReason === 'The entitlement holder is insured in another country because they have a pension there' ||
+    cancellationReason === 'The status of the entitlement holder has changed' ||
+    cancellationReason === 'The institution issuing the entitlement has changed' ||
+    cancellationReason === 'The dependant has applied for their own S1' 
+  ) {
+    res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
+  } else {
+    res.redirect('/version-32/s1/account/dependant/cancellations/dr-date-entitlement-ceased');
+  }
+});
+
+
+// Enter the date the entitlement holder or main insurer died
+router.post([/dr-date-entitlement-holder-died/], function(req, res) {
+
+  // Save the source in session data
+  req.session.data['date-entitlement-holder-died'] = req.body['date-entitlement-holder-died'];
+  
+  res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
+});
+
+// Enter the 'Other' cancellation reason (free text box)
+router.post([/dr-other-cancellation-comments/], function(req, res) {
+
+  // Retrieve the cancellation comments
+  const comments = req.body['cancellation-comments'];
+  // Store these in the session or database
+  req.session.data['cancellation-comments'] = comments;
+  // Set flag that a new document was uploaded
+  req.session.data['add-cancellation-reason-comments'] = 'yes'
+  
+  res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
+});
+
+// Enter the date the entitlement holder or main insurer died
+router.post([/dr-date-entitlement-ceased/], function(req, res) {
+
+  // Save the source in session data
+  req.session.data['date-entitlement-ceased'] = req.body['date-entitlement-ceased'];
+  
+  res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
+});
+
+// Check your answers
+router.post([/dr-cancellation-cya/], function(req, res){
+
+    // Mark the entitlement as cancelled
+    req.session.data['dr-cancel-e109-entitlement'] = 'yes';
+
+  res.redirect('/version-32/s1/account/dependant/entitlements-and-treatments');
+})
+
+
+// Main's record
+// Select who is cancelling the entitlement
+router.post([/cancellation-source/], function(req, res) {
+
+  // Save the source in session data
+  req.session.data['cancelled-by'] = req.body['cancelled-by'];
+  
+  res.redirect('/version-32/s1/account/cancellations/entitlement-end-date');
+});
+
+// Enter the end date of the entitlement
+router.post([/entitlement-end-date/], function(req, res) {
+  // Extract day, month, and year from the request body
+  const day = req.body['entitlement-end-date-day'];
+  const month = req.body['entitlement-end-date-month'];
+  const year = req.body['entitlement-end-date-year'];
+
+  // Combine to form the full date (or use a default if not provided)
+  const entitlementEndDate = day && month && year ? `${day}/${month}/${year}` : '13/01/2025';
+
+  // Save the formatted date in session data
+  req.session.data['entitlement-end-date'] = entitlementEndDate;
+
+  // Redirect to the next step in the journey
+  res.redirect('/version-31/s1/account/cancellations/cancellation-reason');
+});
+
+// Select the cancellation reason
+router.post([/cancellation-reason/], (req, res) => {
+  const { 'cancellation-reason': cancellationReason } = req.body; // Destructure cancellation reason from the request body
+
+  // Save the cancellation reason in session data
+  req.session.data['cancellation-reason'] = cancellationReason;
+
+  // Redirection logic based on the cancellation reason
+  if (cancellationReason === 'The entitlement holder has died') {
+    res.redirect('/version-32/s1/account/cancellations/date-entitlement-holder-died');
+  } else if (cancellationReason === 'Other') {
+    res.redirect('/version-32/s1/account/cancellations/other-cancellation-comments');
+  } else if (
+    cancellationReason === 'The entitlement holder is insured in another country because they have a pension there' ||
+    cancellationReason === 'The status of the entitlement holder has changed' ||
+    cancellationReason === 'The institution issuing the entitlement has changed' 
+  ) {
+    res.redirect('/version-32/s1/account/cancellations/cancellation-cya');
+  } else {
+    res.redirect('/version-32/s1/account/cancellations/date-entitlement-ceased');
+  }
+});
+
+
+// Enter the date the entitlement holder or main insurer died
+router.post([/date-entitlement-holder-died/], function(req, res) {
+
+  // Save the source in session data
+  req.session.data['date-entitlement-holder-died'] = req.body['date-entitlement-holder-died'];
+  
+  res.redirect('/version-32/s1/account/cancellations/cancellation-cya');
+});
+
+// Enter the 'Other' cancellation reason (free text box)
+router.post([/other-cancellation-comments/], function(req, res) {
+
+  // Retrieve the cancellation comments
+  const comments = req.body['cancellation-comments'];
+  // Store these in the session or database
+  req.session.data['cancellation-comments'] = comments;
+  // Set flag that a new document was uploaded
+  req.session.data['add-cancellation-reason-comments'] = 'yes'
+  
+  res.redirect('/version-32/s1/account/cancellations/cancellation-cya');
+});
+
+// Enter the date the entitlement holder or main insurer died
+router.post([/date-entitlement-ceased/], function(req, res) {
+
+  // Save the source in session data
+  req.session.data['date-entitlement-ceased'] = req.body['date-entitlement-ceased'];
+  
+  res.redirect('/version-32/s1/account/cancellations/cancellation-cya');
+});
+
+// Check your answers
+router.post([/cancellation-cya/], function(req, res){
+
+    // Mark the entitlement as cancelled
+    req.session.data['cancel-s1-entitlement'] = 'yes';
+
+  res.redirect('/version-32/s1/account/entitlements-and-treatments');
+})
+
 
 
 // Upload documents //

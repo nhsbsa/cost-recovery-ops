@@ -1,0 +1,260 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+S1/S072 cancellation check your answers - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                            S1/S072 entitlement cancellation
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Check your answers
+                    </h1>
+   
+                    <form action="dr-cancellation-cya" method="post">
+
+                      
+
+                        <dl class="nhsuk-summary-list">
+
+                            <div class="nhsuk-summary-list__row">
+                                <dt class="nhsuk-summary-list__key">Cancelled by</dt>
+                                <dd class="nhsuk-summary-list__value">
+                                  {% if data['cancelled-by'] %}
+                                    {{ data['cancelled-by'] }}
+                                  {% else %}
+                                    The Member State
+                                  {% endif %}
+                                </dd>
+    
+                                <dd class="nhsuk-summary-list__actions">
+                                  <a href="dr-cancellation-source"> Change<span class="nhsuk-u-visually-hidden">who is cancelling this entitlement</span> </a>
+                                </dd>
+                              </div>
+
+
+                            <div class="nhsuk-summary-list__row">
+                                <dt class="nhsuk-summary-list__key">End date of S1/S072 entitlement</dt>
+                                <dd class="nhsuk-summary-list__value">
+                                    {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                                          {% set day = data['entitlement-end-date-day'] %}
+                                          {% set month = data['entitlement-end-date-month'] | int %}
+                                          {% set year = data['entitlement-end-date-year'] %}
+                              
+                                          {# Define month names #}
+                                          {% set month_names = [
+                                              "January", "February", "March", "April", "May", "June",
+                                              "July", "August", "September", "October", "November", "December"
+                                          ] %}
+                              
+                                          {# Get the month name #}
+                                          {% set month_name = month_names[month - 1] %}
+                              
+                                          {# Display the date in the format "day month year" #}
+                                          {{ day | int }} {{ month_name }} {{ year }}
+                                      {% else %}
+                                          13 January 2025
+                                      {% endif %}
+                                </dd>
+                              
+                                <dd class="nhsuk-summary-list__actions">
+                                  <a href="dr-entitlement-end-date#entitlement-end-date-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
+                                </dd>
+                              </div>
+
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Cancellation reason</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['cancellation-reason'] %}
+                                {{ data['cancellation-reason'] }}
+                              {% else %}
+                                The status of the entitlement holder has changed
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="dr-cancellation-reason"> Change<span class="nhsuk-u-visually-hidden">the cancellation reason</span> </a>
+                            </dd>
+                          </div>
+
+                          {% if data['cancellation-reason'] == 'The entitlement holder is no longer insured by the Member State' 
+                              or data['cancellation-reason'] == 'The entitlement holder is no longer entitled to sickness benefit from the Member State' 
+                              or data['cancellation-reason'] == 'The entitlement holder no longer lives in the UK' 
+                              or data['cancellation-reason'] == 'The entitlement holder lives in another Member State' %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date entitlement ceased</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['date-entitlement-ceased-day'] and data['date-entitlement-ceased-month'] and data['date-entitlement-ceased-year'] %}
+                                  {% set day = data['date-entitlement-ceased-day'] %}
+                                  {% set month = data['date-entitlement-ceased-month'] | int %}
+                                  {% set year = data['date-entitlement-ceased-year'] %}
+                      
+                                  {# Define month names #}
+                                  {% set month_names = [
+                                      "January", "February", "March", "April", "May", "June",
+                                      "July", "August", "September", "October", "November", "December"
+                                  ] %}
+                      
+                                  {# Get the month name #}
+                                  {% set month_name = month_names[month - 1] %}
+                      
+                                  {# Display the date in the format "day month year" #}
+                                  {{ day | int }} {{ month_name }} {{ year }}
+                              {% else %}
+                                  13 January 2025
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="dr-date-entitlement-ceased#date-entitlement-ceased-day"> Change<span class="nhsuk-u-visually-hidden">the date the entitlement ceased</span> </a>
+                            </dd>
+                          </div>
+
+                          {% elif data['cancellation-reason'] == 'The entitlement holder has died' %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date entitlement holder died</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['date-entitlement-holder-died-day'] and data['date-entitlement-holder-died-month'] and data['date-entitlement-holder-died-year'] %}
+                                  {% set day = data['date-entitlement-holder-died-day'] %}
+                                  {% set month = data['date-entitlement-holder-died-month'] | int %}
+                                  {% set year = data['date-entitlement-holder-died-year'] %}
+                      
+                                  {# Define month names #}
+                                  {% set month_names = [
+                                      "January", "February", "March", "April", "May", "June",
+                                      "July", "August", "September", "October", "November", "December"
+                                  ] %}
+                      
+                                  {# Get the month name #}
+                                  {% set month_name = month_names[month - 1] %}
+                      
+                                  {# Display the date in the format "day month year" #}
+                                  {{ day | int }} {{ month_name }} {{ year }}
+                              {% else %}
+                                  13 January 2025
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="dr-date-entitlement-holder-died#date-entitlement-holder-died-day"> Change<span class="nhsuk-u-visually-hidden">the date the entitlement holder died</span> </a>
+                            </dd>
+                          </div>
+
+                          {% elif data['cancellation-reason'] == 'The dependant’s main insurer has died' %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date main insurer died</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['date-entitlement-holder-died-day'] and data['date-entitlement-holder-died-month'] and data['date-entitlement-holder-died-year'] %}
+                                  {% set day = data['date-entitlement-holder-died-day'] %}
+                                  {% set month = data['date-entitlement-holder-died-month'] | int %}
+                                  {% set year = data['date-entitlement-holder-died-year'] %}
+                      
+                                  {# Define month names #}
+                                  {% set month_names = [
+                                      "January", "February", "March", "April", "May", "June",
+                                      "July", "August", "September", "October", "November", "December"
+                                  ] %}
+                      
+                                  {# Get the month name #}
+                                  {% set month_name = month_names[month - 1] %}
+                      
+                                  {# Display the date in the format "day month year" #}
+                                  {{ day | int }} {{ month_name }} {{ year }}
+                              {% else %}
+                                  13 January 2025
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="dr-date-entitlement-holder-died#date-entitlement-holder-died-day"> Change<span class="nhsuk-u-visually-hidden">the date the main insurer died</span> </a>
+                            </dd>
+                          </div>
+
+
+                          {% elif data['cancellation-reason'] == 'Other' %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Comments</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['dr-cancellation-comments'] %}
+                                {{ data['dr-cancellation-comments'] }}
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="dr-other-cancellation-comments"> Change<span class="nhsuk-u-visually-hidden">comments</span> </a>
+                            </dd>
+                          </div>
+                          {% endif %}
+
+
+                          
+                          
+
+                            
+                          
+                              
+                          </dl>                          
+      
+                          <button class="nhsuk-button nhsuk-u-margin-top-3" data-module="nhsuk-button" type="submit">Save and continue</button>
+
+                        <p><a href="../entitlements-and-treatments">Cancel</a></p>
+
+                    </form>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Date Format -->
+<script>
+  function formatDate(day, month, year) {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthName = months[parseInt(month, 10) - 1]; // Convert month number to month name
+    return `${parseInt(day, 10)} ${monthName} ${parseInt(year, 10)}`; // Format as "DD Month YYYY"
+  }
+</script>
+{% endblock %}
+
