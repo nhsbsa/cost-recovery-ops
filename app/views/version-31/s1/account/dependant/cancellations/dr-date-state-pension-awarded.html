@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Enter the date the entitlement holder died - Manage overseas entitlements and treatments - NHSBSA
+Enter the entitlement end date - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -36,7 +36,7 @@ Enter the date the entitlement holder died - Manage overseas entitlements and tr
 
                     
                         
-                    <form action="dr-date-entitlement-holder-died" method="post">
+                    <form action="dr-date-state-pension-awarded" method="post">
 
                         <div class="nhsuk-form-group">
 
@@ -47,34 +47,30 @@ Enter the date the entitlement holder died - Manage overseas entitlements and tr
                                     <span class="nhsuk-u-visually-hidden"> - </span>
                                 </span>
                                 <h1 class="nhsuk-fieldset__heading">
-                                  {% if data['dr-cancellation-reason'] == 'The dependant’s main insurer has died' %}
-                                  Enter the date the main insurer died
-                                  {% else %}
-                                  Enter the date the entitlement holder died
-                                  {% endif %}
+                                  Enter the date the state pension was awarded (optional)
                                 </h1>
                               </legend>
                               <div class="nhsuk-hint" id="example-hint">
                                 For example, 28 8 2024
                               </div>
                           
-                                <div class="nhsuk-date-input" id="dr-date-entitlement-holder-died">
+                                <div class="nhsuk-date-input" id="dr-state-pension-awarded-date">
                                   <div class="nhsuk-date-input__item">
                                     <div class="nhsuk-form-group">
-                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-date-entitlement-holder-died-day">Day</label>
-                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-date-entitlement-holder-died-day" name="dr-date-entitlement-holder-died-day" type="number" pattern="[0-9]*" value="">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-state-pension-awarded-date-day">Day</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="state-pension-awarded-date-day" name="dr-state-pension-awarded-date-day" type="number" pattern="[0-9]*" value="">
                                     </div>
                                   </div>
                                   <div class="nhsuk-date-input__item">
                                     <div class="nhsuk-form-group">
-                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-date-entitlement-holder-died-month">Month</label>
-                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-date-entitlement-holder-died-month" name="dr-date-entitlement-holder-died-month" type="number" pattern="[0-9]*" value="">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-state-pension-awarded-date-month">Month</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="state-pension-awarded-date-month" name="dr-state-pension-awarded-date-month" type="number" pattern="[0-9]*" value="">
                                     </div>
                                   </div>
                                   <div class="nhsuk-date-input__item">
                                     <div class="nhsuk-form-group">
-                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-date-entitlement-holder-died-year">Year</label>
-                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dr-date-entitlement-holder-died-year" name="dr-date-entitlement-holder-died-year" type="number" pattern="[0-9]*" value="">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-state-pension-awarded-date-year">Year</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dr-state-pension-awarded-date-year" name="dr-state-pension-awarded-date-year" type="number" pattern="[0-9]*" value="">
                                     </div>
                                   </div>
                                 </div>
@@ -110,7 +106,7 @@ Enter the date the entitlement holder died - Manage overseas entitlements and tr
 
   document.addEventListener('DOMContentLoaded', () => {
     // Call the function for all the dates you are capturing
-    updateFormattedDate('dr-date-entitlement-holder-died');
+    updateFormattedDate('dr-state-pension-awarded-date');
   });
 </script>
 {% endblock %}

@@ -513,22 +513,22 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
 router.post([/dr-cancellation-source/], function(req, res) {
 
   // Save the source in session data
-  req.session.data['cancelled-by'] = req.body['cancelled-by'];
+  req.session.data['dr-cancelled-by'] = req.body['dr-cancelled-by'];
   
   res.redirect('/version-32/s1/account/dependant/cancellations/dr-entitlement-end-date');
 });
 
 router.post([/dr-entitlement-end-date/], function(req, res) {
   // Extract day, month, and year from the request body
-  const day = req.body['entitlement-end-date-day'];
-  const month = req.body['entitlement-end-date-month'];
-  const year = req.body['entitlement-end-date-year'];
+  const day = req.body['dr-entitlement-end-date-day'];
+  const month = req.body['dr-entitlement-end-date-month'];
+  const year = req.body['dr-entitlement-end-date-year'];
 
   // Combine to form the full date (or use a default if not provided)
-  const entitlementEndDate = day && month && year ? `${day}/${month}/${year}` : '13/01/2025';
+  const drEntitlementEndDate = day && month && year ? `${day}/${month}/${year}` : '13/01/2025';
 
   // Save the formatted date in session data
-  req.session.data['entitlement-end-date'] = entitlementEndDate;
+  req.session.data['dr-entitlement-end-date'] = drEntitlementEndDate;
 
   // Redirect to the next step in the journey
   res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-reason');
@@ -536,21 +536,21 @@ router.post([/dr-entitlement-end-date/], function(req, res) {
 
 // Select the cancellation reason
 router.post([/dr-cancellation-reason/], (req, res) => {
-  const { 'cancellation-reason': cancellationReason } = req.body; // Destructure cancellation reason from the request body
+  const { 'dr-cancellation-reason': drCancellationReason } = req.body; // Destructure cancellation reason from the request body
 
   // Save the cancellation reason in session data
-  req.session.data['cancellation-reason'] = cancellationReason;
+  req.session.data['dr-cancellation-reason'] = drCancellationReason;
 
   // Redirection logic based on the cancellation reason
-  if (cancellationReason === 'The entitlement holder has died' || cancellationReason === 'The dependant’s main insurer has died') {
+  if (drCancellationReason === 'The entitlement holder has died' || drCancellationReason === 'The dependant’s main insurer has died') {
     res.redirect('/version-32/s1/account/dependant/cancellations/dr-date-entitlement-holder-died');
-  } else if (cancellationReason === 'Other') {
+  } else if (drCancellationReason === 'Other') {
     res.redirect('/version-32/s1/account/dependant/cancellations/dr-other-cancellation-comments');
   } else if (
-    cancellationReason === 'The entitlement holder is insured in another country because they have a pension there' ||
-    cancellationReason === 'The status of the entitlement holder has changed' ||
-    cancellationReason === 'The institution issuing the entitlement has changed' ||
-    cancellationReason === 'The dependant has applied for their own S1' 
+    drCancellationReason === 'The entitlement holder is insured in another country because they have a pension there' ||
+    drCancellationReason === 'The status of the entitlement holder has changed' ||
+    drCancellationReason === 'The institution issuing the entitlement has changed' ||
+    drCancellationReason === 'The dependant has applied for their own S1' 
   ) {
     res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
   } else {
@@ -563,7 +563,7 @@ router.post([/dr-cancellation-reason/], (req, res) => {
 router.post([/dr-date-entitlement-holder-died/], function(req, res) {
 
   // Save the source in session data
-  req.session.data['date-entitlement-holder-died'] = req.body['date-entitlement-holder-died'];
+  req.session.data['dr-date-entitlement-holder-died'] = req.body['dr-date-entitlement-holder-died'];
   
   res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
 });
@@ -572,11 +572,11 @@ router.post([/dr-date-entitlement-holder-died/], function(req, res) {
 router.post([/dr-other-cancellation-comments/], function(req, res) {
 
   // Retrieve the cancellation comments
-  const comments = req.body['cancellation-comments'];
+  const comments = req.body['dr-cancellation-comments'];
   // Store these in the session or database
-  req.session.data['cancellation-comments'] = comments;
+  req.session.data['dr-cancellation-comments'] = comments;
   // Set flag that a new document was uploaded
-  req.session.data['add-cancellation-reason-comments'] = 'yes'
+  req.session.data['dr-add-cancellation-reason-comments'] = 'yes'
   
   res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
 });
@@ -585,7 +585,7 @@ router.post([/dr-other-cancellation-comments/], function(req, res) {
 router.post([/dr-date-entitlement-ceased/], function(req, res) {
 
   // Save the source in session data
-  req.session.data['date-entitlement-ceased'] = req.body['date-entitlement-ceased'];
+  req.session.data['dr-date-entitlement-ceased'] = req.body['dr-date-entitlement-ceased'];
   
   res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
 });

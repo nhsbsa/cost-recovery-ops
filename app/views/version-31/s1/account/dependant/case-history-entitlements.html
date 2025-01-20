@@ -124,109 +124,77 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Additional information</span>
                                       <p id="entitlement-history-s1-s072-entitlements-updated-by">
-                                        <b>Cancelled by:</b> {% if data['cancelled-by'] %}
-                                                                {{ data['cancelled-by'] }}
-                                                              {% else %}
-                                                                The Member State
-                                                              {% endif %}
-
-                                        <br><b>End date of S1/S072 entitlement:</b> {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                                                            {% set day = data['entitlement-end-date-day'] %}
-                                                                            {% set month = data['entitlement-end-date-month'] | int %}
-                                                                            {% set year = data['entitlement-end-date-year'] %}
-                                                                
-                                                                            {# Define month names #}
-                                                                            {% set month_names = [
-                                                                                "January", "February", "March", "April", "May", "June",
-                                                                                "July", "August", "September", "October", "November", "December"
-                                                                            ] %}
-                                                                
-                                                                            {# Get the month name #}
-                                                                            {% set month_name = month_names[month - 1] %}
-                                                                
-                                                                            {# Display the date in the format "day month year" #}
-                                                                            {{ day | int }} {{ month_name }} {{ year }}
-                                                                        {% else %}
-                                                                            13 January 2025
-                                                                        {% endif %}
-
-                                        <br><b>Cancellation reason:</b> {{ data['cancellation-reason'] }}
-                                       
-                                        <br>{% if data['cancellation-reason'] == 'The entitlement holder is no longer insured by the Member State' 
-                                          or data['cancellation-reason'] == 'The entitlement holder is no longer entitled to sickness benefit from the Member State' 
-                                          or data['cancellation-reason'] == 'The entitlement holder no longer lives in the UK' 
-                                          or data['cancellation-reason'] == 'The entitlement holder lives in another Member State' %}
-                                        
-                                          <b>Date entitlement ceased:</b> {% if data['date-entitlement-ceased-day'] and data['date-entitlement-ceased-month'] and data['date-entitlement-ceased-year'] %}
-                                                                        {% set day = data['date-entitlement-ceased-day'] %}
-                                                                        {% set month = data['date-entitlement-ceased-month'] | int %}
-                                                                        {% set year = data['date-entitlement-ceased-year'] %}
-                                                            
-                                                                        {# Define month names #}
-                                                                        {% set month_names = [
-                                                                            "January", "February", "March", "April", "May", "June",
-                                                                            "July", "August", "September", "October", "November", "December"
-                                                                        ] %}
-                                                            
-                                                                        {# Get the month name #}
-                                                                        {% set month_name = month_names[month - 1] %}
-                                                            
-                                                                        {# Display the date in the format "day month year" #}
-                                                                        {{ day | int }} {{ month_name }} {{ year }}
-                                                                    {% else %}
-                                                                        13 January 2024
-                                                                    {% endif %}
-
-                                        {% elif data['cancellation-reason'] == 'The entitlement holder has died' %}
-                                        <b>Date entitlement holder died:</b> {% if data['date-entitlement-holder-died-day'] and data['date-entitlement-holder-died-month'] and data['date-entitlement-holder-died-year'] %}
-                                                                            {% set day = data['date-entitlement-holder-died-day'] %}
-                                                                            {% set month = data['date-entitlement-holder-died-month'] | int %}
-                                                                            {% set year = data['date-entitlement-holder-died-year'] %}
-                                                                
-                                                                            {# Define month names #}
-                                                                            {% set month_names = [
-                                                                                "January", "February", "March", "April", "May", "June",
-                                                                                "July", "August", "September", "October", "November", "December"
-                                                                            ] %}
-                                                                
-                                                                            {# Get the month name #}
-                                                                            {% set month_name = month_names[month - 1] %}
-                                                                
-                                                                            {# Display the date in the format "day month year" #}
-                                                                            {{ day | int }} {{ month_name }} {{ year }}
-                                                                        {% else %}
-                                                                            13 January 2024
-                                                                        {% endif %}
-
-                                        {% elif data['cancellation-reason'] == 'The dependant’s main entitlement holder has died' %}
-                                        <b>Date entitlement holder died:</b> {% if data['date-entitlement-holder-died-day'] and data['date-entitlement-holder-died-month'] and data['date-entitlement-holder-died-year'] %}
-                                                                            {% set day = data['date-entitlement-holder-died-day'] %}
-                                                                            {% set month = data['date-entitlement-holder-died-month'] | int %}
-                                                                            {% set year = data['date-entitlement-holder-died-year'] %}
-                                                                
-                                                                            {# Define month names #}
-                                                                            {% set month_names = [
-                                                                                "January", "February", "March", "April", "May", "June",
-                                                                                "July", "August", "September", "October", "November", "December"
-                                                                            ] %}
-                                                                
-                                                                            {# Get the month name #}
-                                                                            {% set month_name = month_names[month - 1] %}
-                                                                
-                                                                            {# Display the date in the format "day month year" #}
-                                                                            {{ day | int }} {{ month_name }} {{ year }}
-                                                                        {% else %}
-                                                                            13 January 2024
-                                                                        {% endif %}
-
-                                        {% elif data['cancellation-reason'] == 'Other' %}
-                                          <b>Comments:</b> {% if data['other-cancellation-reason'] %}
-                                                      {{ data['other-cancellation-reason'] }}
-                                                    {% else %}
-                                                      The main insurer moved to the UK so the dependant is no longer entitled to their S1
-                                                    {% endif %}
+                                        <b>Cancelled by:</b><br> 
+                                        {% if data['dr-cancelled-by'] %}
+                                          {{ data['dr-cancelled-by'] }}
                                         {% else %}
-                                        The entitlement holder is no longer insured by the Member State
+                                          The Member State
+                                        {% endif %}
+
+                                        <br><br>
+
+                                        <b>End date of S1/S072 entitlement:</b><br>
+                                        {% if data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-entitlement-end-date-day'] %}
+                                            {% set month = data['dr-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-entitlement-end-date-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                        {% else %}
+                                            13 January 2025
+                                        {% endif %}
+
+                                        <br><br>
+                                        
+                                        <b>Cancellation reason:</b><br> 
+                                        {% if data['dr-cancellation-reason'] %}
+                                          {{ data['dr-cancellation-reason'] }}
+                                        {% else %}
+                                          The entitlement holder is no longer insured in the Member State
+                                        {% endif %}
+                                       
+                                        {% if data['dr-cancellation-reason'] == 'The entitlement holder is insured in another country because they have a pension there' %}
+                                        <br>
+                                        <b>Date state pension awarded:</b><br>
+                                          {% if data['dr-state-pension-awarded-date-day'] and data['dr-state-pension-awarded-date-month'] and data['dr-state-pension-awarded-date-year'] %}
+                                            {% set day = data['dr-state-pension-awarded-date-day'] %}
+                                            {% set month = data['dr-state-pension-awarded-date-month'] | int %}
+                                            {% set year = data['dr-state-pension-awarded-date-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                          {% else %}
+                                              14 January 2024
+                                          {% endif %}
+
+                                        {% elif data['dr-cancellation-reason'] == 'Other' %}
+                                        <br>
+                                        <b>Comments:</b><br>
+                                          {% if data['dr-other-cancellation-reason'] %}
+                                            {{ data['dr-other-cancellation-reason'] }}
+                                          {% else %}
+                                            The main insurer moved to the UK so the dependant is no longer entitled to their S1
+                                          {% endif %}
+
                                         {% endif %}
                                       </p>
                                     </td>
@@ -240,7 +208,7 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Linked main insurer</p>
+                                      <p>Linked the main insurer</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -249,7 +217,13 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Additional information</span>
                                       <p id="person-history-s1-s072-entitlements-updated-by">
-                                        None provided
+                                        <b>Main insurer:</b><br>
+                                        John Doe
+
+                                        <br><br>
+
+                                        <b>Entitlement details:</b><br>
+                                        S1/S072 - Valid: from 05/09/2024 - France (FR)
                                       </p>
                                     </td>
                                   </tr>
@@ -334,110 +308,77 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Additional information</span>
                                       <p id="entitlement-history-s1-s072-entitlements-updated-by">
-                                        <b>Cancelled by:</b> {% if data['cancelled-by'] %}
-                                                                {{ data['cancelled-by'] }}
-                                                              {% else %}
-                                                                The Member State
-                                                              {% endif %}
-
-
-                                        <br><b>End date of S1/S072 entitlement:</b> {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                                                            {% set day = data['entitlement-end-date-day'] %}
-                                                                            {% set month = data['entitlement-end-date-month'] | int %}
-                                                                            {% set year = data['entitlement-end-date-year'] %}
-                                                                
-                                                                            {# Define month names #}
-                                                                            {% set month_names = [
-                                                                                "January", "February", "March", "April", "May", "June",
-                                                                                "July", "August", "September", "October", "November", "December"
-                                                                            ] %}
-                                                                
-                                                                            {# Get the month name #}
-                                                                            {% set month_name = month_names[month - 1] %}
-                                                                
-                                                                            {# Display the date in the format "day month year" #}
-                                                                            {{ day | int }} {{ month_name }} {{ year }}
-                                                                        {% else %}
-                                                                            13 January 2025
-                                                                        {% endif %}
-
-                                        <br><b>Cancellation reason:</b> {{ data['cancellation-reason'] }}
-                                       
-                                        <br>{% if data['cancellation-reason'] == 'The entitlement holder is no longer insured by the Member State' 
-                                          or data['cancellation-reason'] == 'The entitlement holder is no longer entitled to sickness benefit from the Member State' 
-                                          or data['cancellation-reason'] == 'The entitlement holder no longer lives in the UK' 
-                                          or data['cancellation-reason'] == 'The entitlement holder lives in another Member State' %}
-                                        
-                                          <b>Date entitlement ceased:</b> {% if data['date-entitlement-ceased-day'] and data['date-entitlement-ceased-month'] and data['date-entitlement-ceased-year'] %}
-                                                                        {% set day = data['date-entitlement-ceased-day'] %}
-                                                                        {% set month = data['date-entitlement-ceased-month'] | int %}
-                                                                        {% set year = data['date-entitlement-ceased-year'] %}
-                                                            
-                                                                        {# Define month names #}
-                                                                        {% set month_names = [
-                                                                            "January", "February", "March", "April", "May", "June",
-                                                                            "July", "August", "September", "October", "November", "December"
-                                                                        ] %}
-                                                            
-                                                                        {# Get the month name #}
-                                                                        {% set month_name = month_names[month - 1] %}
-                                                            
-                                                                        {# Display the date in the format "day month year" #}
-                                                                        {{ day | int }} {{ month_name }} {{ year }}
-                                                                    {% else %}
-                                                                        13 January 2024
-                                                                    {% endif %}
-
-                                        {% elif data['cancellation-reason'] == 'The entitlement holder has died' %}
-                                        <b>Date entitlement holder died:</b> {% if data['date-entitlement-holder-died-day'] and data['date-entitlement-holder-died-month'] and data['date-entitlement-holder-died-year'] %}
-                                                                            {% set day = data['date-entitlement-holder-died-day'] %}
-                                                                            {% set month = data['date-entitlement-holder-died-month'] | int %}
-                                                                            {% set year = data['date-entitlement-holder-died-year'] %}
-                                                                
-                                                                            {# Define month names #}
-                                                                            {% set month_names = [
-                                                                                "January", "February", "March", "April", "May", "June",
-                                                                                "July", "August", "September", "October", "November", "December"
-                                                                            ] %}
-                                                                
-                                                                            {# Get the month name #}
-                                                                            {% set month_name = month_names[month - 1] %}
-                                                                
-                                                                            {# Display the date in the format "day month year" #}
-                                                                            {{ day | int }} {{ month_name }} {{ year }}
-                                                                        {% else %}
-                                                                            13 January 2024
-                                                                        {% endif %}
-
-                                        {% elif data['cancellation-reason'] == 'The dependant’s main entitlement holder has died' %}
-                                        <b>Date entitlement holder died:</b> {% if data['date-entitlement-holder-died-day'] and data['date-entitlement-holder-died-month'] and data['date-entitlement-holder-died-year'] %}
-                                                                            {% set day = data['date-entitlement-holder-died-day'] %}
-                                                                            {% set month = data['date-entitlement-holder-died-month'] | int %}
-                                                                            {% set year = data['date-entitlement-holder-died-year'] %}
-                                                                
-                                                                            {# Define month names #}
-                                                                            {% set month_names = [
-                                                                                "January", "February", "March", "April", "May", "June",
-                                                                                "July", "August", "September", "October", "November", "December"
-                                                                            ] %}
-                                                                
-                                                                            {# Get the month name #}
-                                                                            {% set month_name = month_names[month - 1] %}
-                                                                
-                                                                            {# Display the date in the format "day month year" #}
-                                                                            {{ day | int }} {{ month_name }} {{ year }}
-                                                                        {% else %}
-                                                                            13 January 2024
-                                                                        {% endif %}
-
-                                        {% elif data['cancellation-reason'] == 'Other' %}
-                                          <b>Comments:</b> {% if data['other-cancellation-reason'] %}
-                                                      {{ data['other-cancellation-reason'] }}
-                                                    {% else %}
-                                                      The main insurer moved to the UK so the dependant is no longer entitled to their S1
-                                                    {% endif %}
+                                        <b>Cancelled by:</b><br> 
+                                        {% if data['dr-cancelled-by'] %}
+                                          {{ data['dr-cancelled-by'] }}
                                         {% else %}
-                                        The entitlement holder is no longer insured by the Member State
+                                          The Member State
+                                        {% endif %}
+
+                                        <br><br>
+
+                                        <b>End date of S1/S072 entitlement:</b><br>
+                                        {% if data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-entitlement-end-date-day'] %}
+                                            {% set month = data['dr-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-entitlement-end-date-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                        {% else %}
+                                            13 January 2025
+                                        {% endif %}
+
+                                        <br><br>
+
+                                        <b>Cancellation reason:</b><br> 
+                                        {% if data['dr-cancellation-reason'] %}
+                                          {{ data['dr-cancellation-reason'] }}
+                                        {% else %}
+                                          The entitlement holder is no longer insured in the Member State
+                                        {% endif %}
+                                       
+                                        {% if data['dr-cancellation-reason'] == 'The entitlement holder is insured in another country because they have a pension there' %}
+                                        <br><br>
+                                        <b>Date state pension awarded:</b><br>
+                                          {% if data['dr-state-pension-awarded-date-day'] and data['dr-state-pension-awarded-date-month'] and data['dr-state-pension-awarded-date-year'] %}
+                                            {% set day = data['dr-state-pension-awarded-date-day'] %}
+                                            {% set month = data['dr-state-pension-awarded-date-month'] | int %}
+                                            {% set year = data['dr-state-pension-awarded-date-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                          {% else %}
+                                              14 January 2024
+                                          {% endif %}
+
+                                        {% elif data['dr-cancellation-reason'] == 'Other' %}
+                                        <br><br>
+                                          <b>Comments:</b><br>
+                                          {% if data['dr-other-cancellation-reason'] %}
+                                            {{ data['dr-other-cancellation-reason'] }}
+                                          {% else %}
+                                            The main insurer moved to the UK so the dependant is no longer entitled to their S1
+                                          {% endif %}
+
                                         {% endif %}
                                       </p>
                                     </td>
@@ -460,7 +401,13 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Additional information</span>
                                       <p id="person-history-s1-s072-entitlements-updated-by">
-                                        None provided
+                                        <b>Main insurer:</b><br>
+                                        John Doe
+
+                                        <br><br>
+
+                                        <b>Entitlement details:</b><br>
+                                        S1/S072 - Valid: from 05/09/2024 - France (FR)
                                       </p>
                                     </td>
                                   </tr>
