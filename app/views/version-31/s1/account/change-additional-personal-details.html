@@ -42,14 +42,6 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                       {% endif %}
                     </h1>
                     
-                    <div class="nhsuk-inset-text">
-                      <span class="nhsuk-u-visually-hidden">Information: </span>
-                    
-                      <p>Changes to these details will be made across all entitlements, claims, and resubmissions for this person.</p>
-
-                      <p>If you do not want to change details for all entitlements, claims, and resubmissions, select Go back.</p>
-                    </div>
-                    
                     <form action="change-additional-personal-details" method="post">
           
                       <div class="nhsuk-form-group">
@@ -298,8 +290,7 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                       </div>
                       <input class="nhsuk-input nhsuk-u-width-one-third" id="UK-national-insurance-number" name="UK-national-insurance-number" type="text" value="">
                     </div>
-
-
+                    
                     <div class="nhsuk-form-group">
                       <label class="nhsuk-label" for="email-address-label">
                         Email address
@@ -309,6 +300,16 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                       </div>
                       <input class="nhsuk-input nhsuk-input--width-20" id="email-address" name="email-address" type="text"  autocomplete="cc-csc" value="">
                     </div>
+
+                   <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="contact-number-label">
+                      Contact number
+                    </label>
+                    <div class="nhsuk-hint" id="contact-number-hint">
+                      Include the country code. For example, (+44) for United Kingdom.
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-10" id="contact-number" name="contact-number" type="text"  autocomplete="cc-csc" value="">
+                  </div>
 
                                             
                     <button class="nhsuk-button" style="margin-top: 25px;" type="submit">
@@ -329,12 +330,21 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 {% block pageScripts %}
-<!-- autocomplete js -->
+<!-- autocomplete js for Country of nationality -->
 <script type="text/javascript">
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue : '',
     autoselect : true,  
     selectElement : document.querySelector('#nationalityDrop')
+  })
+</script>
+
+<!-- autocomplete js for Contact number type -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#contact-number-type')
   })
 </script>
 
