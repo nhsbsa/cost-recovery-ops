@@ -1,0 +1,112 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Enter the date the entitlement holder died - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="date-entitlement-holder-died" method="post">
+
+                        <div class="nhsuk-form-group">
+
+                            <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                              <legend class="nhsuk-fieldset__legend nhsuk-label--xl">
+                                <span class="nhsuk-caption-l">
+                                    S1/S072 entitlement cancellation
+                                    <span class="nhsuk-u-visually-hidden"> - </span>
+                                </span>
+                                <h1 class="nhsuk-fieldset__heading">
+                                  Enter the date the entitlement holder died
+                                </h1>
+                              </legend>
+                              <div class="nhsuk-hint" id="example-hint">
+                                For example, 28 8 2024
+                              </div>
+                          
+                                <div class="nhsuk-date-input" id="date-entitlement-holder-died">
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-died-day">Day</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-died-day" name="date-entitlement-holder-died-day" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-died-month">Month</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-died-month" name="date-entitlement-holder-died-month" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-died-year">Year</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-entitlement-holder-died-year" name="date-entitlement-holder-died-year" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+                            
+                          
+
+                        <button class="nhsuk-button nhsuk-u-margin-top-3" data-module="nhsuk-button" type="submit">Continue</button>
+
+                    <p><a href="../entitlements-and-treatments">Cancel</a></p>
+
+                      </form>
+
+                    </div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Date formats -->
+<script>
+  function updateFormattedDate(idPrefix) {
+    const day = document.getElementById(`${idPrefix}-day`).value;
+    const month = document.getElementById(`${idPrefix}-month`).value;
+    const year = document.getElementById(`${idPrefix}-year`).value;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Call the function for all the dates you are capturing
+    updateFormattedDate('date-entitlement-holder-died');
+  });
+</script>
+{% endblock %}
