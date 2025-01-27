@@ -74,19 +74,19 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                         </summary>
                         <div class="nhsuk-details__text">
 
-                        <div class="nhsuk-form-group">
+                        <!--div class="nhsuk-form-group">
                           <label class="nhsuk-label" for="filter-notes"><b>Enter keywords</b></label>
                           <div class="nhsuk-hint" id="contact-hint">
                             For example, 'email' or 'response'.
                           </div>
 
                           <input class="nhsuk-input" id="example" name="filter-notes-by-keywords" type="text" value="">
-                        </div>
+                        </div-->
 
                         
                         <div class="nhsuk-form-group">
                           <label class="nhsuk-label" for="filter-notes-by-entitlement-type-label"><b>Entitlement type</b></label>
-                          <div class="nhsuk-hint" id="contact-hint">Select all that apply.</div>
+                          <div class="nhsuk-hint" id="contact-hint" style="margin-bottom: 30px;" >Select all that apply.</div>
 
                             <div style="display: flex; gap: 1rem;">
                             <!-- Left Column -->
@@ -98,30 +98,31 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                                 </label>
                               </div>
                     
-                              <div class="nhsuk-checkboxes__item">
+                              <!--div class="nhsuk-checkboxes__item">
                                 <input class="nhsuk-checkboxes__input" id="entitlement-type-e109" name="filter-notes-by-entitlement-type" type="checkbox" value="E109">
                                 <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-e109">
                                   E109
                                 </label>
-                              </div>
+                              </div-->
                       
-                              <div class="nhsuk-checkboxes__item">
+                              <!--div class="nhsuk-checkboxes__item">
                                 <input class="nhsuk-checkboxes__input" id="entitlement-type-e121" name="filter-notes-by-entitlement-type" type="checkbox" value="E121">
                                 <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-e121">
                                   E121
                                 </label>
-                              </div>
-                            </div>
-
-                            <!-- Right Column -->
-                            <div class="nhsuk-checkboxes">
+                              </div-->
+                            
+                            
                               <div class="nhsuk-checkboxes__item">
                                 <input class="nhsuk-checkboxes__input" id="entitlement-type-s2-e112" name="filter-notes-by-entitlement-type" type="checkbox" value="S2/E112">
                                 <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-s2-e112">
                                   S2/E112
                                 </label>
                               </div>
+                            </div>
 
+                            <!-- Right Column -->
+                            <div class="nhsuk-checkboxes">
                               <div class="nhsuk-checkboxes__item">
                                 <input class="nhsuk-checkboxes__input" id="entitlement-type-ehic" name="filter-notes-by-entitlement-type" type="checkbox" value="EHIC">
                                 <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-ehic">
@@ -175,12 +176,12 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                       <table role="table" class="nhsuk-table-responsive">
                         <thead role="rowgroup" class="nhsuk-table__head">
                           <tr role="row">
-                            <th role="columnheader" scope="col" style="width: 25%;">Date and time</th>
-                            <th role="columnheader" scope="col">Added by</th>
-                            <th role="columnheader" scope="col">Entitlement type</th>
+                            <th role="columnheader" scope="col" style="width: 20%;">Date and time</th>
+                            <th role="columnheader" scope="col" style="width: 20%;">Added by</th>
+                            <th role="columnheader" scope="col" style="width: 10%;">Entitlement type</th>
                             <!--th role="columnheader" scope="col" style="width: 10%;">Document type<br>(optional)</th-->
                             <th role="columnheader" scope="col" style="width: 50%;">Comments</th>
-                            <th role="columnheader" scope="col" style="width: 10%;">Actions</th>
+                            <!--th role="columnheader" scope="col" style="width: 10%;">Actions</th-->
                           </tr>
                         </thead>
                         <tbody class="nhsuk-table__body">
@@ -206,15 +207,18 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                             </td-->
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Comments</span>
+                              {% if data['entitlement-id'] %}
+                                <p><b>Entitlement ID: {{ data['entitlement-id'] }}</b></p>
+                              {% endif %}
                               {% if data['rina-ref-number'] %}
                                 <p><b>RINA reference number: {{ data['rina-ref-number'] }}</b></p>
                               {% endif %}
                               <p>{{ data['note'] if data['note'] else 'This is what the comments would look like.' }}</p>
                             </td>
-                            <td role="cell" class="nhsuk-table__cell">
+                            <!--td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Actions</span>
                               <a href="#">Remove</span></a>
-                            </td>
+                            </td-->
                           </tr>
                           {% endif %}
                       
@@ -247,10 +251,10 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                                 <p>None provided</p>
                               {% endif %}
                               </td>
-                              <td role="cell" class="nhsuk-table__cell">
+                              <!--td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Actions</span>
                                 <a href="#">Remove</span></a>
-                              </td>
+                              </td-->
                             </tr>
                             {% endif %}
                     
@@ -274,6 +278,11 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                                 <p>{{ data['document-type'] if data['document-type'] else 'Not provided' }}</p>
                               </td-->
                               <td role="cell" class="nhsuk-table__cell">
+                              {% if data['entitlement-id'] %}
+                                <p><b>Entitlement ID: {{ data['entitlement-id'] }}</b></p>
+                                {% else %}
+                                  <p><b>Entitlement ID: 1000000001</b></p>
+                              {% endif %}
                                 {% if data['rina-reference-number'] %}
                                   <p><b>RINA reference number: {{ data['rina-reference-number'] }}</b></p>
                                 {% else %}
@@ -286,10 +295,10 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                                 <p>None provided</p>
                               {% endif %}
                               </td>
-                              <td role="cell" class="nhsuk-table__cell">
+                              <!--td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Actions</span>
                                 <a href="#">Remove</span></a>
-                              </td>
+                              </td-->
                             </tr>
                             {% endif %}
                     

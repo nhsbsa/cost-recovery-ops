@@ -53,8 +53,8 @@ Add a note - Manage overseas entitlements and treatments - NHSBSA
                                     <datalist id="entitlements">
                                         <option value="" selected="selected"></option>
                                         <option id="s1/s072" value="S1/S072">S1/S072</option>
-                                        <option id="e109" value="E109">E109</option>
-                                        <option id="e121" value="E121">E121</option>
+                                        <!--option id="e109" value="E109">E109</option>
+                                        <option id="e121" value="E121">E121</option-->
                                         <option id="s2/e112" value="S2/E112">S2/E112</option>
                                         <option id="ehic" value="EHIC">EHIC</option>
                                         <option id="prc" value="PRC">PRC</option>
@@ -74,11 +74,21 @@ Add a note - Manage overseas entitlements and treatments - NHSBSA
                                   </div-->
 
                                   <div class="nhsuk-form-group">
+                                    <label class="nhsuk-label" for="entitlement-id-label">
+                                      Entitlement ID (optional)
+                                    </label>
+                                    <div class="nhsuk-hint" id="entitlement-id-input-hint">
+                                      This a X digit number. For example, XXXXXXXXXX.
+                                    </div>
+                                    <input class="nhsuk-input nhsuk-input--width-10" id="entitlement-id" name="entitlement-id" type="text">
+                                  </div>
+
+                                  <div class="nhsuk-form-group">
                                     <label class="nhsuk-label" for="rina-reference-number-label">
                                       RINA reference number (optional)
                                     </label>
                                     <div class="nhsuk-hint" id="rina-reference-number-input-hint">
-                                      This a x digit number. For example, 1234566.
+                                      This a 15 digit number. For example, 111110000011111.
                                     </div>
                                     <input class="nhsuk-input nhsuk-input--width-10" id="rina-ref-number" name="rina-ref-number" type="text">
                                   </div>
@@ -91,9 +101,9 @@ Add a note - Manage overseas entitlements and treatments - NHSBSA
                                         These will display in the Notes section.
                                       </div>
                                       
-                                      <textarea class="nhsuk-textarea" id="s1EntitlementNote" name="note" rows="8"></textarea>
-                                      <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">500 characters remaining</p>
-                                      <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 500 characters</p>
+                                      <textarea class="nhsuk-textarea" id="s1EntitlementNote" name="note" rows="15"></textarea>
+                                      <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">1000 characters remaining</p>
+                                      <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 1000 characters</p>
                                     </div>           
                                     
                                     <br>
@@ -123,7 +133,7 @@ Add a note - Manage overseas entitlements and treatments - NHSBSA
   const textarea = document.querySelector('#s1EntitlementNote');
   const countRemaining = document.getElementById('charactersRemaining');
   const staticMsg = document.querySelector('#char-count-screen-reader');
-  const maxCharacters = 500;
+  const maxCharacters = 1000;
   let timeoutId;
 
   function updateCharacterCount() {
@@ -158,7 +168,7 @@ Add a note - Manage overseas entitlements and treatments - NHSBSA
       } else {
         staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
       }
-    }, 500);
+    }, 1000);
   }
 
   textarea.addEventListener('input', () => {
