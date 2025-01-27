@@ -572,9 +572,9 @@ router.post([/dr-date-entitlement-holder-died/], function(req, res) {
 router.post([/dr-other-cancellation-comments/], function(req, res) {
 
   // Retrieve the cancellation comments
-  const comments = req.body['dr-cancellation-comments'];
+  const drComments = req.body['dr-cancellation-comments'];
   // Store these in the session or database
-  req.session.data['dr-cancellation-comments'] = comments;
+  req.session.data['dr-cancellation-comments'] = drComments;
   // Set flag that a new document was uploaded
   req.session.data['dr-add-cancellation-reason-comments'] = 'yes'
   
