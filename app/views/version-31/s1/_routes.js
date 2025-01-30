@@ -25,7 +25,7 @@ router.post([/add-note-dependant/], function(req, res) {
 });
 
 // Link a Main/Dependant - On Dependant record //
-// How is the Dependant related to the Main Insurer?
+// How is the Dependant related to the Main Insured person?
 router.post([/dr-select-relationship/], function(req, res) {
 
   req.session.data['dr-add-main'] = 'yes'
@@ -33,7 +33,7 @@ router.post([/dr-select-relationship/], function(req, res) {
   res.redirect('/version-31/s1/account/dependant/s1-entitlement-content/s1-entitlement-details');
 });
 
-// Change dependant relationship to Main Insurer
+// Change dependant relationship to Main Insured person
 router.post([/dr-change-relationship/], function(req, res) {
 
   req.session.data['dr-add-main'] = 'yes'

@@ -25,7 +25,7 @@ router.post([/add-note-dependant/], function(req, res) {
 });
 
 // Link a Main/Dependant - On Dependant record //
-// How is the Dependant related to the Main Insurer?
+// How is the Dependant related to the Main Insured person?
 router.post([/main-person-summary/], function(req, res) {
 
   req.session.data['dr-add-main'] = 'yes'
@@ -157,7 +157,7 @@ router.post([/person-search-results/], function(req, res){
   res.redirect('/version-32/s1/account/entitlement-content/s1-entitlement-details');
 })
 
-// How is the Dependant related to the Main Insurer?
+// How is the Dependant related to the Main Insured person?
 router.post([/select-relationship/], function(req, res) {
 
   req.session.data['add-dependant'] = 'yes'
@@ -165,7 +165,7 @@ router.post([/select-relationship/], function(req, res) {
   res.redirect('/version-32/s1/account/entitlement-content/s1-entitlement-details');
 });
 
-// Change dependant relationship to Main Insurer
+// Change dependant relationship to Main Insured person
 router.post([/change-relationship/], function(req, res) {
 
   req.session.data['add-dependant'] = 'yes'
@@ -542,7 +542,7 @@ router.post([/dr-cancellation-reason/], (req, res) => {
   req.session.data['dr-cancellation-reason'] = drCancellationReason;
 
   // Redirection logic based on the cancellation reason
-  if (drCancellationReason === 'The entitlement holder has died' || drCancellationReason === 'The dependant’s main insurer has died') {
+  if (drCancellationReason === 'The entitlement holder has died' || drCancellationReason === 'The dependant’s main insured has died') {
     res.redirect('/version-32/s1/account/dependant/cancellations/dr-date-entitlement-holder-died');
   } else if (drCancellationReason === 'Other') {
     res.redirect('/version-32/s1/account/dependant/cancellations/dr-other-cancellation-comments');
@@ -559,7 +559,7 @@ router.post([/dr-cancellation-reason/], (req, res) => {
 });
 
 
-// Enter the date the entitlement holder or main insurer died
+// Enter the date the entitlement holder or main insured died
 router.post([/dr-date-entitlement-holder-died/], function(req, res) {
 
   // Save the source in session data
@@ -581,7 +581,7 @@ router.post([/dr-other-cancellation-comments/], function(req, res) {
   res.redirect('/version-32/s1/account/dependant/cancellations/dr-cancellation-cya');
 });
 
-// Enter the date the entitlement holder or main insurer died
+// Enter the date the entitlement holder or main insured died
 router.post([/dr-date-entitlement-ceased/], function(req, res) {
 
   // Save the source in session data
@@ -651,7 +651,7 @@ router.post([/cancellation-reason/], (req, res) => {
 });
 
 
-// Enter the date the entitlement holder or main insurer died
+// Enter the date the entitlement holder or main insured died
 router.post([/date-entitlement-holder-died/], function(req, res) {
 
   // Save the source in session data
@@ -673,7 +673,7 @@ router.post([/other-cancellation-comments/], function(req, res) {
   res.redirect('/version-32/s1/account/cancellations/cancellation-cya');
 });
 
-// Enter the date the entitlement holder or main insurer died
+// Enter the date the entitlement holder or main insured died
 router.post([/date-entitlement-ceased/], function(req, res) {
 
   // Save the source in session data

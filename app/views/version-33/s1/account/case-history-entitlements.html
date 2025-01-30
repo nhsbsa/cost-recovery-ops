@@ -1,0 +1,703 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}View Case history - Entitlement history - Manage overseas entitlements and treatments - NHSBSA{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-by-person">Search (Person)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-results-none">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Case history (Entitlement history)</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+            
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Case history - entitlements</h1>
+            </div>
+          </div>
+           
+            <!--start secondary navigation-->
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="case-history-person">Person history</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="case-history-entitlements">Entitlement history</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="#">Treatment history</a>
+              </li>
+            </ul>
+          </nav>
+          <!--end secondary navigation-->
+
+
+            <hr class="gray-horizontal-line">
+            <br>
+            <br>
+            
+               <div class="nhsuk-grid-row">
+                  <div class="nhsuk-grid-column-full">
+
+                    <!-- Start of S1/S072 entitlements card -->
+                    {% if data['dr-add-e109-entitlement'] == 'yes' %}
+                    <div class="nhsuk-card">
+                      <div class="nhsuk-card__content">
+                        <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                          <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-e109-entitlements">Dependant E109 entitlements</h2>
+                        </div>
+
+                        <hr class="gray-horizontal-line">
+                        <br>
+                    
+                        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                          <details class="nhsuk-details">
+                            <summary aria-label="View dependant E109 entitlement history" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_e109_entitlements_Link">View dependant E109 entitlement history</span>
+                            </summary>
+                        
+                            <div class="nhsuk-details__text" style="margin-top: 30px;">
+                              <table class="nhsuk-table-responsive" id="entitlement-history-e109-entitlements-table" style="margin-bottom: 9px;">
+                                <thead class="nhsuk-table__head">
+                                  <tr>
+                                    <th scope="col">Date and time</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Updated by</th>
+                                    <th scope="col">Additional information</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="nhsuk-table__body">
+                                  <!-- Most recent update shown at the top of the table -->
+                                  {% if data ['dr-cancel-e109-entitlement'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateS1Cancelled"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Cancelled</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">
+                                        <b>Cancelled by:</b><br> 
+                                        {% if data['cancelled-by'] %}
+                                          {{ data['cancelled-by'] }}
+                                        {% else %}
+                                          The Member State
+                                        {% endif %}
+
+                                        <br><br>
+
+                                        <b>End date of S1/S072 entitlement:</b><br>
+                                        {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                                            {% set day = data['entitlement-end-date-day'] %}
+                                            {% set month = data['entitlement-end-date-month'] | int %}
+                                            {% set year = data['entitlement-end-date-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                        {% else %}
+                                            13 January 2025
+                                        {% endif %}
+
+                                        <br><br>
+                                        
+                                        <b>Cancellation reason:</b><br> 
+                                        {% if data['cancellation-reason'] %}
+                                          {{ data['cancellation-reason'] }}
+                                        {% else %}
+                                          The entitlement holder is no longer insured in the Member State
+                                        {% endif %}
+                                       
+                                        {% if data['cancellation-reason'] == 'The entitlement holder is insured in another country because they have a pension there' %}
+                                        <br>
+                                        <b>Date state pension awarded:</b><br>
+                                          {% if data['state-pension-awarded-date-day'] and data['state-pension-awarded-date-month'] and data['state-pension-awarded-date-year'] %}
+                                            {% set day = data['state-pension-awarded-date-day'] %}
+                                            {% set month = data['state-pension-awarded-date-month'] | int %}
+                                            {% set year = data['state-pension-awarded-date-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                          {% else %}
+                                              14 January 2024
+                                          {% endif %}
+
+                                        {% elif data['cancellation-reason'] == 'Other' %}
+                                        <br>
+                                        <b>Comments:</b><br>
+                                          {% if data['other-cancellation-reason'] %}
+                                            {{ data['other-cancellation-reason'] }}
+                                          {% else %}
+                                            The main insured moved to the UK so the dependant is no longer entitled to their S1
+                                          {% endif %}
+
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateE109MainLinked"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Linked main insured</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        <b>Dependant:</b><br>
+                                        Jane Doe
+
+                                        <br><br>
+
+                                        <b>Entitlement details:</b><br>
+                                        S1/S072 - Valid: from 05/09/2024 - France (FR)
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateE109"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Registered</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="person-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                      </div>
+
+                  <br>
+
+                  </div>
+                    </div>
+                  {% endif %}
+                  <!-- End of E109 entitlements card -->
+
+
+                    <!-- Start of S1/S072 entitlements card -->
+                    <div class="nhsuk-card">
+                      <div class="nhsuk-card__content">
+                        <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                          <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-s1-s072-entitlements">S1/S072 entitlements</h2>
+                        </div>
+
+                        <hr class="gray-horizontal-line">
+                        <br>
+                    
+                        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                          <details class="nhsuk-details">
+                            <summary aria-label="View S1/S072 entitlement history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_s1_s072_entitlements_Link">View S1/S072 entitlement history</span>
+                            </summary>
+                        
+                            <div class="nhsuk-details__text" style="margin-top: 30px;">
+                              <table class="nhsuk-table-responsive" id="entitlement-history-s1-s072-entitlements-table" style="margin-bottom: 9px;">
+                                <thead class="nhsuk-table__head">
+                                  <tr>
+                                    <th scope="col">Date and time</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Updated by</th>
+                                    <th scope="col">Additional information</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="nhsuk-table__body">
+                                  <!-- most recent update at top of table -->
+                                  {% if data ['cancel-s1-entitlement'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateS1Cancelled"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Cancelled</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">
+                                        <b>Cancelled by:</b><br> 
+                                        {% if data['cancelled-by'] %}
+                                          {{ data['cancelled-by'] }}
+                                        {% else %}
+                                          The Member State
+                                        {% endif %}
+
+                                        <br><br>
+
+                                        <b>End date of S1/S072 entitlement:</b><br>
+                                        {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                                            {% set day = data['entitlement-end-date-day'] %}
+                                            {% set month = data['entitlement-end-date-month'] | int %}
+                                            {% set year = data['entitlement-end-date-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                        {% else %}
+                                            13 January 2025
+                                        {% endif %}
+
+                                        <br><br>
+                                        
+                                        <b>Cancellation reason:</b><br> 
+                                        {% if data['cancellation-reason'] %}
+                                          {{ data['cancellation-reason'] }}
+                                        {% else %}
+                                          The entitlement holder is no longer insured in the Member State
+                                        {% endif %}
+                                       
+                                        {% if data['cancellation-reason'] == 'The entitlement holder is insured in another country because they have a pension there' %}
+                                        <br>
+                                        <b>Date state pension awarded:</b><br>
+                                          {% if data['state-pension-awarded-date-day'] and data['state-pension-awarded-date-month'] and data['state-pension-awarded-date-year'] %}
+                                            {% set day = data['state-pension-awarded-date-day'] %}
+                                            {% set month = data['state-pension-awarded-date-month'] | int %}
+                                            {% set year = data['state-pension-awarded-date-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                          {% else %}
+                                              14 January 2024
+                                          {% endif %}
+
+                                        {% elif data['cancellation-reason'] == 'Other' %}
+                                        <br>
+                                        <b>Comments:</b><br>
+                                          {% if data['other-cancellation-reason'] %}
+                                            {{ data['other-cancellation-reason'] }}
+                                          {% else %}
+                                            The d moved to the UK so the dependant is no longer entitled to their S1
+                                          {% endif %}
+
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% if data['add-dependant'] == 'yes' or data['dr-add-main'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateS1Dependant"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Linked as main insured</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">
+                                        <b>Dependant:</b><br>
+                                        Jane Doe
+
+                                        <br><br>
+
+                                        <b>Entitlement ID:</b><br>
+                                        100002
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p>26 November 2024 at 10:09 am</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Registered</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p>28 March 2020 at 09:41 am</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Cancelled</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">
+                                        <b>Cancelled by:</b><br> 
+                                        The Member State
+
+                                        <br><br>
+
+                                        <b>End date of S1/S072 entitlement:</b><br>
+                                        17 March 2020
+
+                                        <br><br>
+                                        
+                                        <b>Cancellation reason:</b><br>
+                                        The entitlement holder is no longer insured by the Member State
+                                        
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p>12 January 2020 at 13:34 pm</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Registered</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">
+                                        None provided
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                      </div>
+
+                  <br>
+
+                  </div>
+                    </div>
+                  <!-- End of S1/S072 entitlements card -->
+
+
+                  
+                   <!-- Start of EHIC entitlements card -->
+                   <div class="nhsuk-card">
+                    <div class="nhsuk-card__content">
+                      <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                        <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-EHIC-entitlements">EHIC entitlements</h2>
+                      </div>
+
+                      <hr class="gray-horizontal-line">
+                      <br>
+                  
+                      <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                        <details class="nhsuk-details">
+                          <summary aria-label="View EHIC entitlement history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                            <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_EHIC_entitlements_Link">View EHIC entitlement history</span>
+                          </summary>
+                      
+                          <div class="nhsuk-details__text" style="margin-top: 30px;">
+                            
+                            <table class="nhsuk-table-responsive" id="entitlement-history-EHIC-entitlements-table" style="margin-bottom: 9px;">
+                              <thead class="nhsuk-table__head">
+                                <tr>
+                                  <th scope="col">Date and time</th>
+                                  <th scope="col">Action</th>
+                                  <th scope="col">Updated by</th>
+                                  <th scope="col">Additional information</th>
+                                </tr>
+                              </thead>
+                              <tbody class="nhsuk-table__body">
+                                
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p> 1 January 2020<br>
+                                    at 17:35 pm</span></p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Added</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p id="person-history-ehic-entitlements-updated-by">joebloggs@nhs.net</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                    <p id="person-history-ehic-entitlements-updated-by">
+                                      None provided
+                                    </p>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                    </div>
+
+                <br>
+
+                </div>
+                  </div>
+
+                <!-- End of EHIC entitlements card -->
+
+
+
+
+                <!-- Start of PRC entitlements card -->
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                      <h2 class="nhsuk-card__heading nhsuk-heading-m" id="entitlements-history-PRC-entitlements">PRC entitlements</h2>
+                    </div>
+
+                    <hr class="gray-horizontal-line">
+                    <br>
+                
+                    <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                      <details class="nhsuk-details">
+                        <summary aria-label="View PRC entitlement history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                          <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_PRC_entitlements_Link">View PRC entitlement history</span>
+                        </summary>
+                    
+                        <div class="nhsuk-details__text" style="margin-top: 30px;">
+                          
+                          <table class="nhsuk-table-responsive" id="entitlement-history-prc-entitlements-table" style="margin-bottom: 9px;">
+                            <thead class="nhsuk-table__head">
+                              <tr>
+                                <th scope="col">Date and time</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Updated by</th>
+                                <th scope="col">Additional information</th>
+                              </tr>
+                            </thead>
+                            <tbody class="nhsuk-table__body">
+                              
+                              <tr class="nhsuk-table__row">
+                                <td class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                  <p> 1 January 2020<br>
+                                  at 10:13 am</span></p>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Action</span>
+                                  <p>Added</p>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                  <p id="person-history-prc-entitlements-updated-by">joebloggs@nhs.net</p>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                  <p id="person-history-prc-entitlements-updated-by">
+                                    None provided
+                                  </p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                  </div>
+
+              <br>
+
+              </div>
+                </div>
+              <!-- End of PRC entitlements card -->
+
+
+
+                
+                  
+
+
+
+              
+                  
+          </div>
+        </div>
+
+               </div>
+
+
+          </div>
+        </div>
+
+          
+      
+      
+
+    <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a href="personal-details">Personal details</a></li>
+          <li><a href="entitlements-and-treatments">Entitlements and treatments</a></li>
+          <li><a class="active" href="case-history-person">Case history</a></li>
+          <!--li><a href="documents">Documents</a></li-->
+          <li><a href="notes">Notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
+
+  </div>
+</div>
+<!-- End of main content -->
+{% endblock %}
+      
+{% block pageScripts %}
+<script>
+// Function to set the current date and time
+function setCurrentDateTime(elementId) {
+    var dateElement = document.getElementById(elementId);
+  
+    if (dateElement) {
+      var currentDate = new Date();
+  
+      var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+      var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+  
+      var timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+      var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+  
+      var formattedDateTime = formattedDate + ' at ' + formattedTime;
+  
+      dateElement.textContent = formattedDateTime;
+    }
+  }
+
+  // Set the date for each item
+  document.addEventListener("DOMContentLoaded", function () {
+    setCurrentDateTime("currentDateS1Cancelled");  // Update to S1/S072 entitlements for cancelling entitlement
+    setCurrentDateTime("currentDateE109MainLinked");  // Update to E109 entitlements for adding a Main insured person
+    setCurrentDateTime("currentDateE109");      // For Dependant E109 entitlements
+    setCurrentDateTime("currentDateS1Dependant");  // Update to S1/S072 entitlements for adding a dependant
+    setCurrentDateTime("currentDateS1");      // For S1/S072 entitlements
+    setCurrentDateTime("currentDateEHIC");      // For EHIC entitlements
+    setCurrentDateTime("currentDatePRC");  // For PRC entitlements
+
+  });
+</script>
+{% endblock %}

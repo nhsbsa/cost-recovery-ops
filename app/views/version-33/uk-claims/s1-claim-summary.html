@@ -1,0 +1,732 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - Claim summary
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">View Claim ID (Claim summary)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">   
+              <div class="nhsuk-grid-column-one-half">
+                  <h1 class="nhsuk-heading-l">Claim ID 123456 - Claim summary</h1>
+              </div>
+            </div>
+
+            <!--start secondary navigation-->
+
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-forms">Forms</a>
+                <span class="nhsuk-u-visually-hidden">Search for a form</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                <span class="nhsuk-u-visually-hidden">View the age groups for claim 123456</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-summary">Claim summary</a>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 123456</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-history">Claim history</a>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 123456</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+
+          {% if data ['entitlement-article-type'] == 'S1/S072 - Article 65' %}
+          <div class="nhsuk-grid-row">
+            <!-- Left panel begins -->
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  <dl class="nhsuk-summary-list">
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Claim month
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        October 2025
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Article type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        S1/S072 - Article 65
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        France (FR)
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date claim recorded
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        13/10/2023
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Recorded by
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        joebloggs@nhsbsa.nhs.uk
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date by which contestation must be submitted by the member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        13/04/2025
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total number of forms
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        11
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total months claimed
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        56
+                      </dd>
+                    </div>
+                    <br>
+
+
+                    <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total number of forms
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        11
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total months claimed
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        56
+                      </dd>
+                    </div>
+
+                  </dl>
+
+                </div>
+              </div>
+            </div>
+            <!-- Left panel ends -->
+
+
+            <!-- Right panel begins -->
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+
+                  <fieldset class="nhsuk-fieldset">
+                    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--m">
+                      <h2 class="nhsuk-heading-s">
+                        Enter details of the claim
+                      </h2>
+                    </legend>
+
+                    <div class="nhsuk-inset-text" style="margin-top: 10px;" >
+                      <span class="nhsuk-u-visually-hidden">Information: </span>
+                      <p>Dates can be left empty, but they must be input to complete the claim.</p>
+                    </div>
+
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="call-no">
+                          What date was the claim sent to the member state? (Optional)
+                        </label>
+                        <div class="nhsuk-hint">
+                          For example, 31 3 2022
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-claim-sent">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-day">
+                                Day
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-sent-day" name="date-claim-sent-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-month">
+                                Month
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-sent-month" name="date-claim-sent-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-year">
+                                Year
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-sent-year" name="date-claim-sent-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="nhsuk-form-group" style="margin-top: 30px;">
+                        <label class="nhsuk-label" for="claim-sent-by-label">
+                          Sender's name (Optional)
+                        </label>
+                        <div class="nhsuk-hint">
+                          The name of the person sending the claim
+                        </div>
+                        <input class="nhsuk-input nhsuk-input--width-20" id="claim-sent-by" name="claim-sent-by" type="text">
+                      </div>
+
+                      <div class="nhsuk-form-group" style="margin-top: 30px;">
+                        <label class="nhsuk-label" for="call-no">
+                          What date were the claim documents received by the member state (confirmed by their acknowledgement letter)? (Optional)
+                        </label>
+                        <div class="nhsuk-hint">
+                          For example, 31 3 2022
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-claim-documents-received-by-ms">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-day">
+                                Day
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-received-by-ms-day" name="date-claim-documents-received-by-ms-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-month">
+                                Month
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-received-by-ms-month" name="date-claim-documents-received-by-ms-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-year">
+                                Year
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-documents-received-by-ms-year" name="date-claim-documents-received-by-ms-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="nhsuk-form-group" style="margin-top: 30px;">
+                        <label class="nhsuk-label" for="date-s100-global-note-uploaded-label">
+                          What date was the S100 Global note uploaded to the DH eXchange? (Optional)
+                        </label>
+                        <div class="nhsuk-hint">
+                          For example, 31 3 2022
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-s100-global-note-uploaded">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-day">
+                                Day
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-s100-global-note-uploaded-day" name="date-s100-global-note-uploaded-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-month">
+                                Month
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-s100-global-note-uploaded-month" name="date-s100-global-note-uploaded-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-year">
+                                Year
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-s100-global-note-uploaded-year" name="date-s100-global-note-uploaded-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="nhsuk-form-group" style="margin-top: 30px;">
+                        <label class="nhsuk-label" for="s100-uploaded-by">
+                          Who uploaded the S080 Global note to the DH eXchange? (Optional)
+                        </label>
+                        <!-- <div class="nhsuk-hint">
+                        The name of the person who uploaded on DH eXchange
+                      </div> -->
+                        <input class="nhsuk-input nhsuk-input--width-20" id="s100-uploaded-by" name="s100-uploaded-by" type="text">
+                      </div>
+
+
+                      <label class="nhsuk-label" style="margin-top: 30px;">
+                        How was the claim sent to the member state? (Optional)
+                      </label>
+
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="claim-sent-by-post" name="claim-sent-by" type="radio" value="Post">
+                        <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-post">
+                          Post
+                        </label>
+                      </div>
+
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="claim-sent-by-rina" name="claim-sent-by" type="radio" value="RINA">
+                        <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-rina">
+                          RINA
+                        </label>
+                      </div>
+
+                      <div class="nhsuk-form-group" style="margin-top: 30px;">
+                        <label class="nhsuk-label" for="completion-date">
+                          RINA reference number (Optional)
+                        </label>
+
+                        <input class="nhsuk-input nhsuk-input--width-20" id="rina-claim-rina-ref-no" name="rina-claim-rina-ref-no" type="text">
+                      </div>
+
+                  </fieldset>
+
+                  <div class="action-buttons">
+                    <a class="nhsuk-button nhsuk-button--primary" href="#" style="margin: 10px 0 15px 0">Save claim summary</a>
+                    <!-- <button class="nhsuk-button nhsuk-button--secondary" type="submit" id="editButton" name="action"
+                    value="editClaimSummary">Edit claim summary</button> -->
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        <!-- End of content for Article 65 -->
+
+        {% else %}
+        <!-- Start of content for Article 63 -->
+        <div class="nhsuk-grid-row">
+          <!-- Left panel begins -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+                <dl class="nhsuk-summary-list">
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Claim month
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      October 2025
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Article type
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      S1/S072 - Article 63
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Member state
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      France (FR)
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Date claim recorded
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      13/10/2023
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Recorded by
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      joebloggs@nhsbsa.nhs.uk
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Date by which contestation must be submitted by the member state
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      13/04/2025
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total number of forms
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      6
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total months claimed
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      27
+                    </dd>
+                  </div>
+                  <br>
+
+
+                  <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total number of forms
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      6
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total months claimed
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      27
+                    </dd>
+                  </div>
+
+                </dl>
+
+              </div>
+            </div>
+          </div>
+          <!-- Left panel ends -->
+
+
+          <!-- Right panel begins -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+
+                <fieldset class="nhsuk-fieldset">
+                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--m">
+                    <h2 class="nhsuk-heading-s">
+                      Enter details of the claim
+                    </h2>
+                  </legend>
+
+                  <div class="nhsuk-inset-text" style="margin-top: 10px;" >
+                    <span class="nhsuk-u-visually-hidden">Information: </span>
+                    <p>Dates can be left empty, but they must be input to complete the claim.</p>
+                  </div>
+
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="call-no">
+                        What date was the claim sent to the member state? (Optional)
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, 31 3 2022
+                      </div>
+
+                      <div class="nhsuk-date-input" id="date-claim-sent">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-sent-day" name="date-claim-sent-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-sent-month" name="date-claim-sent-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-sent-year" name="date-claim-sent-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="claim-sent-by-label">
+                        Sender's name (Optional)
+                      </label>
+                      <div class="nhsuk-hint">
+                        The name of the person sending the claim
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-20" id="claim-sent-by" name="claim-sent-by" type="text">
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="call-no">
+                        What date were the claim documents received by the member state (confirmed by their acknowledgement letter)? (Optional)
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, 31 3 2022
+                      </div>
+
+                      <div class="nhsuk-date-input" id="date-claim-documents-received-by-ms">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-received-by-ms-day" name="date-claim-documents-received-by-ms-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-received-by-ms-month" name="date-claim-documents-received-by-ms-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-documents-received-by-ms-year" name="date-claim-documents-received-by-ms-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="date-s100-global-note-uploaded-label">
+                        What date was the S100 Global note uploaded to the DH eXchange? (Optional)
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, 31 3 2022
+                      </div>
+
+                      <div class="nhsuk-date-input" id="date-s100-global-note-uploaded">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-s100-global-note-uploaded-day" name="date-s100-global-note-uploaded-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-s100-global-note-uploaded-month" name="date-s100-global-note-uploaded-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-s100-global-note-uploaded-year" name="date-s100-global-note-uploaded-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="s100-uploaded-by">
+                        Who uploaded the S080 Global note to the DH eXchange? (Optional)
+                      </label>
+                      <!-- <div class="nhsuk-hint">
+                      The name of the person who uploaded on DH eXchange
+                    </div> -->
+                      <input class="nhsuk-input nhsuk-input--width-20" id="s100-uploaded-by" name="s100-uploaded-by" type="text">
+                    </div>
+
+
+                    <label class="nhsuk-label" style="margin-top: 30px;">
+                      How was the claim sent to the member state? (Optional)
+                    </label>
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="claim-sent-by-post" name="claim-sent-by" type="radio" value="Post">
+                      <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-post">
+                        Post
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="claim-sent-by-rina" name="claim-sent-by" type="radio" value="RINA">
+                      <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-rina">
+                        RINA
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="completion-date">
+                        RINA reference number (Optional)
+                      </label>
+
+                      <input class="nhsuk-input nhsuk-input--width-20" id="rina-claim-rina-ref-no" name="rina-claim-rina-ref-no" type="text">
+                    </div>
+
+                </fieldset>
+
+                <div class="action-buttons">
+                  <a class="nhsuk-button nhsuk-button--primary" href="#" style="margin: 10px 0 15px 0">Save claim summary</a>
+                  <!-- <button class="nhsuk-button nhsuk-button--secondary" type="submit" id="editButton" name="action"
+                  value="editClaimSummary">Edit claim summary</button> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        {% endif %}
+        <!-- End of content for Article 63 -->
+              
+           </div>
+          </div>
+
+<!--Side nav -->
+    <!--div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <ul>
+          <div id="options" class="options">
+            <h3 class="nhsuk-heading-xs">Browse</h3>
+              <li>
+                <a href="../s1/search/search-by-person">Search</a>
+              </li>
+
+            <h3 class="nhsuk-heading-xs">Actions</h3>
+              <li>
+                <a href="account-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">2</span></a>
+                <a href="review-forms">Review forms<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                <a href="uk-claims-search" class="active">UK claims</a>
+                <a href="resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="non-eu-reciprocal-healthcare-quota">Non-EU Reciprocal Healthcare (Quota)</a>
+              </li>
+          </div>
+        </ul>
+      </div>
+    </div-->
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#entitlement-country-drop')
+  })
+</script>
+{% endblock %}
