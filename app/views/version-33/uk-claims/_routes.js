@@ -20,10 +20,13 @@ router.post([/create-new-uk-claim/], function(req, res) {
   req.session.data['entitlement-article-type'] = entitlementArticleType;
   req.session.data['claim-sent-by'] = claimSentBy;
 
-  res.redirect('/version-33/uk-claims/s1-claim-forms');
+  res.redirect('/version-33/uk-claims/uk-claims-loading-new-claim');
 })
 
-
+// Select type of S1 entitlement
+router.post([/uk-claims-loading-new-claim/], function(req, res) {
+  res.redirect('/version-33/uk-claims/s1-claim-forms');
+})
 
 
 module.exports = router;
