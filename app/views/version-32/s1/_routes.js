@@ -24,7 +24,16 @@ router.post([/add-note-dependant/], function(req, res) {
   res.redirect('/version-32/s1/account/dependant/notes');
 });
 
-// Link a Main/Dependant - On Dependant record //
+// Link a Main - from the Dependant's record //
+// Check you're linking to the correct Main insurer and S1/S072 entitlement
+router.post([/dr-link-to-entitlement-cya/], function(req, res){
+
+  req.session.data['dr-add-main'] = 'yes'
+  req.session.data['add-dependant'] = 'yes'
+
+  res.redirect('/version-32/s1/account/dependant/s1-entitlement-content/s1-entitlement-details');
+})
+
 // How is the Dependant related to the Main Insured person?
 router.post([/main-person-summary/], function(req, res) {
 
@@ -146,7 +155,7 @@ router.post([/add-note/], function(req, res) {
 });
 
 
-// Link a Main/Dependant
+// Link a Dependant - from the Main insured person's record
 // Search for person
 router.post([/person-search/], function(req, res){
   res.redirect('/version-32/s1/account/entitlement-content/person-search-results');
@@ -157,27 +166,14 @@ router.post([/person-search-results/], function(req, res){
   res.redirect('/version-32/s1/account/entitlement-content/s1-entitlement-details');
 })
 
-// How is the Dependant related to the Main Insured person?
-router.post([/select-relationship/], function(req, res) {
+// Check you're linking to the correct dependant and S1/S072 entitlement
+router.post([/link-to-entitlement-cya/], function(req, res){
 
   req.session.data['add-dependant'] = 'yes'
-  
+  req.session.data['dr-add-main'] = 'yes'
+
   res.redirect('/version-32/s1/account/entitlement-content/s1-entitlement-details');
-});
-
-// Change dependant relationship to Main Insured person
-router.post([/change-relationship/], function(req, res) {
-
-  req.session.data['add-dependant'] = 'yes'
-
-  req.session.data['change-dependant-relationship'] = 'yes'
-
-  // Save the new relationship temporarily in session data
-  req.session.data['new-relationship'] = req.body['new-relationship'];
-  
-  res.redirect('/version-32/s1/account/entitlement-content/s1-entitlement-details');
-});
-
+})
 
 
 

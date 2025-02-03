@@ -24,7 +24,16 @@ router.post([/add-note-dependant/], function(req, res) {
   res.redirect('/version-33/s1/account/dependant/notes');
 });
 
-// Link a Main/Dependant - On Dependant record //
+// Link a Main - from the Dependant's record //
+// Check you're linking to the correct Main insurer and S1/S072 entitlement
+router.post([/dr-link-to-entitlement-cya/], function(req, res){
+
+  req.session.data['dr-add-main'] = 'yes'
+  req.session.data['add-dependant'] = 'yes'
+
+  res.redirect('/version-33/s1/account/dependant/s1-entitlement-content/s1-entitlement-details');
+})
+
 // How is the Dependant related to the Main Insured?
 router.post([/dr-select-relationship/], function(req, res) {
 
@@ -159,7 +168,7 @@ router.post([/add-note/], function(req, res) {
 });
 
 
-// Link a Main/Dependant
+// Link a Dependant - from the Main insured person's record
 // Search for person
 router.post([/person-search/], function(req, res){
   res.redirect('/version-33/s1/account/entitlement-content/person-search-results');
@@ -170,15 +179,14 @@ router.post([/person-search-results/], function(req, res){
   res.redirect('/version-33/s1/account/entitlement-content/dependant-person-summary');
 })
 
-// Select S1/S072 entitlement
-router.post([/dependant-person-summary/], function(req, res){
+// Check you're linking to the correct dependant and S1/S072 entitlement
+router.post([/link-to-entitlement-cya/], function(req, res){
 
   req.session.data['add-dependant'] = 'yes'
-  req.session.data['dr-add-s1-entitlement'] = 'yes'
+  req.session.data['dr-add-main'] = 'yes'
 
   res.redirect('/version-33/s1/account/entitlement-content/s1-entitlement-details');
 })
-
 
 
 

@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Continue linking the main insured to a cancelled S1/S072 entitlement - Manage overseas entitlements and treatments - NHSBSA
+Check you're linking to the correct main insured and S1/S072 entitlement - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -70,14 +70,14 @@ Continue linking the main insured to a cancelled S1/S072 entitlement - Manage ov
                     
                     
 
-                    <form action="link-to-cancelled-entitlement" method="post">
+                    <form action="dr-link-to-entitlement-cya" method="post">
                        
                         <div class="nhsuk-form-group">
 
                             <fieldset class="nhsuk-fieldset">
                               <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
                                 <h1 class="nhsuk-fieldset__heading">
-                                  This entitlement has been cancelled
+                                  Check you're linking to the correct main insured and S1/S072 entitlement
                                 </h1>
                               </legend>
                 
@@ -89,6 +89,14 @@ Continue linking the main insured to a cancelled S1/S072 entitlement - Manage ov
                                   </span>
                                 </h3>
                                 <dl class="nhsuk-summary-list">
+                                  <div class="nhsuk-summary-list__row">
+                                    <dt class="nhsuk-summary-list__key">
+                                      Main insured
+                                    </dt>
+                                    <dd class="nhsuk-summary-list__value">
+                                      John Doe
+                                    </dd>
+                                  </div>
                                   <div class="nhsuk-summary-list__row">
                                     <dt class="nhsuk-summary-list__key">
                                       S1 registration type
@@ -110,7 +118,7 @@ Continue linking the main insured to a cancelled S1/S072 entitlement - Manage ov
                                       Issue date
                                     </dt>
                                     <dd class="nhsuk-summary-list__value">
-                                      Monday 6 January 2020
+                                      30 September 2024
                                     </dd>
                                   </div>
                                   <div class="nhsuk-summary-list__row">
@@ -126,7 +134,7 @@ Continue linking the main insured to a cancelled S1/S072 entitlement - Manage ov
                                       Start date
                                     </dt>
                                     <dd class="nhsuk-summary-list__value">
-                                      Monday 6 January 2020
+                                      5 October 2024
                                     </dd>
                                   </div>
                                   <div class="nhsuk-summary-list__row">
@@ -134,7 +142,7 @@ Continue linking the main insured to a cancelled S1/S072 entitlement - Manage ov
                                       End date
                                     </dt>
                                     <dd class="nhsuk-summary-list__value">
-                                      Wednesday 6 January 2021
+                                      Not provided
                                     </dd>
                                   </div>
                                   <div class="nhsuk-summary-list__row">
@@ -148,35 +156,27 @@ Continue linking the main insured to a cancelled S1/S072 entitlement - Manage ov
                                 </dl>
                               </div>
                 
-                              <h2 class="nhsuk-heading-m">
-                                Would you still like to link the dependant to this entitlement?
-                              </h2>
-
-                              <!-- div class="nhsuk-hint">If you select No you will return to the previous screen. To link the main insured, you must select an entitlement.</div-->
-                
-                              <div class="nhsuk-radios">
-                                <div class="nhsuk-radios__item">
-                                  <input class="nhsuk-radios__input" id="link-to-cancelled-entitlement-yes" name="link-to-cancelled-entitlement" type="radio" value="Yes">
-                                  <label class="nhsuk-label nhsuk-radios__label" for="link-to-cancelled-entitlement-yes">
-                                    Yes
-                                  </label>
-                                </div>
-                                <div class="nhsuk-radios__item">
-                                  <input class="nhsuk-radios__input" id="link-to-cancelled-entitlement-no" name="link-to-cancelled-entitlement" type="radio" value="No">
-                                  <label class="nhsuk-label nhsuk-radios__label" for="link-to-cancelled-entitlement-no">
-                                    No
-                                  </label>
-                                </div>
+                              <div class="nhsuk-inset-text">
+                                <span class="nhsuk-u-visually-hidden">Information: </span>
+                              
+                                <p>If you have selected the wrong main insured person, check their personal details and <a href="person-search?search-for=Main">search again</a>. 
+                                    If you have selected the wrong entitlement go back and <a href="main-person-summary">select the correct entitlement</a>.</p>
                               </div>
+
+
                             </fieldset>
 
                         </div>
                 
-                        <button class="nhsuk-button" style="margin-top: 10px;" type="submit">Save and continue</button><br>
+                        <a href="s1-entitlement-details?dr-add-main=yes">
+                        <button class="nhsuk-button" style="margin-top: 10px;" type="submit">Save and continue</button>
+                        </a>
+                        
+                        <br>
 
     
                         <p>
-                          <a href="s1-entitlement-details" >Cancel</a>
+                          <a href="person-search?search-for=Main">Cancel</a>
                         </p>
     
                         </form>
@@ -194,11 +194,11 @@ Continue linking the main insured to a cancelled S1/S072 entitlement - Manage ov
             <span class="nhsuk-u-visually-hidden"> - </span>654321</span>
             </h3>
             <ul id="options" class="options">
-            <li><a href="../personal-details?dr-add-s1-entitlement=yes">Personal details</a></li>
-            <li><a class="active" href="../entitlements-and-treatments?dr-add-s1-entitlement=yes">Entitlements and treatments</a></li>
-            <li><a href="../case-history-person?dr-add-s1-entitlement=yes">Case history</a></li>
+            <li><a href="../personal-details">Personal details</a></li>
+            <li><a class="active" href="../entitlements-and-treatments">Entitlements and treatments</a></li>
+            <li><a href="../case-history-person">Case history</a></li>
             <!--li><a href="../document">Documents</a></li-->
-            <li><a href="../notes?dr-add-s1-entitlement=yes">Notes</a></li>
+            <li><a href="../notes">Notes</a></li>
             </ul>
         </div>
         </div>
