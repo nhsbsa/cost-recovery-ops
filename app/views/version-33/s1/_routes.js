@@ -515,6 +515,7 @@ router.post([/change-s1-entitlement-institution-details/], function(req, res){
 
 })
 
+
 // S1 Cancellations //
 
 // Dependant's record
@@ -609,7 +610,32 @@ router.post([/cancellation-source/], function(req, res) {
 
   // Save the source in session data
   req.session.data['cancelled-by'] = req.body['cancelled-by'];
+
+  // Extract the cancellation source from the request body
+  const cancellationSource = req.body['cancelled-by'];
+
+  // Redirection logic based on the cancellation source
+  if (cancellationSource === 'UK') {
+    res.redirect('/version-33/s1/account/cancellations/entitlement-end-date');
+  } else 
+    res.redirect('/version-33/s1/account/cancellations/date-s016-received');
   
+});
+
+// Enter the date the S016 was received from the MS
+router.post([/date-s016-received/], function(req, res) {
+  // Extract day, month, and year from the request body
+  const day = req.body['date-s016-received-day'];
+  const month = req.body['date-s016-received-month'];
+  const year = req.body['date-s016-received-year'];
+
+  // Combine to form the full date (or use a default if not provided)
+  const dateS016Received = day && month && year ? `${day}/${month}/${year}` : '13/01/2025';
+
+  // Save the formatted date in session data
+  req.session.data['date-s016-received'] = dateS016Received;
+
+  // Redirect to the next step in the journey
   res.redirect('/version-33/s1/account/cancellations/entitlement-end-date');
 });
 
@@ -637,13 +663,49 @@ router.post([/cancellation-reason/], (req, res) => {
   // Save the cancellation reason in session data
   req.session.data['cancellation-reason'] = cancellationReason;
 
-  // Redirection logic based on the cancellation reason
-  if (cancellationReason === 'The entitlement holder is insured in another country because they have a pension there') {
-    res.redirect('/version-33/s1/account/cancellations/date-state-pension-awarded');
+  // Reasons requiring a dynamic date capture
+  const dateCaptureReasons = [
+    'The entitlement holder is no longer insured by the Member State',
+    'The entitlement holder is no longer entitled to sickness benefit from the Member State',
+    'The entitlement holder no longer lives in the UK',
+    'The entitlement holder lives in another Member State',
+    'The entitlement holder has died',
+    'The dependant’s main insured has died'
+  ];
+
+  if (dateCaptureReasons.includes(cancellationReason)) {
+    res.redirect('/version-33/s1/account/cancellations/enter-date-dynamic'); // Redirect to dynamic date capture screen
+  } else if (cancellationReason === 'The entitlement holder is insured in another country because they have a pension there') {
+    res.redirect('/version-33/s1/account/cancellations/country-pension-awarded');
+  } else if ([
+    'The status of the entitlement holder has changed',
+    'The institution issuing the entitlement has changed',
+    'The dependant has applied for their own S1'
+  ].includes(cancellationReason)) {
+    res.redirect('/version-33/s1/account/cancellations/additional-comments-optional');
   } else if (cancellationReason === 'Other') {
-    res.redirect('/version-33/s1/account/cancellations/other-cancellation-comments');
-  } else 
-    res.redirect('/version-33/s1/account/cancellations/cancellation-cya');
+    res.redirect('/version-33/s1/account/cancellations/other-cancellation-reason');
+  }
+});
+
+// Enter date dynamic
+router.post([/enter-date-dynamic/], function(req, res){
+
+res.redirect('/version-33/s1/account/cancellations/additional-comments-optional');
+
+});
+
+
+// Select the country where the state pension was awarded
+router.post([/country-pension-awarded/], function(req, res) {
+
+  // Extract the selected country from the request body
+  const statePensionCountry = req.body['state-pension-country'];
+
+  // Save the country in session data
+  req.session.data['state-pension-country'] = statePensionCountry;
+    
+  res.redirect('/version-33/s1/account/cancellations/date-state-pension-awarded');
 });
 
 
@@ -661,23 +723,63 @@ router.post([/date-state-pension-awarded/], function(req, res) {
   // Save the formatted date in session data
   req.session.data['state-pension-awarded-date'] = statePensionAwardedDate;
     
-    res.redirect('/version-33/s1/account/cancellations/cancellation-cya');
-  });
-
-
-// Enter the 'Other' cancellation reason (free text box)
-router.post([/other-cancellation-comments/], function(req, res) {
-
-  // Retrieve the cancellation comments
-  const comments = req.body['cancellation-comments'];
-  // Store these in the session or database
-  req.session.data['cancellation-comments'] = comments;
-  // Set flag that a new document was uploaded
-  req.session.data['add-cancellation-reason-comments'] = 'yes'
-  
-  res.redirect('/version-33/s1/account/cancellations/cancellation-cya');
+  res.redirect('/version-33/s1/account/cancellations/additional-comments-optional');
 });
 
+
+// Enter additional comments (optional)
+router.post([/additional-comments-optional/], function (req, res) {
+  // Retrieve and trim additional comments (default to empty string if not provided)
+  const comments = (req.body['cancellation-additional-comments'] || '').trim();
+
+  // Store comments in session data
+  req.session.data['cancellation-additional-comments'] = comments;
+
+  // Set flag based on whether a comment was entered
+  req.session.data['add-cancellation-additional-comments'] = comments ? 'yes' : 'no';
+
+  // Redirect based on who cancelled the entitlement
+  const redirectPath = req.session.data['cancelled-by'] === 'UK' 
+    ? '/version-33/s1/account/cancellations/date-s018-sent' 
+    : '/version-33/s1/account/cancellations/date-s017-sent';
+
+  res.redirect(redirectPath);
+});
+  
+
+// Enter the date the S018 was sent to the Member State
+router.post([/date-s018-sent/], function(req, res) {
+
+  // Extract day, month, and year from the request body
+  const day = req.body['date-s018-sent-day'];
+  const month = req.body['date-s018-sent-month'];
+  const year = req.body['date-s018-sent-year'];
+  
+  // Combine to form the full date (or use a default if not provided)
+  const dateS018Sent = day && month && year ? `${day}/${month}/${year}` : '14/01/2025';
+  
+  // Save the formatted date in session data
+  req.session.data['date-s018-sent-date'] = dateS018Sent;
+    
+    res.redirect('/version-33/s1/account/cancellations/cancellation-cya');
+});
+
+// Enter the date the S017 was sent to the Member State
+router.post([/date-s017-sent/], function(req, res) {
+
+  // Extract day, month, and year from the request body
+  const day = req.body['date-s017-sent-day'];
+  const month = req.body['date-s017-sent-month'];
+  const year = req.body['date-s017-sent-year'];
+  
+  // Combine to form the full date (or use a default if not provided)
+  const dateS017Sent = day && month && year ? `${day}/${month}/${year}` : '14/01/2025';
+  
+  // Save the formatted date in session data
+  req.session.data['date-s017-sent-date'] = dateS017Sent;
+    
+    res.redirect('/version-33/s1/account/cancellations/cancellation-cya');
+});
 
 // Check your answers
 router.post([/cancellation-cya/], function(req, res){

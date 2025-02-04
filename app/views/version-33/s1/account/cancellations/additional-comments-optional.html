@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Enter the cancellation reason - Manage overseas entitlements and treatments - NHSBSA
+Add a comment (optional) - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -35,7 +35,7 @@ Enter the cancellation reason - Manage overseas entitlements and treatments - NH
                     }) }}
 
                         
-                    <form action="other-cancellation-comments" method="post">
+                    <form action="additional-comments-optional" method="post">
           
                         <div class="nhsuk-form-group">
                           <label class="nhsuk-label" for="nhsbsa-comments">
@@ -43,16 +43,16 @@ Enter the cancellation reason - Manage overseas entitlements and treatments - NH
                               S1/S072 entitlement cancellation
                                 <span class="nhsuk-u-visually-hidden"> - </span>
                             </span>
-                            <h1 class="nhsuk-heading-xl">Enter the cancellation reason</h1>
+                            <h1 class="nhsuk-heading-xl">Additional comments (optional)</h1>
                           </label>
 
 
                             <div class="nhsuk-form-group">
-                              <div class="nhsuk-hint" id="cancellation-comments-hint">
+                              <div class="nhsuk-hint" id="cancellation-additional-comments-hint">
                                 Your comments will display in the Case history under Entitlement history.
                               </div>
                               
-                              <textarea class="nhsuk-textarea" id="cancellationComments" name="cancellation-comments" rows="4" maxlength="255"></textarea>
+                              <textarea class="nhsuk-textarea" id="cancellationAdditionalComments" name="cancellation-additional-comments" rows="4" maxlength="255"></textarea>
                               <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">255 characters remaining</p>
                               <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 255 characters</p>
                             </div>  
@@ -75,7 +75,7 @@ Enter the cancellation reason - Manage overseas entitlements and treatments - NH
 
 {% block pageScripts %}
 <script>
-  const textarea = document.querySelector('#cancellationComments');
+  const textarea = document.querySelector('#cancellationAdditionalComments');
   const countRemaining = document.getElementById('charactersRemaining');
   const staticMsg = document.querySelector('#char-count-screen-reader');
   const maxCharacters = 255;
