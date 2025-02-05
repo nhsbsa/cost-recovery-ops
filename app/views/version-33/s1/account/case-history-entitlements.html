@@ -122,78 +122,7 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Additional information</span>
                                       <p id="entitlement-history-s1-s072-entitlements-updated-by">
-                                        <b>Cancelled by:</b><br> 
-                                        {% if data['cancelled-by'] %}
-                                          {{ data['cancelled-by'] }}
-                                        {% else %}
-                                          The Member State
-                                        {% endif %}
-
-                                        <br><br>
-
-                                        <b>End date of S1/S072 entitlement:</b><br>
-                                        {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                            {% set day = data['entitlement-end-date-day'] %}
-                                            {% set month = data['entitlement-end-date-month'] | int %}
-                                            {% set year = data['entitlement-end-date-year'] %}
-                                
-                                            {# Define month names #}
-                                            {% set month_names = [
-                                                "January", "February", "March", "April", "May", "June",
-                                                "July", "August", "September", "October", "November", "December"
-                                            ] %}
-                                
-                                            {# Get the month name #}
-                                            {% set month_name = month_names[month - 1] %}
-                                
-                                            {# Display the date in the format "day month year" #}
-                                            {{ day | int }} {{ month_name }} {{ year }}
-                                        {% else %}
-                                            13 January 2025
-                                        {% endif %}
-
-                                        <br><br>
-                                        
-                                        <b>Cancellation reason:</b><br> 
-                                        {% if data['cancellation-reason'] %}
-                                          {{ data['cancellation-reason'] }}
-                                        {% else %}
-                                          The entitlement holder is no longer insured in the Member State
-                                        {% endif %}
-                                       
-                                        {% if data['cancellation-reason'] == 'The entitlement holder is insured in another country because they have a pension there' %}
-                                        <br>
-                                        <b>Date state pension awarded:</b><br>
-                                          {% if data['state-pension-awarded-date-day'] and data['state-pension-awarded-date-month'] and data['state-pension-awarded-date-year'] %}
-                                            {% set day = data['state-pension-awarded-date-day'] %}
-                                            {% set month = data['state-pension-awarded-date-month'] | int %}
-                                            {% set year = data['state-pension-awarded-date-year'] %}
-                                
-                                            {# Define month names #}
-                                            {% set month_names = [
-                                                "January", "February", "March", "April", "May", "June",
-                                                "July", "August", "September", "October", "November", "December"
-                                            ] %}
-                                
-                                            {# Get the month name #}
-                                            {% set month_name = month_names[month - 1] %}
-                                
-                                            {# Display the date in the format "day month year" #}
-                                            {{ day | int }} {{ month_name }} {{ year }}
-                                          {% else %}
-                                              14 January 2024
-                                          {% endif %}
-
-                                        {% elif data['cancellation-reason'] == 'Other' %}
-                                        <br>
-                                        <b>Comments:</b><br>
-                                          {% if data['other-cancellation-reason'] %}
-                                            {{ data['other-cancellation-reason'] }}
-                                          {% else %}
-                                            The main insured moved to the UK so the dependant is no longer entitled to their S1
-                                          {% endif %}
-
-                                        {% endif %}
+                                       None provided
                                       </p>
                                     </td>
                                   </tr>
@@ -287,6 +216,46 @@
                                 </thead>
                                 <tbody class="nhsuk-table__body">
                                   <!-- most recent update at top of table -->
+                                  {% if data ['update-date-s019-received'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateS019Received"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Updated date S019 received from the Member State</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">
+                                        {% if data['date-s019-received-day'] and data['date-s019-received-month'] and data['date-s019-received-year'] %}
+                                          {% set day = data['date-s019-received-day'] %}
+                                          {% set month = data['date-s019-received-month'] | int %}
+                                          {% set year = data['date-s019-received-year'] %}
+                              
+                                          {# Define month names #}
+                                          {% set month_names = [
+                                              "January", "February", "March", "April", "May", "June",
+                                              "July", "August", "September", "October", "November", "December"
+                                          ] %}
+                              
+                                          {# Get the month name #}
+                                          {% set month_name = month_names[month - 1] %}
+                              
+                                          {# Display the date in the format "day month year" #}
+                                          {{ day | int }} {{ month_name }} {{ year }}
+                                        {% else %}
+                                          17 March 2025
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
                                   {% if data ['cancel-s1-entitlement'] == 'yes' %}
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
@@ -304,78 +273,7 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Additional information</span>
                                       <p id="entitlement-history-s1-s072-entitlements-updated-by">
-                                        <b>Cancelled by:</b><br> 
-                                        {% if data['cancelled-by'] %}
-                                          {{ data['cancelled-by'] }}
-                                        {% else %}
-                                          The Member State
-                                        {% endif %}
-
-                                        <br><br>
-
-                                        <b>End date of S1/S072 entitlement:</b><br>
-                                        {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                            {% set day = data['entitlement-end-date-day'] %}
-                                            {% set month = data['entitlement-end-date-month'] | int %}
-                                            {% set year = data['entitlement-end-date-year'] %}
-                                
-                                            {# Define month names #}
-                                            {% set month_names = [
-                                                "January", "February", "March", "April", "May", "June",
-                                                "July", "August", "September", "October", "November", "December"
-                                            ] %}
-                                
-                                            {# Get the month name #}
-                                            {% set month_name = month_names[month - 1] %}
-                                
-                                            {# Display the date in the format "day month year" #}
-                                            {{ day | int }} {{ month_name }} {{ year }}
-                                        {% else %}
-                                            13 January 2025
-                                        {% endif %}
-
-                                        <br><br>
-                                        
-                                        <b>Cancellation reason:</b><br> 
-                                        {% if data['cancellation-reason'] %}
-                                          {{ data['cancellation-reason'] }}
-                                        {% else %}
-                                          The entitlement holder is no longer insured in the Member State
-                                        {% endif %}
-                                       
-                                        {% if data['cancellation-reason'] == 'The entitlement holder is insured in another country because they have a pension there' %}
-                                        <br>
-                                        <b>Date state pension awarded:</b><br>
-                                          {% if data['state-pension-awarded-date-day'] and data['state-pension-awarded-date-month'] and data['state-pension-awarded-date-year'] %}
-                                            {% set day = data['state-pension-awarded-date-day'] %}
-                                            {% set month = data['state-pension-awarded-date-month'] | int %}
-                                            {% set year = data['state-pension-awarded-date-year'] %}
-                                
-                                            {# Define month names #}
-                                            {% set month_names = [
-                                                "January", "February", "March", "April", "May", "June",
-                                                "July", "August", "September", "October", "November", "December"
-                                            ] %}
-                                
-                                            {# Get the month name #}
-                                            {% set month_name = month_names[month - 1] %}
-                                
-                                            {# Display the date in the format "day month year" #}
-                                            {{ day | int }} {{ month_name }} {{ year }}
-                                          {% else %}
-                                              14 January 2024
-                                          {% endif %}
-
-                                        {% elif data['cancellation-reason'] == 'Other' %}
-                                        <br>
-                                        <b>Comments:</b><br>
-                                          {% if data['other-cancellation-reason'] %}
-                                            {{ data['other-cancellation-reason'] }}
-                                          {% else %}
-                                            The d moved to the UK so the dependant is no longer entitled to their S1
-                                          {% endif %}
-
-                                        {% endif %}
+                                        None provided
                                       </p>
                                     </td>
                                   </tr>
@@ -428,6 +326,28 @@
                                       </p>
                                     </td>
                                   </tr>
+
+
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                        21 April 2020 at 13:48 pm
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Updated date S019 received from the Member State</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Additional information</span>
+                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">
+                                        20 April 2020
+                                      </p>
+                                    </td>
+                                  </tr>
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -444,19 +364,7 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Additional information</span>
                                       <p id="entitlement-history-s1-s072-entitlements-updated-by">
-                                        <b>Cancelled by:</b><br> 
-                                        The Member State
-
-                                        <br><br>
-
-                                        <b>End date of S1/S072 entitlement:</b><br>
-                                        17 March 2020
-
-                                        <br><br>
-                                        
-                                        <b>Cancellation reason:</b><br>
-                                        The entitlement holder is no longer insured by the Member State
-                                        
+                                        None provided
                                       </p>
                                     </td>
                                   </tr>
@@ -690,6 +598,7 @@ function setCurrentDateTime(elementId) {
 
   // Set the date for each item
   document.addEventListener("DOMContentLoaded", function () {
+    setCurrentDateTime("currentDateS019Received");  // Update to S1/S072 entitlements for updating date S019 received
     setCurrentDateTime("currentDateS1Cancelled");  // Update to S1/S072 entitlements for cancelling entitlement
     setCurrentDateTime("currentDateE109MainLinked");  // Update to E109 entitlements for adding a Main insured person
     setCurrentDateTime("currentDateE109");      // For Dependant E109 entitlements

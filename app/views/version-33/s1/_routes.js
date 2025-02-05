@@ -618,22 +618,22 @@ router.post([/cancellation-source/], function(req, res) {
   if (cancellationSource === 'UK') {
     res.redirect('/version-33/s1/account/cancellations/entitlement-end-date');
   } else 
-    res.redirect('/version-33/s1/account/cancellations/date-s016-received');
+    res.redirect('/version-33/s1/account/cancellations/date-s016-issued');
   
 });
 
-// Enter the date the S016 was received from the MS
-router.post([/date-s016-received/], function(req, res) {
+// Enter the date the S016 was issued by the MS
+router.post([/date-s016-issued/], function(req, res) {
   // Extract day, month, and year from the request body
-  const day = req.body['date-s016-received-day'];
-  const month = req.body['date-s016-received-month'];
-  const year = req.body['date-s016-received-year'];
+  const day = req.body['date-s016-issued-day'];
+  const month = req.body['date-s016-issued-month'];
+  const year = req.body['date-s016-issued-year'];
 
   // Combine to form the full date (or use a default if not provided)
-  const dateS016Received = day && month && year ? `${day}/${month}/${year}` : '13/01/2025';
+  const dateS016Issued = day && month && year ? `${day}/${month}/${year}` : '13/01/2025';
 
   // Save the formatted date in session data
-  req.session.data['date-s016-received'] = dateS016Received;
+  req.session.data['date-s016-issued'] = dateS016Issued;
 
   // Redirect to the next step in the journey
   res.redirect('/version-33/s1/account/cancellations/entitlement-end-date');
@@ -787,7 +787,28 @@ router.post([/cancellation-cya/], function(req, res){
     // Mark the entitlement as cancelled
     req.session.data['cancel-s1-entitlement'] = 'yes';
 
-  res.redirect('/version-33/s1/account/entitlements-and-treatments');
+  res.redirect('/version-33/s1/account/entitlement-content/s1-entitlement-details');
+})
+
+// Date S019 received from the Member State
+router.post([/date-s019-received/], function(req, res){
+
+  // Extract day, month, and year from the request body
+  const day = req.body['date-s019-received-day'];
+  const month = req.body['date-s019-received-month'];
+  const year = req.body['date-s019-received-year'];
+  
+  // Combine to form the full date (or use a default if not provided)
+  const dateS019Received = day && month && year ? `${day}/${month}/${year}` : '17/03/2025';
+  
+  // Save the formatted date in session data
+  req.session.data['date-s019-received'] = dateS019Received;
+
+  // Mark S019 as received
+  req.session.data['update-date-s019-received'] = 'yes';
+
+res.redirect('/version-33/s1/account/entitlement-content/s1-entitlement-details');
+
 })
 
 

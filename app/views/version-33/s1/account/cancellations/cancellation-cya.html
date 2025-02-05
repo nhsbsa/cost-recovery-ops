@@ -398,7 +398,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
                           </div>
 
                           <div class="nhsuk-summary-list__row">
-                            <dt class="nhsuk-summary-list__key">Date state pension awarded</dt>
+                            <dt class="nhsuk-summary-list__key">Date state pension awarded (optional)</dt>
                             <dd class="nhsuk-summary-list__value">
                               {% if data['state-pension-awarded-date-day'] and data['state-pension-awarded-date-month'] and data['state-pension-awarded-date-year'] %}
                                   {% set day = data['state-pension-awarded-date-day'] %}
@@ -417,7 +417,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
                                   {# Display the date in the format "day month year" #}
                                   {{ day | int }} {{ month_name }} {{ year }}
                               {% else %}
-                                  14 January 2025
+                                  Not provided
                               {% endif %}
                             </dd>
 
@@ -443,7 +443,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
 
                           {% elif data['cancellation-reason'] == 'The status of the entitlement holder has changed' %}
                           <div class="nhsuk-summary-list__row">
-                            <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                            <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
                             <dd class="nhsuk-summary-list__value">
                               {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
                                 {{ data['cancellation-additional-comments'] }}
@@ -459,7 +459,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
 
                           {% elif data['cancellation-reason'] == 'The institution issuing the entitlement has changed' %}
                           <div class="nhsuk-summary-list__row">
-                            <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                            <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
                             <dd class="nhsuk-summary-list__value">
                               {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
                                 {{ data['cancellation-additional-comments'] }}
@@ -475,7 +475,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
 
                           {% elif data['cancellation-reason'] == 'The dependant has applied for their own S1' %}
                           <div class="nhsuk-summary-list__row">
-                            <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                            <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
                             <dd class="nhsuk-summary-list__value">
                               {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
                                 {{ data['cancellation-additional-comments'] }}
@@ -558,12 +558,12 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
                             </div>
 
                             <div class="nhsuk-summary-list__row">
-                              <dt class="nhsuk-summary-list__key">Date S016 was received from the Member State</dt>
+                              <dt class="nhsuk-summary-list__key">Date S016 issued by the Member State</dt>
                               <dd class="nhsuk-summary-list__value">
-                                  {% if data['date-s016-received-day'] and data['date-s016-received-month'] and data['date-s016-received-year'] %}
-                                        {% set day = data['date-s016-received-day'] %}
-                                        {% set month = data['date-s016-received-month'] | int %}
-                                        {% set year = data['date-s016-received-year'] %}
+                                  {% if data['date-s016-issued-day'] and data['date-s016-issued-month'] and data['date-s016-issued-year'] %}
+                                        {% set day = data['date-s016-issued-day'] %}
+                                        {% set month = data['date-s016-issued-month'] | int %}
+                                        {% set year = data['date-s016-issued-year'] %}
                             
                                         {# Define month names #}
                                         {% set month_names = [
@@ -577,12 +577,12 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
                                         {# Display the date in the format "day month year" #}
                                         {{ day | int }} {{ month_name }} {{ year }}
                                     {% else %}
-                                        20 January 2025
+                                        3 January 2025
                                     {% endif %}
                               </dd>
                             
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="date-s016-received#date-s016-received-day"> Change<span class="nhsuk-u-visually-hidden">the date the S016 was received from the Member State</span> </a>
+                                <a href="date-s016-issued#date-s016-issued-day">Change<span class="nhsuk-u-visually-hidden">the date the S016 was issued by the Member State</span> </a>
                               </dd>
                             </div>
 
@@ -919,7 +919,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
                         </div>
 
                         <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key">Date state pension awarded</dt>
+                          <dt class="nhsuk-summary-list__key">Date state pension awarded (optional)</dt>
                           <dd class="nhsuk-summary-list__value">
                             {% if data['state-pension-awarded-date-day'] and data['state-pension-awarded-date-month'] and data['state-pension-awarded-date-year'] %}
                                 {% set day = data['state-pension-awarded-date-day'] %}
@@ -938,7 +938,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
                                 {# Display the date in the format "day month year" #}
                                 {{ day | int }} {{ month_name }} {{ year }}
                             {% else %}
-                                14 January 2025
+                                Not provided
                             {% endif %}
                           </dd>
 
@@ -964,7 +964,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
 
                         {% elif data['cancellation-reason'] == 'The status of the entitlement holder has changed' %}
                         <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                          <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
                           <dd class="nhsuk-summary-list__value">
                             {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
                               {{ data['cancellation-additional-comments'] }}
@@ -980,7 +980,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
 
                         {% elif data['cancellation-reason'] == 'The institution issuing the entitlement has changed' %}
                         <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                          <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
                           <dd class="nhsuk-summary-list__value">
                             {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
                               {{ data['cancellation-additional-comments'] }}
@@ -996,7 +996,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
 
                         {% elif data['cancellation-reason'] == 'The dependant has applied for their own S1' %}
                         <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                          <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
                           <dd class="nhsuk-summary-list__value">
                             {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
                               {{ data['cancellation-additional-comments'] }}
@@ -1047,7 +1047,7 @@ S1/S072 cancellation check your answers - Manage overseas entitlements and treat
                                 {# Display the date in the format "day month year" #}
                                 {{ day | int }} {{ month_name }} {{ year }}
                             {% else %}
-                                14 January 2025
+                                6 January 2025
                             {% endif %}
                           </dd>
 
