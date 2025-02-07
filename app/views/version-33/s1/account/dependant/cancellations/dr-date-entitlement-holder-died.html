@@ -46,12 +46,39 @@ Enter the date the entitlement holder died - Manage overseas entitlements and tr
                                     S1/S072 entitlement cancellation
                                     <span class="nhsuk-u-visually-hidden"> - </span>
                                 </span>
+                                {% if data['dr-cancellation-reason'] == 'The dependant’s main insured has died' %}
                                 <h1 class="nhsuk-fieldset__heading">
-                                  {% if data['dr-cancellation-reason'] == 'The dependant’s main insured has died' %}
                                   Enter the date the main insured died
-                                  {% else %}
+                                </h1>
+                              </legend>
+                              <div class="nhsuk-hint" id="example-hint">
+                                For example, 28 8 2024
+                              </div>
+                          
+                                <div class="nhsuk-date-input" id="dr-date-dependants-main-insured-died">
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-date-dependants-main-insured-died-day">Day</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-date-dependants-main-insured-died-day" name="dr-date-dependants-main-insured-died-day" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-date-dependants-main-insured-died-month">Month</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-date-dependants-main-insured-died-month" name="dr-date-dependants-main-insured-died-month" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="dr-date-dependants-main-insured-died-year">Year</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dr-date-dependants-main-insured-died-year" name="dr-date-dependants-main-insured-died-year" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {% else %}
+                                <h1 class="nhsuk-fieldset__heading">
                                   Enter the date the entitlement holder died
-                                  {% endif %}
                                 </h1>
                               </legend>
                               <div class="nhsuk-hint" id="example-hint">
@@ -78,6 +105,7 @@ Enter the date the entitlement holder died - Manage overseas entitlements and tr
                                     </div>
                                   </div>
                                 </div>
+                                {% endif %}
                             </fieldset>
 
                         </div>
@@ -111,6 +139,19 @@ Enter the date the entitlement holder died - Manage overseas entitlements and tr
   document.addEventListener('DOMContentLoaded', () => {
     // Call the function for all the dates you are capturing
     updateFormattedDate('dr-date-entitlement-holder-died');
+  });
+</script>
+
+<script>
+  function updateFormattedDate(idPrefix) {
+    const day = document.getElementById(`${idPrefix}-day`).value;
+    const month = document.getElementById(`${idPrefix}-month`).value;
+    const year = document.getElementById(`${idPrefix}-year`).value;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Call the function for all the dates you are capturing
+    updateFormattedDate('dr-date-dependants-main-insured-died');
   });
 </script>
 {% endblock %}
