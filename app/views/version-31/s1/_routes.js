@@ -13,12 +13,12 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 // Add a note
 router.post([/add-note-dependant/], function(req, res) {
   console.log('Adding note to Dependant record...');
-  console.log('Note Type:', req.body['dependant-note-type']);
-  console.log('Note:', req.body['dependant-note']);
+  console.log('Note Type:', req.body['dr-note-type']);
+  console.log('Note:', req.body['dr-note']);
 
-  req.session.data['dependant-note-type'] = req.body['dependant-note-type'];
-  req.session.data['dependant-note'] = req.body['dependant-note'];
-  req.session.data['dependant-new-note'] = 'yes';
+  req.session.data['dr-note-type'] = req.body['dr-note-type'];
+  req.session.data['dr-note'] = req.body['dr-note'];
+  req.session.data['dr-new-note'] = 'yes';
 
   console.log('Redirecting to Dependant notes...');
   res.redirect('/version-31/s1/account/dependant/notes');

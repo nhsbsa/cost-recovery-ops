@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Notes - Manage overseas entitlements and treatments - NHSBSA
+View notes - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 {% block beforeContent %}
@@ -52,9 +52,12 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
 
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
-              <h1 class="nhsuk-heading-xl">Notes</h1>
+              <h1 class="nhsuk-heading-xl" style="margin-bottom: 10px;" >Notes</h1>
+
+              <a class="nhsuk-button" style="float: right;" href="/version-32/s1/account/dependant/add-note-dependant" id="addNote-button">Add a new note</a>
             </div>
           </div>
+
 
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
@@ -63,7 +66,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
 
                       
                       <!-- Notes tab content begins -->
-                      {% if data['dependant-new-note'] == 'yes' %}
+                      {% if data['dr-new-note'] == 'yes' %}
                       
                       <details class="nhsuk-details" style="margin-left: -20px; margin-top: -30px; margin-bottom: 10px;">
                         <summary class="nhsuk-details__summary">
@@ -73,41 +76,48 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                         </summary>
                         <div class="nhsuk-details__text">
 
-                        <div class="nhsuk-form-group">
+                        <!--div class="nhsuk-form-group">
                           <label class="nhsuk-label" for="filter-notes"><b>Enter keywords</b></label>
                           <div class="nhsuk-hint" id="contact-hint">
                             For example, 'email' or 'response'.
                           </div>
 
                           <input class="nhsuk-input" id="example" name="filter-notes-by-keywords" type="text" value="">
-                        </div>
+                        </div-->
 
                         
                         <div class="nhsuk-form-group">
-                          <label class="nhsuk-label" for="filter-notes-by-entitlement-type-label"><b>Entitlement type</b></label>
-                          <div class="nhsuk-hint" id="contact-hint">Select all that apply.</div>
+                          <label class="nhsuk-label" for="filter-notes-by-note-type-label"><b>Note type</b></label>
+                          <div class="nhsuk-hint" id="contact-hint" style="margin-bottom: 30px;">Select all that apply.</div>
 
                             <div style="display: flex; gap: 1rem;">
                             <!-- Left Column -->
                             <div class="nhsuk-checkboxes">
                               <div class="nhsuk-checkboxes__item">
-                                <input class="nhsuk-checkboxes__input" id="entitlement-type-s1-s072" name="filter-notes-by-entitlement-type" type="checkbox" value="S1/S072">
-                                <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-s1-s072">
+                                <input class="nhsuk-checkboxes__input" id="note-type-s1-s072" name="filter-notes-by-note-type" type="checkbox" value="S1/S072">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-s1-s072">
                                   S1/S072
                                 </label>
                               </div>
                     
                               <div class="nhsuk-checkboxes__item">
-                                <input class="nhsuk-checkboxes__input" id="entitlement-type-e109" name="filter-notes-by-entitlement-type" type="checkbox" value="E109">
-                                <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-e109">
+                                <input class="nhsuk-checkboxes__input" id="note-type-e109" name="filter-notes-by-note-type" type="checkbox" value="E109">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-e109">
                                   E109
                                 </label>
                               </div>
                       
-                              <div class="nhsuk-checkboxes__item">
-                                <input class="nhsuk-checkboxes__input" id="entitlement-type-e121" name="filter-notes-by-entitlement-type" type="checkbox" value="E121">
-                                <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-e121">
+                              <!--div class="nhsuk-checkboxes__item">
+                                <input class="nhsuk-checkboxes__input" id="note-type-e121" name="filter-notes-by-note-type" type="checkbox" value="E121">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-e121">
                                   E121
+                                </label>
+                              </div-->
+                            
+                              <div class="nhsuk-checkboxes__item">
+                                <input class="nhsuk-checkboxes__input" id="note-type-s2-e112" name="filter-notes-by-note-type" type="checkbox" value="S2/E112">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-s2-e112">
+                                  S2/E112
                                 </label>
                               </div>
                             </div>
@@ -115,29 +125,38 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                             <!-- Right Column -->
                             <div class="nhsuk-checkboxes">
                               <div class="nhsuk-checkboxes__item">
-                                <input class="nhsuk-checkboxes__input" id="entitlement-type-s2-e112" name="filter-notes-by-entitlement-type" type="checkbox" value="S2/E112">
-                                <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-s2-e112">
-                                  S2/E112
-                                </label>
-                              </div>
-
-                              <div class="nhsuk-checkboxes__item">
-                                <input class="nhsuk-checkboxes__input" id="entitlement-type-ehic" name="filter-notes-by-entitlement-type" type="checkbox" value="EHIC">
-                                <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-ehic">
+                                <input class="nhsuk-checkboxes__input" id="note-type-ehic" name="filter-notes-by-note-type" type="checkbox" value="EHIC">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-ehic">
                                   EHIC
                                 </label>
                               </div>
 
                             <div class="nhsuk-checkboxes__item">
-                              <input class="nhsuk-checkboxes__input" id="entitlement-type-prc" name="filter-notes-by-entitlement-type" type="checkbox" value="PRC">
-                              <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-type-prc">
+                              <input class="nhsuk-checkboxes__input" id="note-type-prc" name="filter-notes-by-note-type" type="checkbox" value="PRC">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-prc">
                                 PRC
+                              </label>
+                            </div>
+
+                            <div class="nhsuk-checkboxes__item">
+                              <input class="nhsuk-checkboxes__input" id="note-type-general" name="filter-notes-by-note-type" type="checkbox" value="General">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-general">
+                                General
                               </label>
                             </div>
                           </div>
 
                           </div>
                         </div>
+
+                        <!--div class="nhsuk-form-group">
+                          <label class="nhsuk-label" for="filter-notes"><b>Entitlement ID</b></label>
+                          <div class="nhsuk-hint" id="filter-notes-by-entitlement-id-hint">
+                            This is a X digit number. For example, XXXXX.
+                          </div>
+
+                          <input class="nhsuk-input nhsuk-input--width-10" id="example" name="filter-notes-by-entitlement-id" type="text" value="">
+                        </div-->
                     
                         <!--div class="nhsuk-form-group">
                           <div class="nhsuk-checkboxes">
@@ -162,30 +181,28 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                           </div>
                         </div-->
                     
-                        <button class="nhsuk-button nhsuk-button--secondary" style="margin-top: 20px;" id="applyFilterButton">Apply filter</button>
+                        <button class="nhsuk-button nhsuk-button--secondary" style="margin-top: 10px;" id="applyFilterButton">Apply filter</button>
                         
-                        <p><a href="#" id="clearButton">Reset filter</a></p>
+                        <p><a href="/version-32/s1/account/entitlement-content/s1-entitlement-details#tab-Notes" id="clearButton">Reset filter</a></p>
 
                         </div>
                       </details>
-
-                      <a class="nhsuk-button" href="/version-32/s1/account/dependant/add-note-dependant">Add a new note</a>
                     
                       <table role="table" class="nhsuk-table-responsive">
                         <thead role="rowgroup" class="nhsuk-table__head">
                           <tr role="row">
-                            <th role="columnheader" scope="col" style="width: 25%;">Date and time</th>
-                            <th role="columnheader" scope="col">Added by</th>
-                            <th role="columnheader" scope="col">Entitlement type</th>
+                            <th role="columnheader" scope="col" style="width: 20%;">Date and time</th>
+                            <th role="columnheader" scope="col" style="width: 20%;">Added by</th>
+                            <th role="columnheader" scope="col" style="width: 10%;">Note type</th>
                             <!--th role="columnheader" scope="col" style="width: 10%;">Document type<br>(optional)</th-->
                             <th role="columnheader" scope="col" style="width: 50%;">Comments</th>
-                            <th role="columnheader" scope="col" style="width: 10%;">Actions</th>
+                            <!--th role="columnheader" scope="col" style="width: 10%;">Actions</th-->
                           </tr>
                         </thead>
                         <tbody class="nhsuk-table__body">
                       
                           <!-- S1 entitlement note -->
-                          {% if data['dependant-new-note'] == 'yes' %}
+                          {% if data['dr-new-note'] == 'yes' %}
                           <tr role="row" class="nhsuk-table__row">
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -196,8 +213,8 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                               <p>Joe Bloggs</p>
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Entitlement type</span>
-                              <p>{{ data['entitlement-type'] if data['entitlement-type'] else 'S1/S072' }}</p>
+                              <span class="nhsuk-table-responsive__heading">Note type</span>
+                              <p>{{ data['dr-note-type'] if data['dr-note-type'] else 'S1/S072' }}</p>
                             </td>
                             <!--td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Document type (optional)</span>
@@ -205,21 +222,21 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                             </td-->
                             <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Comments</span>
-                              {% if data['rina-ref-number'] %}
-                                <p><b>RINA reference number: {{ data['rina-ref-number'] }}</b></p>
+                              {% if data['dr-rina-ref-number'] %}
+                                <p><b>RINA reference number: {{ data['dr-rina-ref-number'] }}</b></p>
                               {% endif %}
-                              <p>{{ data['dependant-note'] if data['dependant-note'] else 'This is what the comments would look like.' }}</p>
+                              <p>{{ data['dr-note'] if data['dr-note'] else 'This is what the comments would look like.' }}</p>
                             </td>
-                            <td role="cell" class="nhsuk-table__cell">
+                            <!--td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Actions</span>
                               <a href="#">Remove</span></a>
-                            </td>
+                            </td-->
                           </tr>
                           {% endif %}
                       
                     
                             <!-- DL1609 note - Only display if a comment has been added -->
-                            {% if data['new-dl1609-note'] == 'yes' %}
+                            {% if data['dr-new-dl1609-note'] == 'yes' %}
                             <tr role="row" class="nhsuk-table__row">
                               <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -231,7 +248,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                               </td>
                               <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Entitlement type</span>
-                                <p>{{ data['entitlement-type'] if data['entitlement-type'] else 'S1/S072' }}</p>
+                                <p>{{ data['dr-note-type'] if data['dr-note-type'] else 'S1/S072' }}</p>
                               </td>
                               <!--td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Document type (optional)</span>
@@ -240,21 +257,21 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                               <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Comments</span>
                                 <!-- Only display comments if they are present -->
-                                {% if data['dl1609-comments'] %}
-                                  <p>{{ data['dl1609-comments'] }}</p>
+                                {% if data['dr-dl1609-comments'] %}
+                                  <p>{{ data['dr-dl1609-comments'] }}</p>
                                   {% else %}
                                 <p>None provided</p>
                               {% endif %}
                               </td>
-                              <td role="cell" class="nhsuk-table__cell">
+                              <!--td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Actions</span>
                                 <a href="#">Remove</span></a>
-                              </td>
+                              </td-->
                             </tr>
                             {% endif %}
                     
                             <!-- S073 RINA reference note -->
-                            {% if data['new-s073-rina-reference-note'] == 'yes' %}
+                            {% if data['dr-new-s073-rina-reference-note'] == 'yes' %}
                             <tr role="row" class="nhsuk-table__row">
                               <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -266,29 +283,29 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                               </td>
                               <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Entitlement type</span>
-                                <p>{{ data['entitlement-type'] if data['entitlement-type'] else 'S1/S072' }}</p>
+                                <p>{{ data['dr-note-type'] if data['dr-note-type'] else 'S1/S072' }}</p>
                               </td>
                               <!--td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Document type (optional)</span>
                                 <p>{{ data['document-type'] if data['document-type'] else 'Not provided' }}</p>
                               </td-->
                               <td role="cell" class="nhsuk-table__cell">
-                                {% if data['rina-reference-number'] %}
-                                  <p><b>RINA reference number: {{ data['rina-reference-number'] }}</b></p>
+                                {% if data['dr-rina-reference-number'] %}
+                                  <p><b>RINA reference number: {{ data['dr-rina-reference-number'] }}</b></p>
                                 {% else %}
                                   <p><b>RINA reference number: 654321</b></p>
                                 {% endif %}
                                 <!-- Display comments or 'None provided' if no comments are present -->
-                              {% if data['s073-rina-reference-comments'] %}
-                                <p>{{ data['s073-rina-reference-comments'] }}</p>
+                              {% if data['dr-s073-rina-reference-comments'] %}
+                                <p>{{ data['dr-s073-rina-reference-comments'] }}</p>
                               {% else %}
                                 <p>None provided</p>
                               {% endif %}
                               </td>
-                              <td role="cell" class="nhsuk-table__cell">
+                              <!--td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Actions</span>
                                 <a href="#">Remove</span></a>
-                              </td>
+                              </td-->
                             </tr>
                             {% endif %}
                     
@@ -297,13 +314,12 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                     
                       {% else %}
                         <p>No notes have been added.</p>
-                        <a class="nhsuk-button" href="/version-32/s1/account/dependant/add-note-dependant" id="addNote-button">Add a new note</a>
                       {% endif %}
                     
                 </div>
             </div>
           </div>
-                    <!-- Notes tab content ends -->   
+                    <!-- Notes content ends --> 
                                 
                             
 
