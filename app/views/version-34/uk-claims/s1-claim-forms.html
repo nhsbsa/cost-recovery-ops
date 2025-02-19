@@ -1,0 +1,1052 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">View Claim ID (Forms)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">   
+              <div class="nhsuk-grid-column-one-half">
+                {% if data ['entitlement-article-type'] == 'S1/S072 - Article 65' %}
+                  <h1 class="nhsuk-heading-l">Claim ID 123456 - Forms - Article 65</h1>
+                {% else %}
+                  <h1 class="nhsuk-heading-l">Claim ID 123456 - Forms - Article 63</h1>
+                {% endif %}
+              </div>
+            </div>
+
+            <!--start secondary navigation-->
+
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-forms">Forms</a>
+                <span class="nhsuk-u-visually-hidden">Search for a form</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-summary">Claim summary</a>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 123456</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                <span class="nhsuk-u-visually-hidden">View the age groups for claim 123456</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-history">Claim history</a>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 123456</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+
+          <!-- start search-->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-hint">
+                Search for a form using person record ID or last name. Search for up to 8
+                forms at once by separating each person record ID number with a comma. For example, 106370, 160950, 170110
+              </div>
+
+              <form class="nhsuk-header__search-form nhsuk-header__search-form--search-results" id="search"
+                action="/search/" method="get" role="search">
+
+                <label class="nhsuk-u-visually-hidden" for="search-results-field">Search by person record ID or last name to add forms for printing or to resubmit</label>
+
+                <input class="nhsuk-search__input" id="search-results-field" name="search-field" type="search">
+                <a class="nhsuk-search__submit" href="#">
+                  <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    aria-hidden="true" focusable="false">
+                    <path
+                      d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z">
+                    </path>
+                  </svg>
+                  <span class="nhsuk-u-visually-hidden">Search</span>
+                </a>
+
+              </form>
+
+            </div>
+          </div>
+          <!--end search-->
+
+          <!--start filter-->
+          <details class="nhsuk-details-1">
+            <summary class="nhsuk-details__summary-1">
+              <span class="nhsuk-details__summary-text-1">
+                Filter forms
+              </span>
+            </summary>
+            <div class="nhsuk-details__text">
+
+              <div class="nhsuk-form-group">
+                <fieldset class="nhsuk-fieldset">
+                    <h2 class="nhsuk-heading-xs">
+                      By age group.
+                    </h2>
+
+                  <div class="nhsuk-radios nhsuk-radios--inline">
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-inline-1" name="example-inline" type="radio"
+                        value="tca">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-1">
+                        0 - 19
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-inline-2" name="example-inline" type="radio"
+                        value="wa">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-2">
+                        20 - 64
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-inline-2" name="example-inline" type="radio"
+                        value="wa">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-2">
+                        65 and over
+                      </label>
+                    </div>
+
+                  </div>
+                </fieldset>
+              </div>
+
+
+              <div class="nhsuk-form-group">
+                <fieldset class="nhsuk-fieldset">
+                    <h2 class="nhsuk-heading-xs">
+                      By agreement type.
+                    </h2>
+
+                  <div class="nhsuk-radios nhsuk-radios--inline">
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-inline-1" name="example-inline" type="radio"
+                        value="tca">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-1">
+                        TCA
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-inline-2" name="example-inline" type="radio"
+                        value="wa">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-2">
+                        WA
+                      </label>
+                    </div>
+
+                  </div>
+                </fieldset>
+              </div>
+
+              <a href=""><button class="nhsuk-button" type="submit">
+                  Apply
+                </button>
+              </a>
+
+            </div>
+          </details>
+          <!--end filter-->
+
+          <br>
+
+          {% if data ['entitlement-article-type'] == 'S1/S072 - Article 65' %}
+          <!-- Start of Forms table for S1/S072 Article 65 -->
+          <table role="table" id="formsTable" class="nhsuk-table-responsive">
+            <thead role="rowgroup" class="nhsuk-table__head" id="forms">
+              <tr role="row">
+                <th role="columnheader" class="" scope="col">
+                  Age group
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Form ID
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  First names
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Last name
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Entitlement
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Months claimed
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Agreement
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Action
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="nhsuk-table__body">
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>0 - 19</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111110</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Lilian</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Pierlot</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>S1/S072</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>3</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Lilian Pierlot</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>65 and over</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111111</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Jean</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Gardet</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>S1/S072</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>7</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Jean Gardet</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>20 -64</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111112</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Remy</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Moreau</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>E109</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>1</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Remy Moreau</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>0 - 19</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111113</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Justin</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Trouve</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>S1/S072</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>8</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Justin Trouve</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>20 - 64</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>123456</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>John</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Doe</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>S1/S072</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>8</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="../s1/account/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>20 - 64</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111115</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Anastasie</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Bouchard</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>E109</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>4</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Anastasie Bouchard</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>0 - 19</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111116</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Anais</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Jacquard</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>S1/S072</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>6</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Anais Jacquard</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>65 and over</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111117</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Evelyne</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Joubert</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>S1/S072</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>8</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Evelyn Joubert</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>65 and over</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111118</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Laurent</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Bouchard</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>S1/S072</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>2</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Laurent Bouchard</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Age group</span>
+                  <span>65 and over</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span>111119</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Georges</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>LeBeau</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>S1/S072</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>7</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Georges LeBeau</span></span>
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+          <!-- End of table -->
+
+          <!-- Pagination starts -->
+          <nav class="nav" role="navigation" aria-label="Pagination">
+            <ul class="pagination">
+                <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
+                <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>
+                <li class="pagination__item"><a class="pagination__link" href="#">3</a></li>
+                <li class="pagination__item"><a class="pagination__link" href="#">4</a></li>
+                <li class="pagination__item"><a class="pagination__link next" href="#">Next »</a></li>
+            </ul>
+
+            <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 34 forms</div>
+          </nav>
+          <!-- Pagination ends -->
+          
+          {% else %}
+        <!-- Start of Forms table for S1/S072 - Article 63 -->
+        <table role="table" id="dependantsTable" class="nhsuk-table-responsive">
+          <thead role="rowgroup" class="nhsuk-table__head" id="forms">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Age group
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Form ID
+              </th>
+              <th role="columnheader" class="" scope="col">
+                First names
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Last name
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Entitlement
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Months claimed
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Agreement
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Action
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="nhsuk-table__body">
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>0 - 19</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>378392</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Sophie</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Janview</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>E109</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>9</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Sophie Janview</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>65 and over</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>947583</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Charles</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Dupont</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>E109</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>5</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Charles Dupont</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>20 - 64</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>654321</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Jane</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Doe</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>3</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="../s1/account/dependant/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for Aimee Simon</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>20 - 64</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>324778</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Dione</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Martin</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>9</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Dione Martin</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>0 - 19</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>495729</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Jean-Luc</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Bouchard</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>8</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Jean-Luc Bouchard</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>65 and over</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>248829</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Paul</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Germain</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>2</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Paul Germain</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>0 - 19</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>394894</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Brigitte</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Duguay</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>1</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Brigitte Duguay</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>65 and over</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>458825</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Henri</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Leandres</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>E109</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>6</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Henri Leandre</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>65 and over</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>398198</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Charles</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Thomas</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>11</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Paul Germain</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Age group</span>
+                <span>20 - 64</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span>234892</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Jacqueline</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Bernard</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>5</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Jacqueline Bernard</span></span>
+              </td>
+            </tr>
+
+            
+          </tbody>
+
+        </table>
+        <!-- End of Forms table for S1/S072 - Article 63 -->
+
+
+         <!-- Pagination starts -->
+          <nav class="nav" role="navigation" aria-label="Pagination">
+            <ul class="pagination">
+                <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
+                <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>
+                <li class="pagination__item"><a class="pagination__link next" href="#">Next »</a></li>
+            </ul>
+
+            <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 18 forms</div>
+          </nav>
+          <!-- Pagination ends -->
+        {% endif %}
+
+       
+
+
+              
+           </div>
+          </div>
+
+<!--Side nav -->
+    <!--div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <ul>
+          <div id="options" class="options">
+            <h3 class="nhsuk-heading-xs">Browse</h3>
+              <li>
+                <a href="../s1/search/search-by-person">Search</a>
+              </li>
+
+            <h3 class="nhsuk-heading-xs">Actions</h3>
+              <li>
+                <a href="account-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">2</span></a>
+                <a href="review-forms">Review forms<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                <a href="uk-claims-search" class="active">UK claims</a>
+                <a href="resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="non-eu-reciprocal-healthcare-quota">Non-EU Reciprocal Healthcare (Quota)</a>
+              </li>
+          </div>
+        </ul>
+      </div>
+    </div-->
+
+    </div>
+  </div>
+</div>
+{% endblock %}

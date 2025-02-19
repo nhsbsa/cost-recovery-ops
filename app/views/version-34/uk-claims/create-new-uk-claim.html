@@ -1,0 +1,327 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search for UK claims
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Create new claim</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <div class="nhsuk-grid-row">
+                  
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Create a new claim</h1>
+              <hr class="blue-horizontal-line">
+              <br>
+              
+              <form action="create-new-uk-claim" method="post">
+                
+                
+
+                      {% if data['search-entitlement-article-type'] == 'EHIC and PRC - Article 62' or data['search-entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                      <div class="nhsuk-form-group">
+                        <div class="nhsuk-grid-row">
+                          <div class="nhsuk-grid-column-one-third">
+
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label" for="country">
+                                Enter year of claim
+                              </label>
+                              <input class="nhsuk-input nhsuk-input--width-5" id="country" name="country" type="number">
+                            </div>
+                        
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label" for="month">Select month of claim</label>
+                              <select class="nhsuk-select claim-months" id="month" name="claim-month">
+                                <option value="" selected="selected">Select</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                              </select>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                          
+                      <div class="nhsuk-form-group">
+                        <div class="nhsuk-grid-row">
+                          <div class="nhsuk-grid-column-one-half">
+                            
+                            <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" style="margin-bottom: 20px;" for="example">
+                              Entitlement - Article type
+                            </label>
+              
+                            <div class="nhsuk-radios nhsuk-radios--inline">
+                              <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="entitlement-type-ehic-prc" name="entitlement-article-type" type="radio" value="EHIC and PRC - Article 62">
+                                <label class="nhsuk-label nhsuk-radios__label" for="entitlement-type-ehic-prc">
+                                  EHIC and PRC - Article 62
+                                </label>
+                              </div>
+              
+                              <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="entitlement-type-s2" name="entitlement-article-type" type="radio" value="S2/E112 - Article 20.2">
+                                <label class="nhsuk-label nhsuk-radios__label" for="entitlement-type-s2">
+                                  S2/E112 - Article 20.2
+                                </label>
+                              </div>
+                            </div>
+                            </div>
+            
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label" id="entitlement-country-label" for="entitlement-country" class="form-label">
+                                Entitlement country
+                              </label>
+                              <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country">
+                              <datalist id="countries">
+                                <option value="" selected="selected"></option>
+                                <option value="Austria (AT)">Austria (AT)</option>
+                                <option value="Belgium (BE)">Belgium (BE)</option>
+                                <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                                <option value="Croatia (HR)">Croatia (HR)</option>
+                                <option value="Cyprus (CY)">Cyprus (CY)</option>
+                                <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                                <option value="Denmark (DK)">Denmark (DK)</option>
+                                <option value="Estonia (EE)">Estonia (EE)</option>
+                                <option value="Finland (FI)">Finland (FI)</option>
+                                <option value="France (FR)">France (FR)</option>
+                                <option value="Germany (DE)">Germany (DE)</option>
+                                <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                                <option value="Greece (GR)">Greece (GR)</option>
+                                <option value="Hungary (HU)">Hungary (HU)</option>
+                                <option value="Iceland (IS)">Iceland (IS)</option>
+                                <option value="Ireland (IE)">Ireland (IE)</option>
+                                <option value="Italy (IT)">Italy (IT)</option>
+                                <option value="Latvia (LV)">Latvia (LV)</option>
+                                <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                                <option value="Lithuania (LT)">Lithuania (LT)</option>
+                                <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                                <option value="Malta (MT)">Malta (MT)</option>
+                                <option value="Netherlands (NL)">Netherlands (NL)</option>
+                                <option value="Norway (NO)">Norway (NO)</option>
+                                <option value="Poland (PL)">Poland (PL)</option>
+                                <option value="Portugal (PT)">Portugal (PT)</option>
+                                <option value="Romania (RO)">Romania (RO)</option>
+                                <option value="Slovakia (SK)">Slovakia (SK)</option>
+                                <option value="Slovenia (SI)">Slovenia (SI)</option>
+                                <option value="Spain (ES)">Spain (ES)</option>
+                                <option value="Sweden (SE)">Sweden (SE)</option>
+                                <option value="Switzerland (CH)">Switzerland (CH)</option>
+                              </datalist>            
+                            </div>
+                        
+
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End of EHIC and PRC and S2/E112 content -->
+                      {% else %}
+                      <!-- Start of S1/S072 content -->
+                      <div class="nhsuk-form-group">
+
+                        <div class="nhsuk-grid-row">
+                          <div class="nhsuk-grid-column-one-half">
+
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label" for="country">
+                                Enter year of claim
+                              </label>
+                              <input class="nhsuk-input nhsuk-input--width-5" id="country" name="country" type="number">
+                            </div>
+
+                            <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" style="margin-bottom: 20px;" for="example">
+                              Entitlement - Article type
+                            </label>
+
+                            <div class="nhsuk-radios nhsuk-radios--inline">
+                              <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="entitlement-type-s1-article-65" name="entitlement-article-type" type="radio" value="S1/S072 - Article 65">
+                                <label class="nhsuk-label nhsuk-radios__label" for="entitlement-type-s1-article-65">
+                                  S1/S072 - Article 65
+                                </label>
+                              </div>
+
+                              <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="entitlement-type-s1-article-63" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63">
+                                <label class="nhsuk-label nhsuk-radios__label" for="entitlement-type-s1-article-63">
+                                  S1/S072 - Article 63
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" id="entitlement-country-label" for="entitlement-country" class="form-label">
+                              Entitlement country
+                            </label>
+                            <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country">
+                            <datalist id="countries">
+                              <option value="" selected="selected"></option>
+                              <option value="Austria (AT)">Austria (AT)</option>
+                              <option value="Belgium (BE)">Belgium (BE)</option>
+                              <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                              <option value="Croatia (HR)">Croatia (HR)</option>
+                              <option value="Cyprus (CY)">Cyprus (CY)</option>
+                              <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                              <option value="Denmark (DK)">Denmark (DK)</option>
+                              <option value="Estonia (EE)">Estonia (EE)</option>
+                              <option value="Finland (FI)">Finland (FI)</option>
+                              <option value="France (FR)">France (FR)</option>
+                              <option value="Germany (DE)">Germany (DE)</option>
+                              <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                              <option value="Greece (GR)">Greece (GR)</option>
+                              <option value="Hungary (HU)">Hungary (HU)</option>
+                              <option value="Iceland (IS)">Iceland (IS)</option>
+                              <option value="Ireland (IE)">Ireland (IE)</option>
+                              <option value="Italy (IT)">Italy (IT)</option>
+                              <option value="Latvia (LV)">Latvia (LV)</option>
+                              <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                              <option value="Lithuania (LT)">Lithuania (LT)</option>
+                              <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                              <option value="Malta (MT)">Malta (MT)</option>
+                              <option value="Netherlands (NL)">Netherlands (NL)</option>
+                              <option value="Norway (NO)">Norway (NO)</option>
+                              <option value="Poland (PL)">Poland (PL)</option>
+                              <option value="Portugal (PT)">Portugal (PT)</option>
+                              <option value="Romania (RO)">Romania (RO)</option>
+                              <option value="Slovakia (SK)">Slovakia (SK)</option>
+                              <option value="Slovenia (SI)">Slovenia (SI)</option>
+                              <option value="Spain (ES)">Spain (ES)</option>
+                              <option value="Sweden (SE)">Sweden (SE)</option>
+                              <option value="Switzerland (CH)">Switzerland (CH)</option>
+                            </datalist>            
+                          </div>
+
+                          <label class="nhsuk-label" style="margin-top: 30px; margin-bottom: 20px;">
+                            Select how the claim will be sent to the member state
+                          </label>
+                          <div class="nhsuk-radios">
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="claim-sent-by-post" name="claim-sent-by" type="radio" value="Post">
+                              <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-post">
+                                Post
+                              </label>
+                            </div>
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="claim-sent-by-rina" name="claim-sent-by" type="radio" value="RINA">
+                              <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-rina">
+                                RINA
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    <!-- End of S1/S072 content -->
+
+
+                    
+                    <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit" id="create-new-claim-button">Create claim</button>
+                  </form>
+              </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+<!--Side nav -->
+    <!--div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <ul>
+          <div id="options" class="options">
+            <h3 class="nhsuk-heading-xs">Browse</h3>
+              <li>
+                <a href="../s1/search/search-by-person">Search</a>
+              </li>
+
+            <h3 class="nhsuk-heading-xs">Actions</h3>
+              <li>
+                <a href="account-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">2</span></a>
+                <a href="review-treatments">Review treatments<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                <a href="uk-claims-search" class="active">UK claims</a>
+                <a href="resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="non-eu-reciprocal-healthcare-quota">Non-EU Reciprocal Healthcare (Quota)</a>
+              </li>
+          </div>
+        </ul>
+      </div>
+    </div-->
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#entitlement-country-drop')
+  })
+</script>
+
+{% endblock %}

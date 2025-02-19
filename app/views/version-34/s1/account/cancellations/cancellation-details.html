@@ -1,0 +1,442 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Enter cancellation details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="cancellation-details" method="post">
+
+                      <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                          S1/S072 entitlement cancellation
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Cancellation details
+                      </h1>
+
+                      <!-- Start of 'Select who is cancelling the entitlement' radios -->
+                      <fieldset class="nhsuk-fieldset">
+                        <legend class="nhsuk-label">
+                          Select who is cancelling the entitlement
+                        </legend>
+
+                        <div class="nhsuk-form-group">
+                          <div class="nhsuk-radios nhsuk-radios--inline">
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="uk" name="cancelled-by" type="radio" value="UK" aria-controls="conditional-contact-1" aria-expanded="false" />
+                              <label class="nhsuk-label nhsuk-radios__label" for="uk">UK</label>
+                            </div>
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="member-state" name="cancelled-by" type="radio" value="The Member State" aria-controls="conditional-contact-2" aria-expanded="false" />
+                              <label class="nhsuk-label nhsuk-radios__label" for="member-state">The Member State</label>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                      <!-- End of 'Select who is cancelling the entitlement' radios -->
+
+                      <hr style="margin-top: 10px;">
+
+                      <!-- Start of 'Enter the end date of the S1/S072 entitlement' -->
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="entitlement-end-date-label">Enter the end date of the S1/S072 entitlement</label>
+                        <div class="nhsuk-hint" id="example-hint">
+                          For example, 28 8 2024
+                        </div>
+                    
+                          <div class="nhsuk-date-input" id="entitlement-end-date">
+                            <div class="nhsuk-date-input__item">
+                              <div class="nhsuk-form-group">
+                                <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-day">Day</label>
+                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="entitlement-end-date-day" name="entitlement-end-date-day" type="number" pattern="[0-9]*" value="">
+                              </div>
+                            </div>
+                            <div class="nhsuk-date-input__item">
+                              <div class="nhsuk-form-group">
+                                <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-month">Month</label>
+                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="entitlement-end-date-month" name="entitlement-end-date-month" type="number" pattern="[0-9]*" value="">
+                              </div>
+                            </div>
+                            <div class="nhsuk-date-input__item">
+                              <div class="nhsuk-form-group">
+                                <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-year">Year</label>
+                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="entitlement-end-date-year" name="entitlement-end-date-year" type="number" pattern="[0-9]*" value="">
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <!-- End of 'Enter the end date of the S1/S072 entitlement' -->
+
+                      <hr>
+
+                    <!-- Start of 'Select the cancellation reason' conditional radios -->
+                    <div class="nhsuk-form-group">
+                      <fieldset class="nhsuk-fieldset">
+                        <legend class="nhsuk-label">
+                          Select the cancellation reason
+                        </legend>
+
+                        <div class="nhsuk-radios nhsuk-radios--conditional">
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="entitlement-holder-no-longer-insured-by-ms" name="cancellation-reason" type="radio" value="The entitlement holder is no longer insured by the Member State" aria-controls="conditional-contact-1" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="entitlement-holder-no-longer-insured-by-ms">The entitlement holder is no longer insured by the Member State</label>
+                            </div>
+                            <!-- Date entry begins -->
+                            <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-1">
+                              <label class="nhsuk-label" for="date-entitlement-holder-no-longer-insured-by-ms-day-label">Enter the date the entitlement holder became no longer insured by the Member State</label>
+                              <div class="nhsuk-hint" id="s1-entitlement-issue-date-hint">For example, 3 2 2025</div>
+                                <div class="nhsuk-date-input" id="date-entitlement-holder-no-longer-insured-by-ms">
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-no-longer-insured-by-ms-day">Day</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-no-longer-insured-by-ms-day" name="date-entitlement-holder-no-longer-insured-by-ms-day" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-no-longer-insured-by-ms-month">Month</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-no-longer-insured-by-ms-month" name="date-entitlement-holder-no-longer-insured-by-ms-month" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-no-longer-insured-by-ms-year">Year</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-entitlement-holder-no-longer-insured-by-ms-year" name="date-entitlement-holder-no-longer-insured-by-ms-year" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                </div>
+                              <!-- Date entry ends -->
+                            </div>
+
+
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="entitlement-holder-no-longer-entitled-to-sickness-benefits-from-ms" name="cancellation-reason" type="radio" value="The entitlement holder is no longer entitled to sickness benefit from the Member State" aria-controls="conditional-contact-2" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="entitlement-holder-no-longer-entitled-to-sickness-benefits-from-ms">The entitlement holder is no longer entitled to sickness benefit from the Member State</label>
+                            </div>
+                            <!-- Date entry begins -->
+                            <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-2">
+                              <label class="nhsuk-label" for="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-label">Enter the date the entitlement holder became no longer entitled to sickness benefit from the Member State</label>
+                              <div class="nhsuk-hint" id="s1-entitlement-issue-date-hint">For example, 3 2 2025</div>
+                                <div class="nhsuk-date-input" id="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms">
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-day">Day</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-day" name="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-day" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-month">Month</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-month" name="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-month" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-year">Year</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-year" name="date-entitlement-holder-no-longer-entitled-to-sickness-benefits-by-ms-year" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                </div>
+                              <!-- Date entry ends -->
+                            </div>
+
+
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="entitlement-holder-no-longer-lives-in-uk" name="cancellation-reason" type="radio" value="The entitlement holder no longer lives in the UK" aria-controls="conditional-contact-3" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="entitlement-holder-no-longer-lives-in-uk">The entitlement holder no longer lives in the UK</label>
+                            </div>
+                            <!-- Date entry begins -->
+                            <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-3">
+                              <label class="nhsuk-label" for="date-entitlement-holder-uk-residency-ended-label">Enter the date the entitlement holder's UK residency ended</label>
+                              <div class="nhsuk-hint" id="s1-entitlement-issue-date-hint">For example, 3 2 2025</div>
+                                <div class="nhsuk-date-input" id="date-entitlement-holder-uk-residency-ended">
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-uk-residency-endeds-day">Day</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-uk-residency-ended-day" name="date-entitlement-holder-uk-residency-ended-day" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-uk-residency-ended-month">Month</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-uk-residency-ended-month" name="date-entitlement-holder-uk-residency-ended-month" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-uk-residency-ended-year">Year</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-entitlement-holder-uk-residency-ended-year" name="date-entitlement-holder-uk-residency-ended-year" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                </div>
+                              <!-- Date entry ends -->
+                            </div>
+
+
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="entitlement-holder-lives-in-another-ms" name="cancellation-reason" type="radio" value="The entitlement holder lives in another Member State" aria-controls="conditional-contact-4" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="entitlement-holder-lives-in-another-ms">The entitlement holder lives in another Member State</label>
+                            </div>
+                            <!-- Date entry begins -->
+                            <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-4">
+                              <label class="nhsuk-label" for="date-entitlement-moved-to-another-ms-label">Enter the date the entitlement holder moved to another Member State</label>
+                              <div class="nhsuk-hint" id="s1-entitlement-issue-date-hint">For example, 3 2 2025</div>
+                                <div class="nhsuk-date-input" id="date-entitlement-moved-to-another-ms">
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-moved-to-another-ms-day">Day</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-moved-to-another-ms-day" name="date-entitlement-moved-to-another-ms-day" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-moved-to-another-ms-month">Month</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-moved-to-another-ms-month" name="date-entitlement-moved-to-another-ms-month" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-moved-to-another-ms-year">Year</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-entitlement-moved-to-another-ms-year" name="date-entitlement-moved-to-another-ms-year" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                </div>
+                              <!-- Date entry ends -->
+                            </div>
+
+
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="entitlement-holder-has-died" name="cancellation-reason" type="radio" value="The entitlement holder has died" aria-controls="conditional-contact-5" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="entitlement-holder-has-died">The entitlement holder has died</label>
+                            </div>
+                            <!-- Date entry begins -->
+                            <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-5">
+                              <label class="nhsuk-label" for="date-entitlement-holder-died-label">Enter the date the entitlement holder died</label>
+                              <div class="nhsuk-hint" id="s1-entitlement-issue-date-hint">For example, 3 2 2025</div>
+                                <div class="nhsuk-date-input" id="date-entitlement-holder-died">
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-died-day">Day</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-died-day" name="date-entitlement-holder-died-day" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-died-month">Month</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-holder-died-month" name="date-entitlement-holder-died-month" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                  <div class="nhsuk-date-input__item">
+                                    <div class="nhsuk-form-group">
+                                      <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-holder-died-year">Year</label>
+                                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-entitlement-holder-died-year" name="date-entitlement-holder-died-year" type="number" pattern="[0-9]*" value="">
+                                    </div>
+                                  </div>
+                                </div>
+                              <!-- Date entry ends -->
+                            </div>
+
+
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="entitlement-holder-is-insured-in-other-country-with-pension" name="cancellation-reason" type="radio" value="The entitlement holder is insured in another country because they have a pension there" aria-controls="conditional-contact-6" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="entitlement-holder-is-insured-in-other-country-with-pension">The entitlement holder is insured in another country because they have a pension there. See Regulation (EC) 883/04 article 24(2)(b)</label>
+                            </div>
+                            <!-- Country selection begins -->
+                            <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-6">
+                              <label class="nhsuk-label" for="date-entitlement-holder-died-label">Select the country the entitlement holder is or will be in receipt of a state pension</label>
+                              <div class="nhsuk-hint" id="example-hint">
+                                You can also type the country.
+                              </div>
+                                <div class="nhsuk-form-group">
+                                  <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="state-pension-country-drop" name="state-pension-country">
+                                  <datalist id="countries">
+                                    <option value="" selected="selected"></option>
+                                    <option value="Austria (AT)">Austria (AT)</option>
+                                    <option value="Belgium (BE)">Belgium (BE)</option>
+                                    <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                                    <option value="Croatia (HR)">Croatia (HR)</option>
+                                    <option value="Cyprus (CY)">Cyprus (CY)</option>
+                                    <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                                    <option value="Denmark (DK)">Denmark (DK)</option>
+                                    <option value="Estonia (EE)">Estonia (EE)</option>
+                                    <option value="Finland (FI)">Finland (FI)</option>
+                                    <option value="France (FR)">France (FR)</option>
+                                    <option value="Germany (DE)">Germany (DE)</option>
+                                    <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                                    <option value="Greece (GR)">Greece (GR)</option>
+                                    <option value="Hungary (HU)">Hungary (HU)</option>
+                                    <option value="Iceland (IS)">Iceland (IS)</option>
+                                    <option value="Ireland (IE)">Ireland (IE)</option>
+                                    <option value="Italy (IT)">Italy (IT)</option>
+                                    <option value="Latvia (LV)">Latvia (LV)</option>
+                                    <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                                    <option value="Lithuania (LT)">Lithuania (LT)</option>
+                                    <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                                    <option value="Malta (MT)">Malta (MT)</option>
+                                    <option value="Netherlands (NL)">Netherlands (NL)</option>
+                                    <option value="Norway (NO)">Norway (NO)</option>
+                                    <option value="Poland (PL)">Poland (PL)</option>
+                                    <option value="Portugal (PT)">Portugal (PT)</option>
+                                    <option value="Romania (RO)">Romania (RO)</option>
+                                    <option value="Slovakia (SK)">Slovakia (SK)</option>
+                                    <option value="Slovenia (SI)">Slovenia (SI)</option>
+                                    <option value="Spain (ES)">Spain (ES)</option>
+                                    <option value="Sweden (SE)">Sweden (SE)</option>
+                                    <option value="Switzerland (CH)">Switzerland (CH)</option>
+                                    <option value="United Kingdom(UK)">United Kingdom (UK)</option>
+                                  </datalist>            
+                              </div>
+                              <!-- Date entry ends -->
+                            </div>
+
+
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="change-to-entitlement-holders-citizen-status" name="cancellation-reason" type="radio" value="The status of the entitlement holder has changed" aria-controls="conditional-contact-7" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="change-to-entitlement-holders-citizen-status">The status of the entitlement holder has changed</label>
+                            </div>
+
+
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="institution-issuing-entitlement-changed" name="cancellation-reason" type="radio" value="The institution issuing the entitlement has changed" aria-controls="conditional-contact-8" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="institution-issuing-entitlement-changed">The institution issuing the entitlement has changed</label>
+                            </div>
+
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="other" name="cancellation-reason" type="radio" value="Other" aria-controls="conditional-contact-9" aria-expanded="false">
+                              <label class="nhsuk-label nhsuk-radios__label" for="other">Other</label>
+                            </div>
+                            <!-- Other cancellation reason entry begins -->
+                            <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-contact-9">
+                              <label class="nhsuk-label" for="date-entitlement-holder-died-label">Enter the cancellation reason</label>
+                                <div class="nhsuk-form-group">
+                                    <textarea class="nhsuk-textarea" id="otherCancellationReasonComments" name="other-cancellation-reason-comments" rows="4" maxlength="255"></textarea>
+                                    <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">255 characters remaining</p>
+                                    <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 255 characters</p>
+                                  </div>         
+                              </div>
+                              <!-- Other cancellation reason entry ends -->
+                            </div>
+
+                    </fieldset>
+                  </div>
+                  <!-- End of 'Select the cancellation reason' conditional radios -->
+
+                  <button class="nhsuk-button nhsuk-u-margin-top-3" style="margin-bottom: 60px;" data-module="nhsuk-button" type="submit">Continue</button>
+
+
+                  </form>
+
+                </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#state-pension-country-drop')
+  })
+</script>
+
+<script>
+  const textarea = document.querySelector('#otherCancellationReasonComments');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 255;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 255);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
+{% endblock %}
