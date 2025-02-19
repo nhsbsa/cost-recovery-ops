@@ -72,7 +72,9 @@
                         <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" 
                               aria-label="S1/S072 - Valid: from 05/09/2024 - France (FR)">
                           S1/S072 - Valid: from 05/09/2024 to
-                          {% if data['entitlement-end-date'] %}
+                          {% if data['update-s1-entitlement-end-date'] == 'yes' %}
+                            {{ data['updated-s1-entitlement-end-date'] }}
+                          {% elif data['entitlement-end-date'] %}
                             {{ data['entitlement-end-date'] }}
                           {% else %}
                             13/01/2025
@@ -137,7 +139,9 @@
                           {% if data['cancel-s1-entitlement'] == 'yes' %}
                             <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" aria-label="S1/S072 - Valid: 13/12/2024 - France (FR)">
                               S1/S072 - Valid: from 05/10/2024 to
-                              {% if data['entitlement-end-date'] %}
+                              {% if data['update-s1-entitlement-end-date'] == 'yes' %}
+                                {{ data['updated-s1-entitlement-end-date'] }}
+                              {% elif data['entitlement-end-date'] %}
                                 {{ data['entitlement-end-date'] }}
                               {% else %}
                                 13/01/2025
