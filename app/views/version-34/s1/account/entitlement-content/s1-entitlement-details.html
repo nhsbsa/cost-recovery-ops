@@ -360,7 +360,7 @@
                             {{ day | int }} {{ month_name }} {{ year }}
                           {% else %}
                             {# Display fallback date if no update date is entered #}
-                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                            3 January 2025
                           {% endif %}
 
                         {% elif data['cancel-s1-entitlement'] == 'yes' %}
@@ -588,7 +588,7 @@
                   </div>
 
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">End date of S1/S072 entitlement</dt>
+                    <dt class="nhsuk-summary-list__key">New end date of S1/S072 entitlement</dt>
                     <dd class="nhsuk-summary-list__value">
                     {% if data['update-s1-entitlement-end-date'] == 'yes' %}
 
@@ -638,7 +638,7 @@
 
                     <dd class="nhsuk-summary-list__actions">
                       <a href="change-s1-entitlement-end-date">
-                        Change<span class="nhsuk-u-visually-hidden">the end date of S1/S072 entitlement</span>
+                        Change<span class="nhsuk-u-visually-hidden">the new end date of the S1/S072 entitlement</span>
                       </a>
                     </dd>
                   </div>
@@ -940,35 +940,6 @@
                 </dd>
               </div>
 
-              <div class="nhsuk-summary-list__row">
-                <dt class="nhsuk-summary-list__key">Date state pension awarded</dt>
-                <dd class="nhsuk-summary-list__value">
-                  {% if data['state-pension-awarded-date-day'] and data['state-pension-awarded-date-month'] and data['state-pension-awarded-date-year'] %}
-                      {% set day = data['state-pension-awarded-date-day'] %}
-                      {% set month = data['state-pension-awarded-date-month'] | int %}
-                      {% set year = data['state-pension-awarded-date-year'] %}
-          
-                      {# Define month names #}
-                      {% set month_names = [
-                          "January", "February", "March", "April", "May", "June",
-                          "July", "August", "September", "October", "November", "December"
-                      ] %}
-          
-                      {# Get the month name #}
-                      {% set month_name = month_names[month - 1] %}
-          
-                      {# Display the date in the format "day month year" #}
-                      {{ day | int }} {{ month_name }} {{ year }}
-                  {% else %}
-                      Not provided
-                  {% endif %}
-                </dd>
-
-                <dd class="nhsuk-summary-list__actions">
-                  <!-- Add any actions here if needed for interaction -->
-                </dd>
-              </div>
-
                 <!-- only display additional comments if user input comments during cancellation journey -->
                 {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
                 <div class="nhsuk-summary-list__row">
@@ -1067,7 +1038,7 @@
 
 
                 <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key">End date of S1/S072 entitlement</dt>
+                  <dt class="nhsuk-summary-list__key">New end date of S1/S072 entitlement</dt>
                   <dd class="nhsuk-summary-list__value">
                       {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
                             {% set day = data['entitlement-end-date-day'] %}
@@ -1092,7 +1063,7 @@
 
                   <dd class="nhsuk-summary-list__actions">
                     <a href="change-s1-entitlement-end-date">
-                      Change<span class="nhsuk-u-visually-hidden">the end date of S1/S072 entitlement</span>
+                      Change<span class="nhsuk-u-visually-hidden">the new end date of the S1/S072 entitlement</span>
                     </a>
                   </dd>
                 </div>
@@ -1386,35 +1357,6 @@
                   {{ data['state-pension-country'] }}
                 {% else %}
                   United Kingdom (UK)
-                {% endif %}
-              </dd>
-
-              <dd class="nhsuk-summary-list__actions">
-                <!-- Add any actions here if needed for interaction -->
-              </dd>
-            </div>
-
-            <div class="nhsuk-summary-list__row">
-              <dt class="nhsuk-summary-list__key">Date state pension awarded</dt>
-              <dd class="nhsuk-summary-list__value">
-                {% if data['state-pension-awarded-date-day'] and data['state-pension-awarded-date-month'] and data['state-pension-awarded-date-year'] %}
-                    {% set day = data['state-pension-awarded-date-day'] %}
-                    {% set month = data['state-pension-awarded-date-month'] | int %}
-                    {% set year = data['state-pension-awarded-date-year'] %}
-        
-                    {# Define month names #}
-                    {% set month_names = [
-                        "January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"
-                    ] %}
-        
-                    {# Get the month name #}
-                    {% set month_name = month_names[month - 1] %}
-        
-                    {# Display the date in the format "day month year" #}
-                    {{ day | int }} {{ month_name }} {{ year }}
-                {% else %}
-                    Not provided
                 {% endif %}
               </dd>
 

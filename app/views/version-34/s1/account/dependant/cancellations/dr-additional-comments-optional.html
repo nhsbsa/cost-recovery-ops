@@ -47,15 +47,22 @@ Add a comment (optional) - Manage overseas entitlements and treatments - NHSBSA
                           </label>
 
 
-                            <div class="nhsuk-form-group">
-                              <div class="nhsuk-hint" id="dr-cancellation-additional-comments-hint">
-                                Your comments will display on the Cancellation details tab.
-                              </div>
+                          <div class="nhsuk-form-group">
+                            <div class="nhsuk-hint" id="cancellation-additional-comments-hint">
+                              {% if data['dr-cancellation-reason'] == 'Other' %}
+                                For example, you may want to enter the date the Member State awarded the state pension and the RINA reference number.
+                                <br><br>
+                                Your comments will be displayed on the Cancellation details tab.
+                              {% else %}
+                                For example, you may want to enter the RINA reference number. Your comments will be displayed on the Cancellation details tab.
+                              {% endif %}
                               
-                              <textarea class="nhsuk-textarea" id="drCancellationAdditionalComments" name="dr-cancellation-additional-comments" rows="4" maxlength="255"></textarea>
-                              <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">255 characters remaining</p>
-                              <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 255 characters</p>
-                            </div>  
+                            </div>
+                            
+                            <textarea class="nhsuk-textarea" id="drCancellationAdditionalComments" name="dr-cancellation-additional-comments" rows="4" maxlength="255"></textarea>
+                            <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">255 characters remaining</p>
+                            <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 255 characters</p>
+                          </div> 
                             
 
                             <button class="nhsuk-button" style="margin-top: 25px;" type="submit">Continue</button>
