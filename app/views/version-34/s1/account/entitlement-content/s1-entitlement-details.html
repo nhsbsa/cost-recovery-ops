@@ -691,7 +691,7 @@
               </div>
 
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -735,7 +735,7 @@
               </div>
 
               <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -779,7 +779,7 @@
               </div>
 
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -823,7 +823,7 @@
               </div>
 
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -867,7 +867,7 @@
               </div>
 
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -911,7 +911,7 @@
               </div>
 
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -924,7 +924,7 @@
                 </div>
                 {% endif %}
 
-              {% elif data['cancellation-reason'] == 'The entitlement holder is insured in another country because they have a pension there' %}
+              {% elif data['cancellation-reason'] == 'The entitlement holder is insured in another country on the basis of pension conform Regulation (EC) 883/2004 article 24(2)(b)' %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Country where state pension awarded</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -941,7 +941,7 @@
               </div>
 
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -956,7 +956,7 @@
 
               {% elif data['cancellation-reason'] == 'The status of the entitlement holder has changed' %}
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -971,7 +971,7 @@
 
               {% elif data['cancellation-reason'] == 'The institution issuing the entitlement has changed' %}
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -986,7 +986,7 @@
 
               {% elif data['cancellation-reason'] == 'The dependant has applied for their own S1' %}
                 <!-- only display additional comments if user input comments during cancellation journey -->
-                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key">Additional comments</dt>
                   <dd class="nhsuk-summary-list__value">
@@ -1001,12 +1001,27 @@
 
               {% elif data['cancellation-reason'] == 'Other' %}
               <div class="nhsuk-summary-list__row">
-                <dt class="nhsuk-summary-list__key">Comments</dt>
+                <dt class="nhsuk-summary-list__key">Other cancellation reason</dt>
                 <dd class="nhsuk-summary-list__value">
                   {% if data['other-cancellation-reason-comments'] %}
                     {{ data['other-cancellation-reason-comments'] }}
                   {% else %}
                     Other cancellation reason explained here.
+                  {% endif %}
+                </dd>
+
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Add any actions here if needed for interaction -->
+                </dd>
+              </div>
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
+                <dd class="nhsuk-summary-list__value">
+                  {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
+                    {{ data['cancellation-additional-comments'] }}
+                  {% else %}
+                    None provided
                   {% endif %}
                 </dd>
 
@@ -1116,7 +1131,7 @@
             </div>
 
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1160,7 +1175,7 @@
             </div>
 
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1204,7 +1219,7 @@
             </div>
 
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1248,7 +1263,7 @@
             </div>
 
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1292,7 +1307,7 @@
             </div>
 
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1336,7 +1351,7 @@
             </div>
 
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1349,7 +1364,7 @@
               </div>
               {% endif %}
 
-            {% elif data['cancellation-reason'] == 'The entitlement holder is insured in another country because they have a pension there' %}
+            {% elif data['cancellation-reason'] == 'The entitlement holder is insured in another country on the basis of pension conform Regulation (EC) 883/2004 article 24(2)(b)' %}
             <div class="nhsuk-summary-list__row">
               <dt class="nhsuk-summary-list__key">Country where state pension awarded</dt>
               <dd class="nhsuk-summary-list__value">
@@ -1366,7 +1381,7 @@
             </div>
 
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1381,7 +1396,7 @@
 
             {% elif data['cancellation-reason'] == 'The status of the entitlement holder has changed' %}
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1396,7 +1411,7 @@
 
             {% elif data['cancellation-reason'] == 'The institution issuing the entitlement has changed' %}
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1411,7 +1426,7 @@
 
             {% elif data['cancellation-reason'] == 'The dependant has applied for their own S1' %}
               <!-- only display additional comments if user input comments during cancellation journey -->
-              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments']|trim != '' %}
+              {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
               <div class="nhsuk-summary-list__row">
                 <dt class="nhsuk-summary-list__key">Additional comments</dt>
                 <dd class="nhsuk-summary-list__value">
@@ -1426,12 +1441,27 @@
 
             {% elif data['cancellation-reason'] == 'Other' %}
             <div class="nhsuk-summary-list__row">
-              <dt class="nhsuk-summary-list__key">Comments</dt>
+              <dt class="nhsuk-summary-list__key">Other cancellation reason</dt>
               <dd class="nhsuk-summary-list__value">
                 {% if data['other-cancellation-reason-comments'] %}
                   {{ data['other-cancellation-reason-comments'] }}
                 {% else %}
                   Other cancellation reason explained here.
+                {% endif %}
+              </dd>
+
+              <dd class="nhsuk-summary-list__actions">
+                <!-- Add any actions here if needed for interaction -->
+              </dd>
+            </div>
+
+            <div class="nhsuk-summary-list__row">
+              <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
+              <dd class="nhsuk-summary-list__value">
+                {% if data['cancellation-additional-comments'] and data['cancellation-additional-comments'] %}
+                  {{ data['cancellation-additional-comments'] }}
+                {% else %}
+                  None provided
                 {% endif %}
               </dd>
 
