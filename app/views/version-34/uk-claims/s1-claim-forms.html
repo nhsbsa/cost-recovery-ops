@@ -30,7 +30,7 @@ UK claim ID 123456
           <li class="nhsuk-breadcrumb__item">
             <a class="nhsuk-breadcrumb__link" href="uk-claims-search-results">Search results</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">View Claim ID (Forms)</li>
+          <li class="nhsuk-breadcrumb__item">View Claim ID (Invoices)</li>
         </ol>
       </div>
     </div>
@@ -54,10 +54,16 @@ UK claim ID 123456
             
             <div class="nhsuk-grid-row">   
               <div class="nhsuk-grid-column-one-half">
-                {% if data ['entitlement-article-type'] == 'S1/S072 - Article 65' %}
-                  <h1 class="nhsuk-heading-l">Claim ID 123456 - Forms - Article 65</h1>
+                {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' %}
+                  <h1 class="nhsuk-heading-l">Claim ID 100001 - Forms for EHIC and PRC - Article 62</h1>
+                {% elif data['entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                <h1 class="nhsuk-heading-l">Claim ID ID 100002 - Forms for S2/E112 - Article 20.2</h1>
+                {% elif data['entitlement-article-type'] == 'S1/S072 - Article 65'  %}
+                <h1 class="nhsuk-heading-l">Claim ID 100003 - Invoices for<br>S1/S072 Article 65 - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a'  %}
+                <h1 class="nhsuk-heading-l">Claim ID 100004 - Invoices for<br>S1/S072 Article 63, 2.a - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
                 {% else %}
-                  <h1 class="nhsuk-heading-l">Claim ID 123456 - Forms - Article 63</h1>
+                <h1 class="nhsuk-heading-l">Claim ID 100005 - Invoices for<br>S1/S072 Article 63, 2.b - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
                 {% endif %}
               </div>
             </div>
@@ -67,8 +73,8 @@ UK claim ID 123456
           <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
             <ul class="nhsuk-secondary-navigation__list">
               <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-forms">Forms</a>
-                <span class="nhsuk-u-visually-hidden">Search for a form</span>
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-forms">Invoices</a>
+                <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
               </li>
 
               <li class="nhsuk-secondary-navigation__item">
@@ -76,10 +82,10 @@ UK claim ID 123456
                 <span class="nhsuk-u-visually-hidden">View the overall summary for claim 123456</span>
               </li>
 
-              <li class="nhsuk-secondary-navigation__item">
+              <!--li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
                 <span class="nhsuk-u-visually-hidden">View the age groups for claim 123456</span>
-              </li>
+              </li-->
 
               <li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
@@ -102,14 +108,15 @@ UK claim ID 123456
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-one-half">
               <div class="nhsuk-hint">
-                Search for a form using person record ID or last name. Search for up to 8
-                forms at once by separating each person record ID number with a comma. For example, 106370, 160950, 170110
+                Search for a single invoice using the person ID number or a person's last name.
+                Search for up to 8 invoices at once by separating each invoice ID number with a comma.
+                For example, 111110, 111112, 111113.
               </div>
 
               <form class="nhsuk-header__search-form nhsuk-header__search-form--search-results" id="search"
                 action="/search/" method="get" role="search">
 
-                <label class="nhsuk-u-visually-hidden" for="search-results-field">Search by person record ID or last name to add forms for printing or to resubmit</label>
+                <label class="nhsuk-u-visually-hidden" for="search-results-field">Search by invoice ID or last name to add forms for printing or to resubmit</label>
 
                 <input class="nhsuk-search__input" id="search-results-field" name="search-field" type="search">
                 <a class="nhsuk-search__submit" href="#">
@@ -132,51 +139,16 @@ UK claim ID 123456
           <details class="nhsuk-details-1">
             <summary class="nhsuk-details__summary-1">
               <span class="nhsuk-details__summary-text-1">
-                Filter forms
+                Filter by agreement
               </span>
             </summary>
             <div class="nhsuk-details__text">
 
-              <div class="nhsuk-form-group">
-                <fieldset class="nhsuk-fieldset">
-                    <h2 class="nhsuk-heading-xs">
-                      By age group.
-                    </h2>
-
-                  <div class="nhsuk-radios nhsuk-radios--inline">
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="example-inline-1" name="example-inline" type="radio"
-                        value="tca">
-                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-1">
-                        0 - 19
-                      </label>
-                    </div>
-
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="example-inline-2" name="example-inline" type="radio"
-                        value="wa">
-                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-2">
-                        20 - 64
-                      </label>
-                    </div>
-
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="example-inline-2" name="example-inline" type="radio"
-                        value="wa">
-                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-2">
-                        65 and over
-                      </label>
-                    </div>
-
-                  </div>
-                </fieldset>
-              </div>
-
 
               <div class="nhsuk-form-group">
                 <fieldset class="nhsuk-fieldset">
                     <h2 class="nhsuk-heading-xs">
-                      By agreement type.
+                      Select agreement type.
                     </h2>
 
                   <div class="nhsuk-radios nhsuk-radios--inline">
@@ -212,15 +184,12 @@ UK claim ID 123456
           <br>
 
           {% if data ['entitlement-article-type'] == 'S1/S072 - Article 65' %}
-          <!-- Start of Forms table for S1/S072 Article 65 -->
-          <table role="table" id="formsTable" class="nhsuk-table-responsive">
-            <thead role="rowgroup" class="nhsuk-table__head" id="forms">
+          <!-- Start of Invoices table for S1/S072 Article 65 -->
+          <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
+            <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
               <tr role="row">
                 <th role="columnheader" class="" scope="col">
-                  Age group
-                </th>
-                <th role="columnheader" class="" scope="col">
-                  Form ID
+                  Invoice ID
                 </th>
                 <th role="columnheader" class="" scope="col">
                   First names
@@ -229,7 +198,7 @@ UK claim ID 123456
                   Last name
                 </th>
                 <th role="columnheader" class="" scope="col">
-                  Entitlement
+                  Entitlement registration type
                 </th>
                 <th role="columnheader" class="" scope="col">
                   Months claimed
@@ -246,11 +215,7 @@ UK claim ID 123456
             <tbody class="nhsuk-table__body">
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>0 - 19</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111110</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -262,7 +227,7 @@ UK claim ID 123456
                   <span>Pierlot</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>S1/S072</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -281,11 +246,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>65 and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111111</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -297,7 +258,7 @@ UK claim ID 123456
                   <span>Gardet</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>S1/S072</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -316,11 +277,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>20 -64</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111112</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -332,7 +289,7 @@ UK claim ID 123456
                   <span>Moreau</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>E109</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -351,11 +308,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>0 - 19</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111113</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -367,7 +320,7 @@ UK claim ID 123456
                   <span>Trouve</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>S1/S072</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -386,11 +339,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>20 - 64</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>123456</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -402,7 +351,7 @@ UK claim ID 123456
                   <span>Doe</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>S1/S072</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -421,11 +370,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>20 - 64</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111115</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -437,7 +382,7 @@ UK claim ID 123456
                   <span>Bouchard</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>E109</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -456,11 +401,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>0 - 19</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111116</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -472,7 +413,7 @@ UK claim ID 123456
                   <span>Jacquard</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>S1/S072</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -491,11 +432,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>65 and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111117</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -507,7 +444,7 @@ UK claim ID 123456
                   <span>Joubert</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>S1/S072</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -526,11 +463,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>65 and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111118</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -542,7 +475,7 @@ UK claim ID 123456
                   <span>Bouchard</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>S1/S072</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -561,11 +494,7 @@ UK claim ID 123456
 
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age group</span>
-                  <span>65 and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Form ID</span>
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>111119</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -577,7 +506,7 @@ UK claim ID 123456
                   <span>LeBeau</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                   <span>S1/S072</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -608,20 +537,17 @@ UK claim ID 123456
                 <li class="pagination__item"><a class="pagination__link next" href="#">Next »</a></li>
             </ul>
 
-            <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 34 forms</div>
+            <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 34 invoices</div>
           </nav>
           <!-- Pagination ends -->
           
-          {% else %}
-        <!-- Start of Forms table for S1/S072 - Article 63 -->
+          {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a'  %}
+        <!-- Start of Invoices table for S1/S072 - Article 63, 2.a -->
         <table role="table" id="dependantsTable" class="nhsuk-table-responsive">
-          <thead role="rowgroup" class="nhsuk-table__head" id="forms">
+          <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
             <tr role="row">
               <th role="columnheader" class="" scope="col">
-                Age group
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Form ID
+                Invoice ID
               </th>
               <th role="columnheader" class="" scope="col">
                 First names
@@ -630,7 +556,7 @@ UK claim ID 123456
                 Last name
               </th>
               <th role="columnheader" class="" scope="col">
-                Entitlement
+                Entitlement registration type
               </th>
               <th role="columnheader" class="" scope="col">
                 Months claimed
@@ -647,11 +573,7 @@ UK claim ID 123456
           <tbody class="nhsuk-table__body">
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>0 - 19</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>378392</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -663,7 +585,7 @@ UK claim ID 123456
                 <span>Janview</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>E109</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -682,11 +604,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>65 and over</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>947583</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -698,7 +616,7 @@ UK claim ID 123456
                 <span>Dupont</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>E109</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -717,11 +635,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>20 - 64</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>654321</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -733,7 +647,7 @@ UK claim ID 123456
                 <span>Doe</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>S1/S072</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -752,11 +666,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>20 - 64</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>324778</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -768,7 +678,7 @@ UK claim ID 123456
                 <span>Martin</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>S1/S072</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -787,11 +697,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>0 - 19</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>495729</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -803,7 +709,7 @@ UK claim ID 123456
                 <span>Bouchard</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>S1/S072</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -822,11 +728,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>65 and over</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>248829</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -838,7 +740,7 @@ UK claim ID 123456
                 <span>Germain</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>S1/S072</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -857,11 +759,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>0 - 19</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>394894</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -873,7 +771,7 @@ UK claim ID 123456
                 <span>Duguay</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>S1/S072</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -892,11 +790,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>65 and over</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>458825</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -908,7 +802,7 @@ UK claim ID 123456
                 <span>Leandres</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>E109</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -927,11 +821,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>65 and over</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>398198</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -943,7 +833,7 @@ UK claim ID 123456
                 <span>Thomas</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>S1/S072</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -962,11 +852,7 @@ UK claim ID 123456
 
             <tr role="row" class="nhsuk-table__row">
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Age group</span>
-                <span>20 - 64</span>
-              </td>
-              <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Form ID</span>
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                 <span>234892</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -978,7 +864,7 @@ UK claim ID 123456
                 <span>Bernard</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
-                <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
                 <span>S1/S072</span>
               </td>
               <td role="cell" class="nhsuk-table__cell">
@@ -999,7 +885,7 @@ UK claim ID 123456
           </tbody>
 
         </table>
-        <!-- End of Forms table for S1/S072 - Article 63 -->
+        <!-- End of Invoices table for S1/S072 - Article 63 -->
 
 
          <!-- Pagination starts -->
@@ -1010,10 +896,336 @@ UK claim ID 123456
                 <li class="pagination__item"><a class="pagination__link next" href="#">Next »</a></li>
             </ul>
 
-            <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 18 forms</div>
+            <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 18 invoices</div>
+          </nav>
+          <!-- Pagination ends -->
+        {% else %}
+
+        <!-- Start of Invoices table for S1/S072 - Article 63, 2.b -->
+        <table role="table" id="dependantsTable" class="nhsuk-table-responsive">
+          <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Invoice ID
+              </th>
+              <th role="columnheader" class="" scope="col">
+                First names
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Last name
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Entitlement registration type
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Months claimed
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Agreement
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Action
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="nhsuk-table__body">
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>824748</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Suzanne</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Paris</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>S1</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>3</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Suzanne Paris</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>928429</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Charles</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Cloutier</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>E109</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>6</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Charles Cloutier</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>394822</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Ambre</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Olivier</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>8</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Amber Olivier</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>387499</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Francine</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Gosse</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>3</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Francine Gosse</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>928488</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Andree</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Dupont</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>4</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Andree Dupont</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>394829</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Madeline</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Fay</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>E109</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>7</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Madeline Fay</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>384211</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Alexander</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>James</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>7</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Alexander James</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>199455</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Henri</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Savageon</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>11</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Henri Sauvageon</span></span>
+              </td>
+            </tr>
+
+            <tr role="row" class="nhsuk-table__row">
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                <span>924822</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">First names</span>
+                <span>Timothee</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Last name</span>
+                <span>Fabien</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Entitlement registration type</span>
+                <span>S1/S072</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                <span>5</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Agreement</span>
+                <span>TCA</span>
+              </td>
+              <td role="cell" class="nhsuk-table__cell">
+                <span class="nhsuk-table-responsive__heading">Action</span>
+                <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Timothee Fabien</span></span>
+              </td>
+            </tr>
+            
+          </tbody>
+
+        </table>
+        <!-- End of Invoices table for S1/S072 - Article 63 -->
+
+
+         <!-- Pagination starts -->
+          <nav class="nav" role="navigation" aria-label="Pagination">
+            <ul class="pagination">
+                <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
+            </ul>
+
+            <div class="pagination__summary navigation-mobile">Showing 1 - 9 of 9 invoices</div>
           </nav>
           <!-- Pagination ends -->
         {% endif %}
+
 
        
 

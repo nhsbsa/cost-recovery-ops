@@ -40,9 +40,13 @@ const claimSentBy = req.body['claim-sent-by'];
 req.session.data['entitlement-article-type'] = entitlementArticleType;
 req.session.data['claim-sent-by'] = claimSentBy;
 
-res.redirect('/version-34/uk-claims/uk-claims-loading-new-claim');
+res.redirect('/version-34/uk-claims/check-claim-details');
 })
 
+// Check claim details
+router.post([/check-claim-details/], function(req, res) {
+  res.redirect('/version-34/uk-claims/uk-claims-loading-new-claim');
+})
 
 // Claim loading
 router.post([/uk-claims-loading-new-claim/], function(req, res) {

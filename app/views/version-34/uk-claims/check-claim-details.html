@@ -1,0 +1,241 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Check your answers
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="create-new-uk-claim">Create new claim</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Check claim details (S1/S072 - Article 65)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <div class="nhsuk-grid-row">
+                  
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Check claim details for {% if data['search-entitlement-article-type'] %}{{ data['search-entitlement-article-type'] }}{% else %}S1/S072 - Article 65{% endif %}</h1>
+              <hr class="blue-horizontal-line">
+              <br>
+            </div>
+              
+            <div class="nhsuk-grid-column-two-thirds">
+              <form action="check-claim-details" method="post">
+                
+                
+                <dl class="nhsuk-summary-list">
+                      {% if data['search-entitlement-article-type'] == 'EHIC and PRC - Article 62' or data['search-entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                      <!-- Start of EHIC and PRC and S2/E112 content -->
+                      
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Year of claim</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['year-of-claim'] %}
+                              {{ data['year-of-claim'] }}
+                            {% else %}
+                              2024
+                            {% endif %}
+                          </dd>
+
+                          <dd class="nhsuk-summary-list__actions">
+                            <a href="create-new-uk-claim#year-of-claim"> Change<span class="nhsuk-u-visually-hidden">year of claim</span> </a>
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Month of claim</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['claim-month'] %}
+                              {{ data['claim-month'] }}
+                            {% else %}
+                              April
+                            {% endif %}
+                          </dd>
+
+                          <dd class="nhsuk-summary-list__actions">
+                            <a href="create-new-uk-claim#claim-month"> Change<span class="nhsuk-u-visually-hidden">month of claim</span> </a>
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Entitlement country</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['entitlement-country'] %}
+                              {{ data['entitlement-country'] }}
+                            {% else %}
+                              France (FR)
+                            {% endif %}
+                          </dd>
+
+                          <dd class="nhsuk-summary-list__actions">
+                            <a href="create-new-uk-claim#entitlement-country"> Change<span class="nhsuk-u-visually-hidden">entitlement country</span> </a>
+                          </dd>
+                        </div>
+                      <!-- End of EHIC and PRC and S2/E112 content -->
+                      
+                      {% else %}
+
+                      <!-- Start of S1/S072 content -->
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Year of claim</dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['year-of-claim'] %}
+                            {{ data['year-of-claim'] }}
+                          {% else %}
+                            2024
+                          {% endif %}
+                        </dd>
+
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="create-new-uk-claim#year-of-claim"> Change<span class="nhsuk-u-visually-hidden">year of claim</span> </a>
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Claim type</dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['claim-type'] %}
+                            {{ data['claim-type'] }}
+                          {% else %}
+                            Main
+                          {% endif %}
+                        </dd>
+
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="create-new-uk-claim#claim-type"> Change<span class="nhsuk-u-visually-hidden">claim type</span> </a>
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Age bracket of the claim</dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['claim-age-bracket'] %}
+                            {{ data['claim-age-bracket'] }}
+                          {% else %}
+                            0 to 19 years
+                          {% endif %}
+                        </dd>
+
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="create-new-uk-claim#claim-age-bracket"> Change<span class="nhsuk-u-visually-hidden">age bracket of the claim</span> </a>
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Entitlement country</dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['entitlement-country'] %}
+                            {{ data['entitlement-country'] }}
+                          {% else %}
+                            France (FR)
+                          {% endif %}
+                        </dd>
+
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="create-new-uk-claim#entitlement-country"> Change<span class="nhsuk-u-visually-hidden">entitlement country</span> </a>
+                        </dd>
+                      </div>
+                    <!-- End of S1/S072 content -->
+                    
+                    {% endif %}
+                </dl>
+                    
+
+
+                    
+                    <button class="nhsuk-button" type="submit" id="create-new-claim-button">Create claim</button>
+
+                    <p><a href="uk-claims-search">Cancel</a></p>
+
+                  </form>
+              </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+<!--Side nav -->
+    <!--div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <ul>
+          <div id="options" class="options">
+            <h3 class="nhsuk-heading-xs">Browse</h3>
+              <li>
+                <a href="../s1/search/search-by-person">Search</a>
+              </li>
+
+            <h3 class="nhsuk-heading-xs">Actions</h3>
+              <li>
+                <a href="account-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">2</span></a>
+                <a href="review-treatments">Review treatments<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                <a href="uk-claims-search" class="active">UK claims</a>
+                <a href="resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="non-eu-reciprocal-healthcare-quota">Non-EU Reciprocal Healthcare (Quota)</a>
+              </li>
+          </div>
+        </ul>
+      </div>
+    </div-->
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#entitlement-country-drop')
+  })
+</script>
+
+{% endblock %}

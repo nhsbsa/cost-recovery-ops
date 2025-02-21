@@ -54,7 +54,17 @@ UK claim ID 123456 - Claim summary
             
             <div class="nhsuk-grid-row">   
               <div class="nhsuk-grid-column-one-half">
-                  <h1 class="nhsuk-heading-l">Claim ID 123456 - Claim summary</h1>
+                {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' %}
+                  <h1 class="nhsuk-heading-l">Claim ID 100001 - Forms for EHIC and PRC - Article 62</h1>
+                {% elif data['entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                <h1 class="nhsuk-heading-l">Claim ID ID 100002 - Forms for S2/E112 - Article 20.2</h1>
+                {% elif data['entitlement-article-type'] == 'S1/S072 - Article 65'  %}
+                <h1 class="nhsuk-heading-l">Claim ID 100003 - Invoices for<br>S1/S072 Article 65 - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a'  %}
+                <h1 class="nhsuk-heading-l">Claim ID 100004 - Invoices for<br>S1/S072 Article 63, 2.a - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                {% else %}
+                <h1 class="nhsuk-heading-l">Claim ID 100005 - Invoices for<br>S1/S072 Article 63, 2.b - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                {% endif %}
               </div>
             </div>
 
@@ -63,19 +73,19 @@ UK claim ID 123456 - Claim summary
           <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
             <ul class="nhsuk-secondary-navigation__list">
               <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" href="s1-claim-forms">Forms</a>
-                <span class="nhsuk-u-visually-hidden">Search for a form</span>
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-forms">Invoices</a>
+                <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
               </li>
 
               <li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-summary">Claim summary</a>
-                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 123456</span>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 654321</span>
               </li>
 
-              <li class="nhsuk-secondary-navigation__item">
+              <!--li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
-                <span class="nhsuk-u-visually-hidden">View the age groups for claim 123456</span>
-              </li>
+                <span class="nhsuk-u-visually-hidden">View the age groups for claim 654321</span>
+              </li-->
 
               <li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
@@ -84,7 +94,7 @@ UK claim ID 123456 - Claim summary
 
               <li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-claim-history">Claim history</a>
-                <span class="nhsuk-u-visually-hidden">View case history for claim 123456</span>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 654321</span>
               </li>
             </ul>
           </nav>
@@ -104,10 +114,27 @@ UK claim ID 123456 - Claim summary
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Claim month
+                        Year
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        October 2025
+                        {% if data['year-of-claim'] %}
+                          {{ data['year-of-claim'] }}
+                        {% else %}
+                          2024
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Claim type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['claim-type'] %}
+                          {{ data['claim-type'] }}
+                        {% else %}
+                          Main
+                        {% endif %}
                       </dd>
                     </div>
 
@@ -116,7 +143,11 @@ UK claim ID 123456 - Claim summary
                         Article type
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        S1/S072 - Article 65
+                        {% if data['search-entitlement-article-type'] %}
+                          {{ data['search-entitlement-article-type'] }}
+                        {% else %}
+                          Article 65
+                        {% endif %}
                       </dd>
                     </div>
 
@@ -125,38 +156,17 @@ UK claim ID 123456 - Claim summary
                         Member state
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        France (FR)
-                      </dd>
-                    </div>
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Date claim recorded
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        13/10/2023
-                      </dd>
-                    </div>
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Recorded by
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        joebloggs@nhsbsa.nhs.uk
+                        {% if data['entitlement-country'] %}
+                          {{ data['entitlement-country'] }}
+                        {% else %}
+                          France (FR)
+                        {% endif %}
                       </dd>
                     </div>
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Date by which contestation must be submitted by the member state
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        13/04/2025
-                      </dd>
-                    </div>
-
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Total number of forms
+                        Total number of invoices
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         34
@@ -167,7 +177,7 @@ UK claim ID 123456 - Claim summary
                         Total months claimed
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        168
+                        162
                       </dd>
                     </div>
                     <br>
@@ -177,7 +187,7 @@ UK claim ID 123456 - Claim summary
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Total number of forms
+                        Total number of invoices
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         34
@@ -188,7 +198,7 @@ UK claim ID 123456 - Claim summary
                         Total months claimed
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        168
+                        162
                       </dd>
                     </div>
 
@@ -390,8 +400,8 @@ UK claim ID 123456 - Claim summary
           </div>
         <!-- End of content for Article 65 -->
 
-        {% else %}
-        <!-- Start of content for Article 63 -->
+        {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a' %}
+        <!-- Start of content for Article 63, 2.a -->
         <div class="nhsuk-grid-row">
           <!-- Left panel begins -->
           <div class="nhsuk-grid-column-one-half">
@@ -401,10 +411,27 @@ UK claim ID 123456 - Claim summary
 
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">
-                      Claim month
+                      Year
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      October 2025
+                      {% if data['year-of-claim'] %}
+                        {{ data['year-of-claim'] }}
+                      {% else %}
+                        2024
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Claim type
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['claim-type'] %}
+                        {{ data['claim-type'] }}
+                      {% else %}
+                        Main
+                      {% endif %}
                     </dd>
                   </div>
 
@@ -413,7 +440,11 @@ UK claim ID 123456 - Claim summary
                       Article type
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      S1/S072 - Article 63
+                      {% if data['search-entitlement-article-type'] %}
+                        {{ data['search-entitlement-article-type'] }}
+                      {% else %}
+                        Article 63, 2.a
+                      {% endif %}
                     </dd>
                   </div>
 
@@ -422,38 +453,17 @@ UK claim ID 123456 - Claim summary
                       Member state
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      France (FR)
-                    </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Date claim recorded
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      13/10/2023
-                    </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Recorded by
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      joebloggs@nhsbsa.nhs.uk
+                      {% if data['entitlement-country'] %}
+                        {{ data['entitlement-country'] }}
+                      {% else %}
+                        France (FR)
+                      {% endif %}
                     </dd>
                   </div>
 
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">
-                      Date by which contestation must be submitted by the member state
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      13/04/2025
-                    </dd>
-                  </div>
-
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Total number of forms
+                      Total number of invoices
                     </dt>
                     <dd class="nhsuk-summary-list__value">
                       18
@@ -474,7 +484,7 @@ UK claim ID 123456 - Claim summary
 
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">
-                      Total number of forms
+                      Total number of invoices
                     </dt>
                     <dd class="nhsuk-summary-list__value">
                       18
@@ -685,8 +695,308 @@ UK claim ID 123456 - Claim summary
 
           </div>
         </div>
+        <!-- End of content for Article 63, 2.a -->
+
+        {% else %}
+        <!-- Start of content for Article 63, 2.b -->
+        <div class="nhsuk-grid-row">
+          <!-- Left panel begins -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+                <dl class="nhsuk-summary-list">
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Year
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['year-of-claim'] %}
+                        {{ data['year-of-claim'] }}
+                      {% else %}
+                        2024
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Claim type
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['claim-type'] %}
+                        {{ data['claim-type'] }}
+                      {% else %}
+                        Main
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Article type
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['search-entitlement-article-type'] %}
+                        {{ data['search-entitlement-article-type'] }}
+                      {% else %}
+                        Article 63, 2.b
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Member state
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['entitlement-country'] %}
+                        {{ data['entitlement-country'] }}
+                      {% else %}
+                        France (FR)
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total number of invoices
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      9
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total months claimed
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      54
+                    </dd>
+                  </div>
+                  <br>
+
+
+                  <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total number of invoices
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      9
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total months claimed
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      54
+                    </dd>
+                  </div>
+
+                </dl>
+
+              </div>
+            </div>
+          </div>
+          <!-- Left panel ends -->
+
+
+          <!-- Right panel begins -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+
+                <fieldset class="nhsuk-fieldset">
+                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--m">
+                    <h2 class="nhsuk-heading-s">
+                      Enter details of the claim
+                    </h2>
+                  </legend>
+
+                  <div class="nhsuk-inset-text" style="margin-top: 10px;" >
+                    <span class="nhsuk-u-visually-hidden">Information: </span>
+                    <p>You must enter all the dates to complete the claim. However, you can save these details and come back and enter the dates later.</p>
+                  </div>
+
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="call-no">
+                        What date was the claim sent to the member state?
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, 31 3 2022
+                      </div>
+
+                      <div class="nhsuk-date-input" id="date-claim-sent">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-sent-day" name="date-claim-sent-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-sent-month" name="date-claim-sent-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-sent-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-sent-year" name="date-claim-sent-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="claim-sent-by-label">
+                        Sender's name
+                      </label>
+                      <div class="nhsuk-hint">
+                        The name of the person sending the claim
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-20" id="claim-sent-by" name="claim-sent-by" type="text">
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="call-no">
+                        When did the member state receive the claim documents? This date must be confirmed by the member state's acknowledgement letter.
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, 31 3 2022
+                      </div>
+
+                      <div class="nhsuk-date-input" id="date-claim-documents-received-by-ms">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-received-by-ms-day" name="date-claim-documents-received-by-ms-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-received-by-ms-month" name="date-claim-documents-received-by-ms-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-documents-received-by-ms-year" name="date-claim-documents-received-by-ms-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="date-s100-global-note-uploaded-label">
+                        What date was the S100 Global note uploaded to the DH eXchange?
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, 31 3 2022
+                      </div>
+
+                      <div class="nhsuk-date-input" id="date-s100-global-note-uploaded">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-s100-global-note-uploaded-day" name="date-s100-global-note-uploaded-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-s100-global-note-uploaded-month" name="date-s100-global-note-uploaded-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-s100-global-note-uploaded-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-s100-global-note-uploaded-year" name="date-s100-global-note-uploaded-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="s100-uploaded-by">
+                        Who uploaded the S100 Global note to the DH eXchange?
+                      </label>
+                      <!-- <div class="nhsuk-hint">
+                      The name of the person who uploaded on DH eXchange
+                    </div> -->
+                      <input class="nhsuk-input nhsuk-input--width-20" id="s100-uploaded-by" name="s100-uploaded-by" type="text">
+                    </div>
+
+
+                    <label class="nhsuk-label" style="margin-top: 30px;">
+                      How was the claim sent to the member state?
+                    </label>
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="claim-sent-by-post" name="claim-sent-by" type="radio" value="Post">
+                      <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-post">
+                        Post
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="claim-sent-by-rina" name="claim-sent-by" type="radio" value="RINA">
+                      <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-rina">
+                        RINA
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-form-group" style="margin-top: 30px;">
+                      <label class="nhsuk-label" for="completion-date">
+                        RINA reference number
+                      </label>
+
+                      <input class="nhsuk-input nhsuk-input--width-20" id="rina-claim-rina-ref-no" name="rina-claim-rina-ref-no" type="text">
+                    </div>
+
+                </fieldset>
+
+                <div class="action-buttons">
+                  <a class="nhsuk-button nhsuk-button--primary" href="#" style="margin: 10px 0 15px 0">Save claim summary</a>
+                  <!-- <button class="nhsuk-button nhsuk-button--secondary" type="submit" id="editButton" name="action"
+                  value="editClaimSummary">Edit claim summary</button> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- End of content for Article 63, 2.b -->
+
+
         {% endif %}
-        <!-- End of content for Article 63 -->
+        
               
            </div>
           </div>

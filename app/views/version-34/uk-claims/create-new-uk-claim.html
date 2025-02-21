@@ -54,7 +54,7 @@ Search for UK claims
             <div class="nhsuk-grid-row">
                   
             <div class="nhsuk-grid-column-full">
-              <h1 class="nhsuk-heading-xl">Create a new claim</h1>
+              <h1 class="nhsuk-heading-xl">Create a new claim for {% if data['search-entitlement-article-type'] %}{{ data['search-entitlement-article-type'] }}{% else %}S1/S072 - Article 65{% endif %}</h1>
               <hr class="blue-horizontal-line">
               <br>
               
@@ -68,10 +68,10 @@ Search for UK claims
                           <div class="nhsuk-grid-column-one-third">
 
                             <div class="nhsuk-form-group">
-                              <label class="nhsuk-label" for="country">
+                              <label class="nhsuk-label" for="year-of-claim-label">
                                 Enter year of claim
                               </label>
-                              <input class="nhsuk-input nhsuk-input--width-5" id="country" name="country" type="number">
+                              <input class="nhsuk-input nhsuk-input--width-5" id="year-of-claim" name="year-of-claim" type="number" value="2024">
                             </div>
                         
                             <div class="nhsuk-form-group">
@@ -100,34 +100,12 @@ Search for UK claims
                       <div class="nhsuk-form-group">
                         <div class="nhsuk-grid-row">
                           <div class="nhsuk-grid-column-one-half">
-                            
-                            <div class="nhsuk-form-group">
-                            <label class="nhsuk-label" style="margin-bottom: 20px;" for="example">
-                              Entitlement - Article type
-                            </label>
-              
-                            <div class="nhsuk-radios nhsuk-radios--inline">
-                              <div class="nhsuk-radios__item">
-                                <input class="nhsuk-radios__input" id="entitlement-type-ehic-prc" name="entitlement-article-type" type="radio" value="EHIC and PRC - Article 62">
-                                <label class="nhsuk-label nhsuk-radios__label" for="entitlement-type-ehic-prc">
-                                  EHIC and PRC - Article 62
-                                </label>
-                              </div>
-              
-                              <div class="nhsuk-radios__item">
-                                <input class="nhsuk-radios__input" id="entitlement-type-s2" name="entitlement-article-type" type="radio" value="S2/E112 - Article 20.2">
-                                <label class="nhsuk-label nhsuk-radios__label" for="entitlement-type-s2">
-                                  S2/E112 - Article 20.2
-                                </label>
-                              </div>
-                            </div>
-                            </div>
             
                             <div class="nhsuk-form-group">
                               <label class="nhsuk-label" id="entitlement-country-label" for="entitlement-country" class="form-label">
                                 Entitlement country
                               </label>
-                              <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country">
+                              <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country" value="France (FR)">
                               <datalist id="countries">
                                 <option value="" selected="selected"></option>
                                 <option value="Austria (AT)">Austria (AT)</option>
@@ -170,7 +148,9 @@ Search for UK claims
                         </div>
                       </div>
                       <!-- End of EHIC and PRC and S2/E112 content -->
+                      
                       {% else %}
+                      
                       <!-- Start of S1/S072 content -->
                       <div class="nhsuk-form-group">
 
@@ -178,29 +158,60 @@ Search for UK claims
                           <div class="nhsuk-grid-column-one-half">
 
                             <div class="nhsuk-form-group">
-                              <label class="nhsuk-label" for="country">
+                              <label class="nhsuk-label" for="year-of-claim-label">
                                 Enter year of claim
                               </label>
-                              <input class="nhsuk-input nhsuk-input--width-5" id="country" name="country" type="number">
+                              <input class="nhsuk-input nhsuk-input--width-4" id="year-of-claim" name="year-of-claim" type="number" value="2024">
                             </div>
 
+
                             <div class="nhsuk-form-group">
-                            <label class="nhsuk-label" style="margin-bottom: 20px;" for="example">
-                              Entitlement - Article type
+                            <label class="nhsuk-label" style="margin-bottom: 20px;" for="claim-type-label">
+                              Claim type
                             </label>
 
                             <div class="nhsuk-radios nhsuk-radios--inline">
                               <div class="nhsuk-radios__item">
-                                <input class="nhsuk-radios__input" id="entitlement-type-s1-article-65" name="entitlement-article-type" type="radio" value="S1/S072 - Article 65">
-                                <label class="nhsuk-label nhsuk-radios__label" for="entitlement-type-s1-article-65">
-                                  S1/S072 - Article 65
+                                <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Main">
+                                <label class="nhsuk-label nhsuk-radios__label" for="claim-type-main">
+                                  Main
                                 </label>
                               </div>
 
                               <div class="nhsuk-radios__item">
-                                <input class="nhsuk-radios__input" id="entitlement-type-s1-article-63" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63">
-                                <label class="nhsuk-label nhsuk-radios__label" for="entitlement-type-s1-article-63">
-                                  S1/S072 - Article 63
+                                <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Supplemental">
+                                <label class="nhsuk-label nhsuk-radios__label" for="claim-type-supplemental">
+                                  Supplemental
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" style="margin-bottom: 20px;" for="age-bracket-label">
+                              Age bracket of the claim
+                            </label>
+
+                            <div class="nhsuk-radios">
+                              <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="0 to 19 years">
+                                <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-0-19">
+                                  0 to 19 years
+                                </label>
+                              </div>
+                        
+                              <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="20 to 64 years">
+                                <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-20-64">
+                                  20 to 64 years
+                                </label>
+                              </div>
+
+                              <div class="nhsuk-radios__item">
+                                <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="65 years and over">
+                                <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-65-plus">
+                                  65 years and over
                                 </label>
                               </div>
                             </div>
@@ -210,7 +221,7 @@ Search for UK claims
                             <label class="nhsuk-label" id="entitlement-country-label" for="entitlement-country" class="form-label">
                               Entitlement country
                             </label>
-                            <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country">
+                            <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country" value="France (FR)">
                             <datalist id="countries">
                               <option value="" selected="selected"></option>
                               <option value="Austria (AT)">Austria (AT)</option>
@@ -248,7 +259,7 @@ Search for UK claims
                             </datalist>            
                           </div>
 
-                          <label class="nhsuk-label" style="margin-top: 30px; margin-bottom: 20px;">
+                          <!--label class="nhsuk-label" style="margin-top: 30px; margin-bottom: 20px;">
                             Select how the claim will be sent to the member state
                           </label>
                           <div class="nhsuk-radios">
@@ -265,7 +276,7 @@ Search for UK claims
                                 RINA
                               </label>
                             </div>
-                          </div>
+                          </div-->
 
                         </div>
                       </div>
@@ -275,7 +286,10 @@ Search for UK claims
 
 
                     
-                    <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit" id="create-new-claim-button">Create claim</button>
+                    <button class="nhsuk-button" style="margin-top: 10px;" type="submit" id="continue-button">Continue</button>
+
+                    <p><a href="uk-claims-search">Cancel</a></p>
+
                   </form>
               </div>
 
