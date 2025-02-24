@@ -50,7 +50,7 @@ router.post([/check-claim-details/], function(req, res) {
 
 // Claim loading
 router.post([/uk-claims-loading-new-claim/], function(req, res) {
-  res.redirect('/version-34/uk-claims/s1-claim-forms');
+  res.redirect('/version-34/uk-claims/s1-claim-summary');
 })
 
 
