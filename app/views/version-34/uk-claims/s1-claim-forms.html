@@ -68,13 +68,14 @@ UK claim ID 123456
               </div>
             </div>
 
-            <!--start secondary navigation-->
 
+            <!--start secondary navigation-->
+          {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' or data['entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
           <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
             <ul class="nhsuk-secondary-navigation__list">
               <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-forms">Invoices</a>
-                <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-forms">Treatment forms</a>
+                <span class="nhsuk-u-visually-hidden">Search for a treatment form</span>
               </li>
 
               <li class="nhsuk-secondary-navigation__item">
@@ -108,7 +109,478 @@ UK claim ID 123456
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-one-half">
               <div class="nhsuk-hint">
-                Search for a single invoice using the person ID number or a person's last name.
+                Search for a single treatment using the treatment ID number or a patient's last name.
+                Search for up to 8 treatments at once by separating each treatment ID number with a comma.
+                For example, 111110, 111112, 111113.
+              </div>
+
+              <form class="nhsuk-header__search-form nhsuk-header__search-form--search-results" id="search"
+                action="/search/" method="get" role="search">
+
+                <label class="nhsuk-u-visually-hidden" for="search-results-field">Search by treatment ID or last name to add treatments for printing or to resubmit</label>
+
+                <input class="nhsuk-search__input" id="search-results-field" name="search-field" type="search">
+                <a class="nhsuk-search__submit" href="#">
+                  <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    aria-hidden="true" focusable="false">
+                    <path
+                      d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z">
+                    </path>
+                  </svg>
+                  <span class="nhsuk-u-visually-hidden">Search</span>
+                </a>
+
+              </form>
+
+            </div>
+          </div>
+          <!--end search-->
+
+          <!--start filter-->
+          <details class="nhsuk-details-1">
+            <summary class="nhsuk-details__summary-1">
+              <span class="nhsuk-details__summary-text-1">
+                Filter by agreement
+              </span>
+            </summary>
+            <div class="nhsuk-details__text">
+
+
+              <div class="nhsuk-form-group">
+                <fieldset class="nhsuk-fieldset">
+                    <h2 class="nhsuk-heading-xs">
+                      Select agreement type.
+                    </h2>
+
+                  <div class="nhsuk-radios nhsuk-radios--inline">
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-inline-1" name="example-inline" type="radio"
+                        value="tca">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-1">
+                        TCA
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="example-inline-2" name="example-inline" type="radio"
+                        value="wa">
+                      <label class="nhsuk-label nhsuk-radios__label" for="example-inline-2">
+                        WA
+                      </label>
+                    </div>
+
+                  </div>
+                </fieldset>
+              </div>
+
+              <a href=""><button class="nhsuk-button" type="submit">
+                  Apply
+                </button>
+              </a>
+
+            </div>
+          </details>
+          <!--end filter-->
+
+          <br>
+
+          <!-- Start of Invoices table for 65 years and over -->
+          <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
+            <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
+              <tr role="row">
+                <th role="columnheader" class="" scope="col">
+                  Treatment ID
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  First names
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Last name
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Entitlement
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Cost (£)
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Agreement
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Action
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="nhsuk-table__body">
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000001</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Lilian</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Pierlot</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>91.00</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Lilian Pierlot</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000002</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Jean</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Gardet</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>143.63</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Jean Gardet</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000003</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Remy</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Moreau</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>330.04</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Remy Moreau</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000004</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Justin</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Trouve</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>139.74</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Justin Trouve</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000005</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>John</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Doe</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>139.74</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="../s1/account/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000006</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Anastasie</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Bouchard</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>106.00</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Anastasie Bouchard</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000007</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Anais</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Jacquard</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>246.00</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Anais Jacquard</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000008</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Evelyne</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Joubert</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>101.00</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Evelyn Joubert</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000009</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Laurent</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Bouchard</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>228.34</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Laurent Bouchard</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                  <span>100000010</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Georges</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>LeBeau</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                  <span>EHIC</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Cost (£)</span>
+                  <span>101.90</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Agreement</span>
+                  <span>TCA</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Georges LeBeau</span></span>
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+          <!-- End of table -->
+
+          <!-- Pagination starts -->
+          <nav class="nav" role="navigation" aria-label="Pagination">
+            <ul class="pagination">
+                <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
+                <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>
+                <li class="pagination__item"><a class="pagination__link next" href="#">Next »</a></li>
+            </ul>
+
+            <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 13 treatment forms</div>
+          </nav>
+          <!-- Pagination ends -->
+
+
+
+          {% else %}
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-forms">Invoices</a>
+                <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-summary">Claim summary</a>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 100005</span>
+              </li>
+
+              <!--li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                <span class="nhsuk-u-visually-hidden">View the age groups for claim 100005</span>
+              </li-->
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-history">Claim history</a>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 100005</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+
+          <!-- start search-->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-hint">
+                Search for a single invoice using the invoice ID number or a person's last name.
                 Search for up to 8 invoices at once by separating each invoice ID number with a comma.
                 For example, 111110, 111112, 111113.
               </div>
@@ -183,8 +655,8 @@ UK claim ID 123456
 
           <br>
 
-          {% if data ['entitlement-article-type'] == 'S1/S072 - Article 65' %}
-          <!-- Start of Invoices table for S1/S072 Article 65 -->
+          {% if data['claim-age-bracket'] == '65 years and over' %}
+          <!-- Start of Invoices table for 65 years and over -->
           <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
             <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
               <tr role="row">
@@ -541,8 +1013,8 @@ UK claim ID 123456
           </nav>
           <!-- Pagination ends -->
           
-          {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a'  %}
-        <!-- Start of Invoices table for S1/S072 - Article 63, 2.a -->
+          {% elif data['claim-age-bracket'] == '20 to 64 years' %}
+        <!-- Start of Invoices table for 20 to 64 years -->
         <table role="table" id="dependantsTable" class="nhsuk-table-responsive">
           <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
             <tr role="row">
@@ -901,7 +1373,7 @@ UK claim ID 123456
           <!-- Pagination ends -->
         {% else %}
 
-        <!-- Start of Invoices table for S1/S072 - Article 63, 2.b -->
+        <!-- Start of Invoices table for 0 to 19 years -->
         <table role="table" id="dependantsTable" class="nhsuk-table-responsive">
           <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
             <tr role="row">
@@ -1224,6 +1696,8 @@ UK claim ID 123456
             <div class="pagination__summary navigation-mobile">Showing 1 - 9 of 9 invoices</div>
           </nav>
           <!-- Pagination ends -->
+        {% endif %}
+
         {% endif %}
 
 

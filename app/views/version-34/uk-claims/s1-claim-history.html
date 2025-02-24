@@ -53,13 +53,23 @@ UK claim ID 123456 - Claim history
 
             
             <div class="nhsuk-grid-row">   
-              <div class="nhsuk-grid-column-one-half">
-                  <h1 class="nhsuk-heading-l">Claim ID 123456 - Claim history</h1>
+                <div class="nhsuk-grid-column-one-half">
+                  {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' %}
+                    <h1 class="nhsuk-heading-l">Claim ID 100001 - Forms for EHIC and PRC - Article 62</h1>
+                  {% elif data['entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                  <h1 class="nhsuk-heading-l">Claim ID ID 100002 - Forms for S2/E112 - Article 20.2</h1>
+                  {% elif data['entitlement-article-type'] == 'S1/S072 - Article 65'  %}
+                  <h1 class="nhsuk-heading-l">Claim ID 100003 - Invoices for<br>S1/S072 Article 65 - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                  {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a'  %}
+                  <h1 class="nhsuk-heading-l">Claim ID 100004 - Invoices for<br>S1/S072 Article 63, 2.a - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                  {% else %}
+                  <h1 class="nhsuk-heading-l">Claim ID 100005 - Invoices for<br>S1/S072 Article 63, 2.b - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                  {% endif %}
+                </div>
               </div>
-            </div>
 
             <!--start secondary navigation-->
-
+            {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' or data['entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
           <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
             <ul class="nhsuk-secondary-navigation__list">
               <li class="nhsuk-secondary-navigation__item">
@@ -72,10 +82,10 @@ UK claim ID 123456 - Claim history
                 <span class="nhsuk-u-visually-hidden">View the overall summary for claim 123456</span>
               </li>
 
-              <li class="nhsuk-secondary-navigation__item">
+              <!--li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
                 <span class="nhsuk-u-visually-hidden">View the age groups for claim 123456</span>
-              </li>
+              </li-->
 
               <li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
@@ -94,7 +104,6 @@ UK claim ID 123456 - Claim history
 
           <br><br>
 
-          {% if data ['entitlement-article-type'] == 'S1/S072 - Article 65' %}
           <!--start of content for Article 65-->
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
@@ -123,8 +132,8 @@ UK claim ID 123456 - Claim history
                         <tr role="row" class="nhsuk-table__row">
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                2 April 2025<br>
-                                at 10:34 am 
+                                2 April 2025,<br>
+                                10:34
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Action</span>
@@ -140,7 +149,7 @@ UK claim ID 123456 - Claim history
                             </td>
                         </tr>
                         {% endif %}
-                        <tr role="row" class="nhsuk-table__row">
+                        <tr role="row" class="nhsuk-table__row" style="display: none;">
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Date and Time</span>
                                 <span><p id="currentDateS1ClaimSentToMS"></p></span>
@@ -151,14 +160,14 @@ UK claim ID 123456 - Claim history
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Details</span>
-                                Claim sent to member state on 31/01/2025
+                                Claim sent to member state on {% if data['date-claim-sent'] %}{{ data['date-claim-sent'] }} {% else %}27/02/2025{% endif %}
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Updated by</span>
                                 joebloggs@nhsbsa.nhs.uk
                             </td>
                         </tr>
-                        <tr role="row" class="nhsuk-table__row">
+                        <tr role="row" class="nhsuk-table__row" style="display: none;">
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Date and time</span>
                                 <span><p id="currentDateS1ClaimSentToDH"></p></span>
@@ -169,7 +178,7 @@ UK claim ID 123456 - Claim history
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Details</span>
-                                S100 Global note was uploaded to DH eXchange on 31/01/2025
+                                S100 Global note was uploaded to DH eXchange on {% if data['date-s100-global-note-uploaded'] %}{{ data['date-s100-global-note-uploaded'] }} {% else %}27/02/2025{% endif %}
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -198,14 +207,49 @@ UK claim ID 123456 - Claim history
                 </table>
             </div>
         </div>
-        <!--end of content for Article 65 -->
+        <!--end of content for EHIC and PRC and S2 -->
 
         {% else %}
-        <!--start of content for Article 63 -->
+        <!-- Start of secondary navigation -->
+        <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-forms">Invoices</a>
+                <span class="nhsuk-u-visually-hidden">Search for a form</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link"  href="s1-claim-summary">Claim summary</a>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 654321</span>
+              </li>
+
+              <!--li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                <span class="nhsuk-u-visually-hidden">View the age groups for claim 654321</span>
+              </li-->
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-history">Claim history</a>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 654321</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+
+        <!-- Start of content for S1/S072 claims -->
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
 
-                <table role="table" class="nhsuk-table-responsive">
+                <table role="claimSummaryTable" class="nhsuk-table-responsive">
                     <thead role="rowgroup" class="nhsuk-table__head">
                         <tr role="row">
                             <th role="columnheader" class="" scope="col">
@@ -230,7 +274,7 @@ UK claim ID 123456 - Claim history
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Date and time</span>
                                 2 April 2025<br>
-                                at 10:34 am 
+                                10:34
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Action</span>
@@ -246,7 +290,7 @@ UK claim ID 123456 - Claim history
                             </td>
                         </tr>
                         {% endif %}
-                        <tr role="row" class="nhsuk-table__row">
+                        <tr role="row" class="nhsuk-table__row" style="display: none;">
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Date and time</span>
                                 <span><p id="currentDateS1ClaimSentToMS"></p></span>
@@ -257,14 +301,14 @@ UK claim ID 123456 - Claim history
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Details</span>
-                                Claim sent to member state on 31/01/2025
+                                Claim sent to member state on {% if data['date-claim-sent'] %}{{ data['date-claim-sent'] }} {% else %}27/02/2025{% endif %}
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Updated by</span>
                                 joebloggs@nhsbsa.nhs.net
                             </td>
                         </tr>
-                        <tr role="row" class="nhsuk-table__row">
+                        <tr role="row" class="nhsuk-table__row" style="display: none;">
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Date and time</span>
                                 <span><p id="currentDateS1ClaimSentToDH"></p></span>
@@ -275,7 +319,7 @@ UK claim ID 123456 - Claim history
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Details</span>
-                                S100 Global note was uploaded to DH eXchange on 31/01/2025
+                                S100 Global note was uploaded to DH eXchange on {% if data['date-s100-global-note-uploaded'] %}{{ data['date-s100-global-note-uploaded'] }} {% else %}27/02/2025{% endif %}
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -347,24 +391,57 @@ function setCurrentDateTime(elementId) {
   
     if (dateElement) {
       var currentDate = new Date();
-  
-      var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-      var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
-  
-      var timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
-      var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
-  
-      var formattedDateTime = formattedDate + ' at ' + formattedTime;
-  
-      dateElement.textContent = formattedDateTime;
+        // Format date as DD/MM/YYYY
+        var day = String(currentDate.getDate()).padStart(2, '0');
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        var year = currentDate.getFullYear();
+        var formattedDate = `${day}/${month}/${year}`;
+
+        // Format time as HH:mm (24-hour format)
+        var hours = String(currentDate.getHours()).padStart(2, '0');
+        var minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        var formattedTime = `${hours}:${minutes}`;
+
+        // Set formatted date and time with line break
+        dateElement.innerHTML = `${formattedDate},<br>${formattedTime}`;
     }
   }
 
   // Set the date for each item
   document.addEventListener("DOMContentLoaded", function () {
-    setCurrentDateTime("currentDateS1ClaimCreated");  // Updates date S1 claim created
-    setCurrentDateTime("currentDateS1ClaimSentToDH");  // Updates date S1 claim sent to DH
     setCurrentDateTime("currentDateS1ClaimSentToMS");  // Updates date S1 claim sent to the MS
+    setCurrentDateTime("currentDateS1ClaimSentToDH");  // Updates date S100 Global note uploaded to the DH eXchange
+    setCurrentDateTime("currentDateS1ClaimCreated");  // Updates date S1 claim created
   });
+</script>
+
+<script>
+    document.getElementById("save-claim-summary-button").addEventListener("click", function () {
+        // Get current date and time
+        var currentDate = new Date();
+        // Format date as DD/MM/YYYY
+        var day = String(currentDate.getDate()).padStart(2, '0');
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        var year = currentDate.getFullYear();
+        var formattedDate = `${day}/${month}/${year}`;
+
+        // Format time as HH:mm (24-hour format)
+        var hours = String(currentDate.getHours()).padStart(2, '0');
+        var minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        var formattedTime = `${hours}:${minutes}`;
+
+        // Set formatted date and time with line break
+        dateElement.innerHTML = `${formattedDate},<br>${formattedTime}`;
+
+        // Update date fields
+        document.getElementById("currentDateS1ClaimSentToMS").textContent = formattedDate + ", " + formattedTime;
+        document.getElementById("claimDateMS").textContent = formattedDate;
+        document.getElementById("currentDateS1ClaimSentToDH").textContent = formattedDate + ", " + formattedTime;
+        document.getElementById("claimDateDH").textContent = formattedDate;
+
+        // Show hidden table rows
+        var rows = document.querySelectorAll("#claimSummaryTable tr");
+        rows.forEach(row => row.style.display = "table-row");
+    });
 </script>
 {% endblock %}

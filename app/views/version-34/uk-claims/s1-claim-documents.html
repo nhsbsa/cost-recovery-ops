@@ -54,12 +54,22 @@ UK claim ID 123456 - Claim documents
             
             <div class="nhsuk-grid-row">   
               <div class="nhsuk-grid-column-one-half">
-                  <h1 class="nhsuk-heading-l">Claim ID 123456 - Claim documents</h1>
+                {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' %}
+                  <h1 class="nhsuk-heading-l">Claim ID 100001 - Forms for EHIC and PRC - Article 62</h1>
+                {% elif data['entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                <h1 class="nhsuk-heading-l">Claim ID ID 100002 - Forms for S2/E112 - Article 20.2</h1>
+                {% elif data['entitlement-article-type'] == 'S1/S072 - Article 65'  %}
+                <h1 class="nhsuk-heading-l">Claim ID 100003 - Invoices for<br>S1/S072 Article 65 - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a'  %}
+                <h1 class="nhsuk-heading-l">Claim ID 100004 - Invoices for<br>S1/S072 Article 63, 2.a - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                {% else %}
+                <h1 class="nhsuk-heading-l">Claim ID 100005 - Invoices for<br>S1/S072 Article 63, 2.b - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                {% endif %}
               </div>
             </div>
 
             <!--start secondary navigation-->
-
+            {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' or data['entitlement-article-type'] == 'S2/E112 - Article 20.2'%}
           <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
             <ul class="nhsuk-secondary-navigation__list">
               <li class="nhsuk-secondary-navigation__item">
@@ -72,10 +82,10 @@ UK claim ID 123456 - Claim documents
                 <span class="nhsuk-u-visually-hidden">View the overall summary for claim 123456</span>
               </li>
 
-              <li class="nhsuk-secondary-navigation__item">
+              <!--li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
                 <span class="nhsuk-u-visually-hidden">View the age groups for claim 123456</span>
-              </li>
+              </li-->
 
               <li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-documents">Claim documents</a>
@@ -94,8 +104,7 @@ UK claim ID 123456 - Claim documents
 
           <br><br>
 
-          {% if data ['entitlement-article-type'] == 'S1/S072 - Article 65' and data ['claim-sent-by'] == 'Post' %}
-          <!-- Start of content for S1/S072 - Article 65 - Sent by post -->
+          <!-- Start of content for S1/S072 claim documents -->
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full" style="max-width: 900px;">
               <div>
@@ -116,7 +125,7 @@ UK claim ID 123456 - Claim documents
                     <dt class="nhsuk-summary-list__key" id="schedule-label">Schedule</dt>
                     <dd class="nhsuk-summary-list__actions">
                       <a href="/downloads/sample-file-1.pdf" target="_blank">
-                        <span id="wa_schedule_download_text">Print or download file</span>
+                        <span id="wa_schedule_download_text">Download file</span>
                         <span class="nhsuk-u-visually-hidden">&nbsp;</span>
                         <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
                       </a>
@@ -124,7 +133,7 @@ UK claim ID 123456 - Claim documents
                   </div>
 
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key" id="s100-global-note-label">S100 Global note</dt>
+                    <dt class="nhsuk-summary-list__key" id="s100-global-note-label">S080 global note</dt>
                     <dd class="nhsuk-summary-list__actions">
                       <a href="/downloads/sample-file-1.pdf" target="_blank">
                         <span id="wa_schedule_download_text">Print or download file</span>
@@ -135,10 +144,21 @@ UK claim ID 123456 - Claim documents
                   </div>
 
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key" id="s100-claim-forms-label">S100 Claim forms</dt>
+                    <dt class="nhsuk-summary-list__key" id="s100-claim-forms-label">Treatment forms</dt>
                     <dd class="nhsuk-summary-list__actions">
                       <a href="/downloads/sample-file-1.pdf" target="_blank">
                         <span id="wa_schedule_download_text">Print or download file</span>
+                        <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                        <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="s100-claim-forms-label">Claim file for RINA</dt>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="/downloads/sample-file-1.pdf" target="_blank">
+                        <span id="wa_schedule_download_text">Download file</span>
                         <span class="nhsuk-u-visually-hidden">&nbsp;</span>
                         <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
                       </a>
@@ -156,227 +176,120 @@ UK claim ID 123456 - Claim documents
 
             </div>
           </div>
-        <!-- End of content for S1/S072 - Article 65 - Sent by post -->
-        
-        {% elif data ['entitlement-article-type'] == 'S1/S072 - Article 65' and data ['claim-sent-by'] == 'RINA' %}
-        <!-- Start of content for S1/S072 - Article 65 - Sent by RINA -->
-        <div class="nhsuk-grid-row">
-          <div class="nhsuk-grid-column-full" style="max-width: 900px;">
-            <div>
-              <!-- <div class="nhsuk-grid-row">
-                <div class="nhsuk-grid-column-two-thirds">
-                  <h2 class="nhsuk-heading-s" id="WA">Claim documents</h2>
-                </div>
+        <!-- End of content for EHIC and PRC and S2/E112 claim documents -->
 
-                <div class="nhsuk-grid-column-one-third">
-                  <p><a href="#" style="float: right;">
-                      Print all<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
-                    </a></p>
-                </div>
-              </div> -->
+          {% else %}
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-forms">Invoices</a>
+                <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
+              </li>
 
-              <dl class="nhsuk-summary-list">
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="schedule-label">Schedule</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-summary">Claim summary</a>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 654321</span>
+              </li>
 
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="s100-claim-forms-0-19-label">S100 Claim forms (Ages 0 - 19)</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
+              <!--li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                <span class="nhsuk-u-visually-hidden">View the age groups for claim 654321</span>
+              </li-->
 
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="s100-claim-forms-20-64-label">S100 Claim forms (Ages 20 - 64)</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-documents">Claim documents</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
 
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="s100-claim-forms-65-and-over-label">S100 Claim forms (Ages 65 and over)</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
-              </dl>
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-history">Claim history</a>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 654321</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+
+          <!-- Start of content for S1/S072 claim documents -->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full" style="max-width: 900px;">
+              <div>
+                <!-- <div class="nhsuk-grid-row">
+                  <div class="nhsuk-grid-column-two-thirds">
+                    <h2 class="nhsuk-heading-s" id="WA">Claim documents</h2>
+                  </div>
+
+                  <div class="nhsuk-grid-column-one-third">
+                    <p><a href="#" style="float: right;">
+                        Print all<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
+                      </a></p>
+                  </div>
+                </div> -->
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="s100-global-note-label">S100 Global note (for postal claims)</dt>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="/downloads/sample-file-1.pdf" target="_blank">
+                        <span id="wa_schedule_download_text">Download file</span>
+                        <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                        <span class="nhsuk-u-visually-hidden">full claim record for claim 654321</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="s100-input-label">S100 input (.XML file for RINA claims)</dt>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="/downloads/sample-file-1.pdf" target="_blank">
+                        <span id="wa_schedule_download_text">Print or download file</span>
+                        <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                        <span class="nhsuk-u-visually-hidden">full claim record for claim 654321</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="s100-claim-forms-label">S100 Claim forms</dt>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="/downloads/sample-file-1.pdf" target="_blank">
+                        <span id="wa_schedule_download_text">Print or download file</span>
+                        <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                        <span class="nhsuk-u-visually-hidden">full claim record for claim 654321</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="tracker-label">Tracker</dt>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="/downloads/sample-file-1.pdf" target="_blank">
+                        <span id="wa_schedule_download_text">Print or download file</span>
+                        <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                        <span class="nhsuk-u-visually-hidden">full claim record for claim 654321</span>
+                      </a>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+
+             <!-- Download all link
+              <p style="margin: auto 0 30px auto;"><a href="/downloads/sample-file-3.pdf" target="_blank"
+                onclick="window.open('/downloads/sample-file-1.pdf'); window.open('/downloads/sample-file-2.pdf')">
+                Download all<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
+              </a></p>
+            -->
+
             </div>
-
-           <!-- Download all link
-            <p style="margin: auto 0 30px auto;"><a href="/downloads/sample-file-3.pdf" target="_blank"
-              onclick="window.open('/downloads/sample-file-1.pdf'); window.open('/downloads/sample-file-2.pdf')">
-              Download all<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
-            </a></p>
-          -->
-
           </div>
-        </div>
-        <!-- End of content for S1/S072 - Article 65 - Sent by RINA -->
+        <!-- End of content for S1/S072 claim documents -->
         
         
-        {% elif data ['entitlement-article-type'] == 'S1/S072 - Article 63' and data ['claim-sent-by'] == 'Post' %}
-        <div class="nhsuk-grid-row">
-          <!-- Start of content for S1/S072 - Article 63 - Sent by post -->
-          <div class="nhsuk-grid-column-full" style="max-width: 900px;">
-            <div>
-              <!-- <div class="nhsuk-grid-row">
-                <div class="nhsuk-grid-column-two-thirds">
-                  <h2 class="nhsuk-heading-s" id="WA">Claim documents</h2>
-                </div>
-
-                <div class="nhsuk-grid-column-one-third">
-                  <p><a href="#" style="float: right;">
-                      Print all<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
-                    </a></p>
-                </div>
-              </div> -->
-
-              <dl class="nhsuk-summary-list">
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="schedule-label">Schedule</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
-
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="s100-global-note-label">S100 Global note</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
-
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="s100-claim-forms-label">S100 Claim forms</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-
-           <!-- Download all link
-            <p style="margin: auto 0 30px auto;"><a href="/downloads/sample-file-3.pdf" target="_blank"
-              onclick="window.open('/downloads/sample-file-1.pdf'); window.open('/downloads/sample-file-2.pdf')">
-              Download all<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
-            </a></p>
-          -->
-
-          </div>
-        </div>
-      <!-- End of content for S1/S072 - Article 63 - Sent by post -->
-
-
-      {% else %}
-        <!-- Start of content for S1/S072 - Article 63 - Sent by RINA -->
-        <div class="nhsuk-grid-row">
-          <div class="nhsuk-grid-column-full" style="max-width: 900px;">
-            <div>
-              <!-- <div class="nhsuk-grid-row">
-                <div class="nhsuk-grid-column-two-thirds">
-                  <h2 class="nhsuk-heading-s" id="WA">Claim documents</h2>
-                </div>
-
-                <div class="nhsuk-grid-column-one-third">
-                  <p><a href="#" style="float: right;">
-                      Print all<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
-                    </a></p>
-                </div>
-              </div> -->
-
-              <dl class="nhsuk-summary-list">
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="schedule-label">Schedule</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
-
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="s100-claim-forms-0-19-label">S100 Claim forms (Ages 0 - 19)</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
-
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="s100-claim-forms-20-64-label">S100 Claim forms (Ages 20 - 64)</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
-
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="s100-claim-forms-65-and-over-label">S100 Claim forms (Ages 65 and over)</dt>
-                  <dd class="nhsuk-summary-list__actions">
-                    <a href="/downloads/sample-file-1.pdf" target="_blank">
-                      <span id="wa_schedule_download_text">Print or download file</span>
-                      <span class="nhsuk-u-visually-hidden">&nbsp;</span>
-                      <span class="nhsuk-u-visually-hidden">full claim record for claim 123456</span>
-                    </a>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-
-           <!-- Download all link
-            <p style="margin: auto 0 30px auto;"><a href="/downloads/sample-file-3.pdf" target="_blank"
-              onclick="window.open('/downloads/sample-file-1.pdf'); window.open('/downloads/sample-file-2.pdf')">
-              Download all<span class="nhsuk-u-visually-hidden">for claim ID 9543</span>
-            </a></p>
-          -->
-
-          </div>
-        </div>
-        <!-- End of content for S1/S072 - Article 63 - Sent by RINA -->
-
-      
         {% endif %}
-        <!-- End of content for Article 63 -->
+        <!-- End of content -->
               
            </div>
           </div>
