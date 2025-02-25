@@ -59,18 +59,49 @@ Search for UK claims
                           Create new claim
                       </button></a>
               </div>
-          </div>
+            </div>
 
           <hr style="border-bottom:4px solid #005eb8; margin:0">
 
           <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-full">
                   <br>
+
+                  {% if data['search-entitlement-article-type'] == 'EHIC and PRC - Article 62' %}
+                  <h2 class="nhsuk-heading-s">Showing results for 
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">EHIC and PRC - Article 62</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                  </h2>
+
+                  {% elif data['search-entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                  <h2 class="nhsuk-heading-s">Showing results for 
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S2/E112 - Article 20.2</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                  </h2>
+
+                  {% elif data['search-entitlement-article-type'] == 'S1/S072 - Article 65'  %}
                   <h2 class="nhsuk-heading-s">Showing results for 
                     <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
                     <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 65</span>
                     <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
                   </h2>
+
+                  {% elif data['search-entitlement-article-type'] == 'S1/S072 - Article 63, 2.a'  %}
+                  <h2 class="nhsuk-heading-s">Showing results for 
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 63, 2.a</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                  </h2>
+
+                  {% else %}
+                  <h2 class="nhsuk-heading-s">Showing results for 
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 63, 2.b</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                  </h2>
+                  {% endif %}
 
                   <!--table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
                       <caption class="nhsuk-table__caption"></caption>
@@ -135,10 +166,12 @@ Search for UK claims
                       </tbody>
                   </table-->
 
-                  <p><b>No result found.</b></p>
-              </div>
-          </div>
+                
 
+                  <p><b>No result found.</b></p>
+              
+                </div>
+              </div>
 
 
           </div>
@@ -168,6 +201,6 @@ Search for UK claims
         </ul>
       </div>
     </div-->
-
+    </div>
 </div>
 {% endblock %}
