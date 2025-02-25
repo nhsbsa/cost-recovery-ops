@@ -49,9 +49,17 @@ router.post([/check-claim-details/], function(req, res) {
 })
 
 // Claim loading
-router.post([/uk-claims-loading-new-claim/], function(req, res) {
+router.post('/uk-claims-loading-new-claim', function(req, res) {
+  const articleType = req.body['search-entitlement-article-type'];
+
+  if (articleType === 'EHIC and PRC - Article 62') {
+    return res.redirect('/version-34/uk-claims/s1-claim-forms');
+  } else if (articleType === "S2/E112 - Article 20.2") {
+    return res.redirect('/version-34/uk-claims/s1-claim-forms');
+  }
+
   res.redirect('/version-34/uk-claims/s1-claim-summary');
-})
+});
 
 
 module.exports = router;
