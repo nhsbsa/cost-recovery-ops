@@ -439,4 +439,23 @@ Enter cancellation details - Manage overseas entitlements and treatments - NHSBS
     updateScreenReaderMessage();
   });
 </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const ariaExpanded = urlParams.get('ariaExpanded');
+  
+      if (ariaExpanded === 'true') {
+          const radioButton = document.getElementById('entitlement-holder-no-longer-insured-by-ms');
+  
+          if (radioButton) {
+              radioButton.checked = true; // Select the radio button
+  
+              // Trigger the change event to activate conditional reveal logic
+              radioButton.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+      }
+  });
+</script>
+  
 {% endblock %}
