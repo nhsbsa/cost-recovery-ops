@@ -113,29 +113,27 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Cancelled entitlement<br>
-                                          New entitlement end date:<br> 
-                                            {# Check if cancellation date is provided #}
-                                            {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                              {% set day = data['entitlement-end-date-day'] %}
+                                      <p>Entitlement cancelled<br>
+                                          New entitlement end date 
+                                            {# Check if entitlement end date is provided #}
+                                          {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                                              {% set day = data['entitlement-end-date-day'] | int %}
                                               {% set month = data['entitlement-end-date-month'] | int %}
-                                              {% set year = data['entitlement-end-date-year'] %}
+                                              {% set year = data['entitlement-end-date-year'] | int %}
+
+                                              {% if day < 10 %}
+                                                  {% set day = "0" ~ day %}
+                                              {% endif %}
                                               
-                                              {# Define month names #}
-                                              {% set month_names = [
-                                                  "January", "February", "March", "April", "May", "June",
-                                                  "July", "August", "September", "October", "November", "December"
-                                              ] %}
-                                              
-                                              {# Get the month name #}
-                                              {% set month_name = month_names[month - 1] %}
-                                              
-                                              {# Display the cancellation date in the format "day month year" #}
-                                              {{ day | int }} {{ month_name }} {{ year }}
-                                            {% else %}
-                                              {# Display fallback date if no cancellation date is entered #}
-                                              13 January 2024
-                                            {% endif %}
+                                              {% if month < 10 %}
+                                                  {% set month = "0" ~ month %}
+                                              {% endif %}
+
+                                              {{ day }}/{{ month }}/{{ year }}
+                                          {% else %}
+                                              {# Display fallback date if no entitlement end date is entered #}
+                                              13/01/2024
+                                          {% endif %}
                                           </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -151,7 +149,7 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Linked to entitlement ID: 100002</p>
+                                      <p>Entitlement linked to Jane Doe, entitlement ID: 100002</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -166,7 +164,7 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Registered</p>
+                                      <p>Entitlement registered</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -227,27 +225,25 @@
                                       <p>Changed entitlement end date<br> 
                                         from
                                         {% if data['cancel-s1-entitlement'] == 'yes' %}
-                                          {# Check if cancellation date is provided #}
-                                          {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                            {% set day = data['entitlement-end-date-day'] %}
-                                            {% set month = data['entitlement-end-date-month'] | int %}
-                                            {% set year = data['entitlement-end-date-year'] %}
+                                          {# Check if entitlement end date is provided #}
+                                            {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                                                {% set day = data['entitlement-end-date-day'] | int %}
+                                                {% set month = data['entitlement-end-date-month'] | int %}
+                                                {% set year = data['entitlement-end-date-year'] | int %}
                                             
-                                            {# Define month names #}
-                                            {% set month_names = [
-                                                "January", "February", "March", "April", "May", "June",
-                                                "July", "August", "September", "October", "November", "December"
-                                            ] %}
+                                                {% if day < 10 %}
+                                                    {% set day = "0" ~ day %}
+                                                {% endif %}
+                                                
+                                                {% if month < 10 %}
+                                                    {% set month = "0" ~ month %}
+                                                {% endif %}
                                             
-                                            {# Get the month name #}
-                                            {% set month_name = month_names[month - 1] %}
-                                            
-                                            {# Display the cancellation date in the format "day month year" #}
-                                            {{ day | int }} {{ month_name }} {{ year }}
-                                          {% else %}
-                                            {# Display fallback date if no cancellation date is entered #}
-                                            13 January 2024
-                                          {% endif %}
+                                                {{ day }}/{{ month }}/{{ year }}
+                                            {% else %}
+                                              {# Display fallback date if no entitlement end date is entered #}
+                                                13/01/2024
+                                            {% endif %}
                                         
                                         {% else %}
                                           {# Default case when there is no cancellation or update #}
@@ -308,28 +304,26 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Cancelled entitlement<br>
-                                        New entitlement end date:<br>
-                                          {# Check if cancellation date is provided #}
+                                      <p>Entitlement cancelled<br>
+                                        New entitlement end date
+                                        {# Check if entitlement end date is provided #}
                                           {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                            {% set day = data['entitlement-end-date-day'] %}
-                                            {% set month = data['entitlement-end-date-month'] | int %}
-                                            {% set year = data['entitlement-end-date-year'] %}
-                                            
-                                            {# Define month names #}
-                                            {% set month_names = [
-                                                "January", "February", "March", "April", "May", "June",
-                                                "July", "August", "September", "October", "November", "December"
-                                            ] %}
-                                            
-                                            {# Get the month name #}
-                                            {% set month_name = month_names[month - 1] %}
-                                            
-                                            {# Display the cancellation date in the format "day month year" #}
-                                            {{ day | int }} {{ month_name }} {{ year }}
+                                              {% set day = data['entitlement-end-date-day'] | int %}
+                                              {% set month = data['entitlement-end-date-month'] | int %}
+                                              {% set year = data['entitlement-end-date-year'] | int %}
+
+                                              {% if day < 10 %}
+                                                  {% set day = "0" ~ day %}
+                                              {% endif %}
+                                              
+                                              {% if month < 10 %}
+                                                  {% set month = "0" ~ month %}
+                                              {% endif %}
+
+                                              {{ day }}/{{ month }}/{{ year }}
                                           {% else %}
-                                            {# Display fallback date if no cancellation date is entered #}
-                                            13 January 2024
+                                            {# Display fallback date if no entitlement end date is entered #}
+                                              13/01/2024
                                           {% endif %}
                                       </p>
                                     </td>
@@ -376,9 +370,7 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Linked to Jane Doe
-                                        <br>
-                                        Entitlement ID: 100002
+                                      <p>Entitlement linked to Jane Doe, entitlement ID: 100002
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -394,7 +386,7 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Registered entitlement</p>
+                                      <p>Entitlement registered</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -448,27 +440,25 @@
                                       <span class="nhsuk-table-responsive__heading">Action</span>
                                       <p>Cancelled entitlement<br>
                                       New entitlement end date:<br> 
-                                        {# Check if cancellation date is provided #}
-                                        {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                          {% set day = data['entitlement-end-date-day'] %}
-                                          {% set month = data['entitlement-end-date-month'] | int %}
-                                          {% set year = data['entitlement-end-date-year'] %}
+                                        {# Check if entitlement end date is provided #}
+                                          {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                                              {% set day = data['entitlement-end-date-day'] | int %}
+                                              {% set month = data['entitlement-end-date-month'] | int %}
+                                              {% set year = data['entitlement-end-date-year'] | int %}
                                           
-                                          {# Define month names #}
-                                          {% set month_names = [
-                                              "January", "February", "March", "April", "May", "June",
-                                              "July", "August", "September", "October", "November", "December"
-                                          ] %}
+                                              {% if day < 10 %}
+                                                  {% set day = "0" ~ day %}
+                                              {% endif %}
+                                              
+                                              {% if month < 10 %}
+                                                  {% set month = "0" ~ month %}
+                                              {% endif %}
                                           
-                                          {# Get the month name #}
-                                          {% set month_name = month_names[month - 1] %}
-                                          
-                                          {# Display the cancellation date in the format "day month year" #}
-                                          {{ day | int }} {{ month_name }} {{ year }}
-                                        {% else %}
-                                          {# Display fallback date if no cancellation date is entered #}
-                                          13 January 2024
-                                        {% endif %}
+                                              {{ day }}/{{ month }}/{{ year }}
+                                          {% else %}
+                                            {# Display fallback date if no entitlement end date is entered #}
+                                              13/01/2024
+                                          {% endif %}
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -483,7 +473,7 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Registered entitlement</p>
+                                      <p>Entitlement registered</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
