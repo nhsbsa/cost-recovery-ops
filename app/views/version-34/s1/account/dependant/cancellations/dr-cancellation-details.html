@@ -66,14 +66,44 @@ Enter cancellation details - Manage overseas entitlements and treatments - NHSBS
                         </div>
                       </fieldset>
                       <!-- End of 'Select who is cancelling the entitlement' radios -->
-
                       <hr style="margin-top: 10px;">
+
+                      {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
+                          {% set day = data['dr-s1-entitlement-end-date-day'] | int %}
+                          {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
+                          {% set year = data['dr-s1-entitlement-end-date-year'] %}
+
+                          {% if day < 10 %}
+                              {% set formatted_day = "0" + day | string %}
+                          {% else %}
+                              {% set formatted_day = day | string %}
+                          {% endif %}
+
+                          {% if month < 10 %}
+                              {% set formatted_month = "0" + month | string %}
+                          {% else %}
+                              {% set formatted_month = month | string %}
+                          {% endif %}
+
+                          {% set formatted_date = formatted_day + '/' + formatted_month + '/' + year %}
+                      {% endif %}
 
                       <!-- Start of 'Enter the end date of the S1/S072 entitlement' -->
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="entitlement-end-date-label">Enter the new end date of the S1/S072 entitlement</label>
+
+                      {% if formatted_date %}
+                            <label class="nhsuk-label" for="entitlement-end-date-label">
+                                Enter the new end date of the S1/S072 entitlement.
+                            </label>
+                            <p class="nhsuk-body">The current end date of this entitlement is {{ formatted_date }}.</p>
+                        {% else %}
+                            <label class="nhsuk-label" for="entitlement-end-date-label">
+                                Enter the end date of the S1/S072 entitlement
+                            </label>
+                        {% endif %}
+
                         <div class="nhsuk-hint" id="example-hint">
-                          For example, 28 8 2024
+                            For example, 28 08 2024
                         </div>
                     
                           <div class="nhsuk-date-input" id="dr-entitlement-end-date">

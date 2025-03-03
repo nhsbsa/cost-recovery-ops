@@ -103,6 +103,7 @@
                                   <tr>
                                     <th scope="col">Date and time</th>
                                     <th scope="col">Action</th>
+                                    <th scope="col">Details</th>
                                     <th scope="col">Updated by</th>
                                   </tr>
                                 </thead>
@@ -116,8 +117,16 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Updated</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
                                       <p>Entitlement cancelled<br>
-                                        New entitlement end date
+                                        {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
+                                            New entitlement end date
+                                        {% else %}
+                                            Entitlement end date
+                                        {% endif %}
                                           {# Check if cancellation date is provided #}
                                           {% if data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
                                             {% set day = data['dr-entitlement-end-date-day'] %}
@@ -153,6 +162,10 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Updated</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
                                       <p>Entitlement linked to John Doe</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -168,6 +181,10 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Created</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
                                       <p>Entitlement registered</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -214,6 +231,7 @@
                                 <tr>
                                   <th scope="col">Date and time</th>
                                   <th scope="col">Action</th>
+                                  <th scope="col">Details</th>
                                   <th scope="col">Updated by</th>
                                 </tr>
                               </thead>
@@ -226,13 +244,17 @@
                                     <p id="currentDateS1Cancelled"></span></p>
                                   </td>
                                   <td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Entitlement ID</span>
-                                    <p>100002</p>
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
                                     <p>Entitlement cancelled<br>
-                                      New entitlement end date
+                                      {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
+                                          New entitlement end date
+                                      {% else %}
+                                          Entitlement end date
+                                      {% endif %}
                                         {# Check if cancellation date is provided #}
                                         {% if data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
                                           {% set day = data['dr-entitlement-end-date-day'] %}
@@ -267,11 +289,11 @@
                                     <p id="currentDateS1Dependant"></span></p>
                                   </td>
                                   <td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Entitlement ID</span>
-                                    <p>100002</p>
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
                                     <p>Entitlement linked to John Doe, entitlement ID: 100001</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
@@ -291,6 +313,10 @@
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Created</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
                                     <p>Entitlement registered</p>
                                   </td>
                                   <td class="nhsuk-table__cell">

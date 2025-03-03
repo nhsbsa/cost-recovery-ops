@@ -69,35 +69,67 @@ Enter cancellation details - Manage overseas entitlements and treatments - NHSBS
 
                       <hr style="margin-top: 10px;">
 
+                      {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
+                          {% set day = data['s1-entitlement-end-date-day'] | int %}
+                          {% set month = data['s1-entitlement-end-date-month'] | int %}
+                          {% set year = data['s1-entitlement-end-date-year'] %}
+
+                          {% if day < 10 %}
+                              {% set formatted_day = "0" + day | string %}
+                          {% else %}
+                              {% set formatted_day = day | string %}
+                          {% endif %}
+
+                          {% if month < 10 %}
+                              {% set formatted_month = "0" + month | string %}
+                          {% else %}
+                              {% set formatted_month = month | string %}
+                          {% endif %}
+
+                          {% set formatted_date = formatted_day + '/' + formatted_month + '/' + year %}
+                      {% endif %}
+
                       <!-- Start of 'Enter the end date of the S1/S072 entitlement' -->
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="entitlement-end-date-label">Enter the new end date of the S1/S072 entitlement</label>
+                          
+                        {% if formatted_date %}
+                            <label class="nhsuk-label" for="entitlement-end-date-label">
+                                Enter the new end date of the S1/S072 entitlement.
+                            </label>
+                            <p class="nhsuk-body">The current end date of this entitlement is {{ formatted_date }}.</p>
+                        {% else %}
+                            <label class="nhsuk-label" for="entitlement-end-date-label">
+                                Enter the end date of the S1/S072 entitlement
+                            </label>
+                        {% endif %}
+
                         <div class="nhsuk-hint" id="example-hint">
-                          For example, 28 8 2024
+                            For example, 28 08 2024
                         </div>
-                    
-                          <div class="nhsuk-date-input" id="entitlement-end-date">
+
+                        <div class="nhsuk-date-input" id="entitlement-end-date">
                             <div class="nhsuk-date-input__item">
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-day">Day</label>
-                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="entitlement-end-date-day" name="entitlement-end-date-day" type="number" pattern="[0-9]*" value="">
-                              </div>
+                                <div class="nhsuk-form-group">
+                                    <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-day">Day</label>
+                                    <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="entitlement-end-date-day" name="entitlement-end-date-day" type="number" pattern="[0-9]*" value="">
+                                </div>
                             </div>
                             <div class="nhsuk-date-input__item">
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-month">Month</label>
-                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="entitlement-end-date-month" name="entitlement-end-date-month" type="number" pattern="[0-9]*" value="">
-                              </div>
+                                <div class="nhsuk-form-group">
+                                    <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-month">Month</label>
+                                    <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="entitlement-end-date-month" name="entitlement-end-date-month" type="number" pattern="[0-9]*" value="">
+                                </div>
                             </div>
                             <div class="nhsuk-date-input__item">
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-year">Year</label>
-                                <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="entitlement-end-date-year" name="entitlement-end-date-year" type="number" pattern="[0-9]*" value="">
-                              </div>
+                                <div class="nhsuk-form-group">
+                                    <label class="nhsuk-label nhsuk-date-input__label" for="entitlement-end-date-year">Year</label>
+                                    <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="entitlement-end-date-year" name="entitlement-end-date-year" type="number" pattern="[0-9]*" value="">
+                                </div>
                             </div>
-                          </div>
+                        </div>
                       </div>
                       <!-- End of 'Enter the end date of the S1/S072 entitlement' -->
+
 
                       <hr>
 
