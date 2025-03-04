@@ -59,75 +59,74 @@
               <div class="nhsuk-grid-column-full">
 
                 {% if data['dr-add-e109-entitlement'] == 'yes' %}
-                <!-- E109 entitlement expander begins -->
-                <h3 class="nhsuk-heading-m" style="margin-top: 50px;" id="s1-s072-entitlements-heading">S1/S072 entitlements</h3>
-
-                <div class="nhsuk-expander-group">
-                  <details class="nhsuk-details nhsuk-expander">
-                    <summary class="nhsuk-details__summary">
-                      
-                      {% if data['dr-cancel-e109-entitlement'] == 'yes' %}
-                          <span role="button" class="nhsuk-details__summary-text" id="entitlement-type"
-                          aria-label="S1/S072 - Valid: 05/09/2024 - France (FR)">
-                            S1/S072 - Valid: from 05/09/2024 to 
+                    <!-- Dependant E109 entitlement expander begins -->
+                    <h3 class="nhsuk-heading-m" style="margin-top: 50px;" id="s1-s072-entitlements-heading">S1/S072 entitlements</h3>
+                
+                    <div class="nhsuk-expander-group">
+                        <details class="nhsuk-details nhsuk-expander">
+                            <summary class="nhsuk-details__summary">
+                                {% if data['dr-cancel-e109-entitlement'] == 'yes' %}
+                                    <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" aria-label="S1/S072 - Valid: 05/10/2024 - France (FR)">
+                                        S1/S072 - Valid: from 05/10/2024 to
+                
+                                        {% if data['dr-update-s1-entitlement-end-date-day'] and data['dr-update-s1-entitlement-end-date-month'] and data['dr-update-s1-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-update-s1-entitlement-end-date-day'] | int %}
+                                            {% set month = data['dr-update-s1-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-update-s1-entitlement-end-date-year'] %}
+                                        
+                                        {% elif data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-entitlement-end-date-day'] | int %}
+                                            {% set month = data['dr-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-entitlement-end-date-year'] %}
+                                        
+                                        {% else %}
+                                            {% set day = 4 %}
+                                            {% set month = 3 %}
+                                            {% set year = 2025 %}
+                                        {% endif %}
+                
+                                        {% if day < 10 %}
+                                            {% set formatted_day = "0" + day | string %}
+                                        {% else %}
+                                            {% set formatted_day = day | string %}
+                                        {% endif %}
                             
-                            {% if data['dr-update-s1-entitlement-end-date'] == 'yes' %}
-                                {% set day = data['dr-updated-s1-entitlement-end-date-day'] | int %}
-                                {% set month = data['dr-updated-s1-entitlement-end-date-month'] | int %}
-                                {% set year = data['dr-updated-s1-entitlement-end-date-year'] %}
-                
-                            {% elif data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
-                                {% set day = data['dr-entitlement-end-date-day'] | int %}
-                                {% set month = data['dr-entitlement-end-date-month'] | int %}
-                                {% set year = data['dr-entitlement-end-date-year'] %}
-                
-                            {% else %}
-                                {% set day = 13 %}
-                                {% set month = 1 %}
-                                {% set year = 2025 %}
-                            {% endif %}
-                
-                            {% if day < 10 %}
-                                {% set formatted_day = "0" + day | string %}
-                            {% else %}
-                                {% set formatted_day = day | string %}
-                            {% endif %}
-                
-                            {% if month < 10 %}
-                                {% set formatted_month = "0" + month | string %}
-                            {% else %}
-                                {% set formatted_month = month | string %}
-                            {% endif %}
-                
-                            {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
-                        </span>
-                      {% else %}
-                        <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" 
-                              aria-label="S1/S072 - Valid: from 05/09/2024 - France (FR)">
-                            S1/S072 - Valid: from 05/09/2024 
-                    
-                            {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
-                                {% set day = data['dr-s1-entitlement-end-date-day'] | int %}
-                                {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
-                                {% set year = data['dr-s1-entitlement-end-date-year'] %}
-                    
-                                {% if day < 10 %}
-                                    {% set formatted_day = "0" + day | string %}
+                                        {% if month < 10 %}
+                                            {% set formatted_month = "0" + month | string %}
+                                        {% else %}
+                                            {% set formatted_month = month | string %}
+                                        {% endif %}
+                            
+                                        {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
+                                    </span>
                                 {% else %}
-                                    {% set formatted_day = day | string %}
-                                {% endif %}
-                    
-                                {% if month < 10 %}
-                                    {% set formatted_month = "0" + month | string %}
-                                {% else %}
-                                    {% set formatted_month = month | string %}
-                                {% endif %}
-                    
-                                to {{ formatted_day }}/{{ formatted_month }}/{{ year }}
-                            {% endif %}
-                    
-                            - France (FR)
-                        </span>
+                                    <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" aria-label="S1/S072 - Valid: from 05/10/2024 - France (FR)">
+                                        S1/S072 - Valid: from 05/10/2024 to
+                
+                                        {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-s1-entitlement-end-date-day'] | int %}
+                                            {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-s1-entitlement-end-date-year'] %}
+                                        {% else %}
+                                            {% set day = 5 %}
+                                            {% set month = 9 %}
+                                            {% set year = 2027 %}
+                                        {% endif %}
+                
+                                        {% if day < 10 %}
+                                            {% set formatted_day = "0" + day | string %}
+                                        {% else %}
+                                            {% set formatted_day = day | string %}
+                                        {% endif %}
+                            
+                                        {% if month < 10 %}
+                                            {% set formatted_month = "0" + month | string %}
+                                        {% else %}
+                                            {% set formatted_month = month | string %}
+                                        {% endif %}
+                            
+                                        {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
+                                    </span>
 
                         <a id="cancel-e109-entitlement" aria-label="Cancel entitlement with entitlement ID 0000000" 
                             href="../dependant/cancellations/dr-cancellation-details" 
@@ -237,8 +236,8 @@
                         </span>
                       {% else %}
                         <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" 
-                              aria-label="S1/S072 - Valid: from 05/09/2024 - France (FR)">
-                            S1/S072 - Valid: from 05/09/2024 
+                              aria-label="S1/S072 - Valid: from 05/10/2024 - France (FR)">
+                            S1/S072 - Valid: from 05/10/2024 to
                     
                             {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
                                 {% set day = data['dr-s1-entitlement-end-date-day'] | int %}
