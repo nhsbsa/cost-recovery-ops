@@ -76,132 +76,6 @@
                <div class="nhsuk-grid-row">
                   <div class="nhsuk-grid-column-full">
 
-                    <!-- Start of Dependant E109 entitlements -->
-                    {% if data['dr-add-e109-entitlement'] == 'yes' %}
-                    <h2 class="nhsuk-heading-m" id="s1-s072-entitlements-heading">Dependant E109 entitlements</h2>
-                    <div class="nhsuk-card">
-                      <div class="nhsuk-card__content">
-                        <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                          <h3 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-e109-entitlements">Jane Doe - Person record ID: 654321</h3>
-                        </div>
-
-                        <hr class="gray-horizontal-line">
-                        <br>
-                    
-                        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-                          <details class="nhsuk-details">
-                            <summary aria-label="View dependant E109 entitlement history" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_e109_entitlements_Link">View entitlement history<span class="nhsuk-u-visually-hidden">for dependant entitlement ID: 100001</span></span>
-                            </summary>
-                        
-                            <div class="nhsuk-details__text" style="margin-top: 30px;">
-                              <table class="nhsuk-table-responsive" id="entitlement-history-e109-entitlements-table" style="margin-bottom: 9px;">
-                                <thead class="nhsuk-table__head">
-                                  <tr>
-                                    <th scope="col">Date and time</th>
-                                    <th scope="col">Action</th>
-                                    <th scope="col">Details</th>
-                                    <th scope="col">Updated by</th>
-                                  </tr>
-                                </thead>
-                                <tbody class="nhsuk-table__body">
-                                  <!-- Most recent update shown at the top of the table -->
-                                  {% if data ['dr-cancel-e109-entitlement'] == 'yes' %}
-                                  <tr class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateS1Cancelled"></span></p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Updated</p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Entitlement cancelled<br>
-                                        {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
-                                            New entitlement end date
-                                        {% else %}
-                                            Entitlement end date
-                                        {% endif %}
-                                            {# Check if entitlement end date is provided #}
-                                          {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                              {% set day = data['entitlement-end-date-day'] | int %}
-                                              {% set month = data['entitlement-end-date-month'] | int %}
-                                              {% set year = data['entitlement-end-date-year'] | int %}
-
-                                              {% if day < 10 %}
-                                                  {% set day = "0" ~ day %}
-                                              {% endif %}
-                                              
-                                              {% if month < 10 %}
-                                                  {% set month = "0" ~ month %}
-                                              {% endif %}
-
-                                              {{ day }}/{{ month }}/{{ year }}
-                                          {% else %}
-                                              {# Display fallback date if no entitlement end date is entered #}
-                                              04/03/2025
-                                          {% endif %}
-                                          </p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                      <p id="entitlement-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
-                                    </td>
-                                  </tr>
-                                  {% endif %}
-                                  <tr class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateE109MainLinked"></span></p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Updated</p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Entitlement linked to Jane Doe, entitlement ID: 100002</p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
-                                    </td>
-                                  </tr>
-                                  
-                                  <!--tr class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateE109"></span></p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Created</p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Entitlement registered</p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                      <p id="person-history-s1-s072-entitlements-updated-by">joebloggs@nhs.net</p>
-                                    </td>
-                                  </tr-->
-                                </tbody>
-                              </table>
-                            </div>
-
-                      </div>
-
-                  <br>
-
-                  </div>
-                    </div>
-                  {% else %}
-                  <!-- End of E109 entitlements card -->
-
-
                     <!-- Start of S1/S072 entitlements -->
                     <!-- Start of entitlement ID: 100001 -->
                     <h2 class="nhsuk-heading-m" id="s1-s072-entitlements-heading">S1/S072 entitlements</h2>
@@ -244,72 +118,25 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Changed entitlement end date<br> 
-                                        from
-                                        {% if data['cancel-s1-entitlement'] == 'yes' %}
-                                          {# Check if entitlement end date is provided #}
-                                            {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
-                                                {% set day = data['entitlement-end-date-day'] | int %}
-                                                {% set month = data['entitlement-end-date-month'] | int %}
-                                                {% set year = data['entitlement-end-date-year'] | int %}
-                                            
-                                                {% if day < 10 %}
-                                                    {% set day = "0" ~ day %}
-                                                {% endif %}
-                                                
-                                                {% if month < 10 %}
-                                                    {% set month = "0" ~ month %}
-                                                {% endif %}
-                                            
-                                                {{ day }}/{{ month }}/{{ year }}
-                                            {% else %}
-                                              {# Display fallback date if no entitlement end date is entered #}
-                                                13/01/2024
-                                            {% endif %}
-                                        
-                                        {% else %}
-                                          {# Default case when there is no cancellation or update #}
-                                          {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
-                                            {% set day = data['s1-entitlement-end-date-day'] %}
-                                            {% set month = data['s1-entitlement-end-date-month'] | int %}
-                                            {% set year = data['s1-entitlement-end-date-year'] %}
-                                            
-                                            {# Define month names #}
-                                            {% set month_names = [
-                                                "January", "February", "March", "April", "May", "June",
-                                                "July", "August", "September", "October", "November", "December"
-                                            ] %}
-                                            
-                                            {# Get the month name #}
-                                            {% set month_name = month_names[month - 1] %}
-                                            
-                                            {# Display the entitlement end date in the format "day month year" #}
-                                            {{ day | int }} {{ month_name }} {{ year }}
-                                          {% else %}
-                                            <span class="nhsuk-u-visually-hidden">Not provided</span>
-                                          {% endif %}
-                                        {% endif %}
-                                        <br>
-                                        to
+                                      <p>Changed entitlement end date to
                                         {% if data['updated-s1-entitlement-end-date-day'] and data['updated-s1-entitlement-end-date-month'] and data['updated-s1-entitlement-end-date-year'] %}
-                                        {% set day = data['updated-s1-entitlement-end-date-day'] %}
-                                        {% set month = data['updated-s1-entitlement-end-date-month'] | int %}
-                                        {% set year = data['updated-s1-entitlement-end-date-year'] %}
-                            
-                                        {# Define month names #}
-                                        {% set month_names = [
-                                            "January", "February", "March", "April", "May", "June",
-                                            "July", "August", "September", "October", "November", "December"
-                                        ] %}
-                            
-                                        {# Get the month name #}
-                                        {% set month_name = month_names[month - 1] %}
-                            
-                                        {# Display the date in the format "day month year" #}
-                                        {{ day | int }} {{ month_name }} {{ year }}
-                                      {% else %}
-                                        3 January 2025
-                                      {% endif %}
+                                          {% set day = data['updated-s1-entitlement-end-date-day'] | int %}
+                                          {% set month = data['updated-s1-entitlement-end-date-month'] | int %}
+                                          {% set year = data['updated-s1-entitlement-end-date-year'] | int %}
+
+                                              {% if day < 10 %}
+                                                  {% set day = "0" ~ day %}
+                                              {% endif %}
+                                              
+                                              {% if month < 10 %}
+                                                  {% set month = "0" ~ month %}
+                                              {% endif %}
+
+                                              {{ day }}/{{ month }}/{{ year }}
+                                        {% else %}
+                                          {# Display fallback date if no entitlement end date is entered #}
+                                            03/01/2025
+                                        {% endif %}
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -331,11 +158,7 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
                                       <p>Entitlement cancelled<br>
-                                        {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
-                                            New entitlement end date
-                                        {% else %}
-                                            Entitlement end date
-                                        {% endif %}
+                                         Entitlement end date
 
                                         {# Check if entitlement end date is provided #}
                                           {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
@@ -354,7 +177,7 @@
                                               {{ day }}/{{ month }}/{{ year }}
                                           {% else %}
                                             {# Display fallback date if no entitlement end date is entered #}
-                                              13/01/2024
+                                              13/01/2025
                                           {% endif %}
                                       </p>
                                     </td>
@@ -377,18 +200,12 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Changed PIN<br>
-                                        from {% if data['s1-entitlement-pin'] %}
-                                                            {{ data['s1-entitlement-pin'] }}
-                                                          {% else %}
-                                                            1234567890
-                                                          {% endif %}
-                                      <br>
-                                      to {% if data['updated-s1-entitlement-pin'] %}
-                                          {{ data['updated-s1-entitlement-pin'] }}
-                                         {% else %}
-                                           1234500001
-                                         {% endif %}
+                                      <p>Changed PIN to 
+                                        {% if data['s1-entitlement-pin'] %}
+                                          {{ data['s1-entitlement-pin'] }}
+                                        {% else %}
+                                          1234500001
+                                        {% endif %}
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -429,7 +246,26 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Entitlement registered</p>
+                                      <p>Entitlement registered<br>
+                                        Entitlement end date 
+                                        {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
+                                          {% set day = data['s1-entitlement-end-date-day'] %}
+                                          {% set month = data['s1-entitlement-end-date-month'] | int %}
+                                          {% set year = data['s1-entitlement-end-date-year'] %}
+                                          
+                                          {% if day < 10 %}
+                                                {% set day = "0" ~ day %}
+                                            {% endif %}
+                                            
+                                            {% if month < 10 %}
+                                                {% set month = "0" ~ month %}
+                                          {% endif %}
+
+                                            {{ day }}/{{ month }}/{{ year }}
+                                        {% else %}
+                                          not provided
+                                        {% endif %}
+                                      </p>                                     
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -487,7 +323,7 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
                                       <p>Entitlement cancelled<br>
-                                      New entitlement end date 17/03/2020
+                                      Entitlement end date 17/03/2020
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -506,7 +342,9 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Entitlement registered</p>
+                                      <p>Entitlement registered<br>
+                                        Entitlement end date 06/01/2023
+                                     </p>  
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -524,7 +362,6 @@
                   </div>
                     </div>
                   <!-- End of S1/S072 entitlements card -->
-                  {% endif %}
 
 
                   

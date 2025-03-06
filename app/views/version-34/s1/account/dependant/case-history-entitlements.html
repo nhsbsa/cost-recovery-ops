@@ -122,12 +122,9 @@
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
                                       <p>Entitlement cancelled<br>
-                                        {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
-                                            New entitlement end date
-                                        {% else %}
-                                            Entitlement end date
-                                        {% endif %}
-                                          {# Check if cancellation date is provided #}
+                                         Entitlement end date
+
+                                        {# Check if cancellation date is provided #}
                                           {% if data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
                                             {% set day = data['dr-entitlement-end-date-day'] %}
                                             {% set month = data['dr-entitlement-end-date-month'] | int %}
@@ -185,7 +182,26 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Entitlement registered</p>
+                                      <p>Entitlement registered<br>
+                                        Entitlement end date 
+                                        {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
+                                          {% set day = data['dr-s1-entitlement-end-date-day'] %}
+                                          {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
+                                          {% set year = data['dr-s1-entitlement-end-date-year'] %}
+                                          
+                                          {% if day < 10 %}
+                                                {% set day = "0" ~ day %}
+                                            {% endif %}
+                                            
+                                            {% if month < 10 %}
+                                                {% set month = "0" ~ month %}
+                                          {% endif %}
+
+                                            {{ day }}/{{ month }}/{{ year }}
+                                        {% else %}
+                                          not provided
+                                        {% endif %}
+                                      </p> 
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -249,11 +265,7 @@
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Details</span>
                                     <p>Entitlement cancelled<br>
-                                      {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
-                                          New entitlement end date
-                                      {% else %}
-                                          Entitlement end date
-                                      {% endif %}
+                                      Entitlement end date
                                         {# Check if cancellation date is provided #}
                                         {% if data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
                                           {% set day = data['dr-entitlement-end-date-day'] %}
@@ -316,7 +328,26 @@
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Details</span>
-                                    <p>Entitlement registered</p>
+                                    <p>Entitlement registered<br>
+                                      Entitlement end date 
+                                      {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
+                                        {% set day = data['dr-s1-entitlement-end-date-day'] %}
+                                        {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
+                                        {% set year = data['dr-s1-entitlement-end-date-year'] %}
+                                        
+                                        {% if day < 10 %}
+                                              {% set day = "0" ~ day %}
+                                          {% endif %}
+                                          
+                                          {% if month < 10 %}
+                                              {% set month = "0" ~ month %}
+                                        {% endif %}
+
+                                          {{ day }}/{{ month }}/{{ year }}
+                                      {% else %}
+                                        not provided
+                                      {% endif %}
+                                    </p> 
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Updated by</span>
