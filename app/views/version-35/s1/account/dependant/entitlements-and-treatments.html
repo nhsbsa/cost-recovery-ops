@@ -1,0 +1,459 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}Entitlements and treatments - Manage overseas entitlements and treatments - NHSBSA{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../search/search-by-person">Search (Person)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../search/search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Entitlements and treatments</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+          
+          
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <h1 class="nhsuk-heading-xl">Entitlements and treatments</h1>
+
+                <a href="/version-35/s1/account/dependant/s1-s072-registration/which-entitlement" class="nhsuk-button" style="float: right; margin-bottom: 20px;" role="button" data-module="nhsuk-button">
+                  Add an entitlement
+                  </a>
+              </div>
+            </div>
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+
+                {% if data['dr-add-e109-entitlement'] == 'yes' %}
+                    <!-- Dependant E109 entitlement expander begins -->
+                    <h3 class="nhsuk-heading-m" style="margin-top: 50px;" id="s1-s072-entitlements-heading">S1/S072 entitlements</h3>
+                
+                    <div class="nhsuk-expander-group">
+                        <details class="nhsuk-details nhsuk-expander">
+                            <summary class="nhsuk-details__summary">
+                                {% if data['dr-cancel-e109-entitlement'] == 'yes' %}
+                                    <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" aria-label="S1/S072 - Valid: 05/10/2024 - France (FR)">
+                                        S1/S072 - Valid: from 05/10/2024 to
+                
+                                        {% if data['dr-update-s1-entitlement-end-date-day'] and data['dr-update-s1-entitlement-end-date-month'] and data['dr-update-s1-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-update-s1-entitlement-end-date-day'] | int %}
+                                            {% set month = data['dr-update-s1-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-update-s1-entitlement-end-date-year'] %}
+                                        
+                                        {% elif data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-entitlement-end-date-day'] | int %}
+                                            {% set month = data['dr-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-entitlement-end-date-year'] %}
+                                        
+                                        {% else %}
+                                            {% set day = 4 %}
+                                            {% set month = 3 %}
+                                            {% set year = 2025 %}
+                                        {% endif %}
+                
+                                        {% if day < 10 %}
+                                            {% set formatted_day = "0" + day | string %}
+                                        {% else %}
+                                            {% set formatted_day = day | string %}
+                                        {% endif %}
+                            
+                                        {% if month < 10 %}
+                                            {% set formatted_month = "0" + month | string %}
+                                        {% else %}
+                                            {% set formatted_month = month | string %}
+                                        {% endif %}
+                            
+                                        {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
+                                    </span>
+                                {% else %}
+                                    <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" aria-label="S1/S072 - Valid: from 05/10/2024 - France (FR)">
+                                        S1/S072 - Valid: from 05/10/2024 to
+                
+                                        {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-s1-entitlement-end-date-day'] | int %}
+                                            {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-s1-entitlement-end-date-year'] %}
+                                        {% else %}
+                                            {% set day = 05 %}
+                                            {% set month = 10 %}
+                                            {% set year = 2027 %}
+                                        {% endif %}
+                
+                                        {% if day < 10 %}
+                                            {% set formatted_day = "0" + day | string %}
+                                        {% else %}
+                                            {% set formatted_day = day | string %}
+                                        {% endif %}
+                            
+                                        {% if month < 10 %}
+                                            {% set formatted_month = "0" + month | string %}
+                                        {% else %}
+                                            {% set formatted_month = month | string %}
+                                        {% endif %}
+                            
+                                        {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
+                                    </span>
+
+                        <a id="cancel-e109-entitlement" aria-label="Cancel entitlement with entitlement ID 0000000" 
+                            href="../dependant/cancellations/dr-cancellation-details" 
+                            style="float: right; margin-right: 30px; margin-top: 8px; display: block;">
+                            Cancel entitlement
+                        </a>
+                      {% endif %}
+
+                        
+                      {% if data['dr-cancel-e109-entitlement'] == 'yes' %}
+                        <strong class="nhsuk-tag nhsuk-tag--red" style="margin-left: 15px; margin-top: 8px; " id="entitlement-status-tag">
+                          Cancelled
+                        </strong>
+                      {% else %}
+                        <strong class="nhsuk-tag nhsuk-tag--green" style="margin-left: 15px; margin-top: 8px; " id="entitlement-status-tag">
+                          Registered
+                        </strong>
+                      {% endif %}
+
+                    </summary>   
+
+
+                    <div class="nhsuk-details__text">
+                      <br>
+
+                      <div class="nhsuk-action-link">
+
+                        <dl class="nhsuk-summary-list">
+                          
+      
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">
+                              Personal identification number (PIN)
+                            </dt>
+                            <dd class="nhsuk-summary-list__value">
+                              0987654321
+                            </dd>
+                          </div>
+                        </dl>
+                        <!-- Entitlement details content ends -->
+
+                        <div class="nhsuk-action-link">
+                          <a class="nhsuk-action-link__link" href="../dependant/s1-entitlement-content/s1-entitlement-details">
+                            <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="36" height="36">
+                              <path d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
+                            </svg>
+                            <span class="nhsuk-action-link__text">View entitlement details</span>
+                          </a>
+                        </div>
+                      
+                      </div>
+
+                    
+                    
+                  </details>
+                </div>
+                <!-- E109 entitlement expander ends -->
+                
+
+
+  
+                
+
+                {% elif data['dr-add-s1-entitlement'] == 'yes' %}
+                <!-- S1/S072 entitlement expander begins -->
+                <h3 class="nhsuk-heading-m" style="margin-top: 50px;" id="s1-s072-entitlements-heading">S1/S072 entitlements</h3>
+
+                <div class="nhsuk-expander-group">
+                  <details class="nhsuk-details nhsuk-expander">
+                    <summary class="nhsuk-details__summary">
+
+                      {% if data['dr-cancel-s1-entitlement'] == 'yes' %}
+                      <span role="button" class="nhsuk-details__summary-text" id="entitlement-type"
+                      aria-label="S1/S072 - Valid: 05/10/2024 - France (FR)">
+                            S1/S072 - Valid: from 05/10/2024 to 
+                            
+                            {% if data['dr-update-s1-entitlement-end-date'] == 'yes' %}
+                                {% set day = data['dr-updated-s1-entitlement-end-date-day'] | int %}
+                                {% set month = data['dr-updated-s1-entitlement-end-date-month'] | int %}
+                                {% set year = data['dr-updated-s1-entitlement-end-date-year'] %}
+                
+                            {% elif data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
+                                {% set day = data['dr-entitlement-end-date-day'] | int %}
+                                {% set month = data['dr-entitlement-end-date-month'] | int %}
+                                {% set year = data['dr-entitlement-end-date-year'] %}
+                
+                            {% else %}
+                                {% set day = 13 %}
+                                {% set month = 1 %}
+                                {% set year = 2025 %}
+                            {% endif %}
+                
+                            {% if day < 10 %}
+                                {% set formatted_day = "0" + day | string %}
+                            {% else %}
+                                {% set formatted_day = day | string %}
+                            {% endif %}
+                
+                            {% if month < 10 %}
+                                {% set formatted_month = "0" + month | string %}
+                            {% else %}
+                                {% set formatted_month = month | string %}
+                            {% endif %}
+                
+                            {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
+                        </span>
+                      {% else %}
+                        <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" 
+                              aria-label="S1/S072 - Valid: from 05/10/2024 - France (FR)">
+                            S1/S072 - Valid: from 05/10/2024 to
+                    
+                            {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
+                                {% set day = data['dr-s1-entitlement-end-date-day'] | int %}
+                                {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
+                                {% set year = data['dr-s1-entitlement-end-date-year'] %}
+                    
+                                {% if day < 10 %}
+                                    {% set formatted_day = "0" + day | string %}
+                                {% else %}
+                                    {% set formatted_day = day | string %}
+                                {% endif %}
+                    
+                                {% if month < 10 %}
+                                    {% set formatted_month = "0" + month | string %}
+                                {% else %}
+                                    {% set formatted_month = month | string %}
+                                {% endif %}
+                    
+                                to {{ formatted_day }}/{{ formatted_month }}/{{ year }}
+                            {% endif %}
+                    
+                            - France (FR)
+                        </span>
+                    
+                        <a id="cancel-s1-entitlement" aria-label="Cancel entitlement with entitlement ID 0000000" 
+                          href="../dependant/cancellations/dr-cancellation-details" 
+                          style="float: right; margin-right: 30px; margin-top: 8px; display: block;">
+                            Cancel entitlement
+                        </a>
+                    {% endif %}
+                
+                    {% if data['dr-cancel-s1-entitlement'] == 'yes' %}
+                        <strong class="nhsuk-tag nhsuk-tag--red" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
+                            Cancelled
+                        </strong>
+                    {% else %}
+                        <strong class="nhsuk-tag nhsuk-tag--green" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
+                            Registered
+                        </strong>
+                    {% endif %}
+                    </summary>
+                    
+                        
+
+
+                        <div class="nhsuk-details__text">
+                          <br>
+
+                          <div class="nhsuk-action-link">
+
+                            <dl class="nhsuk-summary-list">
+                              
+          
+                              <div class="nhsuk-summary-list__row">
+                                <dt class="nhsuk-summary-list__key">
+                                  Personal identification number (PIN)
+                                </dt>
+                                <dd class="nhsuk-summary-list__value">
+                                  0987654321
+                                </dd>
+                              </div>
+                            </dl>
+                            <!-- Entitlement details content ends -->
+
+                            <div class="nhsuk-action-link">
+                              <a class="nhsuk-action-link__link" href="../dependant/s1-entitlement-content/s1-entitlement-details">
+                                <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="36" height="36">
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                  <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
+                                </svg>
+                                <span class="nhsuk-action-link__text">View entitlement details</span>
+                              </a>
+                            </div>
+                          
+                          </div>
+
+                        </div>
+                        
+                      </details>
+                    </div>
+                    <!-- S1/S072 entitlement expander ends -->
+                    
+                    {% else %}
+
+                    <p style="margin-top: 10px;">No entitlements have been added to this person's record.</p>
+
+                    {% endif %}
+
+                    
+
+                    
+
+                  </div>
+                </div>
+                <!-- Entitlements section ends -->
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          Jane Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>654321</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a href="personal-details">Personal details</a></li>
+          <li><a class="active" href="entitlements-and-treatments">Entitlements and treatments</a></li>
+          <li><a href="case-history-person">Case history</a></li>
+          <!--li><a href="documents">Documents</a></li-->
+          <li><a href="notes">Notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
+
+  </div>
+</div>
+<!-- End of main content -->
+{% endblock %}
+      
+{% block pageScripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".nhsuk-tabs__tab");
+    const panels = document.querySelectorAll(".nhsuk-tabs__panel");
+
+    function hideAllPanels() {
+      panels.forEach(panel => panel.classList.add("nhsuk-tabs__panel--hidden"));
+      tabs.forEach(tab => tab.parentElement.classList.remove("nhsuk-tabs__list-item--selected"));
+    }
+
+    function showPanel(panelId) {
+      const panel = document.querySelector(panelId);
+      if (panel) {
+        panel.classList.remove("nhsuk-tabs__panel--hidden");
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", function (event) {
+        event.preventDefault();
+        hideAllPanels();
+        tab.parentElement.classList.add("nhsuk-tabs__list-item--selected");
+        showPanel(tab.getAttribute("href"));
+      });
+    });
+
+    // Initially show the Personal details tab
+    hideAllPanels();
+    showPanel("#entitlements");
+    document.querySelector('a[href="#entitlements"]').parentElement.classList.add("nhsuk-tabs__list-item--selected");
+  });
+
+
+   // Current Date and Time
+
+  // JavaScript code
+  var currentDateElement = document.getElementById("currentDate1");
+
+  // Get the current date
+  var currentDate = new Date();
+
+  // Format the date as desired
+  var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+  var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+
+  // Format the time as desired
+  var timeOptions = { hour: 'numeric', minute: 'numeric', hour24: true };
+  var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+
+  // Combine date and time
+  var formattedDateTime = formattedDate + ' at ' + formattedTime;
+
+  // Set the formatted date and time as the content of the element
+  currentDateElement.textContent = formattedDateTime;
+</script>
+
+
+<script>
+  function updateFormattedDate(idPrefix) {
+    const day = document.getElementById(`${idPrefix}-day`)?.value || '';
+    const month = document.getElementById(`${idPrefix}-month`)?.value || '';
+    const year = document.getElementById(`${idPrefix}-year`)?.value || '';
+
+    // Pad day and month with leading zeros if needed
+    const formattedDay = day.padStart(2, '0');
+    const formattedMonth = month.padStart(2, '0');
+
+    // Create a formatted date or use the default
+    const formattedDate = (formattedDay && formattedMonth && year)
+      ? `${formattedDay}/${formattedMonth}/${year}`
+      : '13/01/2025';
+
+    // Update the displayed formatted date
+    const displayElement = document.getElementById(`${idPrefix}-formatted`);
+    if (displayElement) {
+      displayElement.textContent = formattedDate;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const idPrefix = 'entitlement-end-date';
+
+    // Initial update
+    updateFormattedDate(idPrefix);
+
+    // Add event listeners for live updates
+    document.getElementById(`${idPrefix}-day`)?.addEventListener('input', () => updateFormattedDate(idPrefix));
+    document.getElementById(`${idPrefix}-month`)?.addEventListener('input', () => updateFormattedDate(idPrefix));
+    document.getElementById(`${idPrefix}-year`)?.addEventListener('input', () => updateFormattedDate(idPrefix));
+  });
+</script>
+
+{% endblock %}
