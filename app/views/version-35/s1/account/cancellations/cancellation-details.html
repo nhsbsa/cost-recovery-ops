@@ -72,22 +72,16 @@ Enter cancellation details - Manage overseas entitlements and treatments - NHSBS
                       {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
                           {% set day = data['s1-entitlement-end-date-day'] | int %}
                           {% set month = data['s1-entitlement-end-date-month'] | int %}
-                          {% set year = data['s1-entitlement-end-date-year'] %}
+                          {% set year = data['s1-entitlement-end-date-year'] | int %}
 
-                          {% if day < 10 %}
-                              {% set formatted_day = "0" + day | string %}
-                          {% else %}
-                              {% set formatted_day = day | string %}
-                          {% endif %}
+                          {% set month_names = [
+                              '', 'January', 'February', 'March', 'April', 'May', 'June',
+                              'July', 'August', 'September', 'October', 'November', 'December'
+                          ] %}
 
-                          {% if month < 10 %}
-                              {% set formatted_month = "0" + month | string %}
-                          {% else %}
-                              {% set formatted_month = month | string %}
-                          {% endif %}
-
-                          {% set formatted_date = formatted_day + '/' + formatted_month + '/' + year %}
+                          {% set formatted_date = day | string + ' ' + month_names[month] + ' ' + year | string %}
                       {% endif %}
+
 
                       <!-- Start of 'Enter the end date of the S1/S072 entitlement' -->
                       <div class="nhsuk-form-group">
