@@ -9,8 +9,19 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 
 // S1 Claims //
 
-// Search for UK Claims
-router.post([/uk-claims-search/], function(req, res) {
+// Search for UK Claims - Actual cost
+router.post([/uk-claims-search-actual-cost/], function(req, res) {
+  // Capture form data from the POST request
+  const searchEntitlementArticleType = req.body['search-entitlement-article-type'];
+  
+  // Store these in the session or database
+  req.session.data['search-entitlement-article-type'] = searchEntitlementArticleType;
+
+  res.redirect('/version-35/uk-claims/uk-claims-search-results');
+})
+
+// Search for UK Claims - Average cost
+router.post([/uk-claims-search-average-cost/], function(req, res) {
   // Capture form data from the POST request
   const searchEntitlementArticleType = req.body['search-entitlement-article-type'];
   
@@ -18,6 +29,17 @@ router.post([/uk-claims-search/], function(req, res) {
   req.session.data['search-entitlement-article-type'] = searchEntitlementArticleType;
 
   res.redirect('/version-35/uk-claims/uk-claims-search-results-found');
+})
+
+// Search for UK Claims - Average cost
+router.post([/uk-claims-search-by-id/], function(req, res) {
+  // Capture form data from the POST request
+  const searchEntitlementID = req.body['search-entitlement-id'];
+  
+  // Store these in the session or database
+  req.session.data['search-entitlement-id'] = searchEntitlementID;
+
+  res.redirect('/version-35/uk-claims/uk-claims-search-by-id-results');
 })
 
 // Select type of S1 entitlement
