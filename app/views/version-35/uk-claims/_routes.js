@@ -17,7 +17,7 @@ router.post([/uk-claims-search/], function(req, res) {
   // Store these in the session or database
   req.session.data['search-entitlement-article-type'] = searchEntitlementArticleType;
 
-  res.redirect('/version-35/uk-claims/uk-claims-search-results');
+  res.redirect('/version-35/uk-claims/uk-claims-search-results-found');
 })
 
 // Select type of S1 entitlement
