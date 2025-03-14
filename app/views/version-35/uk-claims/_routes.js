@@ -81,4 +81,12 @@ router.post([/uk-claims-loading-new-claim/], function(req, res) {
   }
 });
 
+// Check and confirm selected invoices should be removed from the claim
+router.post([/confirm-remove-invoices/], function(req, res) {
+
+  req.session.data['remove-invoices-from-retroactive-claim'] = 'yes'
+
+  res.redirect('/version-35/uk-claims/s1-claim-forms');
+})
+
 module.exports = router;

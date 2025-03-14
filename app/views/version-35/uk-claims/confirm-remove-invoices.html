@@ -59,170 +59,49 @@ Are you sure you want to remove invoices from this claim?
             <div class="nhsuk-grid-row">
                   
               <div class="nhsuk-grid-column-full">
-                <h1 class="nhsuk-heading-l">Check the invoices you have selected to remove from Claim ID 123456</h1>
+
+                {{ backLink({
+                  "href": "javascript:history.go(-1)",
+                  "text": "Go back"
+                }) }}
+
+
+                <h1 class="nhsuk-heading-l">Check and confirm all the invoices you want to remove from Claim ID 100005</h1>
               
                 
                 
                        
                 <div class="nhsuk-form-group">
-        
                   <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
                     <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
                       <tr role="row">
-                        <th role="columnheader" class="" scope="col">
-                          Invoice ID
-                        </th>
-                        <th role="columnheader" class="" scope="col">
-                          First names
-                        </th>
-                        <th role="columnheader" class="" scope="col">
-                          Last name
-                        </th>
-                        <th role="columnheader" class="" scope="col">
-                          Months claimed
-                        </th>
-                        <th role="columnheader" class="" scope="col">
-                          Period of months claimed
-                        </th>
-                        <th role="columnheader" class="" scope="col">
-                          Action
-                        </th>
+                        <th role="columnheader" scope="col">Invoice ID</th>
+                        <th role="columnheader" scope="col">First names</th>
+                        <th role="columnheader" scope="col">Last name</th>
+                        <th role="columnheader" scope="col">Date entitlement registered</th>
+                        <th role="columnheader" scope="col">Months claimed</th>
+                        <th role="columnheader" scope="col">Duration claimed</th>
+                        <th role="columnheader" scope="col">Action</th>
                       </tr>
                     </thead>
-          
-                    <tbody class="nhsuk-table__body">
-                      <tr role="row" class="nhsuk-table__row">
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Invoice ID</span>
-                          <span>928494</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">First names</span>
-                          <span>Andre</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Last name</span>
-                          <span>Caron</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Months claimed</span>
-                          <span>3</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Period of months claimed</span>
-                          <span>01/01/2024 - 01/04/2024</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Action</span>
-                          <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Andre Caron</span></span>
-                        </td>
-                      </tr>
-          
-          
-                      <tr role="row" class="nhsuk-table__row">
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Invoice ID</span>
-                          <span>182733</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">First names</span>
-                          <span>Evonne</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Last name</span>
-                          <span>Albert</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Months claimed</span>
-                          <span>2</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Period of months claimed</span>
-                          <span>01/01/2024 - 01/03/2024</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Action</span>
-                          <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Evonne Albert</span></span>
-                        </td>
-                      </tr>
-          
-                      <tr role="row" class="nhsuk-table__row">
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Invoice ID</span>
-                          <span>726499</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">First names</span>
-                          <span>Modestine</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Last name</span>
-                          <span>Plourde</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Months claimed</span>
-                          <span>1</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Period of months claimed</span>
-                          <span>01/01/2024 - 01/02/2024</span>
-                        </td>
-                        <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Action</span>
-                          <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Modestine Plourde</span></span>
-                        </td>
-                      </tr>
+                    <tbody class="nhsuk-table__body">  
+                      <!-- Selected invoices will be inserted here by JavaScript -->
                     </tbody>
-          
                   </table>
-                  <!-- End of invoices table for Article 63, 2.a - ages 65 years and over -->
-          
-                  <!-- Pagination starts -->
-                  <nav class="nav" role="navigation" aria-label="Pagination">
-                    <ul class="pagination">
-                        <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
-                    </ul>
-          
-                    <div class="pagination__summary navigation-mobile">Showing 1 - 3 of 3 invoices</div>
-                  </nav>
-                  <!-- Pagination ends -->
-
+                  
                 </div>
-              </div>
 
-              <div class="nhsuk-grid-column-one-half">
-                <div class="nhsuk-form-group">
-                  <fieldset class="nhsuk-fieldset">
-                    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-                      <h1 class="nhsuk-fieldset__heading">
-                        Are you sure you want to remove these invoices from this claim?
-                      </h1>
-                    </legend>
 
-                  <div class="nhsuk-radios nhsuk-radios--inline">
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="remove-invoices" name="remove-invoices" type="radio" value="Yes">
-                      <label class="nhsuk-label nhsuk-radios__label" for="remove-invoices-yes">
-                        Yes
-                      </label>
-                    </div>
-
-                    <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="remove-invoices" name="remove-invoices" type="radio" value="No">
-                      <label class="nhsuk-label nhsuk-radios__label" for="remove-invoices-yes">
-                        No
-                      </label>
-                    </div>
-                  </div>
-
-                  </fieldset>
+                <div class="nhsuk-inset-text">
+                  <span class="nhsuk-u-visually-hidden">Information:</span>
+                
+                  <p>If you have selected the wrong invoices to remove, go back and <a href="s1-claim-forms">select the correct invoices</a>.</p>
                 </div>
         
-                <a href="s1-entitlement-details?dr-add-main=yes">
-                <button class="nhsuk-button" style="margin-top: 10px;" type="submit">Save and continue</button>
-                </a>
-
-              </div>
+                <button class="nhsuk-button" style="margin-top: 10px;" type="submit">
+                  Save and continue
+                </button>
+              
             </div>
           </div>
         </div>
@@ -232,13 +111,35 @@ Are you sure you want to remove invoices from this claim?
 {% endblock %}
 
 {% block pageScripts %}
-<!-- autocomplete js -->
-<script type="text/javascript">
-  accessibleAutocomplete.enhanceSelectElement({
-    defaultValue : '',
-    autoselect : true,  
-    selectElement : document.querySelector('#entitlement-country-drop')
-  })
-</script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const selectedInvoices = JSON.parse(sessionStorage.getItem("selectedInvoices"));
+    console.log("Retrieved invoices:", selectedInvoices); // Debugging line
+
+    if (!selectedInvoices || selectedInvoices.length === 0) {
+        alert("No invoices found in session storage!");
+        return;
+    }
+
+    const tbody = document.querySelector(".nhsuk-table__body");
+    tbody.innerHTML = ""; // Clear existing rows
+
+    selectedInvoices.forEach(invoice => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${invoice.id}</td>
+            <td>${invoice.firstName}</td>
+            <td>${invoice.lastName}</td>
+            <td>${invoice.dateEntitlementRegistered}</td>
+            <td>${invoice.months}</td>
+            <td>${invoice.period}</td>
+            <td><a href="#">View person record</a></td>
+        `;
+        tbody.appendChild(row);
+    });
+});
+
+</script>
 {% endblock %}
