@@ -222,4 +222,17 @@ Search for UK claims
     selectElement : document.querySelector('#entitlement-country-drop')
   })
 </script>
+
+<!-- Store year of claim -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const yearInput = document.getElementById("country");
+    if (yearInput) {
+      yearInput.addEventListener("input", function () {
+        localStorage.setItem("yearOfClaim", yearInput.value);
+      });
+    }
+  });
+</script>
+
 {% endblock %}

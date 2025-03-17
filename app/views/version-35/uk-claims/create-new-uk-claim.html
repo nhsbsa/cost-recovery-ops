@@ -345,4 +345,16 @@ Search for UK claims
   })
 </script>
 
+<!-- Retrieve and populate year of claim from original search criteria -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const yearOfClaimInput = document.getElementById("year-of-claim");
+    if (yearOfClaimInput) {
+      const storedYear = localStorage.getItem("yearOfClaim");
+      if (storedYear) {
+        yearOfClaimInput.value = storedYear;
+      }
+    }
+  });
+</script>
 {% endblock %}

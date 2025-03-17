@@ -381,3 +381,62 @@ Search for UK claims
     </div>
 </div>
 {% endblock %}
+
+{% block pageScripts %}
+<!-- update tags based on search criteria -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Store values from the first page
+      const yearInput = document.getElementById("country");
+      if (yearInput) {
+        yearInput.addEventListener("input", function () {
+          localStorage.setItem("yearOfClaim", yearInput.value);
+        });
+      }
+  
+      const articleRadios = document.querySelectorAll('input[name="search-entitlement-article-type"]');
+      articleRadios.forEach(radio => {
+        radio.addEventListener("change", function () {
+          if (this.checked) {
+            localStorage.setItem("articleType", this.value);
+          }
+        });
+      });
+  
+      const countryInput = document.getElementById("entitlement-country-drop");
+      if (countryInput) {
+        countryInput.addEventListener("input", function () {
+          localStorage.setItem("entitlementCountry", countryInput.value);
+        });
+      }
+  
+      // Retrieve stored values
+      const storedYear = localStorage.getItem("yearOfClaim");
+      const storedArticle = localStorage.getItem("articleType");
+      const storedCountry = localStorage.getItem("entitlementCountry");
+  
+      // Update year on second screen
+      const yearOfClaimInput = document.getElementById("year-of-claim");
+      if (yearOfClaimInput && storedYear) {
+        yearOfClaimInput.value = storedYear;
+      }
+  
+      // Update year in search results tag
+      const yearTag = document.querySelector(".nhsuk-tag");
+      if (yearTag && storedYear) {
+        yearTag.textContent = storedYear;
+      }
+  
+      // Update Article Type and Country in search results
+      document.querySelectorAll(".nhsuk-tag").forEach(tag => {
+        if (storedArticle && tag.textContent.includes("Article")) {
+          tag.textContent = storedArticle;
+        }
+        // Fix for Country Tag: Ensures only the country tag is updated
+        if (storedCountry && tag.textContent.match(/\(\w{2}\)$/)) { 
+          tag.textContent = storedCountry;
+        }
+      });
+    });
+</script>  
+{% endblock %}

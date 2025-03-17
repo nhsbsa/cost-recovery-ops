@@ -288,6 +288,32 @@ UK claim ID 123456 - Claim history
                             </td>
                         </tr>
                         {% endif %}
+                        {% if data['remove-invoices-from-retroactive-claim'] == 'yes' %}
+                        <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                <span><p id="currentDateInvoicesRemovedFromRetroactiveClaim"></p></span>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                Updated
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Details</span>
+                                {% if data['claim-age-bracket'] == '65 years and over' %}
+                                  Invoices 113838 and 928494 removed from the claim.
+                                {% elif data['claim-age-bracket'] == '20 to 64 years' %}
+                                  Invoices 293356 and 125764 removed from the claim.
+                                {% else %}
+                                  Invoice 837492 removed from the claim.
+                                {% endif %}
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                joe.bloggs@nhsbsa.nhs.uk
+                            </td>
+                        </tr>
+                        {% endif %}
                         {% if data['save-claim-details'] == 'yes' %}
                         <tr role="row" class="nhsuk-table__row" style="display: none;">
                             <td role="cell" class="nhsuk-table__cell">
@@ -409,6 +435,7 @@ function setCurrentDateTime(elementId) {
 
   // Set the date for each item
   document.addEventListener("DOMContentLoaded", function () {
+    setCurrentDateTime("currentDateInvoicesRemovedFromRetroactiveClaim");  // Invoices removed from retroactive claim
     setCurrentDateTime("currentDateS1ClaimSentToMS");  // Updates date S1 claim sent to the MS
     setCurrentDateTime("currentDateS1ClaimSentToDH");  // Updates date S100 Global note uploaded to the DH eXchange
     setCurrentDateTime("currentDateS1ClaimCreated");  // Updates date S1 claim created
