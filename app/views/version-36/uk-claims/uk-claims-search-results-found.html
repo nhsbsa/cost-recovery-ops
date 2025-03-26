@@ -1,0 +1,442 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search for UK claims
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search-actual-cost">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Search results</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search">Back to search</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                  <h1 class="nhsuk-heading-xl">
+                    {% if data['search-entitlement-article-type'] == 'EHIC and PRC - Article 62' or data['search-entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                      Search results for actual cost UK claims
+                    {% else %}
+                      Search results for average cost UK claims
+                    {% endif %}
+                  </h1>
+              </div>
+              <div class="nhsuk-grid-column-one-third">
+                  <a href="create-new-uk-claim"><button class="nhsuk-button" type="submit" style="float:right">
+                          Create new claim
+                      </button></a>
+              </div>
+            </div>
+
+          <hr style="border-bottom:4px solid #005eb8; margin:0">
+
+          <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                  <br>
+
+                  {% if data['search-entitlement-article-type'] == 'EHIC and PRC - Article 62' %}
+                  <h2 class="nhsuk-heading-s">Showing results for 
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">EHIC and PRC - Article 62</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                  </h2>
+
+                  <table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
+                    <caption class="nhsuk-table__caption"></caption>
+                    <thead role="rowgroup" class="nhsuk-table__head">
+                        <tr role="row">
+                            <th role="columnheader" scope="col" id="claim-id">Claim ID</th>
+                            <th role="columnheader" scope="col" id="claim-year">Year</th>
+                            <th role="columnheader" scope="col" id="claim-month">Month</th>
+                            <th role="columnheader" scope="col" id="claim-entitlement-type">Entitlement type
+                            </th>
+                            <th role="columnheader" scope="col" id="claim-country">Country</th>
+                            <th role="columnheader" scope="col" id="claim-status">Status</th>
+                            <th role="columnheader" scope="col" id="claim-created-by">Created by</th>
+                            <th role="columnheader" scope="col" id="view-claim">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result" class="nhsuk-table__body">
+                        <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                                <p class="responsive-table-values" id="claim_id_0">345680</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Year</span>
+                                <p class="responsive-table-values" id="searchClaimYear_0">2023</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Month</span>
+                                <p class="responsive-table-values" id="searchClaimMonth_0">March</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Entitlement type</span>
+                                <p class="responsive-table-values" id="searchClaimentitlementArticleType_0">
+                                    EHIC &amp; PRC</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Country</span>
+                                <p class="responsive-table-values" id="searchClaimCountry_0">France (FR)</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Status</span>
+                                <p class="responsive-table-values">
+                                    <strong id="searchClaimStatus_0" strong="" style="color: #354550" ;=""
+                                        class="nhsuk-tag no-caps nhsuk-tag--purple">Ready to print</strong>
+                                </p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Created by</span>
+                                <p class="responsive-table-values" id="searchClaimCreatedBy_0">
+                                    Ops.crtest1@nhs.net</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell" value="341515">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                <a id="viewClaim_0" class="responsive-table-values"
+                                    href="s1-claim-forms?search-entitlement-article-type=EHIC%20and%20PRC%20-%20Article%2062">
+                                    View claim
+                                    <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                    <span class="nhsuk-u-visually-hidden">with the claim ID 341515</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                  {% elif data['search-entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                  <h2 class="nhsuk-heading-s">Showing results for 
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S2/E112 - Article 20.2</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                  </h2>
+
+                  <table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
+                    <caption class="nhsuk-table__caption"></caption>
+                    <thead role="rowgroup" class="nhsuk-table__head">
+                        <tr role="row">
+                            <th role="columnheader" scope="col" id="claim-id">Claim ID</th>
+                            <th role="columnheader" scope="col" id="claim-year">Year</th>
+                            <th role="columnheader" scope="col" id="claim-month">Month</th>
+                            <th role="columnheader" scope="col" id="claim-entitlement-type">Entitlement type
+                            </th>
+                            <th role="columnheader" scope="col" id="claim-country">Country</th>
+                            <th role="columnheader" scope="col" id="claim-status">Status</th>
+                            <th role="columnheader" scope="col" id="claim-created-by">Created by</th>
+                            <th role="columnheader" scope="col" id="view-claim">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result" class="nhsuk-table__body">
+                        <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                                <p class="responsive-table-values" id="claim_id_0">345680</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Year</span>
+                                <p class="responsive-table-values" id="searchClaimYear_0">2023</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Month</span>
+                                <p class="responsive-table-values" id="searchClaimMonth_0">March</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Entitlement type</span>
+                                <p class="responsive-table-values" id="searchClaimentitlementArticleType_0">
+                                    S2/E112</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Country</span>
+                                <p class="responsive-table-values" id="searchClaimCountry_0">France (FR)</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Status</span>
+                                <p class="responsive-table-values">
+                                    <strong id="searchClaimStatus_0" strong="" style="color: #354550" ;=""
+                                        class="nhsuk-tag no-caps nhsuk-tag--purple">Ready to print</strong>
+                                </p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Created by</span>
+                                <p class="responsive-table-values" id="searchClaimCreatedBy_0">
+                                    Ops.crtest1@nhs.net</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell" value="341515">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                <a id="viewClaim_0" class="responsive-table-values"
+                                    href="s1-claim-summary?search-entitlement-article-type=S2/E112%20-%20Article%2020.2">
+                                    View claim
+                                    <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                    <span class="nhsuk-u-visually-hidden">with the claim ID 341515</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                  
+
+                {% elif data['search-entitlement-article-type'] == 'S1/S072 - Article 63, 2.a' %}
+                  <h2 class="nhsuk-heading-s">Showing results for 
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2019</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 63, 2.a</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                  </h2>
+
+                  <table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
+                    <caption class="nhsuk-table__caption"></caption>
+                    <thead role="rowgroup" class="nhsuk-table__head">
+                        <tr role="row">
+                            <th role="columnheader" scope="col" id="claim-id">Claim ID</th>
+                            <th role="columnheader" scope="col" id="claim-year">Year</th>
+                            <th role="columnheader" scope="col" id="claim-id">Claim type</th>
+                            <th role="columnheader" scope="col" id="claim-id">Article type</th>
+                            <th role="columnheader" scope="col" id="claim-id">Claim age bracket</th>
+                            <th role="columnheader" scope="col" id="claim-country">Country</th>
+                            <th role="columnheader" scope="col" id="claim-status">Status</th>
+                            <th role="columnheader" scope="col" id="view-claim">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result" class="nhsuk-table__body">
+                        <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                                <p class="responsive-table-values" id="claim_id_0">100003</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Year</span>
+                                <p class="responsive-table-values" id="searchClaimYear_0">2019</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Claim type</span>
+                                <p class="responsive-table-values" id="searchClaimType_0">Retroactive</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Article type type</span>
+                                <p class="responsive-table-values" id="searchClaimArticleType_0">Article 63, 2.a</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Claim age bracket</span>
+                              <p class="responsive-table-values" id="searchClaimAgeBracket_0">0 to 19 years</p>
+                          </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Country</span>
+                                <p class="responsive-table-values" id="searchClaimCountry_0">France (FR)</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Status</span>
+                                <p class="responsive-table-values">
+                                    <strong id="searchClaimStatus_0" strong="" style="color: #354550" ;=""
+                                        class="nhsuk-tag no-caps nhsuk-tag--purple">Ready to send</strong>
+                                </p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell" value="341515">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                <a id="viewClaim_0" class="responsive-table-values"
+                                    href="s1-claim-summary?year-of-claim=2019&entitlement-article-type=S1/S072%20-%20Article%2063,%202.a&claim-type=Main&claim-age-bracket=0%20to%2019%20years">
+                                    View claim
+                                    <span class="nhsuk-u-visually-hidden">with the claim ID 123456</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                {% else %}
+                  <h2 class="nhsuk-heading-s">Showing results for 
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 63, 2.b</span>
+                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                  </h2>
+
+                  <table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
+                    <caption class="nhsuk-table__caption"></caption>
+                    <thead role="rowgroup" class="nhsuk-table__head">
+                        <tr role="row">
+                            <th role="columnheader" scope="col" id="claim-id">Claim ID</th>
+                            <th role="columnheader" scope="col" id="claim-year">Year</th>
+                            <th role="columnheader" scope="col" id="claim-id">Claim type</th>
+                            <th role="columnheader" scope="col" id="claim-id">Article type</th>
+                            <th role="columnheader" scope="col" id="claim-id">Claim age bracket</th>
+                            <th role="columnheader" scope="col" id="claim-country">Country</th>
+                            <th role="columnheader" scope="col" id="claim-status">Status</th>
+                            <th role="columnheader" scope="col" id="view-claim">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result" class="nhsuk-table__body">
+                        <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                                <p class="responsive-table-values" id="claim_id_0">100004</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Year</span>
+                                <p class="responsive-table-values" id="searchClaimYear_0">2019</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Claim type</span>
+                                <p class="responsive-table-values" id="searchClaimType_0">Retroactive</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Article type type</span>
+                                <p class="responsive-table-values" id="searchClaimArticleType_0">Article 63, 2.b</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Claim age bracket</span>
+                              <p class="responsive-table-values" id="searchClaimAgeBracket_0">0 to 19 years</p>
+                          </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Country</span>
+                                <p class="responsive-table-values" id="searchClaimCountry_0">France (FR)</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Status</span>
+                                <p class="responsive-table-values">
+                                    <strong id="searchClaimStatus_0" strong="" style="color: #354550" ;=""
+                                        class="nhsuk-tag no-caps nhsuk-tag--purple">Ready to send</strong>
+                                </p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell" value="341515">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                <a id="viewClaim_0" class="responsive-table-values"
+                                    href="s1-claim-summary?year-of-claim=2019&entitlement-article-type=S1/S072%20-%20Article%2063,%202.b&claim-type=Retroactive&claim-age-bracket=0%20to%2019%20years">
+                                    View claim
+                                    <span class="nhsuk-u-visually-hidden">with the claim ID 123456</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                  {% endif %}
+
+              
+                </div>
+              </div>
+
+
+          </div>
+        </div>
+      </div>
+
+<!--Side nav -->
+    <!--div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <ul>
+          <div id="options" class="options">
+            <h3 class="nhsuk-heading-xs">Browse</h3>
+              <li>
+                <a href="../s1/search/search-by-person">Search</a>
+              </li>
+
+            <h3 class="nhsuk-heading-xs">Actions</h3>
+              <li>
+                <a href="account-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">2</span></a>
+                <a href="review-treatments">Review treatments<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                <a href="uk-claims-search" class="active">UK claims</a>
+                <a href="resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="non-eu-reciprocal-healthcare-quota">Non-EU Reciprocal Healthcare (Quota)</a>
+              </li>
+          </div>
+        </ul>
+      </div>
+    </div-->
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- update tags based on search criteria -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Store values from the first page
+      const yearInput = document.getElementById("country");
+      if (yearInput) {
+        yearInput.addEventListener("input", function () {
+          localStorage.setItem("yearOfClaim", yearInput.value);
+        });
+      }
+  
+      const articleRadios = document.querySelectorAll('input[name="search-entitlement-article-type"]');
+      articleRadios.forEach(radio => {
+        radio.addEventListener("change", function () {
+          if (this.checked) {
+            localStorage.setItem("articleType", this.value);
+          }
+        });
+      });
+  
+      const countryInput = document.getElementById("entitlement-country-drop");
+      if (countryInput) {
+        countryInput.addEventListener("input", function () {
+          localStorage.setItem("entitlementCountry", countryInput.value);
+        });
+      }
+  
+      // Retrieve stored values
+      const storedYear = localStorage.getItem("yearOfClaim");
+      const storedArticle = localStorage.getItem("articleType");
+      const storedCountry = localStorage.getItem("entitlementCountry");
+  
+      // Update year on second screen
+      const yearOfClaimInput = document.getElementById("year-of-claim");
+      if (yearOfClaimInput && storedYear) {
+        yearOfClaimInput.value = storedYear;
+      }
+  
+      // Update year in search results tag
+      const yearTag = document.querySelector(".nhsuk-tag");
+      if (yearTag && storedYear) {
+        yearTag.textContent = storedYear;
+      }
+  
+      // Update Article Type and Country in search results
+      document.querySelectorAll(".nhsuk-tag").forEach(tag => {
+        if (storedArticle && tag.textContent.includes("Article")) {
+          tag.textContent = storedArticle;
+        }
+        // Fix for Country Tag: Ensures only the country tag is updated
+        if (storedCountry && tag.textContent.match(/\(\w{2}\)$/)) { 
+          tag.textContent = storedCountry;
+        }
+      });
+    });
+</script>  
+{% endblock %}

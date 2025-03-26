@@ -1,0 +1,553 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %} Entitlements {% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-by-person">Search</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../account/personal-details">Personal details</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../account/entitlement-details">Entitlements</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          
+      
+          
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Entitlements and treatments</h1>
+            </div>
+          </div>
+          
+          <!-- Tabs -->
+          <div class="nhsuk-tabs" data-module="nhsuk-tabs">
+            <h2 class="nhsuk-tabs__title">Entitlements content</h2>
+
+            <ul class="nhsuk-tabs__list">
+              <li class="nhsuk-tabs__list-item nhsuk-tabs__list-item--selected">
+                <a class="nhsuk-tabs__tab" href="#entitlements">Entitlements</a>
+              </li>
+              <li class="nhsuk-tabs__list-item">
+                <a class="nhsuk-tabs__tab" href="#dependants">Dependants</a>
+              </li>
+              <li class="nhsuk-tabs__list-item">
+                <a class="nhsuk-tabs__tab" href="#treatments">Treatments</a>
+              </li>
+              <li class="nhsuk-tabs__list-item">
+                <a class="nhsuk-tabs__tab" href="#documents">Documents</a>
+              </li>
+              <li class="nhsuk-tabs__list-item">
+                <a class="nhsuk-tabs__tab" href="#notes">Notes</a>
+              </li>
+            </ul>
+
+            <!-- Tab content -->
+            <div class="nhsuk-tabs__panel" id="entitlements">
+              <!-- Entitlements tab content starts -->
+
+              {% if data['add-new-entitlement'] == 'yes' %}
+              <h3 class="nhsuk-heading-l">Entitlements<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+                <table role="table" id="entitlementsTable" class="nhsuk-table-responsive">
+                
+                  <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+                      <th role="columnheader" class="" scope="col">
+                        Entitlement type
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Date issued
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Start date
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        End date (optional)
+                      </th>
+                      <!--th role="columnheader" class="" scope="col">
+                        Main or dependant
+                      </th-->
+                      <th role="columnheader" class="" scope="col">
+                        Registration country
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Entitlement status
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                
+                  <tbody class="nhsuk-table__body">
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Entitlement type</span>
+                        <span>S1</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date issued</span>
+                        <span>01/01/2024</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Start date</span>
+                        <span>07/01/2024</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">End date (optional)</span>
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                      </td>
+                      <!--td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Main or dependant</span>
+                        <span>Main</span>
+                      </td-->
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Registration country</span>
+                        <span>France (FR)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Entitlement status</span>
+                        {%- if data['cancelS1'] == 'true' -%}
+                        <strong class="nhsuk-tag nhsuk-tag--red">Cancelled</strong>
+                        {%- elif data['sendDl1609'] == 'true' and data['sendS073'] == 'true' -%}
+                        <strong class="nhsuk-tag nhsuk-tag--yellow"> Awaiting response </strong>
+                        {%- elif data['dl1609Complete'] == 'true' -%}
+                        <strong class="nhsuk-tag nhsuk-tag--green"> Registered </strong>
+                        {%- else -%}
+                        <strong class="nhsuk-tag nhsuk-tag--yellow"> Action needed </strong>
+                        {%- endif -%}
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Actions</span>
+                        <a href="../account/entitlement-content/S1-entitlement-details">View</a>
+                      </td>
+                    </tr>   
+ 
+                  </tbody>
+                </table>
+
+                {% else %}
+                <h3 class="nhsuk-heading-l">Entitlements</h3>
+                <p>No entitlements have been added to this person's record.</p>
+                {% endif %}  
+
+                
+                <a href="../s072-registration/which-entitlement" class="nhsuk-button nhsuk-u-margin-top-5" role="button" data-module="nhsuk-button">
+                  Add an entitlement
+                </a>        
+              </div>
+              <!-- Entitlements tab content ends -->
+
+            <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="dependants">
+              <!-- Dependants tab content starts -->
+              {% if data['add-dependant'] == 'yes' %}
+              <h3 class="nhsuk-heading-l">Dependants<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+                <table role="table" id="dependantsTable" class="nhsuk-table-responsive">
+                
+                  <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+                      <th role="columnheader" class="" scope="col">
+                        Relationship to Main
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Personal ID
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        First name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Last name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Date of birth
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Country
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                
+                  <tbody class="nhsuk-table__body">
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Relationship to Main</span>
+                        <span>Wife</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Personal ID</span>
+                        <span>112345</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">First name</span>
+                        <span>Jane</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Last name</span>
+                        <span>Doe</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date of birth</span>
+                        <span>29/12/1975</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>France (FR)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Actions</span>
+                        <a href="/s1/account/additional-dependant-details">View additional information</a>
+                      </td>
+                    </tr>   
+                  </tbody>
+                </table>
+
+                <a href="#" class="nhsuk-button nhsuk-u-margin-top-5" role="button" data-module="nhsuk-button">
+                  Add another dependant
+                </a>
+
+                {% else %}
+                <h3 class="nhsuk-heading-l">Dependants</h3>
+                <p>No dependants have been added to this person's record.</p>
+
+                <a href="#" class="nhsuk-button nhsuk-u-margin-top-5" role="button" data-module="nhsuk-button">
+                  Add a dependant
+                </a>
+                {% endif %} 
+                     
+              </div>
+            <!-- Dependants tab content ends -->
+
+
+            <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="treatments">
+              <!-- Treatments tab content starts -->
+              {% if data['add-treatment'] == 'yes' %}
+              <h3 class="nhsuk-heading-l">Treatments<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+                <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
+                
+                  <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+                      <th role="columnheader" class="" scope="col">
+                        Relationship to Main
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Personal ID
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        First name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Last name
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Date of birth
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Country
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                
+                  <tbody class="nhsuk-table__body">
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Relationship to Main</span>
+                        <span>Wife</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Personal ID</span>
+                        <span>112345</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">First name</span>
+                        <span>Jane</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Last name</span>
+                        <span>Doe</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date of birth</span>
+                        <span>29/12/1975</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>France (FR)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Actions</span>
+                        <a href="#">View additional information</a>
+                      </td>
+                    </tr>   
+                  </tbody>
+                </table>
+
+                <a href="#" class="nhsuk-button nhsuk-u-margin-top-5" role="button" data-module="nhsuk-button">
+                  Add another treatment
+                </a>
+
+                {% else %}
+                <h3 class="nhsuk-heading-l">Treatments</h3>
+                <p>No treatments have been added to this person's record.</p>
+
+                <a href="#" class="nhsuk-button nhsuk-u-margin-top-5" role="button" data-module="nhsuk-button">
+                  Add a treatment
+                </a>
+                {% endif %} 
+                     
+              </div>
+            <!-- Treatments tab content ends -->
+
+
+            <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
+                <!-- Documents tab content starts -->
+                {% if data['upload-new-document'] == 'yes' %}
+                <table role="table" id="documentsTable" class="nhsuk-table-responsive">
+                  <h3 class="nhsuk-heading-l">Documents<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
+                
+                  <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+                      <th role="columnheader" class="" scope="col">
+                        Document title
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Date uploaded
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Uploaded by
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Current status
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Document type
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                
+                  <tbody class="nhsuk-table__body">
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Document title</span>
+                        <span>john-doe-FAS1Q.pdf</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date uploaded</span>
+                        <span>15/08/2024</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Uploaded by</span>
+                        <span>Dave Smith</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Current status</span>
+                        <span>Received</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Document type</span>
+                        <span>FAS1Q</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Actions</span>
+                        <a href="">View</a> or 
+                        <a href="/version-36/s1/account/remove-personal-details-document">remove</span></a>
+                      </td>
+                    </tr>   
+                  </tbody>
+                </table>
+                <br>
+                {% else %}  
+                <h3 class="nhsuk-heading-l">Documents</h3>
+                
+                <p>No documents have been uploaded to this person's record.</p>
+                {% endif %}
+
+                     
+                {% if data['add-new-document'] == 'yes' %}
+                <a href="upload-entitlements-document">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Upload a new document
+                  </button>
+                </a>
+                {% else %}
+                <a href="upload-entitlement-document">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Upload a document
+                  </button>
+                </a>
+                {% endif %}
+              </div>
+              <!-- Documents tab content ends -->
+
+
+              <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">
+                <!-- Notes tab content starts -->
+                <h3 class="nhsuk-heading-l">Notes</h3>
+
+                {% if data['new-entitlements-note'] == 'yes' %}
+              <div class="nhsuk-form-group" id="filterNotes-group">
+                <label class="nhsuk-label" for="filter-notes">
+                Filter notes
+                </label>
+                <div id="filterNotes-container"></div>
+                <input class="nhsuk-input" id="example" name="filter-notes" type="text" value="">
+              </div>
+
+              <a href="#">
+                <button class="nhsuk-button nhsuk-button--secondary nhsuk-u-margin-right-4" data-module="nhsuk-button" type="submit" value="Search" id="searchButton">Apply filter </button>
+              <a class="nhsuk-button" style="float: right;" href="/version-36/s1/account/entitlements-note" data-module="nhsuk-button" type="submit" id="addNote-button">Add a new note</a>
+              <p><a href="/version-36/s1/account/entitlement-details#tab-Notes" id="clearButton">Reset filter</a></p>
+
+              <hr>
+              {% else %}
+              <p>No notes have been added to this person's record.</p>
+              <a class="nhsuk-button" href="/version-36/s1/account/entitlements-note" data-module="nhsuk-button" type="submit" id="addNote-button">Add a new note</a>
+              {% endif %}
+
+
+              {% if data['new-entitlements-note'] == 'yes' %}
+              <h3>New note title</h3>
+              <p>Added by <b>Joe Bloggs</b><br>
+              <span id="currentDate1"></span></p>
+              <p>{% if data['note'] %}
+                {{ data['note'] }}
+                {% else %}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {% endif %}
+              </p>
+              <hr>
+              {% endif %}
+              
+             </div>
+              <!-- Notes tab content ends -->
+          
+            </div>
+            <!-- End of Tabs -->
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a href="personal-details">Personal details</a></li>
+          <li><a class="active" href="entitlement-details">Entitlements and enquiries</a></li>
+          <li><a href="case-history-person">Case history</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
+
+  </div>
+</div>
+<!-- End of main content -->
+      
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".nhsuk-tabs__tab");
+    const panels = document.querySelectorAll(".nhsuk-tabs__panel");
+
+    function hideAllPanels() {
+      panels.forEach(panel => panel.classList.add("nhsuk-tabs__panel--hidden"));
+      tabs.forEach(tab => tab.parentElement.classList.remove("nhsuk-tabs__list-item--selected"));
+    }
+
+    function showPanel(panelId) {
+      const panel = document.querySelector(panelId);
+      if (panel) {
+        panel.classList.remove("nhsuk-tabs__panel--hidden");
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", function (event) {
+        event.preventDefault();
+        hideAllPanels();
+        tab.parentElement.classList.add("nhsuk-tabs__list-item--selected");
+        showPanel(tab.getAttribute("href"));
+      });
+    });
+
+    // Initially show the Personal details tab
+    hideAllPanels();
+    showPanel("#entitlements");
+    document.querySelector('a[href="#entitlements"]').parentElement.classList.add("nhsuk-tabs__list-item--selected");
+  });
+
+
+   // Current Date and Time
+
+  // JavaScript code
+  var currentDateElement = document.getElementById("currentDate1");
+
+  // Get the current date
+  var currentDate = new Date();
+
+  // Format the date as desired
+  var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+  var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+
+  // Format the time as desired
+  var timeOptions = { hour: 'numeric', minute: 'numeric', hour24: true };
+  var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+
+  // Combine date and time
+  var formattedDateTime = formattedDate + ' at ' + formattedTime;
+
+  // Set the formatted date and time as the content of the element
+  currentDateElement.textContent = formattedDateTime;
+</script>
+{% endblock %}

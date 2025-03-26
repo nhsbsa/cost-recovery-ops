@@ -65,5 +65,8 @@ router.use('/version-34/uk-claims', require('./views/version-34/uk-claims/_route
 router.use('/version-35/resubmissions/v1', require('./views/version-35/_routes'));
 router.use('/version-35/s1', require('./views/version-35/s1/_routes'));
 router.use('/version-35/uk-claims', require('./views/version-35/uk-claims/_routes'));
+router.use('/version-36/resubmissions/v1', require('./views/version-36/_routes'));
+router.use('/version-36/s1', require('./views/version-36/s1/_routes'));
+router.use('/version-36/uk-claims', require('./views/version-36/uk-claims/_routes'));
 module.exports = router;
 
