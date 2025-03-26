@@ -69,7 +69,40 @@ res.redirect('/version-36/uk-claims/check-claim-details');
 
 // Check claim details
 router.post([/check-claim-details/], function(req, res) {
-  res.redirect('/version-36/uk-claims/uk-claims-loading-new-claim');
+  // Retrieve stored claim data
+  const yearOfClaim = req.session.data['year-of-claim'];
+  const entitlementArticleType = req.session.data['entitlement-article-type'];
+  const claimType = req.session.data['claim-type'];
+  const claimAgeBracket = req.session.data['claim-age-bracket'];
+  const entitlementCountry = req.session.data['entitlement-country'];
+
+  // Define criteria for duplicate claim warning
+  const isDuplicateClaim = 
+    yearOfClaim === '2019' &&
+    entitlementArticleType === 'S1/S072 - Article 63, 2.b' &&
+    claimType === 'Retroactive' &&
+    claimAgeBracket === '0 to 19 years' &&
+    entitlementCountry === 'France (FR)';
+
+  // Redirect based on duplication check
+  if (isDuplicateClaim) {
+    res.redirect('/version-36/uk-claims/duplicate-claim-warning');
+  } else {
+    res.redirect('/version-36/uk-claims/uk-claims-loading-new-claim');
+  }
+});
+
+// Do you want to create a duplicate claim?
+router.post([/duplicate-claim-warning/], (req, res) => {
+
+  const continueCreateDuplicateClaim = req.session.data['continue-with-duplicate-claim']
+
+  if (continueCreateDuplicateClaim === 'Yes'){
+    res.redirect('/version-36/uk-claims/uk-claims-loading-new-claim')
+  } else {
+    res.redirect('/version-36/uk-claims/uk-claims-search-average-cost')
+  }
+
 })
 
 // Claim loading
