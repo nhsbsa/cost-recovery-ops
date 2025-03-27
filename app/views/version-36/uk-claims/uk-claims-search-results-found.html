@@ -214,9 +214,9 @@ Search for UK claims
 
                 {% elif data['search-entitlement-article-type'] == 'S1/S072 - Article 63, 2.a' %}
                   <h2 class="nhsuk-heading-s">Showing results for 
-                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2019</span>
-                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 63, 2.a</span>
-                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                    <span id="year-tag" class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
+                    <span id="article-tag" class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 63, 2.a</span>
+                    <span id="country-tag" class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
                   </h2>
 
                   <table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
@@ -241,11 +241,11 @@ Search for UK claims
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Year</span>
-                                <p class="responsive-table-values" id="searchClaimYear_0">2019</p>
+                                <p class="responsive-table-values" id="searchClaimYear_0">2024</p>
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Claim type</span>
-                                <p class="responsive-table-values" id="searchClaimType_0">Retroactive</p>
+                                <p class="responsive-table-values" id="searchClaimType_0">Main</p>
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Article type type</span>
@@ -269,9 +269,9 @@ Search for UK claims
                             <td role="cell" class="nhsuk-table__cell" value="341515">
                                 <span class="nhsuk-table-responsive__heading">Action</span>
                                 <a id="viewClaim_0" class="responsive-table-values"
-                                    href="s1-claim-summary?year-of-claim=2019&entitlement-article-type=S1/S072%20-%20Article%2063,%202.a&claim-type=Main&claim-age-bracket=0%20to%2019%20years">
+                                    href="s1-claim-summary?year-of-claim=2024&entitlement-article-type=S1/S072%20-%20Article%2063,%202.a&claim-type=Main&claim-age-bracket=0%20to%2019%20years">
                                     View claim
-                                    <span class="nhsuk-u-visually-hidden">with the claim ID 123456</span>
+                                    <span class="nhsuk-u-visually-hidden">with the claim ID 100003</span>
                                 </a>
                             </td>
                         </tr>
@@ -280,12 +280,12 @@ Search for UK claims
 
                 {% else %}
                   <h2 class="nhsuk-heading-s">Showing results for 
-                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2024</span>
-                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 63, 2.b</span>
-                    <span class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
+                    <span id="year-tag" class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-left: 15px; margin-right: 15px">2019</span>
+                    <span id="article-tag" class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">S1/S072 - Article 63, 2.b</span>
+                    <span id="country-tag" class="nhsuk-tag nhsuk-tag--green" style="color: #354550; margin-right: 15px">France (FR)</span>
                   </h2>
 
-                  <table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
+                  <!--table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
                     <caption class="nhsuk-table__caption"></caption>
                     <thead role="rowgroup" class="nhsuk-table__head">
                         <tr role="row">
@@ -311,7 +311,7 @@ Search for UK claims
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Claim type</span>
-                                <p class="responsive-table-values" id="searchClaimType_0">Retroactive</p>
+                                <p class="responsive-table-values" id="searchClaimType_0">Main</p>
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
                                 <span class="nhsuk-table-responsive__heading">Article type type</span>
@@ -342,7 +342,9 @@ Search for UK claims
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table-->
+
+                <p><b>No result found.</b></p>
 
                   {% endif %}
 
@@ -385,58 +387,29 @@ Search for UK claims
 {% block pageScripts %}
 <!-- update tags based on search criteria -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Store values from the first page
-      const yearInput = document.getElementById("country");
-      if (yearInput) {
-        yearInput.addEventListener("input", function () {
-          localStorage.setItem("yearOfClaim", yearInput.value);
-        });
-      }
-  
-      const articleRadios = document.querySelectorAll('input[name="search-entitlement-article-type"]');
-      articleRadios.forEach(radio => {
-        radio.addEventListener("change", function () {
-          if (this.checked) {
-            localStorage.setItem("articleType", this.value);
-          }
-        });
-      });
-  
-      const countryInput = document.getElementById("entitlement-country-drop");
-      if (countryInput) {
-        countryInput.addEventListener("input", function () {
-          localStorage.setItem("entitlementCountry", countryInput.value);
-        });
-      }
-  
+  document.addEventListener("DOMContentLoaded", function () {
       // Retrieve stored values
       const storedYear = localStorage.getItem("yearOfClaim");
       const storedArticle = localStorage.getItem("articleType");
       const storedCountry = localStorage.getItem("entitlementCountry");
-  
-      // Update year on second screen
-      const yearOfClaimInput = document.getElementById("year-of-claim");
-      if (yearOfClaimInput && storedYear) {
-        yearOfClaimInput.value = storedYear;
-      }
-  
-      // Update year in search results tag
-      const yearTag = document.querySelector(".nhsuk-tag");
+
+      // Update Year tag
+      const yearTag = document.getElementById("year-tag");
       if (yearTag && storedYear) {
-        yearTag.textContent = storedYear;
+          yearTag.textContent = storedYear;
       }
-  
-      // Update Article Type and Country in search results
-      document.querySelectorAll(".nhsuk-tag").forEach(tag => {
-        if (storedArticle && tag.textContent.includes("Article")) {
-          tag.textContent = storedArticle;
-        }
-        // Fix for Country Tag: Ensures only the country tag is updated
-        if (storedCountry && tag.textContent.match(/\(\w{2}\)$/)) { 
-          tag.textContent = storedCountry;
-        }
-      });
-    });
-</script>  
+
+      // Update Article Type tag
+      const articleTag = document.getElementById("article-tag");
+      if (articleTag && storedArticle) {
+          articleTag.textContent = storedArticle;
+      }
+
+      // Update Country tag
+      const countryTag = document.getElementById("country-tag");
+      if (countryTag && storedCountry) {
+          countryTag.textContent = storedCountry;
+      }
+  });
+</script>
 {% endblock %}

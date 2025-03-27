@@ -21,13 +21,20 @@ router.post([/uk-claims-search-actual-cost/], function(req, res) {
 })
 
 // Search for UK Claims - Average cost
-router.post([/uk-claims-search-average-cost/], function(req, res) {
+router.post(['/uk-claims-search-average-cost/'], function(req, res) {
   // Capture form data from the POST request
   const searchEntitlementArticleType = req.body['search-entitlement-article-type'];
-  
-  // Store these in the session or database
-  req.session.data['search-entitlement-article-type'] = searchEntitlementArticleType;
+  const searchYearOfClaim = req.body['search-year-of-claim'];  // Capture Year
+  const searchEntitlementCountry = req.body['entitlement-country'];  // Capture Country
 
+  // Store these in the session
+  req.session.data['search-entitlement-article-type'] = searchEntitlementArticleType;
+  req.session.data['search-year-of-claim'] = searchYearOfClaim;
+  req.session.data['search-entitlement-country'] = searchEntitlementCountry;
+
+  console.log("Session Data:", req.session.data);  // Debugging line
+
+  // Redirect to search results page
   res.redirect('/version-36/uk-claims/uk-claims-search-results-found');
 })
 
@@ -78,9 +85,9 @@ router.post([/check-claim-details/], function(req, res) {
 
   // Define criteria for duplicate claim warning
   const isDuplicateClaim = 
-    yearOfClaim === '2019' &&
-    entitlementArticleType === 'S1/S072 - Article 63, 2.b' &&
-    claimType === 'Retroactive' &&
+    yearOfClaim === '2024' &&
+    entitlementArticleType === 'S1/S072 - Article 63, 2.a' &&
+    claimType === 'Main' &&
     claimAgeBracket === '0 to 19 years' &&
     entitlementCountry === 'France (FR)';
 
