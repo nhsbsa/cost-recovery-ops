@@ -74,18 +74,22 @@ router.post([/create-new-uk-claim/], function(req, res) {
   req.session.data['claim-type'] = claimType;
   req.session.data['claim-age-bracket'] = claimAgeBracket;
 
+  // Error 1: Duplicate Main Claim
   const isDuplicateClaim = 
     yearOfClaim === '2024' &&
     entitlementArticleType === 'S1/S072 - Article 63, 2.a' &&
     claimType === 'Main' &&
     claimAgeBracket === '0 to 19 years' &&
-    entitlementCountry === 'France (FR)';
+    entitlementCountry === 'France (FR)'
 
   if (isDuplicateClaim) {
     req.session.data['duplicateClaimError'] = 'You cannot create a Main claim for France in 2024 for ages 0 to 19 under Article 63 2.a.';
+    req.session.data['supplementalClaimError'] = null;
     return res.redirect('/version-37/uk-claims/create-new-uk-claim');
   } else {
+    // Clear errors
     req.session.data['duplicateClaimError'] = null;
+    req.session.data['supplementalClaimError'] = null;
     return res.redirect('/version-37/uk-claims/check-claim-details');
   }
 });
@@ -118,5 +122,53 @@ router.post([/uk-claims-loading-new-claim/], function(req, res) {
    res.redirect('/version-37/uk-claims/s1-claim-summary');
   }
 });
+
+
+// Create new resubmission
+router.post([/create-new-resubmission/], function(req, res) {
+  // Date contestation received
+  const receivedDay = req.body['date-contestation-received-day'];
+  const receivedMonth = req.body['date-contestation-received-month'];
+  const receivedYear = req.body['date-contestation-received-year'];
+  const dateContestationReceived = receivedDay && receivedMonth && receivedYear
+    ? `${receivedDay}/${receivedMonth}/${receivedYear}`
+    : '12/03/2025';
+  req.session.data['date-contestation-received'] = dateContestationReceived;
+
+  // Date on contestation letter
+  const letterDay = req.body['date-on-contestation-letter-day'];
+  const letterMonth = req.body['date-on-contestation-letter-month'];
+  const letterYear = req.body['date-on-contestation-letter-year'];
+  const dateOnContestationLetter = letterDay && letterMonth && letterYear
+    ? `${letterDay}/${letterMonth}/${letterYear}`
+    : '12/03/2025';
+  req.session.data['date-on-contestation-letter'] = dateOnContestationLetter;
+
+  // Store other form fields
+  req.session.data['number-of-contested-invoices'] = req.body['number-of-contested-invoices'];
+  req.session.data['number-of-contested-months'] = req.body['number-of-contested-months'];
+  req.session.data['member-state-reference'] = req.body['member-state-reference'];
+
+  // Conditional flag to track resubmission
+  req.session.data['create-new-resub'] = 'yes';
+
+  // Redirect to next screen
+  res.redirect('/version-37/uk-claims/resubmissions/confirmation-resubmission-created');
+});
+
+// Update claim resubmissions page with newly created resub
+router.get('/version-37/uk-claims/resubmissions/claim-resubmissions', function(req, res) {
+  
+  // Optional: handle query param version if someone uses ?create-new-resub=yes
+  if (req.query['create-new-resub']) {
+    req.session.data['create-new-resub'] = req.query['create-new-resub'];
+  }
+
+  // Render the page and pass session data to Nunjucks
+  res.render('version-37/uk-claims/resubmissions/claim-resubmissions', {
+    data: req.session.data
+  });
+});
+
 
 module.exports = router;

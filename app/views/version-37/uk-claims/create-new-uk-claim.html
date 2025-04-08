@@ -73,7 +73,7 @@ Search for UK claims
                   <h2 class="nhsuk-error-summary__title" id="error-summary-title">There is a problem</h2>
                   <ul class="nhsuk-list nhsuk-error-summary__list">
                     <li class="nhsuk-error-message">
-                      <a href="#entitlement-article-type" id="error-entitlementArticleType">A main claim with the same year, article type, claim type, age bracket and country already exists.</a>
+                      <a href="#entitlement-article-type" id="error-entitlementArticleType">A main claim with the same year, article type, age bracket and country already exists.</a>
                       <br><br>
                       Go back to search claims and create a main claim with different criteria.
                     </li>
@@ -82,63 +82,296 @@ Search for UK claims
                 </div>
               {% endif %}
               
-              <div class="nhsuk-grid-row">
+              
 
               {% if data['search-entitlement-article-type'] == 'EHIC and PRC - Article 62' or data['search-entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
-              <div class="nhsuk-grid-column-one-third">
-                <div class="nhsuk-form-group">
-                  <label class="nhsuk-label" for="year-of-claim">
-                      Enter year of claim
-                  </label>
-                  <input class="nhsuk-input nhsuk-input--width-4" id="year-of-claim" name="year-of-claim" type="number" value="2024">
-                </div>
-
-                <div class="nhsuk-form-group">
-                  <label class="nhsuk-label" for="month">Select month of claim</label>
-                  <select class="nhsuk-select claim-months" id="month" name="claim-month">
-                      <option value="" selected="selected">Select</option>
-                      <option value="January">January</option>
-                      <option value="February">February</option>
-                      <option value="March">March</option>
-                      <option value="April">April</option>
-                      <option value="May">May</option>
-                      <option value="June">June</option>
-                      <option value="July">July</option>
-                      <option value="August">August</option>
-                      <option value="September">September</option>
-                      <option value="October">October</option>
-                      <option value="November">November</option>
-                      <option value="December">December</option>
-                  </select>
-                </div>
-
-                <div class="nhsuk-form-group">
-                  <label class="nhsuk-label" for="entitlement-article-type">
-                      Entitlement - Article type
-                  </label>
-                  <div class="nhsuk-radios nhsuk-radios--inline">
-                      <div class="nhsuk-radios__item">
-                          <input class="nhsuk-radios__input" id="entitlement-article-type-ehic-prc-article-62" name="entitlement-article-type" type="radio" value="EHIC and PRC - Article 62">
-                          <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-ehic-prc-article-62">
-                              EHIC and PRC - Article 62
-                          </label>
-                      </div>
-  
-                      <div class="nhsuk-radios__item">
-                          <input class="nhsuk-radios__input" id="entitlement-article-type-s2" name="entitlement-article-type" type="radio" value="S2/E112 - Article 20.2">
-                          <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s2">
-                              S2/E112 - Article 20.2
-                          </label>
-                      </div>
-                  </div>
-                </div>
-                  
-                <div class="nhsuk-form-group">
-                    <label class="nhsuk-label" for="entitlement-country">
-                        Country
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-one-third">
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="year-of-claim">
+                        Enter year of claim
                     </label>
-                    <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country" value="France (FR)">
-                    <datalist id="countries">
+                    <input class="nhsuk-input nhsuk-input--width-4" id="year-of-claim" name="year-of-claim" type="number" value="2024">
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="month">Select month of claim</label>
+                    <select class="nhsuk-select claim-months" id="month" name="claim-month">
+                        <option value="" selected="selected">Select</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="entitlement-article-type">
+                        Entitlement - Article type
+                    </label>
+                    <div class="nhsuk-radios nhsuk-radios--inline">
+                        <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="entitlement-article-type-ehic-prc-article-62" name="entitlement-article-type" type="radio" value="EHIC and PRC - Article 62">
+                            <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-ehic-prc-article-62">
+                                EHIC and PRC - Article 62
+                            </label>
+                        </div>
+    
+                        <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="entitlement-article-type-s2" name="entitlement-article-type" type="radio" value="S2/E112 - Article 20.2">
+                            <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s2">
+                                S2/E112 - Article 20.2
+                            </label>
+                        </div>
+                    </div>
+                  </div>
+                    
+                  <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="entitlement-country">
+                        Country
+                      </label>
+                      <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country" value="France (FR)">
+                      <datalist id="countries">
+                          <option value="Austria (AT)">Austria (AT)</option>
+                          <option value="Belgium (BE)">Belgium (BE)</option>
+                          <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                          <option value="Croatia (HR)">Croatia (HR)</option>
+                          <option value="Cyprus (CY)">Cyprus (CY)</option>
+                          <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                          <option value="Denmark (DK)">Denmark (DK)</option>
+                          <option value="Estonia (EE)">Estonia (EE)</option>
+                          <option value="Finland (FI)">Finland (FI)</option>
+                          <option value="France (FR)">France (FR)</option>
+                          <option value="Germany (DE)">Germany (DE)</option>
+                          <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                          <option value="Greece (GR)">Greece (GR)</option>
+                          <option value="Hungary (HU)">Hungary (HU)</option>
+                          <option value="Iceland (IS)">Iceland (IS)</option>
+                          <option value="Ireland (IE)">Ireland (IE)</option>
+                          <option value="Italy (IT)">Italy (IT)</option>
+                          <option value="Latvia (LV)">Latvia (LV)</option>
+                          <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                          <option value="Lithuania (LT)">Lithuania (LT)</option>
+                          <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                          <option value="Malta (MT)">Malta (MT)</option>
+                          <option value="Netherlands (NL)">Netherlands (NL)</option>
+                          <option value="Norway (NO)">Norway (NO)</option>
+                          <option value="Poland (PL)">Poland (PL)</option>
+                          <option value="Portugal (PT)">Portugal (PT)</option>
+                          <option value="Romania (RO)">Romania (RO)</option>
+                          <option value="Slovakia (SK)">Slovakia (SK)</option>
+                          <option value="Slovenia (SI)">Slovenia (SI)</option>
+                          <option value="Spain (ES)">Spain (ES)</option>
+                          <option value="Sweden (SE)">Sweden (SE)</option>
+                          <option value="Switzerland (CH)">Switzerland (CH)</option>
+                      </datalist>
+                  </div>
+                   
+                </div>
+              </div>
+              <!--End of Actual Cost content-->
+
+              {% else %}
+
+              <!-- Start of Average cost content -->
+              <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <div class="nhsuk-form-group">
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="year-of-claim-label">
+                        Enter year of claim
+                      </label>
+                      <input class="nhsuk-input nhsuk-input--width-4" id="year-of-claim" name="year-of-claim" type="number" value="2024">
+                    </div>
+
+                    {% if data.duplicateClaimError %}
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="example">
+                          Entitlement - Article type
+                        </label>
+                            
+                          <div class="nhsuk-radios nhsuk-radios--inline">
+                              <div class="nhsuk-radios__item">
+                                  <input class="nhsuk-radios__input" id="entitlement-article-type-s1-article-63-2a" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63, 2.a" checked>
+                                  <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s1-article-63-2a">
+                                      S1/S072 - Article 63, 2.a
+                                  </label>
+                              </div>
+                  
+                              <div class="nhsuk-radios__item">
+                                  <input class="nhsuk-radios__input" id="entitlement-article-type-s1-article-63-2b" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63, 2.b">
+                                  <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s1-article-63-2b">
+                                      S1/S072 - Article 63, 2.b
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
+                    {% else %}
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="example">
+                          Entitlement - Article type
+                        </label>
+                            
+                          <div class="nhsuk-radios nhsuk-radios--inline">
+                              <div class="nhsuk-radios__item">
+                                  <input class="nhsuk-radios__input" id="entitlement-article-type-s1-article-63-2a" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63, 2.a">
+                                  <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s1-article-63-2a">
+                                      S1/S072 - Article 63, 2.a
+                                  </label>
+                              </div>
+                  
+                              <div class="nhsuk-radios__item">
+                                  <input class="nhsuk-radios__input" id="entitlement-article-type-s1-article-63-2b" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63, 2.b">
+                                  <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s1-article-63-2b">
+                                      S1/S072 - Article 63, 2.b
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
+                    {% endif %}
+
+
+                    {% if data.duplicateClaimError %}
+                      <div class="nhsuk-form-group nhsuk-form-group--error">
+                        <label class="nhsuk-label" style="margin-bottom: 20px;" for="claim-type-label">
+                          Claim type
+                        </label>
+
+                        <span class="nhsuk-error-message" id="example-error-error">
+                          <span class="nhsuk-u-visually-hidden">Error:</span>A main claim with the same year, article type, age bracket and country already exists
+                        </span>
+
+                        <div class="nhsuk-radios">
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Main" checked>
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-type-main">
+                              Main
+                            </label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Supplemental">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-type-supplemental">
+                              Supplemental
+                            </label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Retroactive">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-type-retroactive">
+                              Retroactive
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    {% else %}
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" style="margin-bottom: 20px;" for="claim-type-label">
+                          Claim type
+                        </label>
+
+                        <div class="nhsuk-radios">
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Main">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-type-main">
+                              Main
+                            </label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Supplemental">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-type-supplemental">
+                              Supplemental
+                            </label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Retroactive">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-type-retroactive">
+                              Retroactive
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+
+
+                    {% if data.duplicateClaimError %}
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" style="margin-bottom: 20px;" for="age-bracket-label">
+                          Age bracket of the claim
+                        </label>
+
+                        <div class="nhsuk-radios">
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="0 to 19 years" checked>
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-0-19">
+                              0 to 19 years
+                            </label>
+                          </div>
+                    
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="20 to 64 years">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-20-64">
+                              20 to 64 years
+                            </label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="65 years and over">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-65-plus">
+                              65 years and over
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    {% else %}
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" style="margin-bottom: 20px;" for="age-bracket-label">
+                          Age bracket of the claim
+                        </label>
+
+                        <div class="nhsuk-radios">
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="0 to 19 years">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-0-19">
+                              0 to 19 years
+                            </label>
+                          </div>
+                    
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="20 to 64 years">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-20-64">
+                              20 to 64 years
+                            </label>
+                          </div>
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="65 years and over">
+                            <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-65-plus">
+                              65 years and over
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" id="entitlement-country-label" for="entitlement-country" class="form-label">
+                        Country
+                      </label>
+                      <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country" value="France (FR)">
+                      <datalist id="countries">
+                        <option value="" selected="selected"></option>
                         <option value="Austria (AT)">Austria (AT)</option>
                         <option value="Belgium (BE)">Belgium (BE)</option>
                         <option value="Bulgaria (BG)">Bulgaria (BG)</option>
@@ -171,304 +404,44 @@ Search for UK claims
                         <option value="Spain (ES)">Spain (ES)</option>
                         <option value="Sweden (SE)">Sweden (SE)</option>
                         <option value="Switzerland (CH)">Switzerland (CH)</option>
-                    </datalist>
-                </div>
-                <!--End of Actual Cost content-->     
-                
-                </div>
-              </div>
-                      
-                      {% else %}
-                      
-                      <!-- Start of Average cost content -->
-                      <div class="nhsuk-grid-column-one-third">
-                        <div class="nhsuk-form-group">
-
-                            <div class="nhsuk-form-group">
-                              <label class="nhsuk-label" for="year-of-claim-label">
-                                Enter year of claim
-                              </label>
-                              <input class="nhsuk-input nhsuk-input--width-4" id="year-of-claim" name="year-of-claim" type="number" value="2024">
-                            </div>
-
-                            {% if data.duplicateClaimError %}
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label" for="example">
-                                  Entitlement - Article type
-                                </label>
-                                    
-                                  <div class="nhsuk-radios nhsuk-radios--inline">
-                                      <div class="nhsuk-radios__item">
-                                          <input class="nhsuk-radios__input" id="entitlement-article-type-s1-article-63-2a" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63, 2.a" checked>
-                                          <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s1-article-63-2a">
-                                              S1/S072 - Article 63, 2.a
-                                          </label>
-                                      </div>
-                          
-                                      <div class="nhsuk-radios__item">
-                                          <input class="nhsuk-radios__input" id="entitlement-article-type-s1-article-63-2b" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63, 2.b">
-                                          <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s1-article-63-2b">
-                                              S1/S072 - Article 63, 2.b
-                                          </label>
-                                      </div>
-                                  </div>
-                              </div>
-                            {% else %}
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label" for="example">
-                                  Entitlement - Article type
-                                </label>
-                                    
-                                  <div class="nhsuk-radios nhsuk-radios--inline">
-                                      <div class="nhsuk-radios__item">
-                                          <input class="nhsuk-radios__input" id="entitlement-article-type-s1-article-63-2a" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63, 2.a">
-                                          <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s1-article-63-2a">
-                                              S1/S072 - Article 63, 2.a
-                                          </label>
-                                      </div>
-                          
-                                      <div class="nhsuk-radios__item">
-                                          <input class="nhsuk-radios__input" id="entitlement-article-type-s1-article-63-2b" name="entitlement-article-type" type="radio" value="S1/S072 - Article 63, 2.b">
-                                          <label class="nhsuk-label nhsuk-radios__label" for="entitlement-article-type-s1-article-63-2b">
-                                              S1/S072 - Article 63, 2.b
-                                          </label>
-                                      </div>
-                                  </div>
-                              </div>
-                            {% endif %}
-
-
-                            {% if data.duplicateClaimError %}
-                              <div class="nhsuk-form-group nhsuk-form-group--error">
-                                <label class="nhsuk-label" style="margin-bottom: 20px;" for="claim-type-label">
-                                  Claim type
-                                </label>
-
-                                <span class="nhsuk-error-message" id="example-error-error">
-                                  <span class="nhsuk-u-visually-hidden">Error:</span>A main claim with the same year, article type, claim type, age bracket and country already exists
-                                </span>
-
-                                <div class="nhsuk-radios">
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Main" checked>
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-type-main">
-                                      Main
-                                    </label>
-                                  </div>
-
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Supplemental">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-type-supplemental">
-                                      Supplemental
-                                    </label>
-                                  </div>
-
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Retroactive">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-type-retroactive">
-                                      Retroactive
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                            {% else %}
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label" style="margin-bottom: 20px;" for="claim-type-label">
-                                  Claim type
-                                </label>
-
-                                <div class="nhsuk-radios">
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Main">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-type-main">
-                                      Main
-                                    </label>
-                                  </div>
-
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Supplemental">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-type-supplemental">
-                                      Supplemental
-                                    </label>
-                                  </div>
-
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-type" name="claim-type" type="radio" value="Retroactive">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-type-retroactive">
-                                      Retroactive
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                            {% endif %}
-
-
-                            {% if data.duplicateClaimError %}
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label" style="margin-bottom: 20px;" for="age-bracket-label">
-                                  Age bracket of the claim
-                                </label>
-
-                                <div class="nhsuk-radios">
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="0 to 19 years" checked>
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-0-19">
-                                      0 to 19 years
-                                    </label>
-                                  </div>
-                            
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="20 to 64 years">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-20-64">
-                                      20 to 64 years
-                                    </label>
-                                  </div>
-
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="65 years and over">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-65-plus">
-                                      65 years and over
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                            {% else %}
-                              <div class="nhsuk-form-group">
-                                <label class="nhsuk-label" style="margin-bottom: 20px;" for="age-bracket-label">
-                                  Age bracket of the claim
-                                </label>
-
-                                <div class="nhsuk-radios">
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="0 to 19 years">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-0-19">
-                                      0 to 19 years
-                                    </label>
-                                  </div>
-                            
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="20 to 64 years">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-20-64">
-                                      20 to 64 years
-                                    </label>
-                                  </div>
-
-                                  <div class="nhsuk-radios__item">
-                                    <input class="nhsuk-radios__input" id="claim-age-bracket" name="claim-age-bracket" type="radio" value="65 years and over">
-                                    <label class="nhsuk-label nhsuk-radios__label" for="claim-age-bracket-65-plus">
-                                      65 years and over
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                            {% endif %}
-
-                          <div class="nhsuk-form-group">
-                            <label class="nhsuk-label" id="entitlement-country-label" for="entitlement-country" class="form-label">
-                              Country
-                            </label>
-                            <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="entitlement-country-drop" name="entitlement-country" value="France (FR)">
-                            <datalist id="countries">
-                              <option value="" selected="selected"></option>
-                              <option value="Austria (AT)">Austria (AT)</option>
-                              <option value="Belgium (BE)">Belgium (BE)</option>
-                              <option value="Bulgaria (BG)">Bulgaria (BG)</option>
-                              <option value="Croatia (HR)">Croatia (HR)</option>
-                              <option value="Cyprus (CY)">Cyprus (CY)</option>
-                              <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
-                              <option value="Denmark (DK)">Denmark (DK)</option>
-                              <option value="Estonia (EE)">Estonia (EE)</option>
-                              <option value="Finland (FI)">Finland (FI)</option>
-                              <option value="France (FR)">France (FR)</option>
-                              <option value="Germany (DE)">Germany (DE)</option>
-                              <option value="Gibraltar (GI)">Gibraltar (GI)</option>
-                              <option value="Greece (GR)">Greece (GR)</option>
-                              <option value="Hungary (HU)">Hungary (HU)</option>
-                              <option value="Iceland (IS)">Iceland (IS)</option>
-                              <option value="Ireland (IE)">Ireland (IE)</option>
-                              <option value="Italy (IT)">Italy (IT)</option>
-                              <option value="Latvia (LV)">Latvia (LV)</option>
-                              <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
-                              <option value="Lithuania (LT)">Lithuania (LT)</option>
-                              <option value="Luxembourg (LU)">Luxembourg (LU)</option>
-                              <option value="Malta (MT)">Malta (MT)</option>
-                              <option value="Netherlands (NL)">Netherlands (NL)</option>
-                              <option value="Norway (NO)">Norway (NO)</option>
-                              <option value="Poland (PL)">Poland (PL)</option>
-                              <option value="Portugal (PT)">Portugal (PT)</option>
-                              <option value="Romania (RO)">Romania (RO)</option>
-                              <option value="Slovakia (SK)">Slovakia (SK)</option>
-                              <option value="Slovenia (SI)">Slovenia (SI)</option>
-                              <option value="Spain (ES)">Spain (ES)</option>
-                              <option value="Sweden (SE)">Sweden (SE)</option>
-                              <option value="Switzerland (CH)">Switzerland (CH)</option>
-                            </datalist>            
-                          </div>
-
-                          <!--label class="nhsuk-label" style="margin-top: 30px; margin-bottom: 20px;">
-                            Select how the claim will be sent to the member state
-                          </label>
-                          <div class="nhsuk-radios">
-                            <div class="nhsuk-radios__item">
-                              <input class="nhsuk-radios__input" id="claim-sent-by-post" name="claim-sent-by" type="radio" value="Post">
-                              <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-post">
-                                Post
-                              </label>
-                            </div>
-
-                            <div class="nhsuk-radios__item">
-                              <input class="nhsuk-radios__input" id="claim-sent-by-rina" name="claim-sent-by" type="radio" value="RINA">
-                              <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-rina">
-                                RINA
-                              </label>
-                            </div>
-                          </div-->
-
-                        </div>
-                      </div>
+                      </datalist>            
                     </div>
-                    {% endif %}
-                    <!-- End of S1/S072 content -->
 
+                    <!--label class="nhsuk-label" style="margin-top: 30px; margin-bottom: 20px;">
+                      Select how the claim will be sent to the member state
+                    </label>
+                    <div class="nhsuk-radios">
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="claim-sent-by-post" name="claim-sent-by" type="radio" value="Post">
+                        <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-post">
+                          Post
+                        </label>
+                      </div>
 
-                    <button class="nhsuk-button" style="margin-top: 10px;" type="submit" id="continue-button">Continue</button>
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="claim-sent-by-rina" name="claim-sent-by" type="radio" value="RINA">
+                        <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-rina">
+                          RINA
+                        </label>
+                      </div>
+                    </div-->
 
-                    <p><a href="uk-claims-search">Cancel</a></p>
-                    
-
-                  </form>
+                  </div>
+                </div>
               </div>
+              {% endif %}
+              <!-- End of Average cost content -->
 
 
-          </div>
+              <button class="nhsuk-button" style="margin-top: 10px;" type="submit" id="continue-button">Continue</button>
+
+              <p><a href="uk-claims-search">Cancel</a></p>
+            
+
+            </form>
 
         </div>
       </div>
-
-<!--Side nav -->
-    <!--div class="nhsBSA-sidebar-nav">
-      <div class="side-nav">
-        <ul>
-          <div id="options" class="options">
-            <h3 class="nhsuk-heading-xs">Browse</h3>
-              <li>
-                <a href="../s1/search/search-by-person">Search</a>
-              </li>
-
-            <h3 class="nhsuk-heading-xs">Actions</h3>
-              <li>
-                <a href="account-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">2</span></a>
-                <a href="review-treatments">Review treatments<span class="notification-badge" style="background-color: #005eb8">4</span></a>
-                <a href="pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
-                <a href="uk-claims-search" class="active">UK claims</a>
-                <a href="resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
-                <a href="non-eu-reciprocal-healthcare-quota">Non-EU Reciprocal Healthcare (Quota)</a>
-              </li>
-          </div>
-        </ul>
-      </div>
-    </div-->
-
     </div>
   </div>
 </div>

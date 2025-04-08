@@ -1,0 +1,251 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Resubmissions
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">View Claim ID (Claim documents)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h1 class="nhsuk-heading-l" style="margin-bottom: 0;">
+                    Claim ID 100005 - Invoices for<br>
+                    S1/S072 Article 63, 2.b - 20 to 64 years
+                  </h1>
+                  <a href="create-new-resubmission">
+                    <button class="nhsuk-button" type="submit">
+                      Create new resubmission
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <form action="claim-resubmissions" method="post">
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-summary">Claim summary</a>
+                  <span class="nhsuk-u-visually-hidden">View the overall summary for claim 100005</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-invoices">Invoices</a>
+                  <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
+                </li>
+
+                <!--li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                  <span class="nhsuk-u-visually-hidden">View the age groups for claim 100005</span>
+                </li-->
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-documents">Claim documents</a>
+                  <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="claim-resubmissions">Resubmissions</a>
+                  <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-history">Claim history</a>
+                  <span class="nhsuk-u-visually-hidden">View case history for claim 100005</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+
+            <details class="nhsuk-details-1" >
+              <summary class="nhsuk-details__summary-1">
+                <span class="nhsuk-details__summary-text-1">
+                  Filter by status
+                </span>
+              </summary>
+              <div class="nhsuk-details__text">
+                <p>Select all the resubmission statuses that you want to view.</p>
+                <div class="nhsuk-checkboxes">
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="to-action" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="to-action">
+                      To action
+                    </label>
+                  </div>
+            
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="in-progress" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="in-progress">
+                      In progress
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="to-review" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="to-review">
+                      To review
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="under-review" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="under-review">
+                      Under review
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="ready-to-print" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="ready-to-print">
+                      Ready to print
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="send-to-dh" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="send-to-dh">
+                      Send to DH
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="complete" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="complete">
+                      Complete
+                    </label>
+                  </div>
+            
+                </div>
+                <br>
+                <a href="#"><button  class="nhsuk-button" type="submit">
+                  Apply filter
+                </button></a>
+              </div>
+            </details>
+        
+        
+            {% if data['create-new-resub'] == 'yes' %}
+            <!-- TABLE START -->
+              <table role="table" id="resubmissionsTable" class="nhsuk-table-responsive">
+                <thead role="rowgroup" class="nhsuk-table__head" id="resubmissions">
+                  <tr role="row">
+                    <th role="columnheader" class="" scope="col">
+                      Resubmission ID
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Deadline to reply
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Assigned to
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Peer reviewed by
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Status
+                    </th>
+                    <th role="columnheader" class="" scope="col">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody class="nhsuk-table__body">
+                  <tr role="row" class="nhsuk-table__row">
+                    <td role="cell" class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Resubmission ID</span>
+                      <span>7790992</span>
+                    </td>
+                    <td role="cell" class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                      <span>07/04/2026</span>
+                    </td>
+                    <td role="cell" class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                      <span>joe.bloggs@nhsbsa.nhs.uk</span>
+                    </td>
+                    <td role="cell" class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Peer reviewed by</span>
+                      <span>-</span>
+                    </td>
+                    <td role="cell" class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Status</span>
+                      <span><strong class="nhsuk-tag nhsuk-tag--grey">To action</strong></span>
+                    </td>
+                    <td role="cell" class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Action</span>
+                      <span><a href="#">Add invoices</a><span class="nhsuk-u-visually-hidden">to resub ID 7790992</span></span>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+
+            {% else %}
+            <p><b>No resubmissions have been created.</b></p>
+            {% endif %}
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
