@@ -156,15 +156,31 @@ router.post([/create-new-resubmission/], function(req, res) {
   res.redirect('/version-37/uk-claims/resubmissions/confirmation-resubmission-created');
 });
 
-// Update claim resubmissions page with newly created resub
-router.get('/version-37/uk-claims/resubmissions/claim-resubmissions', function(req, res) {
-  
-  // Optional: handle query param version if someone uses ?create-new-resub=yes
+
+// Confirm selected invoices are added to resubmission
+router.post([/check-invoices-added-to-resubmission/], function(req, res) {
+  // Update session to reflect that invoices are added
+  req.session.data['add-selected-invoices-to-resubmission'] = 'yes';
+
+  // Redirect to the resubmission page
+  res.redirect('/version-37/uk-claims/resubmissions/claim-resubmissions');
+});
+
+
+// Get the claim resubmissions page
+router.get([/claim-resubmissions/], function(req, res) {
+   // Check if resubmission creation or invoice addition flags are set
   if (req.query['create-new-resub']) {
     req.session.data['create-new-resub'] = req.query['create-new-resub'];
   }
 
-  // Render the page and pass session data to Nunjucks
+  // If the invoices have been added, update the status to "In progress"
+  if (req.session.data['add-selected-invoices-to-resubmission'] === 'yes') {
+    req.session.data['status'] = 'In progress';
+    req.session.data['action'] = 'Review invoices';
+  }
+
+  // Render the page with updated session data
   res.render('version-37/uk-claims/resubmissions/claim-resubmissions', {
     data: req.session.data
   });
