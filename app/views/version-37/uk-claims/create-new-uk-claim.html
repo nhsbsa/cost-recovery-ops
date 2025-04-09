@@ -432,8 +432,11 @@ Search for UK claims
               {% endif %}
               <!-- End of Average cost content -->
 
-
+              {% if data.duplicateClaimError %}
+              <button class="nhsuk-button" style="margin-top: 10px;" type="submit" id="duplicate-warning-continue-button">Continue</button>
+              {% else %}
               <button class="nhsuk-button" style="margin-top: 10px;" type="submit" id="continue-button">Continue</button>
+              {% endif %}
 
               <p><a href="uk-claims-search">Cancel</a></p>
             
@@ -469,4 +472,13 @@ Search for UK claims
     }
   });
 </script>
+
+<!-- Prevent user from being able to continue if duplicate error is thrown -->
+<script>
+  document.getElementById('duplicate-warning-continue-button').addEventListener('click', function(event) {
+    event.preventDefault(); // prevents file dialog from opening
+  });
+</script>
 {% endblock %}
+
+

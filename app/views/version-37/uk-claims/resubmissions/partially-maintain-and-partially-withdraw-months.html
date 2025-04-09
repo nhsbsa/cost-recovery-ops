@@ -1,0 +1,155 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Enter duration of months maintained and withdrawn
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back"
+            }) }}
+    
+  
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">Enter duration of months partially maintained and partially withdrawn</h1>
+             </div>
+          </div>
+
+          <form action="partially-maintain-and-partially-withdraw-months" method="post">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+
+              <h2 class="nhsuk-heading-s">Contested months</h2>
+                
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duration-months-claimed-label">Duration of months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="duration-months-claimed-value">01/01/2024 - 29/02/2024</dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="initial-months-claimed-label">Initial months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="initial-months-claimed-value">2</dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="current-months-claimed-label">Current months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">2</dd>
+                </div>
+            </dl>
+
+            <h2 class="nhsuk-heading-s">Enter the partially maintained months</h2>
+
+            <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+              <legend class="nhsuk-fieldset__legend">
+                <span class="nhsuk-label">Enter the start date of the first partially maintained month</span>
+              </legend>
+              <div class="nhsuk-hint" id="enter-maintained-months-hint">
+                For example, 31 1 2022
+              </div>
+        
+                <div class="nhsuk-date-input" id="start-date-first-maintained-month-date">
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label nhsuk-date-input__label" for="start-date-first-maintained-month-day">
+                        Day
+                      </label>
+                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="start-date-first-maintained-month-day" name="start-date-first-maintained-month-day" type="text" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label nhsuk-date-input__label" for="start-date-first-maintained-month-month">
+                        Month
+                      </label>
+                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="start-date-first-maintained-month-month" name="start-date-first-maintained-month-month" type="text" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="nhsuk-date-input__item">
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label nhsuk-date-input__label" for="start-date-first-maintained-month-year">
+                        Year
+                      </label>
+                      <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="start-date-first-maintained-month-year" name="start-date-first-maintained-month-year" type="text" inputmode="numeric">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+
+              <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                <legend class="nhsuk-fieldset__legend">
+                  <span class="nhsuk-label">Enter the end date of the last partially maintained month</span>
+                </legend>
+                <div class="nhsuk-hint" id="enter-maintained-months-hint">
+                  For example, 31 5 2022
+                </div>
+          
+                  <div class="nhsuk-date-input" id="end-date-last-maintained-month-date">
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="end-date-last-maintained-month-day">
+                          Day
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="end-date-last-maintained-month-day" name="end-date-last-maintained-month-day" type="text" inputmode="numeric">
+                      </div>
+                    </div>
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="end-date-last-maintained-month-month">
+                          Month
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="end-date-last-maintained-month-month" name="end-date-last-maintained-month-month" type="text" inputmode="numeric">
+                      </div>
+                    </div>
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="end-date-last-maintained-month-year">
+                          Year
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="end-date-last-maintained-month-year" name="end-date-last-maintained-month-year" type="text" inputmode="numeric">
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <button class="nhsuk-button nhsuk-button--primary" style="margin-top: 20px;" type="submit" value="submit" id="continue-button">Continue</button>
+
+            </div>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

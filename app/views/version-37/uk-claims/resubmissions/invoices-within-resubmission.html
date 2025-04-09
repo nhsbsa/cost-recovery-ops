@@ -54,18 +54,16 @@ UK claim ID 100005 - Invoices within resubmission
           <div class="nhsuk-main-wrapper" id="maincontent">
 
             
-            {% if data['add-selected-invoices-to-resubmission'] == 'yes' %}
+            {% if data['set-invoice-to-partial'] == 'yes' %}
             <div>
-                        
               <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
                  <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Selected invoices added to resub 7790992</span>
+                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Invoice partial</span>
                  </div>
                  <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoices linked to the resub are set to contested status.</span>
+                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoice 248829 marked as partial.</span>
                  </div>
               </div>
-           
             </div>
             {% endif %}
             
@@ -334,7 +332,11 @@ UK claim ID 100005 - Invoices within resubmission
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
-                  <span><strong class="nhsuk-tag nhsuk-tag--white">Contested</strong></span>
+                  {% if data['set-invoice-to-partial'] == 'yes' %}
+                    <span><strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong></span>
+                  {% else %}
+                    <span><strong class="nhsuk-tag nhsuk-tag--white">Contested</strong></span>
+                  {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
