@@ -187,6 +187,7 @@ router.get([/claim-resubmissions/], function(req, res) {
 });
 
 
+// Partially maintain and partially withdraw journey
 // Get the partially maintained and partially withdrawn months
 router.post([/partially-maintain-and-partially-withdraw-months/], function(req, res) {
 
@@ -324,5 +325,67 @@ router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
   res.redirect('/version-37/uk-claims/resubmissions/invoices-within-resubmission');
 });
 
+
+// Withdraw journey
+// Who made the request to withdraw?
+router.post([/source-of-withdrawal/], function(req, res) {
+
+  // Store the source of the withdrawal request
+  const sourceOfWithdrawal = req.body['withdrawal-source'];
+  req.session.data['withdrawal-source'] = sourceOfWithdrawal;
+
+  // Redirect to select the reasons for withdrawing months claimed
+  res.redirect('/version-37/uk-claims/resubmissions/reasons-to-withdraw-months');
+});
+
+// Select the reasons to withdraw the months
+router.post([/reasons-to-withdraw-months/], function(req, res) {
+
+  // Store the reasons for  withdrawing months
+  const reasonToWithdrawMonths = req.body['reasons-to-withdraw-months'];
+  req.session.data['reasons-to-withdraw-months'] = reasonToWithdrawMonths;
+
+  // Store the date the contestation was received (after deadline)
+  const dateContestationReceivedAfterDeadlineDayWithdraw = req.body['date-contestation-received-after-deadline-day-withdraw'];
+  const dateContestationReceivedAfterDeadlineMonthWithdraw = req.body['date-contestation-received-after-deadline-month-withdraw'];
+  const dateContestationReceivedAfterDeadlineYearWithdraw = req.body['date-contestation-received-after-deadline-year-withdraw'];
+  
+  // Combine to form the full date (or use a default if not provided)
+  const dateContestationReceivedAfterDeadlineWithdraw = dateContestationReceivedAfterDeadlineDayWithdraw && dateContestationReceivedAfterDeadlineMonthWithdraw && dateContestationReceivedAfterDeadlineYearWithdraw
+  ? `${dateContestationReceivedAfterDeadlineDayWithdraw}/${dateContestationReceivedAfterDeadlineMonthWithdraw}/${dateContestationReceivedAfterDeadlineYearWithdraw}` 
+  : '17/04/2026';
+  req.session.data['date-contestation-received-after-deadline-withdraw'] = dateContestationReceivedAfterDeadlineWithdraw;
+
+
+  // Store the date the state pension was received
+  const dateStatePensionReceivedDayWithdraw = req.body['date-state-pension-received-day-withdraw'];
+  const dateStatePensionReceivedMonthWithdraw = req.body['date-state-pension-received-month-withdraw'];
+  const dateStatePensionReceivedYearWithdraw = req.body['date-state-pension-received-year-withdraw'];
+  
+  // Combine to form the full date (or use a default if not provided)
+  const dateStatePensionReceivedWithdraw = dateStatePensionReceivedDayWithdraw && dateStatePensionReceivedMonthWithdraw && dateStatePensionReceivedYearWithdraw
+  ? `${dateStatePensionReceivedDayWithdraw}/${dateStatePensionReceivedMonthWithdraw}/${dateStatePensionReceivedYearWithdraw}` 
+  : '17/04/2024';
+  req.session.data['date-state-pension-received-withdraw'] = dateStatePensionReceivedWithdraw;
+
+  // Redirect to select the source of the withdrawal request
+  res.redirect('/version-37/uk-claims/resubmissions/cya-withdraw');
+});
+
+// Pull through the input data onto the cya screen
+router.get([/cya-withdraw/], function(req, res) {
+  res.render('version-37/uk-claims/resubmissions/cya-withdraw', {
+    data: req.session.data
+  });
+});
+
+// Redirect cya to Invoices within the resubmission screen
+router.post([/cya-withdraw/], function(req, res) {
+  // Update session to reflect that invoices are added
+  req.session.data['set-invoice-to-withdrawn'] = 'yes';
+
+  // Redirect to the resubmission page
+  res.redirect('/version-37/uk-claims/resubmissions/invoices-within-resubmission');
+});
 
 module.exports = router;
