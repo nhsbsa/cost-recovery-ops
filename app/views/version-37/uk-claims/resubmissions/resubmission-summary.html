@@ -28,7 +28,7 @@ UK claim ID 100005 - View the resubmission summary
             <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
-            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
           </li>
           <li class="nhsuk-breadcrumb__item">
             View Resub ID (Resubmission summary)
@@ -238,7 +238,7 @@ UK claim ID 100005 - View the resubmission summary
                         Assigned to
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['send-for-peer-review'] == 'yes' %}
+                        {% if data['assigned-for-peer-review'] == 'yes' or data['peer-reviewed'] == 'yes' %}
                           nina.evans@nhsbsa.nhs.uk
                         {% else %}
                           joe.bloggs@nhsbsa.nhs.uk
@@ -251,8 +251,17 @@ UK claim ID 100005 - View the resubmission summary
                         Work completion date
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['all-invoices-investigated'] == 'yes' %}
-                          nina.evans@nhsbsa.nhs.uk
+                        {% if data['peer-reviewed'] == 'yes' %}
+                          21 March 2025
+                        {% elif (
+                          (data['invoice'] == 'Jacqueline' and data['set-invoice-to-withdrawn'] == 'yes') and
+                          (data['invoice'] == 'Jane' and data['set-invoice-to-maintained'] == 'yes') and
+                          (data['invoice'] == 'John' and data['set-invoice-to-maintained'] == 'yes') and
+                          (data['invoice'] == 'Paul' and data['set-invoice-to-partial'] == 'yes') and
+                          (data['invoice'] == 'Sophie' and data['set-invoice-to-withdrawn'] == 'yes') and
+                          (data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes')
+                        ) %}
+                          20 March 2025
                         {% else %}
                           -
                         {% endif%}
@@ -274,7 +283,7 @@ UK claim ID 100005 - View the resubmission summary
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Peer reviewed by
+                        Peer review completion date
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         {% if data['peer-reviewed'] == 'yes' %}
@@ -285,6 +294,11 @@ UK claim ID 100005 - View the resubmission summary
                       </dd>
                     </div>
                   </dl>
+
+
+                  {% if data['peer-reviewed'] == 'yes' %}
+                  When was the resub sent to ms? etc to go here
+                  {% endif %}
 
               </div>
             </div>

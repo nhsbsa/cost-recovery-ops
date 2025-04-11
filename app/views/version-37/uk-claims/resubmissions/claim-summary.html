@@ -217,66 +217,108 @@ UK claim ID 100005 - Claim summary
                 </div>
               </div>
 
+              <br>
+
+              {% if data['add-selected-invoices-to-resubmission'] == 'yes' %}
+              <h2 class="nhsuk-heading-m">Resub running total</h2>
               <!-- Bottom-left card content begins -->
-              <!--div class="nhsuk-card">
+              <div class="nhsuk-card">
                 <div class="nhsuk-card__content">
                   <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Total months claimed
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      108
-                    </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Accepted months
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      -
-                    </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Maintained months
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      -
-                    </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Withdrawn months
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      -
-                    </dd>
-                  </div>
-                </dl>
-
-                <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Partially accepted
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      -
-                    </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Partially withdrawn
-                    </dt>
-                    <dd class="nhsuk-summary-list__value">
-                      -
-                    </dd>
-                  </div>
-                </dl>
-                
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Resub ID
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        7790992
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Status of claim
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        To review
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total months contested
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        32
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Maintained months
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['invoice'] == 'Jane' and data['invoice'] == 'John' and data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
+                          16
+                        {% elif data['invoice'] == 'Jane' and data['invoice'] == 'John' and data['set-invoice-to-maintained'] == 'yes' %}
+                          7
+                        {% elif data['invoice'] == 'Jane' and data['set-invoice-to-maintained'] == 'yes' %}
+                          3
+                        {% elif data['invoice'] == 'John' and data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
+                          13
+                        {% elif data['invoice'] == 'John' and data['set-invoice-to-maintained'] == 'yes' %}
+                          4
+                        {% elif data['invoice'] == 'Jane' and data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
+                          12
+                        {% elif data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
+                          9
+                        {% else %}
+                          -
+                        {% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Withdrawn months
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['invoice'] == 'Jacqueline' and data['invoice'] == 'Sophie' and data['set-invoice-to-withdrawn'] == 'yes' %}
+                          14
+                        {% elif data['invoice'] == 'Jacqueline' and data['set-invoice-to-withdrawn'] == 'yes' %}
+                          5
+                        {% elif data['invoice'] == 'Sophie' and data['set-invoice-to-withdrawn'] == 'yes' %}
+                          9
+                        {% else %}
+                          -
+                        {% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Partially maintained
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['invoice'] == 'Paul' and data['set-invoice-to-partial'] == 'yes' %}
+                          1
+                        {% else %}
+                          -
+                        {% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Partially withdrawn
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['invoice'] == 'Paul' and data['set-invoice-to-partial'] == 'yes' %}
+                          1
+                        {% else %}
+                          -
+                        {% endif %}
+                      </dd>
+                    </div>
+                  </dl>
+                  
                 </div>
-              </div-->
+              </div>
               <!-- Bottom-left card content ends -->
+              {% endif %}
 
             </div>
               <!-- End of claim age bracket 20 to 64 years content for Main or Supplemental claim -->

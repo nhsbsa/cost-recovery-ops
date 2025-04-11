@@ -123,6 +123,56 @@ router.post([/uk-claims-loading-new-claim/], function(req, res) {
   }
 });
 
+// Save details on claim summary and pass through to Claim history //
+// Enter details of the claim
+router.post([/s1-claim-summary/], function(req, res) {
+  // Date claim sent to MS
+  const dateClaimSentDay = req.body['date-claim-sent-day'];
+  const dateClaimSentMonth = req.body['date-claim-sent-month'];
+  const dateClaimSentYear = req.body['date-claim-sent-year'];
+  const dateClaimSent = dateClaimSentDay && dateClaimSentMonth && dateClaimSentYear
+    ? `${dateClaimSentDay}/${dateClaimSentMonth}/${dateClaimSentYear}`
+    : '11/04/2025';
+  req.session.data['date-claim-sent'] = dateClaimSent;
+
+  // Date Member State received the claim
+  const dateDocsReceivedByMSDay = req.body['date-claim-documents-received-by-ms-day'];
+  const dateDocsReceivedByMSMonth = req.body['date-claim-documents-received-by-ms-month'];
+  const dateDocsReceivedByMSYear = req.body['date-claim-documents-received-by-ms-year'];
+  const dateClaimDocumentsReceivedByMS = dateDocsReceivedByMSDay && dateDocsReceivedByMSMonth && dateDocsReceivedByMSYear
+    ? `${dateDocsReceivedByMSDay}/${dateDocsReceivedByMSMonth}/${dateDocsReceivedByMSYear}`
+    : '18/04/2025';
+  req.session.data['date-claim-documents-received-by-ms'] = dateClaimDocumentsReceivedByMS;
+
+  // Date S100 uploaded to DH eXchange
+  const dateS100GlobalNoteUploadedDay = req.body['date-s100-global-note-uploaded-day'];
+  const dateS100GlobalNoteUploadedMonth = req.body['date-s100-global-note-uploaded-month'];
+  const dateS100GlobalNoteUploadedYear = req.body['date-s100-global-note-uploaded-year'];
+  const dateS100GlobalNoteUploaded = dateS100GlobalNoteUploadedDay && dateS100GlobalNoteUploadedMonth && dateS100GlobalNoteUploadedYear
+    ? `${dateS100GlobalNoteUploadedDay}/${dateS100GlobalNoteUploadedMonth}/${dateS100GlobalNoteUploadedYear}`
+    : '11/04/2025';
+  req.session.data['date-s100-global-note-uploaded'] = dateS100GlobalNoteUploaded;
+
+  // Store other form fields
+  req.session.data['claim-sent-to-ms-by'] = req.body['claim-sent-to-ms-by'];
+  req.session.data['s100-uploaded-by'] = req.body['s100-uploaded-by'];
+  req.session.data['claim-sent-by'] = req.body['claim-sent-by'];
+  req.session.data['rina-claim-rina-ref-no'] = req.body['rina-claim-rina-ref-no'];
+
+  // Conditional flag to track claim summary details updated
+  req.session.data['claim-summary-details-updated'] = 'yes';
+
+  // Push data through to Claim history screen
+  res.redirect('/version-37/uk-claims/s1-claim-history');
+});
+
+// Pull through the input data onto the Claim history screen
+router.get([/s1-claim-history/], function(req, res) {
+  res.render('version-37/uk-claims/s1-claim-history', {
+    data: req.session.data
+  });
+});
+
 
 // Create new resubmission
 router.post([/create-new-resubmission/], function(req, res) {
@@ -187,7 +237,7 @@ router.get([/claim-resubmissions/], function(req, res) {
 });
 
 
-// Partially maintain and partially withdraw journey
+// Partially maintain and partially withdraw journey //
 // Get the partially maintained and partially withdrawn months
 router.post([/partially-maintain-and-partially-withdraw-months/], function(req, res) {
 
@@ -326,7 +376,7 @@ router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
 });
 
 
-// Withdraw journey
+// Withdraw journey //
 // Who made the request to withdraw?
 router.post([/source-of-withdrawal/], function(req, res) {
 
@@ -368,7 +418,7 @@ router.post([/reasons-to-withdraw-months/], function(req, res) {
   : '17/04/2024';
   req.session.data['date-state-pension-received-withdraw'] = dateStatePensionReceivedWithdraw;
 
-  // Redirect to select the source of the withdrawal request
+  // Redirect to select check your answers (Withdraw)
   res.redirect('/version-37/uk-claims/resubmissions/cya-withdraw');
 });
 
@@ -383,6 +433,58 @@ router.get([/cya-withdraw/], function(req, res) {
 router.post([/cya-withdraw/], function(req, res) {
   // Update session to reflect that invoices are added
   req.session.data['set-invoice-to-withdrawn'] = 'yes';
+
+  // Redirect to the resubmission page
+  res.redirect('/version-37/uk-claims/resubmissions/invoices-within-resubmission');
+});
+
+
+// Maintain journey //
+// Select the reasons to  maintain the months
+router.post([/reasons-to-maintain-months/], function(req, res) {
+
+  // Store the reasons for maintaining months
+  const reasonToMaintainMonths = req.body['reasons-to-maintain-months'];
+  req.session.data['reasons-to-maintain-months'] = reasonToMaintainMonths;
+
+  // Store the date the contestation was received (after deadline)
+  const dateContestationReceivedAfterDeadlineDayMaintain = req.body['date-contestation-received-after-deadline-day-maintain'];
+  const dateContestationReceivedAfterDeadlineMonthMaintain = req.body['date-contestation-received-after-deadline-month-maintain'];
+  const dateContestationReceivedAfterDeadlineYearMaintain = req.body['date-contestation-received-after-deadline-year-maintain'];
+  
+  // Combine to form the full date (or use a default if not provided)
+  const dateContestationReceivedAfterDeadlineMaintain = dateContestationReceivedAfterDeadlineDayMaintain && dateContestationReceivedAfterDeadlineMonthMaintain && dateContestationReceivedAfterDeadlineYearMaintain 
+  ? `${dateContestationReceivedAfterDeadlineDayMaintain}/${dateContestationReceivedAfterDeadlineMonthMaintain}/${dateContestationReceivedAfterDeadlineYearMaintain}` 
+  : '17/04/2026';
+  req.session.data['date-contestation-received-after-deadline-maintain'] = dateContestationReceivedAfterDeadlineMaintain;
+
+
+  // Store the date the state pension was received
+  const dateStatePensionReceivedDayMaintain = req.body['date-state-pension-received-day-maintain'];
+  const dateStatePensionReceivedMonthMaintain = req.body['date-state-pension-received-month-maintain'];
+  const dateStatePensionReceivedYearMaintain = req.body['date-state-pension-received-year-maintain'];
+  
+  // Combine to form the full date (or use a default if not provided)
+  const dateStatePensionReceivedMaintain = dateStatePensionReceivedDayMaintain && dateStatePensionReceivedMonthMaintain && dateStatePensionReceivedYearMaintain 
+  ? `${dateStatePensionReceivedDayMaintain}/${dateStatePensionReceivedMonthMaintain}/${dateStatePensionReceivedYearMaintain}` 
+  : '17/04/2024';
+  req.session.data['date-state-pension-received-maintain'] = dateStatePensionReceivedMaintain;
+
+  // Redirect to check your answers (maintain)
+  res.redirect('/version-37/uk-claims/resubmissions/cya-maintain');
+});
+
+// Pull through the input data onto the cya screen
+router.get([/cya-maintain/], function(req, res) {
+  res.render('version-37/uk-claims/resubmissions/cya-maintain', {
+    data: req.session.data
+  });
+});
+
+// Redirect cya to Invoices within the resubmission screen
+router.post([/cya-maintain/], function(req, res) {
+  // Update session to reflect that invoices are added
+  req.session.data['set-invoice-to-maintained'] = 'yes';
 
   // Redirect to the resubmission page
   res.redirect('/version-37/uk-claims/resubmissions/invoices-within-resubmission');
