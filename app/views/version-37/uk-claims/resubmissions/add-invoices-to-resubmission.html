@@ -139,7 +139,7 @@ UK claim ID 100005 - Select invoices to add to resubmission
           </div>
           <!--end search-->
 
-          <form action="claim-resubmissions" method="post">
+          <form action="add-invoices-to-resubmission" method="post">
 
           <!-- Start of Invoices table -->
           <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
@@ -147,9 +147,9 @@ UK claim ID 100005 - Select invoices to add to resubmission
               <tr role="row">
                 <th role="columnheader" class="" scope="col">
                   <a class="claim-clear-search-link select-all-link"
-                    href="claim-invoices"
-                    id="deselect-all-link">
-                    <span>Deselect all<span class="nhsuk-u-visually-hidden">invoices listed</span></span>
+                    href="#"
+                    id="select-all-link">
+                    <span>Select all<span class="nhsuk-u-visually-hidden">invoices listed</span></span>
                   </a>
                 </th>
                 <th role="columnheader" class="" scope="col">
@@ -793,5 +793,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize button state on page load
     updateButtonState();
 });
+
+// Select all invoices link
+// Handle "Select all" link click
+document.getElementById("select-all-link").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const checkboxes = document.querySelectorAll(".invoice-checkbox");
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+    });
+
+    // Trigger the same logic as individual checkbox changes
+    updateButtonState();
+    saveSelectedInvoices();
+});
+
 </script>
 {% endblock %}

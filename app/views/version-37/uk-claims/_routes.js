@@ -224,12 +224,6 @@ router.get([/claim-resubmissions/], function(req, res) {
     req.session.data['create-new-resub'] = req.query['create-new-resub'];
   }
 
-  // If the invoices have been added, update the status to "In progress"
-  if (req.session.data['add-selected-invoices-to-resubmission'] === 'yes') {
-    req.session.data['status'] = 'In progress';
-    req.session.data['action'] = 'Review invoices';
-  }
-
   // Render the page with updated session data
   res.render('version-37/uk-claims/resubmissions/claim-resubmissions', {
     data: req.session.data
@@ -368,7 +362,7 @@ router.get([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
 
 // Redirect cya to Invoices within the resubmission screen
 router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
-  // Update session to reflect that invoices are added
+  // Update session to reflect that the invoice status has been set to Partial
   req.session.data['set-invoice-to-partial'] = 'yes';
 
   // Redirect to the resubmission page
@@ -431,7 +425,8 @@ router.get([/cya-withdraw/], function(req, res) {
 
 // Redirect cya to Invoices within the resubmission screen
 router.post([/cya-withdraw/], function(req, res) {
-  // Update session to reflect that invoices are added
+  
+  // Update session to reflect that the invoice status has been set to Withdrawn
   req.session.data['set-invoice-to-withdrawn'] = 'yes';
 
   // Redirect to the resubmission page
@@ -483,7 +478,7 @@ router.get([/cya-maintain/], function(req, res) {
 
 // Redirect cya to Invoices within the resubmission screen
 router.post([/cya-maintain/], function(req, res) {
-  // Update session to reflect that invoices are added
+  // Update session to reflect that the invoice status has been set to Maintained
   req.session.data['set-invoice-to-maintained'] = 'yes';
 
   // Redirect to the resubmission page
