@@ -174,6 +174,63 @@ router.get([/s1-claim-history/], function(req, res) {
 });
 
 
+// Resubmissions //
+
+// Set invoice month values per person (used for claim-summary totals)
+const invoiceMonths = {
+  'Jane': 3,
+  'John': 4,
+  'Dione': 9,
+  'Jacqueline': 5,
+  'Sophie': 9,
+  'Paul': 2 // split: 1 maintained, 1 withdrawn
+};
+
+// Helper to check if all invoices have a status set
+function allInvoicesHaveStatus(statuses, expectedCount) {
+  return Object.keys(statuses).length === expectedCount &&
+         Object.values(statuses).every(status => status !== '');
+}
+
+
+router.get([/claim-summary/], function(req, res) {
+  const statuses = req.session.data.invoiceStatuses || {};
+  const months = {
+    maintained: 0,
+    withdrawn: 0,
+    partial: 0
+  };
+
+  // Loop through each invoice and its status
+  for (const [invoice, status] of Object.entries(statuses)) {
+    const count = invoiceMonths[invoice] || 0;
+
+    // Only add to maintained or withdrawn if the status is "Maintained" or "Withdrawn"
+    if (status === 'Maintained') {
+      months.maintained += count;
+    } else if (status === 'Withdrawn') {
+      months.withdrawn += count;
+    } else if (status === 'Partial') {
+      months.partial += count; // Add partials to partial category only
+    }
+  }
+
+  // Split partial into half maintained + half withdrawn
+  // We ensure that the partials are not contributing to the "Maintained" or "Withdrawn" months directly
+  const partialMaintained = Math.floor(months.partial / 2);
+  const partialWithdrawn = months.partial - partialMaintained;
+
+  // Render the final totals with the split partials
+  res.render('version-37/uk-claims/resubmissions/claim-summary', {
+    data: req.session.data,
+    maintainedMonths: months.maintained, // Maintained months should not include Paul's partials
+    withdrawnMonths: months.withdrawn, // Withdrawn months should not include Paul's partials
+    partialMaintainedMonths: partialMaintained,
+    partialWithdrawnMonths: partialWithdrawn
+  });
+});
+
+
 // Create new resubmission
 router.post([/create-new-resubmission/], function(req, res) {
   // Date contestation received
@@ -210,25 +267,44 @@ router.post([/create-new-resubmission/], function(req, res) {
 // Confirm selected invoices are added to resubmission
 router.post([/check-invoices-added-to-resubmission/], function(req, res) {
   // Update session to reflect that invoices are added
-  req.session.data['add-selected-invoices-to-resubmission'] = 'yes';
+  req.session.data.resubStatus = 'invoices-added-to-resub';
 
   // Redirect to the resubmission page
   res.redirect('/version-37/uk-claims/resubmissions/claim-resubmissions');
 });
 
 
-// Get the claim resubmissions page
 router.get([/claim-resubmissions/], function(req, res) {
-   // Check if resubmission creation or invoice addition flags are set
+  const data = req.session.data;
+
   if (req.query['create-new-resub']) {
-    req.session.data['create-new-resub'] = req.query['create-new-resub'];
+    data['create-new-resub'] = req.query['create-new-resub'];
   }
 
-  // Render the page with updated session data
+  if (req.query.resubStatus) {
+    data.resubStatus = req.query.resubStatus;
+  }
+
+  // Recheck invoice statuses to ensure 'resubStatus' is current
+  const statuses = data.invoiceStatuses || {};
+  const invoiceList = ['Jane', 'John', 'Dione', 'Jacqueline', 'Sophie', 'Paul'];
+
+  const allReviewed = Object.keys(statuses).length === invoiceList.length &&
+                      Object.values(statuses).every(status => status !== '');
+
+  // Only update if not already peer-reviewed or sent
+  if (allReviewed && (
+    !data.resubStatus || 
+    data.resubStatus === 'invoices-added-to-resub'
+  )) {
+    data.resubStatus = 'ready-to-send-for-peer-review';
+  }
+
   res.render('version-37/uk-claims/resubmissions/claim-resubmissions', {
-    data: req.session.data
+    data
   });
 });
+
 
 
 // Partially maintain and partially withdraw journey //
@@ -362,8 +438,12 @@ router.get([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
 
 // Redirect cya to Invoices within the resubmission screen
 router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
-  // Update session to reflect that the invoice status has been set to Partial
-  req.session.data['set-invoice-to-partial'] = 'yes';
+
+  const invoice = req.session.data.invoice; // Get active invoice
+  if (invoice) {
+    req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
+    req.session.data.invoiceStatuses[invoice] = 'Partial';
+  }
 
   // Redirect to the resubmission page
   res.redirect('/version-37/uk-claims/resubmissions/invoices-within-resubmission');
@@ -426,8 +506,11 @@ router.get([/cya-withdraw/], function(req, res) {
 // Redirect cya to Invoices within the resubmission screen
 router.post([/cya-withdraw/], function(req, res) {
   
-  // Update session to reflect that the invoice status has been set to Withdrawn
-  req.session.data['set-invoice-to-withdrawn'] = 'yes';
+  const invoice = req.session.data.invoice; // Get active invoice
+  if (invoice) {
+    req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
+    req.session.data.invoiceStatuses[invoice] = 'Withdrawn';
+  }
 
   // Redirect to the resubmission page
   res.redirect('/version-37/uk-claims/resubmissions/invoices-within-resubmission');
@@ -478,11 +561,62 @@ router.get([/cya-maintain/], function(req, res) {
 
 // Redirect cya to Invoices within the resubmission screen
 router.post([/cya-maintain/], function(req, res) {
-  // Update session to reflect that the invoice status has been set to Maintained
-  req.session.data['set-invoice-to-maintained'] = 'yes';
+  
+  const invoice = req.session.data.invoice; // Get active invoice
+  if (invoice) {
+    req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
+    req.session.data.invoiceStatuses[invoice] = 'Maintained';
+  }
 
   // Redirect to the resubmission page
   res.redirect('/version-37/uk-claims/resubmissions/invoices-within-resubmission');
+});
+
+router.get([/invoices-within-resubmission/], function (req, res) {
+  const data = req.session.data;
+  const statuses = data.invoiceStatuses || {};
+  const invoiceList = ['Jane', 'John', 'Dione', 'Jacqueline', 'Sophie', 'Paul'];
+
+  const allReviewed = Object.keys(statuses).length === invoiceList.length &&
+                      Object.values(statuses).every(status => status !== '');
+
+  const currentStatus = data.resubStatus;
+
+  // Update to 'ready-to-send-for-peer-review' if everything reviewed and we're still in early status
+  if (allReviewed && (!currentStatus || currentStatus === 'invoices-added-to-resub')) {
+    data.resubStatus = 'ready-to-send-for-peer-review';
+  }
+
+  // Handle transitions
+  if (req.query['send-for-peer-review'] === 'yes') {
+    data.resubStatus = 'peer-review-requested';
+  }
+
+  if (req.query['assign-to-me'] === 'yes') {
+    data.resubStatus = 'assigned-for-review';
+  }
+
+  if (req.query['set-as-peer-reviewed'] === 'yes') {
+    data.resubStatus = 'peer-reviewed';
+  }
+
+  res.render('version-37/uk-claims/resubmissions/invoices-within-resubmission', {
+    data
+  });
+});
+
+router.get([/]invoice-details/], function(req, res) {
+  res.render('version-37/uk-claims/resubmissions/invoice-details', {
+    data: req.session.data
+  });
+});
+
+
+// Pull through the input data onto the cya screen
+router.get([/resubmission-summary/], function(req, res) {
+  res.render('version-37/uk-claims/resubmissions/resubmission-summary', {
+    data: req.session.data
+  });
 });
 
 module.exports = router;

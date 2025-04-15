@@ -219,7 +219,7 @@ UK claim ID 100005 - Claim summary
 
               <br>
 
-              {% if data['add-selected-invoices-to-resubmission'] == 'yes' %}
+              {% if data.resubStatus == 'invoices-added-to-resub' %}
               <h2 class="nhsuk-heading-m">Resub running total</h2>
               <!-- Bottom-left card content begins -->
               <div class="nhsuk-card">
@@ -254,20 +254,8 @@ UK claim ID 100005 - Claim summary
                         Maintained months
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['invoice'] == 'Jane' and data['invoice'] == 'John' and data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
-                          16
-                        {% elif data['invoice'] == 'Jane' and data['invoice'] == 'John' and data['set-invoice-to-maintained'] == 'yes' %}
-                          7
-                        {% elif data['invoice'] == 'Jane' and data['set-invoice-to-maintained'] == 'yes' %}
-                          3
-                        {% elif data['invoice'] == 'John' and data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
-                          13
-                        {% elif data['invoice'] == 'John' and data['set-invoice-to-maintained'] == 'yes' %}
-                          4
-                        {% elif data['invoice'] == 'Jane' and data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
-                          12
-                        {% elif data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
-                          9
+                        {% if maintainedMonths > 0 %}
+                          {{ maintainedMonths }}
                         {% else %}
                           -
                         {% endif %}
@@ -278,24 +266,21 @@ UK claim ID 100005 - Claim summary
                         Withdrawn months
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['invoice'] == 'Jacqueline' and data['invoice'] == 'Sophie' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                          14
-                        {% elif data['invoice'] == 'Jacqueline' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                          5
-                        {% elif data['invoice'] == 'Sophie' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                          9
+                        {% if withdrawnMonths > 0 %}
+                          {{ withdrawnMonths }}
                         {% else %}
                           -
                         {% endif %}
                       </dd>
+                      
                     </div>
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
                         Partially maintained months
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['invoice'] == 'Paul' and data['set-invoice-to-partial'] == 'yes' %}
-                          1
+                        {% if partialMaintainedMonths > 0 %}
+                          {{ partialMaintainedMonths }}
                         {% else %}
                           -
                         {% endif %}
@@ -306,8 +291,8 @@ UK claim ID 100005 - Claim summary
                         Partially withdrawn months
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['invoice'] == 'Paul' and data['set-invoice-to-partial'] == 'yes' %}
-                          1
+                        {% if partialWithdrawnMonths > 0 %}
+                          {{ partialWithdrawnMonths }}
                         {% else %}
                           -
                         {% endif %}
@@ -321,7 +306,7 @@ UK claim ID 100005 - Claim summary
               {% endif %}
 
             </div>
-              <!-- End of claim age bracket 20 to 64 years content for Main or Supplemental claim -->
+              <!-- End of left-hand panels -->
 
             
             <!-- Start of Details of claim panel -->

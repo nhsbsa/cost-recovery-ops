@@ -53,7 +53,7 @@ UK claim ID 100005 - Invoices within resubmission
         <div class="nhsuk-width-container-fluid">
           <div class="nhsuk-main-wrapper" id="maincontent">
 
-            {% if data['peer-reviewed'] == 'yes' %}
+            {% if data['resubStatus'] ==  'peer-reviewed' %}
             <div>
               <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
                  <div class="govuk-notification-banner__header">
@@ -64,85 +64,54 @@ UK claim ID 100005 - Invoices within resubmission
                  </div>
               </div>
             </div>
+            {% elif data['resubStatus'] == 'peer-review-requested' %}
+            <div>
+              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+                 <div class="govuk-notification-banner__header">
+                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Resub sent for peer review</span>
+                 </div>
+                 <div class="govuk-notification-banner__content">
+                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Resub 7790992 has been sent for peer review</span>
+                 </div>
+              </div>
+            </div>
             {% endif %}
             
-            {% if data['invoice'] == 'Jacqueline' and data ['set-invoice-to-withdrawn'] == 'yes' %}
-            <div>
-              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                 <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Invoice withdrawn</span>
-                 </div>
-                 <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoice 234892 marked as withdrawn.</span>
-                 </div>
+
+            {% set changedInvoiceStatusId = data.changedInvoiceStatusId %}
+            {% set status = data.invoiceStatuses[changedInvoiceStatusId] %}
+            {% set invoiceNumbers = {
+              'Jacqueline': '234892',
+              'Jane': '298473',
+              'John': '387731',
+              'Paul': '248829',
+              'Sophie': '324778',
+              'Dione': '324778'
+            } %}
+
+            {% if changedInvoiceStatusId and status %}
+              <div>
+                <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+                  <div class="govuk-notification-banner__header">
+                    {% if status == 'Partial' %}
+                      <span class="govuk-notification-banner__title">Invoice partial</span>
+                    {% elif status == 'Withdrawn' %}
+                      <span class="govuk-notification-banner__title">Invoice withdrawn</span>
+                    {% elif status == 'Maintained' %}
+                      <span class="govuk-notification-banner__title">Invoice maintained</span>
+                    {% else %}
+                      <span class="govuk-notification-banner__title">Invoice updated</span>
+                    {% endif %}
+                  </div>
+                  <div class="govuk-notification-banner__content">
+                    <span class="govuk-notification-banner__heading big-text-wrap">
+                      Invoice {{ invoiceNumbers[changedInvoiceStatusId] }} marked as {{ status | lower }}.
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
             {% endif %}
 
-            {% if data['invoice'] == 'Jane' and data ['set-invoice-to-maintained'] == 'yes' %}
-            <div>
-              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                 <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Invoice maintained</span>
-                 </div>
-                 <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoice 298473 marked as maintained.</span>
-                 </div>
-              </div>
-            </div>
-            {% endif %}
-
-            {% if data['invoice'] == 'John' and data ['set-invoice-to-maintained'] == 'yes' %}
-            <div>
-              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                 <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Invoice maintained</span>
-                 </div>
-                 <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoice 387731 marked as maintained.</span>
-                 </div>
-              </div>
-            </div>
-            {% endif %}
-
-            {% if data['invoice'] == 'Paul' and data ['set-invoice-to-partial'] == 'yes' %}
-            <div>
-              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                 <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Invoice partial</span>
-                 </div>
-                 <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoice 248829 marked as partial.</span>
-                 </div>
-              </div>
-            </div>
-            {% endif %}
-
-            {% if data['invoice'] == 'Sophie' and data ['set-invoice-to-withdrawn'] == 'yes' %}
-            <div>
-              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                 <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Invoice withdrawn</span>
-                 </div>
-                 <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoice 378392 marked as withdrawn.</span>
-                 </div>
-              </div>
-            </div>
-            {% endif %}
-
-            {% if data['invoice'] == 'Dione' and data ['set-invoice-to-maintained'] == 'yes' %}
-            <div>
-              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                 <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Invoice maintained</span>
-                 </div>
-                 <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoice 324778 marked as maintained.</span>
-                 </div>
-              </div>
-            </div>
-            {% endif %}
 
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-full">
@@ -153,9 +122,17 @@ UK claim ID 100005 - Invoices within resubmission
                       Invoices linked to resubmission
                     </h1>
                   </div>
-                  {% if data['assigned-for-peer-review'] == 'yes' %}
+                  {% if data.resubStatus == 'ready-to-send-for-peer-review' %}
                   <div>
-                    <a href="invoices-within-resubmission?peer-reviewed=yes">
+                    <a href="invoices-within-resubmission?send-for-peer-review=yes">
+                      <button class="nhsuk-button" type="submit">
+                        Send for peer review
+                      </button>
+                    </a>
+                  </div>
+                  {% elif data.resubStatus == 'assigned-for-review' %}
+                  <div>
+                    <a href="invoices-within-resubmission?set-as-peer-reviewed=yes">
                       <button class="nhsuk-button" type="submit">
                         Set as peer reviewed
                       </button>
@@ -165,12 +142,6 @@ UK claim ID 100005 - Invoices within resubmission
                 </div>
               </div>
             </div>
-            
-            
-            
-
-            
-            
             
             
             <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
@@ -334,15 +305,17 @@ UK claim ID 100005 - Invoices within resubmission
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
-                  {% if data['invoice'] == 'Jacqueline' and data['set-invoice-to-partial'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--purple" id="invoice-status">Partial</strong></span>
-                  {% elif data['invoice'] == 'Jacqueline' and data['set-invoice-to-maintained'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--blue" id="invoice-status">Maintained</strong></span>
-                  {% elif data['invoice'] == 'Jacqueline' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--grey" id="invoice-status">Withdrawn</strong></span>
+                  {% set status = data.invoiceStatuses['Jacqueline'] %}
+                  {% if status == 'Partial' %}
+                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                  {% elif status == 'Withdrawn' %}
+                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                  {% elif status == 'Maintained' %}
+                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
                   {% else %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--white">Contested</strong></span>
+                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
                   {% endif %}
+
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -374,15 +347,17 @@ UK claim ID 100005 - Invoices within resubmission
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
-                  {% if data['invoice'] == 'Jane' and data['set-invoice-to-partial'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--purple" id="invoice-status">Partial</strong></span>
-                  {% elif data['invoice'] == 'Jane' and data['set-invoice-to-maintained'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--blue" id="invoice-status">Maintained</strong></span>
-                  {% elif data['invoice'] == 'Jane' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--grey" id="invoice-status">Withdrawn</strong></span>
+                  {% set status = data.invoiceStatuses['Jane'] %}
+                  {% if status == 'Partial' %}
+                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                  {% elif status == 'Withdrawn' %}
+                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                  {% elif status == 'Maintained' %}
+                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
                   {% else %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--white">Contested</strong></span>
+                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
                   {% endif %}
+
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -414,15 +389,17 @@ UK claim ID 100005 - Invoices within resubmission
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
-                  {% if data['invoice'] == 'John' and data['set-invoice-to-partial'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--purple" id="invoice-status">Partial</strong></span>
-                  {% elif data['invoice'] == 'John' and data['set-invoice-to-maintained'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--blue" id="invoice-status">Maintained</strong></span>
-                  {% elif data['invoice'] == 'John' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--grey" id="invoice-status">Withdrawn</strong></span>
+                  {% set status = data.invoiceStatuses['John'] %}
+                  {% if status == 'Partial' %}
+                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                  {% elif status == 'Withdrawn' %}
+                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                  {% elif status == 'Maintained' %}
+                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
                   {% else %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--white">Contested</strong></span>
+                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
                   {% endif %}
+
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -453,14 +430,15 @@ UK claim ID 100005 - Invoices within resubmission
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
-                  {% if data['invoice'] == 'Paul' and data['set-invoice-to-partial'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--purple" id="invoice-status">Partial</strong></span>
-                  {% elif data['invoice'] == 'Paul' and data['set-invoice-to-maintained'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--blue" id="invoice-status">Maintained</strong></span>
-                  {% elif data['invoice'] == 'Paul' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--grey" id="invoice-status">Withdrawn</strong></span>
+                  {% set status = data.invoiceStatuses['Paul'] %}
+                  {% if status == 'Partial' %}
+                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                  {% elif status == 'Withdrawn' %}
+                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                  {% elif status == 'Maintained' %}
+                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
                   {% else %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--white">Contested</strong></span>
+                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -492,14 +470,15 @@ UK claim ID 100005 - Invoices within resubmission
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
-                  {% if data['invoice'] == 'Sophie' and data['set-invoice-to-partial'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--purple" id="invoice-status">Partial</strong></span>
-                  {% elif data['invoice'] == 'Sophie' and data['set-invoice-to-maintained'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--blue" id="invoice-status">Maintained</strong></span>
-                  {% elif data['invoice'] == 'Sophie' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--grey" id="invoice-status">Withdrawn</strong></span>
+                  {% set status = data.invoiceStatuses['Sophie'] %}
+                  {% if status == 'Partial' %}
+                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                  {% elif status == 'Withdrawn' %}
+                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                  {% elif status == 'Maintained' %}
+                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
                   {% else %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--white">Contested</strong></span>
+                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -531,14 +510,15 @@ UK claim ID 100005 - Invoices within resubmission
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
-                  {% if data['invoice'] == 'Dione' and data['set-invoice-to-partial'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--purple" id="invoice-status">Partial</strong></span>
-                  {% elif data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes' %}
-                  <span><strong class="nhsuk-tag nhsuk-tag--blue" id="invoice-status">Maintained</strong></span>
-                  {% elif data['invoice'] == 'Dione' and data['set-invoice-to-withdrawn'] == 'yes' %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--grey" id="invoice-status">Withdrawn</strong></span>
+                  {% set status = data.invoiceStatuses['Dione'] %}
+                  {% if status == 'Partial' %}
+                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                  {% elif status == 'Withdrawn' %}
+                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                  {% elif status == 'Maintained' %}
+                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
                   {% else %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--white">Contested</strong></span>
+                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">

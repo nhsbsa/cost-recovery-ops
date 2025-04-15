@@ -50,6 +50,9 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
 <!-- Your page content goes inside the content block -->
 <!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
 {% block content %}
+{% set invoice = data['invoice'] %}
+{% set status = data.invoiceStatuses[invoice] %}
+
 <div class="nhsBSA-sidebar-container">
     <div class="nhsBSA-sidebar-wrapper">
       <div class="nhsBSA-sidebar-content">
@@ -160,14 +163,134 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                           Invoice status
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['invoice'] == 'Jacqueline' and data ['set-invoice-to-withdrawn'] == 'yes' %}
+                          {% set status = data.invoiceStatuses['Jacqueline'] %}
+                          {% if status == 'Partial' %}
+                            Partial
+                          {% elif status == 'Withdrawn' %}
                             Withdrawn
+                          {% elif status == 'Maintained' %}
+                            Maintained
                           {% else %}
                             Contested
                           {% endif %}
                         </dd>
                       </div>
+
+
+                      {% if status == 'Withdrawn' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Source of withdrawal request</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['withdrawal-source'] %}
+                              {{ data['withdrawal-source'] }}
+                            {% else %}
+                              Member State
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Withdrawal reasons</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['reasons-to-withdraw-months'] %}
+                              {{ data['reasons-to-withdraw-months'] }}
+                            {% else %}
+                              Information requested updated
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        {% if 'Contestation after deadline' in data['reasons-to-withdraw-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date contestation received after deadline</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['date-contestation-received-after-deadline-day-withdraw'] and data['date-contestation-received-after-deadline-month-withdraw'] and data['date-contestation-received-after-deadline-year-withdraw'] %}
+                                {% set day = data['date-contestation-received-after-deadline-day-withdraw'] | int %}
+                                {% set month = data['date-contestation-received-after-deadline-month-withdraw'] | int %}
+                                {% set year = data['date-contestation-received-after-deadline-year-withdraw'] %}
+                    
+                                {% if day < 10 %}
+                                    {% set day = "0" ~ day %}
+                                {% endif %}
+                                
+                                {% if month < 10 %}
+                                    {% set month = "0" ~ month %}
+                                {% endif %}
+          
+                                {{ day }}/{{ month }}/{{ year }}
   
+                              {% else %}
+                                17/04/2026
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+                          {% if 'The person receives a pension in his/her state of residence, copy of the decision attached' in data['reasons-to-withdraw-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                            <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                              {% if data['date-state-pension-received-day-withdraw'] and data['date-state-pension-received-month-withdraw'] and data['date-state-pension-received-year-withdraw'] %}
+                                {% set day = data['date-state-pension-received-day-withdraw'] | int %}
+                                {% set month = data['date-state-pension-received-month-withdraw'] | int %}
+                                {% set year = data['date-state-pension-received-year-withdraw'] %}
+                    
+                                {% if day < 10 %}
+                                    {% set day = "0" ~ day %}
+                                {% endif %}
+                                
+                                {% if month < 10 %}
+                                    {% set month = "0" ~ month %}
+                                {% endif %}
+          
+                                {{ day }}/{{ month }}/{{ year }}
+          
+          
+                              {% else %}
+                                17/04/2026
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+                          {% if 'Other' in data['reasons-to-withdraw-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key" id="other-withdraw-reason-comments-label">Other reason comments</dt>
+                            <dd class="nhsuk-summary-list__value" id="other-withdraw-reason-comments-value">
+                              {% if data['other-withdraw-reason-comments'] %}
+                                {{ data['other-withdraw-reason-comments'] }}
+                              {% else %}
+                                Other withdraw reason explained here.
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Accounting period claimed</dt>
+                          <dd class="nhsuk-summary-list__value">01/01/2024 - 31/05/2024</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Total amount of withdrawn months</dt>
+                          <dd class="nhsuk-summary-list__value">5</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Initial months claimed</dt>
+                          <dd class="nhsuk-summary-list__value">5</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Previous months</dt>
+                          <dd class="nhsuk-summary-list__value">-</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Current months</dt>
+                          <dd class="nhsuk-summary-list__value">5</dd>
+                        </div>
+
+                      
+                      {% else %}
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
                           Months claimed
@@ -179,12 +302,13 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
   
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
-                          Accounting period
+                          Accounting period claimed
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           01/01/2024 - 31/05/2024
                         </dd>
                       </div>
+                      {% endif %}
                     </dl>
 
                 </div>
@@ -429,14 +553,122 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                           Invoice status
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['invoice'] == 'Jane' and data ['set-invoice-to-maintained'] == 'yes' %}
+                          {% set status = data.invoiceStatuses['Jane'] %}
+                          {% if status == 'Partial' %}
+                            Partial
+                          {% elif status == 'Withdrawn' %}
+                            Withdrawn
+                          {% elif status == 'Maintained' %}
                             Maintained
                           {% else %}
                             Contested
                           {% endif %}
                         </dd>
                       </div>
+
+                      {% if status == 'Maintained' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Maintain reasons</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['reasons-to-maintain-months'] %}
+                              {{ data['reasons-to-maintain-months'] }}
+                            {% else %}
+                              Information requested updated
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        {% if 'Contestation after deadline' in data['reasons-to-maintain-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date contestation received after deadline</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['date-contestation-received-after-deadline-day-maintain'] and data['date-contestation-received-after-deadline-month-maintain'] and data['date-contestation-received-after-deadline-year-maintain'] %}
+                                {% set day = data['date-contestation-received-after-deadline-day-maintain'] | int %}
+                                {% set month = data['date-contestation-received-after-deadline-month-maintain'] | int %}
+                                {% set year = data['date-contestation-received-after-deadline-year-maintain'] %}
+                    
+                                {% if day < 10 %}
+                                    {% set day = "0" ~ day %}
+                                {% endif %}
+                                
+                                {% if month < 10 %}
+                                    {% set month = "0" ~ month %}
+                                {% endif %}
+          
+                                {{ day }}/{{ month }}/{{ year }}
   
+                              {% else %}
+                                17/04/2026
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+                          {% if 'The person receives a pension in his/her state of residence, copy of the decision attached' in data['reasons-to-maintain-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                            <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                              {% if data['date-state-pension-received-day-maintain'] and data['date-state-pension-received-month-maintain'] and data['date-state-pension-received-year-maintain'] %}
+                                {% set day = data['date-state-pension-received-day-maintain'] | int %}
+                                {% set month = data['date-state-pension-received-month-maintain'] | int %}
+                                {% set year = data['date-state-pension-received-year-maintain'] %}
+                    
+                                {% if day < 10 %}
+                                    {% set day = "0" ~ day %}
+                                {% endif %}
+                                
+                                {% if month < 10 %}
+                                    {% set month = "0" ~ month %}
+                                {% endif %}
+          
+                                {{ day }}/{{ month }}/{{ year }}
+          
+          
+                              {% else %}
+                                17/04/2026
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+                          {% if 'Other' in data['reasons-to-maintain-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason comments</dt>
+                            <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
+                              {% if data['other-maintain-reason-comments'] %}
+                                {{ data['other-maintain-reason-comments'] }}
+                              {% else %}
+                                Other maintain reason explained here.
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Accounting period claimed</dt>
+                          <dd class="nhsuk-summary-list__value">05/10/2024 - 31/12/2024</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Initial months claimed</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Previous months</dt>
+                          <dd class="nhsuk-summary-list__value">-</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Current months</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                        </div>
+
+                      
+                      {% else %}
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
                           Months claimed
@@ -448,19 +680,20 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
   
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
-                          Accounting period
+                          Accounting period claimed
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           05/10/2024 - 31/12/2024
                         </dd>
                       </div>
+                      {% endif %}
                     </dl>
 
                 </div>
               </div>
 
             </div>
-              <!-- End of invoice details panel -->
+            <!-- End of resub details panel -->
 
             
             <!-- Start of Entitlement details panel -->
@@ -697,7 +930,12 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       Invoice status
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['invoice'] == 'John' and data ['set-invoice-to-maintained'] == 'yes' %}
+                      {% set status = data.invoiceStatuses['John'] %}
+                      {% if status == 'Partial' %}
+                        Partial
+                      {% elif status == 'Withdrawn' %}
+                        Withdrawn
+                      {% elif status == 'Maintained' %}
                         Maintained
                       {% else %}
                         Contested
@@ -705,31 +943,134 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                     </dd>
                   </div>
 
+                  {% if status == 'Maintained' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Maintain reasons</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['reasons-to-maintain-months'] %}
+                        {{ data['reasons-to-maintain-months'] }}
+                      {% else %}
+                        Information requested updated
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  {% if 'Contestation after deadline' in data['reasons-to-maintain-months'] %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Date contestation received after deadline</dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['date-contestation-received-after-deadline-day-maintain'] and data['date-contestation-received-after-deadline-month-maintain'] and data['date-contestation-received-after-deadline-year-maintain'] %}
+                          {% set day = data['date-contestation-received-after-deadline-day-maintain'] | int %}
+                          {% set month = data['date-contestation-received-after-deadline-month-maintain'] | int %}
+                          {% set year = data['date-contestation-received-after-deadline-year-maintain'] %}
+              
+                          {% if day < 10 %}
+                              {% set day = "0" ~ day %}
+                          {% endif %}
+                          
+                          {% if month < 10 %}
+                              {% set month = "0" ~ month %}
+                          {% endif %}
+    
+                          {{ day }}/{{ month }}/{{ year }}
+
+                        {% else %}
+                          17/04/2026
+                        {% endif %}
+                      </dd>
+                    </div>
+                    {% endif %}
+                    {% if 'The person receives a pension in his/her state of residence, copy of the decision attached' in data['reasons-to-maintain-months'] %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                      <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                        {% if data['date-state-pension-received-day-maintain'] and data['date-state-pension-received-month-maintain'] and data['date-state-pension-received-year-maintain'] %}
+                          {% set day = data['date-state-pension-received-day-maintain'] | int %}
+                          {% set month = data['date-state-pension-received-month-maintain'] | int %}
+                          {% set year = data['date-state-pension-received-year-maintain'] %}
+              
+                          {% if day < 10 %}
+                              {% set day = "0" ~ day %}
+                          {% endif %}
+                          
+                          {% if month < 10 %}
+                              {% set month = "0" ~ month %}
+                          {% endif %}
+    
+                          {{ day }}/{{ month }}/{{ year }}
+    
+    
+                        {% else %}
+                          17/04/2026
+                        {% endif %}
+                      </dd>
+                    </div>
+                    {% endif %}
+                    {% if 'Other' in data['reasons-to-maintain-months'] %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason comments</dt>
+                      <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
+                        {% if data['other-maintain-reason-comments'] %}
+                          {{ data['other-maintain-reason-comments'] }}
+                        {% else %}
+                          Other maintain reason explained here.
+                        {% endif %}
+                      </dd>
+                    </div>
+                    {% endif %}
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Accounting period claimed</dt>
+                      <dd class="nhsuk-summary-list__value">05/09/2024 - 31/12/2024</dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                      <dd class="nhsuk-summary-list__value">4</dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Initial months claimed</dt>
+                      <dd class="nhsuk-summary-list__value">4</dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Previous months</dt>
+                      <dd class="nhsuk-summary-list__value">-</dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Current months</dt>
+                      <dd class="nhsuk-summary-list__value">4</dd>
+                    </div>
+
+                  
+                  {% else %}
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">
                       Months claimed
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      4
+                      3
                     </dd>
                   </div>
 
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">
-                      Accounting period
+                      Accounting period claimed
                     </dt>
                     <dd class="nhsuk-summary-list__value">
                       05/09/2024 - 31/12/2024
                     </dd>
                   </div>
+                  {% endif %}
                 </dl>
 
             </div>
           </div>
 
         </div>
-          <!-- End of invoice details panel -->
-
+        <!-- End of resub details panel -->
         
         <!-- Start of Entitlement details panel -->
         <div class="nhsuk-grid-column-one-half">
@@ -966,14 +1307,284 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       Invoice status
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['invoice'] == 'Paul' and data ['set-invoice-to-partial'] == 'yes' %}
+                      {% set status = data.invoiceStatuses['Paul'] %}
+                      {% if status == 'Partial' %}
                         Partial
+                      {% elif status == 'Withdrawn' %}
+                        Withdrawn
+                      {% elif status == 'Maintained' %}
+                        Maintained
                       {% else %}
                         Contested
                       {% endif %}
                     </dd>
                   </div>
 
+                  {% if status == 'Partial' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="start-date-of-first-partially-maintained-month-label">Start date of first partially maintained month</dt>
+                    <dd class="nhsuk-summary-list__value" id="start-date-of-first-partially-maintained-month-value">
+                      {% if data['start-date-first-maintained-month-day'] and data['start-date-first-maintained-month-month'] and data['start-date-first-maintained-month-year'] %}
+                        {% set day = data['start-date-first-maintained-month-day'] | int %}
+                        {% set month = data['start-date-first-maintained-month-month'] | int %}
+                        {% set year = data['start-date-first-maintained-month-year'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+  
+                        {{ day }}/{{ month }}/{{ year }}
+  
+                                        
+                      {% else %}
+                        01/01/2024
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="end-date-of-last-partially-maintained-month-label">End date of last partially maintained month</dt>
+                    <dd class="nhsuk-summary-list__value" id="end-date-of-last-partially-maintained-month-value">
+                      {% if data['end-date-last-maintained-month-day'] and data['end-date-last-maintained-month-month'] and data['end-date-last-maintained-month-year'] %}
+                        {% set day = data['end-date-last-maintained-month-day'] | int %}
+                        {% set month = data['end-date-last-maintained-month-month'] | int %}
+                        {% set year = data['end-date-last-maintained-month-year'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+  
+                        {{ day }}/{{ month }}/{{ year }}
+  
+                                        
+                      {% else %}
+                        31/01/2024
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="total-number-of-partially-maintained-months-label">Total number of partially maintained months</dt>
+                    <dd class="nhsuk-summary-list__value" id="total-number-of-partially-maintained-months-value">
+                      {% if data['total-maintained-months'] %}
+                       {{ data['total-maintained-months'] }}
+                      {% else %}
+                        1
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reasons-to-partially-maintain-months-label">Reasons to partially maintain months</dt>
+                    <dd class="nhsuk-summary-list__value" id="reasons-to-partially-maintain-months-value">
+                      {% if data['reasons-to-partially-maintain-months'] %}
+                       {{ data['reasons-to-partially-maintain-months'] }}
+                      {% else %}
+                        Information requested updated
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% if data['reasons-to-partially-maintain-months'] == 'Contestation after deadline' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-label">Date contestation received after deadline</dt>
+                    <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-value">
+                      {% if data['date-contestation-received-after-deadline-day-partially-maintain'] and data['date-contestation-received-after-deadline-month-partially-maintain'] and data['date-contestation-received-after-deadline-year-partially-maintain'] %}
+                        {% set day = data['date-contestation-received-after-deadline-day-partially-maintain'] | int %}
+                        {% set month = data['date-contestation-received-after-deadline-month-partially-maintain'] | int %}
+                        {% set year = data['date-contestation-received-after-deadline-year-partially-maintain'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+  
+                        {{ day }}/{{ month }}/{{ year }}
+  
+                                        
+                      {% else %}
+                        17/04/2026
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% endif %}
+                  {% if data['reasons-to-partially-maintain-months'] == 'The person receives a pension in his/her state of residence, copy of the decision attached' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                    <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                      {% if data['date-state-pension-received-day-partially-maintain'] and data['date-state-pension-received-month-partially-maintain'] and data['date-state-pension-received-year-partially-maintain'] %}
+                        {% set day = data['date-state-pension-received-day-partially-maintain'] | int %}
+                        {% set month = data['date-state-pension-received-month-partially-maintain'] | int %}
+                        {% set year = data['date-state-pension-received-year-partially-maintain'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+  
+                        {{ day }}/{{ month }}/{{ year }}
+            
+                      {% else %}
+                        17/04/2026
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% endif %}
+                  {% if data['reasons-to-partially-maintain-months'] == 'Other' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="other-reason-to-partially-maintain-months-comments-label">Other reason comments</dt>
+                    <dd class="nhsuk-summary-list__value" id="other-reason-to-partially-maintain-months-comments-value">
+                      {% if data['other-partial-maintain-reason-comments'] %}
+                        {{ data['other-partial-maintain-reason-comments'] }}
+                      {% else %}
+                        Other partial maintain reason explained here.
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% endif %}
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="start-date-of-first-partially-withdrawn-month-label">Start date of first partially withdrawn month</dt>
+                    <dd class="nhsuk-summary-list__value" id="start-date-of-first-partially-withdrawn-month-value">01/02/2024</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="end-date-of-last-partially-withdrawn-month-label">End date of last partially withdrawn month</dt>
+                    <dd class="nhsuk-summary-list__value" id="end-date-of-last-partially-withdrawn-month-value">29/02/2024</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="total-number-of-partially-withdrawn-months-label">Total number of partially withdrawn months</dt>
+                    <dd class="nhsuk-summary-list__value" id="total-number-of-partially-withdrawn-months-value">
+                      {% if data['total-withdrawn-months'] %}
+                       {{ data['total-withdrawn-months'] }}
+                      {% else %}
+                        1
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="source-of-withdrawal-label">Source of withdrawal request</dt>
+                    <dd class="nhsuk-summary-list__value" id="source-of-withdrawal-value">
+                      {% if data['partial-withdrawal-source'] %}
+                       {{ data['partial-withdrawal-source'] }}
+                      {% else %}
+                        Member State
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reasons-to-partially-withdraw-months-label">Reasons to partially withdraw months</dt>
+                    <dd class="nhsuk-summary-list__value" id="reasons-to-partially-withdraw-months-value">
+                      {% if data['reasons-to-partially-withdraw-months'] %}
+                       {{ data['reasons-to-partially-withdraw-months'] }}
+                      {% else %}
+                        Information requested updated
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% if data['reasons-to-partially-withdraw-months'] == 'Contestation after deadline' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reasons-to-partially-withdraw-months-label">Date contestation received after deadline</dt>
+                    <dd class="nhsuk-summary-list__value" id="reasons-to-partially-withdraw-months-value">
+                      {% if data['date-contestation-received-after-deadline-day-partially-withdraw'] and data['date-contestation-received-after-deadline-month-partially-withdraw'] and data['date-contestation-received-after-deadline-year-partially-withdraw'] %}
+                        {% set day = data['date-contestation-received-after-deadline-day-partially-withdraw'] | int %}
+                        {% set month = data['date-contestation-received-after-deadline-month-partially-withdraw'] | int %}
+                        {% set year = data['date-contestation-received-after-deadline-year-partially-withdraw'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+  
+                        {{ day }}/{{ month }}/{{ year }}
+                        
+                        
+                      {% else %}
+                        17/04/2026
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% endif %}
+                  {% if data['reasons-to-partially-withdraw-months'] == 'The person receives a pension in his/her state of residence, copy of the decision attached' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                    <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                      {% if data['date-state-pension-received-day-partially-withdraw'] and data['date-state-pension-received-month-partially-withdraw'] and data['date-state-pension-received-year-partially-withdraw'] %}
+                        {% set day = data['date-state-pension-received-day-partially-withdraw'] | int %}
+                        {% set month = data['date-state-pension-received-month-partially-withdraw'] | int %}
+                        {% set year = data['date-state-pension-received-year-partially-withdraw'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+  
+                        {{ day }}/{{ month }}/{{ year }}
+  
+  
+                      {% else %}
+                        17/04/2026
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% endif %}
+                  {% if data['reasons-to-partially-withdraw-months'] == 'Other' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="other-partial-withdraw-reason-comments-label">Other reason comments</dt>
+                    <dd class="nhsuk-summary-list__value" id="other-partial-withdraw-reason-comments-value">
+                      {% if data['other-partial-withdraw-reason-comments'] %}
+                        {{ data['other-partial-withdraw-reason-comments'] }}
+                      {% else %}
+                        Other partial withdraw reason explained here.
+                      {% endif %}
+                    </dd>
+                  </div>
+                  {% endif %}
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Accounting period claimed</dt>
+                    <dd class="nhsuk-summary-list__value">01/01/2024 - 29/02/2024</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Initial months claimed</dt>
+                    <dd class="nhsuk-summary-list__value">2</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Previous months</dt>
+                    <dd class="nhsuk-summary-list__value">-</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Current months</dt>
+                    <dd class="nhsuk-summary-list__value">1</dd>
+                  </div>
+
+                      
+                  {% else %}
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">
                       Months claimed
@@ -985,19 +1596,20 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
 
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">
-                      Accounting period
+                      Accounting period claimed
                     </dt>
                     <dd class="nhsuk-summary-list__value">
                       01/01/2024 - 29/02/2024
                     </dd>
                   </div>
+                  {% endif %}
                 </dl>
 
             </div>
           </div>
 
         </div>
-          <!-- End of invoice details panel -->
+        <!-- End of invoice details panel -->
 
         
         <!-- Start of Entitlement details panel -->
@@ -1236,38 +1848,158 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       Invoice status
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['invoice'] == 'Sophie' and data ['set-invoice-to-withdrawn'] == 'yes' %}
+                      {% set status = data.invoiceStatuses['Sophie'] %}
+                      {% if status == 'Partial' %}
+                        Partial
+                      {% elif status == 'Withdrawn' %}
                         Withdrawn
+                      {% elif status == 'Maintained' %}
+                        Maintained
                       {% else %}
                         Contested
                       {% endif %}
                     </dd>
                   </div>
 
+                  {% if status == 'Withdrawn' %}
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Months claimed
-                    </dt>
+                    <dt class="nhsuk-summary-list__key">Source of withdrawal request</dt>
                     <dd class="nhsuk-summary-list__value">
-                      9
+                      {% if data['withdrawal-source'] %}
+                        {{ data['withdrawal-source'] }}
+                      {% else %}
+                        Member State
+                      {% endif %}
                     </dd>
                   </div>
 
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key">
-                      Accounting period
-                    </dt>
+                    <dt class="nhsuk-summary-list__key">Withdrawl reasons</dt>
                     <dd class="nhsuk-summary-list__value">
-                      01/01/2024 - 30/09/2024
+                      {% if data['reasons-to-withdraw-months'] %}
+                        {{ data['reasons-to-withdraw-months'] }}
+                      {% else %}
+                        Information requested updated
+                      {% endif %}
                     </dd>
                   </div>
-                </dl>
 
-            </div>
+                  {% if 'Contestation after deadline' in data['reasons-to-withdraw-months'] %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Date contestation received after deadline</dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['date-contestation-received-after-deadline-day-withdraw'] and data['date-contestation-received-after-deadline-month-withdraw'] and data['date-contestation-received-after-deadline-year-withdraw'] %}
+                          {% set day = data['date-contestation-received-after-deadline-day-withdraw'] | int %}
+                          {% set month = data['date-contestation-received-after-deadline-month-withdraw'] | int %}
+                          {% set year = data['date-contestation-received-after-deadline-year-withdraw'] %}
+              
+                          {% if day < 10 %}
+                              {% set day = "0" ~ day %}
+                          {% endif %}
+                          
+                          {% if month < 10 %}
+                              {% set month = "0" ~ month %}
+                          {% endif %}
+    
+                          {{ day }}/{{ month }}/{{ year }}
+
+                        {% else %}
+                          17/04/2026
+                        {% endif %}
+                      </dd>
+                    </div>
+                    {% endif %}
+                    {% if 'The person receives a pension in his/her state of residence, copy of the decision attached' in data['reasons-to-withdraw-months'] %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                      <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                        {% if data['date-state-pension-received-day-withdraw'] and data['date-state-pension-received-month-withdraw'] and data['date-state-pension-received-year-withdraw'] %}
+                          {% set day = data['date-state-pension-received-day-withdraw'] | int %}
+                          {% set month = data['date-state-pension-received-month-withdraw'] | int %}
+                          {% set year = data['date-state-pension-received-year-withdraw'] %}
+              
+                          {% if day < 10 %}
+                              {% set day = "0" ~ day %}
+                          {% endif %}
+                          
+                          {% if month < 10 %}
+                              {% set month = "0" ~ month %}
+                          {% endif %}
+    
+                          {{ day }}/{{ month }}/{{ year }}
+    
+    
+                        {% else %}
+                          17/04/2026
+                        {% endif %}
+                      </dd>
+                    </div>
+                    {% endif %}
+                    {% if 'Other' in data['reasons-to-withdraw-months'] %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="other-withdraw-reason-comments-label">Other reason comments</dt>
+                      <dd class="nhsuk-summary-list__value" id="other-withdraw-reason-comments-value">
+                        {% if data['other-withdraw-reason-comments'] %}
+                          {{ data['other-withdraw-reason-comments'] }}
+                        {% else %}
+                          Other withdraw reason explained here.
+                        {% endif %}
+                      </dd>
+                    </div>
+                    {% endif %}
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Accounting period claimed</dt>
+                    <dd class="nhsuk-summary-list__value">01/01/2024 - 30/09/2024</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Total amount of withdrawn months</dt>
+                    <dd class="nhsuk-summary-list__value">9</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Initial months claimed</dt>
+                    <dd class="nhsuk-summary-list__value">9</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Previous months</dt>
+                    <dd class="nhsuk-summary-list__value">-</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Current months</dt>
+                    <dd class="nhsuk-summary-list__value">9</dd>
+                  </div>
+
+                
+                {% else %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                    Months claimed
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                    9
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                    Accounting period claimed
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                    01/01/2024 - 30/09/2024
+                  </dd>
+                </div>
+                {% endif %}
+              </dl>
+
           </div>
-
         </div>
-          <!-- End of invoice details panel -->
+
+      </div>
+    <!-- End of invoice details panel -->
 
         
         <!-- Start of Entitlement details panel -->
@@ -1505,7 +2237,12 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                   Invoice status
                 </dt>
                 <dd class="nhsuk-summary-list__value">
-                  {% if data['invoice'] == 'Dione' and data ['set-invoice-to-maintained'] == 'yes' %}
+                  {% set status = data.invoiceStatuses['Dione'] %}
+                  {% if status == 'Partial' %}
+                    Partial
+                  {% elif status == 'Withdrawn' %}
+                    Withdrawn
+                  {% elif status == 'Maintained' %}
                     Maintained
                   {% else %}
                     Contested
@@ -1513,31 +2250,134 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                 </dd>
               </div>
 
+              {% if status == 'Maintained' %}
               <div class="nhsuk-summary-list__row">
-                <dt class="nhsuk-summary-list__key">
-                  Months claimed
-                </dt>
+                <dt class="nhsuk-summary-list__key">Maintain reasons</dt>
                 <dd class="nhsuk-summary-list__value">
-                  9
+                  {% if data['reasons-to-maintain-months'] %}
+                    {{ data['reasons-to-maintain-months'] }}
+                  {% else %}
+                    Information requested updated
+                  {% endif %}
                 </dd>
               </div>
 
-              <div class="nhsuk-summary-list__row">
-                <dt class="nhsuk-summary-list__key">
-                  Accounting period
-                </dt>
-                <dd class="nhsuk-summary-list__value">
-                  01/01/2024 - 30/09/2024
-                </dd>
-              </div>
-            </dl>
+              {% if 'Contestation after deadline' in data['reasons-to-maintain-months'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Date contestation received after deadline</dt>
+                  <dd class="nhsuk-summary-list__value">
+                    {% if data['date-contestation-received-after-deadline-day-maintain'] and data['date-contestation-received-after-deadline-month-maintain'] and data['date-contestation-received-after-deadline-year-maintain'] %}
+                      {% set day = data['date-contestation-received-after-deadline-day-maintain'] | int %}
+                      {% set month = data['date-contestation-received-after-deadline-month-maintain'] | int %}
+                      {% set year = data['date-contestation-received-after-deadline-year-maintain'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
 
+                      {{ day }}/{{ month }}/{{ year }}
+
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                  </dd>
+                </div>
+                {% endif %}
+                {% if 'The person receives a pension in his/her state of residence, copy of the decision attached' in data['reasons-to-maintain-months'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                    {% if data['date-state-pension-received-day-maintain'] and data['date-state-pension-received-month-maintain'] and data['date-state-pension-received-year-maintain'] %}
+                      {% set day = data['date-state-pension-received-day-maintain'] | int %}
+                      {% set month = data['date-state-pension-received-month-maintain'] | int %}
+                      {% set year = data['date-state-pension-received-year-maintain'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+
+
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                  </dd>
+                </div>
+                {% endif %}
+                {% if 'Other' in data['reasons-to-maintain-months'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason comments</dt>
+                  <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
+                    {% if data['other-maintain-reason-comments'] %}
+                      {{ data['other-maintain-reason-comments'] }}
+                    {% else %}
+                      Other maintain reason explained here.
+                    {% endif %}
+                  </dd>
+                </div>
+                {% endif %}
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Accounting period claimed</dt>
+                  <dd class="nhsuk-summary-list__value">01/01/2024 - 30/09/2024</dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                  <dd class="nhsuk-summary-list__value">9</dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Initial months claimed</dt>
+                  <dd class="nhsuk-summary-list__value">9</dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Previous months</dt>
+                  <dd class="nhsuk-summary-list__value">-</dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Current months</dt>
+                  <dd class="nhsuk-summary-list__value">9</dd>
+                </div>
+
+              
+                {% else %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                    Months claimed
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                    9
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                    Accounting period claimed
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                    01/01/2024 - 30/09/2024
+                  </dd>
+                </div>
+                {% endif %}
+              </dl>
+
+          </div>
         </div>
+
       </div>
-
-    </div>
-      <!-- End of invoice details panel -->
-
+      <!-- End of resub details panel -->
     
     <!-- Start of Entitlement details panel -->
     <div class="nhsuk-grid-column-one-half">

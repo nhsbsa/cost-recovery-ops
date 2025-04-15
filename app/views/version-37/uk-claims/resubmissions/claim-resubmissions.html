@@ -53,32 +53,33 @@ UK claim ID 100005 - Resubmissions
 
             
 
-            {% if data['assigned-for-peer-review'] == 'yes' %}
-            <div>
-              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                 <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Resub assigned for peer review</span>
-                 </div>
-                 <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Resub 7799709 has been assigned to nina.evans@nhsbsa.nhs.uk.</span>
-                 </div>
+            
+            {% if data['resubStatus'] == 'invoices-added-to-resub' %}
+              <div>
+                <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+                  <div class="govuk-notification-banner__header">
+                    <span class="govuk-notification-banner__title">Selected invoices added to resub 7790992</span>
+                  </div>
+                  <div class="govuk-notification-banner__content">
+                    <span class="govuk-notification-banner__heading big-text-wrap">Invoices linked to the resub are set to contested status.</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            {% elif data['resubStatus'] == 'assigned-for-review' %}
+              <div>
+                <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+                  <div class="govuk-notification-banner__header">
+                    <span class="govuk-notification-banner__title">Resub assigned for peer review</span>
+                  </div>
+                  <div class="govuk-notification-banner__content">
+                    <span class="govuk-notification-banner__heading big-text-wrap">Resub 7799709 has been assigned to nina.evans@nhsbsa.nhs.uk.</span>
+                  </div>
+                </div>
+              </div>
             {% endif %}
 
-            
-            {% if data['add-selected-invoices-to-resubmission'] == 'yes' %}
-            <div>
-              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                 <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Selected invoices added to resub 7790992</span>
-                 </div>
-                 <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Invoices linked to the resub are set to contested status.</span>
-                 </div>
-              </div>
-            </div>
-            {% endif %}
+
+
             
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-full">
@@ -208,76 +209,73 @@ UK claim ID 100005 - Resubmissions
         
             {% if data['create-new-resub'] == 'yes' %}
             <!-- TABLE START -->
-            <table role="table" id="resubmissionsTable" class="nhsuk-table-responsive">
-              <thead role="rowgroup" class="nhsuk-table__head" id="resubmissions">
-                <tr role="row">
-                  <th role="columnheader" scope="col">Resubmission ID</th>
-                  <th role="columnheader" scope="col">Deadline to reply</th>
-                  <th role="columnheader" scope="col">Assigned to</th>
-                  <th role="columnheader" scope="col">Peer reviewed by</th>
-                  <th role="columnheader" scope="col">Status</th>
-                  <th role="columnheader" scope="col">Action</th>
+            <table role="table" class="nhsuk-table-responsive" id="resubmissionsTable">
+              <thead class="nhsuk-table__head">
+                <tr class="nhsuk-table__row">
+                  <th scope="col" class="nhsuk-table__header">Resubmission ID</th>
+                  <th scope="col" class="nhsuk-table__header">Deadline to reply</th>
+                  <th scope="col" class="nhsuk-table__header">Assigned to</th>
+                  <th scope="col" class="nhsuk-table__header">Peer reviewed by</th>
+                  <th scope="col" class="nhsuk-table__header">Status</th>
+                  <th scope="col" class="nhsuk-table__header">Action</th>
                 </tr>
               </thead>
 
               <tbody class="nhsuk-table__body">
-                <tr role="row" class="nhsuk-table__row">
-                  <td role="cell" class="nhsuk-table__cell">
-                    <span class="nhsuk-table-responsive__heading">Resubmission ID</span>
-                    <span>7790992</span>
-                  </td>
-                  <td role="cell" class="nhsuk-table__cell">
-                    <span class="nhsuk-table-responsive__heading">Reply deadline</span>
-                    <span>07/04/2026</span>
-                  </td>
-                  <td role="cell" class="nhsuk-table__cell">
-                    <span class="nhsuk-table-responsive__heading">Assigned to</span>
-                    <span>joe.bloggs@nhsbsa.nhs.uk</span>
-                  </td>
-                  <td role="cell" class="nhsuk-table__cell">
-                    <span class="nhsuk-table-responsive__heading">Peer reviewed by</span>
-                    {% if (
-                      (data['invoice'] == 'Jacqueline' and data['set-invoice-to-withdrawn'] == 'yes') and
-                      (data['invoice'] == 'Jane' and data['set-invoice-to-maintained'] == 'yes') and
-                      (data['invoice'] == 'John' and data['set-invoice-to-maintained'] == 'yes') and
-                      (data['invoice'] == 'Paul' and data['set-invoice-to-partial'] == 'yes') and
-                      (data['invoice'] == 'Sophie' and data['set-invoice-to-withdrawn'] == 'yes') and
-                      (data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes')
-                    ) %}
-                      <span class="nhsuk-table-responsive__heading">Peer reviewed by</span>
-                      <span><a href="claim-resubmissions?assigned-for-peer-review=yes"></a>Assign to me</span>
+                <tr class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell" data-label="Resubmission ID">7790992</td>
+                  <td class="nhsuk-table__cell" data-label="Deadline to reply">07/04/2026</td>
+                  <td class="nhsuk-table__cell" data-label="Assigned to">joe.bloggs@nhsbsa.nhs.uk</td>
+
+                  <td class="nhsuk-table__cell" data-label="Peer reviewed by">
+                    {% if data.resubStatus == 'peer-review-requested' %}
+                      <a href="claim-resubmissions?resubStatus=assigned-for-review">Assign to me</a>
+                    {% elif data.resubStatus == 'assigned-for-review' or data.resubStatus == 'peer-reviewed' %}
+                      nina.evans@nhsbsa.nhs.uk
                     {% else %}
-                      <span>-</span>
+                      -
                     {% endif %}
                   </td>
-                  <td role="cell" class="nhsuk-table__cell">
-                    <span class="nhsuk-table-responsive__heading">Status</span>
-                    {% if data['assigned-for-peer-review'] == 'yes' %}
-                    <span><strong class="nhsuk-tag nhsuk-tag--white">Under review</strong></span>
-                    {% elif (
-                        (data['invoice'] == 'Jacqueline' and data['set-invoice-to-withdrawn'] == 'yes') and
-                        (data['invoice'] == 'Jane' and data['set-invoice-to-maintained'] == 'yes') and
-                        (data['invoice'] == 'John' and data['set-invoice-to-maintained'] == 'yes') and
-                        (data['invoice'] == 'Paul' and data['set-invoice-to-partial'] == 'yes') and
-                        (data['invoice'] == 'Sophie' and data['set-invoice-to-withdrawn'] == 'yes') and
-                        (data['invoice'] == 'Dione' and data['set-invoice-to-maintained'] == 'yes')
-                      ) %}
-                      <span><strong class="nhsuk-tag nhsuk-tag--green">To review</strong></span>
-                    {% elif data['add-selected-invoices-to-resubmission'] == 'yes' %}
-                      <span><strong class="nhsuk-tag nhsuk-tag--green">In progress</strong></span>
+
+                  <td class="nhsuk-table__cell" data-label="Status">
+                    {% if data.resubStatus == 'resubmission-completed' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">Complete</strong>
+                    {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong>
+                    {% elif data.resubStatus == 'peer-reviewed' %}
+                      <strong class="nhsuk-tag nhsuk-tag--blue">Ready to send</strong>
+                    {% elif data.resubStatus == 'assigned-for-review' %}
+                      <strong class="nhsuk-tag nhsuk-tag--white">Under review</strong>
+                    {% elif data.resubStatus == 'peer-review-requested' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">To review</strong>
+                    {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                    {% elif data.resubStatus == 'invoices-added-to-resub' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
                     {% else %}
-                      <span><strong class="nhsuk-tag nhsuk-tag--grey">To action</strong></span>
+                      <strong class="nhsuk-tag nhsuk-tag--grey">To action</strong>
                     {% endif %}
                   </td>
-                                   
-                  <td role="cell" class="nhsuk-table__cell">
-                    <span class="nhsuk-table-responsive__heading">Action</span>
-                    {% if data['assigned-for-peer-review'] == 'yes' %}
-                      <span><a href="invoices-within-resubmission">View invoices</a><span class="nhsuk-u-visually-hidden">to resub ID 7790992</span></span>
-                    {% elif data['add-selected-invoices-to-resubmission'] == 'yes' %}
-                      <span><a href="invoices-within-resubmission">Review invoices</a><span class="nhsuk-u-visually-hidden">to resub ID 7790992</span></span>
+
+                  <td class="nhsuk-table__cell" data-label="Action">
+                    {% if data.resubStatus == 'resubmission-completed' %}
+                      <a href="invoices-within-resubmission">View invoices</a>
+                    {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
+                      <a href="invoices-within-resubmission">View invoices</a>
+                    {% elif data.resubStatus == 'peer-reviewed' %}
+                      <a href="invoices-within-resubmission">View invoices</a>
+                    {% elif data.resubStatus == 'assigned-for-review' %}
+                      <a href="invoices-within-resubmission">Review invoices</a>
+                    {% elif data.resubStatus == 'peer-review-requested' %}
+                      <a href="invoices-within-resubmission">View invoices</a>
+                    {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                      <a href="invoices-within-resubmission">View invoices</a>
+                    {% elif data.resubStatus == 'invoices-added-to-resub' %}
+                      <a href="invoices-within-resubmission">Review invoices</a>
+                    {% elif data.resubStatus != 'peer-reviewed' and data.resubStatus != 'peer-review-requested' %}
+                      <a href="add-invoices-to-resubmission">Add invoices</a>
                     {% else %}
-                      <span><a href="add-invoices-to-resubmission">Add invoices</a><span class="nhsuk-u-visually-hidden">to resub ID 7790992</span></span>
+                      -
                     {% endif %}
                   </td>
                 </tr>
@@ -287,6 +285,8 @@ UK claim ID 100005 - Resubmissions
           {% else %}
             <p><b>No resubmissions have been created.</b></p>
           {% endif %}
+
+
 
 
           </form>
