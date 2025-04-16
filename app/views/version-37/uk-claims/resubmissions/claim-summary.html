@@ -219,7 +219,7 @@ UK claim ID 100005 - Claim summary
 
               <br>
 
-              {% if data.resubStatus == 'invoices-added-to-resub' %}
+              {% if showResubSummary %}
               <h2 class="nhsuk-heading-m">Resub running total</h2>
               <!-- Bottom-left card content begins -->
               <div class="nhsuk-card">
@@ -238,7 +238,21 @@ UK claim ID 100005 - Claim summary
                         Status of claim
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        To review
+                        {% if data.resubStatus == 'resubmission-completed' %}
+                          Complete
+                        {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
+                          Sent to DH
+                        {% elif data.resubStatus == 'peer-reviewed' %}
+                          Ready to send
+                        {% elif data.resubStatus == 'assigned-for-review' %}
+                          Under review
+                        {% elif data.resubStatus == 'peer-review-requested' %}
+                          To review
+                        {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                          In progress
+                        {% else %}
+                          In progress
+                        {% endif %}
                       </dd>
                     </div>
                     <div class="nhsuk-summary-list__row">

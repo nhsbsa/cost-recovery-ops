@@ -194,6 +194,9 @@ function allInvoicesHaveStatus(statuses, expectedCount) {
 
 
 router.get([/claim-summary/], function(req, res) {
+
+  const showResubSummary = req.session.data.showResubSummary;
+
   const statuses = req.session.data.invoiceStatuses || {};
   const months = {
     maintained: 0,
@@ -226,7 +229,8 @@ router.get([/claim-summary/], function(req, res) {
     maintainedMonths: months.maintained, // Maintained months should not include Paul's partials
     withdrawnMonths: months.withdrawn, // Withdrawn months should not include Paul's partials
     partialMaintainedMonths: partialMaintained,
-    partialWithdrawnMonths: partialWithdrawn
+    partialWithdrawnMonths: partialWithdrawn,
+    showResubSummary
   });
 });
 
@@ -268,6 +272,9 @@ router.post([/create-new-resubmission/], function(req, res) {
 router.post([/check-invoices-added-to-resubmission/], function(req, res) {
   // Update session to reflect that invoices are added
   req.session.data.resubStatus = 'invoices-added-to-resub';
+
+  // Flag to always show resub summary after this point
+  req.session.data.showResubSummary = true;
 
   // Redirect to the resubmission page
   res.redirect('/version-37/uk-claims/resubmissions/claim-resubmissions');
@@ -605,18 +612,42 @@ router.get([/invoices-within-resubmission/], function (req, res) {
   });
 });
 
-router.get([/]invoice-details/], function(req, res) {
+router.get([/invoice-details/], function(req, res) {
   res.render('version-37/uk-claims/resubmissions/invoice-details', {
     data: req.session.data
   });
 });
 
-
 // Pull through the input data onto the cya screen
 router.get([/resubmission-summary/], function(req, res) {
+  const data = req.session.data;
+
+  // Safety check to ensure status is at least "ready"
+  const statuses = data.invoiceStatuses || {};
+  const invoiceList = ['Jane', 'John', 'Dione', 'Jacqueline', 'Sophie', 'Paul'];
+
+  const allReviewed = Object.keys(statuses).length === invoiceList.length &&
+                      Object.values(statuses).every(status => status !== '');
+
+  if (allReviewed && (!data.resubStatus || data.resubStatus === 'invoices-added-to-resub')) {
+    data.resubStatus = 'ready-to-send-for-peer-review';
+  }
+
   res.render('version-37/uk-claims/resubmissions/resubmission-summary', {
-    data: req.session.data
+    data
   });
+});
+
+
+
+// Upload new evidence for invoice
+router.post([/invoice-upload-evidence/], function(req, res) {
+  
+   // Conditional flag to track if evidence has been uploaded
+   req.session.data['upload-new-evidence'] = 'yes';
+
+  // Redirect to the resubmission page
+  res.redirect('/version-37/uk-claims/resubmissions/invoice-evidence');
 });
 
 module.exports = router;
