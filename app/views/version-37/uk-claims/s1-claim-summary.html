@@ -244,7 +244,1167 @@ UK claim ID 123456 - Claim summary
             <!-- Left panel ends -->
             <!-- End of actual costs -->
 
-          {% else %}
+          {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a' %}
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-summary">Claim summary</a>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 654321</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-forms">Invoices</a>
+                <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
+              </li>
+
+              <!--li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                <span class="nhsuk-u-visually-hidden">View the age groups for claim 654321</span>
+              </li-->
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-history">Claim history</a>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 654321</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+          
+
+          {% if data['claim-age-bracket'] == '65 years and over' and (data['claim-type'] == 'Main' or data['claim-type'] == 'Supplemental') %}
+          <!-- Beginning of claim age bracket 65 years and over content for Main or Supplemental claim -->
+          <div class="nhsuk-grid-row">
+            <!-- Left panel begins -->
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  <dl class="nhsuk-summary-list">
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Year claim generated
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        2025
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Year of claim
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['year-of-claim'] %}
+                          {{ data['year-of-claim'] }}
+                        {% else %}
+                          2024
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Claim type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['claim-type'] %}
+                          {{ data['claim-type'] }}
+                        {% else %}
+                          Main
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Article type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['entitlement-article-type'] %}
+                          {{ data['entitlement-article-type'] }}
+                        {% else %}
+                          Article 63, 2.a
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Age bracket
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        65 years and over
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Country
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['entitlement-country'] %}
+                          {{ data['entitlement-country'] }}
+                        {% else %}
+                          France (FR)
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total number of invoices
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        34
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total months to be claimed
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        162
+                      </dd>
+                    </div>
+                    
+                    
+                    <!--br>
+
+
+                    <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total number of invoices
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        34
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total months claimed
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        162
+                      </dd>
+                    </div-->
+
+                  </dl>
+
+                </div>
+              </div>
+
+              <!-- Bottom-left card content begins -->
+              <!--div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total months claimed
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      162
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Accepted months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Maintained months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Withdrawn months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                </dl>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Partially accepted
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Partially withdrawn
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                </dl>
+                
+                </div>
+              </div-->
+              <!-- Bottom-left card content ends -->
+
+            </div>
+            <!-- End of claim age bracket 65 years and over content for Main or Supplemental claim -->
+
+            {% elif data['claim-age-bracket'] == '65 years and over' and data['claim-type'] == 'Retroactive' %}
+          <!-- Beginning of claim age bracket 65 years and over content for Retroactive claim -->
+          <div class="nhsuk-grid-row">
+            <!-- Left panel begins -->
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  <dl class="nhsuk-summary-list">
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Year claim generated
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        2025
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Year of claim
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['year-of-claim'] %}
+                          {{ data['year-of-claim'] }}
+                        {% else %}
+                          2019
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Claim type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Retroactive
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Article type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['entitlement-article-type'] %}
+                          {{ data['entitlement-article-type'] }}
+                        {% else %}
+                          Article 63, 2.a
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Age bracket
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        65 years and over
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Country
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['entitlement-country'] %}
+                          {{ data['entitlement-country'] }}
+                        {% else %}
+                          France (FR)
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total number of invoices
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        11
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total months to be claimed
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        54
+                      </dd>
+                    </div>
+                    
+                    
+                    <!--br>
+
+
+                    <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total number of invoices
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        11
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total months claimed
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        54
+                      </dd>
+                    </div-->
+
+                  </dl>
+
+                </div>
+              </div>
+
+              <!-- Bottom-left card content begins -->
+              <!--div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total months claimed
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      162
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Accepted months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Maintained months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Withdrawn months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                </dl>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Partially accepted
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Partially withdrawn
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                </dl>
+                
+                </div>
+              </div-->
+              <!-- Bottom-left card content ends -->
+
+            </div>
+            <!-- End of claim age bracket 65 years and over content for Retroactive claim -->
+            
+            {% elif data['claim-age-bracket'] == '20 to 64 years' and (data['claim-type'] == 'Main' or data['claim-type'] == 'Supplemental') %}
+            <!-- Beginning of claim age bracket 20 to 64 years content -->
+            <div class="nhsuk-grid-row">
+              <!-- Left panel begins -->
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Year claim generated
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          2025
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Year of claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['year-of-claim'] %}
+                            {{ data['year-of-claim'] }}
+                          {% else %}
+                            2019
+                          {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Claim type
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['claim-type'] %}
+                            {{ data['claim-type'] }}
+                          {% else %}
+                            Main
+                          {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Article type
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['entitlement-article-type'] %}
+                            {{ data['entitlement-article-type'] }}
+                          {% else %}
+                            Article 63, 2.a
+                          {% endif %}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Age bracket
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          20 to 64 years
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Country
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['entitlement-country'] %}
+                            {{ data['entitlement-country'] }}
+                          {% else %}
+                            France (FR)
+                          {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total number of invoices
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          18
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total months claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          108
+                        </dd>
+                      </div>
+
+
+                      <!--br>
+  
+  
+                      <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total number of invoices
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          18
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total months to be claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          108
+                        </dd>
+                      </div-->
+  
+                    </dl>
+  
+                  
+                  </dl>
+
+                </div>
+              </div>
+
+              <!-- Bottom-left card content begins -->
+              <!--div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total months claimed
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      108
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Accepted months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Maintained months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Withdrawn months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                </dl>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Partially accepted
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Partially withdrawn
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                </dl>
+                
+                </div>
+              </div-->
+              <!-- Bottom-left card content ends -->
+
+            </div>
+              <!-- End of claim age bracket 20 to 64 years content for Main or Supplemental claim -->
+
+            {% elif data['claim-age-bracket'] == '20 to 64 years' and data['claim-type'] == 'Retroactive' %}
+            <!-- Beginning of claim age bracket 20 to 64 years content -->
+            <div class="nhsuk-grid-row">
+              <!-- Left panel begins -->
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Year claim generated
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          2025
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Year of claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['year-of-claim'] %}
+                            {{ data['year-of-claim'] }}
+                          {% else %}
+                            2019
+                          {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Claim type
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Retroactive
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Article type
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['entitlement-article-type'] %}
+                            {{ data['entitlement-article-type'] }}
+                          {% else %}
+                            Article 63, 2.a
+                          {% endif %}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Age bracket
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          20 to 64 years
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Country
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['entitlement-country'] %}
+                            {{ data['entitlement-country'] }}
+                          {% else %}
+                            France (FR)
+                          {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total number of invoices
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          6
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total months claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          36
+                        </dd>
+                      </div>
+
+
+                      <!--br>
+  
+  
+                      <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total number of invoices
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          18
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total months to be claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          108
+                        </dd>
+                      </div-->
+  
+                    </dl>
+  
+                  
+                  </dl>
+
+                </div>
+              </div>
+
+              <!-- Bottom-left card content begins -->
+              <!--div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Total months claimed
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      108
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Accepted months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Maintained months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Withdrawn months
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                </dl>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Partially accepted
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Partially withdrawn
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      -
+                    </dd>
+                  </div>
+                </dl>
+                
+                </div>
+              </div-->
+              <!-- Bottom-left card content ends -->
+
+            </div>
+              <!-- End of claim age bracket 20 to 64 years content for Retroactive claim -->
+
+              {% elif data['claim-age-bracket'] == '0 to 19 years' and (data['claim-type'] == 'Main' or data['claim-type'] == 'Supplemental') %}
+              <!-- Beginning of claim age bracket 0 to 19 years content for Main or Supplemental claim -->
+              <div class="nhsuk-grid-row">
+                <!-- Left panel begins -->
+                <div class="nhsuk-grid-column-one-half">
+                  <div class="nhsuk-card">
+                    <div class="nhsuk-card__content">
+                      <dl class="nhsuk-summary-list">
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Year claim generated
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            2025
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Year of claim
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['year-of-claim'] %}
+                              {{ data['year-of-claim'] }}
+                            {% else %}
+                              2024
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Claim type
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['claim-type'] %}
+                              {{ data['claim-type'] }}
+                            {% else %}
+                              Main
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Article type
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['entitlement-article-type'] %}
+                              {{ data['entitlement-article-type'] }}
+                            {% else %}
+                              Article 63, 2.a
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Age bracket
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            0 to 19 years
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Country
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['entitlement-country'] %}
+                              {{ data['entitlement-country'] }}
+                            {% else %}
+                              France (FR)
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Total number of invoices
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            9
+                          </dd>
+                        </div>
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Total months to be claimed
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            54
+                          </dd>
+                        </div>
+
+
+                        <!--br>
+
+
+                        <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Total number of invoices
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            9
+                          </dd>
+                        </div>
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Total months claimed
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            54
+                          </dd>
+                        </div-->
+
+                      </dl>
+
+                    </div>
+                  </div>
+
+                  <!-- Bottom-left card content begins -->
+                  <!--div class="nhsuk-card">
+                    <div class="nhsuk-card__content">
+                      <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total months claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          54
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Accepted months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Maintained months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Withdrawn months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Partially accepted
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Partially withdrawn
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                    </dl>
+                    
+                    </div>
+                  </div-->
+                  <!-- Bottom-left card content ends -->
+
+                </div>
+                <!-- End of claim age bracket 0 to 19 years content for Main or Supplemental claim -->
+              
+                {% else %}
+              <!-- Beginning of claim age bracket 0 to 19 years content for Retroactive claim -->
+              <div class="nhsuk-grid-row">
+                <!-- Left panel begins -->
+                <div class="nhsuk-grid-column-one-half">
+                  <div class="nhsuk-card">
+                    <div class="nhsuk-card__content">
+                      <dl class="nhsuk-summary-list">
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Year claim generated
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            2025
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Year of claim
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['year-of-claim'] %}
+                              {{ data['year-of-claim'] }}
+                            {% else %}
+                              2019
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Claim type
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            Retroactive
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Article type
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['entitlement-article-type'] %}
+                              {{ data['entitlement-article-type'] }}
+                            {% else %}
+                              Article 63, 2.a
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Age bracket
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            0 to 19 years
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Country
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['entitlement-country'] %}
+                              {{ data['entitlement-country'] }}
+                            {% else %}
+                              France (FR)
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Total number of invoices
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            3
+                          </dd>
+                        </div>
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Total months to be claimed
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            18
+                          </dd>
+                        </div>
+
+
+                        <!--br>
+
+
+                        <h2 class="nhsuk-heading-s">Withdrawal agreement (WA)</h2>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Total number of invoices
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            9
+                          </dd>
+                        </div>
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Total months claimed
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            54
+                          </dd>
+                        </div-->
+
+                      </dl>
+
+                    </div>
+                  </div>
+
+                  <!-- Bottom-left card content begins -->
+                  <!--div class="nhsuk-card">
+                    <div class="nhsuk-card__content">
+                      <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total months claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          54
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Accepted months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Maintained months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Withdrawn months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Partially accepted
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Partially withdrawn
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          -
+                        </dd>
+                      </div>
+                    </dl>
+                    
+                    </div>
+                  </div-->
+                  <!-- Bottom-left card content ends -->
+
+                </div>
+                <!-- End of claim age bracket 0 to 19 years content for Retroactive claim -->
+              {% endif %}
+
+          <!--Start of Left Panel for S1/S072 - Article 62, 2.b -->
+          {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.b' %}
           <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
             <ul class="nhsuk-secondary-navigation__list">
               <li class="nhsuk-secondary-navigation__item">

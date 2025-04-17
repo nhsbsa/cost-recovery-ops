@@ -116,7 +116,7 @@ UK claim ID 100005 - View the resubmission summary
                           UK deadline to reply
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          11 March 2026
+                          12 March 2026
                         </dd>
                       </div>
   
@@ -213,7 +213,11 @@ UK claim ID 100005 - View the resubmission summary
                           Deadline for member state to reply to a resub
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          -
+                          {% if data.resubStatus == 'resubmission-completed' %}
+                            22/09/2026
+                          {% else %}
+                            -
+                          {% endif %}
                         </dd>
                       </div>
                     </dl>
@@ -398,11 +402,15 @@ UK claim ID 100005 - View the resubmission summary
                     <input class="nhsuk-input nhsuk-input--width-20" id="resubmission-uploaded-to-dh-exchange-by" name="resubmission-uploaded-to-dh-exchange-by" type="text">
                   </div>
 
+                  <!-- Preserve key status data between submissions -->
+                  <input type="hidden" name="sent-for-peer-review" value="{{ data['sent-for-peer-review'] }}">
+                  <input type="hidden" name="resubStatus" value="{{ data.resubStatus }}">
+
                   <div class="button-container">
                     <div class="action-buttons">
-                      <a class="nhsuk-button" id="save-resub-summary-button" href="resubmission-summary?resub-summary-details-updated=yes" style="margin-right: 20px; margin-top: 20px; padding-right: 10px;">
+                      <button class="nhsuk-button" type="submit" style="margin-right: 20px; margin-top: 20px;">
                         Save resub summary
-                      </a>
+                      </button>
                   
                       <!-- Conditionally show Edit Claim Summary button -->
                       {% if data['resub-summary-details-updated'] == 'yes' %}

@@ -51,38 +51,6 @@ UK claim ID 100005 - Claim summary
         <div class="nhsuk-width-container-fluid">
           <div class="nhsuk-main-wrapper" id="maincontent">
 
-
-
-            {% if data['save-claim-details'] == 'yes' %}
-                {% set updates = [] %}
-
-                {% if data['date-claim-sent'] %}
-                    {% set updates = updates + ['The claim was sent to the Member State on ' + data['date-claim-sent']] %}
-                {% endif %}
-
-                {% if data['date-s100-global-note-uploaded'] %}
-                    {% set updates = updates + ['The S100 was uploaded to DH eXchange on ' + data['date-s100-global-note-uploaded']] %}
-                {% endif %}
-
-                {% if data['claim-sent-by'] %}
-                    {% set updates = updates + ['Claim sent by ' + data['claim-sent-by']] %}
-                {% endif %}
-
-                {% if updates | length > 0 %}
-                    <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
-                        <div class="govuk-notification-banner__header">
-                            <span class="govuk-notification-banner__title">Claim details updated</span>
-                        </div>
-                        <div class="govuk-notification-banner__content">
-                            <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">
-                                {{ updates | join(". ") }}.
-                            </span>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endif %}
-
-
             
             <div class="nhsuk-grid-row">   
               <div class="nhsuk-grid-column-one-half">

@@ -266,12 +266,24 @@ UK claim ID 100005 - Invoices within resubmission
                 <th role="columnheader" class="" scope="col">
                   Last name
                 </th>
+                {% if data.resubStatus == 'peer-reviewed' %}
+                <th role="columnheader" class="" scope="col">
+                  Current months claimed
+                </th>
+                {% else %}
                 <th role="columnheader" class="" scope="col">
                   Months claimed
                 </th>
+                {% endif %}
+                {% if data.resubStatus == 'peer-reviewed' %}
                 <th role="columnheader" class="" scope="col">
-                  Duration claimed
+                  Current accounting period
                 </th>
+                {% else %}
+                <th role="columnheader" class="" scope="col">
+                  Accounting period
+                </th>
+                {% endif %}
                 <th role="columnheader" class="" scope="col">
                   Status
                 </th>
@@ -295,14 +307,25 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Bernard</span>
                 </td>
+                {% if data.resubStatus == 'peer-reviewed' %}
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current months claimed</span>
+                  <span>0</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current accounting period</span>
+                  <span>-</span>
+                </td>
+                {% else %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>5</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Duration claimed</span>
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
                   <span>01/01/2024 - 31/05/2024</span>
                 </td>
+                {% endif %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
                   {% set status = data.invoiceStatuses['Jacqueline'] %}
@@ -337,14 +360,25 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Doe</span>
                 </td>
+                {% if data.resubStatus == 'peer-reviewed' %}
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current months claimed</span>
+                  <span>3</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current accounting period</span>
+                  <span>05/10/2024 - 31/12/2024</span>
+                </td>
+                {% else %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>3</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Duration claimed</span>
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
                   <span>05/10/2024 - 31/12/2024</span>
                 </td>
+                {% endif %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
                   {% set status = data.invoiceStatuses['Jane'] %}
@@ -379,14 +413,25 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Doe</span>
                 </td>
+                {% if data.resubStatus == 'peer-reviewed' %}
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current months claimed</span>
+                  <span>4</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current accounting period</span>
+                  <span>05/09/2024 - 31/12/2024</span>
+                </td>
+                {% else %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>4</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Duration claimed</span>
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
                   <span>05/09/2024 - 31/12/2024</span>
                 </td>
+                {% endif %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
                   {% set status = data.invoiceStatuses['John'] %}
@@ -420,14 +465,25 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Germain</span>
                 </td>
+                {% if data.resubStatus == 'peer-reviewed' %}
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current months claimed</span>
+                  <span>1</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 31/01/2024</span>
+                </td>
+                {% else %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>2</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Duration claimed</span>
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
                   <span>01/01/2024 - 29/02/2024</span>
                 </td>
+                {% endif %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
                   {% set status = data.invoiceStatuses['Paul'] %}
@@ -460,14 +516,25 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Janview</span>
                 </td>
+                {% if data.resubStatus == 'peer-reviewed' %}
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current months claimed</span>
+                  <span>0</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current accounting period</span>
+                  <span>-</span>
+                </td>
+                {% else %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>9</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Duration claimed</span>
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
                   <span>01/01/2024 - 30/09/2024</span>
                 </td>
+                {% endif %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
                   {% set status = data.invoiceStatuses['Sophie'] %}
@@ -500,14 +567,25 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Martin</span>
                 </td>
+                {% if data.resubStatus == 'peer-reviewed' %}
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current months claimed</span>
+                  <span>9</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Current accounting period</span>
+                  <span>01/01/2024 - 30/09/2024</span>
+                </td>
+                {% else %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>9</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Duration claimed</span>
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
                   <span>01/01/2024 - 30/09/2024</span>
                 </td>
+                {% endif %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
                   {% set status = data.invoiceStatuses['Dione'] %}
