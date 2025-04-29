@@ -675,13 +675,21 @@ router.post([/additional-comments-optional/], function (req, res) {
   
 
 // Check your answers
-router.post([/cancellation-cya/], function(req, res){
+router.post([/cancellation-cya/], function(req, res) {
+  // Mark the entitlement as cancelled
+  req.session.data['cancel-s1-entitlement'] = 'yes';
 
-    // Mark the entitlement as cancelled
-    req.session.data['cancel-s1-entitlement'] = 'yes';
+  // Retrieve the stored entitlement end date
+  const entitlementEndDate = req.session.data['entitlement-end-date'];
 
-  res.redirect('/version-37/s1/account/entitlement-content/s1-entitlement-details');
-})
+  // Redirect to expired entitlement based on specific entitlement end date
+  if (entitlementEndDate === '06/02/2020') {
+      res.redirect('/version-37/s1/account/entitlement-content/expired-s1-entitlement-details');
+  } else {
+      res.redirect('/version-37/s1/account/entitlement-content/s1-entitlement-details');
+  }
+});
+
 
 // Change the end date of the S1 entitlement
 router.post([/change-s1-entitlement-end-date/], function(req, res){

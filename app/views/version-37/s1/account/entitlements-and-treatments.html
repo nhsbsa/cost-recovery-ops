@@ -488,15 +488,85 @@
                   <div class="nhsuk-expander-group">
                     <details class="nhsuk-details nhsuk-expander">
                       <summary class="nhsuk-details__summary">
-
-                          <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" aria-label="S1/S072 - Valid: from 06/01/2020 to 17/03/2020 - France (FR)">
-                            S1/S072 - Valid: from 06/01/2020 to 17/03/2020 - France (FR)
-                          </span>
-
-                          <strong class="nhsuk-tag nhsuk-tag--red" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
-                            Expired
-                          </strong>
+                        {% if data['cancel-s1-entitlement'] == 'yes' %}
+                              <span role="button" class="nhsuk-details__summary-text" id="entitlement-type"
+                                    aria-label="S1/S072 - Valid: 06/01/2020 - France (FR)">
+                                  S1/S072 - Valid: from 06/01/2020 to 
+                                  
+                                  {% if data['update-s1-entitlement-end-date'] == 'yes' %}
+                                      {% set day = data['updated-s1-entitlement-end-date-day'] | int %}
+                                      {% set month = data['updated-s1-entitlement-end-date-month'] | int %}
+                                      {% set year = data['updated-s1-entitlement-end-date-year'] %}
                       
+                                  {% elif data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                                      {% set day = data['entitlement-end-date-day'] | int %}
+                                      {% set month = data['entitlement-end-date-month'] | int %}
+                                      {% set year = data['entitlement-end-date-year'] %}
+                      
+                                  {% else %}
+                                      {% set day = 6 %}
+                                      {% set month = 2 %}
+                                      {% set year = 2020 %}
+                                  {% endif %}
+                      
+                                  {% if day < 10 %}
+                                      {% set formatted_day = "0" + day | string %}
+                                  {% else %}
+                                      {% set formatted_day = day | string %}
+                                  {% endif %}
+                      
+                                  {% if month < 10 %}
+                                      {% set formatted_month = "0" + month | string %}
+                                  {% else %}
+                                      {% set formatted_month = month | string %}
+                                  {% endif %}
+                      
+                                  {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
+                              </span>
+                            {% else %}
+                              <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" 
+                                    aria-label="S1/S072 - Valid: from 06/01/2020 to 17/03/2020 - France (FR)">
+                                  S1/S072 - Valid: from 06/01/2020 to 17/03/2020
+                          
+                                  {% if data['s1-entitlement-end-date-day'] and data['s1-entitlement-end-date-month'] and data['s1-entitlement-end-date-year'] %}
+                                      {% set day = data['s1-entitlement-end-date-day'] | int %}
+                                      {% set month = data['s1-entitlement-end-date-month'] | int %}
+                                      {% set year = data['s1-entitlement-end-date-year'] %}
+                          
+                                      {% if day < 10 %}
+                                          {% set formatted_day = "0" + day | string %}
+                                      {% else %}
+                                          {% set formatted_day = day | string %}
+                                      {% endif %}
+                          
+                                      {% if month < 10 %}
+                                          {% set formatted_month = "0" + month | string %}
+                                      {% else %}
+                                          {% set formatted_month = month | string %}
+                                      {% endif %}
+                          
+                                      to {{ formatted_day }}/{{ formatted_month }}/{{ year }}
+                                  {% endif %}
+                          
+                                  - France (FR)
+                              </span>
+                          
+                              <a id="cancel-s1-entitlement" aria-label="Cancel entitlement with entitlement ID 100003" 
+                                 href="../account/cancellations/cancellation-details?s1-entitlement-end-date-day=17&s1-entitlement-end-date-month=03&s1-entitlement-end-date-year=2020" 
+                                 style="float: right; margin-right: 30px; margin-top: 8px; display: block;">
+                                  Cancel entitlement
+                              </a>
+                          {% endif %}
+                      
+                          {% if data['cancel-s1-entitlement'] == 'yes' %}
+                            <strong class="nhsuk-tag nhsuk-tag--red" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
+                              Cancelled
+                            </strong>
+                          {% else %}
+                            <strong class="nhsuk-tag nhsuk-tag--red" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
+                              Expired
+                            </strong>
+                          {% endif %}
                       </summary>  
 
 
