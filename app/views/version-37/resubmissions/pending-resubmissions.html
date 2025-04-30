@@ -127,7 +127,21 @@ View pending resubmissions
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Resubmission status</span>
-                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--grey">To action</strong></span>
+                        {% if data.resubStatus == 'resubmission-sent-to-dh' %}
+                          <span><strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong></span>
+                        {% elif data.resubStatus == 'peer-reviewed' %}
+                          <span><strong class="nhsuk-tag nhsuk-tag--blue">Ready to send</strong></span>
+                        {% elif data.resubStatus == 'assigned-for-review' %}
+                          <span><strong class="nhsuk-tag nhsuk-tag--white">Under review</strong></span>
+                        {% elif data.resubStatus == 'peer-review-requested' %}
+                          <span><strong class="nhsuk-tag nhsuk-tag--green">To review</strong></span>
+                        {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                          <span> <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong></span>
+                        {% elif data.resubStatus == 'invoices-added-to-resub' %}
+                          <span><strong class="nhsuk-tag nhsuk-tag--green">In progress</strong></span>
+                        {% else %}
+                          <span><strong class="nhsuk-tag no-caps nhsuk-tag--grey">To action</strong></span>
+                        {% endif %}
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Action</span>
