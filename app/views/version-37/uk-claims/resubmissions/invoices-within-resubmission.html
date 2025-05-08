@@ -266,7 +266,7 @@ UK claim ID 100005 - Invoices within resubmission
                 <th role="columnheader" class="" scope="col">
                   Last name
                 </th>
-                {% if data.resubStatus == 'peer-reviewed' %}
+                {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
                 <th role="columnheader" class="" scope="col">
                   Current months claimed
                 </th>
@@ -275,7 +275,7 @@ UK claim ID 100005 - Invoices within resubmission
                   Months claimed
                 </th>
                 {% endif %}
-                {% if data.resubStatus == 'peer-reviewed' %}
+                {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
                 <th role="columnheader" class="" scope="col">
                   Current accounting period
                 </th>
@@ -307,7 +307,7 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Bernard</span>
                 </td>
-                {% if data.resubStatus == 'peer-reviewed' %}
+                {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Current months claimed</span>
                   <span>0</span>
@@ -360,7 +360,7 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Doe</span>
                 </td>
-                {% if data.resubStatus == 'peer-reviewed' %}
+                {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Current months claimed</span>
                   <span>3</span>
@@ -413,14 +413,22 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Doe</span>
                 </td>
-                {% if data.resubStatus == 'peer-reviewed' %}
+                {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Current months claimed</span>
-                  <span>4</span>
+                  {% if status == 'Partial' %}
+                    <span>1</span>
+                  {% else %}
+                    <span>4</span>
+                  {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Current accounting period</span>
-                  <span>05/09/2024 - 31/12/2024</span>
+                  {% if status == 'Partial' %}
+                    <span>05/09/2024 - 30/09/2024</span>
+                  {% else %}
+                    <span>05/09/2024 - 31/12/2024</span>
+                  {% endif %}
                 </td>
                 {% else %}
                 <td role="cell" class="nhsuk-table__cell">
@@ -465,7 +473,7 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Germain</span>
                 </td>
-                {% if data.resubStatus == 'peer-reviewed' %}
+                {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Current months claimed</span>
                   <span>1</span>
@@ -516,7 +524,7 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Janview</span>
                 </td>
-                {% if data.resubStatus == 'peer-reviewed' %}
+                {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Current months claimed</span>
                   <span>0</span>
@@ -567,7 +575,7 @@ UK claim ID 100005 - Invoices within resubmission
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Martin</span>
                 </td>
-                {% if data.resubStatus == 'peer-reviewed' %}
+                {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Current months claimed</span>
                   <span>9</span>

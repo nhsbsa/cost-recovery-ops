@@ -115,6 +115,8 @@ UK claim ID 100005 - View the resubmission documents
                       </a>
                    </dd>
                 </div>
+
+                {% if data.resubStatus == 'peer-reviewed' %}
                 <div class="nhsuk-summary-list__row">
                    <dt class="nhsuk-summary-list__key" id="re-submission-letter">UK resubmission letter</dt>
                    <dd class="nhsuk-summary-list__actions">
@@ -139,14 +141,20 @@ UK claim ID 100005 - View the resubmission documents
                       </a>
                    </dd>
                 </div>
+                <!-- Only display Withdrawal Letter document if in Credit Note journey -->
+                {% if status == 'Withdrawn' and (data['withdrawal-source'] == 'Department of Health and Social Care (DHSC)' or data['withdrawal-source'] == 'NHSBSA') %}
                 <div class="nhsuk-summary-list__row">
-                   <dt class="nhsuk-summary-list__key" id="withdrawal-letter-label">Withdrawal letter</dt>
-                   <dd class="nhsuk-summary-list__actions">
+                  <dt class="nhsuk-summary-list__key" id="withdrawal-letter-label">Withdrawal letter</dt>
+                  <dd class="nhsuk-summary-list__actions">
                       <a aria-label="Download resubmission withdrawal letter" href="/manage-overseas-entitlements-treatments/claim-resubs/view-document?documentId=35290" id="withdrawalLetter" target="_new">
-                         <span id="Withdrawal_letter_text">View file to print or download</span>
+                        <span id="Withdrawal_letter_text">View file to print or download</span>
                       </a>
-                   </dd>
+                  </dd>
                 </div>
+                {% endif %}
+
+
+                {% endif %}
              </dl>
 
             <div>

@@ -50,6 +50,20 @@ UK claim ID 100005 - Confirm the number of months partially maintained and parti
               <h2 class="nhsuk-heading-s">Contested months</h2>
                 
               <dl class="nhsuk-summary-list">
+                {% if data['invoice'] == 'John' %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duration-months-claimed-label">Duration of months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="duration-months-claimed-value">05/09/2024 - 31/12/2024</dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="initial-months-claimed-label">Initial months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="initial-months-claimed-value">4</dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="current-months-claimed-label">Current months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">1</dd>
+                </div>
+                {% else %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key" id="duration-months-claimed-label">Duration of months claimed</dt>
                   <dd class="nhsuk-summary-list__value" id="duration-months-claimed-value">01/01/2024 - 29/02/2024</dd>
@@ -60,8 +74,9 @@ UK claim ID 100005 - Confirm the number of months partially maintained and parti
                 </div>
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key" id="current-months-claimed-label">Current months claimed</dt>
-                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">2</dd>
+                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">1</dd>
                 </div>
+                {% endif %}
               </dl>
 
             </div>
@@ -138,11 +153,23 @@ UK claim ID 100005 - Confirm the number of months partially maintained and parti
               <dl class="nhsuk-summary-list">
                 <div class="nhsuk-summary-list__row">
                    <dt class="nhsuk-summary-list__key" id="start-date-first-withdrawn-month-label">Start date of first partially withdrawn month</dt>
-                   <dd class="nhsuk-summary-list__value" id="start-date-first-withdrawn-month-date">01/02/2024</dd>
+                   <dd class="nhsuk-summary-list__value" id="start-date-first-withdrawn-month-date">
+                    {% if data['invoice'] == 'John' %}
+                      01/10/2024
+                    {% else %}
+                      01/02/2024
+                    {% endif %}
+                  </dd>
                 </div>
                 <div class="nhsuk-summary-list__row">
                    <dt class="nhsuk-summary-list__key" id="end-date-last-withdrawn-month-label">End date of last partially withdrawn month</dt>
-                   <dd class="nhsuk-summary-list__value" id="end-date-last-withdrawn-month-date">29/02/2024</dd>
+                   <dd class="nhsuk-summary-list__value" id="end-date-last-withdrawn-month-date">
+                    {% if data['invoice'] == 'John' %}
+                      31/12/2024
+                    {% else %}
+                      29/02/2024
+                    {% endif %}
+                    </dd>
                 </div>
                 <div class="nhsuk-summary-list__row">
                    <dt class="nhsuk-summary-list__key" id="total-withdrawn-months-label">
