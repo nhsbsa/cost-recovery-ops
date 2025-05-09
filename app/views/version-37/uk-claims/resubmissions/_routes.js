@@ -172,8 +172,131 @@ router.get([/claim-resubmissions/], function(req, res) {
 });
 
 
-  
+// Select reasons for contestation against each individual invoice //
+router.post([/invoice-reasons-for-contestation/], function(req, res) {
 
+  const invoice = req.body.invoice;
+  const reasonsForContestation = req.body['reasons-for-contestation'];
+  const otherContestationReason = req.body['other-contestation-reason'];
+
+
+  // Store the date actual costs cover from
+  const dateActualCostsShouldCoverFromDay = req.body['date-actual-costs-should-cover-from-day'];
+  const dateActualCostsShouldCoverFromMonth = req.body['date-actual-costs-should-cover-from-month'];
+  const dateActualCostsShouldCoverFromYear = req.body['date-actual-costs-should-cover-from-year'];
+  const dateActualCostsShouldCoverFrom = dateActualCostsShouldCoverFromDay && dateActualCostsShouldCoverFromMonth && dateActualCostsShouldCoverFromYear
+    ? `${dateActualCostsShouldCoverFromDay}/${dateActualCostsShouldCoverFromMonth}/${dateActualCostsShouldCoverFromYear}`
+    : '01/01/2025';
+  req.session.data['date-actual-costs-should-cover-from'] = dateActualCostsShouldCoverFrom;
+
+
+  // Store the date actual costs cover until
+  const dateActualCostsShouldCoverUntilDay = req.body['date-actual-costs-should-cover-until-day'];
+  const dateActualCostsShouldCoverUntilMonth = req.body['date-actual-costs-should-cover-until-month'];
+  const dateActualCostsShouldCoverUntilYear = req.body['date-actual-costs-should-cover-until-year'];
+  const dateActualCostsShouldCoverUntil = dateActualCostsShouldCoverUntilDay && dateActualCostsShouldCoverUntilMonth && dateActualCostsShouldCoverUntilYear
+    ? `${dateActualCostsShouldCoverUntilDay}/${dateActualCostsShouldCoverUntilMonth}/${dateActualCostsShouldCoverUntilYear}`
+    : '01/01/2025';
+  req.session.data['date-actual-costs-should-cover-until'] = dateActualCostsShouldCoverUntil;
+
+
+  // Store the duplicated global IMO reference and the duplicated individual IMO number
+  const duplicatedGlobalIMOReference = req.body['duplicated-global-imo-reference'];
+  const duplicatedIndividualIMONumber = req.body['duplicated-individual-imo-number'];
+
+  req.session.data['duplicated-global-imo-reference'] = duplicatedGlobalIMOReference;
+  req.session.data['duplicated-individual-imo-number'] = duplicatedIndividualIMONumber;
+
+
+  // Store the date the entitlement in the state of residence started on
+  const dateEntitlementInStateOfResidenceStartedOnDay = req.body['date-entitlement-in-state-of-residence-started-on-day'];
+  const dateEntitlementInStateOfResidenceStartedOnMonth = req.body['date-entitlement-in-state-of-residence-started-on-month'];
+  const dateEntitlementInStateOfResidenceStartedOnYear = req.body['date-entitlement-in-state-of-residence-started-on-year'];
+  const dateEntitlementInStateOfResidenceStartedOn = dateEntitlementInStateOfResidenceStartedOnDay && dateEntitlementInStateOfResidenceStartedOnMonth && dateEntitlementInStateOfResidenceStartedOnYear
+    ? `${dateEntitlementInStateOfResidenceStartedOnDay}/${dateEntitlementInStateOfResidenceStartedOnMonth}/${dateEntitlementInStateOfResidenceStartedOnYear}`
+    : '01/01/2025';
+  req.session.data['date-entitlement-in-state-of-residence-started-on'] = dateEntitlementInStateOfResidenceStartedOn;
+
+
+  // Store the date the family member became entitled to benefits in their state of residence
+  const dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceDay = req.body['date-family-member-became-entitled-to-benefits-in-state-of-residence-day'];
+  const dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceMonth = req.body['date-family-member-became-entitled-to-benefits-in-state-of-residence-month'];
+  const dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceYear = req.body['date-family-member-became-entitled-to-benefits-in-state-of-residence-year'];
+  const dateFamilyMemberBecameEntitledToBenefitsInStateOfResidence = dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceDay && dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceMonth && dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceYear
+    ? `${dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceDay}/${dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceMonth}/${dateFamilyMemberBecameEntitledToBenefitsInStateOfResidenceYear}`
+    : '01/01/2025';
+  req.session.data['date-family-member-became-entitled-to-benefits-in-state-of-residence'] = dateFamilyMemberBecameEntitledToBenefitsInStateOfResidence;
+
+
+  // Store the date the person began receiving a state pension from their state of residence
+  const datePersonBeganReceivingPensionInStateOfResidenceDay = req.body['date-person-began-receiving-pension-in-state-of-residence-day'];
+  const datePersonBeganReceivingPensionInStateOfResidenceMonth = req.body['date-person-began-receiving-pension-in-state-of-residence-month'];
+  const datePersonBeganReceivingPensionInStateOfResidenceYear = req.body['date-person-began-receiving-pension-in-state-of-residence-year'];
+  const datePersonBeganReceivingPensionInStateOfResidence = datePersonBeganReceivingPensionInStateOfResidenceDay && datePersonBeganReceivingPensionInStateOfResidenceMonth && datePersonBeganReceivingPensionInStateOfResidenceYear
+    ? `${datePersonBeganReceivingPensionInStateOfResidenceDay}/${datePersonBeganReceivingPensionInStateOfResidenceMonth}/${datePersonBeganReceivingPensionInStateOfResidenceYear}`
+    : '01/01/2025';
+  req.session.data['date-person-began-receiving-pension-in-state-of-residence'] = datePersonBeganReceivingPensionInStateOfResidence;
+
+
+  // Store the date the person died
+  const datePersonDiedDay = req.body['date-person-died-day'];
+  const datePersonDiedMonth = req.body['date-person-died-month'];
+  const datePersonDiedYear = req.body['date-person-died-year'];
+  const datePersonDied = datePersonDiedDay && datePersonDiedMonth && datePersonDiedYear
+    ? `${datePersonDiedDay}/${datePersonDiedMonth}/${datePersonDiedYear}`
+    : '01/01/2025';
+  req.session.data['date-person-died'] = datePersonDied;
+
+
+  // Store the IMO was introduced after the deadline
+  const dateIMOIntroducedAfterDeadlineDay = req.body['date-imo-introduced-after-deadline-day'];
+  const dateIMOIntroducedAfterDeadlineMonth = req.body['date-imo-introduced-after-deadline-month'];
+  const dateIMOIntroducedAfterDeadlineYear = req.body['date-imo-introduced-after-deadline-year'];
+  const dateIMOIntroducedAfterDeadline = dateIMOIntroducedAfterDeadlineDay && dateIMOIntroducedAfterDeadlineMonth && dateIMOIntroducedAfterDeadlineYear
+    ? `${dateIMOIntroducedAfterDeadlineDay}/${dateIMOIntroducedAfterDeadlineMonth}/${dateIMOIntroducedAfterDeadlineYear}`
+    : '01/01/2025';
+  req.session.data['date-imo-introduced-after-deadline'] = dateIMOIntroducedAfterDeadline;
+
+
+  // Store the date the contestation IMO reply was received after the deadline
+  const dateContestationIMOReplyReceivedAfterDeadlineDay = req.body['date-contestation-imo-reply-received-after-deadline-day'];
+  const dateContestationIMOReplyReceivedAfterDeadlineMonth = req.body['date-contestation-imo-reply-received-after-deadline-month'];
+  const dateContestationIMOReplyReceivedAfterDeadlineYear = req.body['date-contestation-imo-reply-received-after-deadline-year'];
+  const dateContestationIMOReplyReceivedAfterDeadline = dateContestationIMOReplyReceivedAfterDeadlineDay && dateContestationIMOReplyReceivedAfterDeadlineMonth && dateContestationIMOReplyReceivedAfterDeadlineYear
+    ? `${dateContestationIMOReplyReceivedAfterDeadlineDay}/${dateContestationIMOReplyReceivedAfterDeadlineMonth}/${dateContestationIMOReplyReceivedAfterDeadlineYear}`
+    : '01/01/2025';
+  req.session.data['date-contestation-imo-reply-received-after-deadline'] = dateContestationIMOReplyReceivedAfterDeadline;
+
+
+  // Store the date the person moved to another state
+  const datePersonMovedToAnotherStateDay = req.body['date-person-moved-to-another-state-day'];
+  const datePersonMovedToAnotherStateMonth = req.body['date-person-moved-to-another-state-month'];
+  const datePersonMovedToAnotherStateYear = req.body['date-person-moved-to-another-state-year'];
+  const datePersonMovedToAnotherState = datePersonMovedToAnotherStateDay && datePersonMovedToAnotherStateMonth && datePersonMovedToAnotherStateYear
+    ? `${datePersonMovedToAnotherStateDay}/${datePersonMovedToAnotherStateMonth}/${datePersonMovedToAnotherStateYear}`
+    : '01/01/2025';
+  req.session.data['date-person-moved-to-another-state'] = datePersonMovedToAnotherState;
+
+
+  // Store reasons and other reason text linked to invoice
+  if (!req.session.data.contestation_reasons) {
+    req.session.data.contestation_reasons = {};
+  }
+
+  req.session.data.contestation_reasons[invoice] = {
+    reasons: Array.isArray(reasonsForContestation) ? reasonsForContestation : [reasonsForContestation], 
+    otherContestationReason: otherContestationReason
+  };
+
+  res.redirect('/version-37/uk-claims/resubmissions/invoice-reasons-for-contestation?invoice=' + invoice);
+});
+
+// Pull through the selected reasons and reload the screen
+router.get([/invoice-reasons-for-contestation/], function(req, res) {
+  res.render('version-37/uk-claims/resubmissions/invoice-reasons-for-contestation', {
+    data: req.session.data
+  });
+});
 
 
 // Partially maintain and partially withdraw journey //

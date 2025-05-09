@@ -161,7 +161,7 @@ UK claim ID 100005 - View the resubmission summary
                           Total number of maintained invoices, including those partially maintained
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data.resubStatus == 'peer-reviewed' %}
+                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                             4
                           {% else %}
                             -
@@ -174,7 +174,7 @@ UK claim ID 100005 - View the resubmission summary
                           Total number of maintained months, including those partially maintained
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data.resubStatus == 'peer-reviewed' %}
+                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                             17
                           {% else %}
                           -
@@ -187,7 +187,7 @@ UK claim ID 100005 - View the resubmission summary
                           Total number of withdrawn invoices, including those partially withdrawn
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data.resubStatus == 'peer-reviewed' %}
+                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                             3
                           {% else %}
                           -
@@ -200,7 +200,7 @@ UK claim ID 100005 - View the resubmission summary
                           Total number of withdrawn months, including those partially withdrawn
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data.resubStatus == 'peer-reviewed' %}
+                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                             15
                           {% else %}
                           -
@@ -280,7 +280,7 @@ UK claim ID 100005 - View the resubmission summary
                         Peer reviewed by
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data.resubStatus == 'peer-reviewed' %}
+                        {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                           nina.evans@nhsbsa.nhs.uk
                         {% else %}
                           -
@@ -293,7 +293,7 @@ UK claim ID 100005 - View the resubmission summary
                         Peer review completion date
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data.resubStatus == 'peer-reviewed' %}
+                        {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                           21 March 2025
                         {% else %}
                           -
@@ -303,7 +303,7 @@ UK claim ID 100005 - View the resubmission summary
                   </dl>
 
 
-                  {% if data.resubStatus == 'peer-reviewed' %}
+                  {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                   <div class="nhsuk-form-group" style="margin-top: 30px;">
                     <label class="nhsuk-label" for="call-no">
                       <b>When was the resubmission sent to the member state? (Optional)</b>
