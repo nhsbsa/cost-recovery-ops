@@ -462,15 +462,15 @@ router.post([/reasons-to-withdraw-months/], function(req, res) {
   req.session.data['reasons-to-withdraw-months'] = reasonToWithdrawMonths;
 
   // Store the date the contestation was received (after deadline)
-  const dateContestationReceivedAfterDeadlineDayWithdraw = req.body['date-contestation-received-after-deadline-day-withdraw'];
-  const dateContestationReceivedAfterDeadlineMonthWithdraw = req.body['date-contestation-received-after-deadline-month-withdraw'];
-  const dateContestationReceivedAfterDeadlineYearWithdraw = req.body['date-contestation-received-after-deadline-year-withdraw'];
+  const datePrimaryEntitlementInStateOfResidenceStartsOnDayWithdraw = req.body['date-primary-entitlement-in-state-of-residence-starts-on-day-withdraw'];
+  const datePrimaryEntitlementInStateOfResidenceStartsOnMonthWithdraw = req.body['date-primary-entitlement-in-state-of-residence-starts-on-month-withdraw'];
+  const datePrimaryEntitlementInStateOfResidenceStartsOnYearWithdraw = req.body['date-primary-entitlement-in-state-of-residence-starts-on-year-withdraw'];
   
   // Combine to form the full date (or use a default if not provided)
-  const dateContestationReceivedAfterDeadlineWithdraw = dateContestationReceivedAfterDeadlineDayWithdraw && dateContestationReceivedAfterDeadlineMonthWithdraw && dateContestationReceivedAfterDeadlineYearWithdraw
-  ? `${dateContestationReceivedAfterDeadlineDayWithdraw}/${dateContestationReceivedAfterDeadlineMonthWithdraw}/${dateContestationReceivedAfterDeadlineYearWithdraw}` 
+  const datePrimaryEntitlementInStateOfResidenceStartsOnWithdraw = datePrimaryEntitlementInStateOfResidenceStartsOnDayWithdraw && datePrimaryEntitlementInStateOfResidenceStartsOnMonthWithdraw && datePrimaryEntitlementInStateOfResidenceStartsOnYearWithdraw
+  ? `${datePrimaryEntitlementInStateOfResidenceStartsOnDayWithdraw}/${datePrimaryEntitlementInStateOfResidenceStartsOnMonthWithdraw}/${datePrimaryEntitlementInStateOfResidenceStartsOnYearWithdraw}` 
   : '17/04/2026';
-  req.session.data['date-contestation-received-after-deadline-withdraw'] = dateContestationReceivedAfterDeadlineWithdraw;
+  req.session.data['date-primary-entitlement-in-state-of-residence-starts-on-withdraw'] = datePrimaryEntitlementInStateOfResidenceStartsOnWithdraw;
 
 
   // Store the date the state pension was received
