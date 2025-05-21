@@ -1,0 +1,181 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Check your answers before maintaining months
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back"
+            }) }}
+    
+  
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">Check your answers before maintaining months</h1>
+             </div>
+          </div>
+
+          <form action="cya-maintain" method="post">
+
+            <input type="hidden" name="invoice" value="{{ data.invoice }}">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+
+              <h2 class="nhsuk-heading-s">Contested months</h2>
+                
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duration-months-claimed-label">Duration of months claimed</dt>
+                  {% if data['invoice'] == 'Jane' %}
+                  <dd class="nhsuk-summary-list__value" id="duration-months-claimed-value">05/10/2024 - 31/12/2024</dd>
+                  {% elif data['invoice'] == 'John' %}
+                  <dd class="nhsuk-summary-list__value" id="duration-months-claimed-value">05/09/2024 - 31/12/2024</dd>
+                  {% else %}
+                  <dd class="nhsuk-summary-list__value" id="duration-months-claimed-value">01/01/2024 - 30/09/2024</dd>
+                  {% endif %}
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="initial-months-claimed-label">Initial months claimed</dt>
+                  {% if data['invoice'] == 'Jane' %}
+                  <dd class="nhsuk-summary-list__value" id="initial-months-claimed-value">3</dd>
+                  {% elif data['invoice'] == 'John' %}
+                  <dd class="nhsuk-summary-list__value" id="initial-months-claimed-value">4</dd>
+                  {% else %}
+                  <dd class="nhsuk-summary-list__value" id="initial-months-claimed-value">9</dd>
+                  {% endif %}
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="current-months-claimed-label">Current months claimed</dt>
+                  {% if data['invoice'] == 'Jane' %}
+                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">3</dd>
+                  {% elif data['invoice'] == 'John' %}
+                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">4</dd>
+                  {% else %}
+                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">9</dd>
+                  {% endif %}
+                </div>
+              </dl>
+
+            </div>
+          </div>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+
+              
+
+              <h2 class="nhsuk-heading-s">Maintained months</h2>
+
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="reasons-to-maintain-months-label">Reasons to maintain months</dt>
+                  <dd class="nhsuk-summary-list__value" id="reasons-to-maintain-months-value">
+                    {% if data['reasons-to-maintain-months'] %}
+                     {{ data['reasons-to-maintain-months'] }}
+                    {% else %}
+                      Information requested updated
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="reasons-to-maintain-months">Change<span class="nhsuk-u-visually-hidden">the reasons to maintain months</span></a></dd>
+                </div>
+                {% if 'Contestation after deadline. [03]' in data['reasons-to-maintain-months'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-label">Date contestation received after deadline</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-value">
+                    {% if data['date-contestation-received-after-deadline-day-maintain'] and data['date-contestation-received-after-deadline-month-maintain'] and data['date-contestation-received-after-deadline-year-maintain'] %}
+                      {% set day = data['date-contestation-received-after-deadline-day-maintain'] | int %}
+                      {% set month = data['date-contestation-received-after-deadline-month-maintain'] | int %}
+                      {% set year = data['date-contestation-received-after-deadline-year-maintain'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="reasons-to-maintain-months">Change<span class="nhsuk-u-visually-hidden">date contestation received after deadline</span></a></dd>
+                </div>
+                {% endif %}
+                {% if 'Information requested updated. [04]' in data['reasons-to-maintain-months'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-maintain-label">Type of information requested</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-maintain-value">
+                    {% if data['type-information-requested-maintain'] %}
+                     {{ data['type-information-requested-maintain'] }}
+                    {% else %}
+                      S072 - Entitlement document - Residence. [02]
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="select-information-requested-maintain">Change<span class="nhsuk-u-visually-hidden">type of information requested</span></a></dd>
+                </div>
+                {% endif %}
+                {% if 'Other. [99]' in data['reasons-to-maintain-months'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason comments</dt>
+                  <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
+                    {% if data['other-maintain-reason-comments'] %}
+                      {{ data['other-maintain-reason-comments'] }}
+                    {% else %}
+                      Other maintain reason explained here.
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="reasons-to-maintain-months">Change<span class="nhsuk-u-visually-hidden">other reason comments</span></a></dd>
+                </div>
+                {% endif %}
+              </dl>
+
+
+            <br>
+
+              <button class="nhsuk-button nhsuk-button--primary" type="submit" id="save-and-continue-button">Save and continue</button>
+
+              <p><a href="invoice-details">Cancel</a></p>
+            </div>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

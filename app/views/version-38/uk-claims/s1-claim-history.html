@@ -1,0 +1,433 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - Claim history
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search-actual-cost">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">View Claim ID (Claim history)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <form action="s1-claim-history" method="post">
+            
+            <div class="nhsuk-grid-row">   
+                <div class="nhsuk-grid-column-one-half">
+                  {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' %}
+                    <h1 class="nhsuk-heading-l">Claim ID 100001 - Forms for EHIC and PRC - Article 62</h1>
+                  {% elif data['entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+                  <h1 class="nhsuk-heading-l">Claim ID ID 100002 - Forms for S2/E112 - Article 20.2</h1>
+                  {% elif data['entitlement-article-type'] == 'S1/S072 - Article 63, 2.a'  %}
+                  <h1 class="nhsuk-heading-l">Claim ID 100004 - Invoices for<br>S1/S072 Article 63, 2.a - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                  {% else %}
+                  <h1 class="nhsuk-heading-l">Claim ID 100005 - Invoices for<br>S1/S072 Article 63, 2.b - {% if data['claim-age-bracket'] %}{{ data['claim-age-bracket'] }}{% else %}0 to 19 years{% endif %}</h1>
+                  {% endif %}
+                </div>
+              </div>
+
+            <!--start of content for Actual cost -->
+            <!--start secondary navigation-->
+            {% if data['entitlement-article-type'] == 'EHIC and PRC - Article 62' or data['entitlement-article-type'] == 'S2/E112 - Article 20.2' %}
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s1-claim-forms">Treatment forms</a>
+                  <span class="nhsuk-u-visually-hidden">Search for a form</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link"  href="s1-claim-summary">Claim summary</a>
+                  <span class="nhsuk-u-visually-hidden">View the overall summary for claim 123456</span>
+                </li>
+
+                <!--li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                  <span class="nhsuk-u-visually-hidden">View the age groups for claim 123456</span>
+                </li-->
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
+                  <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-history">Claim history</a>
+                  <span class="nhsuk-u-visually-hidden">View case history for claim 123456</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+
+                  <table role="table" class="nhsuk-table-responsive">
+                      <thead role="rowgroup" class="nhsuk-table__head">
+                          <tr role="row">
+                              <th role="columnheader" class="" scope="col">
+                                  Date and time
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Action
+                              </th>
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Details
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Updated by
+                              </th>
+                          </tr>
+                      </thead>
+
+                      <tbody class="nhsuk-table__body">
+                          {% if data['change-basic-personal-details'] == 'yes' %}
+                          <tr role="row" class="nhsuk-table__row">
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                  2 April 2025,<br>
+                                  10:34
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Action</span>
+                                  Claim documents regenerated
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Details</span>
+                                  Changes made to John Doe's personal details.
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                  joe.bloggs@nhsbsa.nhs.uk
+                              </td>
+                          </tr>
+                          {% endif %}
+                          <tr role="row" class="nhsuk-table__row" style="display: none;">
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Date and Time</span>
+                                  <span><p id="currentDateS1ClaimSentToMS"></p></span>
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Action</span>
+                                  Sent to member state
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Details</span>
+                                  Claim sent to member state on {% if data['date-claim-sent'] %}{{ data['date-claim-sent'] }} {% else %}27/02/2025{% endif %}
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                  joebloggs@nhsbsa.nhs.uk
+                              </td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row" style="display: none;">
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                  <span><p id="currentDateS1ClaimSentToDH"></p></span>
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Action</span>
+                                  Sent to DH
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Details</span>
+                                  S100 Global note was uploaded to DH eXchange on {% if data['date-s100-global-note-uploaded'] %}{{ data['date-s100-global-note-uploaded'] }} {% else %}27/02/2025{% endif %}
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                  joebloggs@nhsbsa.nhs.uk
+                              </td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Date and time</span> 
+                                  <p id="currentDateS1ClaimCreated"></span></p>
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Action
+                                  </span>Created
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Details
+                                  </span>Claim created
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                  joebloggs@nhsbsa.nhs.uk
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <!--end of content for Actual cost -->
+
+          {% else %}
+          <!-- Start of content for Average cost -->
+          <!-- Start of secondary navigation -->
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link"  href="s1-claim-summary">Claim summary</a>
+                  <span class="nhsuk-u-visually-hidden">View the overall summary for claim 654321</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s1-claim-forms">Invoices</a>
+                  <span class="nhsuk-u-visually-hidden">Search for a form</span>
+                </li>
+
+                <!--li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                  <span class="nhsuk-u-visually-hidden">View the age groups for claim 654321</span>
+                </li-->
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s1-claim-documents">Claim documents</a>
+                  <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-claim-history">Claim history</a>
+                  <span class="nhsuk-u-visually-hidden">View case history for claim 654321</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+          <!-- Start of content for S1/S072 claims -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+
+                  <table role="claimSummaryTable" class="nhsuk-table-responsive">
+                      <thead role="rowgroup" class="nhsuk-table__head">
+                          <tr role="row">
+                              <th role="columnheader" class="" scope="col">
+                                  Date and time
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Action
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Details
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Updated by
+                              </th>
+                          </tr>
+                      </thead>
+                      
+                      <tbody class="nhsuk-table__body">
+                          {% if data['change-basic-personal-details'] == 'yes' %}
+                          <tr role="row" class="nhsuk-table__row">
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                  2 April 2025<br>
+                                  10:34
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Action</span>
+                                  Claim documents regenerated
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Details</span>
+                                  Changes made to John Doe's personal details.
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                  joe.bloggs@nhsbsa.nhs.uk
+                              </td>
+                          </tr>
+                          {% endif %}
+                          {% if data['claim-summary-details-updated'] == 'yes' %}
+                          <tr role="row" class="nhsuk-table__row">
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                  11 April 2025, 15:17
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Action</span>
+                                  Sent to DH
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Details</span>
+                                  S100 Global note was uploaded to DH eXchange on 
+                                  {% if data['date-s100-global-note-uploaded-day'] and data['date-s100-global-note-uploaded-month'] and data['date-s100-global-note-uploaded-year'] %}
+                                    {% set day = data['date-s100-global-note-uploaded-day'] | int %}
+                                    {% set month = data['date-s100-global-note-uploaded-month'] | int %}
+                                    {% set year = data['date-s100-global-note-uploaded-year'] %}
+                        
+                                    {% if day < 10 %}
+                                        {% set day = "0" ~ day %}
+                                    {% endif %}
+                                    
+                                    {% if month < 10 %}
+                                        {% set month = "0" ~ month %}
+                                    {% endif %}
+
+                                    {{ day }}/{{ month }}/{{ year }}
+                                    
+                                    
+                                  {% else %}
+                                    11/04/2025
+                                  {% endif %}
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                  <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                  joe.bloggs@nhsbsa.nhs.uk
+                              </td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                11 April 2025, 15:17
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                Sent to member state
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Details</span>
+                                Claim sent to member state on 
+                                {% if data['date-claim-sent-day'] and data['date-claim-sent-month'] and data['date-claim-sent-year'] %}
+                                  {% set day = data['date-claim-sent-day'] | int %}
+                                  {% set month = data['date-claim-sent-month'] | int %}
+                                  {% set year = data['date-claim-sent-year'] %}
+                      
+                                  {% if day < 10 %}
+                                      {% set day = "0" ~ day %}
+                                  {% endif %}
+                                  
+                                  {% if month < 10 %}
+                                      {% set month = "0" ~ month %}
+                                  {% endif %}
+
+                                  {{ day }}/{{ month }}/{{ year }}
+                                  
+                                  
+                                {% else %}
+                                  11/04/2025
+                                {% endif %}
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                joe.bloggs@nhsbsa.nhs.uk
+                            </td>
+                        </tr>
+                          {% endif %}
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                11 April 2025, 10:34
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                Created
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Details</span>
+                                Claim generated
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                joe.bloggs@nhsbsa.nhs.uk
+                            </td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <!--end of content for Average cost -->
+          {% endif %}
+
+            </form>
+              
+           </div>
+          </div>
+
+<!--Side nav -->
+    <!--div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <ul>
+          <div id="options" class="options">
+            <h3 class="nhsuk-heading-xs">Browse</h3>
+              <li>
+                <a href="../s1/search/search-by-person">Search</a>
+              </li>
+
+            <h3 class="nhsuk-heading-xs">Actions</h3>
+              <li>
+                <a href="account-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">2</span></a>
+                <a href="review-forms">Review forms<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                <a href="uk-claims-search" class="active">UK claims</a>
+                <a href="resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="non-eu-reciprocal-healthcare-quota">Non-EU Reciprocal Healthcare (Quota)</a>
+              </li>
+          </div>
+        </ul>
+      </div>
+    </div-->
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+

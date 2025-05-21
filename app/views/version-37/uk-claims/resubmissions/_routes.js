@@ -725,15 +725,42 @@ router.post([/resubmission-summary/], function (req, res) {
 
 
 
-// Upload new evidence for invoice
+// Choose a file to upload
 router.post([/invoice-upload-evidence/], function(req, res) {
+
+  const uploadAdditionalEvidence = req.session.data['upload-additional-evidence']
+
+  if (uploadAdditionalEvidence === 'yes'){
+    res.redirect('/version-37/uk-claims/resubmissions/invoice-upload-additional-evidence?more-evidence=yes')
+  } else {
+    res.redirect('/version-37/uk-claims/resubmissions/invoice-upload-additional-evidence')
+  }
+
+})
+
+// Do you want to upload additional evidence?
+router.post([/invoice-upload-additional-evidence/], function(req, res) {
   
-   // Conditional flag to track if evidence has been uploaded
-   req.session.data['upload-new-evidence'] = 'yes';
+  const uploadAdditionalEvidence = req.session.data['upload-additional-evidence']
+
+  if (uploadAdditionalEvidence === 'yes'){
+    res.redirect('/version-37/uk-claims/resubmissions/invoice-upload-evidence?upload-additional-evidence=yes')
+  } else {
+    res.redirect('/version-37/uk-claims/resubmissions/check-uploaded-invoice-evidence')
+  }
+
+})
+
+// Check the chosen evidence to upload
+router.post([/check-uploaded-invoice-evidence/], function(req, res) {
+
+  // Conditional flag to track if evidence has been uploaded
+  req.session.data['upload-new-evidence'] = 'yes';
 
   // Redirect to the resubmission page
   res.redirect('/version-37/uk-claims/resubmissions/invoice-evidence');
 });
+
 
 // Pull through and populate Resubmission history throughout different stages of resub journey
 router.get([/resubmission-history/], function (req, res) {

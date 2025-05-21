@@ -1,0 +1,210 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Confirm the number of months partially maintained and partially withdrawn
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back"
+            }) }}
+    
+  
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">Confirm the number of months partially maintained and partially withdrawn</h1>
+             </div>
+          </div>
+
+          <form action="confirm-partially-maintained-and-partially-withdrawn-months" method="post">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+
+              <h2 class="nhsuk-heading-s">Contested months</h2>
+                
+              <dl class="nhsuk-summary-list">
+                {% if data['invoice'] == 'John' %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duration-months-claimed-label">Duration of months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="duration-months-claimed-value">05/09/2024 - 31/12/2024</dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="initial-months-claimed-label">Initial months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="initial-months-claimed-value">4</dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="current-months-claimed-label">Current months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">1</dd>
+                </div>
+                {% else %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duration-months-claimed-label">Duration of months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="duration-months-claimed-value">01/01/2024 - 29/02/2024</dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="initial-months-claimed-label">Initial months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="initial-months-claimed-value">2</dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="current-months-claimed-label">Current months claimed</dt>
+                  <dd class="nhsuk-summary-list__value" id="current-months-claimed-value">1</dd>
+                </div>
+                {% endif %}
+              </dl>
+
+            </div>
+          </div>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+
+            <h2 class="nhsuk-heading-s">Partially maintained months</h2>
+
+            <dl class="nhsuk-summary-list">
+              <div class="nhsuk-summary-list__row">
+                 <dt class="nhsuk-summary-list__key" id="start-date-first-maintained-month-label">Start date of first partially maintained month</dt>
+                 <dd class="nhsuk-summary-list__value" id="start-date-first-maintained-month-date">
+                  {% if data['start-date-first-maintained-month-day'] and data['start-date-first-maintained-month-month'] and data['start-date-first-maintained-month-year'] %}
+                    {% set day = data['start-date-first-maintained-month-day'] | int %}
+                    {% set month = data['start-date-first-maintained-month-month'] | int %}
+                    {% set year = data['start-date-first-maintained-month-year'] %}
+        
+                    {% if day < 10 %}
+                      {% set day = "0" ~ day %}
+                    {% endif %}
+                      
+                    {% if month < 10 %}
+                      {% set month = "0" ~ month %}
+                    {% endif %}
+
+                    {{ day }}/{{ month }}/{{ year }}
+                                    
+                  {% else %}
+                    01/01/2024
+                  {% endif %}
+                </dd>
+              </div>
+              <div class="nhsuk-summary-list__row">
+                 <dt class="nhsuk-summary-list__key" id="end-date-last-maintained-month-label">End date of last partially maintained month</dt>
+                 <dd class="nhsuk-summary-list__value" id="end-date-last-maintained-month-date">
+                  {% if data['end-date-last-maintained-month-day'] and data['end-date-last-maintained-month-month'] and data['end-date-last-maintained-month-year'] %}
+                    {% set day = data['end-date-last-maintained-month-day']  | int %}
+                    {% set month = data['end-date-last-maintained-month-month'] | int %}
+                    {% set year = data['end-date-last-maintained-month-year'] %}
+        
+                    {% if day < 10 %}
+                      {% set day = "0" ~ day %}
+                    {% endif %}
+                      
+                    {% if month < 10 %}
+                      {% set month = "0" ~ month %}
+                    {% endif %}
+
+                    {{ day }}/{{ month }}/{{ year }}
+                                    
+                  {% else %}
+                    31/01/2024
+                  {% endif %}
+                </dd>
+              </div>
+              <div class="nhsuk-summary-list__row">
+                 <dt class="nhsuk-summary-list__key" id="total-maintained-months-label">
+                    <label for="maintained-months-label">Total number of partially maintained months</label>
+                 </dt>
+                 <dd class="nhsuk-summary-list__value" id="total-maintained-months">
+                    <input class="nhsuk-input  nhsuk-input--width-2" id="total-maintained-months" type="text" aria-label="total-maintained-months" name="total-maintained-months" value="">
+                 </dd>
+              </div>
+            </dl>
+
+            </div>
+
+            <div class="nhsuk-grid-column-one-half">
+
+              <h2 class="nhsuk-heading-s">Partially withdrawn months</h2>
+
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="start-date-first-withdrawn-month-label">Start date of first partially withdrawn month</dt>
+                   <dd class="nhsuk-summary-list__value" id="start-date-first-withdrawn-month-date">
+                    {% if data['invoice'] == 'John' %}
+                      01/10/2024
+                    {% else %}
+                      01/02/2024
+                    {% endif %}
+                  </dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="end-date-last-withdrawn-month-label">End date of last partially withdrawn month</dt>
+                   <dd class="nhsuk-summary-list__value" id="end-date-last-withdrawn-month-date">
+                    {% if data['invoice'] == 'John' %}
+                      31/12/2024
+                    {% else %}
+                      29/02/2024
+                    {% endif %}
+                    </dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="total-withdrawn-months-label">
+                      <label for="withdrawn-months-label">Total number of partially withdrawn months</label>
+                   </dt>
+                   <dd class="nhsuk-summary-list__value" id="total-withdrawn-months">
+                      <input class="nhsuk-input  nhsuk-input--width-2" id="total-withdrawn-months" type="text" aria-label="total-withdrawn-months" name="total-withdrawn-months" value="">
+                   </dd>
+                </div>
+              </dl>
+
+            </div>
+
+            <br>
+
+            <div class="nhsuk-grid-column-one-half">
+              <button class="nhsuk-button nhsuk-button--primary" style="margin-top: 20px;" type="submit" id="continue-button">Continue</button>
+
+              <p><a href="invoice-details">Cancel</a></p>
+            </div>
+
+
+
+
+          </div>
+
+
+          
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
