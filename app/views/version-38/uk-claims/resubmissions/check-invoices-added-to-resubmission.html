@@ -92,10 +92,11 @@ Are you sure you want to remove invoices from this claim?
                     <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
                       <tr role="row">
                         <th role="columnheader" scope="col">Invoice ID</th>
-                        <th role="columnheader" scope="col">First names</th>
-                        <th role="columnheader" scope="col">Last name</th>
-                        <th role="columnheader" scope="col">Months claimed</th>
-                        <th role="columnheader" scope="col">Accounting period</th>
+                        <th role="columnheader" scope="col">Name</th>
+                        <th role="columnheader" scope="col">Original months claimed</th>
+                        <th role="columnheader" scope="col">Original accounting period</th>
+                        <th role="columnheader" scope="col">Revised months claimed</th>
+                        <th role="columnheader" scope="col">Revised accounting period</th>
                         <th role="columnheader" scope="col">Action</th>
                       </tr>
                     </thead>
@@ -143,10 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${invoice.id}</td>
-            <td>${invoice.firstName}</td>
-            <td>${invoice.lastName}</td>
-            <td>${invoice.months}</td>
-            <td>${invoice.period}</td>
+            <td>${invoice.Name}</td>
+            <td>${invoice.originalMonths}</td>
+            <td>${invoice.originalPeriod}</td>
+            <td>${invoice.revisedMonths}</td>
+            <td>${invoice.revisedPeriod}</td>
             <td><a href="#">Remove</a></td>
         `;
         tbody.appendChild(row);

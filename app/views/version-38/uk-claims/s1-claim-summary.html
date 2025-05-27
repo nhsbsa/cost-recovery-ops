@@ -2583,7 +2583,7 @@ UK claim ID 123456 - Claim summary
 
 
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="date-claim-sent-label">
+                        <label class="nhsuk-label" for="call-no">
                           <b>What date was the claim sent to the member state?</b>
                         </label>
                         <div class="nhsuk-hint">
@@ -2623,42 +2623,38 @@ UK claim ID 123456 - Claim summary
                         <label class="nhsuk-label" for="claim-sent-by-label">
                          <b>Name of the person sending the claim</b>
                         </label>
-                        <input class="nhsuk-input nhsuk-input--width-20" id="claim-sent-to-ms-by" name="claim-sent-to-ms-by" type="text">
+                        <input class="nhsuk-input nhsuk-input--width-20" id="claim-sent-by" name="claim-sent-by" type="text">
+                      </div>
+
+                      <label class="nhsuk-label" style="margin-top: 30px;">
+                        <b>How was the claim sent to the member state?</b>
+                      </label>
+
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="claim-sent-by-post" name="claim-sent-by" type="radio" value="Post">
+                        <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-post">
+                          Post
+                        </label>
+                      </div>
+
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="claim-sent-by-rina" name="claim-sent-by" type="radio" value="RINA">
+                        <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-rina">
+                          RINA
+                        </label>
                       </div>
 
                       <div class="nhsuk-form-group" style="margin-top: 30px;">
-                        <label class="nhsuk-label" for="call-no">
-                          <b>When did the member state receive the claim documents? This date must be confirmed by the member state's acknowledgement letter.</b>
+                        <label class="nhsuk-label" for="completion-date">
+                          <b>RINA reference number</b>
                         </label>
 
-                        <div class="nhsuk-date-input" id="date-claim-documents-received-by-ms">
-                          <div class="nhsuk-date-input__item">
-                            <div class="nhsuk-form-group">
-                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-day">
-                                Day
-                              </label>
-                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-received-by-ms-day" name="date-claim-documents-received-by-ms-day" type="text" pattern="[0-9]*" inputmode="numeric">
-                            </div>
-                          </div>
-                          <div class="nhsuk-date-input__item">
-                            <div class="nhsuk-form-group">
-                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-month">
-                                Month
-                              </label>
-                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-received-by-ms-month" name="date-claim-documents-received-by-ms-month" type="text" pattern="[0-9]*" inputmode="numeric">
-                            </div>
-                          </div>
-                          <div class="nhsuk-date-input__item">
-                            <div class="nhsuk-form-group">
-                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-received-by-ms-year">
-                                Year
-                              </label>
-                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-documents-received-by-ms-year" name="date-claim-documents-received-by-ms-year" type="text" pattern="[0-9]*" inputmode="numeric">
-                            </div>
-                          </div>
-                        </div>
-
+                        <input class="nhsuk-input nhsuk-input--width-20" id="rina-claim-rina-ref-no" name="rina-claim-rina-ref-no" type="text">
                       </div>
+
+
+                      <hr>
+
 
                       <div class="nhsuk-form-group" style="margin-top: 30px;">
                         <label class="nhsuk-label" for="date-s100-global-note-uploaded-label">
@@ -2696,7 +2692,7 @@ UK claim ID 123456 - Claim summary
 
                       <div class="nhsuk-form-group" style="margin-top: 30px;">
                         <label class="nhsuk-label" for="s100-uploaded-by">
-                          <b>Who uploaded the S100 Global note to the DH eXchange?</b>
+                          <b>Who uploaded the S100 global note to the DH eXchange?</b>
                         </label>
                         <!-- <div class="nhsuk-hint">
                         The name of the person who uploaded on DH eXchange
@@ -2705,34 +2701,80 @@ UK claim ID 123456 - Claim summary
                       </div>
 
 
-                      <label class="nhsuk-label" style="margin-top: 30px;">
-                        <b>How was the claim sent to the member state?</b>
-                      </label>
+                      <hr>
 
-                      <div class="nhsuk-radios__item">
-                        <input class="nhsuk-radios__input" id="claim-sent-by-post" name="claim-sent-by" type="radio" value="Post">
-                        <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-post">
-                          Post
+                      
+                      <div class="nhsuk-form-group" style="margin-top: 30px;">
+                        <label class="nhsuk-label" for="call-no">
+                          <b>When were the claim documents delivered to the member state?</b>
                         </label>
-                      </div>
 
-                      <div class="nhsuk-radios__item">
-                        <input class="nhsuk-radios__input" id="claim-sent-by-rina" name="claim-sent-by" type="radio" value="RINA">
-                        <label class="nhsuk-label nhsuk-radios__label" for="claim-sent-by-rina">
-                          RINA
-                        </label>
+                        <div class="nhsuk-date-input" id="date-claim-documents-delivered-to-ms">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-delivered-to-ms-day">
+                                Day
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-delivered-to-ms-day" name="date-claim-documents-delivered-to-ms-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-delivered-to-ms-month">
+                                Month
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-delivered-to-ms-month" name="date-claim-documents-delivered-to-ms-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-delivered-to-ms-year">
+                                Year
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-documents-delivered-to-ms-year" name="date-claim-documents-delivered-to-ms-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
 
                       <div class="nhsuk-form-group" style="margin-top: 30px;">
-                        <label class="nhsuk-label" for="completion-date">
-                          <b>RINA reference number</b>
+                        <label class="nhsuk-label" for="call-no">
+                          <b>When did the member state acknowledge the claim documents?</b>
                         </label>
+                        <div class="nhsuk-hint">
+                          This date can be found on the acknowledgement letter.
+                        </div>
 
-                        <input class="nhsuk-input nhsuk-input--width-20" id="rina-claim-rina-ref-no" name="rina-claim-rina-ref-no" type="text">
+                        <div class="nhsuk-date-input" id="date-claim-documents-acknowledged-by-ms">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-acknowledged-by-day">
+                                Day
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-acknowledged-by-ms-day" name="date-claim-documents-acknowledged-by-ms-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-acknowledged-by-ms-month">
+                                Month
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-claim-documents-acknowledged-by-ms-month" name="date-claim-documents-acknowledged-byo-ms-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-claim-documents-acknowledged-by-ms-year">
+                                Year
+                              </label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-claim-documents-acknowledged-by-ms-year" name="date-claim-documents-acknowledged-by-ms-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
-
                   </fieldset>
-
 
                   <div class="button-container">
                     <div class="action-buttons">
@@ -2756,8 +2798,10 @@ UK claim ID 123456 - Claim summary
               </div>
 
             </div>
+            <!-- End of Details of claim panel -->
+
           </div>
-        <!-- End of Details of claim panel -->
+        
 
 
       </form>

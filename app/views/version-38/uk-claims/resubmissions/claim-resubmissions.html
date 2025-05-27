@@ -58,7 +58,7 @@ UK claim ID 100005 - Resubmissions
               <div>
                 <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
                   <div class="govuk-notification-banner__header">
-                    <span class="govuk-notification-banner__title">Selected invoices added to resub 7790992</span>
+                    <span class="govuk-notification-banner__title">Selected invoices added to resub 1160158</span>
                   </div>
                   <div class="govuk-notification-banner__content">
                     <span class="govuk-notification-banner__heading big-text-wrap">Invoices linked to the resub are set to contested status.</span>
@@ -72,7 +72,7 @@ UK claim ID 100005 - Resubmissions
                     <span class="govuk-notification-banner__title">Resub assigned for peer review</span>
                   </div>
                   <div class="govuk-notification-banner__content">
-                    <span class="govuk-notification-banner__heading big-text-wrap">Resub 7799709 has been assigned to nina.evans@nhsbsa.nhs.uk.</span>
+                    <span class="govuk-notification-banner__heading big-text-wrap">Resub 1160158 has been assigned to joe.bloggs@nhsbsa.nhs.uk.</span>
                   </div>
                 </div>
               </div>
@@ -206,8 +206,7 @@ UK claim ID 100005 - Resubmissions
               </div>
             </details>
         
-        
-            {% if data['create-new-resub'] == 'yes' %}
+          
             <!-- TABLE START -->
             <table role="table" class="nhsuk-table-responsive" id="resubmissionsTable">
               <thead class="nhsuk-table__head">
@@ -222,6 +221,7 @@ UK claim ID 100005 - Resubmissions
               </thead>
 
               <tbody class="nhsuk-table__body">
+                {% if data['create-new-resub'] == 'yes' %}
                 <tr class="nhsuk-table__row">
                   <td class="nhsuk-table__cell" data-label="Resubmission ID">1160158</td>
                   <td class="nhsuk-table__cell" data-label="Deadline to reply">12/03/2026</td>
@@ -259,19 +259,19 @@ UK claim ID 100005 - Resubmissions
 
                   <td class="nhsuk-table__cell" data-label="Action">
                     {% if data.resubStatus == 'resubmission-completed' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
+                      <a href="invoices-within-resubmission?resubID=1160158">View invoices</a>
                     {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
+                      <a href="invoices-within-resubmission?resubID=1160158">View invoices</a>
                     {% elif data.resubStatus == 'peer-reviewed' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
+                      <a href="invoices-within-resubmission?resubID=1160158">View invoices</a>
                     {% elif data.resubStatus == 'assigned-for-review' %}
-                      <a href="invoices-within-resubmission">Review invoices</a>
+                      <a href="invoices-within-resubmission?resubID=1160158">Review invoices</a>
                     {% elif data.resubStatus == 'peer-review-requested' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
+                      <a href="invoices-within-resubmission?resubID=1160158">View invoices</a>
                     {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
+                      <a href="invoices-within-resubmission?resubID=1160158">View invoices</a>
                     {% elif data.resubStatus == 'invoices-added-to-resub' %}
-                      <a href="invoices-within-resubmission">Review invoices</a>
+                      <a href="invoices-within-resubmission?resubID=1160158">Review invoices</a>
                     {% elif data.resubStatus != 'peer-reviewed' and data.resubStatus != 'peer-review-requested' %}
                       <a href="add-invoices-to-resubmission">Add invoices</a>
                     {% else %}
@@ -279,24 +279,8 @@ UK claim ID 100005 - Resubmissions
                     {% endif %}
                   </td>
                 </tr>
-              </tbody>
-            </table>
-            <!-- TABLE END -->
-          {% else %}
-            <!-- TABLE START -->
-            <table role="table" class="nhsuk-table-responsive" id="resubmissionsTable">
-              <thead class="nhsuk-table__head">
-                <tr class="nhsuk-table__row">
-                  <th scope="col" class="nhsuk-table__header">Resubmission ID</th>
-                  <th scope="col" class="nhsuk-table__header">Deadline to reply</th>
-                  <th scope="col" class="nhsuk-table__header">Assigned to</th>
-                  <th scope="col" class="nhsuk-table__header">Peer reviewed by</th>
-                  <th scope="col" class="nhsuk-table__header">Status</th>
-                  <th scope="col" class="nhsuk-table__header">Action</th>
-                </tr>
-              </thead>
+                {% endif %}
 
-              <tbody class="nhsuk-table__body">
                 <tr class="nhsuk-table__row">
                   <td class="nhsuk-table__cell" data-label="Resubmission ID">7790992</td>
                   <td class="nhsuk-table__cell" data-label="Deadline to reply">12/03/2026</td>
@@ -341,7 +325,6 @@ UK claim ID 100005 - Resubmissions
               </tbody>
             </table>
             <!-- TABLE END -->
-          {% endif %}
 
 
 
