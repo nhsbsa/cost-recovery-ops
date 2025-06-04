@@ -1,0 +1,270 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+View documents - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-by-person">Search (Person)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-results-none">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Documents</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Documents</h1>
+            </div>
+          </div>
+
+          <!--div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+                
+            <h2 class="nhsuk-heading-l">Generate a document</h2>
+
+            <div class="nhsuk-form-group">
+              <label class="nhsuk-label" id="document-type-label" for="document-type" class="form-label">
+                Select a document
+              </label>
+              <input class="nhsuk-input nhsuk-input--width-20" list="documents" id="DownloadDocumentType-Drop" name="document-type">
+              <datalist id="documents">
+                <option value="" selected="selected"></option>
+                <option value="FAS1Q">FAS1Q</option>
+                <option value="DL1609">DL1609</option>
+                <option value="Example">Example</option>
+                <option value="Example 2">Example 2</option>
+                <option value="Example 3">Example 3</option>
+              </datalist>            
+            </div>
+  
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <a href="#">
+                  <button class="nhsuk-button nhsuk-button--secondary nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Generate
+                  </button>
+                </a>
+              </div>
+            </div>
+
+            </div>
+          </div>
+
+          
+
+          <hr class="gray-horizontal-line" style="margin-top: 50px; margin-bottom: 50px;"-->
+            
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h2 class="nhsuk-heading-l">Uploaded documents</h2>
+              <div style="background-color: white; padding: 20px; border: 1px solid #ddd;">
+                <br>
+                   
+                  
+                      <!-- Documents content begins -->
+                      {% if data['upload-new-document'] == 'yes' %}
+                      <table role="table" id="documentsTable" class="nhsuk-table-responsive">
+                      
+                        <thead role="rowgroup" class="nhsuk-table__head">
+                          <tr role="row">
+                            <th role="columnheader" class="" scope="col">
+                              Document title
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                              Date uploaded
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                              Uploaded by
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                              Current status
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                              Document type
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                              Comments (optional)
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                              Actions
+                            </th>
+                          </tr>
+                        </thead>
+                      
+                        <tbody class="nhsuk-table__body">
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Document title</span>
+                              <span>title.pdf</span>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date uploaded</span>
+                              <span>11/10/2024</span>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Uploaded by</span>
+                              <span>Joe Bloggs</span>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Current status</span>
+                              <span>Received</span>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Document type</span>
+                              <span>
+                                {% if data['document-type'] %}
+                                  <p>{{ data['document-type'] }}</p>
+                                {% else %}
+                                  example
+                                {% endif %}
+                              </span>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Comments (optional)</span>
+                              <!-- Only display comments if they are present -->
+                              {% if data['document-comments'] %}
+                                <p>{{ data['document-comments'] }}</p>
+                                {% else %}
+                              <p>None provided</p>
+                            {% endif %}
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Actions</span>
+                              <a href="#">View</a> or 
+                              <a href="#">remove</span></a>
+                            </td>
+                          </tr>   
+                        </tbody>
+                      </table>
+                      <br>
+                      {% else %}
+                      
+                      <p>No documents have been uploaded.</p>
+                      {% endif %}
+
+                          
+                      {% if data['upload-new-document'] == 'yes' %}
+                      <a href="/version-38a/s1/account/upload-document">
+                        <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                          Upload a new document
+                        </button>
+                      </a>
+                      {% else %}
+                      <a href="/version-38a/s1/account/upload-document">
+                        <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                          Upload a document
+                        </button>
+                      </a>
+                      {% endif %}
+                          
+                </div>
+              </div>
+            </div>
+            <!-- Uploaded documents content ends -->   
+               
+                            
+
+        </div>
+    </div>
+</div>
+
+    <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a href="personal-details">Personal details</a></li>
+          <li><a href="entitlements-and-treatments">Entitlements and treatments</a></li>
+          <li><a href="case-history-person">Case history</a></li>
+          <li><a class="active" href="documents">Documents</a></li>
+          <li><a href="notes">Notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
+
+  </div>
+</div>
+<!-- End of main content -->
+{% endblock %}
+    
+{% block pageScripts %}
+<script>
+// autocomplete js //
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#DownloadDocumentType-Drop')
+  })
+</script>
+
+
+<script>
+  // Function to set the current date and time
+  function setCurrentDateTime(elementId) {
+    var dateElement = document.getElementById(elementId);
+  
+    if (dateElement) {
+      var currentDate = new Date();
+  
+      var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+      var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+  
+      var timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+      var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+  
+      var formattedDateTime = formattedDate + ' at ' + formattedTime;
+  
+      dateElement.textContent = formattedDateTime;
+    }
+  }
+  
+  // Set the date for each note
+  document.addEventListener("DOMContentLoaded", function () {
+    setCurrentDateTime("currentDateGeneral");      // For general S1 note
+    setCurrentDateTime("currentDateDL1609");  // For DL1609 note
+    setCurrentDateTime("currentDateS073");    // For S073 note
+  });
+  </script>  
+
+{% endblock %}

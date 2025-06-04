@@ -1,0 +1,239 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - View the resubmission history
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View Resub ID (Resubmission history)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                  <h1 class="nhsuk-heading-l" style="margin-bottom: 20px;">
+                    Claim ID 100005: Resub ID 7790992:<br>
+                    Resubmission history
+                  </h1>
+              </div>
+            </div>
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoices-within-resubmission">Invoices within resub</a>
+                  <span class="nhsuk-u-visually-hidden">View the invoices within resubmission 7790992</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="resubmission-documents">Resubmission documents</a>
+                  <span class="nhsuk-u-visually-hidden">View the documents within resubmission 7790992</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="resubmission-summary">Resubmission summary</a>
+                  <span class="nhsuk-u-visually-hidden">View the summary for resubmission 7790992</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="resubmission-history">Resubmission history</a>
+                  <span class="nhsuk-u-visually-hidden">View the history of resubmission 7790992</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <form action="resubmission-history" method="post">
+
+            <!-- Start of Claim history table -->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+
+                <table role="claimSummaryTable" class="nhsuk-table-responsive">
+                    <thead role="rowgroup" class="nhsuk-table__head">
+                        <tr role="row">
+                            <th role="columnheader" class="" scope="col">
+                                Date and time
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                                Action
+                            </th>
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                                Details
+                            </th>
+                            <th role="columnheader" class="" scope="col">
+                                Updated by
+                            </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody class="nhsuk-table__body">
+
+                        {% if showDeliveredToMSRow %}
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                22/03/2025<br>
+                                13:33
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                Delivered to member state
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Details</span>
+                                Resubmission delivered to member state on {{ data['date-resubmission-delivered-to-ms'] }}
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                nina.evans@nhsbsa.nhs.uk
+                            </td>
+                          </tr>
+                        {% endif %}
+                        {% if showSentToMSRow %}
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                22/03/2025<br>
+                                11:16
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                Sent to member state
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Details</span>
+                                Resubmission sent to member state on {{ data['date-resubmission-sent-to-ms'] or '22/03/2025' }} and status changed to Complete
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                nina.evans@nhsbsa.nhs.uk
+                            </td>
+                          </tr>
+                        {% endif %}
+                        {% if showUploadedToDHRow %}
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              22/03/2025,<br>
+                              11:16
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              Sent to DH
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              Resubmission uploaded to DH eXchange on {{ data['date-resubmission-uploaded-to-dh-exchange'] or '22/03/2025' }}                              and status changed to Sent to DH
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              nina.evans@nhsbsa.nhs.uk
+                          </td>
+                        </tr>
+                        {% endif %}
+                        {% if isPeerReviewed %}
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              21/03/2025,<br>
+                              13:48
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              Ready to send
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              Resubmission set as peer reviewed and status changed to Ready to send
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              nina.evans@nhsbsa.nhs.uk
+                          </td>
+                        </tr>
+                        {% endif %}
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              13/03/2025,<br>
+                              11:07
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              Created
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              Resubmission created for UK Claim ID 100005 received from France (FR) and status set to To action
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              joe.bloggs@nhsbsa.nhs.uk
+                          </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End of Resubmission history table -->
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

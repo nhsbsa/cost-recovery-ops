@@ -1,0 +1,157 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Are you sure you want to remove invoices from this claim?
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View Claim ID (Add invoices to resub)</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <form action="check-invoices-added-to-resubmission" method="post">
+
+            
+              <div class="nhsuk-grid-row"> 
+                <div class="nhsuk-grid-column-full">
+                  <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <!-- Heading takes up most of the row -->
+                    <h1 class="nhsuk-heading-xl" style="flex: 2; margin-bottom: 20px;">
+                      Confirm you want to add these invoices to the resubmission
+                    </h1>
+                    
+                    <!-- Button container -->
+                    <div style="display: flex; gap: 10px;">
+                      <!-- Confirm button that submits the form -->
+                      <button class="nhsuk-button nhsuk-button--primary" type="submit" id="confirm-button">
+                        Confirm
+                      </button>
+                      
+                      <!-- Add more invoices link (does not submit the form, just redirects) -->
+                      <a href="/version-37/uk-claims/resubmissions/add-invoices-to-resubmission">
+                        <button class="nhsuk-button nhsuk-button--secondary" type="button" id="add-more-invoices-button">
+                          Add more invoices
+                        </button>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              <p><b>
+                This resubmission will contain:<br>
+                total of months: 7<br>
+                invoices: 2<br>
+              </b></p>
+                
+                       
+                <div class="nhsuk-form-group">
+                  <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
+                    <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
+                      <tr role="row">
+                        <th role="columnheader" scope="col">Invoice ID</th>
+                        <th role="columnheader" scope="col">First names</th>
+                        <th role="columnheader" scope="col">Last name</th>
+                        <th role="columnheader" scope="col">Months claimed</th>
+                        <th role="columnheader" scope="col">Accounting period</th>
+                        <th role="columnheader" scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody class="nhsuk-table__body">  
+                      <!-- Selected invoices will be inserted here by JavaScript -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Pagination starts -->
+                <nav class="nav" role="navigation" aria-label="Pagination">
+                  <ul class="pagination">
+                      <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
+                  </ul>
+        
+                  <div class="pagination__summary navigation-mobile">Showing 1 - 6 of 6 invoices</div>
+                </nav>
+                <!-- Pagination ends -->
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const selectedInvoices = JSON.parse(sessionStorage.getItem("selectedInvoices"));
+    console.log("Retrieved invoices:", selectedInvoices); // Debugging line
+
+    if (!selectedInvoices || selectedInvoices.length === 0) {
+        alert("No invoices found in session storage!");
+        return;
+    }
+
+    const tbody = document.querySelector(".nhsuk-table__body");
+    tbody.innerHTML = ""; // Clear existing rows
+
+    selectedInvoices.forEach(invoice => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${invoice.id}</td>
+            <td>${invoice.firstName}</td>
+            <td>${invoice.lastName}</td>
+            <td>${invoice.months}</td>
+            <td>${invoice.period}</td>
+            <td><a href="#">Remove</a></td>
+        `;
+        tbody.appendChild(row);
+    });
+});
+
+</script>
+{% endblock %}

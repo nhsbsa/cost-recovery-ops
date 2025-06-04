@@ -1,0 +1,1039 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005: Resub ID 7790992 - View invoice details
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/invoices-within-resubmission">View Resub ID (Invoices within resubmission)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View details (Invoice details)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+
+            {% if data['invoice'] == 'Jane' %}
+            {% set contestationData = data.contestation_reasons[data.invoice] %}
+            <!-- Start of Jane Doe's info -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 100005: Resub ID 1160158<br>
+                    (Invoice ID 298473) - Invoice details
+                </h1>
+              </div>
+
+              <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
+              {% if contestationData and contestationData.reasons and contestationData.reasons | length > 0 and data.resubStatus != 'peer-reviewed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'resubmission-completed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div>              
+              {% endif %}
+
+
+            </div>
+            
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Jane">Invoice details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for invoice ID 298473</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-reasons-for-contestation?invoice=Jane">Reasons for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 298473</span>
+                </li>
+
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Jane">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 298473</span>
+                </li>
+              </ul>
+            </nav>
+
+            {% elif data['invoice'] == 'John' %}
+            {% set contestationData = data.contestation_reasons[data.invoice] %}
+            <!-- Start of John Doe's info -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 100005: Resub ID 1160158<br>
+                    (Invoice ID 387731) - Invoice details
+                </h1>
+              </div>
+    
+              <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
+              {% if contestationData and contestationData.reasons and contestationData.reasons | length > 0 and data.resubStatus != 'peer-reviewed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'resubmission-completed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div>  
+              {% endif %}
+
+
+            </div>
+            
+    
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=John">Invoice details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for invoice ID 387731</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-reasons-for-contestation?invoice=John">Reasons for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 387731</span>
+                </li>
+
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=John">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 387731</span>
+                </li>
+              </ul>
+            </nav>
+            {% endif %}
+
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+
+            
+
+            {% if contestationData %}
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">Reasons for contestation</dt>
+                <dd class="nhsuk-summary-list__value">
+                  {% for reason in contestationData.reasons %}
+                  <p class="nhsuk-body">{{ reason }}</p>
+                  {% endfor %}
+                </dd>
+              </div>
+
+              {% if 'The costs are to be settled by actual costs from the given date. [09]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-the-costs-are-to-be-settled-by-actual-costs-from-label">Date the costs are to be settled by actual costs from</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-the-costs-are-to-be-settled-by-actual-costs-from-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-actual-costs-should-cover-from-day'] and data['date-actual-costs-should-cover-from-month'] and data['date-actual-costs-should-cover-from-year'] %}
+                      {% set day = data['date-actual-costs-should-cover-from-day'] | int %}
+                      {% set month = data['date-actual-costs-should-cover-from-month'] | int %}
+                      {% set year = data['date-actual-costs-should-cover-from-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'The costs are to be settled by actual costs until the given date. [10]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-the-costs-are-to-be-settled-by-actual-costs-until-label">Date the costs are to be settled by actual costs until</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-the-costs-are-to-be-settled-by-actual-costs-until-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-actual-costs-should-cover-until-day'] and data['date-actual-costs-should-cover-until-month'] and data['date-actual-costs-should-cover-until-year'] %}
+                      {% set day = data['date-actual-costs-should-cover-until-day'] | int %}
+                      {% set month = data['date-actual-costs-should-cover-until-month'] | int %}
+                      {% set year = data['date-actual-costs-should-cover-until-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'Double invoice. [13]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duplicated-global-imo-reference-label">Duplicated global IMO reference</dt>
+                  <dd class="nhsuk-summary-list__value" id="duplicated-global-imo-reference-value">
+                    <p class="nhsuk-body">
+                    {% if data['duplicated-global-imo-reference'] %}
+                      {% set day = data['duplicated-global-imo-reference'] %}
+                      
+                    {% else %}
+                      123456
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duplicated-individual-imo-number-label">Duplicated individual IMO number</dt>
+                  <dd class="nhsuk-summary-list__value" id="duplicated-individual-imo-number-value">
+                    <p class="nhsuk-body">
+                    {% if data['duplicated-individual-imo-number'] %}
+                      {% set day = data['duplicated-individual-imo-number'] %}
+                      
+                    {% else %}
+                      1
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'The entitlement in the state of residence started on the date entered here. [14]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-entitlement-in-state-of-residence-started-on-label">Date the entitlement in the state of residence started on</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-entitlement-in-state-of-residence-started-on-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-entitlement-in-state-of-residence-started-on-day'] and data['date-entitlement-in-state-of-residence-started-on-month'] and data['date-entitlement-in-state-of-residence-started-on-year'] %}
+                      {% set day = data['date-entitlement-in-state-of-residence-started-on-day'] | int %}
+                      {% set month = data['date-entitlement-in-state-of-residence-started-on-month'] | int %}
+                      {% set year = data['date-entitlement-in-state-of-residence-started-on-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'Family member concerned is entitled to benefits in the state of residence. [15]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-family-member-became-entitled-to-benefits-in-state-of-residence-label">Date the entitlement in the state of residence started on</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-family-member-became-entitled-to-benefits-in-state-of-residence-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-family-member-became-entitled-to-benefits-in-state-of-residence-day'] and data['date-family-member-became-entitled-to-benefits-in-state-of-residence-month'] and data['date-family-member-became-entitled-to-benefits-in-state-of-residence-year'] %}
+                      {% set day = data['date-family-member-became-entitled-to-benefits-in-state-of-residence-day'] | int %}
+                      {% set month = data['date-family-member-became-entitled-to-benefits-in-state-of-residence-month'] | int %}
+                      {% set year = data['date-family-member-became-entitled-to-benefits-in-state-of-residence-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'The person receives a pension in his/her state of residence. [16]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-person-began-receiving-pension-in-state-of-residence-label">Date the entitlement in the state of residence started on</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-person-began-receiving-pension-in-state-of-residence-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-person-began-receiving-pension-in-state-of-residence-day'] and data['date-person-began-receiving-pension-in-state-of-residence-month'] and data['date-person-began-receiving-pension-in-state-of-residence-year'] %}
+                      {% set day = data['date-person-began-receiving-pension-in-state-of-residence-day'] | int %}
+                      {% set month = data['date-person-began-receiving-pension-in-state-of-residence-month'] | int %}
+                      {% set year = data['date-person-began-receiving-pension-in-state-of-residence-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'The person died. [18]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-person-died-label">Date the person died</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-person-died-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-person-died-day'] and data['date-person-died-month'] and data['date-person-died-year'] %}
+                      {% set day = data['date-person-died-day'] | int %}
+                      {% set month = data['date-person-died-month'] | int %}
+                      {% set year = data['date-person-died-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      15/10/2024
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'IMO introduced after deadline. [19]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-imo-introduced-after-deadline-label">Date the IMO was introduced after the deadline</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-imo-introduced-after-deadline-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-imo-introduced-after-deadline-day'] and data['date-imo-introduced-after-deadline-month'] and data['date-imo-introduced-after-deadline-year'] %}
+                      {% set day = data['date-imo-introduced-after-deadline-day'] | int %}
+                      {% set month = data['date-imo-introduced-after-deadline-month'] | int %}
+                      {% set year = data['date-imo-introduced-after-deadline-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'Contestation IMO reply received after deadline. [20]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-contestation-imo-reply-received-after-deadline-label">Date the contestation IMO reply was received after the deadline</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-contestation-imo-reply-received-after-deadline-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-contestation-imo-reply-received-after-deadline-day'] and data['date-contestation-imo-reply-received-after-deadline-month'] and data['date-contestation-imo-reply-received-after-deadline-year'] %}
+                      {% set day = data['date-contestation-imo-reply-received-after-deadline-day'] | int %}
+                      {% set month = data['date-contestation-imo-reply-received-after-deadline-month'] | int %}
+                      {% set year = data['date-contestation-imo-reply-received-after-deadline-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'Person moved to another state. [21]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-person-moved-to-another-state-label">Date person moved to another state</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-person-moved-to-another-state-value">
+                    <p class="nhsuk-body">
+                    {% if data['date-person-moved-to-another-state-day'] and data['date-person-moved-to-another-state-month'] and data['date-person-moved-to-another-state-year'] %}
+                      {% set day = data['date-person-moved-to-another-state-day'] | int %}
+                      {% set month = data['date-person-moved-to-another-state-month'] | int %}
+                      {% set year = data['date-person-moved-to-another-state-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                      
+                    {% else %}
+                      17/04/2026
+                    {% endif %}
+                    </p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              {% if 'Other. [99]' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="other-contestation-reason-comments-label">Other reason comments</dt>
+                  <dd class="nhsuk-summary-list__value" id="other-contestation-reason-comments-value">
+                    <p class="nhsuk-body">{{ contestationData.otherContestationReason or 'Other contestation reason explained here.' }}</p>
+                  </dd>
+                </div>
+              {% endif %}
+
+              </div>
+            </div>
+
+            {% else %}
+              
+
+              <form action="invoice-reasons-for-contestation" method="post">
+                <!-- Beginning of checkboxes -->
+                <div class="nhsuk-grid-row">
+                  <div class="nhsuk-grid-column-one-half">
+                  <div class="nhsuk-hint" id="example-hint">
+                    This is a list of reasons given by a member state and requests from them when contesting an invoice.
+                    Select all the reasons and requests that are relevant to this contestation.
+                  </div>
+            
+                  <div class="nhsuk-checkboxes nhsuk-checkboxes--conditional" data-module="nhsuk-checkboxes">
+            
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="document-does-not-concern-ms" name="reasons-for-contestation" type="checkbox" value="This document does not concern us. [01] " data-aria-controls="conditional-document-does-not-concern-ms" aria-controls="conditional-contestation-reason-1" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="document-does-not-concern-ms">
+                        This document does not concern us. [01] 
+                      </label>
+                    </div>
+            
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="incorrect-institution-code" name="reasons-for-contestation" type="checkbox" value="Institution code is incorrect. Please provide correct institution code. [02]" data-aria-controls="conditional-incorrect-institution-code" aria-controls="conditional-contestation-reason-2" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="incorrect-institution-code">
+                        Institution code is incorrect. Please provide correct institution code. [02]
+                      </label>
+                    </div>
+            
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="unable-to-identify-person-from-info-provided" name="reasons-for-contestation" type="checkbox" value="Unable to identify the person from the information provided. Please check. [03]" data-aria-controls="conditional-unable-to-identify-person-from-info-provided" aria-controls="conditional-contestation-reason-3" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="unable-to-identify-person-from-info-provided">
+                        Unable to identify the person from the information provided. Please check. [03]
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="entitlement-doc-is-unknown-or-not-found" name="reasons-for-contestation" type="checkbox" value="Entitlement document is unknown or not found. Please provide copy. [04]" data-aria-controls="conditional-entitlement-doc-is-unknown-or-not-found" aria-controls="conditional-contestation-reason-4" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-doc-is-unknown-or-not-found">
+                        Entitlement document is unknown or not found. Please provide copy. [04]
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="lump-sum-category-is-incorrect" name="reasons-for-contestation" type="checkbox" value="Lump-sum category is incorrect. [05]" data-aria-controls="conditional-lump-sum-category-is-incorrect" aria-controls="conditional-contestation-reason-5" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="lump-sum-category-is-incorrect">
+                        Lump-sum category is incorrect. [05]
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="person-not-insured-during-lump-sum-period" name="reasons-for-contestation" type="checkbox" value="Person was not insured during lump-sum period. Please provide copy of entitlement document. [06]" data-aria-controls="conditional-person-not-insured-during-lump-sum-period" aria-controls="conditional-contestation-reason-6" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="person-not-insured-during-lump-sum-period">
+                        Person was not insured during lump-sum period. Please provide copy of entitlement document. [06]
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="period-of-lump-sum-not-covered-by-entitlement-period" name="reasons-for-contestation" type="checkbox" value="The period of lump-sum is not covered by the entitlement period. [07]" data-aria-controls="conditional-period-of-lump-sum-not-covered-by-entitlement-period" aria-controls="conditional-contestation-reason-7" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="period-of-lump-sum-not-covered-by-entitlement-period">
+                        The period of lump-sum is not covered by the entitlement period. [07]
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="period-of-lump-sum-partially-covered-by-entitlement-period" name="reasons-for-contestation" type="checkbox" value="The period of lump-sum is partially covered by the entitlement period. [08]" data-aria-controls="conditional-period-of-lump-sum-partially-covered-by-entitlement-period" aria-controls="conditional-contestation-reason-8" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="period-of-lump-sum-partially-covered-by-entitlement-period">
+                        The period of lump-sum is partially covered by the entitlement period. [08]
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="costs-to-be-settled-by-actual-costs-from-date-given" name="reasons-for-contestation" type="checkbox" value="The costs are to be settled by actual costs from the given date. [09]" data-aria-controls="conditional-costs-to-be-settled-by-actual-costs-from-date-given" aria-controls="conditional-contestation-reason-9" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="costs-to-be-settled-by-actual-costs-from-date-given">
+                        The costs are to be settled by actual costs from the given date. [09]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-9">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-actual-costs-should-cover-from-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the costs are to be settled by actual costs from
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-actual-costs-should-cover-from-hint">
+                          For example, 15 3 2025
+                        </div>
+                    
+                        <div class="nhsuk-date-input" id="date-actual-costs-should-cover-from">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-actual-costs-should-cover-from-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-actual-costs-should-cover-from-day" name="date-actual-costs-should-cover-from-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-actual-costs-should-cover-from-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-actual-costs-should-cover-from-month" name="date-actual-costs-should-cover-from-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-actual-costs-should-cover-from-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-actual-costs-should-cover-from-year" name="date-actual-costs-should-cover-from-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="costs-to-be-settled-by-actual-costs-until-date-given" name="reasons-for-contestation" type="checkbox" value="The costs are to be settled by actual costs until the given date. [10]" data-aria-controls="conditional-costs-to-be-settled-by-actual-costs-until-date-given" aria-controls="conditional-contestation-reason-10" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="costs-to-be-settled-by-actual-costs-until-date-given">
+                        The costs are to be settled by actual costs until the given date. [10]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-10">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-actual-costs-should-cover-until-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the costs are to be settled by actual costs until
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-actual-costs-should-cover-until-hint">
+                          For example, 15 3 2025
+                        </div>
+                    
+                        <div class="nhsuk-date-input" id="date-actual-costs-should-cover-until">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-actual-costs-should-cover-until-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-actual-costs-should-cover-until-day" name="date-actual-costs-should-cover-until-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-actual-costs-should-cover-until-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-actual-costs-should-cover-until-month" name="date-actual-costs-should-cover-until-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-actual-costs-should-cover-until-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-actual-costs-should-cover-until-year" name="date-actual-costs-should-cover-until-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="person-not-registered-on-entitlement-document" name="reasons-for-contestation" type="checkbox" value="The person is not registered on the entitlement document. [11]" data-aria-controls="conditional-person-not-registered-on-entitlement-document" aria-controls="conditional-contestation-reason-11" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="person-not-registered-on-entitlement-document">
+                        The person is not registered on the entitlement document. [11] 
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="entitlement-document-not-been-registered" name="reasons-for-contestation" type="checkbox" value="The entitlement document has not been registered. [12]" data-aria-controls="conditional-entitlement-document-not-been-registered" aria-controls="conditional-contestation-reason-12" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-document-not-been-registered">
+                        The entitlement document has not been registered. [12]
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="double-invoice-duplicated-invoice-number-given" name="reasons-for-contestation" type="checkbox" value="Double invoice. [13]" data-aria-controls="conditional-double-invoice-duplicated-invoice-number-given" aria-controls="conditional-contestation-reason-13" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="double-invoice-duplicated-invoice-number-given">
+                        Double invoice. [13]
+                      </label>
+                    </div>
+                    <!-- Input fields begin  -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-13">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-u-font-weight-bold" for="duplicated-global-imo-reference-label">
+                          Enter the duplicated global IMO reference
+                        </label> 
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" style="margin-bottom: 20px;" id="duplicated-global-imo-reference" name="duplicated-global-imo-reference" type="text">
+                        
+                        <label class="nhsuk-label nhsuk-u-font-weight-bold" for="duplicated-individual-imo-number-label">
+                          Enter the duplicated individual IMO number
+                        </label> 
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="duplicated-individual-imo-number" name="duplicated-individual-imo-number" type="text">
+                      </div>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="entitlement-in-state-of-residence-started-on-date-given" name="reasons-for-contestation" type="checkbox" value="The entitlement in the state of residence started on the date entered here. [14]" data-aria-controls="conditional-entitlement-in-state-of-residence-started-on-date-given" aria-controls="conditional-contestation-reason-14" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-in-state-of-residence-started-on-date-given">
+                        The entitlement in the state of residence started on the date entered here. [14]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-14">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-entitlement-in-state-of-residence-started-on-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the entitlement in the state of residence started on
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-entitlement-in-state-of-residence-started-on-hint">
+                          For example, 15 3 2025
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-entitlement-in-state-of-residence-started-on">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-in-state-of-residence-started-on-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-in-state-of-residence-started-on-day" name="date-entitlement-in-state-of-residence-started-on-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-in-state-of-residence-started-on-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-entitlement-in-state-of-residence-started-on-month" name="date-entitlement-in-state-of-residence-started-on-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-entitlement-in-state-of-residence-started-on-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-entitlement-in-state-of-residence-started-on-year" name="date-entitlement-in-state-of-residence-started-on-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="family-member-concerned-entitled-to-benefits-in-state-of-residence-since-date-given" name="reasons-for-contestation" type="checkbox" value="[15] Family member concerned is entitled to benefits in the state of residence" data-aria-controls="conditional-family-member-concerned-entitled-to-benefits-in-state-of-residence-since-date-given" aria-controls="conditional-contestation-reason-15" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="family-member-concerned-entitled-to-benefits-in-state-of-residence-since-date-given">
+                        Family member concerned is entitled to benefits in the state of residence. [15]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-15">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-family-member-became-entitled-to-benefits-in-state-of-residence-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the family member became entitled to benefits in their state of residence
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-family-member-became-entitled-to-benefits-in-state-of-residence-hint">
+                          For example, 15 3 2025
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-family-member-became-entitled-to-benefits-in-state-of-residence">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-family-member-became-entitled-to-benefits-in-state-of-residence-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-family-member-became-entitled-to-benefits-in-state-of-residence-day" name="date-family-member-became-entitled-to-benefits-in-state-of-residence-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-family-member-became-entitled-to-benefits-in-state-of-residence-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-family-member-became-entitled-to-benefits-in-state-of-residence-month" name="date-family-member-became-entitled-to-benefits-in-state-of-residence-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-family-member-became-entitled-to-benefits-in-state-of-residence-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-family-member-became-entitled-to-benefits-in-state-of-residence-year" name="date-family-member-became-entitled-to-benefits-in-state-of-residence-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="person-receives-pension-in-state-of-residence-from-date-given" name="reasons-for-contestation" type="checkbox" value="The person receives a pension in his/her state of residence. [16]" data-aria-controls="conditional-person-receives-pension-in-state-of-residence-from-date-given" aria-controls="conditional-contestation-reason-16" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="person-receives-pension-in-state-of-residence-from-date-given">
+                        The person receives a pension in his/her state of residence. [16]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-16">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-person-began-receiving-pension-in-state-of-residence-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the person began receiving a pension in their state of residence
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-person-began-receiving-pension-in-state-of-residence-hint">
+                          For example, 15 3 2025
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-person-began-receiving-pension-in-state-of-residence">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-began-receiving-pension-in-state-of-residence-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-person-began-receiving-pension-in-state-of-residence-day" name="date-person-began-receiving-pension-in-state-of-residence-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-began-receiving-pension-in-state-of-residence-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-person-began-receiving-pension-in-state-of-residence-month" name="date-person-began-receiving-pension-in-state-of-residence-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-began-receiving-pension-in-state-of-residence-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-person-began-receiving-pension-in-state-of-residence-year" name="date-person-began-receiving-pension-in-state-of-residence-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="person-receives-dominating-pension-from-another-ms" name="reasons-for-contestation" type="checkbox" value="The person receives a dominating pension from another state. [17]" data-aria-controls="conditional-person-receives-dominating-pension-from-another-ms" aria-controls="conditional-contestation-reason-17" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="person-receives-dominating-pension-from-another-ms">
+                        The person receives a dominating pension from another state. [17]
+                      </label>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="person-died-on-date-given" name="reasons-for-contestation" type="checkbox" value="The person died. [18]" data-aria-controls="conditional-person-died-on-date-given" aria-controls="conditional-contestation-reason-18" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="person-died-on-date-given">
+                        The person died. [18]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-18">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-person-died-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the person died
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-person-died-hint">
+                          For example, 15 3 2025
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-person-died">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-died-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-person-died-day" name="date-person-died-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-died-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-person-died-month" name="date-person-died-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-died-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-person-died-year" name="date-person-died-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="imo-introduced-after-deadline" name="reasons-for-contestation" type="checkbox" value="IMO introduced after deadline. [19]" data-aria-controls="conditional-imo-introduced-after-deadline" aria-controls="conditional-contestation-reason-19" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="imo-introduced-after-deadline">
+                        IMO introduced after deadline. [19]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-19">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-imo-introduced-after-deadline-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the IMO was introduced after the deadline
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-imo-introduced-after-deadline-hint">
+                          For example, 15 3 2025
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-imo-introduced-after-deadline">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-imo-introduced-after-deadline-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-imo-introduced-after-deadline-day" name="date-imo-introduced-after-deadline-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-imo-introduced-after-deadline-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-imo-introduced-after-deadline-month" name="date-imo-introduced-after-deadline-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-imo-introduced-after-deadline-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-imo-introduced-after-deadline-year" name="date-imo-introduced-after-deadline-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="contestation-imo-reply-received-after-deadline" name="reasons-for-contestation" type="checkbox" value="Contestation IMO reply received after deadline. [20]" data-aria-controls="conditional-contestation-imo-reply-received-after-deadline" aria-controls="conditional-contestation-reason-20" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="contestation-imo-reply-received-after-deadline">
+                        Contestation IMO reply received after deadline. [20]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-20">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-contestation-imo-reply-received-after-deadline-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the contestation IMO reply was received after the deadline
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-contestation-imo-reply-received-after-deadline-hint">
+                          For example, 15 3 2025
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-contestation-imo-reply-received-after-deadline">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-imo-reply-received-after-deadline-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-contestation-imo-reply-received-after-deadline-day" name="date-contestation-imo-reply-received-after-deadline-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-imo-reply-received-after-deadline-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-contestation-imo-reply-received-after-deadline-month" name="date-contestation-imo-reply-received-after-deadline-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-imo-reply-received-after-deadline-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-contestation-imo-reply-received-after-deadline-year" name="date-contestation-imo-reply-received-after-deadline-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="person-moved-to-another-state-on-date-given" name="reasons-for-contestation" type="checkbox" value="Person moved to another state. [21]" data-aria-controls="conditional-person-moved-to-another-state-on-date-given" aria-controls="conditional-contestation-reason-21" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="person-moved-to-another-state-on-date-given">
+                        Person moved to another state. [21]
+                      </label>
+                    </div>
+                    <!-- Date entry begins -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contestation-reason-21">
+                      <fieldset class="nhsuk-fieldset" role="group" aria-describedby="date-person-moved-to-another-state-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s">
+                          <h2 class="nhsuk-fieldset__heading">
+                            Enter the date the person moved to another state
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="date-person-moved-to-another-state-hint">
+                          For example, 15 3 2025
+                        </div>
+
+                        <div class="nhsuk-date-input" id="date-person-moved-to-another-state">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-moved-to-another-state-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-person-moved-to-another-state-day" name="date-person-moved-to-another-state-day" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-moved-to-another-state-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-person-moved-to-another-state-month" name="date-person-moved-to-another-state-month" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="date-person-moved-to-another-state-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-person-moved-to-another-state-year" name="date-person-moved-to-another-state-year" type="text" inputmode="numeric">
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="other" name="reasons-for-contestation" type="checkbox" value="Other. [99]" data-aria-controls="conditional-other-reason" aria-controls="conditional-contestation-reason-22" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="other">
+                        Other - add reason in text box. [99]
+                      </label>
+                    </div>
+                    <!-- Other reason comments begin -->
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label nhsuk-u-visually-hidden" for="otherContestationReason">Other reason in detail</label>
+                      
+                      <textarea class="nhsuk-textarea" id="otherContestedReason" rows="5" name="other-contestation-reason"></textarea>
+                  </div>
+
+                  </div>
+                <!-- End of checkboxes -->
+                
+                <input type="hidden" name="invoice" value="{{ data.invoice }}">
+                <button class="nhsuk-button" type="submit">Save and submit</button>
+              </form>
+              {% endif %}
+
+              </div>
+            </div>
+            <!-- End of main content-->
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+  .nhsuk-summary-list__key {
+    font-size: 19px;
+    font-weight: bold;
+  }
+</style>
+{% endblock %}

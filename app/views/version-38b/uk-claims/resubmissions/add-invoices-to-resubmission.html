@@ -1,0 +1,813 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Select invoices to add to resubmission
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View Claim ID (Add invoices to resub)</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h1 class="nhsuk-heading-l" style="margin-bottom: 0;">
+                    Claim ID 100005 - Invoices for<br>
+                    S1/S072 Article 63, 2.b - 20 to 64 years
+                  </h1>
+                  <a href="check-invoices-added-to-resubmission">
+                    <button class="nhsuk-button" type="submit" id="add-invoices-button">
+                      Add invoices to resubmission
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-summary">Claim summary</a>
+                  <span class="nhsuk-u-visually-hidden">View the overall summary for claim 100005</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="claim-invoices">Invoices</a>
+                  <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
+                </li>
+
+                <!--li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                  <span class="nhsuk-u-visually-hidden">View the age groups for claim 100005</span>
+                </li-->
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-documents">Claim documents</a>
+                  <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-resubmissions">Resubmissions</a>
+                  <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-history">Claim history</a>
+                  <span class="nhsuk-u-visually-hidden">View case history for claim 100005</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+
+          <!-- start search-->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-hint">
+                Search for a single invoice using the invoice ID number or a person's last name.
+                Search for up to 8 invoices at once by separating each invoice ID number with a comma.
+                For example, 111110, 111112, 111113.
+              </div>
+
+              <form class="nhsuk-header__search-form nhsuk-header__search-form--search-results" id="search"
+                action="/search/" method="get" role="search">
+
+                <label class="nhsuk-u-visually-hidden" for="search-results-field">Search by treatment ID or last name to add treatments for printing or to resubmit</label>
+
+                <input class="nhsuk-search__input" id="search-results-field" name="search-field" type="search">
+                <a class="nhsuk-search__submit" href="#">
+                  <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    aria-hidden="true" focusable="false">
+                    <path
+                      d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z">
+                    </path>
+                  </svg>
+                  <span class="nhsuk-u-visually-hidden">Search</span>
+                </a>
+
+              </form>
+
+            </div>
+          </div>
+          <!--end search-->
+
+          <form action="add-invoices-to-resubmission" method="post">
+
+          <!-- Start of Invoices table -->
+          <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
+            <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
+              <tr role="row">
+                <th role="columnheader" class="" scope="col">
+                  <a class="claim-clear-search-link select-all-link"
+                    href="#"
+                    id="select-all-link">
+                    <span>Select all<span class="nhsuk-u-visually-hidden">invoices listed</span></span>
+                  </a>
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Invoice ID
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  First names
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Last name
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Months claimed
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Accounting period
+                </th>
+                <th role="columnheader" class="" scope="col">
+                  Action
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="nhsuk-table__body">
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="234892"
+                            id="checkoxId_01"
+                            name="selectedInvoices"
+                            data-firstname="Jacqueline"
+                            data-lastname="Bernard"
+                            data-months="5"
+                            data-period="01/01/2024 - 31/05/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_01">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>234892</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Jacqueline</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Bernard</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>5</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 31/05/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Jacqueline Bernard</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="495729"
+                            id="checkoxId_02"
+                            name="selectedInvoices"
+                            data-firstname="Jean-Luc"
+                            data-lastname="Bernard"
+                            data-months="8"
+                            data-period="01/01/2024 - 31/08/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_02">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>495729</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Jean-Luc</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Bouchard</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>8</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 31/08/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Jean-Luc Bouchard</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="298473"
+                            id="checkoxId_03"
+                            name="selectedInvoices"
+                            data-firstname="Jane"
+                            data-lastname="Doe"
+                            data-months="3"
+                            data-period="05/10/2024 - 31/12/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_03">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>298473</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Jane</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Doe</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>3</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>05/10/2024 - 31/12/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="../../s1/account/dependant/s1-entitlement-content/s1-entitlement-details">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Jane Doe</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="387731"
+                            id="checkoxId_04"
+                            name="selectedInvoices"
+                            data-firstname="John"
+                            data-lastname="Doe"
+                            data-months="4"
+                            data-period="05/09/2024 - 31/12/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_04">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>387731</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>John</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Doe</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>4</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>05/09/2024 - 31/12/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="../../s1/account/entitlement-content/s1-entitlement-details">View entitlement details</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="947583"
+                            id="checkoxId_05"
+                            name="selectedInvoices"
+                            data-firstname="Charles"
+                            data-lastname="Dupont"
+                            data-months="5"
+                            data-period="01/01/2024 - 31/05/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_05">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>947583</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Charles</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Dupont</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>5</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 31/05/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Charles Dupont</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="248829"
+                            id="checkoxId_06"
+                            name="selectedInvoices"
+                            data-firstname="Paul"
+                            data-lastname="Germain"
+                            data-months="2"
+                            data-period="01/01/2024 - 29/02/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_06">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>248829</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Paul</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Germain</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>2</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 29/02/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Paul Germain</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="378392"
+                            id="checkoxId_07"
+                            name="selectedInvoices"
+                            data-firstname="Sophie"
+                            data-lastname="Janview"
+                            data-months="9"
+                            data-period="01/01/2024 - 30/09/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_07">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>378392</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Sophie</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Janview</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>9</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 30/09/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Sophie Janview</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="458825"
+                            id="checkoxId_08"
+                            name="selectedInvoices"
+                            data-firstname="Henri"
+                            data-lastname="Leandres"
+                            data-months="9"
+                            data-period="01/01/2024 - 30/09/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_08">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>458825</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Henri</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Leandres</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>6</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 30/06/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Henri Leandres</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="324778"
+                            id="checkoxId_09"
+                            name="selectedInvoices"
+                            data-firstname="Dione"
+                            data-lastname="Martin"
+                            data-months="9"
+                            data-period="01/01/2024 - 30/09/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_09">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>324778</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Dione</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Martin</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>9</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 30/09/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Dione Martin</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <fieldset class="nhsuk-fieldset">
+                     <legend
+                        class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden">
+                        <span class="nhsuk-u-visually-hidden">checkboxes</span>
+    
+                     </legend>
+                     <div class="nhsuk-checkboxes">
+                        <div class="nhsuk-checkboxes__item ">
+    
+                          <div>
+                            <input class="invoice-checkbox nhsuk-checkboxes__input"
+                            type="checkbox" onclick="hideBanner();"
+                            value="398198"
+                            id="checkoxId_10"
+                            name="selectedInvoices"
+                            data-firstname="Charles"
+                            data-lastname="Thomas"
+                            data-months="11"
+                            data-period="01/01/2024 - 30/11/2024">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_10">
+                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
+                              </label>
+                          </div>
+                        </div>
+                     </div>
+                  </fieldset>
+               </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>398198</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Charles</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Thomas</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months claimed</span>
+                  <span>11</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  <span>01/01/2024 - 30/11/2024</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="#">View entitlement details</a><span class="nhsuk-u-visually-hidden">for Charles Thomas</span></span>
+                </td>
+              </tr>
+    
+              
+            </tbody>
+    
+          </table>
+          <!-- End of Invoices table -->
+    
+    
+           <!-- Pagination starts -->
+            <nav class="nav" role="navigation" aria-label="Pagination">
+              <ul class="pagination">
+                  <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
+                  <li class="pagination__item"><a class="pagination__link current" href="#">2</a></li>
+              </ul>
+    
+              <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 18 invoices</div>
+            </nav>
+            <!-- Pagination ends -->
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Disable 'Add invoices to resubmission' button until at least one invoice has been selected -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll(".invoice-checkbox");
+    const addInvoicesButton = document.getElementById("add-invoices-button"); 
+    
+    // Start disabled but keep the appearance normal
+    addInvoicesButton.style.pointerEvents = "none"; 
+    addInvoicesButton.style.opacity = "1"; // Ensures it doesn't look faded
+
+    function updateButtonState() {
+        const anyChecked = [...checkboxes].some(checkbox => checkbox.checked);
+        addInvoicesButton.style.pointerEvents = anyChecked ? "auto" : "none"; // Enable/disable clicks
+    }
+
+    function saveSelectedInvoices() {
+        const selectedInvoices = [...checkboxes]
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => ({
+                id: checkbox.value,
+                firstName: checkbox.dataset.firstname,
+                lastName: checkbox.dataset.lastname,
+                months: checkbox.dataset.months,
+                period: checkbox.dataset.period
+            }));
+
+        console.log("Saving invoices:", selectedInvoices); // Debugging line
+        sessionStorage.setItem("selectedInvoices", JSON.stringify(selectedInvoices));
+    }
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", () => {
+            updateButtonState();
+            saveSelectedInvoices();
+        });
+    });
+
+    // Initialize button state on page load
+    updateButtonState();
+});
+
+// Select all invoices link
+// Handle "Select all" link click
+document.getElementById("select-all-link").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const checkboxes = document.querySelectorAll(".invoice-checkbox");
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+    });
+
+    // Trigger the same logic as individual checkbox changes
+    updateButtonState();
+    saveSelectedInvoices();
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,144 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search for an institution by institution ID - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="institution-ID-search-results" method="post">
+
+                      <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                          S1/S072 entitlement registration
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Search for an institution in {% if data['s1-entitlement-country-of-issue'] %}{{ data['s1-entitlement-country-of-issue'] }}{% else %}France{% endif %}
+                      </h1>
+                    </div>
+
+
+                    <div class="nhsuk-grid-column-full">
+                      <ul class="nhsuk-secondary-navigation__list">
+                        <li class="nhsuk-secondary-navigation__item tab-header__navigation-item__item--current">
+                          <a id="tab_institution_id" class="nhsuk-secondary-navigation__link" href="institution-ID-search-results" aria-label="search using the Institution ID">
+                            <span>Institution ID</span>
+                          </a>
+                        </li>
+                        <li class="nhsuk-secondary-navigation__item">
+                          <a id="tab_institution_name" class="nhsuk-secondary-navigation__link" href="search-institution-name" aria-label="search using the Institution name">
+                            <span>Institution name</span>
+                          </a>
+                        </li>
+                      </ul>
+                      <hr class="nhsuk-grid-column-one-full gray-horizontal-line">
+
+                      <br>
+
+                      <div class="nhsuk-form-group">
+                        <div id="institutionName-hint" class="nhsuk-label">
+                          <p class="nhsuk-hint">
+                            <span>Enter the institution ID as it is shown on the S1/S072 form.</span>
+                          </p>
+                        </div>
+                        <input class="nhsuk-input nhsuk-input--width-20" id="institutionName" type="text" autocomplete="off" name="searchInstitutionDTO.institutionName" value="0305300000">
+                      </div>
+
+                      <div class="nhsuk-form-group">
+                        <button class="nhsuk-button" type="submit">Search</button>
+                      
+                        <p><a href="../account/entitlements-and-enquiries">Cancel</a></p>
+                      </div>
+
+                      <br>
+
+                      <!-- when total records found result table start-->
+                      <div id="result">
+                        <div role="alert" class="nhsuk-label--m" id="non_zero_records">
+                          <h2 class="nhsuk-label--m">1 result found</h2>
+                        </div>
+                        <p><a href="/version-38a/s1/s072-registration/search-institution-ID">Clear search results</a></p>
+                      </div>
+                      <!-- when no record found result table end -->
+
+                      <div class="nhsuk-hint">Select the correct institution to continue.</div>
+
+                      <table role="table" class="nhsuk-table-responsive nhsuk-u-padding-bottom-6" id="institution-table">
+                        <caption class="nhsuk-table__caption"></caption>
+                        <thead role="rowgroup" class="nhsuk-table__head">
+                          <tr role="row">
+                            <th role="columnheader" scope="col">Institution ID</th>
+                            <th role="columnheader" scope="col">Institution name</th>
+                            <th role="columnheader" scope="col">Institution address</th>
+                            <th role="columnheader" scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody class="nhsuk-table__body">
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Institution ID</span>
+                              <p id="institutionDTO.institutionNumber_0">0305300000</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Institution name</span>
+                              <p id="institutionDTO.institutionName_0">Caisse Regionale des Professions Liberales D'ile de France</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Institution address</span>
+                              <p id="institutionDTO.fullAddress_0">
+                                22 Rue Violet<br>
+                                Paris<br>
+                                75015<br>
+                                France (FR)
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              <a aria-label="Select the institution with the institution ID 104940005" href="entitlement-details-cya" id="institutionDTO.institutionNumber_Select_0"> Select </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+
+
+                    </form>
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

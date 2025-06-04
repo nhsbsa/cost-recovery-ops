@@ -1,0 +1,183 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search results page
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+                <ol class="nhsuk-breadcrumb__list">
+                    <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="uk-claims">UK claims
+                            (Search)</a></li>
+                    <li class="nhsuk-breadcrumb__item">Search results</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-two-thirds">
+                            <h1 class="nhsuk-heading-xl">
+                                Search results
+                            </h1>
+                        </div>
+                        <div class="nhsuk-grid-column-one-third">
+                            <a href="create-new-claim"><button class="nhsuk-button" type="submit" style="float:right">
+                                    Create new claim
+                                </button></a>
+                        </div>
+                    </div>
+
+                    <hr style="border-bottom:4px solid #005eb8; margin:0">
+
+                    <div class="nhsuk-grid-row">
+                        <div class="nhsuk-grid-column-full">
+                            <br>
+                            <h2 class="nhsuk-heading-s">Showing results for <span class="nhsuk-tag nhsuk-tag--green"
+                                    style="color: #354550; margin-right:20px; margin-left:5px;">EHIC and PRC - Article
+                                    62</span>
+                            </h2>
+
+                            <table id="search-result-table-id" role="table" class="nhsuk-table-responsive new-table">
+                                <caption class="nhsuk-table__caption"></caption>
+                                <thead role="rowgroup" class="nhsuk-table__head">
+                                    <tr role="row">
+                                        <th role="columnheader" scope="col" id="claim-id">Claim ID</th>
+                                        <th role="columnheader" scope="col" id="claim-year">Year</th>
+                                        <th role="columnheader" scope="col" id="claim-month">Month</th>
+                                        <th role="columnheader" scope="col" id="claim-entitlement-type">Entitlement type
+                                        </th>
+                                        <th role="columnheader" scope="col" id="claim-country">Country</th>
+                                        <th role="columnheader" scope="col" id="claim-status">Status</th>
+                                        <th role="columnheader" scope="col" id="claim-created-by">Created by</th>
+                                        <th role="columnheader" scope="col" id="view-claim">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="result" class="nhsuk-table__body">
+                                    <tr role="row" class="nhsuk-table__row">
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                                            <p class="responsive-table-values" id="claim_id_0">341516</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Year</span>
+                                            <p class="responsive-table-values" id="searchClaimYear_0">2023</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Month</span>
+                                            <p class="responsive-table-values" id="searchClaimMonth_0">June</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Entitlement type</span>
+                                            <p class="responsive-table-values" id="searchClaimentitlementArticleType_0">
+                                                EHIC &amp; PRC</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Country</span>
+                                            <p class="responsive-table-values" id="searchClaimCountry_0">Germany (DE)</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Status</span>
+                                            <p class="responsive-table-values">
+                                                <strong id="searchClaimStatus_0" strong="" style="color: #354550" ;=""
+                                                    class="nhsuk-tag no-caps nhsuk-tag--purple">Claimed</strong>
+                                            </p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Created by</span>
+                                            <p class="responsive-table-values" id="searchClaimCreatedBy_0">
+                                                Ops.crtest1@nhs.net</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell" value="341515">
+                                            <span class="nhsuk-table-responsive__heading">Action</span>
+                                            <a id="viewClaim_0" class="responsive-table-values"
+                                                href="#">
+                                                View claim
+                                                <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                <span class="nhsuk-u-visually-hidden">with the claim ID 341515</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr role="row" class="nhsuk-table__row">
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                                            <p class="responsive-table-values" id="claim_id_0">341271</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Year</span>
+                                            <p class="responsive-table-values" id="searchClaimYear_0">2023</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Month</span>
+                                            <p class="responsive-table-values" id="searchClaimMonth_0">March</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Entitlement type</span>
+                                            <p class="responsive-table-values" id="searchClaimentitlementArticleType_0">
+                                                EHIC &amp; PRC</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Country</span>
+                                            <p class="responsive-table-values" id="searchClaimCountry_0">Germany (DE)</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Status</span>
+                                            <p class="responsive-table-values">
+                                                <strong id="searchClaimStatus_0" strong="" style="color: #354550" ;=""
+                                                    class="nhsuk-tag no-caps nhsuk-tag--purple">Claimed</strong>
+                                            </p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell">
+                                            <span class="nhsuk-table-responsive__heading">Created by</span>
+                                            <p class="responsive-table-values" id="searchClaimCreatedBy_0">
+                                                Ops.crtest1@nhs.net</p>
+                                        </td>
+                                        <td role="cell" class="nhsuk-table__cell" value="341515">
+                                            <span class="nhsuk-table-responsive__heading">Action</span>
+                                            <a id="viewClaim_0" class="responsive-table-values"
+                                                href="#">
+                                                View claim
+                                                <span class="nhsuk-u-visually-hidden">&nbsp;</span>
+                                                <span class="nhsuk-u-visually-hidden">with the claim ID 341515</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
