@@ -103,51 +103,6 @@ View pending resubmissions
                   </thead>
   
                   <tbody class="nhsuk-table__body">
-                    {% if data['create-new-resub'] == 'yes' %}
-                    <tr role="row" class="nhsuk-table__row">
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Resubmission ID</span>
-                        <span>1160158</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
-                        <span>100005</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Country</span>
-                        <span>France (FR)</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
-                        <span>12/03/2026</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
-                        {% if data.resubStatus == 'assigned-for-review' or data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' %}
-                          <span>nina.evans@nhsbsa.nhs.uk</span>
-                        {% else %}
-                          <span>joe.bloggs@nhsbsa.nhs.uk</span>
-                        {% endif %}
-                      </td>                      
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Resubmission status</span>
-                        {% if data.resubStatus == 'peer-review-requested' %}
-                          <span><strong class="nhsuk-tag nhsuk-tag--green">To review</strong></span>
-                        {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
-                          <span> <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong></span>
-                        {% elif data.resubStatus == 'invoices-added-to-resub' %}
-                          <span><strong class="nhsuk-tag nhsuk-tag--green">In progress</strong></span>
-                        {% else %}
-                          <span><strong class="nhsuk-tag no-caps nhsuk-tag--grey">To action</strong></span>
-                        {% endif %}
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Action</span>
-                        <span><a href="../uk-claims/resubmissions/claim-resubmissions">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 7790992</span></span>
-                      </td>
-                    </tr>
-                    {% endif %}
-
                     {% if data.resubStatus != 'resubmission-completed' %}
                     <tr role="row" class="nhsuk-table__row">
                       <td role="cell" class="nhsuk-table__cell">
