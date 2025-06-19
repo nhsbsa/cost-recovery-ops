@@ -1,0 +1,1728 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005: Resub ID 7790992 - View invoice details
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/invoices-within-resubmission">View Resub ID (Invoices within resubmission)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View details (Invoice details)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+{% set invoice = data['invoice'] %}
+{% set status = data.invoiceStatuses[invoice] %}
+
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {% if data['invoice'] == 'Jacqueline' %}
+            <!-- Start of Jacqueline Bernard's invoice details -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                  Claim ID 100005: Resub ID 7790992<br>
+                  (Invoice ID 234892) - Invoice details
+                </h1>
+              </div>
+
+              {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 234892 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 234892 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 234892 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+              {% endif %}
+          
+            </div>
+
+            
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-details?invoice=Jacqueline">Invoice details</a>
+                <span class="nhsuk-u-visually-hidden">View details for invoice ID 234892</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Jacqueline">Reasons for contestation</a>
+                <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 234892</span>
+              </li>
+
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Jacqueline">Evidence</a>
+                <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 234892</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+          
+            <!-- Beginning of content -->
+            <div class="nhsuk-grid-row">
+              <!-- Start of invoice details panel -->
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Resub ID linked to this invoice
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          7790992
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Entitlement ID linked to this claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          292833
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="#">
+                            View<span class="nhsuk-u-visually-hidden">entitlement details</span>
+                          </a>
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Person record ID
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          383874
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="#">
+                            View<span class="nhsuk-u-visually-hidden">person record</span>
+                          </a>
+                        </dd>
+                      </div>
+                      
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First names
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Jacqueline
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Bernard
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Country of claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          France (FR)
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Invoice status
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% set status = data.invoiceStatuses['Jacqueline'] %}
+                          {% if status == 'Partial' %}
+                            Partial
+                          {% elif status == 'Withdrawn' %}
+                            Withdrawn
+                          {% elif status == 'Maintained' %}
+                            Maintained
+                          {% else %}
+                            Withdrawn
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Source of withdrawal request</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['withdrawal-source'] %}
+                              {{ data['withdrawal-source'] }}
+                            {% else %}
+                              Member State
+                            {% endif %}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Withdrawal reason</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            Contestation accepted in full and IMO concerned is decreased. [01]
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <!-- only display additional comments if user input comments during withdraw journey -->
+                        {% if data['add-withdraw-additional-comments'] == 'yes' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                          <dd class="nhsuk-summary-list__value">
+                              {{ data['withdraw-additional-comments'] }}
+                          </dd>
+
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+                        {% endif %}
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                          <dd class="nhsuk-summary-list__value">5</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                          <dd class="nhsuk-summary-list__value">01/01/2024 - 31/05/2024</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Total amount of withdrawn months</dt>
+                          <dd class="nhsuk-summary-list__value">5</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                        <dd class="nhsuk-summary-list__value">0</dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                        <dd class="nhsuk-summary-list__value">-</dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                  </dl>
+
+              </div>
+            </div>
+
+          </div>
+          <!-- End of invoice details panel -->
+          <!-- End of Jacqueline Bernard's invoice details -->
+            
+            {% elif data['invoice'] == 'Jane' %}
+            <!-- Start of Jane Doe's invoice details for resub ID: 7790992-->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                  Claim ID 100005: Resub ID 7790992<br>
+                  (Invoice ID 298473) - Invoice details
+                </h1>
+              </div>
+
+              <!-- Do not show these three buttons once the resub has been peer reviewed onwards -->
+              {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+              {% endif %}
+          
+            </div>
+
+            
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-details?invoice=Jane">Invoice details</a>
+                <span class="nhsuk-u-visually-hidden">View details for invoice ID 298473</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Jane">Reasons for contestation</a>
+                <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 298473</span>
+              </li>
+
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Jane">Evidence</a>
+                <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 298473</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+          
+            <!-- Beginning of content -->
+            <div class="nhsuk-grid-row">
+              <!-- Start of invoice details panel -->
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Resub ID linked to this invoice
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          7790992
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Entitlement ID linked to this claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          100002
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="../../s1/account/dependant/s1-entitlement-content/s1-entitlement-details">
+                            View<span class="nhsuk-u-visually-hidden">entitlement details</span>
+                          </a>
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Person record ID
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          654321
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="../../s1/account/dependant/personal-details?dr-add-s1-entitlement=yes">
+                            View<span class="nhsuk-u-visually-hidden">person record</span>
+                          </a>
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First names
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Jane
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Doe
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Country of claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          France (FR)
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Invoice status
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% set status = data.invoiceStatuses['Jane'] %}
+                          {% if status == 'Partial' %}
+                            Partial
+                          {% elif status == 'Withdrawn' %}
+                            Withdrawn
+                          {% elif status == 'Maintained' %}
+                            Maintained
+                          {% else %}
+                            Maintained
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Maintain reason</dt>
+                          <dd class="nhsuk-summary-list__value">
+                              Other. [99]
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Other reason comments</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            Member State said main insured, John Doe (Invoice ID: 387731), died on 15/10/2024 but has not provided the S016, so have requested this.
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>   
+                        
+                        <!-- only display additional comments if user input comments during maintain journey -->
+                        {% if data['add-maintain-additional-comments'] == 'yes' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                          <dd class="nhsuk-summary-list__value">
+                              {{ data['maintain-additional-comments'] }}
+                          </dd>
+
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                          <dd class="nhsuk-summary-list__value">05/10/2024 - 31/12/2024</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                          <dd class="nhsuk-summary-list__value">05/10/2024 - 31/12/2024</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                    </dl>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- End of resub details panel -->
+        <!-- End of Jane Doe's invoice details for resub ID: 7790992 --->
+
+        
+        {% elif data['invoice'] == 'John' %}
+        <!-- Start of John Doe's invoice details for resub ID: 7790992-->
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-one-half">
+            <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+              Claim ID 100005: Resub ID 7790992<br>
+              (Invoice ID 387731) - Invoice details
+            </h1>
+          </div>
+
+          <!-- Do not show these three buttons once the resub has been peer reviewed onwards -->
+          {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+          <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+            <!-- Top two buttons side by side -->
+            <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+              <a href="reasons-to-maintain-months">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                </button>
+              </a>
+          
+              <a href="source-of-withdrawal">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                </button>
+              </a>
+            </div>
+          
+            <!-- Third button on a new line below -->
+            <div style="margin-top: -10px;">
+              <a href="partially-maintain-and-partially-withdraw-months">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                </button>
+              </a>
+            </div>
+            
+          </div>
+          {% endif %}
+      
+        </div>
+
+        
+      <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+        <ul class="nhsuk-secondary-navigation__list">
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-details?invoice=John">Invoice details</a>
+            <span class="nhsuk-u-visually-hidden">View details for invoice ID 387731</span>
+          </li>
+
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=John">Reasons for contestation</a>
+            <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 387731</span>
+          </li>
+
+
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=John">Evidence</a>
+            <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 387731</span>
+          </li>
+        </ul>
+      </nav>
+
+      <hr style="border-bottom:1px solid #ccc; margin:0">
+      <!--end secondary navigation-->
+
+      <br><br>
+      
+        <!-- Beginning of content -->
+        <div class="nhsuk-grid-row">
+          <!-- Start of invoice details panel -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+                <dl class="nhsuk-summary-list">
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Resub ID linked to this invoice
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      7790992
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Entitlement ID linked to this claim
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      100001
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="../../s1/account/entitlement-content/s1-entitlement-details">
+                        View<span class="nhsuk-u-visually-hidden">entitlement details</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Person record ID
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      123456
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="../../s1/account/personal-details">
+                        View<span class="nhsuk-u-visually-hidden">person record</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      First names
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      John
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Last name
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      Doe
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Country of claim
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      France (FR)
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Invoice status</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% set status = data.invoiceStatuses['John'] %}
+                      {% if status == 'Partial' %}
+                        Partial
+                      {% elif status == 'Withdrawn' %}
+                        Withdrawn
+                      {% elif status == 'Maintained' %}
+                        Maintained
+                      {% else %}
+                        Maintained
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+                    
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Maintain reason</dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Other. [99]
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <!-- Action -->
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Other reason comments</dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Member State said person died on 15/10/2024 but has not provided the S016, so have requested this.
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <!-- Action -->
+                      </dd>
+                    </div>
+
+                    <!-- only display additional comments if user input comments during maintain journey -->
+                    {% if data['add-maintain-additional-comments'] == 'yes' %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                      <dd class="nhsuk-summary-list__value">
+                          {{ data['maintain-additional-comments'] }}
+                      </dd>
+
+                      <dd class="nhsuk-summary-list__actions">
+                        <!-- Action -->
+                      </dd>
+                    </div>
+                    {% endif %}
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                      <dd class="nhsuk-summary-list__value">4</dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <!-- Action -->
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                      <dd class="nhsuk-summary-list__value">05/09/2024 - 31/12/2024</dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <!-- Action -->
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                      <dd class="nhsuk-summary-list__value">4</dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <!-- Action -->
+                      </dd>
+                    </div>
+                    
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                      <dd class="nhsuk-summary-list__value">4</dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <!-- Action -->
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                      <dd class="nhsuk-summary-list__value">05/09/2024 - 31/12/2024</dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <!-- Action -->
+                      </dd>
+                    </div>
+
+                </dl>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- End of resub details panel -->
+    <!-- End of Jane Doe's invoice details for resub ID: 7790992 --->
+
+
+    {% elif data['invoice'] == 'Paul' %}
+    <!-- Start of Paul Germain's invoice details -->
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-one-half">
+            <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+              Claim ID 100005: Resub ID 7790992<br>
+              (Invoice ID 248829) - Invoice details
+            </h1>
+          </div>
+
+          <!-- Do not show these three buttons once the resub has been peer reviewed onwards -->
+          {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+          <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+            <!-- Top two buttons side by side -->
+            <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+              <a href="reasons-to-maintain-months">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 248829 from claim ID 100005</span>
+                </button>
+              </a>
+          
+              <a href="source-of-withdrawal">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 248829 from claim ID 100005</span>
+                </button>
+              </a>
+            </div>
+          
+            <!-- Third button on a new line below -->
+            <div style="margin-top: -10px;">
+              <a href="partially-maintain-and-partially-withdraw-months">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 248829 from claim ID 100005</span>
+                </button>
+              </a>
+            </div>
+            
+          </div> 
+          {% endif %}
+      
+        </div>
+
+        
+      <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+        <ul class="nhsuk-secondary-navigation__list">
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-details?invoice=Paul">Invoice details</a>
+            <span class="nhsuk-u-visually-hidden">View details for invoice ID 248829</span>
+          </li>
+
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Paul">Reasons for contestation</a>
+            <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 248829</span>
+          </li>
+
+
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Paul">Evidence</a>
+            <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 248829</span>
+          </li>
+        </ul>
+      </nav>
+
+      <hr style="border-bottom:1px solid #ccc; margin:0">
+      <!--end secondary navigation-->
+
+      <br><br>
+      
+        <!-- Beginning of content -->
+        <div class="nhsuk-grid-row">
+          <!-- Start of invoice details panel -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+                <dl class="nhsuk-summary-list">
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Resub ID linked to this invoice
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      7790992
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+  
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Entitlement ID linked to this claim
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      374788
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="#">
+                        View<span class="nhsuk-u-visually-hidden">entitlement details</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Person record ID
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      018374
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="#">
+                        View<span class="nhsuk-u-visually-hidden">person record</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      First names
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      Paul
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Last name
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      Germain
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Country of claim
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      France (FR)
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Invoice status
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% set status = data.invoiceStatuses['Paul'] %}
+                      {% if status == 'Partial' %}
+                        Partial
+                      {% elif status == 'Withdrawn' %}
+                        Withdrawn
+                      {% elif status == 'Maintained' %}
+                        Maintained
+                      {% else %}
+                        Partial
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                    <dd class="nhsuk-summary-list__value">2</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                    <dd class="nhsuk-summary-list__value">01/01/2024 - 29/02/2024</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                    <dd class="nhsuk-summary-list__value">1</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                    <dd class="nhsuk-summary-list__value">01/01/2024 - 31/01/2024</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                </dl>
+
+              </div>
+            </div>
+
+          </div>
+          <!-- End of invoice details panel -->
+
+
+          <!-- Start of Partially maintained and withdrawn months panel -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+
+                <h2 class="nhsuk-heading-m">Maintained details</h2>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="start-date-of-first-partially-maintained-month-label">Start date of first maintained month</dt>
+                    <dd class="nhsuk-summary-list__value" id="start-date-of-first-partially-maintained-month-value">
+                        01/01/2024
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="end-date-of-last-partially-maintained-month-label">End date of last maintained month</dt>
+                    <dd class="nhsuk-summary-list__value" id="end-date-of-last-partially-maintained-month-value">
+                        31/01/2024
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="total-number-of-partially-maintained-months-label">Total number of maintained months</dt>
+                    <dd class="nhsuk-summary-list__value" id="total-number-of-partially-maintained-months-value">
+                        1
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reasons-to-partially-maintain-months-label">Reasons to partially maintain months</dt>
+                    <dd class="nhsuk-summary-list__value" id="reasons-to-partially-maintain-months-value">
+                        Enclosed you find the entitlement documents. [13]
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+                </dl>
+
+
+                <h2 class="nhsuk-heading-m">Withdrawn details</h2>
+
+                  <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="start-date-of-first-partially-withdrawn-month-label">Start date of first withdrawn month</dt>
+                    <dd class="nhsuk-summary-list__value" id="start-date-of-first-partially-withdrawn-month-value">01/02/2024</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="end-date-of-last-partially-withdrawn-month-label">End date of last withdrawn month</dt>
+                    <dd class="nhsuk-summary-list__value" id="end-date-of-last-partially-withdrawn-month-value">29/02/2024</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="total-number-of-partially-withdrawn-months-label">Total number of withdrawn months</dt>
+                    <dd class="nhsuk-summary-list__value" id="total-number-of-partially-withdrawn-months-value">
+                        1
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="source-of-withdrawal-label">Source of withdrawal request</dt>
+                    <dd class="nhsuk-summary-list__value" id="source-of-withdrawal-value">
+                        Member State
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reasons-to-partially-withdraw-months-label">Reasons to withdraw months</dt>
+                    <dd class="nhsuk-summary-list__value" id="reasons-to-partially-withdraw-months-value">
+                      Contestation partially accepted and IMO concerned is decreased. [02]
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <!-- only display additional comments if user input comments during partial journey -->
+                  {% if data['add-partial-additional-comments'] == 'yes' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                    <dd class="nhsuk-summary-list__value">
+                        {{ data['partial-additional-comments'] }}
+                    </dd>
+
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+                  {% endif %}
+                </dl>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- End of Partially maintained and withdrawn months panel -->
+    <!-- End of Paul Germain's invoice details -->
+
+
+    {% elif data['invoice'] == 'Sophie' %}
+    <!-- Start of Sophie Janview's invoice details -->
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-one-half">
+            <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+              Claim ID 100005: Resub ID 7790992<br>
+              (Invoice ID 378392) - Invoice details
+            </h1>
+          </div>
+
+          <!-- Do not show these three buttons once the resub has been peer reviewed onwards -->
+          {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+          <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+            <!-- Top two buttons side by side -->
+            <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+              <a href="reasons-to-maintain-months">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 378392 from claim ID 100005</span>
+                </button>
+              </a>
+          
+              <a href="source-of-withdrawal">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 378392 from claim ID 100005</span>
+                </button>
+              </a>
+            </div>
+          
+            <!-- Third button on a new line below -->
+            <div style="margin-top: -10px;">
+              <a href="partially-maintain-and-partially-withdraw-months">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 378392 from claim ID 100005</span>
+                </button>
+              </a>
+            </div>
+            
+          </div> 
+          {% endif %}
+      
+        </div>
+
+        
+      <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+        <ul class="nhsuk-secondary-navigation__list">
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-details?invoice=Sophie">Invoice details</a>
+            <span class="nhsuk-u-visually-hidden">View details for invoice ID 378392</span>
+          </li>
+
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Sophie">Reasons for contestation</a>
+            <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 378392</span>
+          </li>
+
+
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Sophie">Evidence</a>
+            <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 378392</span>
+          </li>
+        </ul>
+      </nav>
+
+      <hr style="border-bottom:1px solid #ccc; margin:0">
+      <!--end secondary navigation-->
+
+      <br><br>
+      
+        <!-- Beginning of content -->
+        <div class="nhsuk-grid-row">
+          <!-- Start of invoice details panel -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+                <dl class="nhsuk-summary-list">
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Resub ID linked to this invoice
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      7790992
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Entitlement ID linked to this claim
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      373622
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="#">
+                        View<span class="nhsuk-u-visually-hidden">entitlement details</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Person record ID
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      842882
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="#">
+                        View<span class="nhsuk-u-visually-hidden">person record</span>
+                      </a>
+                    </dd>
+                  </div>
+  
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      First names
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      Sophie
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Last name
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      Janview
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Country of claim
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      France (FR)
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Invoice status
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% set status = data.invoiceStatuses['Sophie'] %}
+                      {% if status == 'Partial' %}
+                        Partial
+                      {% elif status == 'Withdrawn' %}
+                        Withdrawn
+                      {% elif status == 'Maintained' %}
+                        Maintained
+                      {% else %}
+                        Withdrawn
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Source of withdrawal request</dt>
+                    <dd class="nhsuk-summary-list__value">
+                        Member State
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Withdrawl reasons</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      Contestation accepted - individual IMO concerned is totally withdrawn. [01]
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <!-- only display additional comments if user input comments during withdraw journey -->
+                  {% if data['add-withdraw-additional-comments'] == 'yes' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                    <dd class="nhsuk-summary-list__value">
+                        {{ data['withdraw-additional-comments'] }}
+                    </dd>
+
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+                  {% endif %}
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                    <dd class="nhsuk-summary-list__value">9</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                    <dd class="nhsuk-summary-list__value">01/01/2024 - 30/09/2024</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Total amount of withdrawn months</dt>
+                    <dd class="nhsuk-summary-list__value">9</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                    <dd class="nhsuk-summary-list__value">0</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                    <dd class="nhsuk-summary-list__value">-</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+              </dl>
+
+          </div>
+        </div>
+
+      </div>
+    <!-- End of invoice details panel -->
+    <!-- End of Sophie Janview's invoice details -->
+    {% else %}
+
+    <!-- Start of Dione Martin's invoice details -->
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-one-half">
+        <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+          Claim ID 100005: Resub ID 7790992<br>
+          (Invoice ID 324778) - Invoice details
+        </h1>
+      </div>
+
+      <!-- Do not show these three buttons once the resub has been peer reviewed onwards -->
+      {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+      <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+        <!-- Top two buttons side by side -->
+        <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+          <a href="reasons-to-maintain-months">
+            <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+              Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 324778 from claim ID 100005</span>
+            </button>
+          </a>
+      
+          <a href="source-of-withdrawal">
+            <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+              Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 324778 from claim ID 100005</span>
+            </button>
+          </a>
+        </div>
+      
+        <!-- Third button on a new line below -->
+        <div style="margin-top: -10px;">
+          <a href="partially-maintain-and-partially-withdraw-months">
+            <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+              Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 324778 from claim ID 100005</span>
+            </button>
+          </a>
+        </div>
+        
+      </div>
+      {% endif %}
+  
+    </div>
+
+    
+  <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+    <ul class="nhsuk-secondary-navigation__list">
+      <li class="nhsuk-secondary-navigation__item">
+        <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-details?invoice=Dione">Invoice details</a>
+        <span class="nhsuk-u-visually-hidden">View details for invoice ID 324778</span>
+      </li>
+
+      <li class="nhsuk-secondary-navigation__item">
+        <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Dione">Reasons for contestation</a>
+        <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 324778</span>
+      </li>
+
+
+      <li class="nhsuk-secondary-navigation__item">
+        <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Dione">Evidence</a>
+        <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 324778</span>
+      </li>
+    </ul>
+  </nav>
+
+  <hr style="border-bottom:1px solid #ccc; margin:0">
+  <!--end secondary navigation-->
+
+  <br><br>
+  
+    <!-- Beginning of content -->
+    <div class="nhsuk-grid-row">
+      <!-- Start of invoice details panel -->
+      <div class="nhsuk-grid-column-one-half">
+        <div class="nhsuk-card">
+          <div class="nhsuk-card__content">
+            <dl class="nhsuk-summary-list">
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">
+                  Resub ID linked to this invoice
+                </dt>
+                <dd class="nhsuk-summary-list__value">
+                  7790992
+                </dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Action -->
+                </dd>
+              </div>
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">
+                  Entitlement ID
+                </dt>
+                <dd class="nhsuk-summary-list__value">
+                  737742
+                </dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <a href="#">
+                    View<span class="nhsuk-u-visually-hidden">entitlement details</span>
+                  </a>
+                </dd>
+              </div>
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">
+                  Person record ID
+                </dt>
+                <dd class="nhsuk-summary-list__value">
+                  009348
+                </dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <a href="#">
+                    View<span class="nhsuk-u-visually-hidden">person record</span>
+                  </a>
+                </dd>
+              </div>
+  
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">
+                  First names
+                </dt>
+                <dd class="nhsuk-summary-list__value">
+                  Dione
+                </dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Action -->
+                </dd>
+              </div>
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">
+                  Last name
+                </dt>
+                <dd class="nhsuk-summary-list__value">
+                  Martin
+                </dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Action -->
+                </dd>
+              </div>
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">
+                  Country of claim
+                </dt>
+                <dd class="nhsuk-summary-list__value">
+                  France (FR)
+                </dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Action -->
+                </dd>
+              </div>
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">
+                  Invoice status
+                </dt>
+                <dd class="nhsuk-summary-list__value">
+                  {% set status = data.invoiceStatuses['Dione'] %}
+                  {% if status == 'Partial' %}
+                    Partial
+                  {% elif status == 'Withdrawn' %}
+                    Withdrawn
+                  {% elif status == 'Maintained' %}
+                    Maintained
+                  {% else %}
+                    Maintained
+                  {% endif %}
+                </dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Action -->
+                </dd>
+              </div>
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">Maintain reasons</dt>
+                <dd class="nhsuk-summary-list__value">
+                  Enclosed you find the entitlement documents. [13]
+                </dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Action -->
+                </dd>
+              </div>
+
+              <!-- only display additional comments if user input comments during maintain journey -->
+              {% if data['add-maintain-additional-comments'] == 'yes' %}
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                <dd class="nhsuk-summary-list__value">
+                    {{ data['maintain-additional-comments'] }}
+                </dd>
+
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Action -->
+                </dd>
+              </div>
+              {% endif %}
+
+              <div class="nhsuk-summary-list__row">
+                <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                <dd class="nhsuk-summary-list__value">9</dd>
+                <dd class="nhsuk-summary-list__actions">
+                  <!-- Action -->
+                </dd>
+              </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                  <dd class="nhsuk-summary-list__value">01/01/2024 - 30/09/2024</dd>
+                  <dd class="nhsuk-summary-list__actions">
+                    <!-- Action -->
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                  <dd class="nhsuk-summary-list__value">9</dd>
+                  <dd class="nhsuk-summary-list__actions">
+                    <!-- Action -->
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                  <dd class="nhsuk-summary-list__value">9</dd>
+                  <dd class="nhsuk-summary-list__actions">
+                    <!-- Action -->
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                  <dd class="nhsuk-summary-list__value">01/01/2024 - 30/09/2024</dd>
+                  <dd class="nhsuk-summary-list__actions">
+                    <!-- Action -->
+                  </dd>
+                </div>
+
+              </dl>
+
+          </div>
+        </div>
+
+      </div>
+      <!-- End of resub details panel -->
+      <!-- End of Dione Martin's invoice details -->
+      {% endif %}
+
+
+        
+              
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const savedDetails = JSON.parse(localStorage.getItem("claimHistory"));
+
+    if (savedDetails) {
+        console.log("Loaded Claim History:", savedDetails);
+
+        // Only display "Sent to Member State" if dateClaimSent exists
+        if (savedDetails.dateClaimSent && savedDetails.dateClaimSent !== "Not provided") {
+            document.getElementById("displayClaimSentDate").textContent = savedDetails.dateClaimSent;
+            document.getElementById("currentDateS1ClaimSentToMS").textContent = getCurrentDateTime();
+            document.querySelector("#currentDateS1ClaimSentToMS").closest("tr").style.display = "table-row";
+        }
+
+        // Only display "Sent to DH" if dateS100Uploaded exists
+        if (savedDetails.dateS100Uploaded && savedDetails.dateS100Uploaded !== "Not provided") {
+            document.getElementById("displayS100UploadedDate").textContent = savedDetails.dateS100Uploaded;
+            document.getElementById("currentDateS1ClaimSentToDH").textContent = getCurrentDateTime();
+            document.querySelector("#currentDateS1ClaimSentToDH").closest("tr").style.display = "table-row";
+        }
+
+        // Always display "Created" log entry
+        document.getElementById("currentDateS1ClaimCreated").textContent = getCurrentDateTime();
+    } else {
+        console.log("No claim history found in localStorage.");
+    }
+
+    // Helper function to get formatted date and time
+    function getCurrentDateTime() {
+        const currentDate = new Date();
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const year = currentDate.getFullYear();
+        const hours = String(currentDate.getHours()).padStart(2, '0');
+        const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
+});
+</script>
+{% endblock %}

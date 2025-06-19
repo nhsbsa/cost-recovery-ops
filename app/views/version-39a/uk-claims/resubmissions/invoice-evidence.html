@@ -1,0 +1,1064 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005: Resub ID 7790992 - View evidence for invoice
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/invoices-within-resubmission">View Resub ID (Invoices within resubmission)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View details (Evidence)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+            
+            {% if data['invoice'] == 'Jacqueline' %}
+            <!-- Start of Jacqueline Bernard's evidence -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 100005: Resub ID 7790992<br>
+                    (Invoice ID 234892) - Evidence
+                </h1>
+              </div>
+
+              {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 234892 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 234892 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 234892 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+              {% endif %}
+
+            </div>
+            
+              <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+                <ul class="nhsuk-secondary-navigation__list">
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Jacqueline">Invoice details</a>
+                    <span class="nhsuk-u-visually-hidden">View details for invoice ID 234892</span>
+                  </li>
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Jacqueline">Reasons for contestation</a>
+                    <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 234892</span>
+                  </li>
+
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-evidence?invoice=Jacqueline">Evidence</a>
+                    <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 234892</span>
+                  </li>
+                </ul>
+              </nav>
+
+              <hr style="border-bottom:1px solid #ccc; margin:0">
+              <!--end secondary navigation-->
+
+              <br><br>
+              
+              <!-- Beginning of content -->
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-one-third">
+                    <div class="nhsuk-summary-list__row">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Jacqueline&upload-evidence-separately=yes">
+                        <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% else %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Jacqueline">
+                          <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% endif %}
+                    </div>
+                </div>
+                
+                <div class="nhsuk-grid-column-three-quarters">
+                  <div>
+                      <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
+
+                      <div id="evidenceSection">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+
+                        {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
+                          <!-- Evidence table only shows when there's evidence -->
+                          <div id="evidenceContainer">
+                            <table id="evidenceTable" class="nhsuk-table">
+                              <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                              <thead role="rowgroup" class="nhsuk-table__head">
+                                <tr role="row">
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody class="nhsuk-table__body">
+                                {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-2.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if data['evidenceRow2'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-1.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+                              </tbody>
+                            </table>
+                          </div>
+                          {% endif %}
+                      {% else %}
+                        <!-- Show this only if there's NO evidence -->
+                        <p>No evidence has been uploaded.</p>
+                      {% endif %}
+
+                      </div>
+                    </div>
+
+                    <h2 class="nhsuk-card__heading nhsuk-heading-m" style="margin-top: 20px;">System-generated documents</h2>
+                    <dl class="nhsuk-summary-list">
+                      
+                      <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="s100-form-label">S100 form</dt>
+                          <dd class="nhsuk-summary-list__actions">
+                            <a id="s100-form-download" target="blank" href="#" aria-label="View file to print or download S100 claim form">
+                                <span id="s100_claim_form_download_text">View file to print or download</span>
+                            </a>
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions"></dd>
+                      </div>
+                      
+                    </dl>
+                </div>
+              </div>
+            <!-- End of main content-->
+            <!-- End of Jacqueline Bernard's evidence -->
+                
+            {% elif data['invoice'] == 'Jane' %}
+            <!-- Start of Jane Doe's evidence -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 100005: Resub ID 7790992<br>
+                    (Invoice ID 298473) - Evidence
+                </h1>
+              </div>
+
+              {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+              {% endif %}
+
+            </div>
+            
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Jane">Invoice details</a>
+                <span class="nhsuk-u-visually-hidden">View details for invoice ID 298473</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Jane">Reasons for contestation</a>
+                <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 298473</span>
+              </li>
+
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-evidence?invoice=Jane">Evidence</a>
+                <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 298473</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+          
+          <!-- Beginning of content -->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-third">
+                <div class="nhsuk-summary-list__row">
+                  {% if data['upload-new-evidence'] == 'yes' %}
+                  <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Jane&upload-evidence-separately=yes">
+                    <span id="upload-evidence-button">Upload new evidence</span>
+                  </a>
+                  {% else %}
+                  <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Jane">
+                      <span id="upload-evidence-button">Upload new evidence</span>
+                  </a>
+                  {% endif %}
+                </div>
+            </div>
+            <div class="nhsuk-grid-column-three-quarters">
+                <div>
+                  <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
+
+                  <div id="evidenceSection">
+                  {% if data['upload-new-evidence'] == 'yes' %}
+
+                    {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
+                      <!-- Evidence table only shows when there's evidence -->
+                      <div id="evidenceContainer">
+                        <table id="evidenceTable" class="nhsuk-table">
+                          <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                          <thead role="rowgroup" class="nhsuk-table__head">
+                            <tr role="row">
+                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody class="nhsuk-table__body">
+                            {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' %}
+                            <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                              <td class="nhsuk-table__cell">
+                                <b>example-evidence-2.pdf</b>
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                              </td>
+                            </tr>
+                            {% endif %}
+
+                            {% if data['evidenceRow2'] != 'Removed' %}
+                            <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                              <td class="nhsuk-table__cell">
+                                <b>example-evidence-1.pdf</b>
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                              </td>
+                            </tr>
+                            {% endif %}
+                          </tbody>
+                        </table>
+                      </div>
+                      {% endif %}
+                  {% else %}
+                    <!-- Show this only if there's NO evidence -->
+                    <p>No evidence has been uploaded.</p>
+                  {% endif %}
+
+                  </div>
+                </div>
+            
+                <h2 class="nhsuk-card__heading nhsuk-heading-m" style="margin-top: 20px;">System-generated documents</h2>
+                <dl class="nhsuk-summary-list">
+                  
+                  <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="s100-form-label">S100 form</dt>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a id="s100-form-download" target="blank" href="#" aria-label="View file to print or download S100 claim form">
+                            <span id="s100_claim_form_download_text">View file to print or download</span>
+                        </a>
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions"></dd>
+                  </div>
+                  
+                </dl>
+            </div>
+          </div>
+        <!-- End of main content-->
+        <!-- End of Jane Doe's evidence -->
+
+        {% elif data['invoice'] == 'John' %}
+        <!-- Start of John Doe's evidence -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 100005: Resub ID 7790992<br>
+                    (Invoice ID 387731) - Evidence
+                </h1>
+              </div>
+
+              {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+              {% endif %}
+
+            </div>
+            
+              <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+                <ul class="nhsuk-secondary-navigation__list">
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=John">Invoice details</a>
+                    <span class="nhsuk-u-visually-hidden">View details for invoice ID 387731</span>
+                  </li>
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=John">Reasons for contestation</a>
+                    <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 387731</span>
+                  </li>
+
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-evidence?invoice=John">Evidence</a>
+                    <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 387731</span>
+                  </li>
+                </ul>
+              </nav>
+
+              <hr style="border-bottom:1px solid #ccc; margin:0">
+              <!--end secondary navigation-->
+
+              <br><br>
+              
+              <!-- Beginning of content -->
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-one-third">
+                    <div class="nhsuk-summary-list__row">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=John&more-evidence=yes">
+                        <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% else %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=John">
+                          <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% endif %}
+                    </div>
+                </div>
+                
+                <div class="nhsuk-grid-column-three-quarters">
+                  <div>
+                      <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
+
+                      <div id="evidenceSection">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+
+                        {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
+                          <!-- Evidence table only shows when there's evidence -->
+                          <div id="evidenceContainer">
+                            <table id="evidenceTable" class="nhsuk-table">
+                              <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                              <thead role="rowgroup" class="nhsuk-table__head">
+                                <tr role="row">
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody class="nhsuk-table__body">
+                                {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-2.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if data['evidenceRow2'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-1.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+                              </tbody>
+                            </table>
+                          </div>
+                          {% endif %}
+                      {% else %}
+                        <!-- Show this only if there's NO evidence -->
+                        <p>No evidence has been uploaded.</p>
+                      {% endif %}
+
+                      </div>
+                    </div>
+
+                    <h2 class="nhsuk-card__heading nhsuk-heading-m" style="margin-top: 20px;">System-generated documents</h2>
+                    <dl class="nhsuk-summary-list">
+                      
+                      <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="s100-form-label">S100 form</dt>
+                          <dd class="nhsuk-summary-list__actions">
+                            <a id="s100-form-download" target="blank" href="#" aria-label="View file to print or download S100 claim form">
+                                <span id="s100_claim_form_download_text">View file to print or download</span>
+                            </a>
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions"></dd>
+                      </div>
+                      
+                    </dl>
+                </div>
+              </div>
+            <!-- End of main content-->
+            <!-- End of John Doe's evidence -->
+                
+            {% elif data['invoice'] == 'Paul' %}
+            <!-- Start of Paul Germain's evidence -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 100005: Resub ID 7790992<br>
+                    (Invoice ID 248829) - Evidence
+                </h1>
+              </div>
+
+              {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 248829 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 248829 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 248829 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+              {% endif %}
+
+            </div>
+            
+              <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+                <ul class="nhsuk-secondary-navigation__list">
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Paul">Invoice details</a>
+                    <span class="nhsuk-u-visually-hidden">View details for invoice ID 248829</span>
+                  </li>
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Paul">Reasons for contestation</a>
+                    <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 248829</span>
+                  </li>
+
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-evidence?invoice=Paul">Evidence</a>
+                    <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 248829</span>
+                  </li>
+                </ul>
+              </nav>
+
+              <hr style="border-bottom:1px solid #ccc; margin:0">
+              <!--end secondary navigation-->
+
+              <br><br>
+              
+              <!-- Beginning of content -->
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-one-third">
+                    <div class="nhsuk-summary-list__row">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Paul&more-evidence=yes">
+                        <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% else %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Paul">
+                          <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% endif %}
+                    </div>
+                </div>
+                
+                <div class="nhsuk-grid-column-three-quarters">
+                  <div>
+                      <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
+
+                      <div id="evidenceSection">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+
+                        {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
+                          <!-- Evidence table only shows when there's evidence -->
+                          <div id="evidenceContainer">
+                            <table id="evidenceTable" class="nhsuk-table">
+                              <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                              <thead role="rowgroup" class="nhsuk-table__head">
+                                <tr role="row">
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody class="nhsuk-table__body">
+                                {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-2.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if data['evidenceRow2'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-1.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+                              </tbody>
+                            </table>
+                          </div>
+                          {% endif %}
+                      {% else %}
+                        <!-- Show this only if there's NO evidence -->
+                        <p>No evidence has been uploaded.</p>
+                      {% endif %}
+
+                      </div>
+                    </div>
+
+                    <h2 class="nhsuk-card__heading nhsuk-heading-m" style="margin-top: 20px;">System-generated documents</h2>
+                    <dl class="nhsuk-summary-list">
+                      
+                      <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="s100-form-label">S100 form</dt>
+                          <dd class="nhsuk-summary-list__actions">
+                            <a id="s100-form-download" target="blank" href="#" aria-label="View file to print or download S100 claim form">
+                                <span id="s100_claim_form_download_text">View file to print or download</span>
+                            </a>
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions"></dd>
+                      </div>
+                      
+                    </dl>
+                </div>
+              </div>
+            <!-- End of main content-->
+            <!-- End of Paul Germain's evidence -->
+
+            {% elif data['invoice'] == 'Sophie' %}
+            <!-- Start of Sophie Janview's evidence -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 100005: Resub ID 7790992<br>
+                    (Invoice ID 378392) - Evidence
+                </h1>
+              </div>
+
+              {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 378392 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 378392 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 378392 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+              {% endif %}
+
+            </div>
+            
+              <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+                <ul class="nhsuk-secondary-navigation__list">
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Sophie">Invoice details</a>
+                    <span class="nhsuk-u-visually-hidden">View details for invoice ID 378392</span>
+                  </li>
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Sophie">Reasons for contestation</a>
+                    <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 378392</span>
+                  </li>
+
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-evidence?invoice=Sophie">Evidence</a>
+                    <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 378392</span>
+                  </li>
+                </ul>
+              </nav>
+
+              <hr style="border-bottom:1px solid #ccc; margin:0">
+              <!--end secondary navigation-->
+
+              <br><br>
+              
+              <!-- Beginning of content -->
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-one-third">
+                    <div class="nhsuk-summary-list__row">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Sophie&more-evidence=yes">
+                        <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% else %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Sophie">
+                          <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% endif %}
+                    </div>
+                </div>
+                
+                <div class="nhsuk-grid-column-three-quarters">
+                  <div>
+                      <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
+
+                      <div id="evidenceSection">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+
+                        {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
+                          <!-- Evidence table only shows when there's evidence -->
+                          <div id="evidenceContainer">
+                            <table id="evidenceTable" class="nhsuk-table">
+                              <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                              <thead role="rowgroup" class="nhsuk-table__head">
+                                <tr role="row">
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody class="nhsuk-table__body">
+                                {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-2.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if data['evidenceRow2'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-1.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+                              </tbody>
+                            </table>
+                          </div>
+                          {% endif %}
+                      {% else %}
+                        <!-- Show this only if there's NO evidence -->
+                        <p>No evidence has been uploaded.</p>
+                      {% endif %}
+
+                      </div>
+                    </div>
+
+                    <h2 class="nhsuk-card__heading nhsuk-heading-m" style="margin-top: 20px;">System-generated documents</h2>
+                    <dl class="nhsuk-summary-list">
+                      
+                      <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="s100-form-label">S100 form</dt>
+                          <dd class="nhsuk-summary-list__actions">
+                            <a id="s100-form-download" target="blank" href="#" aria-label="View file to print or download S100 claim form">
+                                <span id="s100_claim_form_download_text">View file to print or download</span>
+                            </a>
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions"></dd>
+                      </div>
+                      
+                    </dl>
+                </div>
+              </div>
+            <!-- End of main content-->
+            <!-- End of Sophie Janview's evidence -->
+
+            {% elif data['invoice'] == 'Dione' %}
+            <!-- Start of Dione Martin's evidence -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 100005: Resub ID 7790992<br>
+                    (Invoice ID 324778) - Evidence
+                </h1>
+              </div>
+
+              {% if data.resubStatus != 'resubmission-completed' and data.resubStatus != 'resubmission-sent-to-dh' and data.resubStatus != 'peer-reviewed' %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 324778 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 324778 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="partially-maintain-and-partially-withdraw-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 324778 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+              {% endif %}
+
+            </div>
+            
+              <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+                <ul class="nhsuk-secondary-navigation__list">
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Dione">Invoice details</a>
+                    <span class="nhsuk-u-visually-hidden">View details for invoice ID 324778</span>
+                  </li>
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Dione">Reasons for contestation</a>
+                    <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 324778</span>
+                  </li>
+
+
+                  <li class="nhsuk-secondary-navigation__item">
+                    <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-evidence?invoice=Dione">Evidence</a>
+                    <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 324778</span>
+                  </li>
+                </ul>
+              </nav>
+
+              <hr style="border-bottom:1px solid #ccc; margin:0">
+              <!--end secondary navigation-->
+
+              <br><br>
+              
+              <!-- Beginning of content -->
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-one-third">
+                    <div class="nhsuk-summary-list__row">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Dione&more-evidence=yes">
+                        <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% else %}
+                      <a role="button" class="nhsuk-button " id="evidence-upload" href="invoice-upload-evidence?invoice=Dione">
+                          <span id="upload-evidence-button">Upload new evidence</span>
+                      </a>
+                      {% endif %}
+                    </div>
+                </div>
+                
+                <div class="nhsuk-grid-column-three-quarters">
+                  <div>
+                      <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
+
+                      <div id="evidenceSection">
+                      {% if data['upload-new-evidence'] == 'yes' %}
+
+                        {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
+                          <!-- Evidence table only shows when there's evidence -->
+                          <div id="evidenceContainer">
+                            <table id="evidenceTable" class="nhsuk-table">
+                              <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                              <thead role="rowgroup" class="nhsuk-table__head">
+                                <tr role="row">
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                                  <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody class="nhsuk-table__body">
+                                {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-2.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if data['evidenceRow2'] != 'Removed' %}
+                                <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                                  <td class="nhsuk-table__cell">
+                                    <b>example-evidence-1.pdf</b>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                                  </td>
+                                </tr>
+                                {% endif %}
+                              </tbody>
+                            </table>
+                          </div>
+                          {% endif %}
+                      {% else %}
+                        <!-- Show this only if there's NO evidence -->
+                        <p>No evidence has been uploaded.</p>
+                      {% endif %}
+
+                      </div>
+                    </div>
+
+                    <h2 class="nhsuk-card__heading nhsuk-heading-m" style="margin-top: 20px;">System-generated documents</h2>
+                    <dl class="nhsuk-summary-list">
+                      
+                      <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="s100-form-label">S100 form</dt>
+                          <dd class="nhsuk-summary-list__actions">
+                            <a id="s100-form-download" target="blank" href="#" aria-label="View file to print or download S100 claim form">
+                                <span id="s100_claim_form_download_text">View file to print or download</span>
+                            </a>
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions"></dd>
+                      </div>
+                      
+                    </dl>
+                </div>
+              </div>
+            <!-- End of main content-->
+            <!-- End of Dione Martin's evidence -->
+        {% endif %}
+              
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const evidenceTable = document.getElementById('evidenceTable');
+    const noEvidenceTextContainer = document.getElementById('noEvidenceTextContainer');
+    const evidenceSection = document.getElementById('evidenceSection');
+  
+    function updateUIBasedOnEvidence() {
+      if (!evidenceTable || evidenceTable.getElementsByTagName('tbody')[0].rows.length === 0) {
+        noEvidenceTextContainer.style.display = 'block';
+        evidenceSection.style.display = 'none';
+      } else {
+        noEvidenceTextContainer.style.display = 'none';
+        evidenceSection.style.display = 'block';
+      }
+    }
+  
+    if (evidenceTable) {
+      evidenceTable.addEventListener('click', function(event) {
+        if (event.target.classList.contains('removeEvidence')) {
+          event.preventDefault();
+          const rowId = event.target.getAttribute('data-row');
+          const row = document.getElementById(rowId);
+          row.remove();
+          updateUIBasedOnEvidence();
+        }
+      });
+    }
+  
+    updateUIBasedOnEvidence();
+  });
+  </script>
+  {% endblock %}
