@@ -677,7 +677,6 @@ UK claim ID 100005: Resub ID 1160158 - View invoice details
                 <h2 class="nhsuk-heading-m">Maintained details</h2>
 
                 <dl class="nhsuk-summary-list">
-
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">Start date of first maintained month</dt>
                     <dd class="nhsuk-summary-list__value">
@@ -733,80 +732,7 @@ UK claim ID 100005: Resub ID 1160158 - View invoice details
                       <!-- Action -->
                     </dd>
                   </div>
-
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key" id="reasons-to-partially-maintain-months-label">Reason to partially maintain months</dt>
-                      <dd class="nhsuk-summary-list__value" id="reasons-to-partially-maintain-months-value">
-                        {% if data['reasons-to-partially-maintain-months'] %}
-                          {{ data['reasons-to-partially-maintain-months'] }}
-                        {% else %}
-                          According to the attached documents, the invoice has to be paid. [12]
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <!-- Action -->
-                      </dd>
-                    </div>
-                    {% if 'Contestation after deadline. [03]' in data['reasons-to-partially-maintain-months'] %}
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-label">Date contestation received after deadline</dt>
-                      <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-value">
-                        {% if data['date-contestation-received-after-deadline-day-partially-maintain'] and data['date-contestation-received-after-deadline-month-partially-maintain'] and data['date-contestation-received-after-deadline-year-partially-maintain'] %}
-                          {% set day = data['date-contestation-received-after-deadline-day-partially-maintain'] | int %}
-                          {% set month = data['date-contestation-received-after-deadline-month-partially-maintain'] | int %}
-                          {% set year = data['date-contestation-received-after-deadline-year-partially-maintain'] %}
-              
-                          {% if day < 10 %}
-                              {% set day = "0" ~ day %}
-                          {% endif %}
-                          
-                          {% if month < 10 %}
-                              {% set month = "0" ~ month %}
-                          {% endif %}
-    
-                          {{ day }}/{{ month }}/{{ year }}
-    
-                                          
-                        {% else %}
-                          17/04/2026
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <!-- Action -->
-                      </dd>
-                    </div>
-                    {% endif %}
-                    {% if 'Information requested updated. [04]' in data['reasons-to-partially-maintain-months'] %}
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-partially-maintain-label">Type of information requested</dt>
-                      <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-partially-maintain-value">
-                        {% if data['type-information-requested-partially-maintain'] %}
-                        {{ data['type-information-requested-partially-maintain'] }}
-                        {% else %}
-                          S072 - Entitlement document - Residence. [02]
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <!-- Action -->
-                      </dd>
-                    </div>
-                    {% endif %}
-                    {% if data['reasons-to-partially-maintain-months'] == 'Other. [99]' %}
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key" id="other-partial-maintain-reason-comments-label">Other reason comments</dt>
-                      <dd class="nhsuk-summary-list__value" id="other-partial-maintain-reason-comments-value">
-                        {% if data['other-partial-maintain-reason-comments'] %}
-                          {{ data['other-partial-maintain-reason-comments'] }}
-                        {% else %}
-                          Other partial maintain reason explained here.
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <!-- Action -->
-                      </dd>
-                    </div>
-                    {% endif %}
-                  </dl>
+                </dl>
 
 
                   <h2 class="nhsuk-heading-m">Withdrawn details</h2>
@@ -845,6 +771,109 @@ UK claim ID 100005: Resub ID 1160158 - View invoice details
                           <!-- Action -->
                         </dd>
                       </div>
+                    </dl>
+
+                      
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="reasons-to-partially-withdraw-months-label">Reason to partially maintain and withdraw months</dt>
+                        <dd class="nhsuk-summary-list__value" id="reasons-to-partially-withdraw-months-value">
+                          {% if data['reasons-to-partially-maintain-and-withdraw-months'] %}
+                            {{ data['reasons-to-partially-maintain-and-withdraw-months'] }}
+                          {% else %}
+                            Contestation partially accepted and IMO concerned is decreased. [02]
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'Information requested updated. [04]' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-partially-maintain-label">Type of information requested</dt>
+                        <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-partially-maintain-value">
+                          {% if data['type-information-requested-partially-maintain-and-withdraw'] %}
+                          {{ data['type-information-requested-partially-maintain-and-withdraw'] }}
+                          {% else %}
+                            S072 - Entitlement document - Residence. [02]
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'The primary entitlement in state of residence starts on the date provided. [06]' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Date the primary entitlement in state of residence started on</dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['date-primary-entitlement-in-state-of-residence-starts-on-day-partial'] and data['date-primary-entitlement-in-state-of-residence-starts-on-month-partial'] and data['date-primary-entitlement-in-state-of-residence-starts-on-year-partial'] %}
+                            {% set day = data['date-primary-entitlement-in-state-of-residence-starts-on-day-partial'] | int %}
+                            {% set month = data['date-primary-entitlement-in-state-of-residence-starts-on-month-partial'] | int %}
+                            {% set year = data['date-primary-entitlement-in-state-of-residence-starts-on-year-partial'] %}
+                
+                            {% if day < 10 %}
+                                {% set day = "0" ~ day %}
+                            {% endif %}
+                            
+                            {% if month < 10 %}
+                                {% set month = "0" ~ month %}
+                            {% endif %}
+      
+                            {{ day }}/{{ month }}/{{ year }}
+
+                          {% else %}
+                            17/04/2024
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'The person receives a pension in his/her state of residence as from the date provided, copy of the decision attached. [07]' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="date-state-pension-received-partial-label">Date state pension received</dt>
+                        <dd class="nhsuk-summary-list__value" id="date-state-pension-received-partial-value">
+                          {% if data['date-state-pension-received-day-partial'] and data['date-state-pension-received-month-partial'] and data['date-state-pension-received-year-partial'] %}
+                            {% set day = data['date-state-pension-received-day-partial'] | int %}
+                            {% set month = data['date-state-pension-received-month-partial'] | int %}
+                            {% set year = data['date-state-pension-received-year-partial'] %}
+                
+                            {% if day < 10 %}
+                                {% set day = "0" ~ day %}
+                            {% endif %}
+                            
+                            {% if month < 10 %}
+                                {% set month = "0" ~ month %}
+                            {% endif %}
+      
+                            {{ day }}/{{ month }}/{{ year }}
+                
+                          {% else %}
+                            17/04/2024
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'Other. [99]' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="other-partially-maintain-and-withdraw-reason-comments-label">Other reason comments</dt>
+                        <dd class="nhsuk-summary-list__value" id="other-partially-maintain-and-withdraw-reason-comments-value">
+                          {% if data['other-partial-maintain-and-withdraw-reason-comments'] %}
+                            {{ data['other-partial-maintain-and-withdraw-reason-comments'] }}
+                          {% else %}
+                            Other partial withdraw reason explained here.
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key" id="source-of-withdrawal-label">Source of withdrawal request</dt>
@@ -859,91 +888,6 @@ UK claim ID 100005: Resub ID 1160158 - View invoice details
                           <!-- Action -->
                         </dd>
                       </div>
-
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key" id="reasons-to-partially-withdraw-months-label">Reason to withdraw months</dt>
-                        <dd class="nhsuk-summary-list__value" id="reasons-to-partially-withdraw-months-value">
-                          {% if data['reasons-to-partially-withdraw-months'] %}
-                            {{ data['reasons-to-partially-withdraw-months'] }}
-                          {% else %}
-                            Contestation partially accepted and IMO concerned is decreased. [02]
-                          {% endif %}
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
-                      </div>
-                      {% if 'The primary entitlement in state of residence starts on the date provided. [06]' in data['reasons-to-partially-withdraw-months'] %}
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">Date the primary entitlement in state of residence started on</dt>
-                        <dd class="nhsuk-summary-list__value">
-                          {% if data['date-primary-entitlement-in-state-of-residence-starts-on-day-partially-withdraw'] and data['date-primary-entitlement-in-state-of-residence-starts-on-month-partially-withdraw'] and data['date-primary-entitlement-in-state-of-residence-starts-on-year-partially-withdraw'] %}
-                            {% set day = data['date-primary-entitlement-in-state-of-residence-starts-on-day-partially-withdraw'] | int %}
-                            {% set month = data['date-primary-entitlement-in-state-of-residence-starts-on-month-partially-withdraw'] | int %}
-                            {% set year = data['date-primary-entitlement-in-state-of-residence-starts-on-year-partially-withdraw'] %}
-                
-                            {% if day < 10 %}
-                                {% set day = "0" ~ day %}
-                            {% endif %}
-                            
-                            {% if month < 10 %}
-                                {% set month = "0" ~ month %}
-                            {% endif %}
-      
-                            {{ day }}/{{ month }}/{{ year }}
-
-                          {% else %}
-                            17/04/2024
-                          {% endif %}
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
-                      </div>
-                      {% endif %}
-                      {% if data['reasons-to-partially-maintain-months'] == 'The person receives a pension in his/her state of residence as from the date provided, copy of the decision attached. [07]' %}
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
-                        <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
-                          {% if data['date-state-pension-received-day-partially-maintain'] and data['date-state-pension-received-month-partially-maintain'] and data['date-state-pension-received-year-partially-maintain'] %}
-                            {% set day = data['date-state-pension-received-day-partially-maintain'] | int %}
-                            {% set month = data['date-state-pension-received-month-partially-maintain'] | int %}
-                            {% set year = data['date-state-pension-received-year-partially-maintain'] %}
-                
-                            {% if day < 10 %}
-                                {% set day = "0" ~ day %}
-                            {% endif %}
-                            
-                            {% if month < 10 %}
-                                {% set month = "0" ~ month %}
-                            {% endif %}
-      
-                            {{ day }}/{{ month }}/{{ year }}
-                
-                          {% else %}
-                            17/04/2024
-                          {% endif %}
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
-                      </div>
-                      {% endif %}
-                      {% if data['reasons-to-partially-withdraw-months'] == 'Other. [99]' %}
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key" id="other-partial-withdraw-reason-comments-label">Other reason comments</dt>
-                        <dd class="nhsuk-summary-list__value" id="other-partial-withdraw-reason-comments-value">
-                          {% if data['other-partial-withdraw-reason-comments'] %}
-                            {{ data['other-partial-withdraw-reason-comments'] }}
-                          {% else %}
-                            Other partial withdraw reason explained here.
-                          {% endif %}
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
-                      </div>
-                      {% endif %}
 
                       <!-- only display additional comments if user input comments during withdraw journey -->
                       {% if data['add-partial-additional-comments'] == 'yes' %}

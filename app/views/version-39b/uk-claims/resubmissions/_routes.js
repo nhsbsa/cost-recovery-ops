@@ -305,7 +305,7 @@ router.post([/partially-maintain-and-partially-withdraw-months/], function(req, 
   const startMaintainedMonthDateYear = req.body['start-date-first-maintained-month-year'];
   const startDateFirstMaintainedMonthDate = startMaintainedMonthDateDay && startMaintainedMonthDateMonth && startMaintainedMonthDateYear
     ? `${startMaintainedMonthDateDay}/${startMaintainedMonthDateMonth}/${startMaintainedMonthDateYear}`
-    : '01/01/2025';
+    : '01/09/2025';
   req.session.data['start-date-first-maintained-month-date'] = startDateFirstMaintainedMonthDate;
 
   // End date of last maintained month date
@@ -314,7 +314,7 @@ router.post([/partially-maintain-and-partially-withdraw-months/], function(req, 
   const endMaintainedMonthDateYear = req.body['end-date-last-maintained-month-year'];
   const endDateLastMaintainedMonthDate = endMaintainedMonthDateDay && endMaintainedMonthDateMonth && endMaintainedMonthDateYear
     ? `${endMaintainedMonthDateDay}/${endMaintainedMonthDateMonth}/${endMaintainedMonthDateYear}`
-    : '31/01/2025';
+    : '30/09/2025';
   req.session.data['end-date-last-maintained-month-date'] = endDateLastMaintainedMonthDate;
 
   // Redirect to the confirm partial
@@ -333,42 +333,42 @@ router.post([/confirm-partially-maintained-and-partially-withdrawn-months/], fun
   req.session.data['total-withdrawn-months'] = totalWithdrawnMonths;
 
   // Redirect to select the reasons of the partial maintain
-  res.redirect('/version-39b/uk-claims/resubmissions/reasons-to-partially-maintain-months');
+  res.redirect('/version-39b/uk-claims/resubmissions/reasons-to-partially-maintain-and-withdraw-months');
 });
 
 // Select the reasons to partially maintain the months
-router.post([/reasons-to-partially-maintain-months/], function(req, res) {
+router.post([/reasons-to-partially-maintain-and-withdraw-months/], function(req, res) {
 
   // Store the reasons for partially maintaining months
-  const reasonToPartiallyMaintainMonths = req.body['reasons-to-partially-maintain-months'];
-  req.session.data['reasons-to-partially-maintain-months'] = reasonToPartiallyMaintainMonths;
+  const reasonToPartiallyMaintainAndWithdrawMonths = req.body['reasons-to-partially-maintain-and-withdraw-months'];
+  req.session.data['reasons-to-partially-maintain-and-withdraw-months'] = reasonToPartiallyMaintainAndWithdrawMonths;
 
-  // Store the date the contestation was received (after deadline)
-  const dateContestationReceivedAfterDeadlineDayPartiallyMaintain = req.body['date-contestation-received-after-deadline-day-partially-maintain'];
-  const dateContestationReceivedAfterDeadlineMonthPartiallyMaintain = req.body['date-contestation-received-after-deadline-month-partially-maintain'];
-  const dateContestationReceivedAfterDeadlineYearPartiallyMaintain = req.body['date-contestation-received-after-deadline-year-partially-maintain'];
+  // Store the date the primary entitlement in state of residence started on
+  const datePrimaryEntitlementStartedInStateOfResidenceDayPartial= req.body['date-primary-entitlement-in-state-of-residence-starts-on-partial'];
+  const datePrimaryEntitlementStartedInStateOfResidenceMonthPartial = req.body['date-primary-entitlement-in-state-of-residence-starts-on-partial'];
+  const datePrimaryEntitlementStartedInStateOfResidenceYearPartial = req.body['date-primary-entitlement-in-state-of-residence-starts-on-partial'];
   
   // Combine to form the full date (or use a default if not provided)
-  const dateContestationReceivedAfterDeadlinePartiallyMaintain = dateContestationReceivedAfterDeadlineDayPartiallyMaintain && dateContestationReceivedAfterDeadlineMonthPartiallyMaintain && dateContestationReceivedAfterDeadlineYearPartiallyMaintain 
-  ? `${dateContestationReceivedAfterDeadlineDayPartiallyMaintain}/${dateContestationReceivedAfterDeadlineMonthPartiallyMaintain}/${dateContestationReceivedAfterDeadlineYearPartiallyMaintain}` 
-  : '17/04/2026';
-  req.session.data['date-contestation-received-after-deadline-partially-maintain'] = dateContestationReceivedAfterDeadlinePartiallyMaintain;
-
+  const datePrimaryEntitlementStartedInStateOfResidencePartial = datePrimaryEntitlementStartedInStateOfResidenceDayPartial && datePrimaryEntitlementStartedInStateOfResidenceMonthPartial && datePrimaryEntitlementStartedInStateOfResidenceYearPartial
+  ? `${datePrimaryEntitlementStartedInStateOfResidenceDayPartial}/${datePrimaryEntitlementStartedInStateOfResidenceMonthPartial}/${datePrimaryEntitlementStartedInStateOfResidenceYearPartial}` 
+  : '17/04/2024';
+  req.session.data['date-primary-entitlement-in-state-of-residence-starts-on-partial'] = datePrimaryEntitlementStartedInStateOfResidencePartial;
 
   // Store the date the state pension was received
-  const dateStatePensionReceivedDayPartiallyMaintain = req.body['date-state-pension-received-day-partially-maintain'];
-  const dateStatePensionReceivedMonthPartiallyMaintain = req.body['date-state-pension-received-month-partially-maintain'];
-  const dateStatePensionReceivedYearPartiallyMaintain = req.body['date-state-pension-received-year-partially-maintain'];
+  const dateStatePensionReceivedDayPartial = req.body['date-state-pension-received-day-partial'];
+  const dateStatePensionReceivedMonthPartial = req.body['date-state-pension-received-month-partial'];
+  const dateStatePensionReceivedYearPartial = req.body['date-state-pension-received-year-partial'];
   
   // Combine to form the full date (or use a default if not provided)
-  const dateStatePensionReceivedPartiallyMaintain = dateStatePensionReceivedDayPartiallyMaintain && dateStatePensionReceivedMonthPartiallyMaintain && dateStatePensionReceivedYearPartiallyMaintain 
-  ? `${dateStatePensionReceivedDayPartiallyMaintain}/${dateStatePensionReceivedMonthPartiallyMaintain}/${dateStatePensionReceivedYearPartiallyMaintain}` 
+  const dateStatePensionReceivedPartial = dateStatePensionReceivedDayPartial && dateStatePensionReceivedMonthPartial && dateStatePensionReceivedYearPartial
+  ? `${dateStatePensionReceivedDayPartial}/${dateStatePensionReceivedMonthPartial}/${dateStatePensionReceivedYearPartial}` 
   : '17/04/2024';
-  req.session.data['date-state-pension-received-partially-maintain'] = dateStatePensionReceivedPartiallyMaintain;
+  req.session.data['date-state-pension-received-partial'] = dateStatePensionReceivedPartial;
+
 
   // Check if reason includes 'Information requested updated. [04]' and redirect conditionally
-  if (reasonToPartiallyMaintainMonths === 'Information requested updated. [04]') {
-    return res.redirect('/version-39b/uk-claims/resubmissions/select-information-requested-partially-maintain');
+  if (reasonToPartiallyMaintainAndWithdrawMonths === 'Information requested updated. [04]') {
+    return res.redirect('/version-39b/uk-claims/resubmissions/select-information-requested-partially-maintain-and-withdraw');
   }
 
   // Redirect to select the source of the partial withdrawal request
@@ -376,11 +376,11 @@ router.post([/reasons-to-partially-maintain-months/], function(req, res) {
 });
 
 // Select the type of information requested if applicable
-router.post([/select-information-requested-partially-maintain/], function(req, res) {
+router.post([/select-information-requested-partially-maintain-and-withdraw/], function(req, res) {
 
   // Store the reasons for maintaining months
-  const typeInformationRequestedPartiallyMaintain = req.body['type-information-requested-partially-maintain'];
-  req.session.data['type-information-requested-partially-maintain'] = typeInformationRequestedPartiallyMaintain;
+  const typeInformationRequestedPartiallyMaintainAndWithdraw = req.body['type-information-requested-partially-maintain-and-withdraw'];
+  req.session.data['type-information-requested-partially-maintain-and-withdraw'] = typeInformationRequestedPartiallyMaintainAndWithdraw;
 
   // Redirect to check your answers (maintain)
   res.redirect('/version-39b/uk-claims/resubmissions/source-of-partial-withdrawal');
@@ -392,41 +392,6 @@ router.post([/source-of-partial-withdrawal/], function(req, res) {
   // Store the source of the partial withdrawal request
   const sourceOfPartialWithdrawal = req.body['partial-withdrawal-source'];
   req.session.data['partial-withdrawal-source'] = sourceOfPartialWithdrawal;
-
-  // Redirect to select the reasons for partially withdrawing months claimed
-  res.redirect('/version-39b/uk-claims/resubmissions/reasons-to-partially-withdraw-months');
-});
-
-
-// Select the reasons to partially withdraw the months
-router.post([/reasons-to-partially-withdraw-months/], function(req, res) {
-
-  // Store the reasons for partially withdrawing months
-  const reasonToPartiallyWithdrawMonths = req.body['reasons-to-partially-withdraw-months'];
-  req.session.data['reasons-to-partially-withdraw-months'] = reasonToPartiallyWithdrawMonths;
-
-  // Store the date the contestation was received (after deadline)
-  const dateContestationReceivedAfterDeadlineDayPartiallyWithdraw = req.body['date-contestation-received-after-deadline-day-partially-withdraw'];
-  const dateContestationReceivedAfterDeadlineMonthPartiallyWithdraw = req.body['date-contestation-received-after-deadline-month-partially-withdraw'];
-  const dateContestationReceivedAfterDeadlineYearPartiallyWithdraw = req.body['date-contestation-received-after-deadline-year-partially-withdraw'];
-  
-  // Combine to form the full date (or use a default if not provided)
-  const dateContestationReceivedAfterDeadlinePartiallyWithdraw = dateContestationReceivedAfterDeadlineDayPartiallyWithdraw && dateContestationReceivedAfterDeadlineMonthPartiallyWithdraw && dateContestationReceivedAfterDeadlineYearPartiallyWithdraw
-  ? `${dateContestationReceivedAfterDeadlineDayPartiallyWithdraw}/${dateContestationReceivedAfterDeadlineMonthPartiallyWithdraw}/${dateContestationReceivedAfterDeadlineYearPartiallyWithdraw}` 
-  : '17/04/2026';
-  req.session.data['date-contestation-received-after-deadline-partially-withdraw'] = dateContestationReceivedAfterDeadlinePartiallyWithdraw;
-
-
-  // Store the date the state pension was received
-  const dateStatePensionReceivedDayPartiallyWithdraw = req.body['date-state-pension-received-day-partially-withdraw'];
-  const dateStatePensionReceivedMonthPartiallyWithdraw = req.body['date-state-pension-received-month-partially-withdraw'];
-  const dateStatePensionReceivedYearPartiallyWithdraw = req.body['date-state-pension-received-year-partially-withdraw'];
-  
-  // Combine to form the full date (or use a default if not provided)
-  const dateStatePensionReceivedPartiallyWithdraw = dateStatePensionReceivedDayPartiallyWithdraw && dateStatePensionReceivedMonthPartiallyWithdraw && dateStatePensionReceivedYearPartiallyWithdraw
-  ? `${dateStatePensionReceivedDayPartiallyWithdraw}/${dateStatePensionReceivedMonthPartiallyWithdraw}/${dateStatePensionReceivedYearPartiallyWithdraw}` 
-  : '17/04/2024';
-  req.session.data['date-state-pension-received-partially-withdraw'] = dateStatePensionReceivedPartiallyWithdraw;
 
   // Redirect to add additional comments (optional)
   res.redirect('/version-39b/uk-claims/resubmissions/partial-additional-comments');
