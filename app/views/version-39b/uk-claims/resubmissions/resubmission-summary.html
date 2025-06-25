@@ -161,10 +161,14 @@ UK claim ID 100005 - View the resubmission summary
                           Total number of maintained invoices, including those partially maintained
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                            1
+                          {% if showResubSummary %}
+
+                          {% if maintainedInvoices > 0 %}
+                            {{ maintainedInvoices }}
                           {% else %}
                             -
+                          {% endif %}
+
                           {% endif %}
                         </dd>
                       </div>
@@ -174,10 +178,14 @@ UK claim ID 100005 - View the resubmission summary
                           Total number of maintained months, including those partially maintained
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                            1
+                          {% if showResubSummary %}
+
+                          {% if maintainedMonths > 0 %}
+                            {{ maintainedMonths }}
                           {% else %}
-                          -
+                            -
+                          {% endif %}
+
                           {% endif %}
                         </dd>
                       </div>
@@ -187,10 +195,14 @@ UK claim ID 100005 - View the resubmission summary
                           Total number of withdrawn invoices, including those partially withdrawn
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                            2
+                          {% if showResubSummary %}
+
+                          {% if withdrawnInvoices > 0 %}
+                            {{ withdrawnInvoices }}
                           {% else %}
-                          -
+                            -
+                          {% endif %}
+
                           {% endif %}
                         </dd>
                       </div>
@@ -200,15 +212,19 @@ UK claim ID 100005 - View the resubmission summary
                           Total number of withdrawn months, including those partially withdrawn
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                            6
+                          {% if showResubSummary %}
+
+                          {% if withdrawnMonths > 0 %}
+                            {{ withdrawnMonths }}
                           {% else %}
-                          -
+                            -
+                          {% endif %}
+
                           {% endif %}
                         </dd>
                       </div>
 
-                      <div class="nhsuk-summary-list__row">
+                      <!--pdiv class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
                           Deadline for member state to reply to a resub
                         </dt>
@@ -219,7 +235,7 @@ UK claim ID 100005 - View the resubmission summary
                             -
                           {% endif %}
                         </dd>
-                      </div>
+                      </div-->
                     </dl>
 
                 </div>

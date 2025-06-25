@@ -22,46 +22,39 @@ function allInvoicesHaveStatus(statuses, expectedCount) {
 }
 
 
-router.get([/claim-summary/], function(req, res) {
-
+router.get([/resubmission-summary/], function(req, res) {
   const showResubSummary = req.session.data.showResubSummary;
+  const invoiceMonthSplits = req.session.data.invoiceMonthSplits || {};
 
-  const statuses = req.session.data.invoiceStatuses || {};
-  const months = {
-    maintained: 0,
-    withdrawn: 0,
-    partial: 0
-  };
+  let maintainedInvoices = 0;
+  let withdrawnInvoices = 0;
 
-  // Loop through each invoice and its status
-  for (const [invoice, status] of Object.entries(statuses)) {
-    const count = invoiceMonths[invoice] || 0;
+  let maintainedMonths = 0;
+  let withdrawnMonths = 0;
 
-    // Only add to maintained or withdrawn if the status is "Maintained" or "Withdrawn"
-    if (status === 'Maintained') {
-      months.maintained += count;
-    } else if (status === 'Withdrawn') {
-      months.withdrawn += count;
-    } else if (status === 'Partial') {
-      months.partial += count; // Add partials to partial category only
-    }
+  for (const [invoice, split] of Object.entries(invoiceMonthSplits)) {
+    const m = split.maintained || 0;
+    const w = split.withdrawn || 0;
+
+    // Count months
+    maintainedMonths += m;
+    withdrawnMonths += w;
+
+    // Count invoice once if it contributes to maintained
+    if (m > 0) maintainedInvoices += 1;
+    if (w > 0) withdrawnInvoices += 1;
   }
 
-  // Split partial into half maintained + half withdrawn
-  // We ensure that the partials are not contributing to the "Maintained" or "Withdrawn" months directly
-  const partialMaintained = Math.floor(months.partial / 2);
-  const partialWithdrawn = months.partial - partialMaintained;
-
-  // Render the final totals with the split partials
-  res.render('version-39b/uk-claims/resubmissions/claim-summary', {
+  res.render('version-39b/uk-claims/resubmissions/resubmission-summary', {
     data: req.session.data,
-    maintainedMonths: months.maintained, // Maintained months should not include Paul's partials
-    withdrawnMonths: months.withdrawn, // Withdrawn months should not include Paul's partials
-    partialMaintainedMonths: partialMaintained,
-    partialWithdrawnMonths: partialWithdrawn,
-    showResubSummary
+    showResubSummary,
+    maintainedInvoices,
+    withdrawnInvoices,
+    maintainedMonths,
+    withdrawnMonths
   });
 });
+
 
 
 // Create new resubmission
@@ -420,18 +413,32 @@ router.get([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
   });
 });
 
-// Redirect cya to Invoices within the resubmission screen
+// Redirect CYA to Invoices within the resubmission screen
 router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
 
-  const invoice = req.session.data.invoice; // Get active invoice
+  const invoice = req.session.data.invoice; // e.g. 'John'
+  const invoiceMonths = {
+    'Jane': 3,
+    'John': 4
+  };
+
+  // Set status as 'Partial'
+  req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
   if (invoice) {
-    req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
     req.session.data.invoiceStatuses[invoice] = 'Partial';
   }
 
-  // Redirect to the resubmission page
+  // Set or update the split of maintained/withdrawn months for this invoice
+  req.session.data.invoiceMonthSplits = req.session.data.invoiceMonthSplits || {};
+
+  req.session.data.invoiceMonthSplits[invoice] = {
+    maintained: 1, // Adjust this if letting users decide
+    withdrawn: 3   // Remaining from John's total of 4 months
+  };
+
   res.redirect('/version-39b/uk-claims/resubmissions/invoices-within-resubmission');
 });
+
 
 
 // Withdraw journey //
@@ -496,25 +503,30 @@ router.post([/withdraw-additional-comments/], function(req, res) {
   res.redirect('/version-39b/uk-claims/resubmissions/cya-withdraw');
 });
 
-// Pull through the input data onto the cya screen
-router.get([/cya-withdraw/], function(req, res) {
-  res.render('version-39b/uk-claims/resubmissions/cya-withdraw', {
-    data: req.session.data
-  });
-});
-
-// Redirect cya to Invoices within the resubmission screen
 router.post([/cya-withdraw/], function(req, res) {
-  
-  const invoice = req.session.data.invoice; // Get active invoice
+  const invoice = req.session.data.invoice; // e.g. 'Jane'
+  const invoiceMonths = {
+    'Jane': 3,
+    'John': 4
+  };
+
+  // Set invoice status
+  req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
   if (invoice) {
-    req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
     req.session.data.invoiceStatuses[invoice] = 'Withdrawn';
   }
 
-  // Redirect to the resubmission page
+  // Set or update invoiceMonthSplits
+  req.session.data.invoiceMonthSplits = req.session.data.invoiceMonthSplits || {};
+
+  req.session.data.invoiceMonthSplits[invoice] = {
+    maintained: 0,
+    withdrawn: invoiceMonths[invoice] || 0
+  };
+
   res.redirect('/version-39b/uk-claims/resubmissions/invoices-within-resubmission');
 });
+
 
 
 // Maintain journey //
