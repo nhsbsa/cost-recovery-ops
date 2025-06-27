@@ -89,7 +89,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
               
                 <!-- Third button on a new line below -->
                 <div style="margin-top: -10px;">
-                  <a href="partially-maintain-and-partially-withdraw-months">
+                  <a href="enter-revised-accounting-period">
                     <button class="nhsuk-button nhsuk-button--secondary" type="submit">
                       Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 234892 from claim ID 100005</span>
                     </button>
@@ -350,7 +350,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
               
                 <!-- Third button on a new line below -->
                 <div style="margin-top: -10px;">
-                  <a href="partially-maintain-and-partially-withdraw-months">
+                  <a href="enter-revised-accounting-period">
                     <button class="nhsuk-button nhsuk-button--secondary" type="submit">
                       Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
                     </button>
@@ -608,7 +608,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
           
             <!-- Third button on a new line below -->
             <div style="margin-top: -10px;">
-              <a href="partially-maintain-and-partially-withdraw-months">
+              <a href="enter-revised-accounting-period">
                 <button class="nhsuk-button nhsuk-button--secondary" type="submit">
                   Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
                 </button>
@@ -864,7 +864,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
           
             <!-- Third button on a new line below -->
             <div style="margin-top: -10px;">
-              <a href="partially-maintain-and-partially-withdraw-months">
+              <a href="enter-revised-accounting-period">
                 <button class="nhsuk-button nhsuk-button--secondary" type="submit">
                   Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 248829 from claim ID 100005</span>
                 </button>
@@ -1057,9 +1057,9 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
 
                 <dl class="nhsuk-summary-list">
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key" id="start-date-of-first-partially-maintained-month-label">Start date of first maintained month</dt>
-                    <dd class="nhsuk-summary-list__value" id="start-date-of-first-partially-maintained-month-value">
-                        01/01/2024
+                    <dt class="nhsuk-summary-list__key" id="period-of-maintained-months-label">Period of maintained months</dt>
+                    <dd class="nhsuk-summary-list__value" id="period-of-maintained-months-value">
+                        01/01/2024 - 31/01/2024
                     </dd>
                     <dd class="nhsuk-summary-list__actions">
                       <!-- Action -->
@@ -1067,20 +1067,8 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                   </div>
 
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key" id="end-date-of-last-partially-maintained-month-label">End date of last maintained month</dt>
-                    <dd class="nhsuk-summary-list__value" id="end-date-of-last-partially-maintained-month-value">
-                        31/01/2024
-                    </dd>
-                    <dd class="nhsuk-summary-list__actions">
-                      <!-- Action -->
-                    </dd>
-                  </div>
-
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key" id="total-number-of-partially-maintained-months-label">Total number of maintained months</dt>
-                    <dd class="nhsuk-summary-list__value" id="total-number-of-partially-maintained-months-value">
-                        1
-                    </dd>
+                    <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                    <dd class="nhsuk-summary-list__value">1</dd>
                     <dd class="nhsuk-summary-list__actions">
                       <!-- Action -->
                     </dd>
@@ -1092,16 +1080,10 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
 
                 <dl class="nhsuk-summary-list">
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key" id="start-date-of-first-partially-withdrawn-month-label">Start date of first withdrawn month</dt>
-                    <dd class="nhsuk-summary-list__value" id="start-date-of-first-partially-withdrawn-month-value">01/02/2024</dd>
-                    <dd class="nhsuk-summary-list__actions">
-                      <!-- Action -->
+                    <dt class="nhsuk-summary-list__key" id="period-of-withdrawn-months-label">Period of withdrawn months</dt>
+                    <dd class="nhsuk-summary-list__value" id="period-of-withdrawn-months-value">
+                        01/02/2024 - 29/02/2024
                     </dd>
-                  </div>
-
-                  <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key" id="end-date-of-last-partially-withdrawn-month-label">End date of last withdrawn month</dt>
-                    <dd class="nhsuk-summary-list__value" id="end-date-of-last-partially-withdrawn-month-value">29/02/2024</dd>
                     <dd class="nhsuk-summary-list__actions">
                       <!-- Action -->
                     </dd>
@@ -1110,7 +1092,11 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key" id="total-number-of-partially-withdrawn-months-label">Total number of withdrawn months</dt>
                     <dd class="nhsuk-summary-list__value" id="total-number-of-partially-withdrawn-months-value">
+                      {% if data['total-withdrawn-months'] %}
+                        {{ data['total-withdrawn-months'] }}
+                      {% else %}
                         1
+                      {% endif %}
                     </dd>
                     <dd class="nhsuk-summary-list__actions">
                       <!-- Action -->

@@ -76,58 +76,66 @@ UK claim ID 100005 - Check your answers before partially maintaining and withdra
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-two-thirds">
 
+              <h2 class="nhsuk-heading-s">Revised accounting period</h2>
+                
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="start-date-of-revised-accounting-period-label">Start date of the revised accounting period</dt>
+                  <dd class="nhsuk-summary-list__value" id="start-date-of-revised-accounting-period-value">
+                    {% if data['start-date-accounting-period-day'] and data['start-date-accounting-period-month'] and data['start-date-accounting-period-year'] %}
+                      {% set day = data['start-date-accounting-period-day'] | int %}
+                      {% set month = data['start-date-accounting-period-month'] | int %}
+                      {% set year = data['start-date-accounting-period-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      05/09/2024
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="enter-revised-accounting-period#start-date-accounting-period-day">Change<span class="nhsuk-u-visually-hidden">the start date of the revised accounting period</span></a></dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="end-date-of-revised-accounting-period-label">End date of the revised accounting period</dt>
+                  <dd class="nhsuk-summary-list__value" id="end-date-of-revised-accounting-period-value">
+                    {% if data['end-date-accounting-period-day'] and data['end-date-accounting-period-month'] and data['end-date-accounting-period-year'] %}
+                      {% set day = data['end-date-accounting-period-day'] | int %}
+                      {% set month = data['end-date-accounting-period-month'] | int %}
+                      {% set year = data['end-date-accounting-period-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      16/10/2024
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="enter-revised-accounting-period#end-date-accounting-period-day">Change<span class="nhsuk-u-visually-hidden">the end date of the revised accounting period</span></a></dd>
+                </div>
+              </dl>
+
               <h2 class="nhsuk-heading-s">Maintained months</h2>
                 
               <dl class="nhsuk-summary-list">
                 <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="start-date-of-first-partially-maintained-month-label">Start date of first maintained month</dt>
-                  <dd class="nhsuk-summary-list__value" id="start-date-of-first-partially-maintained-month-value">
-                    {% if data['start-date-first-maintained-month-day'] and data['start-date-first-maintained-month-month'] and data['start-date-first-maintained-month-year'] %}
-                      {% set day = data['start-date-first-maintained-month-day'] | int %}
-                      {% set month = data['start-date-first-maintained-month-month'] | int %}
-                      {% set year = data['start-date-first-maintained-month-year'] %}
-          
-                      {% if day < 10 %}
-                          {% set day = "0" ~ day %}
-                      {% endif %}
-                      
-                      {% if month < 10 %}
-                          {% set month = "0" ~ month %}
-                      {% endif %}
-
-                      {{ day }}/{{ month }}/{{ year }}
-
-                                      
-                    {% else %}
-                      01/01/2024
-                    {% endif %}
+                  <dt class="nhsuk-summary-list__key" id="period-of-maintained-months-label">Period of maintained months</dt>
+                  <dd class="nhsuk-summary-list__value" id="period-of-maintained-months-value">
+                      01/09/2024 - 30/09/2024
                   </dd>
-                  <dd class="nhsuk-summary-list__actions"><a href="partially-maintain-and-partially-withdraw-months">Change<span class="nhsuk-u-visually-hidden">start date of first partially maintained month</span></a></dd>
-                </div>
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="end-date-of-last-partially-maintained-month-label">End date of last maintained month</dt>
-                  <dd class="nhsuk-summary-list__value" id="end-date-of-last-partially-maintained-month-value">
-                    {% if data['end-date-last-maintained-month-day'] and data['end-date-last-maintained-month-month'] and data['end-date-last-maintained-month-year'] %}
-                      {% set day = data['end-date-last-maintained-month-day'] | int %}
-                      {% set month = data['end-date-last-maintained-month-month'] | int %}
-                      {% set year = data['end-date-last-maintained-month-year'] %}
-          
-                      {% if day < 10 %}
-                          {% set day = "0" ~ day %}
-                      {% endif %}
-                      
-                      {% if month < 10 %}
-                          {% set month = "0" ~ month %}
-                      {% endif %}
-
-                      {{ day }}/{{ month }}/{{ year }}
-
-                                      
-                    {% else %}
-                      31/01/2024
-                    {% endif %}
-                  </dd>
-                  <dd class="nhsuk-summary-list__actions"><a href="partially-maintain-and-partially-withdraw-months">Change<span class="nhsuk-u-visually-hidden">end date of last maintained month</span></a></dd>
+                  <dd class="nhsuk-summary-list__actions"></dd>
                 </div>
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key" id="total-number-of-partially-maintained-months-label">Total number of maintained months</dt>
@@ -147,16 +155,9 @@ UK claim ID 100005 - Check your answers before partially maintaining and withdra
 
               <dl class="nhsuk-summary-list">
                 <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="start-date-of-first-partially-withdrawn-month-label">Start date of first withdrawn month</dt>
-                  <dd class="nhsuk-summary-list__value" id="start-date-of-first-partially-withdrawn-month-value">
-                      01/10/2024
-                  </dd>
-                  <dd class="nhsuk-summary-list__actions"></dd>
-                </div>
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="end-date-of-last-partially-withdrawn-month-label">End date of last withdrawn month</dt>
-                  <dd class="nhsuk-summary-list__value" id="end-date-of-last-partially-withdrawn-month-value">
-                      31/12/2024
+                  <dt class="nhsuk-summary-list__key" id="period-of-withdrawn-months-label">Period of withdrawn months</dt>
+                  <dd class="nhsuk-summary-list__value" id="period-of-withdrawn-months-value">
+                      01/10/2024 - 31/12/2024
                   </dd>
                   <dd class="nhsuk-summary-list__actions"></dd>
                 </div>
