@@ -82,12 +82,25 @@ router.post([/create-new-resubmission/], function(req, res) {
   req.session.data['number-of-contested-months'] = req.body['number-of-contested-months'];
   req.session.data['member-state-reference'] = req.body['member-state-reference'];
 
+
+
+  // Redirect to next screen
+  res.redirect('/version-39b/uk-claims/resubmissions/create-new-resubmission-cya');
+});
+
+// Pull through the input data onto the cya screen
+router.get([/create-new-resubmission-cya/], function(req, res) {
+
   // Conditional flag to track resubmission
   req.session.data['create-new-resub'] = 'yes';
 
-  // Redirect to next screen
-  res.redirect('/version-39b/uk-claims/resubmissions/confirmation-resubmission-created');
+  res.render('version-39b/uk-claims/resubmissions/create-new-resubmission-cya', {
+    data: req.session.data
+  });
 });
+
+
+
 
 
 // Confirm selected invoices are added to resubmission
