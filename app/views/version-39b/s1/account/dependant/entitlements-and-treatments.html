@@ -199,7 +199,7 @@
                   <details class="nhsuk-details nhsuk-expander">
                     <summary class="nhsuk-details__summary">
 
-                      {% if data['dr-cancel-s1-entitlement'] == 'yes' %}
+                      {% if data['dr-update-s1-entitlement-end-date'] == 'yes' %}
                       <span role="button" class="nhsuk-details__summary-text" id="entitlement-type"
                       aria-label="S1/S072 - Valid: 05/10/2024 - France (FR)">
                             S1/S072 - Valid: from 05/10/2024 to 
@@ -235,48 +235,14 @@
                             {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
                         </span>
                       {% else %}
-                        <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" 
-                              aria-label="S1/S072 - Valid: from 05/10/2024 - France (FR)">
-                            S1/S072 - Valid: from 05/10/2024 to
-                    
-                            {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
-                                {% set day = data['dr-s1-entitlement-end-date-day'] | int %}
-                                {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
-                                {% set year = data['dr-s1-entitlement-end-date-year'] %}
-                    
-                                {% if day < 10 %}
-                                    {% set formatted_day = "0" + day | string %}
-                                {% else %}
-                                    {% set formatted_day = day | string %}
-                                {% endif %}
-                    
-                                {% if month < 10 %}
-                                    {% set formatted_month = "0" + month | string %}
-                                {% else %}
-                                    {% set formatted_month = month | string %}
-                                {% endif %}
-                    
-                                to {{ formatted_day }}/{{ formatted_month }}/{{ year }}
-                            {% endif %}
-                    
-                            - France (FR)
-                        </span>
-                    
-                        <a id="cancel-s1-entitlement" aria-label="Cancel entitlement with entitlement ID 0000000" 
-                          href="../dependant/cancellations/dr-cancellation-details" 
-                          style="float: right; margin-right: 30px; margin-top: 8px; display: block;">
-                            Cancel entitlement
-                        </a>
-                    {% endif %}
-                
-                    {% if data['dr-cancel-s1-entitlement'] == 'yes' %}
-                        <strong class="nhsuk-tag nhsuk-tag--red" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
-                            Cancelled
-                        </strong>
-                    {% else %}
-                        <strong class="nhsuk-tag nhsuk-tag--green" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
-                            Registered
-                        </strong>
+                      <span role="button" class="nhsuk-details__summary-text" id="entitlement-type" 
+                      aria-label="S1/S072 - Valid: from 05/10/2024 to 16/10/2024 - France (FR)">
+                          S1/S072 - Valid: from 05/10/2024 to 16/10/2024 - France (FR)
+                      </span>
+                      
+                      <strong class="nhsuk-tag nhsuk-tag--red" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
+                          Cancelled
+                      </strong>
                     {% endif %}
                     </summary>
                     
