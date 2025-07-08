@@ -1,0 +1,99 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Select who made the request to withdraw
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back"
+            }) }}
+    
+            <form action="source-of-withdrawal" method="post">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+              <div class="nhsuk-form-group">
+            
+                <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--xl">
+                    <h1 class="nhsuk-fieldset__heading">
+                      Who made the request to withdraw?
+                    </h1>
+                  </legend>
+            
+                  <div class="nhsuk-radios">
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="withdrawal-request-ms" name="withdrawal-source" type="radio" value="Member State" aria-controls="source-1">
+                      <label class="nhsuk-label nhsuk-radios__label" for="withdrawal-request-ms">
+                        Member State
+                      </label>
+                    </div>
+              
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="withdrawal-request-dhsc" name="withdrawal-source" type="radio" value="Department of Health and Social Care (DHSC)" aria-controls="source-2">
+                      <label class="nhsuk-label nhsuk-radios__label" for="withdrawal-request-dhsc">
+                        Department of Health and Social Care (DHSC)
+                      </label>
+                    </div>
+              
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="withdrawal-request-nhsbsa" name="withdrawal-source" type="radio" value="NHSBSA" aria-controls="source-3">
+                      <label class="nhsuk-label nhsuk-radios__label" for="withdrawal-request-nhsbsa">
+                        NHSBSA
+                      </label>
+                    </div>
+              
+                  </div>
+                </fieldset>
+            
+              </div>
+            
+
+              <button class="nhsuk-button nhsuk-button--primary" style="margin-top: 20px;" type="submit" id="continue-button">Continue</button>
+
+            </div>
+
+
+
+
+          </div>
+        </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

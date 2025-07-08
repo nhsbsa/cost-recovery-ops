@@ -1,0 +1,195 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Dependant's details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                    <span class="nhsuk-caption-l">
+                      Add a dependant
+                    <span class="nhsuk-u-visually-hidden"> - </span>
+                    </span>
+                    <h1 class="app-page-heading">
+                        Dependant's details
+                    </h1>
+
+                    <form action="s1-dependant-personal-details" method="post">
+   
+                    <div class="nhsuk-inset-text">
+                      <span class="nhsuk-u-visually-hidden">Information: </span>
+                      <p>Check the dependant's details carefully. If their details match those provided on the S1/S072 form, select Add dependant.</p>
+                      <p>If their details do not match, select Go back.</p>
+                    </div>
+                   
+
+                    <h2 class="nhsuk-heading-m">Personal details</h2>
+
+                        <dl class="nhsuk-summary-list">
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Person record ID</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              654321
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Personal identification number (PIN)</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                0987654321
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">First names</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                Jane
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">First names at birth, if different</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                Not provided
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Last name</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                Doe
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Last name at birth, if different</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                Not provided
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date of birth</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                29 December 1975
+                            </dd>
+                          </div>
+                        </dl>
+
+
+                        <h2 class="nhsuk-heading-m">Additional details</h2>
+
+                        <dl class="nhsuk-summary-list">
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Sex</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                Not provided
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Country of nationality</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                Not provided
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">UK National Insurance Number (NINO)</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                Not provided
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Email address</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                Not provided
+                            </dd>
+                          </div>
+                        </dl>
+
+
+                        <h2 class="nhsuk-heading-m">Address details</h2>
+
+                        <dl class="nhsuk-summary-list">
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Home address</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              1 Washington Street<br>
+                              Worcester<br>
+                              WR1 1NL<br>
+                              United Kingdom
+                            </dd>
+                          </div>
+                        </dl>
+                          
+                         
+                        <button class="nhsuk-button" data-module="nhsuk-button" type="submit">Add dependant</button>
+
+                        <p><a href="s1-entitlement-details">Cancel</a></p>
+
+                    </form>
+
+                </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Date format -->
+<script>
+  function formatDate(day, month, year) {
+    // Add one month to the current month
+    let newMonth = parseInt(month) + 1;
+    let newYear = parseInt(year);
+
+    // Check if the new month exceeds 12 (December)
+    if (newMonth > 12) {
+        newMonth = 1; // Reset to January
+        newYear += 1; // Increment the year
+    }
+
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthName = months[newMonth - 1]; // Get the new month name
+    return `${parseInt(day)} ${monthName} ${newYear}`;
+}
+</script>
+{% endblock %}

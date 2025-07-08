@@ -1,0 +1,455 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Claim invoices
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">View Claim ID (Invoices)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+            
+            <div class="nhsuk-grid-row">   
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l">Claim ID 100005 - Invoices for<br>S1/S072 Article 63, 2.b - 20 to 64 years</h1>
+              </div>
+            </div>
+
+            
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-summary">Claim summary</a>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 100005</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="claim-invoices">Invoices</a>
+                <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
+              </li>
+
+              <!--li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="s1-claim-age-groups">Age groups</a>
+                <span class="nhsuk-u-visually-hidden">View the age groups for claim 100005</span>
+              </li-->
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-documents">Claim documents</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-resubmissions">Resubmissions</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-history">Claim history</a>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 100005</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+
+        <!-- start search-->
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-hint">
+              Search for a single invoice using the invoice ID number or a person's last name.
+              Search for up to 8 invoices at once by separating each invoice ID number with a comma.
+              For example, 111110, 111112, 111113.
+            </div>
+
+            <form class="nhsuk-header__search-form nhsuk-header__search-form--search-results" id="search"
+              action="/search/" method="get" role="search">
+
+              <label class="nhsuk-u-visually-hidden" for="search-results-field">Search by invoice ID or last name to add forms for printing or to resubmit</label>
+
+              <input class="nhsuk-search__input" id="search-results-field" name="search-field" type="search">
+              <a class="nhsuk-search__submit" href="#">
+                <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                  aria-hidden="true" focusable="false">
+                  <path
+                    d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z">
+                  </path>
+                </svg>
+                <span class="nhsuk-u-visually-hidden">Search</span>
+              </a>
+
+            </form>
+
+          </div>
+        </div>
+        <!--end search-->
+
+
+        <!-- Invoices table for Main claim, Article 63, 2.b, ages 20 to 64 years begins -->
+        <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
+          <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
+            <tr role="row">
+              <th role="columnheader" class="" scope="col">
+                Invoice ID
+              </th>
+              <th role="columnheader" class="" scope="col">
+                First names
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Last name
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Months claimed
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Accounting period
+              </th>
+              <th role="columnheader" class="" scope="col">
+                Action
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="nhsuk-table__body">
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>234892</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Jacqueline</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Bernard</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>5</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>01/01/2024 - 31/05/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Jacqueline Bernard</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>495729</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Jean-Luc</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Bouchard</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>8</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>01/01/2024 - 31/08/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Jean-Luc Bouchard</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>298473</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Jane</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Doe</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>3</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>05/10/2024 - 31/12/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="../s1/account/dependant/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for Jane Doe</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>387731</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>John</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Doe</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>4</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>05/09/2024 - 31/12/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="../s1/account/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>947583</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Charles</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Dupont</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>5</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>01/01/2024 - 31/05/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Charles Dupont</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>248829</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Paul</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Germain</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>2</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>01/01/2024 - 29/02/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Paul Germain</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>378392</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Sophie</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Janview</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>9</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>01/01/2024 - 30/09/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Sophie Janview</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>458825</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Henri</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Leandres</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>6</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>01/01/2024 - 30/06/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Henri Leandre</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>324778</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Dione</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Martin</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>9</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>01/01/2024 - 30/09/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Dione Martin</span></span>
+            </td>
+          </tr>
+
+          <tr role="row" class="nhsuk-table__row">
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+              <span>398198</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">First names</span>
+              <span>Charles</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Last name</span>
+              <span>Thomas</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>11</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Accounting period</span>
+              <span>01/01/2024 - 30/11/2024</span>
+            </td>
+            <td role="cell" class="nhsuk-table__cell">
+              <span class="nhsuk-table-responsive__heading">Action</span>
+              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Paul Germain</span></span>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <!-- End of Invoices table for Article 63, 2.b - ages 20 to 64 years -->
+
+
+       <!-- Pagination starts -->
+        <nav class="nav" role="navigation" aria-label="Pagination">
+          <ul class="pagination">
+              <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
+              <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>
+              <li class="pagination__item"><a class="pagination__link next" href="#">Next »</a></li>
+          </ul>
+
+          <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 18 invoices</div>
+        </nav>
+        <!-- Pagination ends -->
+      
+
+              
+           </div>
+          </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

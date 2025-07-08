@@ -1,0 +1,916 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005: Resub ID 1160158 - View invoice details
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/invoices-within-resubmission">View Resub ID (Invoices within resubmission)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View details (Invoice details)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+{% set invoice = data['invoice'] %}
+{% set status = data.invoiceStatuses[invoice] %}
+
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+          {% if data['invoice'] == 'Jane' %}
+          {% set contestationData = data.contestation_reasons[data.invoice] %}
+            <!-- Start of Jane Doe's invoice details for resub ID: 1160158 --->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                  Claim ID 100005: Resub ID 1160158<br>
+                  (Invoice ID 298473) - Invoice details
+                </h1>
+              </div>
+
+              <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
+              {% if contestationData.reasons and contestationData.reasons | length > 0 %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+              
+                <!-- Third button on a new line below -->
+                <div style="margin-top: -10px;">
+                  <a href="enter-revised-accounting-period">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div> 
+            {% endif %}
+
+          
+            </div>
+
+            
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-details?invoice=Jane">Invoice details</a>
+                <span class="nhsuk-u-visually-hidden">View details for invoice ID 298473</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=Jane">Reasons for contestation</a>
+                <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 298473</span>
+              </li>
+
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Jane">Evidence</a>
+                <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 298473</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+          
+            <!-- Beginning of content -->
+            <div class="nhsuk-grid-row">
+              <!-- Start of invoice details panel -->
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Resub ID linked to this invoice
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          1160158
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Entitlement ID linked to this claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          100002
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="../../s1/account/dependant/s1-entitlement-content/s1-entitlement-details">
+                            View<span class="nhsuk-u-visually-hidden">entitlement details</span>
+                          </a>
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Person record ID
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          654321
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="../../s1/account/dependant/personal-details?dr-add-s1-entitlement=yes">
+                            View<span class="nhsuk-u-visually-hidden">person record</span>
+                          </a>
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First names
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Jane
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Doe
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Country of claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          France (FR)
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Invoice status
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% set status = data.invoiceStatuses['Jane'] %}
+                          {% if status == 'Partial' %}
+                            Partial
+                          {% elif status == 'Withdrawn' %}
+                            Withdrawn
+                          {% elif status == 'Maintained' %}
+                            Maintained
+                          {% else %}
+                            Contested
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      {% if status == 'Withdrawn' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Withdrawal reason</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['reasons-to-withdraw-months'] %}
+                              {{ data['reasons-to-withdraw-months'] }}
+                            {% else %}
+                              Other. [99]
+                            {% endif %}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        {% if 'The primary entitlement in state of residence starts on the date provided. [06]' in data['reasons-to-withdraw-months'] %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Date the primary entitlement in state of residence started on</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['date-primary-entitlement-in-state-of-residence-starts-on-day-withdraw'] and data['date-primary-entitlement-in-state-of-residence-starts-on-month-withdraw'] and data['date-primary-entitlement-in-state-of-residence-starts-on-year-withdraw'] %}
+                              {% set day = data['date-primary-entitlement-in-state-of-residence-starts-on-day-withdraw'] | int %}
+                              {% set month = data['date-primary-entitlement-in-state-of-residence-starts-on-month-withdraw'] | int %}
+                              {% set year = data['date-primary-entitlement-in-state-of-residence-starts-on-year-withdraw'] %}
+                  
+                              {% if day < 10 %}
+                                  {% set day = "0" ~ day %}
+                              {% endif %}
+                              
+                              {% if month < 10 %}
+                                  {% set month = "0" ~ month %}
+                              {% endif %}
+        
+                              {{ day }}/{{ month }}/{{ year }}
+
+                            {% else %}
+                              17/04/2026
+                            {% endif %}
+                          </dd>
+                        </div>
+                        {% endif %}
+                        {% if 'The person receives a pension in his/her state of residence as from the date provided, copy of the decision attached. [07]' in data['reasons-to-withdraw-months'] %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                          <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                            {% if data['date-state-pension-received-day-withdraw'] and data['date-state-pension-received-month-withdraw'] and data['date-state-pension-received-year-withdraw'] %}
+                              {% set day = data['date-state-pension-received-day-withdraw'] | int %}
+                              {% set month = data['date-state-pension-received-month-withdraw'] | int %}
+                              {% set year = data['date-state-pension-received-year-withdraw'] %}
+                  
+                              {% if day < 10 %}
+                                  {% set day = "0" ~ day %}
+                              {% endif %}
+                              
+                              {% if month < 10 %}
+                                  {% set month = "0" ~ month %}
+                              {% endif %}
+        
+                              {{ day }}/{{ month }}/{{ year }}
+        
+        
+                            {% else %}
+                              17/04/2026
+                            {% endif %}
+                          </dd>
+                        </div>
+                        {% endif %}
+                        {% if 'Other. [99]' in data['reasons-to-withdraw-months'] %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="other-withdraw-reason-comments-label">Other reason comments</dt>
+                          <dd class="nhsuk-summary-list__value" id="other-withdraw-reason-comments-value">
+                            {% if data['other-withdraw-reason-comments'] %}
+                              {{ data['other-withdraw-reason-comments'] }}
+                            {% else %}
+                              Other withdraw reason explained here.
+                            {% endif %}
+                          </dd>
+                        </div>
+                        {% endif %}
+
+                        <!-- only display additional comments if user input comments during withdraw journey -->
+                        {% if data['add-withdraw-additional-comments'] == 'yes' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                          <dd class="nhsuk-summary-list__value">
+                              {{ data['withdraw-additional-comments'] }}
+                          </dd>
+
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+                        {% endif %}
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                          <dd class="nhsuk-summary-list__value">05/10/2024 - 31/12/2024</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Previously maintained months</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Previously maintained accounting period</dt>
+                          <dd class="nhsuk-summary-list__value">05/10/2024 - 31/12/2024</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Total amount of withdrawn months</dt>
+                          <dd class="nhsuk-summary-list__value">3</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                          <dd class="nhsuk-summary-list__value">0</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                          <dd class="nhsuk-summary-list__value">-</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+                        
+
+                      
+                      {% else %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original months claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          3
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original accounting period
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          05/10/2024 - 31/12/2024
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Previously maintained months</dt>
+                        <dd class="nhsuk-summary-list__value">3</dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Previously maintained accounting period</dt>
+                        <dd class="nhsuk-summary-list__value">05/10/2024 - 31/12/2024</dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+                    </dl>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- End of resub details panel -->
+        <!-- End of Jane Doe's invoice details for resub ID: 1160158 -->
+
+        
+    {% elif data['invoice'] == 'John' %}
+    {% set contestationData = data.contestation_reasons[data.invoice] %}
+    <!-- Start of Jane Doe's invoice details for resub ID: 1160158 - -->
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-one-half">
+            <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+              Claim ID 100005: Resub ID 1160158<br>
+              (Invoice ID 387731) - Invoice details
+            </h1>
+          </div>
+
+          <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
+          {% if contestationData.reasons and contestationData.reasons | length > 0 %}
+          <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+            <!-- Top two buttons side by side -->
+            <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+              <a href="reasons-to-maintain-months">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                </button>
+              </a>
+          
+              <a href="source-of-withdrawal">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                </button>
+              </a>
+            </div>
+          
+            <!-- Third button on a new line below -->
+            <div style="margin-top: -10px;">
+              <a href="enter-revised-accounting-period">
+                <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                  Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
+                </button>
+              </a>
+            </div>
+            
+          </div> 
+          {% endif %}
+      
+        </div>
+
+        
+      <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+        <ul class="nhsuk-secondary-navigation__list">
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-details?invoice=John">Invoice details</a>
+            <span class="nhsuk-u-visually-hidden">View details for invoice ID 387731</span>
+          </li>
+
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" href="invoice-reasons-for-contestation?invoice=John">Reasons for contestation</a>
+            <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 387731</span>
+          </li>
+
+
+          <li class="nhsuk-secondary-navigation__item">
+            <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=John">Evidence</a>
+            <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 387731</span>
+          </li>
+        </ul>
+      </nav>
+
+      <hr style="border-bottom:1px solid #ccc; margin:0">
+      <!--end secondary navigation-->
+
+      <br><br>
+      
+        <!-- Beginning of content -->
+        <div class="nhsuk-grid-row">
+          <!-- Start of invoice details panel -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+                <dl class="nhsuk-summary-list">
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Resub ID linked to this invoice
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      1160158
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Entitlement ID linked to this claim
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      100001
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="../../s1/account/entitlement-content/s1-entitlement-details">
+                        View<span class="nhsuk-u-visually-hidden">entitlement details</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Person record ID
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      123456
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="../../s1/account/personal-details">
+                        View<span class="nhsuk-u-visually-hidden">person record</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      First names
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      John
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Last name
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      Doe
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Country of claim
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      France (FR)
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Invoice status</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% set status = data.invoiceStatuses['John'] %}
+                      {% if status == 'Partial' %}
+                        Partial
+                      {% elif status == 'Withdrawn' %}
+                        Withdrawn
+                      {% elif status == 'Maintained' %}
+                        Maintained
+                      {% else %}
+                        Contested
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                    <dd class="nhsuk-summary-list__value">4</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                    <dd class="nhsuk-summary-list__value">05/09/2024 - 31/12/2024</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Previously maintained months</dt>
+                    <dd class="nhsuk-summary-list__value">4</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Previously maintained accounting period</dt>
+                    <dd class="nhsuk-summary-list__value">05/09/2024 - 31/12/2024</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  {% if status == 'Partial' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                    <dd class="nhsuk-summary-list__value">1</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                    <dd class="nhsuk-summary-list__value">05/09/2024 - 30/09/2024</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+                  {% endif %}
+                </dl>
+
+              </div>
+            </div>
+
+          </div>
+          <!-- End of invoice details panel -->
+
+          {% if status == 'Partial' %}
+          <!-- Start of Partially maintained and withdrawn months panel -->
+          <div class="nhsuk-grid-column-one-half">
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+
+                <h2 class="nhsuk-heading-m">Maintained details</h2>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="period-of-maintained-months-label">Period of maintained months</dt>
+                    <dd class="nhsuk-summary-list__value" id="period-of-maintained-months-value">
+                        01/09/2024 - 30/09/2024
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                    <dd class="nhsuk-summary-list__value">1</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
+                    </dd>
+                  </div>
+                </dl>
+
+
+                  <h2 class="nhsuk-heading-m">Withdrawn details</h2>
+  
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="period-of-withdrawn-months-label">Period of withdrawn months</dt>
+                        <dd class="nhsuk-summary-list__value" id="period-of-withdrawn-months-value">
+                            01/10/2024 - 31/12/2024
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="total-number-of-partially-withdrawn-months-label">Total number of withdrawn months</dt>
+                        <dd class="nhsuk-summary-list__value" id="total-number-of-partially-withdrawn-months-value">
+                          {% if data['total-withdrawn-months'] %}
+                            {{ data['total-withdrawn-months'] }}
+                          {% else %}
+                            3
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                    </dl>
+
+                      
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="reasons-to-partially-withdraw-months-label">Reason to partially maintain and withdraw months</dt>
+                        <dd class="nhsuk-summary-list__value" id="reasons-to-partially-withdraw-months-value">
+                          {% if data['reasons-to-partially-maintain-and-withdraw-months'] %}
+                            {{ data['reasons-to-partially-maintain-and-withdraw-months'] }}
+                          {% else %}
+                            Contestation partially accepted and IMO concerned is decreased. [02]
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'Information requested updated. [04]' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-partially-maintain-label">Type of information requested</dt>
+                        <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-partially-maintain-value">
+                          {% if data['type-information-requested-partially-maintain-and-withdraw'] %}
+                          {{ data['type-information-requested-partially-maintain-and-withdraw'] }}
+                          {% else %}
+                            S072 - Entitlement document - Residence. [02]
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'The primary entitlement in state of residence starts on the date provided. [06]' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Date the primary entitlement in state of residence started on</dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['date-primary-entitlement-in-state-of-residence-starts-on-day-partial'] and data['date-primary-entitlement-in-state-of-residence-starts-on-month-partial'] and data['date-primary-entitlement-in-state-of-residence-starts-on-year-partial'] %}
+                            {% set day = data['date-primary-entitlement-in-state-of-residence-starts-on-day-partial'] | int %}
+                            {% set month = data['date-primary-entitlement-in-state-of-residence-starts-on-month-partial'] | int %}
+                            {% set year = data['date-primary-entitlement-in-state-of-residence-starts-on-year-partial'] %}
+                
+                            {% if day < 10 %}
+                                {% set day = "0" ~ day %}
+                            {% endif %}
+                            
+                            {% if month < 10 %}
+                                {% set month = "0" ~ month %}
+                            {% endif %}
+      
+                            {{ day }}/{{ month }}/{{ year }}
+
+                          {% else %}
+                            17/04/2024
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'The person receives a pension in his/her state of residence as from the date provided, copy of the decision attached. [07]' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="date-state-pension-received-partial-label">Date state pension received</dt>
+                        <dd class="nhsuk-summary-list__value" id="date-state-pension-received-partial-value">
+                          {% if data['date-state-pension-received-day-partial'] and data['date-state-pension-received-month-partial'] and data['date-state-pension-received-year-partial'] %}
+                            {% set day = data['date-state-pension-received-day-partial'] | int %}
+                            {% set month = data['date-state-pension-received-month-partial'] | int %}
+                            {% set year = data['date-state-pension-received-year-partial'] %}
+                
+                            {% if day < 10 %}
+                                {% set day = "0" ~ day %}
+                            {% endif %}
+                            
+                            {% if month < 10 %}
+                                {% set month = "0" ~ month %}
+                            {% endif %}
+      
+                            {{ day }}/{{ month }}/{{ year }}
+                
+                          {% else %}
+                            17/04/2024
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'Other. [99]' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="other-partially-maintain-and-withdraw-reason-comments-label">Other reason comments</dt>
+                        <dd class="nhsuk-summary-list__value" id="other-partially-maintain-and-withdraw-reason-comments-value">
+                          {% if data['other-partial-maintain-and-withdraw-reason-comments'] %}
+                            {{ data['other-partial-maintain-and-withdraw-reason-comments'] }}
+                          {% else %}
+                            Other partial withdraw reason explained here.
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key" id="source-of-withdrawal-label">Source of withdrawal request</dt>
+                        <dd class="nhsuk-summary-list__value" id="source-of-withdrawal-value">
+                          {% if data['partial-withdrawal-source'] %}
+                            {{ data['partial-withdrawal-source'] }}
+                          {% else %}
+                            Member State
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <!-- only display additional comments if user input comments during withdraw journey -->
+                      {% if data['add-partial-additional-comments'] == 'yes' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                        <dd class="nhsuk-summary-list__value">
+                            {{ data['partial-additional-comments'] }}
+                        </dd>
+
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+
+                      {% endif %}
+                    </dl>
+
+                  </div>
+                </div>
+
+              </div>
+              <!-- End of resub details panel -->
+              <!-- End of John Doe's invoice details -->
+              {% endif %}
+    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const savedDetails = JSON.parse(localStorage.getItem("claimHistory"));
+
+    if (savedDetails) {
+        console.log("Loaded Claim History:", savedDetails);
+
+        // Only display "Sent to Member State" if dateClaimSent exists
+        if (savedDetails.dateClaimSent && savedDetails.dateClaimSent !== "Not provided") {
+            document.getElementById("displayClaimSentDate").textContent = savedDetails.dateClaimSent;
+            document.getElementById("currentDateS1ClaimSentToMS").textContent = getCurrentDateTime();
+            document.querySelector("#currentDateS1ClaimSentToMS").closest("tr").style.display = "table-row";
+        }
+
+        // Only display "Sent to DH" if dateS100Uploaded exists
+        if (savedDetails.dateS100Uploaded && savedDetails.dateS100Uploaded !== "Not provided") {
+            document.getElementById("displayS100UploadedDate").textContent = savedDetails.dateS100Uploaded;
+            document.getElementById("currentDateS1ClaimSentToDH").textContent = getCurrentDateTime();
+            document.querySelector("#currentDateS1ClaimSentToDH").closest("tr").style.display = "table-row";
+        }
+
+        // Always display "Created" log entry
+        document.getElementById("currentDateS1ClaimCreated").textContent = getCurrentDateTime();
+    } else {
+        console.log("No claim history found in localStorage.");
+    }
+
+    // Helper function to get formatted date and time
+    function getCurrentDateTime() {
+        const currentDate = new Date();
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const year = currentDate.getFullYear();
+        const hours = String(currentDate.getHours()).padStart(2, '0');
+        const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
+});
+</script>
+{% endblock %}
