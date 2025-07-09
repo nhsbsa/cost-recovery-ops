@@ -11,8 +11,9 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 
 // Set invoice month values per person (used for claim-summary totals)
 const invoiceMonths = {
-  'Jane': 3,
-  'John': 4,
+  'John': 6,
+  'Alexander': 0,
+  'Henri': 6,
 };
 
 // Helper to check if all invoices have a status set
@@ -23,12 +24,63 @@ function allInvoicesHaveStatus(statuses, expectedCount) {
 
 
 router.get([/resubmission-summary/], function(req, res) {
-  const showResubSummary = req.session.data.showResubSummary;
-  const invoiceMonthSplits = req.session.data.invoiceMonthSplits || {};
+  const data = req.session.data;
 
+  // === Status calculation logic
+  const statuses = data.invoiceStatuses || {};
+  const invoiceList = ['John', 'Alexander', 'Henri'];
+
+  const allReviewed = Object.keys(statuses).length === invoiceList.length &&
+                      Object.values(statuses).every(status => status !== '');
+
+  const statusPriority = [
+    'invoices-added-to-resub',
+    'ready-to-send-for-peer-review',
+    'peer-review-requested',
+    'assigned-for-review',
+    'peer-reviewed',
+    'resubmission-sent-to-dh',
+    'resubmission-completed'
+  ];
+
+  let currentStatus = data.resubStatus || '';
+  let currentIndex = statusPriority.indexOf(currentStatus);
+
+  if (!currentStatus || currentStatus === 'invoices-added-to-resub') {
+    currentStatus = allReviewed ? 'ready-to-send-for-peer-review' : 'invoices-added-to-resub';
+    currentIndex = statusPriority.indexOf(currentStatus);
+  }
+
+  const dhDate = data['date-resubmission-uploaded-to-dh-exchange'];
+  const msDate = data['date-resubmission-sent-to-ms'];
+
+  if (dhDate && msDate) {
+    const completedIndex = statusPriority.indexOf('resubmission-completed');
+    if (completedIndex > currentIndex) {
+      currentStatus = 'resubmission-completed';
+      currentIndex = completedIndex;
+    }
+  } else if (dhDate) {
+    const dhIndex = statusPriority.indexOf('resubmission-sent-to-dh');
+    if (dhIndex > currentIndex) {
+      currentStatus = 'resubmission-sent-to-dh';
+      currentIndex = dhIndex;
+    }
+  }
+
+  if (allReviewed) {
+    const reviewedIndex = statusPriority.indexOf('ready-to-send-for-peer-review');
+    if (reviewedIndex > currentIndex) {
+      currentStatus = 'ready-to-send-for-peer-review';
+    }
+  }
+
+  data.resubStatus = currentStatus;
+
+  // === Summary value calculation logic
+  const invoiceMonthSplits = data.invoiceMonthSplits || {};
   let maintainedInvoices = 0;
   let withdrawnInvoices = 0;
-
   let maintainedMonths = 0;
   let withdrawnMonths = 0;
 
@@ -36,17 +88,17 @@ router.get([/resubmission-summary/], function(req, res) {
     const m = split.maintained || 0;
     const w = split.withdrawn || 0;
 
-    // Count months
     maintainedMonths += m;
     withdrawnMonths += w;
 
-    // Count invoice once if it contributes to maintained
     if (m > 0) maintainedInvoices += 1;
     if (w > 0) withdrawnInvoices += 1;
   }
 
+  const showResubSummary = data.showResubSummary;
+
   res.render('version-40/uk-claims/resubmissions/resubmission-summary', {
-    data: req.session.data,
+    data,
     showResubSummary,
     maintainedInvoices,
     withdrawnInvoices,
@@ -54,6 +106,7 @@ router.get([/resubmission-summary/], function(req, res) {
     withdrawnMonths
   });
 });
+
 
 
 
@@ -152,7 +205,7 @@ router.get([/claim-resubmissions/], function(req, res) {
 
   // --- Invoice review checks ---
   const statuses = data.invoiceStatuses || {};
-  const invoiceList = ['Jane', 'John'];
+  const invoiceList = ['John', 'Alexander', 'Henri'];
 
   const allReviewed = Object.keys(statuses).length === invoiceList.length &&
                       Object.values(statuses).every(status => status !== '');
@@ -170,6 +223,110 @@ router.get([/claim-resubmissions/], function(req, res) {
     data
   });
 });
+
+router.post([/resubmission-summary/], function (req, res) {
+  const data = req.session.data;
+
+  data['resub-summary-details-updated'] = 'yes';
+
+  const existingStatus = data.resubStatus || '';
+
+  // === Claim sent to MS date handling ===
+  const msDay = req.body['date-resubmission-sent-to-ms-day'];
+  const msMonth = req.body['date-resubmission-sent-to-ms-month'];
+  const msYear = req.body['date-resubmission-sent-to-ms-year'];
+
+  const msDateEntered = msDay && msMonth && msYear;
+
+  if (msDateEntered) {
+    data['date-resubmission-sent-to-ms'] = `${msDay}/${msMonth}/${msYear}`;
+  } else if (!data['date-resubmission-sent-to-ms']) {
+    data['date-resubmission-sent-to-ms'] = '';
+  }
+
+  // === DH Date Handling ===
+  const dhDay = req.body['date-resubmission-uploaded-to-dh-exchange-day'];
+  const dhMonth = req.body['date-resubmission-uploaded-to-dh-exchange-month'];
+  const dhYear = req.body['date-resubmission-uploaded-to-dh-exchange-year'];
+
+  const dhDateEntered = dhDay && dhMonth && dhYear;
+
+  if (dhDateEntered) {
+    data['date-resubmission-uploaded-to-dh-exchange'] = `${dhDay}/${dhMonth}/${dhYear}`;
+  } else if (!data['date-resubmission-uploaded-to-dh-exchange']) {
+    data['date-resubmission-uploaded-to-dh-exchange'] = '';
+  }
+
+  // === Status Upgrade Logic ===
+  const statusPriority = [
+    'invoices-added-to-resub',
+    'ready-to-send-for-peer-review',
+    'peer-review-requested',
+    'assigned-for-review',
+    'peer-reviewed',
+    'resubmission-sent-to-dh',
+    'resubmission-completed'
+  ];
+
+  const reviewStatuses = [
+    'ready-to-send-for-peer-review',
+    'peer-review-requested',
+    'assigned-for-review',
+    'peer-reviewed'
+  ];
+
+  let desiredStatus = existingStatus;
+
+  if (reviewStatuses.includes(existingStatus)) {
+    desiredStatus = existingStatus;
+  } else {
+    if (msDateEntered && dhDateEntered) {
+      desiredStatus = 'resubmission-completed';
+    } else if (dhDateEntered) {
+      desiredStatus = 'resubmission-sent-to-dh';
+    }
+  }
+
+  // Only promote if new status is later
+  const currentIndex = statusPriority.indexOf(existingStatus);
+  const desiredIndex = statusPriority.indexOf(desiredStatus);
+
+  if (desiredIndex > currentIndex) {
+    data.resubStatus = desiredStatus;
+  } else {
+    data.resubStatus = existingStatus;
+  }
+
+  // === Recheck invoice reviews and auto-upgrade ===
+  const statuses = data.invoiceStatuses || {};
+  const invoiceList = ['John', 'Alexander', 'Henri'];
+
+  const allReviewed = Object.keys(statuses).length === invoiceList.length &&
+                      Object.values(statuses).every(status => status !== '');
+
+  if (allReviewed) {
+    const reviewIndex = statusPriority.indexOf('ready-to-send-for-peer-review');
+    const currentStatusIndex = statusPriority.indexOf(data.resubStatus);
+
+    if (reviewIndex > currentStatusIndex) {
+      data.resubStatus = 'ready-to-send-for-peer-review';
+    }
+  }
+
+  // === Claim delivered to MS date handling ===
+  const deliveredToMSDay = req.body['date-resubmission-delivered-to-ms-day'];
+  const deliveredToMSMonth = req.body['date-resubmission-sent-to-ms-month'];
+  const deliveredToMSYear = req.body['date-resubmission-sent-to-ms-year'];
+
+  if (deliveredToMSDay && deliveredToMSMonth && deliveredToMSYear) {
+    data['date-resubmission-delivered-to-ms'] = `${deliveredToMSDay}/${deliveredToMSMonth}/${deliveredToMSYear}`;
+  } else if (!data['date-resubmission-delivered-to-ms']) {
+    data['date-resubmission-delivered-to-ms'] = '';
+  }
+
+  res.redirect('/version-40/uk-claims/resubmissions/resubmission-summary');
+});
+
 
 
 // Select reasons for contestation against each individual invoice //
@@ -429,8 +586,9 @@ router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
 
   const invoice = req.session.data.invoice; // e.g. 'John'
   const invoiceMonths = {
-    'Jane': 3,
-    'John': 4
+    'John': 6,
+    'Alexander': 7,
+    'Henri': 11
   };
 
   // Set status as 'Partial'
@@ -443,8 +601,8 @@ router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
   req.session.data.invoiceMonthSplits = req.session.data.invoiceMonthSplits || {};
 
   req.session.data.invoiceMonthSplits[invoice] = {
-    maintained: 1, // Adjust this if letting users decide
-    withdrawn: 3   // Remaining from John's total of 4 months
+    maintained: 6, // Adjust this if letting users decide
+    withdrawn: 5   // Remaining from Henri's total of 11 months
   };
 
   res.redirect('/version-40/uk-claims/resubmissions/invoices-within-resubmission');
@@ -517,8 +675,9 @@ router.post([/withdraw-additional-comments/], function(req, res) {
 router.post([/cya-withdraw/], function(req, res) {
   const invoice = req.session.data.invoice; // e.g. 'Jane'
   const invoiceMonths = {
-    'Jane': 3,
-    'John': 4
+    'John': 6,
+    'Alexander': 7,
+    'Henri': 11
   };
 
   // Set invoice status
@@ -616,21 +775,35 @@ router.get([/cya-maintain/], function(req, res) {
 
 // Redirect cya to Invoices within the resubmission screen
 router.post([/cya-maintain/], function(req, res) {
-  
-  const invoice = req.session.data.invoice; // Get active invoice
+  const invoice = req.session.data.invoice;
+
+  // Original months per invoice
+  const invoiceMonths = {
+    'John': 6,
+    'Alexander': 7,
+    'Henri': 11
+  };
+
   if (invoice) {
     req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
     req.session.data.invoiceStatuses[invoice] = 'Maintained';
+
+    // Update invoiceMonthSplits (was missing!)
+    req.session.data.invoiceMonthSplits = req.session.data.invoiceMonthSplits || {};
+    req.session.data.invoiceMonthSplits[invoice] = {
+      maintained: invoiceMonths[invoice] || 0,
+      withdrawn: 0
+    };
   }
 
-  // Redirect to the resubmission page
   res.redirect('/version-40/uk-claims/resubmissions/invoices-within-resubmission');
 });
+
 
 router.get([/invoices-within-resubmission/], function (req, res) {
   const data = req.session.data;
   const statuses = data.invoiceStatuses || {};
-  const invoiceList = ['Jane', 'John'];
+  const invoiceList = ['John', 'Alexander', 'Henri'];
 
   const allReviewed = Object.keys(statuses).length === invoiceList.length &&
                       Object.values(statuses).every(status => status !== '');
@@ -665,176 +838,6 @@ router.get([/invoice-details/], function(req, res) {
     data: req.session.data
   });
 });
-
-// Resubmission summary
-router.get([/resubmission-summary/], function(req, res) {
-  const data = req.session.data;
-
-  const statuses = data.invoiceStatuses || {};
-  const invoiceList = ['Jane', 'John'];
-
-  const allReviewed = Object.keys(statuses).length === invoiceList.length &&
-                      Object.values(statuses).every(status => status !== '');
-
-  const statusPriority = [
-    'invoices-added-to-resub',
-    'ready-to-send-for-peer-review',
-    'peer-review-requested',
-    'assigned-for-review',
-    'peer-reviewed',
-    'resubmission-sent-to-dh',
-    'resubmission-completed'
-  ];
-
-  let currentStatus = data.resubStatus || '';
-  let currentIndex = statusPriority.indexOf(currentStatus);
-
-  // Default logic if status not set or minimal
-  if (!currentStatus || currentStatus === 'invoices-added-to-resub') {
-    currentStatus = allReviewed ? 'ready-to-send-for-peer-review' : 'invoices-added-to-resub';
-    currentIndex = statusPriority.indexOf(currentStatus);
-  }
-
-  // Upgrade status based on DH and MS dates
-  const dhDate = data['date-resubmission-uploaded-to-dh-exchange'];
-  const msDate = data['date-resubmission-sent-to-ms'];
-
-  if (dhDate && msDate) {
-    const completedIndex = statusPriority.indexOf('resubmission-completed');
-    if (completedIndex > currentIndex) {
-      currentStatus = 'resubmission-completed';
-      currentIndex = completedIndex;
-    }
-  } else if (dhDate) {
-    const dhIndex = statusPriority.indexOf('resubmission-sent-to-dh');
-    if (dhIndex > currentIndex) {
-      currentStatus = 'resubmission-sent-to-dh';
-      currentIndex = dhIndex;
-    }
-  }
-
-  // Reapply ready-to-send-for-peer-review if all reviewed and still below that status
-  if (allReviewed) {
-    const reviewedIndex = statusPriority.indexOf('ready-to-send-for-peer-review');
-    if (reviewedIndex > currentIndex) {
-      currentStatus = 'ready-to-send-for-peer-review';
-    }
-  }
-
-  data.resubStatus = currentStatus;
-
-  res.render('version-40/uk-claims/resubmissions/resubmission-summary', {
-    data
-  });
-});
-
-
-router.post([/resubmission-summary/], function (req, res) {
-  const data = req.session.data;
-
-  data['resub-summary-details-updated'] = 'yes';
-
-  const existingStatus = data.resubStatus || '';
-
-  // === Claim sent to MS date handling ===
-  const msDay = req.body['date-resubmission-sent-to-ms-day'];
-  const msMonth = req.body['date-resubmission-sent-to-ms-month'];
-  const msYear = req.body['date-resubmission-sent-to-ms-year'];
-
-  const msDateEntered = msDay && msMonth && msYear;
-
-  if (msDateEntered) {
-    data['date-resubmission-sent-to-ms'] = `${msDay}/${msMonth}/${msYear}`;
-  } else if (!data['date-resubmission-sent-to-ms']) {
-    data['date-resubmission-sent-to-ms'] = '';
-  }
-
-  // === DH Date Handling ===
-  const dhDay = req.body['date-resubmission-uploaded-to-dh-exchange-day'];
-  const dhMonth = req.body['date-resubmission-uploaded-to-dh-exchange-month'];
-  const dhYear = req.body['date-resubmission-uploaded-to-dh-exchange-year'];
-
-  const dhDateEntered = dhDay && dhMonth && dhYear;
-
-  if (dhDateEntered) {
-    data['date-resubmission-uploaded-to-dh-exchange'] = `${dhDay}/${dhMonth}/${dhYear}`;
-  } else if (!data['date-resubmission-uploaded-to-dh-exchange']) {
-    data['date-resubmission-uploaded-to-dh-exchange'] = '';
-  }
-
-  // === Status Upgrade Logic ===
-  const statusPriority = [
-    'invoices-added-to-resub',
-    'ready-to-send-for-peer-review',
-    'peer-review-requested',
-    'assigned-for-review',
-    'peer-reviewed',
-    'resubmission-sent-to-dh',
-    'resubmission-completed'
-  ];
-
-  const reviewStatuses = [
-    'ready-to-send-for-peer-review',
-    'peer-review-requested',
-    'assigned-for-review',
-    'peer-reviewed'
-  ];
-
-  let desiredStatus = existingStatus;
-
-  if (reviewStatuses.includes(existingStatus)) {
-    desiredStatus = existingStatus;
-  } else {
-    if (msDateEntered && dhDateEntered) {
-      desiredStatus = 'resubmission-completed';
-    } else if (dhDateEntered) {
-      desiredStatus = 'resubmission-sent-to-dh';
-    }
-  }
-
-  // Only promote if new status is later
-  const currentIndex = statusPriority.indexOf(existingStatus);
-  const desiredIndex = statusPriority.indexOf(desiredStatus);
-
-  if (desiredIndex > currentIndex) {
-    data.resubStatus = desiredStatus;
-  } else {
-    data.resubStatus = existingStatus;
-  }
-
-  // === Recheck invoice reviews and auto-upgrade ===
-  const statuses = data.invoiceStatuses || {};
-  const invoiceList = ['Jane', 'John'];
-
-  const allReviewed = Object.keys(statuses).length === invoiceList.length &&
-                      Object.values(statuses).every(status => status !== '');
-
-  if (allReviewed) {
-    const reviewIndex = statusPriority.indexOf('ready-to-send-for-peer-review');
-    const currentStatusIndex = statusPriority.indexOf(data.resubStatus);
-
-    if (reviewIndex > currentStatusIndex) {
-      data.resubStatus = 'ready-to-send-for-peer-review';
-    }
-  }
-
-  // === Claim delivered to MS date handling ===
-  const deliveredToMSDay = req.body['date-resubmission-delivered-to-ms-day'];
-  const deliveredToMSMonth = req.body['date-resubmission-sent-to-ms-month'];
-  const deliveredToMSYear = req.body['date-resubmission-sent-to-ms-year'];
-
-  if (deliveredToMSDay && deliveredToMSMonth && deliveredToMSYear) {
-    data['date-resubmission-delivered-to-ms'] = `${deliveredToMSDay}/${deliveredToMSMonth}/${deliveredToMSYear}`;
-  } else if (!data['date-resubmission-delivered-to-ms']) {
-    data['date-resubmission-delivered-to-ms'] = '';
-  }
-
-  res.redirect('/version-40/uk-claims/resubmissions/resubmission-summary');
-});
-
-
-
-
 
 
 

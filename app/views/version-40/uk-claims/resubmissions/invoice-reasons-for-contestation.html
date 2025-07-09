@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-UK claim ID 100005: Resub ID 7790992 - View invoice details
+UK claim ID 123456: Resub ID 0000001 - View invoice details
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -57,14 +57,14 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
           <div class="nhsuk-main-wrapper" id="maincontent">
 
 
-            {% if data['invoice'] == 'Jane' %}
+            {% if data['invoice'] == 'John' %}
             {% set contestationData = data.contestation_reasons[data.invoice] %}
-            <!-- Start of Jane Doe's info -->
+            <!-- Start of John Doe's info -->
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-one-half">
                 <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
-                    Claim ID 100005: Resub ID 1160158<br>
-                    (Invoice ID 298473) - Invoice details
+                    Claim ID 123456: Resub ID 0000001<br>
+                    (Invoice ID 387731) - Invoice details
                 </h1>
               </div>
 
@@ -76,26 +76,22 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                 <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
                   <a href="reasons-to-maintain-months">
                     <button class="nhsuk-button nhsuk-button--secondary" type="submit">
-                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 123456</span>
                     </button>
                   </a>
               
                   <a href="source-of-withdrawal">
                     <button class="nhsuk-button nhsuk-button--secondary" type="submit">
-                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 123456</span>
                     </button>
                   </a>
-                </div>
               
-                <!-- Third button on a new line below -->
-                <div style="margin-top: -10px;">
                   <a href="enter-revised-accounting-period">
                     <button class="nhsuk-button nhsuk-button--secondary" type="submit">
-                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 298473 from claim ID 100005</span>
+                      Partial<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 123456</span>
                     </button>
                   </a>
                 </div>
-                
               </div>              
               {% endif %}
 
@@ -103,72 +99,6 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
             </div>
             
             
-            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
-              <ul class="nhsuk-secondary-navigation__list">
-                <li class="nhsuk-secondary-navigation__item">
-                  <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Jane">Invoice details</a>
-                  <span class="nhsuk-u-visually-hidden">View details for invoice ID 298473</span>
-                </li>
-
-                <li class="nhsuk-secondary-navigation__item">
-                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-reasons-for-contestation?invoice=Jane">Reasons for contestation</a>
-                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 298473</span>
-                </li>
-
-
-                <li class="nhsuk-secondary-navigation__item">
-                  <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Jane">Evidence</a>
-                  <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 298473</span>
-                </li>
-              </ul>
-            </nav>
-
-            {% elif data['invoice'] == 'John' %}
-            {% set contestationData = data.contestation_reasons[data.invoice] %}
-            <!-- Start of John Doe's info -->
-            <div class="nhsuk-grid-row">
-              <div class="nhsuk-grid-column-one-half">
-                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
-                    Claim ID 100005: Resub ID 1160158<br>
-                    (Invoice ID 387731) - Invoice details
-                </h1>
-              </div>
-    
-              <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
-              {% if contestationData and contestationData.reasons and contestationData.reasons | length > 0 %}
-              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
-  
-                <!-- Top two buttons side by side -->
-                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
-                  <a href="reasons-to-maintain-months">
-                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
-                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
-                    </button>
-                  </a>
-              
-                  <a href="source-of-withdrawal">
-                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
-                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
-                    </button>
-                  </a>
-                </div>
-              
-                <!-- Third button on a new line below -->
-                <div style="margin-top: -10px;">
-                  <a href="enter-revised-accounting-period">
-                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
-                      Partially maintain and withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 100005</span>
-                    </button>
-                  </a>
-                </div>
-                
-              </div>  
-              {% endif %}
-
-
-            </div>
-            
-    
             <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
               <ul class="nhsuk-secondary-navigation__list">
                 <li class="nhsuk-secondary-navigation__item">
@@ -185,6 +115,137 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                 <li class="nhsuk-secondary-navigation__item">
                   <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=John">Evidence</a>
                   <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 387731</span>
+                </li>
+              </ul>
+            </nav>
+
+
+
+
+            {% elif data['invoice'] == 'Alexander' %}
+            {% set contestationData = data.contestation_reasons[data.invoice] %}
+            <!-- Start of Alexander James' info -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 123456: Resub ID 0000001<br>
+                    (Invoice ID 384211) - Invoice details
+                </h1>
+              </div>
+    
+              <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
+              {% if contestationData and contestationData.reasons and contestationData.reasons | length > 0 %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 384211 from claim ID 123456</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 384211 from claim ID 123456</span>
+                    </button>
+                  </a>
+
+                  <a href="enter-revised-accounting-period">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partial<span class="nhsuk-u-visually-hidden"> invoice ID 384211 from claim ID 123456</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div>  
+              {% endif %}
+
+
+            </div>
+            
+    
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Alexander">Invoice details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for invoice ID 384211</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-reasons-for-contestation?invoice=Alexander">Reasons for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 384211</span>
+                </li>
+
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Alexander">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 384211</span>
+                </li>
+              </ul>
+            </nav>
+
+
+
+            {% elif data['invoice'] == 'Henri' %}
+            {% set contestationData = data.contestation_reasons[data.invoice] %}
+            <!-- Start of Henri Savageon's info -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 123456: Resub ID 0000001<br>
+                    (Invoice ID 199455) - Invoice details
+                </h1>
+              </div>
+    
+              <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
+              {% if contestationData and contestationData.reasons and contestationData.reasons | length > 0 %}
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                  <a href="reasons-to-maintain-months">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 199455 from claim ID 123456</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> invoice ID 199455 from claim ID 123456</span>
+                    </button>
+                  </a>
+
+                  <a href="enter-revised-accounting-period">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partial<span class="nhsuk-u-visually-hidden"> invoice ID 199455 from claim ID 123456</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div>  
+              {% endif %}
+
+
+            </div>
+            
+    
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Henri">Invoice details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for invoice ID 199455</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-reasons-for-contestation?invoice=Henri">Reasons for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 199455</span>
+                </li>
+
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Henri">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 199455</span>
                 </li>
               </ul>
             </nav>
@@ -233,7 +294,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      17/04/2026
+                      17/04/2015
                     {% endif %}
                     </p>
                   </dd>
@@ -261,7 +322,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      17/04/2026
+                      17/04/2015
                     {% endif %}
                     </p>
                   </dd>
@@ -277,7 +338,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {% set day = data['duplicated-global-imo-reference'] %}
                       
                     {% else %}
-                      123456
+                      111111
                     {% endif %}
                     </p>
                   </dd>
@@ -291,7 +352,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {% set day = data['duplicated-individual-imo-number'] %}
                       
                     {% else %}
-                      1
+                      928429
                     {% endif %}
                     </p>
                   </dd>
@@ -319,7 +380,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      17/04/2026
+                      17/04/2015
                     {% endif %}
                     </p>
                   </dd>
@@ -347,7 +408,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      17/04/2026
+                      17/04/2015
                     {% endif %}
                     </p>
                   </dd>
@@ -375,7 +436,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      17/04/2026
+                      17/04/2015
                     {% endif %}
                     </p>
                   </dd>
@@ -403,7 +464,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      15/10/2024
+                      15/07/2016
                     {% endif %}
                     </p>
                   </dd>
@@ -431,7 +492,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      17/04/2026
+                      17/04/2015
                     {% endif %}
                     </p>
                   </dd>
@@ -459,7 +520,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      17/04/2026
+                      17/04/2015
                     {% endif %}
                     </p>
                   </dd>
@@ -487,7 +548,7 @@ UK claim ID 100005: Resub ID 7790992 - View invoice details
                       {{ day }}/{{ month }}/{{ year }}
                       
                     {% else %}
-                      17/04/2026
+                      17/04/2015
                     {% endif %}
                     </p>
                   </dd>
