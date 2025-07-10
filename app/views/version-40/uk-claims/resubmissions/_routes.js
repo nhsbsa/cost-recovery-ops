@@ -159,12 +159,16 @@ router.post([/check-invoices-added-to-resubmission/], function(req, res) {
   // Update session to reflect that invoices are added
   req.session.data['add-invoices-to-resub'] = 'yes';
 
+  // Set resubmission status
+  req.session.data.resubStatus = 'invoices-added-to-resub';
+
   // Flag to always show resub summary after this point
   req.session.data.showResubSummary = true;
 
   // Redirect to the resubmission page
   res.redirect('/version-40/uk-claims/resubmissions/claim-resubmissions');
 });
+
 
 
 router.get([/claim-resubmissions/], function(req, res) {
