@@ -133,15 +133,14 @@ UK claim ID 100005 - Claim invoices
         <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
           <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
             <tr role="row">
-              <th role="columnheader" scope="col" style="width: 15%;">Invoice ID</th>
-              <th role="columnheader" scope="col" style="width: 15%;">First names</th>
-              <th role="columnheader" scope="col" style="width: 15%;">Last name</th>
-              <th role="columnheader" scope="col" style="width: 10%;">Months</th>
-              <th role="columnheader" scope="col" style="width: 30%;">Accounting period</th>
-              <th role="columnheader" scope="col" style="width: 15%;">Action</th>
+              <th role="columnheader" scope="col" style="max-width: 130px;">Invoice ID</th>
+              <th role="columnheader" scope="col" style="max-width: 130px;">First names</th>
+              <th role="columnheader" scope="col" style="max-width: 140px;">Last name</th>
+              <th role="columnheader" scope="col" style="max-width: 80px;">Months claimed</th>
+              <th role="columnheader" scope="col" style="max-width: 120px;">Accounting period</th>
+              <th role="columnheader" scope="col" style="max-width: 200px;">Action</th>
             </tr>
           </thead>
-          
           
 
           <tbody class="nhsuk-table__body">
@@ -159,19 +158,33 @@ UK claim ID 100005 - Claim invoices
               <span>Bernard</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 5</span><br>
-              <span>Current: 0</span>
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>5</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 01/01/2024 - 31/05/2024</span><br>
-              <span>Current: Fully withdrawn</span>
+              <span>01/01/2024 -<br> 
+              31/05/2024</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Action</span>
-              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Jacqueline Bernard</span></span>
+              <div>
+                <a href="#">View person record</a> or
+                <details style="display: inline;">
+                  <summary style="display: inline; color: #005eb8; text-decoration: underline; cursor: pointer;">
+                    view current values
+                  </summary>
+                  <div class="nhsuk-u-padding-top-2">
+                    <br>
+                    <strong>Current months:</strong> 5<br>
+                    <strong>Current accounting period:</strong> 
+                    <span>01/01/2024 -<br>  
+                    31/05/2024</span>
+                  </div>
+                </details>
+              </div>
             </td>
+
           </tr>
 
           <tr role="row" class="nhsuk-table__row">
@@ -188,20 +201,43 @@ UK claim ID 100005 - Claim invoices
               <span>Bouchard</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 8</span><br>
-              <span>Current: 8</span>
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>8</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 01/01/2024 - 31/08/2024</span><br>
-              <span>Current: 01/01/2024 - 31/08/2024</span>
+              <span>01/01/2024 -<br>
+              31/08/2024</span>
             </td>
-            <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Action</span>
-              <span><a href="#">View person record</a><span class="nhsuk-u-visually-hidden">for Jean-Luc Bouchard</span></span>
-            </td>
-          </tr>
+<!-- Action cell with both links -->
+<td class="nhsuk-table__cell">
+  <a href="#">View person record</a> or
+  <a href="#" class="view-current-values-link nhsuk-link" data-target="summary-row-234892">
+    view current values
+  </a>
+</td>
+</tr>
+
+<tr id="summary-row-234892" class="nhsuk-table__row summary-list-row" style="display: none;">
+<td colspan="6" class="nhsuk-table__cell">
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      <dl class="nhsuk-summary-list">
+        <div class="nhsuk-summary-list__row">
+          <dt class="nhsuk-summary-list__key">Current months</dt>
+          <dd class="nhsuk-summary-list__value">8</dd>
+        </div>
+        <div class="nhsuk-summary-list__row">
+          <dt class="nhsuk-summary-list__key">Current accounting period</dt>
+          <dd class="nhsuk-summary-list__value">
+            <span>01/01/2024 -<br>
+            31/05/2024</span></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</td>
+</tr>
 
             
 
@@ -219,28 +255,41 @@ UK claim ID 100005 - Claim invoices
               <span>Doe</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 3</span><br>
-
-              {% if data.resubStatus == 'resubmission-completed' %}
-                <span>Current: 0</span>
-              {% else %}
-                <span>Current: 3</span>
-              {% endif %}
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>3</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 05/10/2024 - 31/12/2024</span><br>
-
-              {% if data.resubStatus == 'resubmission-completed' %}
-                <span>Current: Fully withdrawn</span>
-              {% else %}
-                <span>Current: 05/10/2024 - 31/12/2024</span>
-              {% endif %}
+              <span>05/10/2024 -<br>
+              31/12/2024</span>
             </td>
-            <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Action</span>
-              <span><a href="../../s1/account/dependant/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for Jane Doe</span></span>
+            <td class="nhsuk-table__cell">
+              <a href="#">View person record</a> or
+              <a href="#" class="view-current-values-link nhsuk-link" data-target="nested-row-234892">
+                view current values
+              </a>
+            </td>
+          </tr>
+          
+          <tr id="nested-row-234892" class="nhsuk-table__row" style="display: none;">
+            <td colspan="6" class="nhsuk-table__cell">
+              <table class="nhsuk-table nhsuk-table--responsive" style="margin-top: 0;">
+                <thead class="nhsuk-table__head">
+                  <tr class="nhsuk-table__row">
+                    <th class="nhsuk-table__header">Current months</th>
+                    <th class="nhsuk-table__header">Current accounting period</th>
+                  </tr>
+                </thead>
+                <tbody class="nhsuk-table__body">
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">3</td>
+                    <td class="nhsuk-table__cell">
+                      <span>05/10/2024 -<br> 
+                      31/12/2024</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </td>
           </tr>
 
@@ -258,28 +307,17 @@ UK claim ID 100005 - Claim invoices
               <span>Doe</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 4</span><br>
-
-              {% if data.resubStatus == 'resubmission-completed' %}
-                <span>Current: 1</span>
-              {% else %}
-                <span>Current: 4</span>
-              {% endif %}
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>4</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 05/09/2024 - 31/12/2024</span><br>
-
-              {% if data.resubStatus == 'resubmission-completed' %}
-
-              {% else %}
-              <span>05/09/2024 - 30/09/2024</span>
-              {% endif %}
+              <span>05/09/2024 -<br> 
+              31/12/2024</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Action</span>
-              <span><a href="../../s1/account/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
+              <span><a href="../s1/account/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
             </td>
           </tr>
 
@@ -297,14 +335,13 @@ UK claim ID 100005 - Claim invoices
               <span>Dupont</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 5</span><br>
-              <span>Current: 5</span>
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>5</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 01/01/2024 - 31/05/2024</span><br>
-              <span>Current: 01/01/2024 - 31/05/2024</span>
+              <span>01/01/2024 -<br>
+              31/05/2024</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Action</span>
@@ -326,14 +363,13 @@ UK claim ID 100005 - Claim invoices
               <span>Germain</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 2</span><br>
-              <span>Current: 0</span>
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>2</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>01/01/2024 - 29/02/2024</span><br>
-              <span>Current: Fully withdrawn</span>
+              <span>01/01/2024 -<br>
+              29/02/2024</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Action</span>
@@ -355,14 +391,13 @@ UK claim ID 100005 - Claim invoices
               <span>Janview</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 9</span><br>
-              <span>Current: 0</span>
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>9</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 01/01/2024 - 30/09/2024</span><br>
-              <span>Current: Fully withdrawn</span>
+              <span>01/01/2024 -<br>
+              30/09/2024</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Action</span>
@@ -384,14 +419,13 @@ UK claim ID 100005 - Claim invoices
               <span>Leandres</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 6</span><br>
-              <span>Current: 6</span>
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>6</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 01/01/2024 - 30/06/2024</span><br>
-              <span>Current: 01/01/2024 - 30/06/2024</span>
+              <span>01/01/2024 -<br>
+              30/06/2024</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Action</span>
@@ -413,14 +447,13 @@ UK claim ID 100005 - Claim invoices
               <span>Martin</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 9</span><br>
-              <span>Current: 9</span>
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>9</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 01/01/2024 - 30/09/2024</span><br>
-              <span>Current: 01/01/2024 - 30/09/2024</span>
+              <span>01/01/2024 -<br>
+              30/09/2024</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Action</span>
@@ -442,14 +475,13 @@ UK claim ID 100005 - Claim invoices
               <span>Thomas</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
-              <span class="nhsuk-table-responsive__heading">Months</span>
-              <span>Claimed: 11</span><br>
-              <span>Current: 11</span>
+              <span class="nhsuk-table-responsive__heading">Months claimed</span>
+              <span>11</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Accounting period</span>
-              <span>Claimed: 01/01/2024 - 30/11/2024</span><br>
-              <span>Current: 01/01/2024 - 30/11/2024</span>
+              <span>01/01/2024 -<br>
+              30/11/2024</span>
             </td>
             <td role="cell" class="nhsuk-table__cell">
               <span class="nhsuk-table-responsive__heading">Action</span>
@@ -485,8 +517,77 @@ UK claim ID 100005 - Claim invoices
 {% endblock %}
 
 {% block pageScripts %}
+<style>
+  #invoicesTable {
+    table-layout: fixed;
+    width: 100%;
+  }
+</style>
+
+<style>
+@media (min-width: 40.0625em) {
+  #invoicesTable th:nth-child(1),
+  #invoicesTable td:nth-child(1) {
+    width: 80px; /* Invoice ID */
+  }
+
+  #invoicesTable th:nth-child(2),
+  #invoicesTable td:nth-child(2) {
+    width: 100px; /* First names */
+  }
+
+  #invoicesTable th:nth-child(3),
+  #invoicesTable td:nth-child(3) {
+    width: 100px; /* Last name */
+  }
+
+  #invoicesTable th:nth-child(4),
+  #invoicesTable td:nth-child(4) {
+    width: 80px; /* Months claimed */
+  }
+
+  #invoicesTable th:nth-child(5),
+  #invoicesTable td:nth-child(5) {
+    width: 80px; /* Accounting period */
+  }
+
+  #invoicesTable th:nth-child(6),
+  #invoicesTable td:nth-child(6) {
+    width: 80px; /* Action links */
+  }
+
+  #invoicesTable th:nth-child(7),
+  #invoicesTable td:nth-child(7) {
+    width: 80px; /* Action links */
+  }
+
+  #invoicesTable th:nth-child(8),
+  #invoicesTable td:nth-child(8) {
+    width: 80px; /* Action links */
+  }
+}
 
 
+</style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggleLinks = document.querySelectorAll('.view-current-values-link');
+
+      toggleLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-target');
+          const row = document.getElementById(targetId);
+          if (row) {
+            const isHidden = row.style.display === 'none';
+            row.style.display = isHidden ? '' : 'none';
+            this.textContent = isHidden ? 'hide current values' : 'view current values';
+          }
+        });
+      });
+    });
+  </script>
 {% endblock %}
 
 

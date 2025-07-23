@@ -531,8 +531,8 @@ router.post([/reasons-to-partially-maintain-and-withdraw-months/], function(req,
   req.session.data['date-state-pension-received-partial'] = dateStatePensionReceivedPartial;
 
 
-  // Check if reason includes 'Information requested updated. [04]' and redirect conditionally
-  if (reasonToPartiallyMaintainAndWithdrawMonths === 'Information requested updated. [04]') {
+  // Check if reason includes 'Information requested updated [04]' and redirect conditionally
+  if (reasonToPartiallyMaintainAndWithdrawMonths === 'Information requested updated [04]') {
     return res.redirect('/version-40/uk-claims/resubmissions/select-information-requested-partially-maintain-and-withdraw');
   }
 
@@ -734,8 +734,8 @@ router.post([/reasons-to-maintain-months/], function(req, res) {
   : '17/04/2024';
   req.session.data['date-state-pension-received-maintain'] = dateStatePensionReceivedMaintain;
 
-  // Check if reason includes 'Information requested updated. [04]' and redirect conditionally
-  if (reasonToMaintainMonths === 'Information requested updated. [04]') {
+  // Check if reason includes 'Information requested updated [04]' and redirect conditionally
+  if (reasonToMaintainMonths === 'Information requested updated [04]') {
     return res.redirect('/version-40/uk-claims/resubmissions/select-information-requested-maintain');
   }
 
