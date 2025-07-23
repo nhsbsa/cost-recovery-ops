@@ -142,26 +142,33 @@ UK claim ID 100005 - Select reasons to maintain months
                     </div>
 
                     <div class="nhsuk-radios__item">
-                      <input class="nhsuk-radios__input" id="other" name="reasons-to-maintain-months" type="radio" value="Other. [99]" aria-controls="conditional-maintain-reason-10" aria-expanded="false">
+                      <input class="nhsuk-radios__input" id="other" name="reasons-to-maintain-months" type="radio" value="Other. [99]" data-aria-controls="conditional-maintain-reason-10" aria-controls="conditional-maintain-reason-10" aria-expanded="false">
                       <label class="nhsuk-label nhsuk-radios__label" for="other">
-                        Other - add reason in text box. [99]
+                        Other. [99]
                       </label>
                     </div>
-                    <div class="nhsuk-form-group">
-                      <label class="nhsuk-label nhsuk-u-visually-hidden" for="otherMaintainReasonComments">Other reason in detail</label>
-                      
-                      <textarea class="nhsuk-textarea" id="otherMaintainReasonComments" rows="5" name="other-maintain-reason-comments"></textarea>
-                   </div>
-                    
+                    <!-- Conditionally revealed textarea -->
+                    <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-maintain-reason-10">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="otherMaintainReasonComments">
+                          Add other reason.
+                        </label>
+                        <textarea class="nhsuk-textarea" id="otherMaintainReasonComments" rows="7" name="other-maintain-reason-comments" maxlength="500"></textarea>
+                        <p id="charactersRemaining" class="nhsuk-hint" aria-hidden="true">500 characters remaining</p>
+                        <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 500 characters</p>
+                      </div>
+                    </div>
                     
             
                   </div>
+                  <!-- End of radios -->
+
                 </fieldset>
             
               </div>
             
 
-              <button class="nhsuk-button nhsuk-button--primary" style="margin-top: 20px;" type="submit" id="continue-button">Continue</button>
+              <button class="nhsuk-button nhsuk-button--primary" style="margin-top: 10px;" type="submit" id="continue-button">Continue</button>
 
             </div>
 
@@ -188,5 +195,59 @@ UK claim ID 100005 - Select reasons to maintain months
     max-width: 100%; /* Ensures it doesn't get constrained by default select styles */
   }
 </style>
+
+<script>
+  const textarea = document.querySelector('#otherMaintainReasonComments');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 500;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 1000);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
 {% endblock %}
 

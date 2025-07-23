@@ -72,7 +72,7 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
               </div>
 
               <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
-              {% if contestationData.reasons and contestationData.reasons | length > 0 %}
+              {% if contestationData.reasons and contestationData.reasons | length > 0 and data.resubStatus not in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
               <div class="nhsuk-grid-column-one-half" style="text-align: right;">
   
                 <!-- Top two buttons side by side -->
@@ -302,7 +302,7 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
                         {% endif %}
                         {% if 'Other. [99]' in data['reasons-to-maintain-months'] %}
                         <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason comments</dt>
+                          <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason - comments</dt>
                           <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
                             {% if data['other-maintain-reason-comments'] %}
                               {{ data['other-maintain-reason-comments'] }}
@@ -317,11 +317,11 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
                         {% endif %}
 
                         <!-- only display additional comments if user input comments during withdraw journey -->
-                        {% if data['add-withdraw-additional-comments'] == 'yes' %}
+                        {% if data['add-maintain-additional-comments'] == 'yes' %}
                         <div class="nhsuk-summary-list__row">
                           <dt class="nhsuk-summary-list__key">Additional comments</dt>
                           <dd class="nhsuk-summary-list__value">
-                              {{ data['withdraw-additional-comments'] }}
+                              {{ data['maintain-additional-comments'] }}
                           </dd>
 
                           <dd class="nhsuk-summary-list__actions">
@@ -419,7 +419,7 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
           </div>
 
           <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
-          {% if contestationData.reasons and contestationData.reasons | length > 0 %}
+          {% if contestationData.reasons and contestationData.reasons | length > 0 and data.resubStatus not in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
           <div class="nhsuk-grid-column-one-half" style="text-align: right;">
   
             <!-- Top two buttons side by side -->
@@ -657,13 +657,17 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
                   {% endif %}
                   {% if 'Other. [99]' in data['reasons-to-withdraw-months'] %}
                   <div class="nhsuk-summary-list__row">
-                    <dt class="nhsuk-summary-list__key" id="other-withdraw-reason-comments-label">Other reason comments</dt>
+                    <dt class="nhsuk-summary-list__key" id="other-withdraw-reason-comments-label">Other reason - comments</dt>
                     <dd class="nhsuk-summary-list__value" id="other-withdraw-reason-comments-value">
                       {% if data['other-withdraw-reason-comments'] %}
                         {{ data['other-withdraw-reason-comments'] }}
                       {% else %}
                         Other withdraw reason explained here.
                       {% endif %}
+                    </dd>
+
+                    <dd class="nhsuk-summary-list__actions">
+                      <!-- Action -->
                     </dd>
                   </div>
                   {% endif %}
@@ -754,7 +758,7 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
             </div>
 
             <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
-            {% if contestationData.reasons and contestationData.reasons | length > 0 %}
+            {% if contestationData.reasons and contestationData.reasons | length > 0 and data.resubStatus not in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
             <div class="nhsuk-grid-column-one-half" style="text-align: right;">
     
               <!-- Top two buttons side by side -->
@@ -1110,7 +1114,7 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
                         {% endif %}
                         {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'Other. [99]' %}
                         <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key" id="other-partially-maintain-and-withdraw-reason-comments-label">Other reason comments</dt>
+                          <dt class="nhsuk-summary-list__key" id="other-partially-maintain-and-withdraw-reason-comments-label">Other reason - comments</dt>
                           <dd class="nhsuk-summary-list__value" id="other-partially-maintain-and-withdraw-reason-comments-value">
                             {% if data['other-partial-maintain-and-withdraw-reason-comments'] %}
                               {{ data['other-partial-maintain-and-withdraw-reason-comments'] }}
