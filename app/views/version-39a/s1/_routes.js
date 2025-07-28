@@ -379,25 +379,22 @@ router.post([/basic-personal-details-comment/], function(req, res){
 // Change additional personal details
 router.post([/change-additional-personal-details/], function(req, res){
 
-  req.session.data['change-additional-personal-details'] = 'yes'
+  req.session.data['sex'] = req.body['sex'];
+  req.session.data['nationality'] = req.body['nationality'];
+  req.session.data['UK-national-insurance-number'] = req.body['UK-national-insurance-number'];
+  req.session.data['email-address'] = req.body['email-address'];
+  req.session.data['contact-number'] = req.body['contact-number'];
 
-  res.redirect('/version-39a/s1/account/additional-personal-details-change-reason');
+  res.redirect('/version-39a/s1/account/additional-personal-details-cya');
 })
 
 // Select the reason for the change to the additional personal details
-router.post([/additional-personal-details-change-reason/], function(req, res){
+router.post([/additional-personal-details-cya/], function(req, res){
 
-  res.redirect('/version-39a/s1/account/additional-personal-details-comment');
-
-})
-
-// Add comments alongside change made to additional personal details
-router.post([/additional-personal-details-comment/], function(req, res){
-
-  req.session.data['add-additional-personal-details-comment'] = 'yes'
+  // Conditional flag to track change of additional details
+  req.session.data['add-additional-personal-details'] = 'yes'
 
   res.redirect('/version-39a/s1/account/personal-details');
-
 })
 
 router.post([/change-current-address/], function (req, res) {
