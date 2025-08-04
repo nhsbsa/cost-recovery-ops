@@ -5,13 +5,13 @@
 -->
 
 <!-- Extends the layout from /docs/views/template.html -->
-{% extends "template.html" %}
+{% extends "prototype-kit-template.njk" %}
 
 {% set bodyClasses = 'has-sidebar' %}
 {% set containerClasses = 'nhsuk-width-container-fluid' %}
 
 <!-- Add your custom CSS or Sass in /app/assets/sass/main.scss -->
-{% block headCSS %}
+{% block head %}
   <link href="/css/main.css" rel="stylesheet">
   <link href="/sass/autocomplete.min.css" rel="stylesheet">
 {% endblock %}
@@ -66,8 +66,8 @@
   "links": [
 
     {
-     "URL": "/examples/passing-data/clear-data",
-     "label": "Clear data"
+      "URL": "/prototype-admin/reset?returnPage=" + (currentPage | urlencode),
+      "label": "Reset data"
     },
     {
       "URL": "#",
