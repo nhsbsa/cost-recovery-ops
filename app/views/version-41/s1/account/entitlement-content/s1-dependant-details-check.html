@@ -1,0 +1,622 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Check your answers - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <h1 class="app-page-heading">
+                      <span class="nhsuk-caption-l">
+                        Create a new person record
+                        <span class="nhsuk-u-visually-hidden"> - </span>
+                      </span>
+                        Check your answers
+                    </h1>
+   
+                    <form action="s1-dependant-details-check" method="post">
+
+                    <!-- Dependant 1 details -->
+                    {% if data['number-of-dependants'] != '2' or data['remove-dependant'] == 'yes' %}
+                        <dl class="nhsuk-summary-list">
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">First names</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['dependant-first-name'] %}
+                                {{ data['dependant-first-name'] }}
+                              {% else %}
+                                Jane
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="s1-create-new-dependant-record#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">First names at birth, if different</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['dependant-birth-first-name'] %}
+                                {{ data['dependant-birth-first-name'] }}
+                              {% else %}
+                                Not provided
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="s1-create-new-dependant-record#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
+                            </dd>
+                          </div>
+
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Last name</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['dependant-last-name'] %}
+                                {{ data['dependant-last-name'] }}
+                              {% else %}
+                                Doe
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="s1-create-new-dependant-record#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
+                            </dd>
+                          </div>
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Last name at birth, if different</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['dependant-birth-last-name'] %}
+                                {{ data['dependant-birth-last-name'] }}
+                              {% else %}
+                                Not provided
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="s1-create-new-dependant-record#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
+                            </dd>
+                          </div>
+
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date of birth</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                {% if data['dependant-dob-day'] and data['dependant-dob-month'] and data['dependant-dob-year'] %}
+                                      {% set day = data['dependant-dob-day'] %}
+                                      {% set month = data['dependant-dob-month'] | int %}
+                                      {% set year = data['dependant-dob-year'] %}
+                          
+                                      {# Define month names #}
+                                      {% set month_names = [
+                                          "January", "February", "March", "April", "May", "June",
+                                          "July", "August", "September", "October", "November", "December"
+                                      ] %}
+                          
+                                      {# Get the month name #}
+                                      {% set month_name = month_names[month - 1] %}
+                          
+                                      {# Display the date in the format "day month year" #}
+                                      {{ day | int }} {{ month_name }} {{ year }}
+                                  {% else %}
+                                      29 December 1975
+                                  {% endif %}
+                            </dd>
+                          
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="s1-create-new-dependant-record#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
+                            </dd>
+                          </div>
+                        </dl>
+                        
+
+
+                        <h2 class="nhsuk-heading-m">Address details</h2>
+
+                        <dl class="nhsuk-summary-list">
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Knowledge of current address</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['add-dependant-address'] == 'yes' %}
+                                Yes
+                              {% else %}
+                                No
+                              {% endif %}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <a href="add-dependant-address"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                            </dd>
+                          </div>
+
+                          {% if data['add-dependant-address'] == 'yes' %}
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">Current address</dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['address-line-1'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-region'] or data['address-postcode'] or data['address-country'] %}
+                                  {% if data['address-line-1'] %}
+                                    {{ data['address-line-1'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-line-2'] %}
+                                    {{ data['address-line-2'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-line-3'] %}
+                                    {{ data['address-line-3'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-town'] %}
+                                    {{ data['address-town'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-region'] %}
+                                    {{ data['address-region'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-postcode'] %}
+                                    {{ data['address-postcode'] }}<br>
+                                  {% endif %}
+                                  {% if data['address-country'] %}
+                                    {{ data['address-country'] }}
+                                  {% endif %}
+                                {% else %}
+                                  1 Washington Street<br>
+                                  Worcester<br>
+                                  WR1 1NL<br>
+                                  United Kingdom
+                                {% endif %}
+                              </dd>
+
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="enter-dependant-address"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                              </dd>
+                            </div>
+                            {% endif %}
+                        </dl>
+                        
+
+                          
+                          <!-- Display expanders for more than one dependant -->
+			                    {% else %}
+                          <dl class="nhsuk-summary-list">
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                Total number of dependants
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                2
+                              </dd>
+                            </div>
+                          </dl>
+
+                          <!-- First dependant details -->
+                          <details class="nhsuk-details nhsuk-expander">
+                            <summary class="nhsuk-details__summary">
+                              <span class="nhsuk-details__summary-text">
+                                654321 - Jane Doe
+                              </span>
+                            </summary>
+
+                            <br>
+
+                            <div class="nhsuk-details__text">
+                              <dl class="nhsuk-summary-list">
+
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">First names</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['dependant-first-name'] %}
+                                      {{ data['dependant-first-name'] }}
+                                    {% else %}
+                                      Jane
+                                    {% endif %}
+                                  </dd>
+      
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
+                                  </dd>
+                                </div>
+      
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">First names at birth, if different</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['dependant-birth-first-name'] %}
+                                      {{ data['dependant-birth-first-name'] }}
+                                    {% else %}
+                                      Not provided
+                                    {% endif %}
+                                  </dd>
+      
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
+                                  </dd>
+                                </div>
+      
+      
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">Last name</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['dependant-last-name'] %}
+                                      {{ data['dependant-last-name'] }}
+                                    {% else %}
+                                      Doe
+                                    {% endif %}
+                                  </dd>
+      
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
+                                  </dd>
+                                </div>
+      
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">Last name at birth, if different</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['dependant-birth-last-name'] %}
+                                      {{ data['dependant-birth-last-name'] }}
+                                    {% else %}
+                                      Not provided
+                                    {% endif %}
+                                  </dd>
+      
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
+                                  </dd>
+                                </div>
+      
+      
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">Date of birth</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                      {% if data['dependant-dob-day'] and data['dependant-dob-month'] and data['dependant-dob-year'] %}
+                                            {% set day = data['dependant-dob-day'] %}
+                                            {% set month = data['dependant-dob-month'] | int %}
+                                            {% set year = data['dependant-dob-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                        {% else %}
+                                            29 December 1975
+                                        {% endif %}
+                                  </dd>
+                                
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
+                                  </dd>
+                                </div>
+                              </dl>
+
+
+                              <h2 class="nhsuk-heading-m">Address details</h2>
+
+                              <dl class="nhsuk-summary-list">
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">Knowledge of current address</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['add-dependant-address'] == 'yes' %}
+                                      Yes
+                                    {% else %}
+                                      No
+                                    {% endif %}
+                                  </dd>
+
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="add-dependant-address"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                                  </dd>
+                                </div>
+
+                                {% if data['add-dependant-address'] == 'yes' %}
+                                  <div class="nhsuk-summary-list__row">
+                                    <dt class="nhsuk-summary-list__key">Current address</dt>
+                                    <dd class="nhsuk-summary-list__value">
+                                      {% if data['address-line-1'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-region'] or data['address-postcode'] or data['address-country'] %}
+                                        {% if data['address-line-1'] %}
+                                          {{ data['address-line-1'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-line-2'] %}
+                                          {{ data['address-line-2'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-line-3'] %}
+                                          {{ data['address-line-3'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-town'] %}
+                                          {{ data['address-town'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-region'] %}
+                                          {{ data['address-region'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-postcode'] %}
+                                          {{ data['address-postcode'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-country'] %}
+                                          {{ data['address-country'] }}
+                                        {% endif %}
+                                      {% else %}
+                                        1 Washington Street<br>
+                                        Worcester<br>
+                                        WR1 1NL<br>
+                                        United Kingdom
+                                      {% endif %}
+                                    </dd>
+
+                                    <dd class="nhsuk-summary-list__actions">
+                                      <a href="enter-dependant-address"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                                    </dd>
+                                  </div>
+                                  {% endif %}
+                              </dl>
+
+                              <a class="nhsuk-button nhsuk-button--warning" href="remove-dependant?dependant-id=1">Remove dependant</a>
+
+                            </div>
+
+                          </details>
+
+
+                          <!-- Second dependant details -->
+                          <details class="nhsuk-details nhsuk-expander">
+                            <summary class="nhsuk-details__summary">
+                              <span class="nhsuk-details__summary-text">
+                                654311 - Joe Doe
+                              </span>
+                            </summary>
+
+                            <br>
+
+                            <div class="nhsuk-details__text">
+                              <dl class="nhsuk-summary-list">
+
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">First names</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['dependant-first-name'] %}
+                                      {{ data['dependant-first-name'] }}
+                                    {% else %}
+                                      Joe
+                                    {% endif %}
+                                  </dd>
+      
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-first-name"> Change<span class="nhsuk-u-visually-hidden">first name</span> </a>
+                                  </dd>
+                                </div>
+      
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">First names at birth, if different</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['dependant-birth-first-name'] %}
+                                      {{ data['dependant-birth-first-name'] }}
+                                    {% else %}
+                                      Not provided
+                                    {% endif %}
+                                  </dd>
+      
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-birth-first-name"> Change<span class="nhsuk-u-visually-hidden">first name at birth</span> </a>
+                                  </dd>
+                                </div>
+      
+      
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">Last name</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['dependant-last-name'] %}
+                                      {{ data['dependant-last-name'] }}
+                                    {% else %}
+                                      Doe
+                                    {% endif %}
+                                  </dd>
+      
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-last-name"> Change<span class="nhsuk-u-visually-hidden">last name</span> </a>
+                                  </dd>
+                                </div>
+      
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">Last name at birth, if different</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['dependant-birth-last-name'] %}
+                                      {{ data['dependant-birth-last-name'] }}
+                                    {% else %}
+                                      Not provided
+                                    {% endif %}
+                                  </dd>
+      
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-birth-last-name"> Change<span class="nhsuk-u-visually-hidden">last name at birth</span> </a>
+                                  </dd>
+                                </div>
+      
+      
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">Date of birth</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                      {% if data['dependant-dob-day'] and data['dependant-dob-month'] and data['dependant-dob-year'] %}
+                                            {% set day = data['dependant-dob-day'] %}
+                                            {% set month = data['dependant-dob-month'] | int %}
+                                            {% set year = data['dependant-dob-year'] %}
+                                
+                                            {# Define month names #}
+                                            {% set month_names = [
+                                                "January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ] %}
+                                
+                                            {# Get the month name #}
+                                            {% set month_name = month_names[month - 1] %}
+                                
+                                            {# Display the date in the format "day month year" #}
+                                            {{ day | int }} {{ month_name }} {{ year }}
+                                        {% else %}
+                                            14 September 1999
+                                        {% endif %}
+                                  </dd>
+                                
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="s1-create-new-dependant-record#dependant-dob-day"> Change<span class="nhsuk-u-visually-hidden">date of birth</span> </a>
+                                  </dd>
+                                </div>
+                              </dl>
+
+
+                              <h2 class="nhsuk-heading-m">Address details</h2>
+
+                              <dl class="nhsuk-summary-list">
+                                <div class="nhsuk-summary-list__row">
+                                  <dt class="nhsuk-summary-list__key">Knowledge of current address</dt>
+                                  <dd class="nhsuk-summary-list__value">
+                                    {% if data['add-dependant-address'] == 'yes' %}
+                                      Yes
+                                    {% else %}
+                                      No
+                                    {% endif %}
+                                  </dd>
+
+                                  <dd class="nhsuk-summary-list__actions">
+                                    <a href="add-dependant-address"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                                  </dd>
+                                </div>
+
+                                {% if data['add-dependant-address'] == 'yes' %}
+                                  <div class="nhsuk-summary-list__row">
+                                    <dt class="nhsuk-summary-list__key">Current address</dt>
+                                    <dd class="nhsuk-summary-list__value">
+                                      {% if data['address-line-1'] or data['address-line-2'] or data['address-line-3'] or data['address-town'] or data['address-region'] or data['address-postcode'] or data['address-country'] %}
+                                        {% if data['address-line-1'] %}
+                                          {{ data['address-line-1'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-line-2'] %}
+                                          {{ data['address-line-2'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-line-3'] %}
+                                          {{ data['address-line-3'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-town'] %}
+                                          {{ data['address-town'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-region'] %}
+                                          {{ data['address-region'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-postcode'] %}
+                                          {{ data['address-postcode'] }}<br>
+                                        {% endif %}
+                                        {% if data['address-country'] %}
+                                          {{ data['address-country'] }}
+                                        {% endif %}
+                                      {% else %}
+                                        1 Washington Street<br>
+                                        Worcester<br>
+                                        WR1 1NL<br>
+                                        United Kingdom
+                                      {% endif %}
+                                    </dd>
+
+                                    <dd class="nhsuk-summary-list__actions">
+                                      <a href="enter-dependant-address"> Change<span class="nhsuk-u-visually-hidden">address</span> </a>
+                                    </dd>
+                                  </div>
+                                  {% endif %}
+                              </dl>
+
+
+                              <a class="nhsuk-button nhsuk-button--warning" href="remove-dependant?dependant-id=2">Remove dependant</a>
+
+                            </div>
+
+                          </details>
+                          {% endif %}
+                                
+                                
+      
+                          
+
+                        <div class="button-container">
+                          <form action="../../account/entitlement-content/s1-confirmation-dependant-added">
+                            <button style="margin-right:20px; margin-top:10px; margin-bottom:60px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                              Save and continue
+                            </button>
+                          </form>
+              
+                          <form action="../../account/entitlement-content/s1-dependant-search">
+                            <button style="margin-top:10px; margin-bottom:60px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                              Add another dependant
+                            </button>
+                          </form>
+                        </div>
+                        
+                        
+
+                          <p><a href="s1-entitlement-details">Cancel</a></p>
+
+                    
+
+                </div>
+
+              </form>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- Date format -->
+<script>
+  function formatDate(day, month, year) {
+    // Add one month to the current month
+    let newMonth = parseInt(month) + 1;
+    let newYear = parseInt(year);
+
+    // Check if the new month exceeds 12 (December)
+    if (newMonth > 12) {
+        newMonth = 1; // Reset to January
+        newYear += 1; // Increment the year
+    }
+
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthName = months[newMonth - 1]; // Get the new month name
+    return `${parseInt(day)} ${monthName} ${newYear}`;
+}
+</script>
+{% endblock %}

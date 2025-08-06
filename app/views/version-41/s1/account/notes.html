@@ -1,0 +1,403 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Notes - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-by-person">Search</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../search/search-results-none">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../account/personal-details">Personal details</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            Notes
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back">
+      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
+    </p>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl" style="margin-bottom: 10px;" >Notes</h1>
+
+              <a class="nhsuk-button" style="float: right;" href="/version-41/s1/account/add-note" id="addNote-button">Add a new note</a>
+            </div>
+          </div>
+
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+                
+
+                      
+                      <!-- Notes tab content begins -->
+                      {% if data['new-note'] == 'yes' %}
+                      <div style="background-color: white; padding: 20px; border: 1px solid #ddd;">
+                        <br>
+
+                      <details class="nhsuk-details" style="margin-left: -20px; margin-top: -30px; margin-bottom: 10px;">
+                        <summary class="nhsuk-details__summary">
+                          <span class="nhsuk-details__summary-text">
+                            Filter notes
+                          </span>
+                        </summary>
+                        <div class="nhsuk-details__text">
+
+                        <!--div class="nhsuk-form-group">
+                          <label class="nhsuk-label" for="filter-notes"><b>Enter keywords</b></label>
+                          <div class="nhsuk-hint" id="contact-hint">
+                            For example, 'email' or 'response'.
+                          </div>
+
+                          <input class="nhsuk-input" id="example" name="filter-notes-by-keywords" type="text" value="">
+                        </div-->
+
+                        
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label" for="filter-notes-by-note-type-label"><b>Note type</b></label>
+                          <div class="nhsuk-hint" id="contact-hint" style="margin-bottom: 30px;">Select all that apply.</div>
+
+                          <div style="display: flex; gap: 1rem;">
+                            <!-- Left Column -->
+                            <div class="nhsuk-checkboxes">
+                              <div class="nhsuk-checkboxes__item">
+                                <input class="nhsuk-checkboxes__input" id="note-type-s1-s072" name="filter-notes-by-note-type" type="checkbox" value="S1/S072">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-s1-s072">
+                                  S1/S072
+                                </label>
+                              </div>
+                    
+                              <div class="nhsuk-checkboxes__item">
+                                <input class="nhsuk-checkboxes__input" id="note-type-e109" name="filter-notes-by-note-type" type="checkbox" value="E109">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-e109">
+                                  E109
+                                </label>
+                              </div>
+                      
+                              <!--div class="nhsuk-checkboxes__item">
+                                <input class="nhsuk-checkboxes__input" id="note-type-e121" name="filter-notes-by-note-type" type="checkbox" value="E121">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-e121">
+                                  E121
+                                </label>
+                              </div-->
+                            
+                              <div class="nhsuk-checkboxes__item">
+                                <input class="nhsuk-checkboxes__input" id="note-type-s2-e112" name="filter-notes-by-note-type" type="checkbox" value="S2/E112">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-s2-e112">
+                                  S2/E112
+                                </label>
+                              </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="nhsuk-checkboxes">
+                              <div class="nhsuk-checkboxes__item">
+                                <input class="nhsuk-checkboxes__input" id="note-type-ehic" name="filter-notes-by-note-type" type="checkbox" value="EHIC">
+                                <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-ehic">
+                                  EHIC
+                                </label>
+                              </div>
+
+                            <div class="nhsuk-checkboxes__item">
+                              <input class="nhsuk-checkboxes__input" id="note-type-prc" name="filter-notes-by-note-type" type="checkbox" value="PRC">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-prc">
+                                PRC
+                              </label>
+                            </div>
+
+                            <div class="nhsuk-checkboxes__item">
+                              <input class="nhsuk-checkboxes__input" id="note-type-general" name="filter-notes-by-note-type" type="checkbox" value="General">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="note-type-general">
+                                General
+                              </label>
+                            </div>
+                          </div>
+
+                          </div>
+                        </div>
+                        
+                        <!--div class="nhsuk-form-group">
+                          <label class="nhsuk-label" for="filter-notes"><b>Entitlement ID</b></label>
+                          <div class="nhsuk-hint" id="filter-notes-by-entitlement-id-hint">
+                            This is a X digit number. For example, XXXXX.
+                          </div>
+
+                          <input class="nhsuk-input nhsuk-input--width-10" id="example" name="filter-notes-by-entitlement-id" type="text" value="">
+                        </div-->
+                    
+                        <!--div class="nhsuk-form-group">
+                          <div class="nhsuk-checkboxes">
+                            <label class="nhsuk-label" for="filter-notes-by-document-type-label"><b>Document type</b></label>
+                            <div class="nhsuk-hint" id="contact-hint">
+                              Select all that apply.
+                            </div>
+
+                            <div class="nhsuk-checkboxes__item">
+                              <input class="nhsuk-checkboxes__input" id="doc-type-dl1609" name="filter-notes-by-document-type" type="checkbox" value="DL1609">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="doc-type-dl1609">
+                                DL1609
+                              </label>
+                            </div>
+
+                            <div class="nhsuk-checkboxes__item">
+                              <input class="nhsuk-checkboxes__input" id="doc-type-fas1q" name="filter-notes-by-document-type" type="checkbox" value="FAS1Q">
+                              <label class="nhsuk-label nhsuk-checkboxes__label" for="doc-type-fas1q">
+                                FAS1Q
+                              </label>
+                            </div>
+                          </div>
+                        </div-->
+                    
+                        <button class="nhsuk-button nhsuk-button--secondary" style="margin-top: 10px;" id="applyFilterButton">Apply filter</button>
+                        
+                        <p><a href="/version-41/s1/account/entitlement-content/s1-entitlement-details#tab-Notes" id="clearButton">Reset filter</a></p>
+
+                        </div>
+                      </details>
+                    
+                      <table role="table" class="nhsuk-table-responsive">
+                        <thead role="rowgroup" class="nhsuk-table__head">
+                          <tr role="row">
+                            <th role="columnheader" scope="col" style="width: 20%;">Date and time</th>
+                            <th role="columnheader" scope="col" style="width: 20%;">Added by</th>
+                            <th role="columnheader" scope="col" style="width: 10%;">Note type</th>
+                            <!--th role="columnheader" scope="col" style="width: 10%;">Document type<br>(optional)</th-->
+                            <th role="columnheader" scope="col" style="width: 50%;">Comments</th>
+                            <!--th role="columnheader" scope="col" style="width: 10%;">Actions</th-->
+                          </tr>
+                        </thead>
+                        <tbody class="nhsuk-table__body">
+                      
+                          <!-- S1 entitlement note -->
+                          {% if data['new-note'] == 'yes' %}
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              <span id="currentDateGeneral"></span>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Added by</span>
+                              <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Note type</span>
+                              <p>{{ data['note-type'] if data['note-type'] else 'S1/S072' }}</p>
+                            </td>
+                            <!--td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Document type (optional)</span>
+                              <p>{{ data['document-type'] if data['document-type'] }}</p>
+                            </td-->
+                            <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Comments</span>
+                              {% if data['rina-ref-number'] %}
+                                <p><b>RINA reference number: {{ data['rina-ref-number'] }}</b></p>
+                              {% endif %}
+                              <p>{{ data['note'] if data['note'] else 'This is what the comments would look like.' }}</p>
+                            </td>
+                            <!--td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Actions</span>
+                              <a href="#">Remove</span></a>
+                            </td-->
+                          </tr>
+                          {% endif %}
+                      
+                    
+                            <!-- DL1609 note - Only display if a comment has been added -->
+                            {% if data['new-dl1609-note'] == 'yes' %}
+                            <tr role="row" class="nhsuk-table__row">
+                              <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                <span id="currentDateDL1609"></span>
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Added by</span>
+                                <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Entitlement type</span>
+                                <p>{{ data['note-type'] if data['note-type'] else 'S1/S072' }}</p>
+                              </td>
+                              <!--td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Document type (optional)</span>
+                                <p>{{ data['document-type'] if data['document-type'] else 'DL1609' }}</p>
+                              </td-->
+                              <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Comments</span>
+                                <!-- Only display comments if they are present -->
+                                {% if data['dl1609-comments'] %}
+                                  <p>{{ data['dl1609-comments'] }}</p>
+                                  {% else %}
+                                <p>None provided</p>
+                              {% endif %}
+                              </td>
+                              <!--td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Actions</span>
+                                <a href="#">Remove</span></a>
+                              </td-->
+                            </tr>
+                            {% endif %}
+                    
+                            <!-- S073 RINA reference note -->
+                            {% if data['new-s073-rina-reference-note'] == 'yes' %}
+                            <tr role="row" class="nhsuk-table__row">
+                              <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                <span id="currentDateS073"></span>
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Added by</span>
+                                <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                              </td>
+                              <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Entitlement type</span>
+                                <p>{{ data['note-type'] if data['note-type'] else 'S1/S072' }}</p>
+                              </td>
+                              <!--td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Document type (optional)</span>
+                                <p>{{ data['document-type'] if data['document-type'] else 'Not provided' }}</p>
+                              </td-->
+                              <td role="cell" class="nhsuk-table__cell">
+                                {% if data['rina-reference-number'] %}
+                                  <p><b>RINA reference number: {{ data['rina-reference-number'] }}</b></p>
+                                {% else %}
+                                  <p><b>RINA reference number: 654321</b></p>
+                                {% endif %}
+                                <!-- Display comments or 'None provided' if no comments are present -->
+                              {% if data['s073-rina-reference-comments'] %}
+                                <p>{{ data['s073-rina-reference-comments'] }}</p>
+                              {% else %}
+                                <p>None provided</p>
+                              {% endif %}
+                              </td>
+                              <!--td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Actions</span>
+                                <a href="#">Remove</span></a>
+                              </td-->
+                            </tr>
+                            {% endif %}
+                    
+                          </tbody>
+                        </table>
+                    
+                      </div>
+                      {% else %}
+                        <p>No notes have been added.</p>
+                      {% endif %}
+                    
+                
+            </div>
+          </div>
+                    <!-- Notes tab content ends -->   
+                                
+                            
+
+        </div>
+    </div>
+</div>
+
+    <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a href="personal-details">Personal details</a></li>
+          <li><a href="entitlements-and-treatments">Entitlements and treatments</a></li>
+          <li><a href="case-history-person">Case history</a></li>
+          <!--li><a href="documents">Documents</a></li-->
+          <li><a class="active" href="notes">Notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
+
+  </div>
+</div>
+<!-- End of main content -->
+{% endblock %}
+    
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#note-type-drop')
+  })
+</script>
+
+<script type="text/javascript">
+    accessibleAutocomplete.enhanceSelectElement({
+      defaultValue : '',
+      autoselect : true,  
+      selectElement : document.querySelector('#document-type-drop')
+    })
+</script>
+
+
+<script>
+  // Function to set the current date and time
+  function setCurrentDateTime(elementId) {
+    var dateElement = document.getElementById(elementId);
+  
+    if (dateElement) {
+      var currentDate = new Date();
+  
+      var dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+      var formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+  
+      var timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+      var formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+  
+      var formattedDateTime = formattedDate + ' at ' + formattedTime;
+  
+      dateElement.textContent = formattedDateTime;
+    }
+  }
+  
+  // Set the date for each note
+  document.addEventListener("DOMContentLoaded", function () {
+    setCurrentDateTime("currentDateGeneral");      // For general S1 note
+    setCurrentDateTime("currentDateDL1609");  // For DL1609 note
+    setCurrentDateTime("currentDateS073");    // For S073 note
+  });
+  </script>  
+
+{% endblock %}

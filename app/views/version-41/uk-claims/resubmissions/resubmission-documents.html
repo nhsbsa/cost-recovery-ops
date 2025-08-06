@@ -1,0 +1,178 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - View the resubmission documents
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View Resub ID (Invoices within resubmission)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                  <h1 class="nhsuk-heading-l" style="margin-bottom: 20px;">
+                    Claim ID 100005: Resub ID 1160158:<br>
+                    Resubmission documents
+                  </h1>
+              </div>
+            </div>
+            
+            
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoices-within-resubmission">Invoices within resub</a>
+                  <span class="nhsuk-u-visually-hidden">View the invoices within resubmission 1160158</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="resubmission-documents">Resubmission documents</a>
+                  <span class="nhsuk-u-visually-hidden">View the documents within resubmission 1160158</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="resubmission-summary">Resubmission summary</a>
+                  <span class="nhsuk-u-visually-hidden">View the summary for resubmission 1160158</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="resubmission-history">Resubmission history</a>
+                  <span class="nhsuk-u-visually-hidden">View the history of resubmission 1160158</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <!-- start of documents list -->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+              
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="resub-ack-letter">Acknowledgement letter</dt>
+                   <dd class="nhsuk-summary-list__actions">
+                      <a aria-label="View file to print or download acknowledgement letter" href="/manage-overseas-entitlements-treatments/claim-resubs/view-document?documentId=34508" id="ackLetter" target="_new">
+                         <span id="ack_letter_print_text">View file to print or download</span>
+                      </a>
+                   </dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="summary-letter">Resubmission summary</dt>
+                   <dd class="nhsuk-summary-list__actions">
+                      <a aria-label="Download resubmission summary" href="/manage-overseas-entitlements-treatments/claim-resubs/view-document?documentId=34509" id="summaryletter" target="_new">
+                         <span id="summary_print_text">Download</span>
+                      </a>
+                   </dd>
+                </div>
+
+                {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="re-submission-letter">UK resubmission letter</dt>
+                   <dd class="nhsuk-summary-list__actions">
+                      <a aria-label="View file to print or download UK resubmission letter" href="/manage-overseas-entitlements-treatments/claim-resubs/view-document?documentId=35287" id="resubLetter" target="_new">
+                         <span id="letter_print_text">View file to print or download</span>
+                      </a>
+                   </dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="schedule-label">Resubmission schedule</dt>
+                   <dd class="nhsuk-summary-list__actions">
+                      <a aria-label="Download resubmission schedule" href="/manage-overseas-entitlements-treatments/claim-resubs/view-document?documentId=35288" id="resubSchedule" target="_new">
+                         <span id="schedule_print_text">Download</span>
+                      </a>
+                   </dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="evidence-label">Evidence uploaded for all invoices</dt>
+                   <dd class="nhsuk-summary-list__actions">
+                      <a aria-label="Download all evidence uploaded for all treatments, excluding evidence uploaded by OVM" href="/manage-overseas-entitlements-treatments/claim-resubs/donwload-document-zip?documentId=35289&amp;documentType=Evidence" id="downloadAllEvidence" target="_new">
+                         <span id="evidence_print_text">Download all evidence</span>
+                      </a>
+                   </dd>
+                </div>
+                <!-- Only display Withdrawal Letter document if in Credit Note journey -->
+                {% if status == 'Withdrawn' and (data['withdrawal-source'] == 'Department of Health and Social Care (DHSC)' or data['withdrawal-source'] == 'NHSBSA') %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="withdrawal-letter-label">Withdrawal letter</dt>
+                  <dd class="nhsuk-summary-list__actions">
+                      <a aria-label="Download resubmission withdrawal letter" href="/manage-overseas-entitlements-treatments/claim-resubs/view-document?documentId=35290" id="withdrawalLetter" target="_new">
+                        <span id="Withdrawal_letter_text">View file to print or download</span>
+                      </a>
+                  </dd>
+                </div>
+                {% endif %}
+
+
+                {% endif %}
+             </dl>
+
+            <div>
+              <a aria-label="Download all resubmission documents" href="#" id="download-all-resubmission-documents" target="blank">
+                 <span id="download-all-resubmission-documents-label">Download all resub documents</span>
+              </a>
+            </div>
+
+            </div>
+          </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

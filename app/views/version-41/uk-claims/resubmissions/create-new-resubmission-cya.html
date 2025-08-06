@@ -1,0 +1,214 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Check your answers before creating a new resubmission
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="claim-resubmissions">View Claim ID (Claim resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Create a resubmission</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back"
+            }) }}
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">
+                  Check your answers before creating a new resubmission
+                </h1>
+              </div>
+            </div>
+
+
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date the contestation was received from the member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value" id="date-contestation-received-value">
+                        {% if data['date-contestation-received-day'] and data['date-contestation-received-month'] and data['date-contestation-received-year'] %}
+                          {% set day = data['date-contestation-received-day'] | int %}
+                          {% set month = data['date-contestation-received-month'] | int %}
+                          {% set year = data['date-contestation-received-year'] %}
+              
+                          {% if day < 10 %}
+                              {% set day = "0" ~ day %}
+                          {% endif %}
+                          
+                          {% if month < 10 %}
+                              {% set month = "0" ~ month %}
+                          {% endif %}
+    
+                          {{ day }}/{{ month }}/{{ year }}
+                        {% else %}
+                          04/03/2025
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions"><a href="create-new-resubmission#date-contestation-received-day">Change<span class="nhsuk-u-visually-hidden">the date the contestation was received from the member state</span></a></dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Number of contested invoices
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['number-of-contested-invoices'] %}
+                          {{ data['number-of-contested-invoices'] }}
+                        {% else %}
+                          2
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions"><a href="create-new-resubmission#number-of-contested-invoices">Change<span class="nhsuk-u-visually-hidden">the number of contested invoices</span></a></dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Number of contested months
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['number-of-contested-months'] %}
+                          {{ data['number-of-contested-months'] }}
+                        {% else %}
+                          4
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions"><a href="create-new-resubmission#number-of-contested-months">Change<span class="nhsuk-u-visually-hidden">the number of contested months</span></a></dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Member state reference
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['member-state-reference'] %}
+                          {{ data['member-state-reference'] }}
+                        {% else %}
+                          1234567890
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions"><a href="create-new-resubmission#member-state-reference">Change<span class="nhsuk-u-visually-hidden">the member state reference</span></a></dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date on contestation letter from member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value" id="date-on-contestation-letter-value">
+                        {% if data['date-on-contestation-letter-day'] and data['date-on-contestation-letter-month'] and data['date-on-contestation-letter-year'] %}
+                          {% set day = data['date-on-contestation-letter-day'] | int %}
+                          {% set month = data['date-on-contestation-letter-month'] | int %}
+                          {% set year = data['date-on-contestation-letter-year'] %}
+              
+                          {% if day < 10 %}
+                              {% set day = "0" ~ day %}
+                          {% endif %}
+                          
+                          {% if month < 10 %}
+                              {% set month = "0" ~ month %}
+                          {% endif %}
+    
+                          {{ day }}/{{ month }}/{{ year }}
+                        {% else %}
+                          04/03/2025
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions"><a href="create-new-resubmission#date-on-contestation-letter-day">Change<span class="nhsuk-u-visually-hidden">the date on contestation letter from member state</span></a></dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date the acknowledgement letter was sent to the member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value" id="date-acknowledgement-letter-sent-to-ms-value">
+                        {% if data['date-acknowledgement-letter-sent-to-ms-day'] and data['date-acknowledgement-letter-sent-to-ms-month'] and data['date-acknowledgement-letter-sent-to-ms-year'] %}
+                          {% set day = data['date-acknowledgement-letter-sent-to-ms-day'] | int %}
+                          {% set month = data['date-acknowledgement-letter-sent-to-ms-month'] | int %}
+                          {% set year = data['date-acknowledgement-letter-sent-to-ms-year'] %}
+              
+                          {% if day < 10 %}
+                              {% set day = "0" ~ day %}
+                          {% endif %}
+                          
+                          {% if month < 10 %}
+                              {% set month = "0" ~ month %}
+                          {% endif %}
+    
+                          {{ day }}/{{ month }}/{{ year }}
+                        {% else %}
+                          04/03/2025
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions"><a href="create-new-resubmission#date-acknowledgement-letter-sent-to-ms-day">Change<span class="nhsuk-u-visually-hidden">the date the acknowledgement letter was sent to the member state</span></a></dd>
+                    </div>
+
+                  </dl>
+
+                  <form action="confirmation-resubmission-created?create-new-resub=yes" method="post">
+                    <button style="margin-top:10px;" class="nhsuk-button nhsuk-button--primary" type="submit">
+                      Create new resubmission
+                    </button>
+                  </form>
+                  
+                
+
+              <p><a href="claim-resubmissions">Cancel</a></p>
+
+            </div>
+          </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

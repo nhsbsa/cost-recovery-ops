@@ -1,0 +1,442 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Entitlement details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="entitlement-details" method="post">
+
+                      <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                            S1/S072 entitlement registration
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Entitlement details
+                    </h1>
+
+
+                    {% if data['entitlement-for'] == 'Dependant' or data['s1-entitlement-type'] == 'E109' %}
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="s1-entitlement-pin-label">Personal Identification Number (PIN)</label>
+                      <div class="nhsuk-hint" id="entitlement-pin">
+                        The PIN format is different for each member state. It may include numbers, letters and other characters.
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-10" id="dr-s1-entitlement-pin" name="dr-s1-entitlement-pin" type="text">
+                    </div>
+
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" id="s1-entitlement-country-of-issue" for="dr-country-of-issue">
+                          Issue country
+                      </label>
+                      <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="dr-s1-entitlement-country-of-issue" name="dr-s1-entitlement-country-of-issue">
+                      <datalist id="countries">
+                        <option value="" selected="selected"></option>
+                        <option value="Austria (AT)">Austria (AT)</option>
+                        <option value="Belgium (BE)">Belgium (BE)</option>
+                        <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                        <option value="Croatia (HR)">Croatia (HR)</option>
+                        <option value="Cyprus (CY)">Cyprus (CY)</option>
+                        <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                        <option value="Denmark (DK)">Denmark (DK)</option>
+                        <option value="Estonia (EE)">Estonia (EE)</option>
+                        <option value="Finland (FI)">Finland (FI)</option>
+                        <option value="France (FR)">France (FR)</option>
+                        <option value="Germany (DE)">Germany (DE)</option>
+                        <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                        <option value="Greece (GR)">Greece (GR)</option>
+                        <option value="Hungary (HU)">Hungary (HU)</option>
+                        <option value="Iceland (IS)">Iceland (IS)</option>
+                        <option value="Ireland (IE)">Ireland (IE)</option>
+                        <option value="Italy (IT)">Italy (IT)</option>
+                        <option value="Latvia (LV)">Latvia (LV)</option>
+                        <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                        <option value="Lithuania (LT)">Lithuania (LT)</option>
+                        <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                        <option value="Malta (MT)">Malta (MT)</option>
+                        <option value="Netherlands (NL)">Netherlands (NL)</option>
+                        <option value="Norway (NO)">Norway (NO)</option>
+                        <option value="Poland (PL)">Poland (PL)</option>
+                        <option value="Portugal (PT)">Portugal (PT)</option>
+                        <option value="Romania (RO)">Romania (RO)</option>
+                        <option value="Slovakia (SK)">Slovakia (SK)</option>
+                        <option value="Slovenia (SI)">Slovenia (SI)</option>
+                        <option value="Spain (ES)">Spain (ES)</option>
+                        <option value="Sweden (SE)">Sweden (SE)</option>
+                        <option value="Switzerland (CH)">Switzerland (CH)</option>
+                        <option value="United Kingdom (UK)">United Kingdom (UK)</option>
+                      </datalist>                                                                                
+                    </div>
+
+
+                    <!-- Entitlement dates -->
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="s1-entitlement-issue-date-day">S1/S072 issue date</label>
+                        <div class="nhsuk-hint" id="s1-entitlement-issue-date-hint">For example, 22 8 2023</div>
+                        <div class="nhsuk-date-input" id="dr-s1-entitlement-issue-date">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="dr-s1-entitlement-issue-date-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-s1-entitlement-issue-date-day" name="dr-s1-entitlement-issue-date-day" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="dr-s1-entitlement-issue-date-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-s1-entitlement-issue-date-month" name="dr-s1-entitlement-issue-date-month" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="dr-s1-entitlement-issue-date-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dr-s1-entitlement-issue-date-year" name="dr-s1-entitlement-issue-date-year" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+
+                      <hr>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="citizen-status-label">Citizen status </label>
+                        <div class="nhsuk-hint" id="s1-entitlement-citizen-status-hint"></div>
+                      
+                          <div class="nhsuk-radios">
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="dr-s1-entitlement-citizen-status-family-member-of-insured-person" name="dr-s1-entitlement-citizen-status" type="radio" value="Family member of insured person">
+                              <label class="nhsuk-label nhsuk-radios__label" for="dr-s1-entitlement-citizen-status-family-member-of-insured-person">
+                                Family member of insured person
+                              </label>
+                            </div>
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="dr-s1-entitlement-citizen-status-family-member-of-pensioner" name="dr-s1-entitlement-citizen-status" type="radio" value="Family member of pensioner">
+                              <label class="nhsuk-label nhsuk-radios__label" for="dr-s1-entitlement-citizen-status-family-member-of-pensioner">
+                                Family member of pensioner
+                              </label>
+                            </div>
+
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="dr-s1-entitlement-citizen-status-family-member-of-pension-claimant" name="dr-s1-entitlement-citizen-status" type="radio" value="Family member of pension claimant">
+                              <label class="nhsuk-label nhsuk-radios__label" for="dr-s1-entitlement-citizen-status-family-member-of-pension-claimant">
+                                Family member of pension claimant
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <hr>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="s1-entitlement-start-date-day">S1/S072 start date</label>
+                        <div class="nhsuk-hint" id="s1-entitlement-start-date-hint">For example, 28 8 2023</div>
+                        <div class="nhsuk-date-input" id="dr-s1-entitlement-start-date">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="dr-s1-entitlement-start-date-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-s1-entitlement-start-date-day" name="dr-s1-entitlement-start-date-day" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="dr-s1-entitlement-start-date-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-s1-entitlement-start-date-month" name="dr-s1-entitlement-start-date-month" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="dr-s1-entitlement-start-date-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dr-s1-entitlement-start-date-year" name="dr-s1-entitlement-start-date-year" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="s1-entitlement-end-date-day">S1/S072 end date (optional)</label>
+                        <div class="nhsuk-hint" id="s1-entitlement-end-date-hint">For example, 28 8 2024</div>
+                        <div class="nhsuk-date-input" id="dr-s1-entitlement-end-date">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="dr-s1-entitlement-end-date-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-s1-entitlement-end-date-day" name="dr-s1-entitlement-end-date-day" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-end-date-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-s1-entitlement-end-date-month" name="dr-s1-entitlement-end-date-month" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="dr-s1-entitlement-end-date-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dr-s1-entitlement-end-date-year" name="dr-s1-entitlement-end-date-year" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    {% else %}
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="s1-entitlement-pin-label">Personal Identification Number (PIN)</label>
+                      <div class="nhsuk-hint" id="entitlement-pin">
+                        The PIN format is different for each member state. It may include numbers, letters and other characters.
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-10" id="s1-entitlement-pin" name="s1-entitlement-pin" type="text"  />
+                    </div>
+
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" id="s1-entitlement-country-of-issue" for="country-of-issue">
+                          Issue country
+                      </label>
+                      <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="s1-entitlement-country-of-issue" name="s1-entitlement-country-of-issue">
+                      <datalist id="countries">
+                        <option value="" selected="selected"></option>
+                        <option value="Austria (AT)">Austria (AT)</option>
+                        <option value="Belgium (BE)">Belgium (BE)</option>
+                        <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                        <option value="Croatia (HR)">Croatia (HR)</option>
+                        <option value="Cyprus (CY)">Cyprus (CY)</option>
+                        <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                        <option value="Denmark (DK)">Denmark (DK)</option>
+                        <option value="Estonia (EE)">Estonia (EE)</option>
+                        <option value="Finland (FI)">Finland (FI)</option>
+                        <option value="France (FR)">France (FR)</option>
+                        <option value="Germany (DE)">Germany (DE)</option>
+                        <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                        <option value="Greece (GR)">Greece (GR)</option>
+                        <option value="Hungary (HU)">Hungary (HU)</option>
+                        <option value="Iceland (IS)">Iceland (IS)</option>
+                        <option value="Ireland (IE)">Ireland (IE)</option>
+                        <option value="Italy (IT)">Italy (IT)</option>
+                        <option value="Latvia (LV)">Latvia (LV)</option>
+                        <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                        <option value="Lithuania (LT)">Lithuania (LT)</option>
+                        <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                        <option value="Malta (MT)">Malta (MT)</option>
+                        <option value="Netherlands (NL)">Netherlands (NL)</option>
+                        <option value="Norway (NO)">Norway (NO)</option>
+                        <option value="Poland (PL)">Poland (PL)</option>
+                        <option value="Portugal (PT)">Portugal (PT)</option>
+                        <option value="Romania (RO)">Romania (RO)</option>
+                        <option value="Slovakia (SK)">Slovakia (SK)</option>
+                        <option value="Slovenia (SI)">Slovenia (SI)</option>
+                        <option value="Spain (ES)">Spain (ES)</option>
+                        <option value="Sweden (SE)">Sweden (SE)</option>
+                        <option value="Switzerland (CH)">Switzerland (CH)</option>
+                        <option value="United Kingdom (UK)">United Kingdom (UK)</option>
+                      </datalist>                                                                                
+                  </div>
+
+
+                    <!-- Entitlement dates -->
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="s1-entitlement-issue-date-day">S1/S072 issue date</label>
+                        <div class="nhsuk-hint" id="s1-entitlement-issue-date-hint">For example, 22 8 2023</div>
+                        <div class="nhsuk-date-input" id="s1-entitlement-issue-date">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-issue-date-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="s1-entitlement-issue-date-day" name="s1-entitlement-issue-date-day" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-issue-date-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="s1-entitlement-issue-date-month" name="s1-entitlement-issue-date-month" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-issue-date-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="s1-entitlement-issue-date-year" name="s1-entitlement-issue-date-year" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+
+                      <hr>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="citizen-status-label">Citizen status </label>
+                        <div class="nhsuk-hint" id="s1-entitlement-citizen-status-hint"></div>
+                      
+                          <div class="nhsuk-radios">
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="s1-entitlement-citizen-status-insured-person" name="s1-entitlement-citizen-status" type="radio" value="Insured person">
+                              <label class="nhsuk-label nhsuk-radios__label" for="s1-entitlement-citizen-status-insured-person">
+                                Insured person
+                              </label>
+                            </div>
+                      
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="s1-entitlement-citizen-status-pensioner" name="s1-entitlement-citizen-status" type="radio" value="Pensioner">
+                              <label class="nhsuk-label nhsuk-radios__label" for="s1-entitlement-citizen-status-pensioner">
+                                Pensioner
+                              </label>
+                            </div>
+                      
+                            <div class="nhsuk-radios__item">
+                              <input class="nhsuk-radios__input" id="s1-entitlement-citizen-status-pension-claimant" name="s1-entitlement-citizen-status" type="radio" value="Pension claimant">
+                              <label class="nhsuk-label nhsuk-radios__label" for="s1-entitlement-citizen-status-pension-claimant">
+                                Pension claimant
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <hr>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="s1-entitlement-start-date-day">S1/S072 start date</label>
+                        <div class="nhsuk-hint" id="s1-entitlement-start-date-hint">For example, 28 8 2023</div>
+                        <div class="nhsuk-date-input" id="s1-entitlement-start-date">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-start-date-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="s1-entitlement-start-date-day" name="s1-entitlement-start-date-day" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-start-date-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="s1-entitlement-start-date-month" name="s1-entitlement-start-date-month" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-start-date-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="s1-entitlement-start-date-year" name="s1-entitlement-start-date-year" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="s1-entitlement-end-date-day">S1/S072 end date (optional)</label>
+                        <div class="nhsuk-hint" id="s1-entitlement-end-date-hint">For example, 28 8 2024</div>
+                        <div class="nhsuk-date-input" id="s1-entitlement-end-date">
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-end-date-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="s1-entitlement-end-date-day" name="s1-entitlement-end-date-day" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-end-date-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="s1-entitlement-end-date-month" name="s1-entitlement-end-date-month" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                          <div class="nhsuk-date-input__item">
+                            <div class="nhsuk-form-group">
+                              <label class="nhsuk-label nhsuk-date-input__label" for="s1-entitlement-end-date-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="s1-entitlement-end-date-year" name="s1-entitlement-end-date-year" type="number" pattern="[0-9]*" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    
+
+                    
+                    
+                          
+
+                        <!--label class="nhsuk-label" for="1">Does the holder recieve long term benefits in cash? </label>
+                        <div class="nhsuk-radios">
+
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="receive-long-term-benefits-yes" name="receive-long-term-benefits" type="radio" value="yes">
+                            <label class="nhsuk-label nhsuk-radios__label" for="receive-long-term-benefits-yes">
+                              Yes
+                            </label>
+                          </div>
+                    
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="receive-long-term-benefits-no" name="receive-long-term-benefits" type="radio" value="no">
+                            <label class="nhsuk-label nhsuk-radios__label" for="receive-long-term-benefits-no">
+                              No
+                            </label>
+                          </div>
+                    
+                        </div-->
+
+                        {% endif %}
+
+                        <button class="nhsuk-button nhsuk-u-margin-top-7" data-module="nhsuk-button" type="submit">Continue</button>
+
+                        <p><a href="../account/entitlements-and-enquiries">Cancel</a></p>
+
+                      </form>
+
+                    </div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#countries')
+  })
+</script>
+
+<!-- Date formats -->
+<script>
+  function updateFormattedDate(idPrefix) {
+    const day = document.getElementById(`${idPrefix}-day`).value;
+    const month = document.getElementById(`${idPrefix}-month`).value;
+    const year = document.getElementById(`${idPrefix}-year`).value;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Call the function for all the dates you are capturing
+    updateFormattedDate('s1-entitlement-issue-date');
+    updateFormattedDate('s1-entitlement-start-date');
+    updateFormattedDate('s1-entitlement-end-date');
+  });
+</script>
+{% endblock %}

@@ -92,6 +92,11 @@ router.use('/version-40/resubmissions/v1', require('./views/version-40/_routes')
 router.use('/version-40/s1', require('./views/version-40/s1/_routes'));
 router.use('/version-40/uk-claims', require('./views/version-40/uk-claims/_routes'));
 router.use('/version-40/uk-claims/resubmissions', require('./views/version-40/uk-claims/resubmissions/_routes'));
+router.use('/version-41/resubmissions/v1', require('./views/version-41/_routes'));
+router.use('/version-41/s1', require('./views/version-41/s1/_routes'));
+router.use('/version-41/uk-claims', require('./views/version-41/uk-claims/_routes'));
+router.use('/version-41/uk-claims/resubmissions', require('./views/version-41/uk-claims/resubmissions/_routes'));
+
 
 
 module.exports = router;

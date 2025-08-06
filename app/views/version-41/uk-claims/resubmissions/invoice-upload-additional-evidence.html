@@ -1,0 +1,179 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456: Resub ID 0000001 - Upload additional evidence
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+        
+          {{ backLink({
+            "href": "javascript:history.go(-1)",
+            "text": "Go back"
+          }) }}
+  
+
+        <div class="nhsuk-grid-row">
+           <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">Upload additional evidence</h1>
+           </div>
+        </div>
+        
+        <hr class="blue-horizontal-line">
+        
+        <div class="nhsuk-grid-row nhsuk-u-margin-top-4">
+           <div class="nhsuk-grid-column-two-thirds">
+
+              <form action="invoice-upload-additional-evidence" method="post">
+
+                <h2 class="nhsuk-heading-m">
+                  Files added
+                </h2>
+                 
+                <div class="nhsuk-grid-row">
+                    <div class="nhsuk-grid-column-full">
+
+                       
+                      {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
+                      <!-- Evidence table only shows when there's evidence -->
+                      <div id="evidenceContainer">
+                        <table id="evidenceTable" class="nhsuk-table">
+                          <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                          <thead role="rowgroup" class="nhsuk-table__head">
+                            <tr role="row">
+                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody class="nhsuk-table__body">
+                            {% if data['more-evidence'] == 'yes' or data['upload-evidence-separately'] == 'yes' and data['evidenceRow1'] != 'Removed' %}
+                            <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                              <td class="nhsuk-table__cell">
+                                <b>example-evidence-2.pdf</b>
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                <a href="#" target="_blank" rel="noopener">View file</a>
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                              </td>
+                            </tr>
+                            {% endif %}
+
+                            {% if data['evidenceRow2'] != 'Removed' %}
+                            <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                              <td class="nhsuk-table__cell">
+                                <b>example-evidence-1.pdf</b>
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                <a href="#" target="_blank" rel="noopener">View file</a>
+                              </td>
+                              <td class="nhsuk-table__cell">
+                                <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                              </td>
+                            </tr>
+                            {% endif %}
+                          </tbody>
+                        </table>
+                      </div>
+                      {% endif %}
+
+                      <div class="nhsuk-form-group">
+                        <fieldset class="nhsuk-fieldset">
+                          <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--m">
+                            <h2 class="nhsuk-fieldset__heading">
+                              Do you want to upload additional evidence?
+                            </h2>
+                          </legend>
+                        <div class="nhsuk-radios">
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="upload-additional-evidence-yes" name="upload-additional-evidence" type="radio" value="yes">
+                            <label class="nhsuk-label nhsuk-radios__label" for="upload-additional-evidence-yes">
+                              Yes
+                            </label>
+                          </div>
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="upload-additional-evidence-no" name="upload-additional-evidence" type="radio" value="no">
+                            <label class="nhsuk-label nhsuk-radios__label" for="upload-additional-evidence-no">
+                              No
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                      </div>
+
+                      <button class="nhsuk-button nhsuk-button--primary" type="submit" value="submit" id="continue-button">Continue</button>
+
+                    </div>
+                 </div>
+
+              </form>
+           </div>
+        </div>
+
+        <div class="nhsuk-back-link">
+           <a href="invoice-evidence" id="upload-evidence-cancel-link" aria-label="Cancel uploading evidence">Cancel</a>
+        </div>
+
+        </div>
+     </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const evidenceTable = document.getElementById('evidenceTable');
+    const noEvidenceTextContainer = document.getElementById('noEvidenceTextContainer');
+    const evidenceSection = document.getElementById('evidenceSection');
+  
+    function updateUIBasedOnEvidence() {
+      if (!evidenceTable || evidenceTable.getElementsByTagName('tbody')[0].rows.length === 0) {
+        noEvidenceTextContainer.style.display = 'block';
+        evidenceSection.style.display = 'none';
+      } else {
+        noEvidenceTextContainer.style.display = 'none';
+        evidenceSection.style.display = 'block';
+      }
+    }
+  
+    if (evidenceTable) {
+      evidenceTable.addEventListener('click', function(event) {
+        if (event.target.classList.contains('removeEvidence')) {
+          event.preventDefault();
+          const rowId = event.target.getAttribute('data-row');
+          const row = document.getElementById(rowId);
+          row.remove();
+          updateUIBasedOnEvidence();
+        }
+      });
+    }
+  
+    updateUIBasedOnEvidence();
+  });
+  </script>
+  {% endblock %}

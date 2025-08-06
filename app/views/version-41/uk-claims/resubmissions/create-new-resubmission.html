@@ -1,0 +1,320 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 100005 - Create new resubmission
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="claim-resubmissions">View Claim ID (Claim resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">Create a resubmission</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <form action="create-new-resubmission" method="post">
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <h1 class="nhsuk-heading-xl">
+                  Create a resubmission
+                </h1>
+              </div>
+            </div>
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+
+                <div
+                  style="border: 3px; border-style: solid; border-color:lightgray; background-color:rgb(252, 252, 252); padding:20px 20px 1px 20px;">
+
+                  <dl class="nhsuk-summary-list">
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Claim type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Main
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Article type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        S1/S072 - Article 63, 2.b
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Age bracket
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        20 to 64 years
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Country
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        France (FR)
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date claim sent to member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        04/02/2025
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Claim sent by
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Nina Evans
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date member state must submit a contestation
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        04/08/2026
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Original number of invoices claimed
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        18
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Original total months claimed
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        108
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Remaining total number of months
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['resubStatus'] == 'resubmission-completed' %}
+                          87 months
+                        {% else %}
+                          90 months
+                        {% endif %}
+                      </dd>
+                    </div>
+
+                  </dl>
+                </div>
+              </div>
+
+              <div class="nhsuk-grid-column-one-half">
+
+                <div style="border: 3px; border-style: solid; border-color:lightgray; background-color:rgb(252, 252, 252); padding:20px 20px 1px 20px;">
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="date-contestation-received-label">
+                      <b>Date the contestation was received from the member state</b>
+                    </label>
+                    <div class="nhsuk-hint">
+                      For example, 31 3 2025
+                    </div>
+
+                    <div class="nhsuk-date-input" id="date-contestation-received">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-received-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-contestation-received-day" name="date-contestation-received-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-received-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-contestation-received-month" name="date-contestation-received-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-received-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-contestation-received-year" name="date-contestation-received-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="number-of-contested-invoices-label">
+                      <b>Number of contested invoices</b>
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-10" id="number-of-contested-invoices" name="number-of-contested-invoices" type="text" inputmode="numeric">
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="number-of-contested-months-label">
+                      <b>Number of contested months</b>
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-10" id="number-of-contested-months" name="number-of-contested-months" type="text" inputmode="numeric">
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="member-state-reference-label">
+                      <b>Member state reference</b>
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-10" id="member-state-reference" name="member-state-reference" type="text">
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="date-on-contestation-letter-label">
+                      <b>Date on contestation letter from member state</b>
+                    </label>
+
+                    <div class="nhsuk-date-input" id="date-on-contestation-letter">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-on-contestation-letter-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-on-contestation-letter-day" name="date-on-contestation-letter-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-on-contestation-letter-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-on-contestation-letter-month" name="date-on-contestation-letter-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-on-contestation-letter-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-on-contestation-letter-year" name="date-on-contestation-letter-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="date-acknowledgement-letter-sent-to-ms-label">
+                      <b>Date the acknowledgement letter was sent to the member state</b>
+                    </label>
+
+                    <div class="nhsuk-date-input" id="date-acknowledgement-letter-sent-to-ms">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-acknowledgement-letter-sent-to-ms-day" name="date-acknowledgement-letter-sent-to-ms-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-acknowledgement-letter-sent-to-ms-month" name="date-acknowledgement-letter-sent-to-ms-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-acknowledgement-letter-sent-to-ms-year" name="date-acknowledgement-letter-sent-to-ms-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  
+                </form>
+
+                <div class="action-buttons">
+                  <button class="nhsuk-button nhsuk-button--primary" style="margin-top: 20px;" type="submit">
+                    Continue
+                  </button>
+                </div>                
+            </div>
+
+          </div>
+
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
