@@ -471,30 +471,29 @@ router.get([/invoice-reasons-for-contestation/], function(req, res) {
 
 // Partially maintain and partially withdraw journey //
 // Enter the new accounting period
-router.post([/enter-maintained-months/], function(req, res) {
+router.post([/enter-revised-accounting-period/], function(req, res) {
 
   // Start date of first maintained month date
-  const maintainedMonthStartDateDay = req.body['maintained-month-start-date-day'];
-  const maintainedMonthStartDateMonth = req.body['maintained-month-start-date-month'];
-  const maintainedMonthStartDateYear = req.body['maintained-month-start-date-year'];
-  const maintainedMonthStartDate = maintainedMonthStartDateDay && maintainedMonthStartDateMonth && maintainedMonthStartDateYear
-    ? `${maintainedMonthStartDateDay}/${maintainedMonthStartDateMonth}/${maintainedMonthStartDateYear}`
+  const startDateAccountingPeriodDay = req.body['start-date-accounting-period-day'];
+  const startDateAccountingPeriodMonth = req.body['start-date-accounting-period-month'];
+  const startDateAccountingPeriodYear = req.body['start-date-accounting-period-year'];
+  const startDateAccountingPeriod = startDateAccountingPeriodDay && startDateAccountingPeriodMonth && startDateAccountingPeriodYear
+    ? `${startDateAccountingPeriodDay}/${startDateAccountingPeriodMonth}/${startDateAccountingPeriodYear}`
     : '01/09/2025';
-  req.session.data['maintained-month-start-date'] = maintainedMonthStartDate;
+  req.session.data['start-date-accounting-period'] = startDateAccountingPeriod;
 
   // End date of last maintained month date
-  const maintainedMonthEndDateDay = req.body['maintained-month-end-date-day'];
-  const maintainedMonthEndDateMonth = req.body['maintained-month-end-date-month'];
-  const maintainedMonthEndDateYear = req.body['maintained-month-end-date-year'];
-  const maintainedMonthEndDate = maintainedMonthEndDateDay && maintainedMonthEndDateMonth && maintainedMonthEndDateYear
-    ? `${maintainedMonthEndDateDay}/${maintainedMonthEndDateMonth}/${maintainedMonthEndDateYear}`
+  const endDateAccountingPeriodDay = req.body['end-date-accounting-period-day'];
+  const endDateAccountingPeriodMonth = req.body['end-date-accounting-period-month'];
+  const endDateAccountingPeriodYear = req.body['end-date-accounting-period-year'];
+  const endDateAccountingPeriod = endDateAccountingPeriodDay && endDateAccountingPeriodMonth && endDateAccountingPeriodYear
+    ? `${endDateAccountingPeriodDay}/${endDateAccountingPeriodMonth}/${endDateAccountingPeriodYear}`
     : '30/09/2025';
-  req.session.data['maintained-month-end-date'] = maintainedMonthEndDate;
+  req.session.data['end-date-accounting-period'] = endDateAccountingPeriod;
 
   // Redirect to the confirm partial
   res.redirect('/version-41/uk-claims/resubmissions/reasons-to-partially-maintain-and-withdraw-months');
 });
-
 
 // Select the reasons to partially maintain the months
 router.post([/reasons-to-partially-maintain-and-withdraw-months/], function(req, res) {

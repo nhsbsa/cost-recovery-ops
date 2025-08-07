@@ -262,25 +262,23 @@ UK claim ID 100005 - Invoices within resubmission
                   <span>Doe</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
-                    <span>Claimed: 05/10/2024 - 31/12/2024</span><br>
-                    <span>Contested: Fully withdrawn</span><br>
-                    <span>Remaining: Fully withdrawn</span>
+                  <span class="nhsuk-table-responsive__heading">Months</span>
+                  {% set status = data.invoiceStatuses['Jane'] %}
+                  {% if status == 'Withdrawn' or status == 'Maintained' %}
+                    <span>Previous: 0</span><br>
+                    <span>Remaining: 0</span><br>
                   {% else %}
-                    <span>Claimed: 05/09/2024 - 31/12/2024</span><br>
-                    <span>Contested: Fully withdrawn</span>
+                    <span>3</span>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Months</span>
-                  {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
-                    <span>Claimed: 3</span><br>
-                    <span>Contested: 0</span><br>
-                    <span>Remaining: 0</span><br>
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  {% set status = data.invoiceStatuses['Jane'] %}
+                  {% if status == 'Withdrawn' or status == 'Maintained' %}
+                    <span>Previous: Fully withdrawn</span><br>
+                    <span>Remaining: Fully withdrawn</span>
                   {% else %}
-                    <span>Claimed: 3</span><br>
-                    <span>Contested: 0</span>
+                    <span>Fully withdrawn</span>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -317,25 +315,23 @@ UK claim ID 100005 - Invoices within resubmission
                   <span>Doe</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
-                    <span>Claimed: 05/09/2024 - 31/12/2024</span><br>
-                    <span>Contested: 05/09/2024 - 31/12/2024</span><br>
-                    <span>Remaining: 05/09/2024 - 30/09/2024</span>
+                  <span class="nhsuk-table-responsive__heading">Months</span>
+                  {% set status = data.invoiceStatuses['John'] %}
+                  {% if status == 'Partial' %}
+                    <span>Previous: 4</span><br>
+                    <span>Remaining: 1</span><br>
                   {% else %}
-                    <span>Claimed: 05/09/2024 - 31/12/2024</span><br>
-                    <span>Contested: 05/09/2024 - 31/12/2024</span>
+                    <span>4</span>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Months</span>
-                  {% if data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or  data.resubStatus == 'resubmission-completed' %}
-                    <span>Claimed: 4</span><br>
-                    <span>Contested: 4</span><br>
-                    <span>Remaining: 1</span><br>
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  {% set status = data.invoiceStatuses['John'] %}
+                  {% if status == 'Partial' %}
+                    <span>Previous: 05/09/2024 - 31/12/2024</span><br>
+                    <span>Remaining: 05/09/2024 - 16/10/2024</span>
                   {% else %}
-                    <span>Claimed: 4</span><br>
-                    <span>Contested: 4</span>
+                    <span>05/09/2024 - 31/12/2024</span>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
