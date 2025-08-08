@@ -385,6 +385,165 @@ UK claim ID 100005: Resub ID 1160158 - View invoice details
                             <!-- Action -->
                           </dd>
                         </div>
+
+
+                        {% elif status == 'Maintained' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Maintain reason</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['reasons-to-maintain-months'] %}
+                              {{ data['reasons-to-maintain-months'] }}
+                            {% else %}
+                              Information requested updated
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        {% if 'Contestation after deadline [03]' in data['reasons-to-maintain-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Date contestation received after deadline</dt>
+                            <dd class="nhsuk-summary-list__value">
+                              {% if data['date-contestation-received-after-deadline-day-maintain'] and data['date-contestation-received-after-deadline-month-maintain'] and data['date-contestation-received-after-deadline-year-maintain'] %}
+                                {% set day = data['date-contestation-received-after-deadline-day-maintain'] | int %}
+                                {% set month = data['date-contestation-received-after-deadline-month-maintain'] | int %}
+                                {% set year = data['date-contestation-received-after-deadline-year-maintain'] %}
+                    
+                                {% if day < 10 %}
+                                    {% set day = "0" ~ day %}
+                                {% endif %}
+                                
+                                {% if month < 10 %}
+                                    {% set month = "0" ~ month %}
+                                {% endif %}
+          
+                                {{ day }}/{{ month }}/{{ year }}
+  
+                              {% else %}
+                                17/04/2026
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+                          {% if 'Information requested updated [04]' in data['reasons-to-maintain-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-maintain-label">Type of information requested</dt>
+                            <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-maintain-value">
+                              {% if data['type-of-information-requested-maintain'] %}
+                              {{ data['type-of-information-requested-maintain'] }}
+                              {% else %}
+                                S072 - Entitlement document - Residence. [02]
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+                          {% if 'The person receives a pension in his/her state of residence as from the date provided, copy of the decision attached [07]' in data['reasons-to-maintain-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                            <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                              {% if data['date-state-pension-received-day-maintain'] and data['date-state-pension-received-month-maintain'] and data['date-state-pension-received-year-maintain'] %}
+                                {% set day = data['date-state-pension-received-day-maintain'] | int %}
+                                {% set month = data['date-state-pension-received-month-maintain'] | int %}
+                                {% set year = data['date-state-pension-received-year-maintain'] %}
+                    
+                                {% if day < 10 %}
+                                    {% set day = "0" ~ day %}
+                                {% endif %}
+                                
+                                {% if month < 10 %}
+                                    {% set month = "0" ~ month %}
+                                {% endif %}
+          
+                                {{ day }}/{{ month }}/{{ year }}
+          
+          
+                              {% else %}
+                                17/04/2026
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+                          {% if 'Other [99]' in data['reasons-to-maintain-months'] %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason comments</dt>
+                            <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
+                              {% if data['other-maintain-reason-comments'] %}
+                                {{ data['other-maintain-reason-comments'] }}
+                              {% else %}
+                                Other maintain reason explained here.
+                              {% endif %}
+                            </dd>
+                          </div>
+                          {% endif %}
+
+                          <!-- only display additional comments if user input comments during maintain journey -->
+                          {% if data['add-maintain-additional-comments'] == 'yes' %}
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                            <dd class="nhsuk-summary-list__value">
+                                {{ data['maintain-additional-comments'] }}
+                            </dd>
+
+                            <dd class="nhsuk-summary-list__actions">
+                              <!-- Action -->
+                            </dd>
+                          </div>
+                          {% endif %}
+
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Original months claimed</dt>
+                            <dd class="nhsuk-summary-list__value">3</dd>
+                            <dd class="nhsuk-summary-list__actions">
+                              <!-- Action -->
+                            </dd>
+                          </div>
+  
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Original accounting period</dt>
+                            <dd class="nhsuk-summary-list__value">05/10/2024 - 31/12/2024</dd>
+                            <dd class="nhsuk-summary-list__actions">
+                              <!-- Action -->
+                            </dd>
+                          </div>
+  
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Previously maintained months</dt>
+                            <dd class="nhsuk-summary-list__value">0</dd>
+                            <dd class="nhsuk-summary-list__actions">
+                              <!-- Action -->
+                            </dd>
+                          </div>
+  
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Previously maintained accounting period</dt>
+                            <dd class="nhsuk-summary-list__value">Fully withdrawn</dd>
+                            <dd class="nhsuk-summary-list__actions">
+                              <!-- Action -->
+                            </dd>
+                          </div>
+  
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Total amount of maintained months</dt>
+                            <dd class="nhsuk-summary-list__value">0</dd>
+                            <dd class="nhsuk-summary-list__actions">
+                              <!-- Action -->
+                            </dd>
+                          </div>
+  
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Remaining months</dt>
+                            <dd class="nhsuk-summary-list__value">0</dd>
+                            <dd class="nhsuk-summary-list__actions">
+                              <!-- Action -->
+                            </dd>
+                          </div>
+  
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">Remaining accounting period</dt>
+                            <dd class="nhsuk-summary-list__value">Fully withdrawn</dd>
+                            <dd class="nhsuk-summary-list__actions">
+                              <!-- Action -->
+                            </dd>
+                          </div>
                         
 
                       
