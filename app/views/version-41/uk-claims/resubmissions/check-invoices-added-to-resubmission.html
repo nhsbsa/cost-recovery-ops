@@ -87,7 +87,7 @@ Are you sure you want to remove invoices from this claim?
                         <th role="columnheader" scope="col">Invoice ID</th>
                         <th role="columnheader" scope="col">First names</th>
                         <th role="columnheader" scope="col">Last name</th>
-                        <th role="columnheader" scope="col">Months claimed</th>
+                        <th role="columnheader" scope="col">Months</th>
                         <th role="columnheader" scope="col">Accounting period</th>
                         <th role="columnheader" scope="col">Action</th>
                       </tr>
@@ -134,8 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <td>${invoice.id}</td>
             <td>${invoice.firstName}</td>
             <td>${invoice.lastName}</td>
-            <td>${invoice.months.replace(/\n/g, "<br>")}</td>
-            <td>${invoice.period.replace(/\n/g, "<br>")}</td>
+            <td>${invoice.months.split(/\r?\n/).join("<br>")}</td>
+            <td>${invoice.period.split(/\r?\n/).join("<br>")}</td>
+
             <td><a href="#">Remove</a></td>
         `;
         tbody.appendChild(row);
@@ -148,10 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const checkbox = document.querySelector('.invoice-checkbox:checked');
 
   if (checkbox) {
-    const months = checkbox.dataset.months.replace(/\n/g, '<br>');
+    const months = checkbox.dataset.months.split(/\r?\n/).join('<br>');
     document.getElementById('monthsDisplay').innerHTML = months;
 
-    const period = checkbox.dataset.period.replace(/\n/g, '<br>');
+    const period = checkbox.dataset.period.split(/\r?\n/).join('<br>');
     document.getElementById('periodDisplay').innerHTML = period;
   }
 </script>
