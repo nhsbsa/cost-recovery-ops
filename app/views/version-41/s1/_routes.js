@@ -359,6 +359,34 @@ router.post([/create-person-record-cya/], function(req, res){
 
 // Personal details tabs //
 
+// Step 1 — Change additional personal details
+router.post([/change-additional-personal-details/], function (req, res) {
+  req.session.data['updated-sex'] = req.body['updated-sex'];
+  req.session.data['updated-nationality'] = req.body['updated-nationality'];
+  req.session.data['updated-UK-national-insurance-number'] = req.body['updated-UK-national-insurance-number'];
+  req.session.data['updated-email-address'] = req.body['updated-email-address'];
+  req.session.data['updated-contact-number'] = req.body['updated-contact-number'];
+
+  res.redirect('/version-41/s1/account/reason-additional-personal-details');
+});
+
+// Step 2 — Enter reason for the change
+router.post([/reason-additional-personal-details/], function (req, res) {
+  req.session.data['reason-for-changing-additional-personal-details'] =
+    req.body['change-additional-personal-details-reason']; // matches <textarea name="...">
+
+  res.redirect('/version-41/s1/account/cya-change-additional-personal-details');
+});
+
+// Step 3 — Confirm on CYA page
+router.post([/cya-change-additional-personal-details/], function (req, res) {
+  req.session.data['change-additional-personal-details'] = 'yes';
+
+  res.redirect('/version-41/s1/account/personal-details');
+});
+
+
+
 // Change basic personal details
 router.post([/change-basic-personal-details/], function(req, res){
 
@@ -376,8 +404,9 @@ router.post([/basic-personal-details-comment/], function(req, res){
 
 })
 
-// Change additional personal details
-router.post([/change-additional-personal-details/], function(req, res){
+
+// Add additional personal details
+router.post([/add-additional-personal-details/], function(req, res){
 
   req.session.data['sex'] = req.body['sex'];
   req.session.data['nationality'] = req.body['nationality'];
@@ -388,15 +417,20 @@ router.post([/change-additional-personal-details/], function(req, res){
   res.redirect('/version-41/s1/account/additional-personal-details-cya');
 })
 
-// Select the reason for the change to the additional personal details
+// Check your answers before adding additional personal details
 router.post([/additional-personal-details-cya/], function(req, res){
 
-  // Conditional flag to track change of additional details
+  // Conditional flag to track if additional details were added
   req.session.data['add-additional-personal-details'] = 'yes'
 
   res.redirect('/version-41/s1/account/personal-details');
 })
 
+
+
+
+
+// Change current address //
 router.post([/change-current-address/], function (req, res) {
   // Set session variable indicating the address change process has started
   req.session.data['change-address'] = 'yes';

@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Check your answers before adding additional details - Manage overseas entitlements and treatments - NHSBSA
+Check your answers before changing additional details - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -35,17 +35,13 @@ Check your answers before adding additional details - Manage overseas entitlemen
                     }) }}
                 
                     
-                    <form action="additional-personal-details-cya" method="post">
+                    <form action="cya-change-additional-personal-details" method="post">
           
                       <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456</p>
                   
                           <div class="nhsuk-form-group">
                             <label class="nhsuk-label" for="additional-personal-details-cya-header-label">
-                              {% if data['add-additional-personal-details'] == 'yes' %}
                                 <h1 class="nhsuk-heading-xl">Check your answers before changing additional details</h1>
-                              {% else %}
-                                <h1 class="nhsuk-heading-xl">Check your answers before adding additional details</h1>
-                              {% endif %}
                             </label>
                           </div>
 
@@ -55,14 +51,14 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 Sex
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['sex'] %}
-                                  {{ data['sex'] }}
+                                {% if data['updated-sex'] %}
+                                  {{ data['updated-sex'] }}
                                 {% else %}
                                   Not provided
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#sex">
+                                <a href="change-additional-personal-details#updated-sex">
                                   Change<span class="nhsuk-u-visually-hidden">sex</span>
                                 </a>
                               </dd>
@@ -72,14 +68,14 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 Country of nationality
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['nationality'] %}
-                                  {{ data['nationality'] }}
+                                {% if data['updated-nationality'] %}
+                                  {{ data['updated-nationality'] }}
                                 {% else %}
                                   Not provided
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#nationality">
+                                <a href="change-additional-personal-details#updated-nationality">
                                   Change<span class="nhsuk-u-visually-hidden">country of nationality</span>
                                 </a>
                               </dd>
@@ -89,14 +85,14 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 UK National Insurance Number (NINO)
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['UK-national-insurance-number'] %}
-                                  {{ data['UK-national-insurance-number'] }}
+                                {% if data['updated-UK-national-insurance-number'] %}
+                                  {{ data['updated-UK-national-insurance-number'] }}
                                 {% else %}
                                   Not provided
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#UK-national-insurance-number">
+                                <a href="change-additional-personal-details#updated-UK-national-insurance-number">
                                   Change<span class="nhsuk-u-visually-hidden">UK national insurance number</span>
                                 </a>
                               </dd>
@@ -106,14 +102,14 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 Email address
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['email-address'] %}
-                                  {{ data['email-address'] }}
+                                {% if data['updated-email-address'] %}
+                                  {{ data['updated-email-address'] }}
                                 {% else %}
                                   Not provided
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#email-address">
+                                <a href="change-additional-personal-details#updated-email-address">
                                   Change<span class="nhsuk-u-visually-hidden">email address</span>
                                 </a>
                               </dd>
@@ -123,14 +119,14 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 Contact number
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['contact-number'] %}
-                                  {{ data['contact-number'] }}
+                                {% if data['updated-contact-number'] %}
+                                  {{ data['updated-contact-number'] }}
                                 {% else %}
                                   Not provided
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#contact-number">
+                                <a href="change-additional-personal-details#updated-contact-number">
                                   Change<span class="nhsuk-u-visually-hidden">contact number</span>
                                 </a>
                               </dd>
@@ -157,14 +153,6 @@ Check your answers before adding additional details - Manage overseas entitlemen
 {% endblock %}
 
 {% block pageScripts %}
-<!-- autocomplete js -->
-<script type="text/javascript">
-  accessibleAutocomplete.enhanceSelectElement({
-    defaultValue : '',
-    autoselect : true,  
-    selectElement : document.querySelector('#nationalityDrop')
-  })
-</script>
 
 <!-- DOB format -->
 <script>

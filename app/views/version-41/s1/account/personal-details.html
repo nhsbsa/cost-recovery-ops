@@ -61,7 +61,20 @@
           </div>
           {% endif %}
 
-          {% if data['change-additional-personal-details'] == 'yes' %}
+          {% if data['add-additional-personal-details'] == 'yes' %}
+          <div>
+                        
+            <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+               <div class="govuk-notification-banner__header">
+                  <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
+               </div>
+               <div class="govuk-notification-banner__content">
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">Additional details were added to {% if data['first-name'] %}{{ data['first-name'] }}{% else %}John{% endif %} {% if data['last-name'] %}{{ data['last-name'] }}{% else %}Doe{% endif %}’s record. View the Case history to see XYZ.</span>
+               </div>
+            </div>
+         
+          </div>
+          {% elif data['change-additional-personal-details'] == 'yes' %}
           <div>
                         
             <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
@@ -241,7 +254,11 @@
                         Sex
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes' %}
+                        {% if data['change-additional-personal-details'] == 'yes' %}
+
+                            {{ data['updated-sex'] }}
+
+                        {% elif data['add-additional-personal-details'] == 'yes' %}
 
                             {{ data['sex'] }}
 
@@ -259,7 +276,11 @@
                         Country of nationality
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes' %}
+                        {% if data['change-additional-personal-details'] == 'yes' %}
+
+                            {{ data['updated-nationality'] }}
+
+                        {% elif data['add-additional-personal-details'] == 'yes' %}
 
                             {{ data['nationality'] }}
 
@@ -277,7 +298,11 @@
                         UK National Insurance Number (NINO)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes' %}
+                        {% if data['change-additional-personal-details'] == 'yes' %}
+
+                            {{ data['updated-UK-national-insurance-number'] }}
+
+                        {% elif data['add-additional-personal-details'] == 'yes' %}
 
                             {{ data['UK-national-insurance-number'] }}
 
@@ -296,7 +321,11 @@
                       Email address
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes' %}
+                      {% if data['change-additional-personal-details'] == 'yes' %}
+
+                          {{ data['updated-email-address'] }}
+
+                      {% elif data['add-additional-personal-details'] == 'yes' %}
 
                           {{ data['email-address'] }}
 
@@ -315,7 +344,11 @@
                       Contact number
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes' %}
+                      {% if data['change-additional-personal-details'] == 'yes' %}
+
+                          {{ data['updated-contact-number'] }}
+
+                      {% elif data['add-additional-personal-details'] == 'yes' %}
 
                           {{ data['contact-number'] }}
 
@@ -332,7 +365,7 @@
                 {% if data['add-additional-personal-details'] == 'yes' %}
                   <p><a href="change-additional-personal-details">Change additional details</a></p>
                 {% else %}
-                  <p><a href="change-additional-personal-details">Add additional details</a></p>
+                  <p><a href="add-additional-personal-details">Add additional details</a></p>
                 {% endif %}
                 </div>
                 <!-- Personal details tabs content ends -->

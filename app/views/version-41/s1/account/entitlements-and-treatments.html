@@ -243,6 +243,34 @@
                             <span class="nhsuk-action-link__text">View entitlement details</span>
                           </a>
                         </div>
+
+                        <p>Claims and resubmissions linked to this entitlement</p>
+                        {% set status = data.invoiceStatuses['John'] %}
+                        <!-- TABLE START -->
+                        <table role="table" class="nhsuk-table" id="resubmissionsTable">
+                          <thead class="nhsuk-table__head">
+                            <tr class="nhsuk-table__row">
+                              <th scope="col" class="nhsuk-table__header">Claim ID</th>
+                              <th scope="col" class="nhsuk-table__header">Invoice ID</th>
+                              <th scope="col" class="nhsuk-table__header">Linked resub IDs</th>
+                              <th scope="col" class="nhsuk-table__header">Year of claim</th>
+                              <th scope="col" class="nhsuk-table__header">Claimed accounting period</th>
+                              <th scope="col" class="nhsuk-table__header">Claimed months</th>
+                              <th scope="col" class="nhsuk-table__header">Maintained months</th>
+                            </tr>
+                          </thead>
+
+                          <tbody class="nhsuk-table__body">
+                            <tr class="nhsuk-table__row">
+                              <td class="nhsuk-table__cell" data-label="Claim ID"><a href="../../uk-claims/resubmissions/claim-summary">100005</a></td>
+                              <td class="nhsuk-table__cell" data-label="Invoice ID"><a href="../../uk-claims/resubmissions/claim-invoices">387731</a></td>
+                              <td class="nhsuk-table__cell" data-label="Linked resub IDs">{% if data['create-new-resub'] == 'yes' %}1160158,{% endif %} 7790992</td>
+                              <td class="nhsuk-table__cell" data-label="Year of claim">2024</td>
+                              <td class="nhsuk-table__cell" data-label="Claimed accounting period">05/09/2024 - 31/12/2024</td>
+                              <td class="nhsuk-table__cell" data-label="Claimed months">4</td>
+                              <td class="nhsuk-table__cell" data-label="Maintained months">{% if data['create-new-resub'] == 'yes' and status == 'Partial' %} 1 {% else %} 4 {% endif %}</td>
+                          </tbody>
+                        </table>
                       
                       </div>
 
@@ -253,7 +281,7 @@
                 <!-- S1/S072 entitlement expander ends -->
 
                   
-                    <!-- Expired S1/S072 entitlement expander begins -->
+                  <!-- Expired S1/S072 entitlement expander begins -->
                   <div class="nhsuk-expander-group">
                     <details class="nhsuk-details nhsuk-expander">
                       <summary class="nhsuk-details__summary">
@@ -367,6 +395,33 @@
                               <span class="nhsuk-action-link__text">View entitlement details</span>
                             </a>
                           </div>
+
+                          <p>Claims and resubmissions linked to this entitlement</p>
+                          <!-- TABLE START -->
+                          <table role="table" class="nhsuk-table" id="resubmissionsTable">
+                            <thead class="nhsuk-table__head">
+                              <tr class="nhsuk-table__row">
+                                <th scope="col" class="nhsuk-table__header">Claim ID</th>
+                                <th scope="col" class="nhsuk-table__header">Invoice ID</th>
+                                <th scope="col" class="nhsuk-table__header">Linked resub IDs</th>
+                                <th scope="col" class="nhsuk-table__header">Year of claim</th>
+                                <th scope="col" class="nhsuk-table__header">Claimed accounting period</th>
+                                <th scope="col" class="nhsuk-table__header">Claimed months</th>
+                                <th scope="col" class="nhsuk-table__header">Maintained months</th>
+                              </tr>
+                            </thead>
+
+                            <tbody class="nhsuk-table__body">
+                              <tr class="nhsuk-table__row">
+                                <td class="nhsuk-table__cell" data-label="Claim ID"><a href="#">824848</a></td>
+                                <td class="nhsuk-table__cell" data-label="Invoice ID"><a href="#">238838</a></td>
+                                <td class="nhsuk-table__cell" data-label="Linked resub IDs">-<span class="nhsuk-u-visually-hidden">There are no linked resubmissions.</span></td>
+                                <td class="nhsuk-table__cell" data-label="Year of claim">2021</td>
+                                <td class="nhsuk-table__cell" data-label="Claimed accounting period">06/01/2020 - 17/03/2020</td>
+                                <td class="nhsuk-table__cell" data-label="Claimed months">2</td>
+                                <td class="nhsuk-table__cell" data-label="Maintained months">2</td>
+                            </tbody>
+                          </table>
                         
                         </div>
 

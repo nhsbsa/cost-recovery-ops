@@ -503,7 +503,7 @@
                   </summary>
               
                   <div class="nhsuk-details__text" style="margin-top: 30px;">
-                    {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['sex'] %}
+                    {% if data['add-additional-personal-details'] == 'yes' and data['sex'] %}
                     <table class="nhsuk-table-responsive" id="case-history-sex-table" style="margin-bottom: 9px;">
                       <thead class="nhsuk-table__head">
                         <tr>
@@ -516,11 +516,11 @@
                       </thead>
                       <tbody class="nhsuk-table__body">
 
-                        {% if data['add-additional-personal-details'] == 'yes' and data['change-additional-personal-details'] == 'yes' %}
+                        {% if data['change-additional-personal-details'] == 'yes' %}
                         <tr class="nhsuk-table__row">
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Date and time</span>
-                            <p id="currentDateSex">[Insert update timestamp here]</p>
+                            <p id="currentDateChangeSex">[Insert update timestamp here]</p>
                           </td>
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Action</span>
@@ -529,7 +529,7 @@
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Details</span>
                             <p id="person-history-sex-details">
-                              Sex updated to {{ data['sex'] }}
+                              Sex updated to {{ data['updated-sex'] }}
                             </p>
                           </td>
                           <td class="nhsuk-table__cell">
@@ -539,7 +539,7 @@
                         </tr>
                         {% endif %}
 
-                        {% if data['add-additional-personal-details'] == 'yes' %}
+                        
                         <tr class="nhsuk-table__row">
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -560,11 +560,11 @@
                             <p>joe.bloggs@nhsbsa.nhs.uk</p>
                           </td>
                         </tr>
-                        {% endif %}
                         
                       </tbody>
                     </table>
                     {% else %}
+                    <br>
                       There is no history because this person's sex is yet to be added.
                     {% endif %}
                   </div>
@@ -1017,11 +1017,16 @@ function setCurrentDateTime(elementId) {
     setCurrentDateTime("currentDateBirthFirstName");    // For First name at birth
     setCurrentDateTime("currentDateLastName");    // For Last name
     setCurrentDateTime("currentDateBirthLastName");    // For Last name at birth
-    setCurrentDateTime("currentDateSex");    // For Sex
-    setCurrentDateTime("currentDateNationality");    // For Country of nationality
+    setCurrentDateTime("currentDateSex");    // For adding the Sex
+    setCurrentDateTime("currentDateChangeSex");    // For changing the Sex
+    setCurrentDateTime("currentDateNationality");    // For adding Country of nationality
+    setCurrentDateTime("currentDateChangeNationality");    // For changing Country of nationality
     setCurrentDateTime("currentDateNINO");    // For UK National Insurance Number (NINO)
+    setCurrentDateTime("currentDateChangeNINO");    // For changing UK National Insurance Number (NINO)
     setCurrentDateTime("currentDateEmailAddress");    // For Email address
+    setCurrentDateTime("currentDateChangeEmailAddress");    // For changing Email address
     setCurrentDateTime("currentDateContactNumber");    // For Contact Number
+    setCurrentDateTime("currentDateChangeContactNumber");    // For changing Contact Number
   });
 </script>
 {% endblock %}
