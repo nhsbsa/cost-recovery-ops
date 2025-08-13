@@ -445,7 +445,7 @@
                   </summary>
               
                   <div class="nhsuk-details__text" style="margin-top: 30px;">
-                    {% if data['add-additional-personal-details'] == 'yes' and data['sex'] %}
+                    {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['sex'] or data['updated-sex'] %}
                     <table class="nhsuk-table-responsive" id="case-history-sex-table" style="margin-bottom: 9px;">
                       <thead class="nhsuk-table__head">
                         <tr>
@@ -458,7 +458,7 @@
                       </thead>
                       <tbody class="nhsuk-table__body">
 
-                        {% if data['change-additional-personal-details'] == 'yes' %}
+                        {% if data['change-additional-personal-details'] == 'yes' and data['updated-sex'] %}
                         <tr class="nhsuk-table__row">
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -479,7 +479,7 @@
                         </tr>
                         {% endif %}
 
-                        
+                        {% if data['add-additional-personal-details'] == 'yes' and data['sex'] %}
                         <tr class="nhsuk-table__row">
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -498,7 +498,7 @@
                             <p>joe.bloggs@nhsbsa.nhs.uk</p>
                           </td>
                         </tr>
-                        
+                        {% endif %}
                       </tbody>
                     </table>
                     {% else %}
@@ -534,7 +534,7 @@
                 </summary>
             
                 <div class="nhsuk-details__text" style="margin-top: 30px;">
-                  {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['nationality'] %}
+                  {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['nationality'] or data['updated-nationality'] %}
                   <table class="nhsuk-table-responsive" id="person-history-nationality-table" style="margin-bottom: 9px;">
                     <thead class="nhsuk-table__head">
                       <tr>
@@ -547,28 +547,9 @@
                     </thead>
                     <tbody class="nhsuk-table__body">
 
-                      {% if data['change-additional-personal-details'] == 'yes' %}
-                      <tr class="nhsuk-table__row">
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Date and time</span>
-                          <p id="currentDateNationality">[Insert update timestamp here]</span></p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Action</span>
-                          <p>Updated</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Details</span>
-                          <p>{{ data['nationality'] }}</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Updated by</span>
-                          <p id="person-history-nationality-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                        </td>
-                      </tr>
-                      {% endif %}
+                      
 
-                      {% if data['add-additional-personal-details'] == 'yes' %}
+                      {% if data['add-additional-personal-details'] == 'yes' and data['nationality'] %}
                       <tr class="nhsuk-table__row">
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -624,7 +605,7 @@
               </summary>
           
               <div class="nhsuk-details__text" style="margin-top: 30px;">
-                {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['UK-national-insurance-number'] %}
+                {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['UK-national-insurance-number'] or data['updated-UK-national-insurance-number'] %}
                 <table class="nhsuk-table-responsive" id="case-history-uk-nino-table" style="margin-bottom: 9px;">
                   <thead class="nhsuk-table__head">
                     <tr>
@@ -637,11 +618,11 @@
                   </thead>
                   <tbody class="nhsuk-table__body">
 
-                    {% if data['change-additional-personal-details'] == 'yes' %}
+                    {% if data['change-additional-personal-details'] == 'yes' and data['updated-UK-national-insurance-number'] %}
                     <tr class="nhsuk-table__row">
                       <td class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date and time</span>
-                        <p id="currentDateNINO">[Insert update timestamp here]</p>
+                        <p id="currentDateChangeNINO">[Insert update timestamp here]</p>
                       </td>
                       <td class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Action</span>
@@ -658,7 +639,7 @@
                     </tr>
                     {% endif %}
 
-                    {% if data['add-additional-personal-details'] == 'yes' %}
+                    {% if data['add-additional-personal-details'] == 'yes' and data['UK-national-insurance-number'] %}
                     <tr class="nhsuk-table__row">
                       <td class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -714,7 +695,7 @@
             </summary>
         
             <div class="nhsuk-details__text" style="margin-top: 30px;">
-              {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['email-address'] %}
+              {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['email-address'] or data['updated-email-address'] %}
               <table class="nhsuk-table-responsive" id="case-history-uk-nino-table" style="margin-bottom: 9px;">
                 <thead class="nhsuk-table__head">
                   <tr>
@@ -727,28 +708,9 @@
                 </thead>
                 <tbody class="nhsuk-table__body">
 
-                  {% if data['change-additional-personal-details'] == 'yes' %}
-                  <tr class="nhsuk-table__row">
-                    <td class="nhsuk-table__cell">
-                      <span class="nhsuk-table-responsive__heading">Date and time</span>
-                      <p id="currentDateEmailAddress">[Insert update timestamp here]</p>
-                    </td>
-                    <td class="nhsuk-table__cell">
-                      <span class="nhsuk-table-responsive__heading">Action</span>
-                      <p>Updated</p>
-                    </td>
-                    <td class="nhsuk-table__cell">
-                      <span class="nhsuk-table-responsive__heading">Details</span>
-                      <p>{{ data['contact-number'] }}</p>
-                    </td>
-                    <td class="nhsuk-table__cell">
-                      <span class="nhsuk-table-responsive__heading">Updated by</span>
-                      <p id="case-history-email-address-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                    </td>
-                  </tr>
-                  {% endif %}
+                  
 
-                  {% if data['add-additional-personal-details'] == 'yes' %}
+                  {% if data['add-additional-personal-details'] == 'yes' and data['email-address'] %}
                   <tr class="nhsuk-table__row">
                     <td class="nhsuk-table__cell">
                       <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -803,7 +765,7 @@
               </summary>
 
               <div class="nhsuk-details__text" style="margin-top: 30px;">
-                {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['contact-number'] %}
+                {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['contact-number'] or data['updated-contact-number'] %}
                   <table class="nhsuk-table-responsive" id="case-history-contact-number-table" style="margin-bottom: 9px;">
                     <thead class="nhsuk-table__head">
                       <tr>
@@ -815,11 +777,11 @@
                     </thead>
                     <tbody class="nhsuk-table__body">
 
-                      {% if data['change-additional-personal-details'] == 'yes' %}
+                      {% if data['change-additional-personal-details'] == 'yes' and data['updated-contact-number'] %}
                       <tr class="nhsuk-table__row">
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Date and time</span>
-                          <p id="currentDateContactNumber">[Insert update timestamp here]</p>
+                          <p id="currentDateChangeContactNumber">[Insert update timestamp here]</p>
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Action</span>
@@ -836,7 +798,7 @@
                       </tr>
                       {% endif %}
 
-                      {% if data['add-additional-personal-details'] == 'yes' %}
+                      {% if data['add-additional-personal-details'] == 'yes' and data['contact-number'] %}
                       <tr class="nhsuk-table__row">
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Date and time</span>

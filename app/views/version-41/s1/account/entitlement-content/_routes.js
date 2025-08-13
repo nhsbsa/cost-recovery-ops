@@ -52,19 +52,42 @@ router.post([/s1-dependant-details-check/], function(req, res) {
 // Changing S1 entitlement details
 // =====================================================
 
-// Change the date of UK residency
-router.post([/change-date-of-residency-uk/], function (req, res) {
-  req.session.data['change-date-of-residency-uk'] = 'yes';
-  req.session.data['new-date-of-residency-uk'] = req.body['new-date-of-residency-uk'];
-  res.redirect('/version-41/s1/account/entitlement-content/change-date-of-residency-uk-cya');
+// =====================================================
+// Change the Personal identifcation number (PIN)
+// =====================================================
+
+router.post([/change-pin-s1/], function (req, res) {
+  req.session.data['new-pin'] = req.body['new-pin'];
+  res.redirect('/version-41/s1/account/entitlement-content/change-pin-s1-cya');
 });
 
 // CYA for date of UK residency
-router.get('/version-41/s1/account/entitlement-content/change-date-of-residency-uk-cya', function (req, res) {
-  res.render('version-41/s1/account/entitlement-content/change-date-of-residency-uk-cya', { data: req.session.data });
+router.get('/version-41/s1/account/entitlement-content/change-pin-s1-cya', function (req, res) {
+  res.render('version-41/s1/account/entitlement-content/change-pin-s1-cya', { data: req.session.data });
 });
 
-router.post([/change-date-of-residency-uk-cya/], function (req, res) {
+router.post([/change-pin-s1-cya/], function (req, res) {
+  req.session.data['change-pin'] = 'yes';
+  res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
+});
+
+
+// =====================================================
+// Change the date of UK residency
+// =====================================================
+
+router.post([/change-date-of-residency-uk-s1/], function (req, res) {
+  req.session.data['change-date-of-residency-uk'] = 'yes';
+  req.session.data['new-date-of-residency-uk'] = req.body['new-date-of-residency-uk'];
+  res.redirect('/version-41/s1/account/entitlement-content/change-date-of-residency-uk-s1-cya');
+});
+
+// CYA for date of UK residency
+router.get('/version-41/s1/account/entitlement-content/change-date-of-residency-uk-s1-cya', function (req, res) {
+  res.render('version-41/s1/account/entitlement-content/change-date-of-residency-uk-s1-cya', { data: req.session.data });
+});
+
+router.post([/change-date-of-residency-uk-s1-cya/], function (req, res) {
   req.session.data['uk-residency-change-comment'] = req.body['uk-residency-change-comment'];
   req.session.data['current-uk-residency-date'] = req.session.data['new-uk-residency-date'];
   const caseHistoryEntry = {

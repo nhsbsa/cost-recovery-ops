@@ -35,51 +35,37 @@ Check your answers before changing the date of residency in UK - Manage overseas
                     }) }}
                 
                     
-                    <form action="change-date-of-residency-uk-cya" method="post">
+                    <form action="change-pin-s1-cya" method="post">
           
                       <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456<br>Entitlement ID: 100001</p>
                   
                           <div class="nhsuk-form-group">
                             <label class="nhsuk-label" for="additional-personal-details-cya-header-label">
-                              <h1 class="nhsuk-heading-xl">Check your answers before changing the date of residency in UK</h1>
+                              <h1 class="nhsuk-heading-xl">Check your answers before changing the personal identification number (PIN)</h1>
                             </label>
                           </div>
 
                           <dl class="nhsuk-summary-list">
                             <div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">
-                                Date of residency in UK
+                                Personal identification number (PIN)
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['new-residency-day'] and data['new-residency-month'] and data['new-residency-year'] %}
-                                {% set day = data['new-residency-day'] %}
-                                {% set month = data['new-residency-month'] | int %}
-                                {% set year = data['new-residency-year'] %}
-                    
-                                {# Define month names #}
-                                {% set month_names = [
-                                    "January", "February", "March", "April", "May", "June",
-                                    "July", "August", "September", "October", "November", "December"
-                                ] %}
-                    
-                                {# Get the month name #}
-                                {% set month_name = month_names[month - 1] %}
-                    
-                                {# Display the date in the format "day month year" #}
-                                {{ day | int }} {{ month_name }} {{ year }}
+                              {% if data['new-pin'] %}
+                                {{ data['new-pin'] }}
                               {% else %}
-                                30 September 2024
+                                09876543S1
                               {% endif %}
                             </dd>
     
                             <dd class="nhsuk-summary-list__actions">
-                              <a href="change-date-of-residency-uk#new-residency-day"> Change<span class="nhsuk-u-visually-hidden">S1/S072 issue date</span> </a>
+                              <a href="change-pin-s1#new-pin"> Change<span class="nhsuk-u-visually-hidden">personal identification number</span> </a>
                             </dd>
                           </dl>
 
                                             
                           <button class="nhsuk-button" type="submit">
-                              Save and continue
+                            Save and continue
                           </button>
 
                           <p style="margin-bottom: 60px;"><a href="../../account/entitlement-content/s1-entitlement-details">Cancel</a></p>
