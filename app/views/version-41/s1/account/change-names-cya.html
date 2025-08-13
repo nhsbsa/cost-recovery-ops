@@ -35,151 +35,118 @@ Check your answers before adding additional details - Manage overseas entitlemen
                     }) }}
                 
                     
-                    <form action="additional-personal-details-cya" method="post">
+                    <form action="change-names-cya" method="post">
           
                       <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456</p>
                   
                           <div class="nhsuk-form-group">
                             <label class="nhsuk-label" for="additional-personal-details-cya-header-label">
-                              {% if data['add-additional-personal-details'] == 'yes' %}
-                                <h1 class="nhsuk-heading-xl">Check your answers before changing additional details</h1>
-                              {% else %}
-                                <h1 class="nhsuk-heading-xl">Check your answers before adding additional details</h1>
-                              {% endif %}
+                              <h1 class="nhsuk-heading-xl">Check your answers before changing John Doe's names</h1>
                             </label>
                           </div>
 
                           <dl class="nhsuk-summary-list">
                             <div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">
-                                Sex
+                                First names
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['sex'] %}
-                                  {{ data['sex'] }}
+                                {% if data['new-first-names'] %}
+                                  {{ data['new-first-names'] }}
                                 {% else %}
-                                  Not provided
+                                  John
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#sex">
-                                  Change<span class="nhsuk-u-visually-hidden">sex</span>
+                                <a href="change-names#new-first-names">
+                                  Change<span class="nhsuk-u-visually-hidden">first names</span>
                                 </a>
                               </dd>
                             </div>
                             <div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">
-                                Country of nationality
+                                First names at birth, if different
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['nationality'] %}
-                                  {{ data['nationality'] }}
+                                {% if data['new-birth-first-names'] %}
+                                  {{ data['new-birth-first-names'] }}
                                 {% else %}
                                   Not provided
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#nationality">
-                                  Change<span class="nhsuk-u-visually-hidden">country of nationality</span>
+                                <a href="change-names#new-birth-first-names">
+                                  Change<span class="nhsuk-u-visually-hidden">first names at birth</span>
                                 </a>
                               </dd>
                             </div>
                             <div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">
-                                UK National Insurance Number (NINO)
+                                Last name
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['UK-national-insurance-number'] %}
-                                  {{ data['UK-national-insurance-number'] }}
+                                {% if data['new-last-name'] %}
+                                  {{ data['new-last-name'] }}
                                 {% else %}
-                                  Not provided
+                                  Doe
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#UK-national-insurance-number">
-                                  Change<span class="nhsuk-u-visually-hidden">UK national insurance number</span>
+                                <a href="change-names#new-last-name">
+                                  Change<span class="nhsuk-u-visually-hidden">last name</span>
                                 </a>
                               </dd>
                             </div>
                             <div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">
-                                Email address
+                                Last name at birth, if different
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['email-address'] %}
-                                  {{ data['email-address'] }}
+                                {% if data['new-birth-last-name'] %}
+                                  {{ data['new-birth-last-name'] }}
                                 {% else %}
                                   Not provided
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#email-address">
-                                  Change<span class="nhsuk-u-visually-hidden">email address</span>
+                                <a href="change-names#new-birth-last-name">
+                                  Change<span class="nhsuk-u-visually-hidden">last name at birth</span>
                                 </a>
                               </dd>
                             </div>
                             <div class="nhsuk-summary-list__row">
                               <dt class="nhsuk-summary-list__key">
-                                Contact number
+                                Reason for change
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['contact-number'] %}
-                                  {{ data['contact-number'] }}
+                                {% if data['change-names-reason'] %}
+                                  {{ data['change-names-reason'] }}
                                 {% else %}
-                                  Not provided
+                                  Reason for change explained here.
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="add-additional-personal-details#contact-number">
-                                  Change<span class="nhsuk-u-visually-hidden">contact number</span>
+                                <a href="change-names-reason#change-names-reason">
+                                  Change<span class="nhsuk-u-visually-hidden">reason-for-change</span>
                                 </a>
                               </dd>
                             </div>
                           </dl>
 
-                          
                                             
-                    <button class="nhsuk-button" type="submit">
-                        Save and continue
-                    </button>
+                          <button class="nhsuk-button" type="submit">
+                              Save and continue
+                          </button>
 
-                    <p style="margin-bottom: 60px;"><a href="../account/personal-details">Cancel</a></p>
+                          <p style="margin-bottom: 60px;"><a href="../account/personal-details">Cancel</a></p>
 
                     </form>
 
-                    </div>
+                  </div>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block pageScripts %}
-<!-- autocomplete js -->
-<script type="text/javascript">
-  accessibleAutocomplete.enhanceSelectElement({
-    defaultValue : '',
-    autoselect : true,  
-    selectElement : document.querySelector('#nationalityDrop')
-  })
-</script>
-
-<!-- DOB format -->
-<script>
-  function updateFormattedDate() {
-    const day = document.getElementById("residency-day").value;
-    const month = document.getElementById("residency-month").value;
-    const year = document.getElementById("residency-year").value;
-
-    if (day && month && year) {
-        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
-    } else {
-        document.getElementById("formatted-date").textContent = "2 July 2024";
-    }
-}
-
-document.addEventListener('DOMContentLoaded', updateFormattedDate);
-</script>
 {% endblock %}

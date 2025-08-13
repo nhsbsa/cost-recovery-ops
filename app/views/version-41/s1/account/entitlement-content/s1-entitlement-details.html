@@ -47,7 +47,33 @@
       <div class="nhsuk-width-container-fluid">
         <div class="nhsuk-main-wrapper" id="maincontent">
 
-          
+          {% if data['change-first-names-s1'] == 'yes' %}
+            <div>
+              <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+                <div class="govuk-notification-banner__header">
+                  <span class="govuk-notification-banner__title">Entitlement details updated</span>
+                </div>
+                <div class="govuk-notification-banner__content">
+                  <span class="govuk-notification-banner__heading big-text-wrap">You have changed the first names on entitlement ID 100001. These first names will be used on any future claims and resubmissions against this entitlement. View all changes in the <a href="../../account/case-history-entitlements">Case history</a>.</span>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if data['change-date-of-residency-uk'] == 'yes' %}
+          <div>
+                        
+            <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+               <div class="govuk-notification-banner__header">
+                  <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Entitlement details updated</span>
+               </div>
+               <div class="govuk-notification-banner__content">
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">{% if data['first-name'] %}{{ data['first-name'] }}{% else %}John{% endif %} {% if data['last-name'] %}{{ data['last-name'] }}{% else %}Doe{% endif %}’s entitlement details have been updated.</span>
+               </div>
+            </div>
+         
+          </div>
+          {% endif %}
       
           
           <div class="nhsuk-grid-row">
@@ -91,10 +117,16 @@
                         First names
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        John
+                        {% if data['change-first-names-s1'] == 'yes' %}
+                          {{ data['s1-entitlement-first-name'] }}
+                        {% else %}
+                          John
+                        {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                        
+                        <a href="change-first-names-s1">
+                          Change<span class="nhsuk-u-visually-hidden">first names</span>
+                        </a>
                       </dd>
                     </div>
 
@@ -104,10 +136,16 @@
                         Last name
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        Doe
+                        {% if data['change-last-name-s1'] == 'yes' %}
+                          {{ data['s1-entitlement-last-name'] }}
+                        {% else %}
+                          Doe
+                        {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                        
+                        <a href="change-last-name-s1">
+                          Change<span class="nhsuk-u-visually-hidden">last name</span>
+                        </a>
                       </dd>
                     </div>
 
@@ -174,7 +212,7 @@
                         {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                        <a href="change-s1-entitlement-details">
+                        <a href="change-pin-s1">
                           Change<span class="nhsuk-u-visually-hidden">personal identification number</span>
                         </a>
                       </dd>
@@ -272,6 +310,45 @@
                         <!-- Add any actions here if needed for interaction -->
                       </dd>
                     </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date of residency in UK
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% set month_names = {
+                          '1': 'January',
+                          '2': 'February',
+                          '3': 'March',
+                          '4': 'April',
+                          '5': 'May',
+                          '6': 'June',
+                          '7': 'July',
+                          '8': 'August',
+                          '9': 'September',
+                          '10': 'October',
+                          '11': 'November',
+                          '12': 'December'
+                        } %}
+                    
+                        {% if data['change-date-of-residency-uk'] == 'yes' %}
+                          {% if data['change-residency-day'] and data['change-residency-month'] and data['change-residency-year'] %}
+                            {{ data['change-residency-day'] | int }} {{ month_names[data['change-residency-month'] | int] }} {{ data['change-residency-year'] }}
+                          {% elseif data['residency-day'] and data['residency-month'] and data['residency-year'] %}
+                            {{ data['residency-day'] | int }} {{ month_names[data['residency-month'] | int] }} {{ data['residency-year'] }}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="change-date-of-residency-uk">
+                          Change<span class="nhsuk-u-visually-hidden">date of residency in UK</span>
+                        </a>
+                      </dd>
+                    </div>      
 
 
                     <div class="nhsuk-summary-list__row">

@@ -187,6 +187,45 @@
                       </dd>
                     </div>
 
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date of residency in UK
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% set month_names = {
+                          '1': 'January',
+                          '2': 'February',
+                          '3': 'March',
+                          '4': 'April',
+                          '5': 'May',
+                          '6': 'June',
+                          '7': 'July',
+                          '8': 'August',
+                          '9': 'September',
+                          '10': 'October',
+                          '11': 'November',
+                          '12': 'December'
+                        } %}
+                    
+                        {% if data['change-date-of-residency-uk'] == 'yes' %}
+                          {% if data['change-residency-day'] and data['change-residency-month'] and data['change-residency-year'] %}
+                            {{ data['change-residency-day'] | int }} {{ month_names[data['change-residency-month'] | int] }} {{ data['change-residency-year'] }}
+                          {% elseif data['residency-day'] and data['residency-month'] and data['residency-year'] %}
+                            {{ data['residency-day'] | int }} {{ month_names[data['residency-month'] | int] }} {{ data['residency-year'] }}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="">
+                          Change<span class="nhsuk-u-visually-hidden">date of residency in UK</span>
+                        </a>
+                      </dd>
+                    </div>  
+
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">

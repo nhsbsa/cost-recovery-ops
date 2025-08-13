@@ -1,0 +1,91 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Change first names on this S1 entitlement - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456<br>Entitlement ID: 100001</p>
+
+                    <h1 class="app-page-heading">
+                      Check your answers before changing last name
+                    </h1>
+
+                    
+                    <form action="change-last-name-s1-cya" method="post">
+
+                      <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Last names
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {{ data['s1-entitlement-last-name'] }}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <a href="change-last-name-s1#s1-entitlement-last-name">
+                              Change<span class="nhsuk-u-visually-hidden">last name</span>
+                            </a>
+                          </dd>
+                        </div>
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Reason for change
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {{ data['reason-for-change-to-last-name-s1'] }}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <a href="reason-for-changing-last-name-s1#reason-for-change-to-last-name-s1">
+                              Change<span class="nhsuk-u-visually-hidden">the reason for changing the last name</span>
+                            </a>
+                          </dd>
+                        </div>
+                      </dl>
+                          
+                      <button class="nhsuk-button" type="submit">
+                        Save and continue
+                      </button>
+
+                      <p style="margin-bottom: 60px;"><a href="../entitlement-content/s1-entitlement-details">Cancel</a></p>
+
+                    </form>
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

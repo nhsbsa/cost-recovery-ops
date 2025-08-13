@@ -90,7 +90,7 @@
                         <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
                           <details class="nhsuk-details">
                             <summary aria-label="View address history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_address_Link">View address history</span>
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_address_Link">View changes to current address</span>
                             </summary>
                         
                             <div class="nhsuk-details__text" style="margin-top: 30px;">
@@ -105,64 +105,6 @@
                                   </tr>
                                 </thead>
                                 <tbody class="nhsuk-table__body">
-                                  {% if data['change-date-of-residency-uk'] == 'yes' %}
-                                  <tr class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateUKResidency"></span></p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Updated</p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p id="person-history-address-details">
-                                        {# Check if any of the date fields have been updated, otherwise fallback to default #}
-                                        {% set month_names = {
-                                          '1': 'January',
-                                          '2': 'February',
-                                          '3': 'March',
-                                          '4': 'April',
-                                          '5': 'May',
-                                          '6': 'June',
-                                          '7': 'July',
-                                          '8': 'August',
-                                          '9': 'September',
-                                          '10': 'October',
-                                          '11': 'November',
-                                          '12': 'December'
-                                      } %}
-                                  
-                                      {% if data['change-address'] == 'yes' and data['change-residency-day'] and data['change-residency-month'] and data['change-residency-year'] %}
-                                          {# Convert day and month to integers to handle leading zeroes #}
-                                          {{ data['change-residency-day'] | int }} {{ month_names[data['change-residency-month'] | int] }} {{ data['change-residency-year'] }}
-                                      {% elseif data['residency-day'] and data['residency-month'] and data['residency-year'] %}
-                                          {# Convert day and month to integers to handle leading zeroes #}
-                                          {{ data['residency-day'] | int }} {{ month_names[data['residency-month'] | int] }} {{ data['residency-year'] }}
-                                      {% else %}
-                                          8 September 2024
-                                      {% endif %}
-                                      </p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                      <p id="person-history-address-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                                    </td>
-                                    <!--td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Comments</span>
-                                      <p id="person-history-address-updated-by">
-                                        {# Check if any comments have been added, otherwise fallback to default #}
-                                        {% if data['change-to-residency-in-uk-note'] %}
-                                          {{ data['change-to-residency-in-uk-note'] }}
-                                        {% else %}
-                                        Received completed DL1609 where individual provided this info
-                                        {% endif %}
-                                      </p>
-                                    </td-->
-                                  </tr>
-                                  {% endif %}
-
                                   {% if data['change-address'] == 'yes' %}
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
@@ -177,30 +119,30 @@
                                       <span class="nhsuk-table-responsive__heading">Details</span>
                                       <p id="person-history-address-details">
                                         {# Check if any of the address fields have been updated, otherwise fallback to default #}
-                                        {% if data['change-address-line-1'] or data['change-address-line-2'] or data['change-address-town'] or data['change-address-region'] or data['change-address-postcode'] or data['change-address-country'] %}
-                                          {{ data['change-address-line-1'] }}<br>
+                                        {% if data['new-address-line-1'] or data['new-address-line-2'] or data['new-address-town'] or data['new-address-region'] or data['new-address-postcode'] or data['new-address-country'] %}
+                                          {{ data['new-address-line-1'] }}<br>
                                     
-                                          {% if data['change-address-line-2'] %}
-                                              {{ data['change-address-line-2'] }}<br>
+                                          {% if data['new-address-line-2'] %}
+                                            {{ data['new-address-line-2'] }}<br>
                                           {% endif %}
                                           
-                                          {% if data['change-address-line-3'] %}
-                                              {{ data['change-address-line-3'] }}<br>
+                                          {% if data['new-address-line-3'] %}
+                                            {{ data['new-address-line-3'] }}<br>
                                           {% endif %}
                                           
-                                          {{ data['change-address-town'] }}<br>
+                                          {{ data['new-address-town'] }}<br>
                                           
-                                          {% if data['change-address-region'] %}
-                                              {{ data['change-address-region'] }}<br>
+                                          {% if data['new-address-region'] %}
+                                            {{ data['new-address-region'] }}<br>
                                           {% endif %}
                                           
-                                          {{ data['change-address-postcode'] }}<br>
-                                          {{ data['change-address-country'] }}
+                                          {{ data['new-address-postcode'] }}<br>
+                                          {{ data['new-address-country'] }}
                                         {% else %}
-                                          10 Washington Street<br>
-                                          Worcester<br>
-                                          WR1 1NL<br>
-                                          United Kingdom
+                                          100 Meldon Terrace<br>
+                                          Newcastle upon Tyne<br>
+                                          NE6 5XQ<br>
+                                          United Kingdom (UK)
                                         {% endif %}
                                       </p>
                                     </td>
@@ -237,7 +179,7 @@
                                         1 Washington Street<br>
                                         Worcester<br>
                                         WR1 1NL<br>
-                                        United Kingdom
+                                        United Kingdom (UK)
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -277,7 +219,7 @@
                   <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
                     <details class="nhsuk-details">
                       <summary aria-label="View date of birth history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                        <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_dob_Link">View date of birth history</span>
+                        <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_dob_Link">View changes to date of birth</span>
                       </summary>
                   
                       <div class="nhsuk-details__text" style="margin-top: 30px;">
@@ -287,8 +229,8 @@
                               <th scope="col">Date and time</th>
                               <th scope="col">Action</th>
                               <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                              <th scope="col">Reason for change</th>
                               <th scope="col">Updated by</th>
-                              <!--th scope="col">Comments</th-->
                             </tr>
                           </thead>
                           <tbody class="nhsuk-table__body">
@@ -394,7 +336,7 @@
                 <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
                   <details class="nhsuk-details">
                     <summary aria-label="View name history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                      <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_name_Link">View name history</span>
+                      <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_name_Link">View changes to first and last names</span>
                     </summary>
                 
                     <div class="nhsuk-details__text" style="margin-top: 30px;">
@@ -404,12 +346,12 @@
                             <th scope="col">Date and time</th>
                             <th scope="col">Action</th>
                             <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                            <th scope="col">Reason for change</th>
                             <th scope="col">Updated by</th>
-                            <!--th scope="col">Comments</th-->
                           </tr>
                         </thead>
                         <tbody class="nhsuk-table__body">
-                          {% if data['change-basic-personal-details'] == 'yes' %}
+                          {% if data['change-names'] == 'yes' %}
                           <tr class="nhsuk-table__row">
                             <td class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -423,10 +365,21 @@
                               <span class="nhsuk-table-responsive__heading">Details</span>
                               <p id="person-history-name-details">
                                 {# Check if any of the name fields have been updated, otherwise fallback to default #}
-                                {% if data['first-name'] or data['last-name'] %}
-                                  {{ data['first-name'] }} {{ data['last-name'] }}
+                                {% if data['new-first-name'] or data['new-last-name'] %}
+                                  {{ data['new-first-name'] }} {{ data['new-last-name'] }}
                                 {% else %}
-                                  Jon Doe
+                                  Jonathan Doe
+                                {% endif %}
+                              </p>
+                            </td>
+                            <td class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                              <p id="person-history-name-updated-by">
+                                {# Check if any comments have been added, otherwise fallback to default #}
+                                {% if data['change-names-reason'] %}
+                                  {{ data['change-names-reason'] }}
+                                {% else %}
+                                  Reason for change explained here.
                                 {% endif %}
                               </p>
                             </td>
@@ -434,17 +387,6 @@
                               <span class="nhsuk-table-responsive__heading">Updated by</span>
                               <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                             </td>
-                            <!--td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Comments</span>
-                              <p id="person-history-name-updated-by">
-                                {# Check if any comments have been added, otherwise fallback to default #}
-                                {% if data['change-to-personal-details-note'] %}
-                                  {{ data['change-to-personal-details-note'] }}
-                                {% else %}
-                                Member State requested this change on 13/12/2024
-                                {% endif %}
-                              </p>
-                            </td-->
                           </tr>
                           {% endif %}
 
@@ -464,13 +406,13 @@
                               </p>
                             </td>
                             <td class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                              <p id="person-history-name-updated-by">Not applicable</p>
+                            </td>
+                            <td class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Updated by</span>
                               <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                             </td>
-                            <!--td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Comments</span>
-                              <p id="person-history-name-updated-by">None provided</p>
-                            </td-->
                           </tr>
                         </tbody>
                       </table>
@@ -499,7 +441,7 @@
               <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
                 <details class="nhsuk-details">
                   <summary aria-label="View name history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                    <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_sex_Link">View sex history</span>
+                    <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_sex_Link">View changes to sex</span>
                   </summary>
               
                   <div class="nhsuk-details__text" style="margin-top: 30px;">
@@ -528,9 +470,7 @@
                           </td>
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Details</span>
-                            <p id="person-history-sex-details">
-                              Sex updated to {{ data['updated-sex'] }}
-                            </p>
+                            <p>{{ data['updated-sex'] }}</p>
                           </td>
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -551,9 +491,7 @@
                           </td>
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Details</span>
-                            <p>
-                              Sex added as {{ data['sex'] }}
-                            </p>
+                            <p>{{ data['sex'] }}</p>
                           </td>
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -592,7 +530,7 @@
             <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
               <details class="nhsuk-details">
                 <summary aria-label="View country of nationality history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                  <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_nationality_Link">View country of nationality history</span>
+                  <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_nationality_Link">View changes to country of nationality</span>
                 </summary>
             
                 <div class="nhsuk-details__text" style="margin-top: 30px;">
@@ -621,9 +559,7 @@
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Details</span>
-                          <p id="person-history-nationality-details">
-                            Nationality updated to {{ data['nationality'] }}
-                          </p>
+                          <p>{{ data['nationality'] }}</p>
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -644,9 +580,7 @@
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Details</span>
-                          <p>
-                            Nationality added as {{ data['nationality'] }}
-                          </p>
+                          <p>{{ data['nationality'] }}</p>
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -658,6 +592,7 @@
                     </tbody>
                   </table>
                   {% else %}
+                  <br>
                     There is no history because this person's nationality is yet to be added.
                   {% endif %}
                 </div>
@@ -685,7 +620,7 @@
           <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
             <details class="nhsuk-details">
               <summary aria-label="View UK National Insurance Number (NINO) history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_sex_Link">View UK National Insurance Number (NINO) history</span>
+                <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_sex_Link">View changes to UK National Insurance Number (NINO)</span>
               </summary>
           
               <div class="nhsuk-details__text" style="margin-top: 30px;">
@@ -714,9 +649,7 @@
                       </td>
                       <td class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Details</span>
-                        <p id="case-history-uk-nino-details">
-                          UK National Insurance Number (NINO) updated to {{ data['UK-national-insurance-number'] }}
-                        </p>
+                        <p>{{ data['UK-national-insurance-number'] }}</p>
                       </td>
                       <td class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -737,9 +670,7 @@
                       </td>
                       <td class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Details</span>
-                        <p>
-                          UK National Insurance Number (NINO) added as {{ data['UK-national-insurance-number'] }}
-                        </p>
+                        <p>{{ data['UK-national-insurance-number'] }}</p>
                       </td>
                       <td class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -751,6 +682,7 @@
                   </tbody>
                 </table>
                 {% else %}
+                <br>
                   There is no history because this person's UK National Insurance Number (NINO) is yet to be added.
                 {% endif %}
               </div>
@@ -778,7 +710,7 @@
         <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
           <details class="nhsuk-details">
             <summary aria-label="View email address history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_email_address_Link">View email address history</span>
+              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_email_address_Link">View changes to  email address</span>
             </summary>
         
             <div class="nhsuk-details__text" style="margin-top: 30px;">
@@ -807,9 +739,7 @@
                     </td>
                     <td class="nhsuk-table__cell">
                       <span class="nhsuk-table-responsive__heading">Details</span>
-                      <p id="case-history-email-address-details">
-                        Email address updated to {{ data['contact-number'] }}
-                      </p>
+                      <p>{{ data['contact-number'] }}</p>
                     </td>
                     <td class="nhsuk-table__cell">
                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -830,9 +760,7 @@
                     </td>
                     <td class="nhsuk-table__cell">
                       <span class="nhsuk-table-responsive__heading">Details</span>
-                      <p>
-                        Email address added as {{ data['email-address'] }}
-                      </p>
+                      <p>{{ data['email-address'] }}</p>
                     </td>
                     <td class="nhsuk-table__cell">
                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -844,6 +772,7 @@
                 </tbody>
               </table>
               {% else %}
+              <br>
                 There is no history because this person's email address is yet to be added.
               {% endif %}
             </div>
@@ -870,7 +799,7 @@
           <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
             <details class="nhsuk-details">
               <summary aria-label="View contact number history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_contactNumber_Link">View contact number history</span>
+                <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_contactNumber_Link">View changes to contact number</span>
               </summary>
 
               <div class="nhsuk-details__text" style="margin-top: 30px;">
@@ -898,9 +827,7 @@
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Details</span>
-                          <p>
-                            Contact number updated to {{ data['contact-number'] }}
-                          </p>
+                          <p>{{ data['contact-number'] }}</p>
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -921,9 +848,7 @@
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Details</span>
-                          <p>
-                            Contact number added as {{ data['contact-number'] }}
-                          </p>
+                          <p>{{ data['contact-number'] }}</p>
                         </td>
                         <td class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -935,6 +860,7 @@
                     </tbody>
                   </table>
                 {% else %}
+                <br>
                   <p>There is no history because this person's contact number is yet to be added.</p>
                 {% endif %}
               </div>

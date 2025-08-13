@@ -1,0 +1,253 @@
+// External dependencies
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+
+router.use(bodyParser.json()); // to support JSON bodies
+router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
+
+
+// Person record (Main insured) //
+
+
+// Notes section //
+
+// Add a new note
+router.post([/add-note/], function(req, res) {
+  // Retrieve the submitted note and note type
+  const noteType = req.body['note-type'];
+  const note = req.body['note'];
+
+  // Store these in the session or database
+  req.session.data['note-type'] = noteType;
+  req.session.data['note'] = note;
+
+  // Set flag that a new note was added
+  req.session.data['new-note'] = 'yes';
+
+  // Redirect back to the Main record notes screen
+  res.redirect('/version-41/s1/account/notes');
+});
+
+
+
+// Search for a person & create a new person record // 
+
+// Enter person's name, DOB and address
+router.post([/create-person-record/], function(req, res){
+  res.redirect('add-address');
+})
+
+// Do you know the person's address?
+router.post([/add-address/], (req, res) => {
+
+  const knowAddress = req.session.data['know-address']
+
+  if (knowAddress === 'yes') {
+    res.redirect('enter-address')
+  } else {
+    res.redirect('create-person-record-cya')
+  }
+
+})
+
+// Enter person's name, DOB and address
+router.post([/enter-address/], function(req, res){
+  res.redirect('create-person-record-cya');
+})
+
+// Check your answers
+router.post([/create-person-record-cya/], function(req, res){
+      res.redirect('confirmation-person-record-created');
+})
+
+
+
+// Personal details tabs //
+
+
+
+
+
+// Step 1 - Change names
+router.post([/change-names/], function(req, res){
+
+  // Save new name fields from the form into the session
+  req.session.data['new-first-name'] = req.body['new-first-names'];
+  req.session.data['new-birth-first-name'] = req.body['new-birth-first-names'];
+  req.session.data['new-last-name'] = req.body['new-last-name'];
+  req.session.data['new-birth-last-name'] = req.body['new-birth-last-name'];
+
+  res.redirect('/version-41/s1/account/change-names-reason');
+})
+
+// Step 2 - provide a reason for the change
+router.post([/change-names-reason/], function(req, res){
+
+  req.session.data['change-names-reason'] =
+  req.body['change-names-reason']; 
+
+  res.redirect('/version-41/s1/account/change-names-cya');
+
+})
+
+// Step 3 - redirect ot personal details tab with updated details
+router.post([/change-names-cya/], function(req, res){
+
+  req.session.data['change-names'] = 'yes'
+
+  res.redirect('/version-41/s1/account/personal-details');
+
+})
+
+
+// Step 1 — Add additional personal details
+router.post([/add-additional-personal-details/], function(req, res){
+
+  req.session.data['sex'] = req.body['sex'];
+  req.session.data['nationality'] = req.body['nationality'];
+  req.session.data['UK-national-insurance-number'] = req.body['UK-national-insurance-number'];
+  req.session.data['email-address'] = req.body['email-address'];
+  req.session.data['contact-number'] = req.body['contact-number'];
+
+  res.redirect('/version-41/s1/account/additional-personal-details-cya');
+})
+
+// Step 2 - Check your answers before adding additional personal details
+router.post([/additional-personal-details-cya/], function(req, res){
+  req.session.data['add-additional-personal-details'] = 'yes'
+
+  res.redirect('/version-41/s1/account/personal-details');
+})
+
+
+// Step 1 — Change additional personal details
+router.post([/change-additional-personal-details/], function (req, res) {
+  req.session.data['updated-sex'] = req.body['updated-sex'];
+  req.session.data['updated-nationality'] = req.body['updated-nationality'];
+  req.session.data['updated-UK-national-insurance-number'] = req.body['updated-UK-national-insurance-number'];
+  req.session.data['updated-email-address'] = req.body['updated-email-address'];
+  req.session.data['updated-contact-number'] = req.body['updated-contact-number'];
+
+  res.redirect('/version-41/s1/account/reason-additional-personal-details');
+});
+
+// Step 2 — Enter reason for the change
+router.post([/reason-additional-personal-details/], function (req, res) {
+  req.session.data['change-additional-personal-details-reason'] =
+    req.body['change-additional-personal-details-reason']; 
+
+  res.redirect('/version-41/s1/account/cya-change-additional-personal-details');
+});
+
+// Step 3 — Confirm on CYA page
+router.post([/cya-change-additional-personal-details/], function (req, res) {
+  req.session.data['change-additional-personal-details'] = 'yes';
+
+  res.redirect('/version-41/s1/account/personal-details');
+});
+
+
+
+// Change current address //
+router.post([/change-current-address/], function (req, res) {
+
+  // Build the new address from individual form fields
+  req.session.data['new-address'] = {
+    line1: req.body['new-address-line-1'] || '',
+    line2: req.body['new-address-line-2'] || '',
+    line3: req.body['new-address-line-3'] || '',
+    town: req.body['new-address-town'] || '',
+    region: req.body['new-address-region'] || '',
+    postcode: req.body['new-address-postcode'] || '',
+    country: req.body['new-address-country'] || ''
+  };
+
+  // Redirect to the check-your-answers screen
+  res.redirect('/version-41/s1/account/change-current-address-cya');
+});
+
+// Check your answers before changing current address
+router.post([/change-current-address-cya/], function (req, res) {
+  // Set session variable indicating the address change process has started
+  req.session.data['change-address'] = 'yes';
+
+  // Update the current address with the new address
+  req.session.data['current-address'] = req.session.data['new-address'];
+
+  // Add a log entry in the case history
+  const caseHistoryEntry = {
+    action: 'Address changed',
+    details: {
+      oldAddress: req.session.data['previous-address'],
+      newAddress: req.session.data['current-address']
+    },
+    timestamp: new Date().toISOString()
+  };
+  req.session.data['case-history-person'] = req.session.data['case-history-person'] || [];
+  req.session.data['case-history-person'].push(caseHistoryEntry);
+
+  // Redirect back to address details with updated data
+  res.redirect('/version-41/s1/account/personal-details');
+});
+
+// View case history section
+router.get('/version-41/s1/account/case-history-person', function (req, res) {
+  res.render('version-41/s1/account/case-history-person', {
+    history: req.session.data['case-history-person']
+  });
+});
+
+
+
+
+// Upload documents //
+
+// Upload document
+router.post([/upload-document/], function(req, res){
+
+  // Retrieve the document type
+  const documentType = req.body['document-type'];
+
+  // Store the document type in the session or database
+  req.session.data['document-type'] = documentType;
+
+res.redirect('/version-41/s1/account/document-comments');
+
+})
+
+
+// Upload a new document - comments
+router.post([/document-comments/], function(req, res){
+
+  // Retrieve the document comments
+  const comments = req.body['document-comments'];
+
+  // Store these in the session or database
+  req.session.data['document-comments'] = comments;
+
+  // Set flag that a new document was uploaded
+  req.session.data['upload-new-document'] = 'yes'
+
+  // Redirect to the S1/S072 entitlement details screen and the tab that displays the notes table
+  res.redirect('/version-41/s1/account/documents');
+
+})
+
+
+// Remove document from Personal Details section
+router.post([/remove-personal-details-document/], function(req, res){
+
+  const removeDocument = req.session.data['remove-document']
+
+  if (removeDocument === 'yes') {
+      res.redirect('/version-41/s1/account/documents')
+  } else {
+      res.redirect('/version-41/s1/account/documents')
+  }
+
+
+})
+
+
+module.exports = router;
