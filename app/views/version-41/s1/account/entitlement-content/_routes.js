@@ -112,61 +112,34 @@ router.get('/version-41/s1/account/case-history-entitlements', function (req, re
 });
 
 // =====================================================
-// Change first names
+// Change names
 // =====================================================
-router.post([/change-first-names-s1/], function(req, res){
-  req.session.data['s1-entitlement-first-name'] = req.body['s1-entitlement-first-name'];
-  res.redirect('/version-41/s1/account/entitlement-content/reason-for-changing-first-names-s1');
+router.post([/change-s1-names/], function(req, res){
+  req.session.data['new-s1-first-names'] = req.body['new-s1-first-names'];
+  req.session.data['new-s1-birth-first-names'] = req.body['new-s1-birth-first-names'];
+  req.session.data['new-s1-last-name'] = req.body['new-s1-last-name'];
+  req.session.data['new-s1-birth-last-names'] = req.body['new-s1-birth-last-name'];
+
+  res.redirect('/version-41/s1/account/entitlement-content/reason-for-changing-s1-names');
 });
 
-router.post([/reason-for-changing-first-names-s1/], function(req, res){
-  req.session.data['reason-for-change-to-first-names-s1'] = req.body['reason-for-change-to-first-names-s1'];
-  res.redirect('/version-41/s1/account/entitlement-content/change-first-names-s1-cya');
+router.post([/reason-for-changing-s1-names/], function(req, res){
+  req.session.data['reason-for-changing-s1-names'] = req.body['reason-for-changing-s1-names'];
+  res.redirect('/version-41/s1/account/entitlement-content/change-s1-names-cya');
 });
 
-// GET CYA page for changing first names
-router.get('/version-41/s1/account/entitlement-content/change-first-names-s1-cya', function (req, res) {
-  res.render('version-41/s1/account/entitlement-content/change-first-names-s1-cya', { data: req.session.data });
+// GET CYA page for changing names
+router.get('/version-41/s1/account/entitlement-content/change-s1-names-cya', function (req, res) {
+  res.render('version-41/s1/account/entitlement-content/change-s1-names-cya', { data: req.session.data });
 });
 
-router.post([/change-first-names-s1-cya/], function(req, res){
-  req.session.data['change-first-names-s1'] = 'yes';
-  req.session.data['current-s1-entitlement-first-names'] = req.session.data['new-s1-entitlement-first-names'];
-  const caseHistoryEntry = {
-    action: 'S1 entitlement first names changed',
-    details: {
-      oldS1EntitlementFirstNames: req.session.data['previous-s1-entitlement-first-names'],
-      newS1EntitlementFirstNames: req.session.data['new-s1-entitlement-first-names']
-    },
-    timestamp: new Date().toISOString()
-  };
-  req.session.data['case-history-person'] = req.session.data['case-history-person'] || [];
-  req.session.data['case-history-person'].push(caseHistoryEntry);
+router.post([/change-s1-names-cya/], function(req, res){
+  req.session.data['change-s1-names'] = 'yes';
+
   res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
 });
 
-// =====================================================
-// Change last name
-// =====================================================
-router.post([/change-last-name-s1/], function(req, res){
-  req.session.data['s1-entitlement-last-name'] = req.body['s1-entitlement-last-name'];
-  res.redirect('/version-41/s1/account/entitlement-content/reason-for-changing-last-name-s1');
-});
 
-router.post([/reason-for-changing-last-name-s1/], function(req, res){
-  req.session.data['reason-for-change-to-last-names-s1'] = req.body['reason-for-change-to-last-name-s1'];
-  res.redirect('/version-41/s1/account/entitlement-content/change-last-name-s1-cya');
-});
-
-// GET CYA page for changing last name
-router.get('/version-41/s1/account/entitlement-content/change-last-name-s1-cya', function (req, res) {
-  res.render('version-41/s1/account/entitlement-content/change-last-name-s1-cya', { data: req.session.data });
-});
-
-router.post([/change-last-name-s1-cya/], function(req, res){
-  req.session.data['change-last-name-s1'] = 'yes';
-  res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
-});
 
 // =====================================================
 // Change end date

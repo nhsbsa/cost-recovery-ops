@@ -69,36 +69,29 @@ router.post([/create-person-record-cya/], function(req, res){
 
 
 
-// Step 1 - Change names
-router.post([/change-names/], function(req, res){
-
-  // Save new name fields from the form into the session
-  req.session.data['new-first-name'] = req.body['new-first-names'];
-  req.session.data['new-birth-first-name'] = req.body['new-birth-first-names'];
+// Step 1 - change names
+router.post([/change-names/], function(req, res) {
+  req.session.data['new-first-names'] = req.body['new-first-names'];
+  req.session.data['new-birth-first-names'] = req.body['new-birth-first-names'];
   req.session.data['new-last-name'] = req.body['new-last-name'];
   req.session.data['new-birth-last-name'] = req.body['new-birth-last-name'];
 
   res.redirect('/version-41/s1/account/change-names-reason');
 })
 
-// Step 2 - provide a reason for the change
-router.post([/change-names-reason/], function(req, res){
-
-  req.session.data['change-names-reason'] =
-  req.body['change-names-reason']; 
-
+// Step 2 - add reason for changing names
+router.post([/change-names-reason/], function(req, res) {
+  req.session.data['change-names-reason'] = req.body['change-names-reason'];
   res.redirect('/version-41/s1/account/change-names-cya');
-
 })
 
-// Step 3 - redirect ot personal details tab with updated details
-router.post([/change-names-cya/], function(req, res){
-
-  req.session.data['change-names'] = 'yes'
-
+// Step 3 - check your answers
+router.post([/change-names-cya/], function(req, res) {
+  req.session.data['change-names'] = 'yes';
   res.redirect('/version-41/s1/account/personal-details');
-
 })
+
+
 
 
 // Step 1 — Add additional personal details

@@ -110,23 +110,37 @@
             <div class="nhsuk-tabs__panel" id="entitlement-details">
               <!-- Entitlement details tab content starts -->
                 
-                <dl class="nhsuk-summary-list">
+                <dl class="nhsuk-summary-list" style="margin-bottom: 15px;">
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
                         First names
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['change-first-names-s1'] == 'yes' %}
-                          {{ data['s1-entitlement-first-name'] }}
+                        {% if data['change-first-names-s1'] == 'yes' and data['new-s1-first-names']  %}
+                          {{ data['new-s1-first-names'] }}
                         {% else %}
                           John
                         {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                        <a href="change-first-names-s1">
-                          Change<span class="nhsuk-u-visually-hidden">first names</span>
-                        </a>
+                        
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        First names at birth, if different
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['change-s1-birth-first-names'] == 'yes' and data['new-s1-birth-first-names'] %}
+                          {{ data['new-s1-birth-first-names'] }}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %} 
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
                       </dd>
                     </div>
 
@@ -136,20 +150,39 @@
                         Last name
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['change-last-name-s1'] == 'yes' %}
-                          {{ data['s1-entitlement-last-name'] }}
+                        {% if data['change-last-name-s1'] == 'yes' and data['new-s1-last-name']  %}
+                          {{ data['new-s1-last-name'] }}
                         {% else %}
                           Doe
                         {% endif %}
                       </dd>
                       <dd class="nhsuk-summary-list__actions">
-                        <a href="change-last-name-s1">
-                          Change<span class="nhsuk-u-visually-hidden">last name</span>
-                        </a>
+                        
                       </dd>
                     </div>
 
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Last name at birth, if different
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['change-s1-birth-last-name'] == 'yes' and data['new-s1-birth-last-name'] %}
+                          {{ data['new-s1-birth-last-name'] }}
+                        {% else %}
+                          <span class="nhsuk-u-visually-hidden">Not provided</span>
+                        {% endif %} 
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        
+                      </dd>
+                    </div>
+                </dl>
 
+                <div style="text-align: right;">
+                  <p><a href="change-s1-names">Change<span class="nhsuk-u-visually-hidden">names on this S1 entitlement</span></a></p>
+                </div>
+
+                  <dl class="nhsuk-summary-list">
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
                         S1 registration type
