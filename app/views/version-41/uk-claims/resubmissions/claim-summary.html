@@ -157,11 +157,7 @@ UK claim ID 100005 - Claim summary
   
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
-                          {% if data['create-new-resub'] == 'yes' %}
-                            Original number of invoices claimed
-                          {% else %}
-                            Number of invoices claimed
-                          {% endif %}
+                          Original number of invoices claimed
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           18 invoices
@@ -169,11 +165,7 @@ UK claim ID 100005 - Claim summary
                       </div>
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
-                          {% if data['create-new-resub'] == 'yes' %}
-                            Original total months claimed
-                          {% else %}
-                            Total months claimed
-                          {% endif %}
+                          Original total months claimed
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           108 months
@@ -192,7 +184,7 @@ UK claim ID 100005 - Claim summary
                           Number of invoices contested
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['resubStatus'] == 'resubmission-completed' %}
+                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                             6 invoices
                           {% else %}
                             6 invoices
@@ -207,7 +199,7 @@ UK claim ID 100005 - Claim summary
                           Total number of maintained months
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['resubStatus'] == 'resubmission-completed' %}
+                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                             11 months
                           {% else %}
                             14 months
@@ -220,7 +212,7 @@ UK claim ID 100005 - Claim summary
                           Total number of withdrawn months
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['resubStatus'] == 'resubmission-completed' %}
+                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                             21 months
                           {% else %}
                             18 months
@@ -235,7 +227,7 @@ UK claim ID 100005 - Claim summary
                           Remaining total number of months
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['resubStatus'] == 'resubmission-completed' %}
+                          {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                             87 months
                           {% else %}
                             90 months
