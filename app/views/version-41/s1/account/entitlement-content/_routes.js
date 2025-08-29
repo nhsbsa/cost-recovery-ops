@@ -55,19 +55,21 @@ router.post([/s1-dependant-details-check/], function(req, res) {
 // =====================================================
 // Change the Personal identifcation number (PIN)
 // =====================================================
-
+// Step 1 - change the S1 entitlement PIN
 router.post([/change-pin-s1/], function (req, res) {
-  req.session.data['new-pin'] = req.body['new-pin'];
-  res.redirect('/version-41/s1/account/entitlement-content/change-pin-s1-cya');
+  req.session.data['new-s1-pin'] = req.body['new-s1-pin'];
+  res.redirect('/version-41/s1/account/entitlement-content/reason-for-changing-s1-pin');
 });
 
-// CYA for date of UK residency
-router.get('/version-41/s1/account/entitlement-content/change-pin-s1-cya', function (req, res) {
-  res.render('version-41/s1/account/entitlement-content/change-pin-s1-cya', { data: req.session.data });
+// Step 2 - Enter the reason for making a change to S1 entitlement PIN
+router.post([/reason-for-changing-s1-pin/], function(req, res){
+  req.session.data['reason-for-changing-s1-pin'] = req.body['reason-for-changing-s1-pin'];
+  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-pin');
 });
 
-router.post([/change-pin-s1-cya/], function (req, res) {
-  req.session.data['change-pin'] = 'yes';
+// Step 3 - Check your answers before changing the S1 entitlement PIN
+router.post([/check-before-changing-s1-pin/], function (req, res) {
+  req.session.data['change-s1-pin'] = 'yes';
   res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
 });
 
@@ -75,41 +77,44 @@ router.post([/change-pin-s1-cya/], function (req, res) {
 // =====================================================
 // Change the date of UK residency
 // =====================================================
+// Step 1 - Change the S1 entitlement date of UK residency
+router.post([/change-date-of-uk-residency-s1/], function (req, res) {
+  // Store the new date of UK residency
+  const day = req.body['new-s1-uk-residency-day'];
+  const month = req.body['new-s1-uk-residency-month'];
+  const year = req.body['new-s1-uk-residency'];
+  
+  // Month names
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
 
-router.post([/change-date-of-residency-uk-s1/], function (req, res) {
-  req.session.data['change-date-of-residency-uk'] = 'yes';
-  req.session.data['new-date-of-residency-uk'] = req.body['new-date-of-residency-uk'];
-  res.redirect('/version-41/s1/account/entitlement-content/change-date-of-residency-uk-s1-cya');
+  let dateS1UKResidency;
+  if (day && month && year) {
+    const monthName = monthNames[parseInt(month, 10) - 1];
+    dateS1UKResidency = `${parseInt(day, 10)} ${monthName} ${year}`;
+  } else {
+    dateS1UKResidency = '21 August 2024';
+  }
+  req.session.data['new-s1-uk-residency-date'] = dateS1UKResidency;
+
+  res.redirect('/version-41/s1/account/entitlement-content/reason-for-changing-s1-date-of-uk-residency');
 });
 
-// CYA for date of UK residency
-router.get('/version-41/s1/account/entitlement-content/change-date-of-residency-uk-s1-cya', function (req, res) {
-  res.render('version-41/s1/account/entitlement-content/change-date-of-residency-uk-s1-cya', { data: req.session.data });
+// Step 2 - Enter the reason for making a change to the date of UK residency
+router.post([/reason-for-changing-s1-date-of-uk-residency/], function(req, res){
+  req.session.data['reason-for-changing-s1-date-of-uk-residency'] = req.body['reason-for-changing-s1-date-of-uk-residency'];
+  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-date-of-uk-residency');
 });
 
-router.post([/change-date-of-residency-uk-s1-cya/], function (req, res) {
-  req.session.data['uk-residency-change-comment'] = req.body['uk-residency-change-comment'];
-  req.session.data['current-uk-residency-date'] = req.session.data['new-uk-residency-date'];
-  const caseHistoryEntry = {
-    action: 'Date of UK residency changed',
-    details: {
-      oldUKResidencyDate: req.session.data['previous-uk-residency-date'],
-      newUKResidencyDate: req.session.data['current-uk-residency-date'],
-      comment: req.session.data['uk-residency-date-change-comment']
-    },
-    timestamp: new Date().toISOString()
-  };
-  req.session.data['case-history-entitlements'] = req.session.data['case-history-entitlements'] || [];
-  req.session.data['case-history-entitlements'].push(caseHistoryEntry);
+// Step 3 - Check your answers before changing the S1 entitlement date of UK residency
+router.post([/check-before-changing-s1-date-of-uk-residency/], function (req, res) {
+  req.session.data['change-s1-date-of-uk-residency'] = 'yes';
   res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
 });
 
-// View case history section
-router.get('/version-41/s1/account/case-history-entitlements', function (req, res) {
-  res.render('version-41/s1/account/case-history-entitlements', {
-    history: req.session.data['case-history-entitlements']
-  });
-});
+
 
 // =====================================================
 // Change names
@@ -120,20 +125,16 @@ router.post([/change-s1-names/], function(req, res){
   req.session.data['new-s1-last-name'] = req.body['new-s1-last-name'];
   req.session.data['new-s1-birth-last-names'] = req.body['new-s1-birth-last-name'];
 
-  res.redirect('/version-41/s1/account/entitlement-content/reason-for-changing-s1-names');
+  res.redirect('/version-41/s1/account/entitlement-content/reason-for-s1-name-change');
 });
 
-router.post([/reason-for-changing-s1-names/], function(req, res){
+router.post([/reason-for-s1-name-change/], function(req, res){
   req.session.data['reason-for-changing-s1-names'] = req.body['reason-for-changing-s1-names'];
-  res.redirect('/version-41/s1/account/entitlement-content/change-s1-names-cya');
+  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-names');
 });
 
-// GET CYA page for changing names
-router.get('/version-41/s1/account/entitlement-content/change-s1-names-cya', function (req, res) {
-  res.render('version-41/s1/account/entitlement-content/change-s1-names-cya', { data: req.session.data });
-});
 
-router.post([/change-s1-names-cya/], function(req, res){
+router.post([/check-before-changing-s1-names/], function(req, res){
   req.session.data['change-s1-names'] = 'yes';
 
   res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');

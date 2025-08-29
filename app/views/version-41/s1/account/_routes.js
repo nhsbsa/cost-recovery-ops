@@ -66,9 +66,7 @@ router.post([/create-person-record-cya/], function(req, res){
 // Personal details tabs //
 
 
-
-
-
+// Change the person's first and/or last names
 // Step 1 - change names
 router.post([/change-names/], function(req, res) {
   req.session.data['new-first-names'] = req.body['new-first-names'];
@@ -76,24 +74,24 @@ router.post([/change-names/], function(req, res) {
   req.session.data['new-last-name'] = req.body['new-last-name'];
   req.session.data['new-birth-last-name'] = req.body['new-birth-last-name'];
 
-  res.redirect('/version-41/s1/account/change-names-reason');
+  res.redirect('/version-41/s1/account/reason-for-name-change');
 })
 
 // Step 2 - add reason for changing names
-router.post([/change-names-reason/], function(req, res) {
-  req.session.data['change-names-reason'] = req.body['change-names-reason'];
-  res.redirect('/version-41/s1/account/change-names-cya');
+router.post([/reason-for-name-change/], function(req, res) {
+  req.session.data['reason-for-changing-names'] = req.body['reason-for-changing-names'];
+  res.redirect('/version-41/s1/account/check-before-changing-names');
 })
 
 // Step 3 - check your answers
-router.post([/change-names-cya/], function(req, res) {
+router.post([/check-before-changing-names/], function(req, res) {
   req.session.data['change-names'] = 'yes';
   res.redirect('/version-41/s1/account/personal-details');
 })
 
 
 
-
+// Add additional details to person record
 // Step 1 — Add additional personal details
 router.post([/add-additional-personal-details/], function(req, res){
 
@@ -114,6 +112,7 @@ router.post([/additional-personal-details-cya/], function(req, res){
 })
 
 
+// Change additional details on person record
 // Step 1 — Change additional personal details
 router.post([/change-additional-personal-details/], function (req, res) {
   req.session.data['updated-sex'] = req.body['updated-sex'];
@@ -122,19 +121,19 @@ router.post([/change-additional-personal-details/], function (req, res) {
   req.session.data['updated-email-address'] = req.body['updated-email-address'];
   req.session.data['updated-contact-number'] = req.body['updated-contact-number'];
 
-  res.redirect('/version-41/s1/account/reason-additional-personal-details');
+  res.redirect('/version-41/s1/account/reason-for-changing-additional-details');
 });
 
 // Step 2 — Enter reason for the change
-router.post([/reason-additional-personal-details/], function (req, res) {
-  req.session.data['change-additional-personal-details-reason'] =
-    req.body['change-additional-personal-details-reason']; 
+router.post([/reason-for-changing-additional-details/], function (req, res) {
+  req.session.data['reason-for-changing-additional-details'] =
+    req.body['reason-for-changing-additional-details']; 
 
-  res.redirect('/version-41/s1/account/cya-change-additional-personal-details');
+  res.redirect('/version-41/s1/account/check-before-changing-additional-details');
 });
 
 // Step 3 — Confirm on CYA page
-router.post([/cya-change-additional-personal-details/], function (req, res) {
+router.post([/check-before-changing-additional-details/], function (req, res) {
   req.session.data['change-additional-personal-details'] = 'yes';
 
   res.redirect('/version-41/s1/account/personal-details');
@@ -142,7 +141,8 @@ router.post([/cya-change-additional-personal-details/], function (req, res) {
 
 
 
-// Change current address //
+// Change current address 
+// Step 1 - Change the current address
 router.post([/change-current-address/], function (req, res) {
 
   // Build the new address from individual form fields
@@ -157,39 +157,19 @@ router.post([/change-current-address/], function (req, res) {
   };
 
   // Redirect to the check-your-answers screen
-  res.redirect('/version-41/s1/account/change-current-address-cya');
+  res.redirect('/version-41/s1/account/check-before-changing-current-address');
 });
 
-// Check your answers before changing current address
-router.post([/change-current-address-cya/], function (req, res) {
+// Step 2 - Check your answers before changing current address
+router.post([/check-before-changing-current-address/], function (req, res) {
   // Set session variable indicating the address change process has started
-  req.session.data['change-address'] = 'yes';
-
-  // Update the current address with the new address
-  req.session.data['current-address'] = req.session.data['new-address'];
-
-  // Add a log entry in the case history
-  const caseHistoryEntry = {
-    action: 'Address changed',
-    details: {
-      oldAddress: req.session.data['previous-address'],
-      newAddress: req.session.data['current-address']
-    },
-    timestamp: new Date().toISOString()
-  };
-  req.session.data['case-history-person'] = req.session.data['case-history-person'] || [];
-  req.session.data['case-history-person'].push(caseHistoryEntry);
+  req.session.data['change-current-address'] = 'yes';
 
   // Redirect back to address details with updated data
   res.redirect('/version-41/s1/account/personal-details');
 });
 
-// View case history section
-router.get('/version-41/s1/account/case-history-person', function (req, res) {
-  res.render('version-41/s1/account/case-history-person', {
-    history: req.session.data['case-history-person']
-  });
-});
+
 
 
 

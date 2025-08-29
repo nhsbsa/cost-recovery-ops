@@ -37,7 +37,7 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                     <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456<br>Entitlement ID: 100001</p>
 
                     
-                    <form action="reason-for-changing-s1-names" method="post">
+                    <form action="reason-for-s1-name-change" method="post">
 
                       <div class="nhsuk-character-count" data-module="nhsuk-character-count" data-maxlength="200">
                         <div class="nhsuk-form-group">
@@ -73,60 +73,4 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block pageScripts %}   
-<script>
-  const textarea = document.querySelector('#reasonForChangingS1Names');
-  const countRemaining = document.getElementById('charactersRemaining');
-  const staticMsg = document.querySelector('#char-count-screen-reader');
-  const maxCharacters = 200;
-  let timeoutId;
-
-  function updateCharacterCount() {
-    const textEntered = textarea.value;
-    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
-    const addition = newLines?.length || 0;
-    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
-
-    if (remainingCharacters >= 0) {
-      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
-      countRemaining.classList.remove('nhsbsa-count-error-message');
-      countRemaining.classList.add('nhsuk-hint');
-      textarea.classList.remove('nhsuk-textarea--error');
-    } else {
-      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
-      countRemaining.classList.add('nhsbsa-count-error-message');
-      countRemaining.classList.remove('nhsuk-hint');
-      textarea.classList.add('nhsuk-textarea--error');
-    }
-  }
-
-  function updateScreenReaderMessage() {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      const textEntered = textarea.value;
-      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
-      const addition = newLines?.length || 0;
-      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
-      // TO DO ADD FIX FOR 1 CHARACTER
-      if (remainingCharacters < 0) {
-        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
-      } else {
-        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
-      }
-    }, 500);
-  }
-
-  textarea.addEventListener('input', () => {
-    updateCharacterCount();
-    updateScreenReaderMessage();
-  });
-
-  // Update character count if textarea has a value on page load
-  window.addEventListener('load', () => {
-    updateCharacterCount();
-    updateScreenReaderMessage();
-  });
-</script>
 {% endblock %}

@@ -35,7 +35,7 @@ Check your answers before changing the date of residency in UK - Manage overseas
                     }) }}
                 
                     
-                    <form action="change-pin-s1-cya" method="post">
+                    <form action="check-before-changing-s1-pin" method="post">
           
                       <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456<br>Entitlement ID: 100001</p>
                   
@@ -51,16 +51,34 @@ Check your answers before changing the date of residency in UK - Manage overseas
                                 Personal identification number (PIN)
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                              {% if data['new-pin'] %}
-                                {{ data['new-pin'] }}
+                              {% if data['new-s1-pin'] %}
+                                {{ data['new-s1-pin'] }}
                               {% else %}
-                                09876543S1
+                                111234567B
                               {% endif %}
-                            </dd>
+                              </dd>
     
-                            <dd class="nhsuk-summary-list__actions">
-                              <a href="change-pin-s1#new-pin"> Change<span class="nhsuk-u-visually-hidden">personal identification number</span> </a>
-                            </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="change-pin-s1#new-s1-pin"> Change<span class="nhsuk-u-visually-hidden">personal identification number</span> </a>
+                              </dd>
+                            </div>
+
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                Reason for change
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                              {% if data['reason-for-changing-s1-pin'] %}
+                                {{ data['reason-for-changing-s1-pin'] }}
+                              {% else %}
+                                Reason for change explained here.
+                              {% endif %}
+                              </dd>
+      
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="reason-for-changing-s1-pin#reason-for-changing-s1-pin"> Change<span class="nhsuk-u-visually-hidden">the reason for changing the personal identification number (PIN)</span> </a>
+                              </dd>
+                            </div>
                           </dl>
 
                                             

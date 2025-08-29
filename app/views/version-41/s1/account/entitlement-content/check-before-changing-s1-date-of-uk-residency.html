@@ -35,7 +35,7 @@ Check your answers before changing the date of residency in UK - Manage overseas
                     }) }}
                 
                     
-                    <form action="change-date-of-residency-uk-s1-cya" method="post">
+                    <form action="check-before-changing-s1-date-of-uk-residency" method="post">
           
                       <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456<br>Entitlement ID: 100001</p>
                   
@@ -51,10 +51,10 @@ Check your answers before changing the date of residency in UK - Manage overseas
                                 Date of residency in UK
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['new-residency-day'] and data['new-residency-month'] and data['new-residency-year'] %}
-                                {% set day = data['new-residency-day'] %}
-                                {% set month = data['new-residency-month'] | int %}
-                                {% set year = data['new-residency-year'] %}
+                                {% if data['new-s1-uk-residency-day'] and data['new-s1-uk-residency-month'] and data['new-s1-uk-residency-year'] %}
+                                {% set day = data['new-s1-uk-residency-day'] %}
+                                {% set month = data['new-s1-uk-residency-month'] | int %}
+                                {% set year = data['new-s1-uk-residency-year'] %}
                     
                                 {# Define month names #}
                                 {% set month_names = [
@@ -68,13 +68,31 @@ Check your answers before changing the date of residency in UK - Manage overseas
                                 {# Display the date in the format "day month year" #}
                                 {{ day | int }} {{ month_name }} {{ year }}
                               {% else %}
-                                30 September 2024
+                                21 August 2024
                               {% endif %}
-                            </dd>
+                              </dd>
     
-                            <dd class="nhsuk-summary-list__actions">
-                              <a href="change-date-of-residency-uk#new-residency-day"> Change<span class="nhsuk-u-visually-hidden">S1/S072 issue date</span> </a>
-                            </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="change-date-of-uk-residency-s1#new-s1-uk-residency-day"> Change<span class="nhsuk-u-visually-hidden">the date of residency in UK</span> </a>
+                              </dd>
+                            </div>
+
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                Reason for change
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                              {% if data['reason-for-changing-s1-date-of-uk-residency'] %}
+                                {{ data['reason-for-changing-s1-date-of-uk-residency'] }}
+                              {% else %}
+                                Reason for change explained here.
+                              {% endif %}
+                              </dd>
+      
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="reason-for-changing-s1-date-of-uk-residency#reason-for-changing-s1-date-of-uk-residency"> Change<span class="nhsuk-u-visually-hidden">the reason for changing the date of residency in UK</span> </a>
+                              </dd>
+                            </div>
                           </dl>
 
                                             

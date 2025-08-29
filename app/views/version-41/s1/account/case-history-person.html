@@ -76,6 +76,226 @@
                <div class="nhsuk-grid-row">
                   <div class="nhsuk-grid-column-full">
 
+                    <!-- Start of Name card -->
+                    <div class="nhsuk-card">
+                      <div class="nhsuk-card__content">
+                        <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                          <h2 class="nhsuk-card__heading nhsuk-heading-m" id="person-history-name">Name</h2>
+                        </div>
+
+                        <hr class="gray-horizontal-line">
+                        <br>
+
+                        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                          <details class="nhsuk-details">
+                            <summary aria-label="View name history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_name_Link">View changes to first and last names</span>
+                            </summary>
+                        
+                            <div class="nhsuk-details__text" style="margin-top: 30px;">
+                              <table class="nhsuk-table-responsive" id="person-history-name-table" style="margin-bottom: 9px;">
+                                <thead class="nhsuk-table__head">
+                                  <tr>
+                                    <th scope="col">Date and time</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                                    <th scope="col">Reason for change</th>
+                                    <th scope="col">Updated by</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="nhsuk-table__body">
+                                  {% if data['change-names'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateFirstName"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Updated</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
+                                      <p id="person-history-name-details">
+                                        {# Check if any of the name fields have been updated, otherwise fallback to default #}
+                                        {% if data['new-first-name'] or data['new-last-name'] %}
+                                          {{ data['new-first-name'] }} {{ data['new-last-name'] }}
+                                        {% else %}
+                                          Jonathan Doe
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                      <p id="person-history-name-updated-by">
+                                        {# Check if any comments have been added, otherwise fallback to default #}
+                                        {% if data['change-names-reason'] %}
+                                          {{ data['change-names-reason'] }}
+                                        {% else %}
+                                          Reason for change explained here.
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
+
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="person-history-name-date-time_0">02/10/2024,<br>15:26</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Created</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
+                                      <p id="person-history-name-details">
+                                        John Doe
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                      <p id="person-history-name-updated-by">Not applicable</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                          </div>
+
+                        <br>
+
+                      </div>
+                    </div>
+                    <!-- End of Name card -->
+
+
+                    <!-- Start of Date of Birth card -->
+                    <div class="nhsuk-card">
+                      <div class="nhsuk-card__content">
+                        <div class="nhsuk-grid-row" style="margin-left: 2px;">
+                          <h2 class="nhsuk-card__heading nhsuk-heading-m" id="person-history-dob">Date of birth</h2>
+                        </div>
+
+                        <hr class="gray-horizontal-line">
+                        <br>
+
+                        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                          <details class="nhsuk-details">
+                            <summary aria-label="View date of birth history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_dob_Link">View changes to date of birth</span>
+                            </summary>
+              
+                            <div class="nhsuk-details__text" style="margin-top: 30px;">
+                              <table class="nhsuk-table-responsive" id="person-history-dob-table" style="margin-bottom: 9px;">
+                                <thead class="nhsuk-table__head">
+                                  <tr>
+                                    <th scope="col">Date and time</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                                    <th scope="col">Reason for change</th>
+                                    <th scope="col">Updated by</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="nhsuk-table__body">
+                                  {% if data['change-basic-personal-details'] == 'yes' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateDOB"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Updated</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
+                                      <p id="person-history-dob-details">
+                                        {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
+                                          {% set day = data['dob-day'] %}
+                                          {% set month = data['dob-month'] | int %}
+                                          {% set year = data['dob-year'] %}
+                              
+                                          {# Define month names #}
+                                          {% set month_names = [
+                                              "January", "February", "March", "April", "May", "June",
+                                              "July", "August", "September", "October", "November", "December"
+                                          ] %}
+                              
+                                          {# Get the month name #}
+                                          {% set month_name = month_names[month - 1] %}
+                              
+                                          {# Display the date in the format "day month year" #}
+                                          {{ day | int }} {{ month_name }} {{ year }}
+                                        {% else %}
+                                          11 July 1951
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-dob-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                    </td>
+                                    <!--td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-dob-updated-by">
+                                        {# Check if any comments have been added, otherwise fallback to default #}
+                                        {% if data['change-to-personal-details-note'] %}
+                                          {{ data['change-to-personal-details-note'] }}
+                                        {% else %}
+                                        Received completed DL1609 and individual provided this info
+                                        {% endif %}
+                                      </p>
+                                    </td-->
+                                  </tr>
+                                  {% endif %}
+
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="person-history-dob-date-time_0">02/10/2024,<br>15:26</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Created</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
+                                      <p id="person-history-dob-details">
+                                        1 July 1951
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-dob-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                    </td>
+                                    <!--td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Comments</span>
+                                      <p id="person-history-dob-updated-by">None provided</p>
+                                    </td-->
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                          </div>
+
+                        <br>
+
+                      </div>
+                    </div>
+                    <!-- End of Date of Birth card -->
+
 
                     <!-- Start of Current address card -->
                     <div class="nhsuk-card">
@@ -105,7 +325,7 @@
                                   </tr>
                                 </thead>
                                 <tbody class="nhsuk-table__body">
-                                  {% if data['change-address'] == 'yes' %}
+                                  {% if data['change-current-address'] == 'yes' %}
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -206,229 +426,15 @@
                   
 
                   
-                  <!-- Start of Date of Birth card -->
-                  <div class="nhsuk-card">
-                    <div class="nhsuk-card__content">
-                      <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                        <h2 class="nhsuk-card__heading nhsuk-heading-m" id="person-history-dob">Date of birth</h2>
-                      </div>
-
-                      <hr class="gray-horizontal-line">
-                      <br>
-
-                  <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-                    <details class="nhsuk-details">
-                      <summary aria-label="View date of birth history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                        <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_dob_Link">View changes to date of birth</span>
-                      </summary>
                   
-                      <div class="nhsuk-details__text" style="margin-top: 30px;">
-                        <table class="nhsuk-table-responsive" id="person-history-dob-table" style="margin-bottom: 9px;">
-                          <thead class="nhsuk-table__head">
-                            <tr>
-                              <th scope="col">Date and time</th>
-                              <th scope="col">Action</th>
-                              <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
-                              <th scope="col">Reason for change</th>
-                              <th scope="col">Updated by</th>
-                            </tr>
-                          </thead>
-                          <tbody class="nhsuk-table__body">
-                            {% if data['change-basic-personal-details'] == 'yes' %}
-                            <tr class="nhsuk-table__row">
-                              <td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                <p id="currentDateDOB"></span></p>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Action</span>
-                                <p>Updated</p>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Details</span>
-                                <p id="person-history-dob-details">
-                                  {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
-                                    {% set day = data['dob-day'] %}
-                                    {% set month = data['dob-month'] | int %}
-                                    {% set year = data['dob-year'] %}
-                        
-                                    {# Define month names #}
-                                    {% set month_names = [
-                                        "January", "February", "March", "April", "May", "June",
-                                        "July", "August", "September", "October", "November", "December"
-                                    ] %}
-                        
-                                    {# Get the month name #}
-                                    {% set month_name = month_names[month - 1] %}
-                        
-                                    {# Display the date in the format "day month year" #}
-                                    {{ day | int }} {{ month_name }} {{ year }}
-                                  {% else %}
-                                    11 July 1951
-                                  {% endif %}
-                                </p>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                <p id="person-history-dob-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                              </td>
-                              <!--td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Comments</span>
-                                <p id="person-history-dob-updated-by">
-                                  {# Check if any comments have been added, otherwise fallback to default #}
-                                  {% if data['change-to-personal-details-note'] %}
-                                    {{ data['change-to-personal-details-note'] }}
-                                  {% else %}
-                                  Received completed DL1609 and individual provided this info
-                                  {% endif %}
-                                </p>
-                              </td-->
-                            </tr>
-                            {% endif %}
-
-                            <tr class="nhsuk-table__row">
-                              <td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                <p id="person-history-dob-date-time_0">02/10/2024,<br>15:26</p>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Action</span>
-                                <p>Created</p>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Details</span>
-                                <p id="person-history-dob-details">
-                                  1 July 1951
-                                </p>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                <p id="person-history-dob-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                              </td>
-                              <!--td class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Comments</span>
-                                <p id="person-history-dob-updated-by">None provided</p>
-                              </td-->
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-
-                    </div>
-
-                  <br>
-
-                  </div>
-                </div>
-                <!-- End of Date of Birth card -->
 
 
-                <!-- Start of Name card -->
-                <div class="nhsuk-card">
-                  <div class="nhsuk-card__content">
-                    <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                      <h2 class="nhsuk-card__heading nhsuk-heading-m" id="person-history-name">Name</h2>
-                    </div>
-
-                    <hr class="gray-horizontal-line">
-                    <br>
-
-                <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-                  <details class="nhsuk-details">
-                    <summary aria-label="View name history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                      <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_name_Link">View changes to first and last names</span>
-                    </summary>
                 
-                    <div class="nhsuk-details__text" style="margin-top: 30px;">
-                      <table class="nhsuk-table-responsive" id="person-history-name-table" style="margin-bottom: 9px;">
-                        <thead class="nhsuk-table__head">
-                          <tr>
-                            <th scope="col">Date and time</th>
-                            <th scope="col">Action</th>
-                            <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
-                            <th scope="col">Reason for change</th>
-                            <th scope="col">Updated by</th>
-                          </tr>
-                        </thead>
-                        <tbody class="nhsuk-table__body">
-                          {% if data['change-names'] == 'yes' %}
-                          <tr class="nhsuk-table__row">
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Date and time</span>
-                              <p id="currentDateFirstName"></span></p>
-                            </td>
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Action</span>
-                              <p>Updated</p>
-                            </td>
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Details</span>
-                              <p id="person-history-name-details">
-                                {# Check if any of the name fields have been updated, otherwise fallback to default #}
-                                {% if data['new-first-name'] or data['new-last-name'] %}
-                                  {{ data['new-first-name'] }} {{ data['new-last-name'] }}
-                                {% else %}
-                                  Jonathan Doe
-                                {% endif %}
-                              </p>
-                            </td>
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Reason for change</span>
-                              <p id="person-history-name-updated-by">
-                                {# Check if any comments have been added, otherwise fallback to default #}
-                                {% if data['change-names-reason'] %}
-                                  {{ data['change-names-reason'] }}
-                                {% else %}
-                                  Reason for change explained here.
-                                {% endif %}
-                              </p>
-                            </td>
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Updated by</span>
-                              <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                            </td>
-                          </tr>
-                          {% endif %}
-
-                          <tr class="nhsuk-table__row">
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Date and time</span>
-                              <p id="person-history-name-date-time_0">02/10/2024,<br>15:26</p>
-                            </td>
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Action</span>
-                              <p>Created</p>
-                            </td>
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Details</span>
-                              <p id="person-history-name-details">
-                                John Doe
-                              </p>
-                            </td>
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Reason for change</span>
-                              <p id="person-history-name-updated-by">Not applicable</p>
-                            </td>
-                            <td class="nhsuk-table__cell">
-                              <span class="nhsuk-table-responsive__heading">Updated by</span>
-                              <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                  </div>
-
-                <br>
-
-                </div>
-              </div>
-              <!-- End of Name card -->
 
 
 
               <!-- Start of Sex card -->
+              {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') %}
               <div class="nhsuk-card">
                 <div class="nhsuk-card__content">
                   <div class="nhsuk-grid-row" style="margin-left: 2px;">
@@ -438,48 +444,62 @@
                   <hr class="gray-horizontal-line">
                   <br>
 
-              <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-                <details class="nhsuk-details">
-                  <summary aria-label="View name history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                    <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_sex_Link">View changes to sex</span>
-                  </summary>
-              
-                  <div class="nhsuk-details__text" style="margin-top: 30px;">
-                    {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['sex'] or data['updated-sex'] %}
-                    <table class="nhsuk-table-responsive" id="case-history-sex-table" style="margin-bottom: 9px;">
-                      <thead class="nhsuk-table__head">
-                        <tr>
-                          <th scope="col">Date and time</th>
-                          <th scope="col">Action</th>
-                          <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
-                          <th scope="col">Updated by</th>
-                          <!--th scope="col">Comments</th-->
-                        </tr>
-                      </thead>
-                      <tbody class="nhsuk-table__body">
+                  <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                    <details class="nhsuk-details">
+                      <summary aria-label="View name history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                        <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_sex_Link">View changes to sex</span>
+                      </summary>
+                  
+                      <div class="nhsuk-details__text" style="margin-top: 30px;">
+                        
+                        <table class="nhsuk-table-responsive" id="case-history-sex-table" style="margin-bottom: 9px;">
+                          <thead class="nhsuk-table__head">
+                            <tr>
+                              <th scope="col">Date and time</th>
+                              <th scope="col">Action</th>
+                              <th scope="col">Details</th>
+                              <th scope="col" style="min-width: 200px; white-space: nowrap;">Reason</th>
+                              <th scope="col">Updated by</th>
+                              <!--th scope="col">Comments</th-->
+                            </tr>
+                          </thead>
+                          <tbody class="nhsuk-table__body">
 
-                        {% if data['change-additional-personal-details'] == 'yes' and data['updated-sex'] %}
-                        <tr class="nhsuk-table__row">
-                          <td class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading">Date and time</span>
-                            <p id="currentDateChangeSex">[Insert update timestamp here]</p>
-                          </td>
-                          <td class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading">Action</span>
-                            <p>Updated</p>
-                          </td>
-                          <td class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading">Details</span>
-                            <p>{{ data['updated-sex'] }}</p>
-                          </td>
-                          <td class="nhsuk-table__cell">
-                            <span class="nhsuk-table-responsive__heading">Updated by</span>
-                            <p id="person-history-sex-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                          </td>
-                        </tr>
+                          {% if data['change-additional-personal-details'] == 'yes' 
+                                and data['updated-sex'] 
+                                and data['sex'] %}
+                          {# Case 2: Updated in change journey #}
+                          <tr class="nhsuk-table__row">
+                            <td class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              <p id="currentDateChangeSex">[Insert update timestamp here]</p>
+                            </td>
+                            <td class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              <p>Updated</p>
+                            </td>
+                            <td class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              <p>{{ data['updated-sex'] }}</p>
+                            </td>
+                            <td class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Reason</span>
+                              <p id="person-history-sex-reason-for-change">
+                                {% if data['reason-for-changing-additional-details'] %}
+                                  {{ data['reason-for-changing-additional-details'] }}
+                                {% else %}
+                                  Customer provided this info in FAS1Q
+                                {% endif %}
+                              </p>
+                            </td>
+                            <td class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                            </td>
+                          </tr>
                         {% endif %}
 
-                        {% if data['add-additional-personal-details'] == 'yes' and data['sex'] %}
+                        {% if data['add-additional-personal-details'] == 'yes' %}
                         <tr class="nhsuk-table__row">
                           <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -494,6 +514,12 @@
                             <p>{{ data['sex'] }}</p>
                           </td>
                           <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Reason</span>
+                            <p id="person-history-sex-reason-for-change">
+                              Not applicable
+                            </p>
+                          </td>
+                          <td class="nhsuk-table__cell">
                             <span class="nhsuk-table-responsive__heading">Updated by</span>
                             <p>joe.bloggs@nhsbsa.nhs.uk</p>
                           </td>
@@ -501,10 +527,7 @@
                         {% endif %}
                       </tbody>
                     </table>
-                    {% else %}
-                    <br>
-                      There is no history because this person's sex is yet to be added.
-                    {% endif %}
+                    
                   </div>
 
                 </div>
@@ -513,11 +536,13 @@
 
               </div>
             </div>
+            {% endif %}
             <!-- End of Sex card -->
 
 
 
             <!-- Start of Country of nationality card -->
+            {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['nationality'] or data['updated-nationality'] %}
             <div class="nhsuk-card">
               <div class="nhsuk-card__content">
                 <div class="nhsuk-grid-row" style="margin-left: 2px;">
@@ -527,56 +552,125 @@
                 <hr class="gray-horizontal-line">
                 <br>
 
-            <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-              <details class="nhsuk-details">
-                <summary aria-label="View country of nationality history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                  <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_nationality_Link">View changes to country of nationality</span>
-                </summary>
-            
-                <div class="nhsuk-details__text" style="margin-top: 30px;">
-                  {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['nationality'] or data['updated-nationality'] %}
-                  <table class="nhsuk-table-responsive" id="person-history-nationality-table" style="margin-bottom: 9px;">
-                    <thead class="nhsuk-table__head">
-                      <tr>
-                        <th scope="col">Date and time</th>
-                        <th scope="col">Action</th>
-                        <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
-                        <th scope="col">Updated by</th>
-                        <!--th scope="col">Comments</th-->
-                      </tr>
-                    </thead>
-                    <tbody class="nhsuk-table__body">
+                <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                  <details class="nhsuk-details">
+                    <summary aria-label="View country of nationality history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                      <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_nationality_Link">View changes to country of nationality</span>
+                    </summary>
+                
+                    <div class="nhsuk-details__text" style="margin-top: 30px;">
 
-                      
+                      <table class="nhsuk-table-responsive" id="person-history-nationality-table" style="margin-bottom: 9px;">
+                        <thead class="nhsuk-table__head">
+                          <tr>
+                            <th scope="col">Date and time</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Details</th>
+                            <th scope="col" style="min-width: 200px; white-space: nowrap;">Reason</th>
+                            <th scope="col">Updated by</th>
+                            <!--th scope="col">Comments</th-->
+                          </tr>
+                        </thead>
+                        <tbody class="nhsuk-table__body">
 
-                      {% if data['add-additional-personal-details'] == 'yes' and data['nationality'] %}
-                      <tr class="nhsuk-table__row">
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Date and time</span>
-                          <p id="currentDateNationality">[Insert add timestamp here]</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Action</span>
-                          <p>Added</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Details</span>
-                          <p>{{ data['nationality'] }}</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Updated by</span>
-                          <p>joe.bloggs@nhsbsa.nhs.uk</p>
-                        </td>
-                      </tr>
-                      {% endif %}
+                        {% if data['change-additional-personal-details'] == 'yes' 
+                          and data['updated-nationality'] 
+                          and not data['nationality'] %}
+                        {# Case 2: Added for first time in change journey #}
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Date and time</span>
+                            <p id="currentDateChangeContactNumber">[Insert update timestamp here]</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Action</span>
+                            <p>Added</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Details</span>
+                            <p>{{ data['updated-nationality'] }}</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Reason</span>
+                            <p id="person-history-nationality-reason-for-change">
+                              {% if data['reason-for-changing-additional-details'] %}
+                                {{ data['reason-for-changing-additional-details'] }}
+                              {% else %}
+                                Updated details from FAS1Q
+                              {% endif %}
+                            </p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Updated by</span>
+                            <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                          </td>
+                        </tr>
 
-                    </tbody>
-                  </table>
-                  {% else %}
-                  <br>
-                    There is no history because this person's nationality is yet to be added.
-                  {% endif %}
-                </div>
+                        {% elif data['change-additional-personal-details'] == 'yes' 
+                              and data['updated-nationality'] 
+                              and data['nationality'] %}
+                        {# Case 3: Updated in change journey #}
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Date and time</span>
+                            <p id="currentDateChangeContactNumber">[Insert update timestamp here]</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Action</span>
+                            <p>Updated</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Details</span>
+                            <p>{{ data['updated-nationality'] }}</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Reason</span>
+                            <p id="person-history-nationality-reason-for-change">
+                              {% if data['reason-for-changing-additional-details'] %}
+                                {{ data['reason-for-changing-additional-details'] }}
+                              {% else %}
+                                Updated details from FAS1Q
+                              {% endif %}
+                            </p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Updated by</span>
+                            <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                          </td>
+                        </tr>
+                        {% endif %}
+
+                        {% if data['add-additional-personal-details'] == 'yes' and data['nationality'] %}
+                        <tr class="nhsuk-table__row">
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Date and time</span>
+                            <p id="currentDateNationality">[Insert add timestamp here]</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Action</span>
+                            <p>Added</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Details</span>
+                            <p>{{ data['nationality'] }}</p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Reason</span>
+                            <p id="person-history-nationality-reason-for-change">
+                              Not applicable
+                            </p>
+                          </td>
+                          <td class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Updated by</span>
+                            <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                          </td>
+                        </tr>
+                        {% endif %}
+
+                      </tbody>
+                    </table>
+                    
+                  </div>
 
               </div>
 
@@ -584,11 +678,13 @@
 
             </div>
           </div>
+          {% endif %}
           <!-- End of Country of nationality card -->
 
 
 
           <!-- Start of UK National Insurance Number (NINO) card -->
+          {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['UK-national-insurance-number'] or data['updated-UK-national-insurance-number'] %}
           <div class="nhsuk-card">
             <div class="nhsuk-card__content">
               <div class="nhsuk-grid-row" style="margin-left: 2px;">
@@ -598,87 +694,139 @@
               <hr class="gray-horizontal-line">
               <br>
 
-          <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-            <details class="nhsuk-details">
-              <summary aria-label="View UK National Insurance Number (NINO) history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_sex_Link">View changes to UK National Insurance Number (NINO)</span>
-              </summary>
-          
-              <div class="nhsuk-details__text" style="margin-top: 30px;">
-                {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['UK-national-insurance-number'] or data['updated-UK-national-insurance-number'] %}
-                <table class="nhsuk-table-responsive" id="case-history-uk-nino-table" style="margin-bottom: 9px;">
-                  <thead class="nhsuk-table__head">
-                    <tr>
-                      <th scope="col">Date and time</th>
-                      <th scope="col">Action</th>
-                      <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
-                      <th scope="col">Updated by</th>
-                      <!--th scope="col">Comments</th-->
-                    </tr>
-                  </thead>
-                  <tbody class="nhsuk-table__body">
+              <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+                <details class="nhsuk-details">
+                  <summary aria-label="View UK National Insurance Number (NINO) history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                    <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_sex_Link">View changes to UK National Insurance Number (NINO)</span>
+                  </summary>
+              
+                  <div class="nhsuk-details__text" style="margin-top: 30px;">
 
-                    {% if data['change-additional-personal-details'] == 'yes' and data['updated-UK-national-insurance-number'] %}
-                    <tr class="nhsuk-table__row">
-                      <td class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Date and time</span>
-                        <p id="currentDateChangeNINO">[Insert update timestamp here]</p>
-                      </td>
-                      <td class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Action</span>
-                        <p>Updated</p>
-                      </td>
-                      <td class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Details</span>
-                        <p>{{ data['UK-national-insurance-number'] }}</p>
-                      </td>
-                      <td class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Updated by</span>
-                        <p id="case-history-uk-nino-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                      </td>
-                    </tr>
-                    {% endif %}
+                    <table class="nhsuk-table-responsive" id="case-history-uk-nino-table" style="margin-bottom: 9px;">
+                      <thead class="nhsuk-table__head">
+                        <tr>
+                          <th scope="col">Date and time</th>
+                          <th scope="col">Action</th>
+                          <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                          <th scope="col" style="min-width: 200px; white-space: nowrap;">Reason</th>
+                          <th scope="col">Updated by</th>
+                          <!--th scope="col">Comments</th-->
+                        </tr>
+                      </thead>
+                      <tbody class="nhsuk-table__body">
 
-                    {% if data['add-additional-personal-details'] == 'yes' and data['UK-national-insurance-number'] %}
-                    <tr class="nhsuk-table__row">
-                      <td class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Date and time</span>
-                        <p id="currentDateNINO">[Insert add timestamp here]</p>
-                      </td>
-                      <td class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Action</span>
-                        <p>Added</p>
-                      </td>
-                      <td class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Details</span>
-                        <p>{{ data['UK-national-insurance-number'] }}</p>
-                      </td>
-                      <td class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Updated by</span>
-                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
-                      </td>
-                    </tr>
-                    {% endif %}
-                    
-                  </tbody>
-                </table>
-                {% else %}
-                <br>
-                  There is no history because this person's UK National Insurance Number (NINO) is yet to be added.
-                {% endif %}
+                      {% if data['change-additional-personal-details'] == 'yes' 
+                          and data['updated-UK-national-insurance-number'] 
+                          and not data['UK-national-insurance-number'] %}
+                      {# Case 2: Added for first time in change journey #}
+                      <tr class="nhsuk-table__row">
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Date and time</span>
+                          <p id="currentDateChangeNINO">[Insert update timestamp here]</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Action</span>
+                          <p>Added</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Details</span>
+                          <p>{{ data['updated-UK-national-insurance-number'] }}</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Reason</span>
+                          <p id="person-history-uk-nino-reason-for-change">
+                            {% if data['reason-for-changing-additional-details'] %}
+                              {{ data['reason-for-changing-additional-details'] }}
+                            {% else %}
+                              Updated details from FAS1Q
+                            {% endif %}
+                          </p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Updated by</span>
+                          <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                        </td>
+                      </tr>
+
+                      {% elif data['change-additional-personal-details'] == 'yes' 
+                            and data['updated-UK-national-insurance-number'] 
+                            and data['UK-national-insurance-number'] %}
+                      {# Case 3: Updated in change journey #}
+                      <tr class="nhsuk-table__row">
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Date and time</span>
+                          <p id="currentDateChangeNINO">[Insert update timestamp here]</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Action</span>
+                          <p>Updated</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Details</span>
+                          <p>{{ data['updated-UK-national-insurance-number'] }}</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Reason</span>
+                          <p id="person-history-uk-nino-reason-for-change">
+                            {% if data['reason-for-changing-additional-details'] %}
+                              {{ data['reason-for-changing-additional-details'] }}
+                            {% else %}
+                              Updated details from FAS1Q
+                            {% endif %}
+                          </p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Updated by</span>
+                          <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                        </td>
+                      </tr>
+                      {% endif %}
+
+                      {% if data['add-additional-personal-details'] == 'yes' and data['UK-national-insurance-number'] %}
+                      <tr class="nhsuk-table__row">
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Date and time</span>
+                          <p id="currentDateNINO">[Insert add timestamp here]</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Action</span>
+                          <p>Added</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Details</span>
+                          <p>{{ data['UK-national-insurance-number'] }}</p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Reason</span>
+                          <p id="person-history-uk-nino-reason-for-change">
+                            Not applicable
+                          </p>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Updated by</span>
+                          <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                        </td>
+                      </tr>
+                      {% endif %}
+                      
+                    </tbody>
+                  </table>
+                  
+                </div>
+
               </div>
 
-            </div>
-
-          <br>
+            <br>
 
           </div>
         </div>
+        {% endif %}
         <!-- End of UK National Insurance Number (NINO) card -->
 
 
 
         <!-- Start of Email address card -->
+        {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['email-address'] or data['updated-email-address'] %}
         <div class="nhsuk-card">
           <div class="nhsuk-card__content">
             <div class="nhsuk-grid-row" style="margin-left: 2px;">
@@ -688,27 +836,93 @@
             <hr class="gray-horizontal-line">
             <br>
 
-        <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
-          <details class="nhsuk-details">
-            <summary aria-label="View email address history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_email_address_Link">View changes to  email address</span>
-            </summary>
-        
-            <div class="nhsuk-details__text" style="margin-top: 30px;">
-              {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['email-address'] or data['updated-email-address'] %}
-              <table class="nhsuk-table-responsive" id="case-history-uk-nino-table" style="margin-bottom: 9px;">
-                <thead class="nhsuk-table__head">
-                  <tr>
-                    <th scope="col">Date and time</th>
-                    <th scope="col">Action</th>
-                    <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
-                    <th scope="col">Updated by</th>
-                    <!--th scope="col">Comments</th-->
-                  </tr>
-                </thead>
-                <tbody class="nhsuk-table__body">
+            <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
+              <details class="nhsuk-details">
+                <summary aria-label="View email address history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
+                  <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_email_address_Link">View changes to  email address</span>
+                </summary>
+            
+                <div class="nhsuk-details__text" style="margin-top: 30px;">
 
-                  
+                <table class="nhsuk-table-responsive" id="case-history-uk-nino-table" style="margin-bottom: 9px;">
+                  <thead class="nhsuk-table__head">
+                    <tr>
+                      <th scope="col">Date and time</th>
+                      <th scope="col">Action</th>
+                      <th scope="col" style="min-width: 100px; white-space: nowrap;">Details</th>
+                      <th scope="col" style="min-width: 100px; white-space: nowrap;">Reason</th>
+                      <th scope="col">Updated by</th>
+                    </tr>
+                  </thead>
+                  <tbody class="nhsuk-table__body">
+
+                  {% if data['change-additional-personal-details'] == 'yes' 
+                      and data['updated-email-address'] 
+                      and not data['email-address'] %}
+                  {# Case 2: Added for first time in change journey #}
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                      <p id="currentDateChangeEmailAddress">[Insert update timestamp here]</p>
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Action</span>
+                      <p>Added</p>
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Details</span>
+                      <p>{{ data['updated-email-address'] }}</p>
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Reason</span>
+                      <p id="person-history-email-address-reason-for-change">
+                        {% if data['reason-for-changing-additional-details'] %}
+                          {{ data['reason-for-changing-additional-details'] }}
+                        {% else %}
+                          Updated details from FAS1Q
+                        {% endif %}
+                      </p>
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                      <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                    </td>
+                  </tr>
+
+                  {% elif data['change-additional-personal-details'] == 'yes' 
+                        and data['updated-email-address'] 
+                        and data['email-address'] %}
+                  {# Case 3: Updated in change journey #}
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                      <p id="currentDateChangeEmailAddress">[Insert update timestamp here]</p>
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Action</span>
+                      <p>Updated</p>
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Details</span>
+                      <p>{{ data['updated-email-address'] }}</p>
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Reason</span>
+                      <p id="person-history-email-address-reason-for-change">
+                        {% if data['reason-for-changing-additional-details'] %}
+                          {{ data['reason-for-changing-additional-details'] }}
+                        {% else %}
+                          Updated details from FAS1Q
+                        {% endif %}
+                      </p>
+                    </td>
+                    <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                      <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                    </td>
+                  </tr>
+                  {% endif %}
+                    
 
                   {% if data['add-additional-personal-details'] == 'yes' and data['email-address'] %}
                   <tr class="nhsuk-table__row">
@@ -725,18 +939,21 @@
                       <p>{{ data['email-address'] }}</p>
                     </td>
                     <td class="nhsuk-table__cell">
+                      <span class="nhsuk-table-responsive__heading">Reason</span>
+                      <p id="person-history-email-reason-for-change">
+                        Not applicable
+                      </p>
+                    </td>
+                    <td class="nhsuk-table__cell">
                       <span class="nhsuk-table-responsive__heading">Updated by</span>
                       <p>joe.bloggs@nhsbsa.nhs.uk</p>
                     </td>
                   </tr>
                   {% endif %}
-                  
-                </tbody>
-              </table>
-              {% else %}
-              <br>
-                There is no history because this person's email address is yet to be added.
-              {% endif %}
+                    
+                  </tbody>
+                </table>
+              
             </div>
 
           </div>
@@ -745,10 +962,12 @@
 
         </div>
       </div>
+      {% endif %}
       <!-- End of Email address card -->
 
 
       <!-- Start of Contact number card -->
+      {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['contact-number'] or data['updated-contact-number'] %}
       <div class="nhsuk-card">
         <div class="nhsuk-card__content">
           <div class="nhsuk-grid-row" style="margin-left: 2px;">
@@ -765,66 +984,117 @@
               </summary>
 
               <div class="nhsuk-details__text" style="margin-top: 30px;">
-                {% if (data['add-additional-personal-details'] == 'yes' or data['change-additional-personal-details'] == 'yes') and data['contact-number'] or data['updated-contact-number'] %}
+
                   <table class="nhsuk-table-responsive" id="case-history-contact-number-table" style="margin-bottom: 9px;">
                     <thead class="nhsuk-table__head">
                       <tr>
                         <th scope="col">Date and time</th>
                         <th scope="col">Action</th>
-                        <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                        <th scope="col">Details</th>
+                        <th scope="col" style="min-width: 200px; white-space: nowrap;">Reason</th>
                         <th scope="col">Updated by</th>
                       </tr>
                     </thead>
                     <tbody class="nhsuk-table__body">
 
-                      {% if data['change-additional-personal-details'] == 'yes' and data['updated-contact-number'] %}
-                      <tr class="nhsuk-table__row">
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Date and time</span>
-                          <p id="currentDateChangeContactNumber">[Insert update timestamp here]</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Action</span>
-                          <p>Updated</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Details</span>
-                          <p>{{ data['contact-number'] }}</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Updated by</span>
-                          <p>joe.bloggs@nhsbsa.nhs.uk</p>
-                        </td>
-                      </tr>
-                      {% endif %}
+                    {% if data['change-additional-personal-details'] == 'yes' 
+                        and data['updated-contact-number'] 
+                        and not data['contact-number'] %}
+                    {# Case 2: Added for first time in change journey #}
+                    <tr class="nhsuk-table__row">
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date and time</span>
+                        <p id="currentDateChangeContactNumber">[Insert update timestamp here]</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <p>Added</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Details</span>
+                        <p>{{ data['updated-contact-number'] }}</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reason</span>
+                        <p id="person-history-contact-number-reason-for-change">
+                          {% if data['reason-for-changing-additional-details'] %}
+                            {{ data['reason-for-changing-additional-details'] }}
+                          {% else %}
+                            Updated details from FAS1Q
+                          {% endif %}
+                        </p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Updated by</span>
+                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                      </td>
+                    </tr>
 
-                      {% if data['add-additional-personal-details'] == 'yes' and data['contact-number'] %}
-                      <tr class="nhsuk-table__row">
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Date and time</span>
-                          <p id="currentDateContactNumber">[Insert add timestamp here]</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Action</span>
-                          <p>Added</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Details</span>
-                          <p>{{ data['contact-number'] }}</p>
-                        </td>
-                        <td class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Updated by</span>
-                          <p>joe.bloggs@nhsbsa.nhs.uk</p>
-                        </td>
-                      </tr>
-                      {% endif %}
+                    {% elif data['change-additional-personal-details'] == 'yes' 
+                          and data['updated-contact-number'] 
+                          and data['contact-number'] %}
+                    {# Case 3: Updated in change journey #}
+                    <tr class="nhsuk-table__row">
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date and time</span>
+                        <p id="currentDateChangeContactNumber">[Insert update timestamp here]</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <p>Updated</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Details</span>
+                        <p>{{ data['updated-contact-number'] }}</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reason</span>
+                        <p id="person-history-contact-number-reason-for-change">
+                          {% if data['reason-for-changing-additional-details'] %}
+                            {{ data['reason-for-changing-additional-details'] }}
+                          {% else %}
+                            Updated details from FAS1Q
+                          {% endif %}
+                        </p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Updated by</span>
+                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                      </td>
+                    </tr>
+                    {% endif %}
 
-                    </tbody>
-                  </table>
-                {% else %}
-                <br>
-                  <p>There is no history because this person's contact number is yet to be added.</p>
-                {% endif %}
+
+                    {% if data['add-additional-personal-details'] == 'yes' and data['contact-number'] %}
+                    <tr class="nhsuk-table__row">
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Date and time</span>
+                        <p id="currentDateContactNumber">[Insert add timestamp here]</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <p>Added</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Details</span>
+                        <p>{{ data['contact-number'] }}</p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reason</span>
+                        <p id="person-history-contact-number-reason-for-change">
+                          Not applicable
+                        </p>
+                      </td>
+                      <td class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Updated by</span>
+                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                      </td>
+                    </tr>
+                    {% endif %}
+
+                  </tbody>
+                </table>
+                
               </div>
             </details>
           </div>
@@ -832,6 +1102,7 @@
           <br>
         </div>
       </div>
+      {% endif %}
       <!-- End of Contact number card -->
 
                   
@@ -898,13 +1169,12 @@ function setCurrentDateTime(elementId) {
 
   // Set the date for each item
   document.addEventListener("DOMContentLoaded", function () {
-    setCurrentDateTime("currentDateAddress");      // For address
-    setCurrentDateTime("currentDateUKResidency");      // For date of UK residency
-    setCurrentDateTime("currentDateDOB");  // For Date of birth
     setCurrentDateTime("currentDateFirstName");    // For First name
     setCurrentDateTime("currentDateBirthFirstName");    // For First name at birth
     setCurrentDateTime("currentDateLastName");    // For Last name
     setCurrentDateTime("currentDateBirthLastName");    // For Last name at birth
+    setCurrentDateTime("currentDateDOB");  // For Date of birth
+    setCurrentDateTime("currentDateAddress");      // For address
     setCurrentDateTime("currentDateSex");    // For adding the Sex
     setCurrentDateTime("currentDateChangeSex");    // For changing the Sex
     setCurrentDateTime("currentDateNationality");    // For adding Country of nationality
@@ -915,6 +1185,8 @@ function setCurrentDateTime(elementId) {
     setCurrentDateTime("currentDateChangeEmailAddress");    // For changing Email address
     setCurrentDateTime("currentDateContactNumber");    // For Contact Number
     setCurrentDateTime("currentDateChangeContactNumber");    // For changing Contact Number
+
+    setCurrentDateTime("currentDateUKResidency");      // For date of UK residency
   });
 </script>
 {% endblock %}

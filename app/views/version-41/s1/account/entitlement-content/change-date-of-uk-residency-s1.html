@@ -41,22 +41,22 @@ Change date of residency in UK - Manage overseas entitlements and treatments - N
                     </h1>
 
                     
-                    <form action="change-date-of-residency-uk-s1" method="post">
+                    <form action="change-date-of-uk-residency-s1" method="post">
 
 
                     <div class="nhsuk-form-group">
-                      <label class="nhsuk-label" for="new-residency-date-label">
+                      <label class="nhsuk-label" for="new-s1-uk-residency-date-label">
                           Date of residency in UK
                       </label>
-                      <div class="nhsuk-hint" id="new-residency-date-hint">
+                      <div class="nhsuk-hint" id="new-s1-uk-residency-date-hint">
                           For example, 2 10 2023
                       </div>
                       <div class="nhsuk-date-input">
                           <div class="nhsuk-date-input__item">
-                              <label class="nhsuk-label nhsuk-date-input__label" id="new-residency-day-label" for="new-residency-day">Day</label>
+                              <label class="nhsuk-label nhsuk-date-input__label" id="new-s1-uk-residency-day-label" for="new-s1-uk-residency-day">Day</label>
                               <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
-                                     id="new-residency-day"
-                                     name="new-residency-day"
+                                     id="new-s1-uk-residency-day"
+                                     name="new-s1-uk-residency-day"
                                      type="number"
                                      pattern="[0-9]*"
                                      inputmode="numeric"
@@ -65,10 +65,10 @@ Change date of residency in UK - Manage overseas entitlements and treatments - N
                           </div>
                   
                           <div class="nhsuk-date-input__item">
-                              <label class="nhsuk-label nhsuk-date-input__label" id="new-residency-month-label" for="new-residency-month">Month</label>
+                              <label class="nhsuk-label nhsuk-date-input__label" id="new-s1-uk-residency-month-label" for="new-s1-uk-residency-month">Month</label>
                               <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
-                                     id="new-residency-month"
-                                     name="new-residency-month"
+                                     id="new-s1-uk-residency-month"
+                                     name="new-s1-uk-residency-month"
                                      type="number"
                                      pattern="[0-9]*"
                                      inputmode="numeric"
@@ -77,10 +77,10 @@ Change date of residency in UK - Manage overseas entitlements and treatments - N
                           </div>
                   
                           <div class="nhsuk-date-input__item">
-                              <label class="nhsuk-label nhsuk-date-input__label" id="new-residency-year-label" for="new-residency-year">Year</label>
+                              <label class="nhsuk-label nhsuk-date-input__label" id="new-s1-uk-residency-year-label" for="new-s1-uk-residency-year">Year</label>
                               <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4"
-                                     id="new-residency-year"
-                                     name="new-residency-year"
+                                     id="new-s1-uk-residency-year"
+                                     name="new-s1-uk-residency-year"
                                      type="number"
                                      pattern="[0-9]*"
                                      inputmode="numeric"
@@ -108,21 +108,13 @@ Change date of residency in UK - Manage overseas entitlements and treatments - N
 {% endblock %}
 
 {% block pageScripts %}
-<!-- autocomplete js -->
-<script type="text/javascript">
-  accessibleAutocomplete.enhanceSelectElement({
-    defaultValue : '',
-    autoselect : true,  
-    selectElement : document.querySelector('#nationalityDrop')
-  })
-</script>
 
 <!-- Date format -->
 <script>
   function updateFormattedDate() {
-    const day = document.getElementById("residency-day").value;
-    const month = document.getElementById("residency-month").value;
-    const year = document.getElementById("residency-year").value;
+    const day = document.getElementById("new-s1-uk-residency-day").value;
+    const month = document.getElementById("new-s1-uk-residency-month").value;
+    const year = document.getElementById("new-s1-uk-residency-year").value;
 
     if (day && month && year) {
         document.getElementById("formatted-date").textContent = formatDate(day, month, year);
