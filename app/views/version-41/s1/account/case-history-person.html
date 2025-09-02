@@ -98,50 +98,169 @@
                                   <tr>
                                     <th scope="col">Date and time</th>
                                     <th scope="col">Action</th>
-                                    <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                                    <th scope="col">Detail updated</th>
+                                    <th scope="col" style="min-width: 100px; white-space: nowrap;">Details</th>
                                     <th scope="col">Reason for change</th>
                                     <th scope="col">Updated by</th>
                                   </tr>
                                 </thead>
                                 <tbody class="nhsuk-table__body">
                                   {% if data['change-names'] == 'yes' %}
-                                  <tr class="nhsuk-table__row">
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateFirstName"></span></p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Action</span>
-                                      <p>Updated</p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p id="person-history-name-details">
-                                        {# Check if any of the name fields have been updated, otherwise fallback to default #}
-                                        {% if data['new-first-name'] or data['new-last-name'] %}
-                                          {{ data['new-first-name'] }} {{ data['new-last-name'] }}
-                                        {% else %}
-                                          Jonathan Doe
-                                        {% endif %}
-                                      </p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Reason for change</span>
-                                      <p id="person-history-name-updated-by">
-                                        {# Check if any comments have been added, otherwise fallback to default #}
-                                        {% if data['reason-for-changing-names'] %}
-                                          {{ data['reason-for-changing-names'] }}
-                                        {% else %}
-                                          Reason for change explained here.
-                                        {% endif %}
-                                      </p>
-                                    </td>
-                                    <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                      <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
-                                    </td>
-                                  </tr>
+
+                                    {% if data['new-birth-last-name'] %}
+                                    <tr class="nhsuk-table__row">
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                        <p>
+                                        03/09/2025,<br>
+                                        09:19
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Action</span>
+                                        <p>Updated</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                        <p>Last name at birth</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Details</span>
+                                        <p>{{ data['new-birth-last-name'] }}</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                        <p>
+                                          {% if data['reason-for-changing-names'] %}
+                                            {{ data['reason-for-changing-names'] }}
+                                          {% else %}
+                                            Reason for change explained here.
+                                          {% endif %}
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                      </td>
+                                    </tr>
+                                    {% endif %}
+
+                                    {% if data['new-last-name'] and data['new-last-name'] != 'Doe' %}
+                                    <tr class="nhsuk-table__row">
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                        <p>
+                                        03/09/2025,<br>
+                                        09:19
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Action</span>
+                                        <p>Updated</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                        <p>Last name</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Details</span>
+                                        <p>{{ data['new-last-name'] }}</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                        <p>
+                                          {% if data['reason-for-changing-names'] %}
+                                            {{ data['reason-for-changing-names'] }}
+                                          {% else %}
+                                            Reason for change explained here.
+                                          {% endif %}
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                      </td>
+                                    </tr>
+                                    {% endif %}
+
+                                    {% if data['new-birth-first-names'] %}
+                                    <tr class="nhsuk-table__row">
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                        <p>
+                                        03/09/2025,<br>
+                                        09:19
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Action</span>
+                                        <p>Updated</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                        <p>First names at birth</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Details</span>
+                                        <p>{{ data['new-birth-first-names'] }}</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                        <p>
+                                          {% if data['reason-for-changing-names'] %}
+                                            {{ data['reason-for-changing-names'] }}
+                                          {% else %}
+                                            Reason for change explained here.
+                                          {% endif %}
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                      </td>
+                                    </tr>
+                                    {% endif %}
+
+                                    {% if data['new-first-names'] and data['new-first-names'] != 'John' %}
+                                    <tr class="nhsuk-table__row">
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                        <p>
+                                        03/09/2025,<br>
+                                        09:19
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Action</span>
+                                        <p>Updated</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                        <p>First names</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Details</span>
+                                        <p>{{ data['new-first-names'] }}</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                        <p>
+                                          {% if data['reason-for-changing-names'] %}
+                                            {{ data['reason-for-changing-names'] }}
+                                          {% else %}
+                                            Reason for change explained here.
+                                          {% endif %}
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                      </td>
+                                    </tr>
+                                    {% endif %}
+
                                   {% endif %}
+
 
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
@@ -153,9 +272,42 @@
                                       <p>Created</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                      <p>Last name</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
                                       <p id="person-history-name-details">
-                                        John Doe
+                                        Doe
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                      <p id="person-history-name-updated-by">Not applicable</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                    </td>
+                                  </tr>
+
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="person-history-name-date-time_0">02/10/2024,<br>15:26</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Created</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                      <p>First names</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
+                                      <p id="person-history-name-details">
+                                        John
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
@@ -1173,6 +1325,10 @@ function setCurrentDateTime(elementId) {
     setCurrentDateTime("currentDateBirthFirstName");    // For First name at birth
     setCurrentDateTime("currentDateLastName");    // For Last name
     setCurrentDateTime("currentDateBirthLastName");    // For Last name at birth
+    setCurrentDateTime("currentDateChangeFirstName");    // For changing First name
+    setCurrentDateTime("currentDateChangeBirthFirstName");    // For changing First name at birth
+    setCurrentDateTime("currentDateChangeLastName");    // For changing Last name
+    setCurrentDateTime("currentDateChangeBirthLastName");    // For changing Last name at birth
     setCurrentDateTime("currentDateDOB");  // For Date of birth
     setCurrentDateTime("currentDateAddress");      // For address
     setCurrentDateTime("currentDateSex");    // For adding the Sex

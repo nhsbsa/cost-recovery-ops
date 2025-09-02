@@ -228,7 +228,11 @@
                               Personal identification number (PIN)
                             </dt>
                             <dd class="nhsuk-summary-list__value">
-                              1234567890
+                              {% if data['change-s1-pin'] == 'yes' %}
+                                {{ data['new-s1-pin'] }}
+                              {% else %}
+                                1234567890
+                              {% endif %}
                             </dd>
                           </div>
                         </dl>
