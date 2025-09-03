@@ -46,7 +46,7 @@
 
           
       
-          {% if data['change-basic-personal-details'] == 'yes' %}
+          {% if data['dr-change-names'] == 'yes' %}
           <div>
                         
             <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
@@ -54,14 +54,15 @@
                   <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
                </div>
                <div class="govuk-notification-banner__content">
-                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">{% if data['first-name'] %}{{ data['first-name'] }}{% else %}Jane{% endif %} {% if data['last-name'] %}{{ data['last-name'] }}{% else %}Doe{% endif %}’s personal details have been changed across all entitlements, claims, and resubmissions. All claim documents have been regenerated to reflect these changes.</span>
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have changed {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s names on their person record. These names will be used on any future entitlements, claims and resubmissions. View all changes in the Case history.</span>
                </div>
             </div>
          
           </div>
           {% endif %}
 
-          {% if data['change-additional-personal-details'] == 'yes' %}
+          
+          {% if data['dr-change-additional-personal-details'] == 'yes' %}
           <div>
                         
             <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
@@ -69,14 +70,27 @@
                   <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
                </div>
                <div class="govuk-notification-banner__content">
-                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">{% if data['first-name'] %}{{ data['first-name'] }}{% else %}Jane{% endif %} {% if data['last-name'] %}{{ data['last-name'] }}{% else %}Doe{% endif %}’s personal details have been changed.</span>
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have changed the personal details on {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s person record. View all changes in the Case history.</span>
+               </div>
+            </div>
+         
+          </div>
+          {% elif data['dr-add-additional-personal-details'] == 'yes' %}
+          <div>
+                        
+            <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+               <div class="govuk-notification-banner__header">
+                  <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
+               </div>
+               <div class="govuk-notification-banner__content">
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have added additional details to {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s person record. View all changes in the Case history.</span>
                </div>
             </div>
          
           </div>
           {% endif %}
-          
-          {% if data['change-address'] == 'yes' or data['change-date-of-residency-uk'] == 'yes' %}
+
+          {% if data['dr-change-current-address'] == 'yes' %}
           <div>
                         
             <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
@@ -84,7 +98,20 @@
                   <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
                </div>
                <div class="govuk-notification-banner__content">
-                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">{% if data['first-name'] %}{{ data['first-name'] }}{% else %}Jane{% endif %} {% if data['last-name'] %}{{ data['last-name'] }}{% else %}Doe{% endif %}’s address details have been changed.</span>
+                <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have changed the current address on {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s person record. View all changes in the Case history.</span>
+               </div>
+            </div>
+         
+          </div>
+          {% elif data['dr-add-current-address'] == 'yes' %}
+          <div>
+                        
+            <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
+               <div class="govuk-notification-banner__header">
+                  <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
+               </div>
+               <div class="govuk-notification-banner__content">
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have added a current address to {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}John{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s person record. View all changes in the Case history.</span>
                </div>
             </div>
          
@@ -93,7 +120,7 @@
       
           <h1 class="nhsuk-heading-xl">Personal details</h1>
       
-          <!-- Tabs -->
+          <!-- Start of tabs -->
           <div class="nhsuk-tabs" data-module="nhsuk-tabs">
             <h2 class="nhsuk-tabs__title">Personal details content</h2>
 
@@ -109,142 +136,145 @@
             <!-- Tab content -->
             <div class="nhsuk-tabs__panel" id="personal-details">
               <!-- Personal details tab content starts -->
-                <dl class="nhsuk-summary-list">
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Person record ID
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        654321
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        
-                      </dd>
-                    </div>
+              <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Person record ID
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      654321
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
                 </dl>
                   
 
-                <dl class="nhsuk-summary-list">
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        First names
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['change-basic-personal-details'] == 'yes' %}
-                          {% if data['first-name'] %}
-                            {{ data['first-name'] }}
-                          {% endif %}
-                        {% else %}
-                          Jane
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        
-                      </dd>
-                    </div>
+                <dl class="nhsuk-summary-list" style="margin-bottom: 15px;">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      First names
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-names'] == 'yes' and data['dr-new-first-names'] %}
+                        {{ data['dr-new-first-names'] }}
+                      {% else %}
+                        Jane
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
 
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        First names at birth, if different
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['change-basic-personal-details'] == 'yes' %}
-                          {% if data['birth-first-name'] %}
-                            {{ data['birth-first-name'] }}
-                          {% endif %}
-                        {% else %}
-                          <span class="nhsuk-u-visually-hidden">Not provided</span>
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        
-                      </dd>
-                    </div>
-                  
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Last name
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['change-basic-personal-details'] == 'yes' %}
-                          {% if data['last-name'] %}
-                            {{ data['last-name'] }}
-                          {% endif %}
-                        {% else %}
-                          Doe
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        
-                      </dd>
-                    </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      First names at birth, if different
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-names'] == 'yes' and data['dr-new-birth-first-names'] %}
+                        {{ data['dr-new-birth-first-names'] }}
+                      {% else %}
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                      {% endif %} 
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
+                
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Last name
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-names'] == 'yes' and data['dr-new-last-name'] %}
+                        {{ data['dr-new-last-name'] }}
+                      {% else %}
+                        Doe
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
 
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Last name at birth, if different
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['change-basic-personal-details'] == 'yes' %}
-                          {% if data['birth-last-name'] %}
-                            {{ data['birth-last-name'] }}
-                          {% endif %}
-                        {% else %}
-                          <span class="nhsuk-u-visually-hidden">Not provided</span>
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        
-                      </dd>
-                    </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Last name at birth, if different
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-names'] == 'yes' and data['dr-new-birth-last-name'] %}
+                        {{ data['dr-new-birth-last-name'] }}
+                      {% else %}
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
+                </dl>
+
+                <div style="text-align: right;">
+                  <p><a href="dr-change-names">Change<span class="nhsuk-u-visually-hidden">names</span></a></p>
+                </div>
               
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Date of birth
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data['change-basic-personal-details'] == 'yes' %}
-                          {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
-                            {% set day = data['dob-day'] %}
-                            {% set month = data['dob-month'] | int %}
-                            {% set year = data['dob-year'] %}
-                
-                            {# Define month names #}
-                            {% set month_names = [
-                                "January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December"
-                            ] %}
-                
-                            {# Get the month name #}
-                            {% set month_name = month_names[month - 1] %}
-                
-                            {# Display the date in the format "day month year" #}
-                            {{ day | int }} {{ month_name }} {{ year }}
-                          {% endif %}
-                        {% else %}
-                          29 December 1975
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Date of birth
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-dob'] == 'yes' %}
+                        {% if data['dr-dob-day'] and data['dr-dob-month'] and data['dr-dob-year'] %}
+                          {% set day = data['dr-dob-day'] %}
+                          {% set month = data['dr-dob-month'] | int %}
+                          {% set year = data['dr-dob-year'] %}
+              
+                          {# Define month names #}
+                          {% set month_names = [
+                              "January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"
+                          ] %}
+              
+                          {# Get the month name #}
+                          {% set month_name = month_names[month - 1] %}
+              
+                          {# Display the date in the format "day month year" #}
+                          {{ day | int }} {{ month_name }} {{ year }}
                         {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        
-                      </dd>
-                    </div>
+                      {% else %}
+                        29 December 1975
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
                 </dl>
 
-                <p><a href="change-basic-personal-details">Change</a></p>
+
                 <br>
 
 
                 <h2 class="nhsuk-heading-m">Additional details</h2>
-                <dl class="nhsuk-summary-list">
+
+                <dl class="nhsuk-summary-list" style="margin-bottom: 15px;">
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
                         Sex
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['change-additional-personal-details'] == 'yes' %}
-                          {% if data['sex'] %}
-                            {{ data['sex'] }}
-                          {% endif %}
+                        {% if data['dr-change-additional-personal-details'] == 'yes' %}
+
+                            {{ data['dr-updated-sex'] }}
+
+                        {% elif data['dr-add-additional-personal-details'] == 'yes' %}
+
+                            {{ data['dr-sex'] }}
+
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -259,10 +289,14 @@
                         Country of nationality
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['change-additional-personal-details'] == 'yes' %}
-                          {% if data['nationality'] %}
-                            {{ data['nationality'] }}
-                          {% endif %}
+                        {% if data['dr-change-additional-personal-details'] == 'yes' %}
+
+                            {{ data['dr-updated-nationality'] }}
+
+                        {% elif data['dr-add-additional-personal-details'] == 'yes' %}
+
+                            {{ data['dr-nationality'] }}
+
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -277,10 +311,14 @@
                         UK National Insurance Number (NINO)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['change-additional-personal-details'] == 'yes' %}
-                          {% if data['UK-national-insurance-number'] %}
-                            {{ data['UK-national-insurance-number'] }}
-                          {% endif %}
+                        {% if data['dr-change-additional-personal-details'] == 'yes' %}
+
+                            {{ data['dr-updated-UK-national-insurance-number'] }}
+
+                        {% elif data['dr-add-additional-personal-details'] == 'yes' %}
+
+                            {{ data['dr-UK-national-insurance-number'] }}
+
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -296,10 +334,37 @@
                       Email address
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['change-additional-personal-details'] == 'yes' %}
-                        {% if data['email-address'] %}
-                          {{ data['email-address'] }}
-                        {% endif %}
+                      {% if data['dr-change-additional-personal-details'] == 'yes' %}
+
+                          {{ data['dr-updated-email-address'] }}
+
+                      {% elif data['dr-add-additional-personal-details'] == 'yes' %}
+
+                          {{ data['dr-email-address'] }}
+
+                      {% else %}
+                        <span class="nhsuk-u-visually-hidden">Not provided</span>
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                        
+                    </dd>
+                  </div>
+
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Contact number
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-additional-personal-details'] == 'yes' %}
+
+                          {{ data['dr-updated-contact-number'] }}
+
+                      {% elif data['dr-add-additional-personal-details'] == 'yes' %}
+
+                          {{ data['dr-contact-number'] }}
+
                       {% else %}
                         <span class="nhsuk-u-visually-hidden">Not provided</span>
                       {% endif %}
@@ -310,236 +375,68 @@
                   </div>
                 </dl>
 
-                {% if data['change-additional-personal-details'] == 'yes' %}
-                <p><a href="change-additional-personal-details">Change additional details</a></p>
-                {% else %}
-                <p><a href="change-additional-personal-details">Add additional details</a></p>
-                {% endif %}
+                <div style="text-align: right;">
+                  {% if data['dr-add-additional-personal-details'] == 'yes' %}
+                    <p><a href="dr-change-additional-personal-details">Change<span class="nhsuk-u-visually-hidden">additional details</span></a></p>
+                  {% else %}
+                    <p><a href="dr-add-additional-personal-details">Add<span class="nhsuk-u-visually-hidden">additional details</span></a></p>
+                  {% endif %}
                 </div>
-                <!-- Personal details tabs content ends -->
-
-
-                <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="address">
-                  <!-- Addresses tab content starts -->
-                  
-                  <dl class="nhsuk-summary-list">
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                          Current address
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                          {% if data['change-address'] == 'yes' %}
-                              {# Check if any of the address fields have been updated, otherwise fallback to default #}
-                              {% if data['change-address-line-1'] or data['change-address-line-2'] or data['change-address-line-3'] or data['change-address-town'] or data['change-address-region'] or data['change-address-postcode'] or data['change-address-country'] %}
-                                  {{ data['change-address-line-1'] }}<br>
-                                  
-                                  {% if data['change-address-line-2'] %}
-                                      {{ data['change-address-line-2'] }}<br>
-                                  {% endif %}
-                                  
-                                  {% if data['change-address-line-3'] %}
-                                      {{ data['change-address-line-3'] }}<br>
-                                  {% endif %}
-                                  
-                                  {{ data['change-address-town'] }}<br>
-                                  
-                                  {% if data['change-address-region'] %}
-                                      {{ data['change-address-region'] }}<br>
-                                  {% endif %}
-                                  
-                                  {{ data['change-address-postcode'] }}<br>
-                                  {{ data['change-address-country'] }}
-                              {% endif %}
-                          {% else %}
-                              1 Washington Street<br>
-                              Worcester<br>
-                              WR1 1NL<br>
-                              United Kingdom
-                          {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                          <a href="change-current-address">
-                              Change<span class="nhsuk-u-visually-hidden"> current address</span>
-                          </a>
-                      </dd>
-                  </div>
-                  
-                
-              
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Date of residency in UK
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% set month_names = {
-                          '1': 'January',
-                          '2': 'February',
-                          '3': 'March',
-                          '4': 'April',
-                          '5': 'May',
-                          '6': 'June',
-                          '7': 'July',
-                          '8': 'August',
-                          '9': 'September',
-                          '10': 'October',
-                          '11': 'November',
-                          '12': 'December'
-                        } %}
-                    
-                        {% if data['change-date-of-residency-uk'] == 'yes' %}
-                          {% if data['change-residency-day'] and data['change-residency-month'] and data['change-residency-year'] %}
-                            {{ data['change-residency-day'] | int }} {{ month_names[data['change-residency-month'] | int] }} {{ data['change-residency-year'] }}
-                          {% elseif data['residency-day'] and data['residency-month'] and data['residency-year'] %}
-                            {{ data['residency-day'] | int }} {{ month_names[data['residency-month'] | int] }} {{ data['residency-year'] }}
-                          {% else %}
-                            <span class="nhsuk-u-visually-hidden">Not provided</span>
-                          {% endif %}
-                        {% else %}
-                          <span class="nhsuk-u-visually-hidden">Not provided</span>
-                        {% endif %}
-                      </dd>
-                      <dd class="nhsuk-summary-list__actions">
-                        <a href="change-date-of-residency-uk">
-                          Change<span class="nhsuk-u-visually-hidden"> date of residency in UK</span>
-                        </a>
-                      </dd>
-                    </div>                    
-                  </dl>
-              
-                  
-              </div>
-              <!-- Addresses tab content ends -->
-              
-              
-
-              <!--div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="documents">
-                
-
-                {% if data['upload-new-document'] == 'yes' %}
-                <table role="table" id="documentsTable" class="nhsuk-table-responsive">
-                  <h3 class="nhsuk-heading-l">Documents<span id="ariaLiveMessage" class="nhsuk-u-visually-hidden"> - contains 1 result</span></h3>
-                
-                  <thead role="rowgroup" class="nhsuk-table__head">
-                    <tr role="row">
-                      <th role="columnheader" class="" scope="col">
-                        Document title
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Date uploaded
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Uploaded by
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Current status
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Document type
-                      </th>
-                      <th role="columnheader" class="" scope="col">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                
-                  <tbody class="nhsuk-table__body">
-                    <tr role="row" class="nhsuk-table__row">
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Document title</span>
-                        <span>jane-doe-FAS1Q.pdf</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Date uploaded</span>
-                        <span>15/08/2024</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Uploaded by</span>
-                        <span>Dave Smith</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Current status</span>
-                        <span>Received</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Document type</span>
-                        <span>FAS1Q</span>
-                      </td>
-                      <td role="cell" class="nhsuk-table__cell">
-                        <span class="nhsuk-table-responsive__heading">Actions</span>
-                        <a href="">View</a> or 
-                        <a href="/version-41/s1/account/remove-personal-details-document">remove</span></a>
-                      </td>
-                    </tr>   
-                  </tbody>
-                </table>
-                <br>
-                {% else %}  
-                <h3 class="nhsuk-heading-l">Documents</h3>
-                
-                <p>No documents have been uploaded.</p>
-                {% endif %}
-
-                     
-                {% if data['add-new-document'] == 'yes' %}
-                <a href="upload-personal-details-document">
-                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
-                    Upload a new document
-                  </button>
-                </a>
-                {% else %}
-                <a href="upload-personal-details-document">
-                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
-                    Upload a document
-                  </button>
-                </a>
-                {% endif %}
-              </div-->
-              <!-- Documents tab content ends -->
-
-
-              <!--div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="notes">
-                
-                <h3 class="nhsuk-heading-l">Notes</h3>
-
-                {% if data['new-personal-details-note'] == 'yes' %}
-              <div class="nhsuk-form-group" id="filterNotes-group">
-                <label class="nhsuk-label" for="filter-notes">
-                Filter notes
-                </label>
-                <div id="filterNotes-container"></div>
-                <input class="nhsuk-input" id="example" name="filter-notes" type="text" value="">
-              </div>
-
-              <a href="#">
-                <button class="nhsuk-button nhsuk-button--secondary nhsuk-u-margin-right-4" data-module="nhsuk-button" type="submit" value="Search" id="searchButton">Apply filter </button>
-              <a class="nhsuk-button" style="float: right;" href="/version-41/s1/account/personal-details-note" data-module="nhsuk-button" type="submit" id="addNote-button">Add a new note</a>
-              <p><a href="/version-41/s1/account/personal-details#tab-Notes" id="clearButton">Reset filter</a></p>
-
-              <hr>
-              {% else %}
-              <p>No notes have been added to this person's record.</p>
-              <a class="nhsuk-button" href="/version-41/s1/account/personal-details-note" data-module="nhsuk-button" type="submit" id="addNote-button">Add a new note</a>
-              {% endif %}
-
-
-              {% if data['new-personal-details-note'] == 'yes' %}
-              <h3>New note title</h3>
-              <p>Added by <b>Joe Bloggs</b><br>
-              <span id="currentDate1"></span></p>
-              <p>{% if data['note'] %}
-                {{ data['note'] }}
-                {% else %}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                {% endif %}
-              </p>
-              <hr>
-              {% endif %}
-              
-             </div-->
-              <!-- Notes tab content ends -->
-
             </div>
-            <!-- End of Tabs -->
+            <!-- Personal details tabs content ends -->
+
+
+            <div class="nhsuk-tabs__panel nhsuk-tabs__panel--hidden" id="address">
+              <!-- Addresses tab content starts -->
+              
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                      Current address
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-current-address'] == 'yes' %}
+                          {# Check if any of the address fields have been updated, otherwise fallback to default #}
+                          {% if data['dr-new-current-address-line-1'] or data['dr-new-current-address-line-2'] or data['dr-new-current-address-line-3'] or data['dr-new-current-address-town'] or data['dr-new-current-address-region'] or data['dr-new-current-address-postcode'] or data['dr-new-current-address-country'] %}
+                              {{ data['dr-new-current-address-line-1'] }}<br>
+                              
+                              {% if data['dr-new-current-address-line-2'] %}
+                                  {{ data['dr-new-current-address-line-2'] }}<br>
+                              {% endif %}
+                              
+                              {% if data['dr-new-current-address-line-3'] %}
+                                  {{ data['dr-new-current-address-line-3'] }}<br>
+                              {% endif %}
+                              
+                              {{ data['dr-new-current-address-town'] }}<br>
+                              
+                              {% if data['dr-new-current-address-region'] %}
+                                  {{ data['dr-new-current-address-region'] }}<br>
+                              {% endif %}
+                              
+                              {{ data['dr-new-current-address-postcode'] }}<br>
+                              {{ data['dr-new-current-address-country'] }}
+                          {% endif %}
+                      {% else %}
+                          1 Washington Street<br>
+                          Worcester<br>
+                          WR1 1NL<br>
+                          United Kingdom (UK)
+                      {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions">
+                      <a href="dr-change-current-address">
+                          Change<span class="nhsuk-u-visually-hidden">current address</span>
+                      </a>
+                  </dd>
+                </div>              
+              </dl>
+          
+            </div>
+            <!-- Addresses tab content ends -->
+
+          </div>
+          <!-- End of Tabs -->
 
 
         </div>

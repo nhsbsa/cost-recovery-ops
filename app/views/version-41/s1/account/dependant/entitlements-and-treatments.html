@@ -262,7 +262,11 @@
                                   Personal identification number (PIN)
                                 </dt>
                                 <dd class="nhsuk-summary-list__value">
-                                  0987654321
+                                  {% if data['dr-change-s1-pin'] == 'yes' %}
+                                    {{ data['dr-new-s1-pin'] }}
+                                  {% else %}
+                                    0987654321
+                                  {% endif %}
                                 </dd>
                               </div>
                             </dl>
@@ -297,8 +301,8 @@
                               <tbody class="nhsuk-table__body">
                                 <tr class="nhsuk-table__row">
                                   <td class="nhsuk-table__cell" data-label="Claim ID"><a href="../../../uk-claims/resubmissions/claim-summary">100005</a></td>
-                                  <td class="nhsuk-table__cell" data-label="Invoice ID"><a href="../../../uk-claims/resubmissions/claim-invoices">298473</a></td>
-                                  <td class="nhsuk-table__cell" data-label="Linked resub IDs">{% if data['create-new-resub'] == 'yes' %}1160158,{% endif %} 7790992</td>
+                                  <td class="nhsuk-table__cell" data-label="Invoice ID">298473</td>
+                                  <td class="nhsuk-table__cell" data-label="Linked resub IDs">{% if data['create-new-resub'] == 'yes' %}<a href="../../uk-claims/resubmissions/invoices-within-resubmission">1160158</a>,{% endif %} <a href="#">7790992</a></td>
                                   <td class="nhsuk-table__cell" data-label="Year of claim">2024</td>
                                   <td class="nhsuk-table__cell" data-label="Claimed accounting period">05/10/2024 - 31/12/2024</td>
                                   <td class="nhsuk-table__cell" data-label="Claimed months">3</td>

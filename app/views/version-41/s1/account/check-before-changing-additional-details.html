@@ -37,7 +37,7 @@ Check your answers before changing additional details - Manage overseas entitlem
                     
                     <form action="check-before-changing-additional-details" method="post">
           
-                      <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456</p>
+                      <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 123456</p>
                   
                           <div class="nhsuk-form-group">
                             <label class="nhsuk-label" for="additional-personal-details-cya-header-label">
@@ -167,24 +167,4 @@ Check your answers before changing additional details - Manage overseas entitlem
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block pageScripts %}
-
-<!-- DOB format -->
-<script>
-  function updateFormattedDate() {
-    const day = document.getElementById("residency-day").value;
-    const month = document.getElementById("residency-month").value;
-    const year = document.getElementById("residency-year").value;
-
-    if (day && month && year) {
-        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
-    } else {
-        document.getElementById("formatted-date").textContent = "2 July 2024";
-    }
-}
-
-document.addEventListener('DOMContentLoaded', updateFormattedDate);
-</script>
 {% endblock %}

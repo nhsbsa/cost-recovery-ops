@@ -34,13 +34,13 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                       "text": "Go back"
                     }) }}
                 
-                    <p class="nhsuk-u-font-size-22" style="color: grey;">John Doe<br>Person record ID - 123456</p>
+                    <p class="nhsuk-u-font-size-22" style="color: grey;">Jane Doe<br>Person record ID - 654321</p>
 
                     <h1 class="app-page-heading">
-                      Add additional details to {% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}’s person record
+                      Add additional details to {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s person record
                     </h1>
                     
-                    <form action="add-additional-personal-details" method="post">
+                    <form action="dr-add-additional-personal-details" method="post">
           
                       <div class="nhsuk-form-group">
                         <label class="nhsuk-label" for="sex-label">
@@ -48,22 +48,22 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                           </label>
                         <div class="nhsuk-radios">
                             <div class="nhsuk-radios__item">
-                            <input class="nhsuk-radios__input" id="sex-male" name="sex" type="radio" value="Male">
-                            <label class="nhsuk-label nhsuk-radios__label" for="sex-male">
+                            <input class="nhsuk-radios__input" id="dr-sex-male" name="dr-sex" type="radio" value="Male">
+                            <label class="nhsuk-label nhsuk-radios__label" for="dr-sex-male">
                                 Male
                             </label>
                             </div>
                     
                             <div class="nhsuk-radios__item">
-                            <input class="nhsuk-radios__input" id="sex-female" name="sex" type="radio" value="Female">
-                            <label class="nhsuk-label nhsuk-radios__label" for="sex-female">
+                            <input class="nhsuk-radios__input" id="dr-sex-female" name="dr-sex" type="radio" value="Female">
+                            <label class="nhsuk-label nhsuk-radios__label" for="dr-sex-female">
                                 Female
                             </label>
                             </div>
                     
                             <div class="nhsuk-radios__item">
-                            <input class="nhsuk-radios__input" id="sex-unknown" name="sex" type="radio" value="Unknown">
-                            <label class="nhsuk-label nhsuk-radios__label" for="sex-unknown">
+                            <input class="nhsuk-radios__input" id="dr-sex-unknown" name="dr-sex" type="radio" value="Unknown">
+                            <label class="nhsuk-label nhsuk-radios__label" for="dr-sex-unknown">
                                 Unknown
                             </label>
                             </div>
@@ -75,10 +75,10 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                         <label class="nhsuk-label" id="nationality-label" for="nationality">
                             Country of nationality (optional)
                         </label>
-                        <div class="nhsuk-hint" id="UK-national-insurance-number-input-hint">
+                        <div class="nhsuk-hint" id="nationalities-input-hint">
                          For example, France
                         </div>
-                        <input class="nhsuk-input nhsuk-input--width-20" list="nationalities" id="nationality" name="nationality">
+                        <input class="nhsuk-input nhsuk-input--width-20" list="nationalities" id="dr-nationality" name="dr-nationality">
                         <datalist id="nationalities">
                             <option id="1" value="Afghanistan">Afghanistan</option>
                             <option id="2" value="Albania">Albania</option>
@@ -286,7 +286,7 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                         A NINO is made up of 2 letters, 6 numbers and a final letter, which is always A, B, C, or D.<br>
                         For example, QQ 12 34 56 C.
                       </div>
-                      <input class="nhsuk-input nhsuk-u-width-one-third" id="UK-national-insurance-number" name="UK-national-insurance-number" type="text" value="">
+                      <input class="nhsuk-input nhsuk-u-width-one-third" id="dr-UK-national-insurance-number" name="dr-UK-national-insurance-number" type="text" value="">
                     </div>
                     
                     <div class="nhsuk-form-group">
@@ -296,7 +296,7 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                       <div class="nhsuk-hint" id="email-address-hint">
                         For example, joe.bloggs@gmail.com
                       </div>
-                      <input class="nhsuk-input nhsuk-input--width-20" id="email-address" name="email-address" type="text"  autocomplete="cc-csc" value="">
+                      <input class="nhsuk-input nhsuk-input--width-20" id="dr-email-address" name="dr-email-address" type="text"  autocomplete="cc-csc" value="">
                     </div>
 
                    <div class="nhsuk-form-group">
@@ -306,7 +306,7 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                     <div class="nhsuk-hint" id="contact-number-hint">
                       Include the country code. For example, (+44) for United Kingdom.
                     </div>
-                    <input class="nhsuk-input nhsuk-input--width-10" id="contact-number" name="contact-number" type="text"  autocomplete="cc-csc" value="">
+                    <input class="nhsuk-input nhsuk-input--width-10" id="dr-contact-number" name="dr-contact-number" type="text"  autocomplete="cc-csc" value="">
                   </div>
 
                                             
@@ -331,33 +331,8 @@ Add additional personal details - Manage overseas entitlements and treatments - 
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue : '',
     autoselect : true,  
-    selectElement : document.querySelector('#nationalityDrop')
+    selectElement : document.querySelector('#nationalities')
   })
 </script>
 
-<!-- autocomplete js for Contact number type -->
-<script type="text/javascript">
-  accessibleAutocomplete.enhanceSelectElement({
-    defaultValue : '',
-    autoselect : true,  
-    selectElement : document.querySelector('#contact-number-type')
-  })
-</script>
-
-<!-- DOB format -->
-<script>
-  function updateFormattedDate() {
-    const day = document.getElementById("residency-day").value;
-    const month = document.getElementById("residency-month").value;
-    const year = document.getElementById("residency-year").value;
-
-    if (day && month && year) {
-        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
-    } else {
-        document.getElementById("formatted-date").textContent = "2 July 2024";
-    }
-}
-
-document.addEventListener('DOMContentLoaded', updateFormattedDate);
-</script>
 {% endblock %}

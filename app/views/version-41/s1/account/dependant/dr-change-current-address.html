@@ -35,11 +35,11 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
                     }) }}
 
                     <h1 class="app-page-heading">
-                      Change {% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}’s current address on their person record
+                      Change {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s current address on their person record
                     </h1>
 
                     
-                    <form action="change-current-address" method="post">
+                    <form action="dr-change-current-address" method="post">
 
                       <div class="nhsuk-inset-text">
                         <span class="nhsuk-u-visually-hidden">Information: </span>
@@ -51,49 +51,49 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
                         <label class="nhsuk-label" for="new-current-address-line-1-label">
                           Address line 1
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-current-address-line-1" name="new-current-address-line-1" type="text"  autocomplete="cc-csc" value="1 Washington Street">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-new-current-address-line-1" name="dr-new-current-address-line-1" type="text"  autocomplete="cc-csc" value="1 Washington Street">
                       </div>
               
                       <div class="nhsuk-form-group">
                         <label class="nhsuk-label" for="new-current-address-line-2-label">
                           Address line 2 (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-current-address-line-2" name="new-current-address-line-2" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-new-current-address-line-2" name="dr-new-current-address-line-2" type="text"  autocomplete="cc-csc">
                       </div>
 
                       <div class="nhsuk-form-group">
                         <label class="nhsuk-label" for="new-current-address-line-3-label">
                           Address line 3 (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-current-address-line-3" name="new-current-address-line-3" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-new-current-address-line-3" name="dr-new-current-address-line-3" type="text"  autocomplete="cc-csc">
                       </div>
               
                       <div class="nhsuk-form-group">
                         <label class="nhsuk-label" for="new-current-address-town-label">
                           Town or city (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-current-address-town" name="new-current-address-town" type="text" autocomplete="cc-csc" value="Worcester">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dr-new-current-address-town" name="dr-new-current-address-town" type="text" autocomplete="cc-csc" value="Worcester">
                       </div>
               
                       <div class="nhsuk-form-group">
                         <label class="nhsuk-label" for="new-current-address-region-label">
                           County, province or region (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-current-address-region" name="new-current-address-region" type="text" autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dr-new-current-address-region" name="dr-new-current-address-region" type="text" autocomplete="cc-csc">
                       </div>
               
                       <div class="nhsuk-form-group">
                         <label class="nhsuk-label" for="new-current-address-postcode-label">
                           Postcode (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-input--width-10" id="new-current-address-postcode" name="new-current-address-postcode" type="text"  autocomplete="cc-csc" value="WR1 1NL">
+                        <input class="nhsuk-input nhsuk-input--width-10" id="dr-new-current-address-postcode" name="dr-new-current-address-postcode" type="text"  autocomplete="cc-csc" value="WR1 1NL">
                       </div>
 
                       <div class="nhsuk-form-group">
                         <label class="nhsuk-label" id="new-current-address-country-label" for="new-current-address-country">
                             Country
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" list="countries" id="new-current-address-country" name="new-current-address-country" value="United Kingdom (UK)">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" list="countries" id="dr-new-current-address-country" name="dr-new-current-address-country" value="United Kingdom (UK)">
                         <datalist id="countries">
                           <option value="Austria (AT)">Austria (AT)</option>
                           <option value="Belgium (BE)">Belgium (BE)</option>
@@ -152,7 +152,7 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue : '',
     autoselect : true,  
-    selectElement : document.querySelector('#new-current-address-country')
+    selectElement : document.querySelector('#countries')
   })
 </script>
 {% endblock %}

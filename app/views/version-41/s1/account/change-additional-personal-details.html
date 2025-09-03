@@ -35,7 +35,7 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                     }) }}
                 
                     <h1 class="app-page-heading">
-                      Change John Doe's additional details on their person record
+                      Change {% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}’s additional details on their person record
                     </h1>
                     
                     <form action="change-additional-personal-details" method="post">
@@ -79,7 +79,7 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                         <label class="nhsuk-label" id="nationality-label" for="updated-nationality">
                             Country of nationality (optional)
                         </label>
-                        <div class="nhsuk-hint" id="UK-national-insurance-number-input-hint">
+                        <div class="nhsuk-hint" id="nationality-input-hint">
                          For example, France
                         </div>
                         <input class="nhsuk-input nhsuk-input--width-20" list="nationalities" id="updated-nationality" name="updated-nationality" value="">
@@ -335,7 +335,7 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue : '',
     autoselect : true,  
-    selectElement : document.querySelector('#nationalityDrop')
+    selectElement : document.querySelector('#nationalities')
   })
 </script>
 

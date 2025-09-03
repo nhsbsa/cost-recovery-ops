@@ -240,5 +240,107 @@ res.redirect('/version-41/s1/account/dependant/s1-entitlement-content/s1-entitle
 })
 
 
+// Personal details tabs //
 
+
+// Change the person's first and/or last names
+// Step 1 - change names
+router.post([/dr-change-names/], function(req, res) {
+  req.session.data['dr-new-first-names'] = req.body['dr-new-first-names'];
+  req.session.data['dr-new-birth-first-names'] = req.body['dr-new-birth-first-names'];
+  req.session.data['dr-new-last-name'] = req.body['dr-new-last-name'];
+  req.session.data['dr-new-birth-last-name'] = req.body['dr-new-birth-last-name'];
+
+  res.redirect('/version-41/s1/account/dependant/dr-reason-for-name-change');
+})
+
+// Step 2 - add reason for changing names
+router.post([/dr-reason-for-name-change/], function(req, res) {
+  req.session.data['dr-reason-for-changing-names'] = req.body['dr-reason-for-changing-names'];
+  res.redirect('/version-41/s1/account/dependant/dr-check-before-changing-names');
+})
+
+// Step 3 - check your answers
+router.post([/dr-check-before-changing-names/], function(req, res) {
+  req.session.data['dr-change-names'] = 'yes';
+  res.redirect('/version-41/s1/account/dependant/personal-details');
+})
+
+
+// Add additional details to person record
+// Step 1 — Add additional personal details
+router.post([/dr-add-additional-personal-details/], function(req, res){
+
+  req.session.data['dr-sex'] = req.body['dr-sex'];
+  req.session.data['dr-nationality'] = req.body['dr-nationality'];
+  req.session.data['dr-UK-national-insurance-number'] = req.body['dr-UK-national-insurance-number'];
+  req.session.data['dr-email-address'] = req.body['dr-email-address'];
+  req.session.data['dr-contact-number'] = req.body['dr-contact-number'];
+
+  res.redirect('/version-41/s1/account/dependant/dr-additional-personal-details-cya');
+})
+
+// Step 2 - Check your answers before adding additional personal details
+router.post([/dr-additional-personal-details-cya/], function(req, res){
+  req.session.data['dr-add-additional-personal-details'] = 'yes'
+
+  res.redirect('/version-41/s1/account/dependant/personal-details');
+})
+
+
+// Change additional details on person record
+// Step 1 — Change additional personal details
+router.post([/dr-change-additional-personal-details/], function (req, res) {
+  req.session.data['dr-updated-sex'] = req.body['dr-updated-sex'];
+  req.session.data['dr-updated-nationality'] = req.body['dr-updated-nationality'];
+  req.session.data['dr-updated-UK-national-insurance-number'] = req.body['dr-updated-UK-national-insurance-number'];
+  req.session.data['dr-updated-email-address'] = req.body['dr-updated-email-address'];
+  req.session.data['dr-updated-contact-number'] = req.body['dr-updated-contact-number'];
+
+  res.redirect('/version-41/s1/account/dependant/dr-reason-for-changing-additional-details');
+});
+
+// Step 2 — Enter reason for the change
+router.post([/dr-reason-for-changing-additional-details/], function (req, res) {
+  req.session.data['dr-reason-for-changing-additional-details'] =
+    req.body['dr-reason-for-changing-additional-details']; 
+
+  res.redirect('/version-41/s1/account/dependant/dr-check-before-changing-additional-details');
+});
+
+// Step 3 — Confirm on CYA page
+router.post([/dr-check-before-changing-additional-details/], function (req, res) {
+  req.session.data['dr-change-additional-personal-details'] = 'yes';
+
+  res.redirect('/version-41/s1/account/dependant/personal-details');
+});
+
+
+// Change current address 
+// Step 1 - Change the current address
+router.post([/dr-change-current-address/], function (req, res) {
+
+  // Build the new address from individual form fields
+  req.session.data['dr-new-address'] = {
+    line1: req.body['dr-new-address-line-1'] || '',
+    line2: req.body['dr-new-address-line-2'] || '',
+    line3: req.body['dr-new-address-line-3'] || '',
+    town: req.body['dr-new-address-town'] || '',
+    region: req.body['dr-new-address-region'] || '',
+    postcode: req.body['dr-new-address-postcode'] || '',
+    country: req.body['dr-new-address-country'] || ''
+  };
+
+  // Redirect to the check-your-answers screen
+  res.redirect('/version-41/s1/account/dependant/dr-check-before-changing-current-address');
+});
+
+// Step 2 - Check your answers before changing current address
+router.post([/dr-check-before-changing-current-address/], function (req, res) {
+  // Set session variable indicating the address change process has started
+  req.session.data['dr-change-current-address'] = 'yes';
+
+  // Redirect back to address details with updated data
+  res.redirect('/version-41/s1/account/dependant/personal-details');
+});
 module.exports = router;

@@ -355,7 +355,7 @@
                                     <th scope="col">Date and time</th>
                                     <th scope="col">Action</th>
                                     <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
-                                    <th scope="col">Reason for change</th>
+                                    <th scope="col">Reason</th>
                                     <th scope="col">Updated by</th>
                                   </tr>
                                 </thead>
@@ -395,20 +395,19 @@
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason</span>
+                                      <p id="person-history-dob-updated-by">
+                                        {% if data['reason-for-changing-dob'] %}
+                                          {{ data['reason-for-changing-dob'] }}
+                                        {% else %}
+                                          Customer provided this info in FAS1Q
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
                                       <p id="person-history-dob-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                                     </td>
-                                    <!--td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Comments</span>
-                                      <p id="person-history-dob-updated-by">
-                                        {# Check if any comments have been added, otherwise fallback to default #}
-                                        {% if data['change-to-personal-details-note'] %}
-                                          {{ data['change-to-personal-details-note'] }}
-                                        {% else %}
-                                        Received completed DL1609 and individual provided this info
-                                        {% endif %}
-                                      </p>
-                                    </td-->
                                   </tr>
                                   {% endif %}
 
@@ -428,13 +427,15 @@
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason</span>
+                                      <p id="person-history-dob-updated-by">
+                                        Not applicable
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
                                       <p id="person-history-dob-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                                     </td>
-                                    <!--td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Comments</span>
-                                      <p id="person-history-dob-updated-by">None provided</p>
-                                    </td-->
                                   </tr>
                                 </tbody>
                               </table>
@@ -1341,8 +1342,6 @@ function setCurrentDateTime(elementId) {
     setCurrentDateTime("currentDateChangeEmailAddress");    // For changing Email address
     setCurrentDateTime("currentDateContactNumber");    // For Contact Number
     setCurrentDateTime("currentDateChangeContactNumber");    // For changing Contact Number
-
-    setCurrentDateTime("currentDateUKResidency");      // For date of UK residency
   });
 </script>
 {% endblock %}
