@@ -247,45 +247,61 @@
                                 <tr>
                                   <th scope="col">Date and time</th>
                                   <th scope="col">Action</th>
+                                  <th scope="col">Detail updated</th>
                                   <th scope="col">Details</th>
+                                  <th scope="col">Reason for update</th>
                                   <th scope="col">Updated by</th>
                                 </tr>
                               </thead>
                               <tbody class="nhsuk-table__body">
                                 <!-- most recent update at top of table -->
-                                {% if data ['dr-cancel-s1-entitlement'] == 'yes' %}
+
+                                <!-- Start of events for changes to the date of residency in UK -->
+                                {% if data ['dr-change-s1-date-of-uk-residency'] == 'yes' %}
                                 <tr class="nhsuk-table__row">
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                    <p id="currentDateS1Cancelled"></span></p>
+                                    <p id="currentDateDRS1UKResidencyChanged"></span></p>
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Action</span>
-                                    <p>Updated</p>
+                                    <p>Added</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Date of residency in UK</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Details</span>
-                                    <p>Entitlement cancelled<br>
-                                      Entitlement end date
-                                        {# Check if cancellation date is provided #}
-                                        {% if data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
-                                          {% set day = data['dr-entitlement-end-date-day'] %}
-                                          {% set month = data['dr-entitlement-end-date-month'] | int %}
-                                          {% set year = data['dr-entitlement-end-date-year'] %}
-                                          
-                                          {% if day < 10 %}
-                                                {% set day = "0" ~ day %}
-                                            {% endif %}
-                                            
-                                            {% if month < 10 %}
-                                                {% set month = "0" ~ month %}
-                                            {% endif %}
+                                    <p>
+                                      {% set day = data['dr-new-s1-uk-residency-day'] | int %}
+                                      {% set month = data['dr-new-s1-uk-residency-month'] | int %}
+                                      {% set year = data['dr-new-s1-uk-residency-year'] %}
 
-                                            {{ day }}/{{ month }}/{{ year }}
-                                        {% else %}
-                                            {# Display fallback date if no entitlement end date is entered #}
-                                            13/01/2024
-                                        {% endif %}
+                                      {# Pad day and month with leading zero if needed #}
+                                      {% if day < 10 %}
+                                        {% set day_str = '0' ~ day %}
+                                      {% else %}
+                                        {% set day_str = day|string %}
+                                      {% endif %}
+
+                                      {% if month < 10 %}
+                                        {% set month_str = '0' ~ month %}
+                                      {% else %}
+                                        {% set month_str = month|string %}
+                                      {% endif %}
+
+                                      {{ day_str }}/{{ month_str }}/{{ year }}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>
+                                      {% if data['dr-reason-for-changing-s1-date-of-uk-residency'] %}
+                                        {{ data['dr-reason-for-changing-s1-date-of-uk-residency'] }}
+                                      {% else %}
+                                        Reason for change explained here.
+                                      {% endif %}
                                     </p>
                                   </td>
                                   <td class="nhsuk-table__cell">
@@ -294,6 +310,221 @@
                                   </td>
                                 </tr>
                                 {% endif %}
+                                <!-- End of events for changes to the date of residency in UK -->
+
+                                <!-- Start of events for changes to PIN -->
+                                {% if data ['dr-change-s1-pin'] == 'yes' %}
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p id="currentDateDRS1PinChanged"></span></p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Personal identification number (PIN)</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
+                                    <p>{{ data['dr-new-s1-pin'] }}</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>
+                                      {% if data['dr-reason-for-changing-s1-pin'] %}
+                                        {{ data['dr-reason-for-changing-s1-pin'] }}
+                                      {% else %}
+                                        Reason for change explained here.
+                                      {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p id="entitlement-history-s1-s072-entitlements-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                  </td>
+                                </tr>
+                                {% endif %}
+                                <!-- End of events for changes to PIN -->
+
+                                <!-- Start of events for changes to any names -->
+                                {% if data['dr-change-s1-names'] == 'yes' %}
+
+                                {% if data['dr-new-s1-birth-last-name'] %}
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p id="currentDateDRS1BirthLastNameChanged"></span></p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Last name at birth</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
+                                    <p>{{ data['dr-new-s1-birth-last-name'] }}</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>
+                                      {% if data['dr-reason-for-changing-s1-names'] %}
+                                        {{ data['dr-reason-for-changing-s1-names'] }}
+                                      {% else %}
+                                        Reason for change explained here.
+                                      {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if data['dr-new-s1-last-name'] and data['dr-new-s1-last-name'] != 'Doe' %}
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p id="currentDateDRS1LastNameChanged"></span></p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Last name</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
+                                    <p>{{ data['dr-new-s1-last-name'] }}</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>
+                                      {% if data['dr-reason-for-changing-s1-names'] %}
+                                        {{ data['dr-reason-for-changing-s1-names'] }}
+                                      {% else %}
+                                        Reason for change explained here.
+                                      {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if data['dr-new-s1-birth-first-names'] %}
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p id="currentDateDRS1BirthFirstNamesChanged"></span></p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>First names at birth</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
+                                    <p>{{ data['dr-new-s1-birth-first-names'] }}</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>
+                                      {% if data['dr-reason-for-changing-s1-names'] %}
+                                        {{ data['dr-reason-for-changing-s1-names'] }}
+                                      {% else %}
+                                        Reason for change explained here.
+                                      {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                                {% if data['dr-new-s1-first-names'] and data['dr-new-s1-first-names'] != 'Jane' %}
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p id="currentDateDRS1FirstNamesChanged"></span></p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>First names</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
+                                    <p>{{ data['dr-new-s1-first-names'] }}</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>
+                                      {% if data['dr-reason-for-changing-s1-names'] %}
+                                        {{ data['dr-reason-for-changing-s1-names'] }}
+                                      {% else %}
+                                        Reason for change explained here.
+                                      {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
+                              {% endif %}
+                              <!-- End of events for changes to any names -->
+
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p>
+                                      19/08/2025,<br>
+                                      09:44
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Entitlement end date</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
+                                    <p>16/10/2024</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>Entitlement cancelled</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p id="entitlement-history-s1-s072-entitlements-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                  </td>
+                                </tr>
+
                                 <tr class="nhsuk-table__row">
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -304,32 +535,41 @@
                                     <p>Updated</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Main insured</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Details</span>
-                                    <p>Entitlement linked to John Doe,<br>
-                                      entitlement ID: 100001</p>
+                                    <p>John Doe,<br>
+                                      entitlement ID: 100001
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>Entitlement linked to main insured</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Updated by</span>
                                     <p id="person-history-s1-s072-entitlements-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                                   </td>
                                 </tr>
+
                                 <tr class="nhsuk-table__row">
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                    {% if data ['dr-cancel-s1-entitlement'] == 'yes' %}
-                                    <p>11/11/2024,<br>13:42</p>
-                                    {% else %}
                                     <p>21/05/2024, <br> 13:28</p>
-                                    {% endif %}
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Action</span>
                                     <p>Created</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Entitlement end date</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Details</span>
-                                    <p>Entitlement registered<br>
-                                      Entitlement end date 
+                                    <p>
                                       {% if data['dr-s1-entitlement-end-date-day'] and data['dr-s1-entitlement-end-date-month'] and data['dr-s1-entitlement-end-date-year'] %}
                                         {% set day = data['dr-s1-entitlement-end-date-day'] %}
                                         {% set month = data['dr-s1-entitlement-end-date-month'] | int %}
@@ -345,9 +585,13 @@
 
                                           {{ day }}/{{ month }}/{{ year }}
                                       {% else %}
-                                        not provided
+                                        Open-ended
                                       {% endif %}
                                     </p> 
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>Entitlement registered</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -430,15 +674,21 @@ function setCurrentDateTime(elementId) {
 
   // Set the date for each item
   document.addEventListener("DOMContentLoaded", function () {
-    setCurrentDateTime("currentDatePinChanged");  // Update to S1/S072 entitlement personal identification number (PIN)
-    setCurrentDateTime("currentDateS1EntitlementEndDateChanged");  // Update to S1/S072 entitlement end date
-    setCurrentDateTime("currentDateS1Cancelled");  // Update to S1/S072 entitlements for cancelling entitlement
-    setCurrentDateTime("currentDateE109MainLinked");  // Update to E109 entitlements for adding a Main insured person
-    setCurrentDateTime("currentDateE109");      // For Dependant E109 entitlements
-    setCurrentDateTime("currentDateS1Dependant");  // Update to S1/S072 entitlements for adding a dependant
-    setCurrentDateTime("currentDateS1");      // For S1/S072 entitlements
-    setCurrentDateTime("currentDateEHIC");      // For EHIC entitlements
-    setCurrentDateTime("currentDatePRC");  // For PRC entitlements
+    setCurrentDateTime("currentDateDRS1BirthLastNameChanged");  // Update to S1/S072 entitlement birth last name
+    setCurrentDateTime("currentDateDRS1LastNameChanged");  // Update to S1/S072 entitlement last name
+    setCurrentDateTime("currentDateDRS1BirthFirstNamesChanged");  // Update to S1/S072 entitlement birth first names
+    setCurrentDateTime("currentDateDRS1FirstNamesChanged");  // Update to S1/S072 entitlement first names
+    setCurrentDateTime("currentDateDRS1UKResidencyChanged");  // Update to S1/S072 entitlement personal identification number (PIN)
+    setCurrentDateTime("currentDateDRS1PinChanged");  // Update to S1/S072 entitlement personal identification number (PIN)
+    setCurrentDateTime("currentDateDRS1EntitlementEndDateChanged");  // Update to S1/S072 entitlement end date
+    setCurrentDateTime("currentDateDRS1Cancelled");  // Update to S1/S072 entitlements for cancelling entitlement
+    setCurrentDateTime("currentDateDRE109MainLinked");  // Update to E109 entitlements for adding a Main insured person
+    setCurrentDateTime("currentDateDRE109");      // For Dependant E109 entitlements
+    setCurrentDateTime("currentDateDRS1Dependant");  // Update to S1/S072 entitlements for adding a dependant
+    setCurrentDateTime("currentDateDRS1");      // For S1/S072 entitlements
+    setCurrentDateTime("currentDateDREHIC");      // For EHIC entitlements
+    setCurrentDateTime("currentDateDRPRC");  // For PRC entitlements
+
   });
 </script>
 {% endblock %}

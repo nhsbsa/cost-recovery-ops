@@ -53,6 +53,31 @@ router.post([/s1-dependant-details-check/], function(req, res) {
 // =====================================================
 
 // =====================================================
+// Change names
+// =====================================================
+router.post([/change-s1-names/], function(req, res){
+  req.session.data['new-s1-first-names'] = req.body['new-s1-first-names'];
+  req.session.data['new-s1-birth-first-names'] = req.body['new-s1-birth-first-names'];
+  req.session.data['new-s1-last-name'] = req.body['new-s1-last-name'];
+  req.session.data['new-s1-birth-last-names'] = req.body['new-s1-birth-last-name'];
+
+  res.redirect('/version-41/s1/account/entitlement-content/reason-for-s1-name-change');
+});
+
+router.post([/reason-for-s1-name-change/], function(req, res){
+  req.session.data['reason-for-changing-s1-names'] = req.body['reason-for-changing-s1-names'];
+  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-names');
+});
+
+
+router.post([/check-before-changing-s1-names/], function(req, res){
+  req.session.data['change-s1-names'] = 'yes';
+
+  res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
+});
+
+
+// =====================================================
 // Change the Personal identifcation number (PIN)
 // =====================================================
 // Step 1 - change the S1 entitlement PIN
@@ -111,32 +136,6 @@ router.post([/reason-for-changing-s1-date-of-uk-residency/], function(req, res){
 // Step 3 - Check your answers before changing the S1 entitlement date of UK residency
 router.post([/check-before-changing-s1-date-of-uk-residency/], function (req, res) {
   req.session.data['change-s1-date-of-uk-residency'] = 'yes';
-  res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
-});
-
-
-
-// =====================================================
-// Change names
-// =====================================================
-router.post([/change-s1-names/], function(req, res){
-  req.session.data['new-s1-first-names'] = req.body['new-s1-first-names'];
-  req.session.data['new-s1-birth-first-names'] = req.body['new-s1-birth-first-names'];
-  req.session.data['new-s1-last-name'] = req.body['new-s1-last-name'];
-  req.session.data['new-s1-birth-last-names'] = req.body['new-s1-birth-last-name'];
-
-  res.redirect('/version-41/s1/account/entitlement-content/reason-for-s1-name-change');
-});
-
-router.post([/reason-for-s1-name-change/], function(req, res){
-  req.session.data['reason-for-changing-s1-names'] = req.body['reason-for-changing-s1-names'];
-  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-names');
-});
-
-
-router.post([/check-before-changing-s1-names/], function(req, res){
-  req.session.data['change-s1-names'] = 'yes';
-
   res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
 });
 
