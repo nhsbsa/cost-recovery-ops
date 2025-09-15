@@ -67,25 +67,52 @@ router.post([/create-person-record-cya/], function(req, res){
 
 
 // Change the person's first and/or last names
-// Step 1 - change names
-router.post([/change-names/], function(req, res) {
+// Step 1 - change personal details
+router.post([/change-personal-details/], function(req, res) {
   req.session.data['new-first-names'] = req.body['new-first-names'];
   req.session.data['new-birth-first-names'] = req.body['new-birth-first-names'];
   req.session.data['new-last-name'] = req.body['new-last-name'];
   req.session.data['new-birth-last-name'] = req.body['new-birth-last-name'];
+  
+  // Store the new date of birth
+  const dobDay = req.body['new-date-of-birth-day'];
+  const dobMonth = req.body['new-date-of-birth-month'];
+  const dobYear = req.body['new-date-of-birth-year'];
 
-  res.redirect('/version-41/s1/account/reason-for-name-change');
+  // Month names
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  let dobDate;
+  if (dobDay && dobMonth && dobYear) {
+    const monthIndex = parseInt(dobMonth, 10) - 1;
+    if (monthIndex >= 0 && monthIndex < 12) {
+      const monthName = monthNames[monthIndex];
+      dobDate = `${parseInt(dobDay, 10)} ${monthName} ${dobYear}`;
+    } else {
+      dobDate = `${parseInt(dobDay, 10)} ${dobMonth} ${dobYear}`; // fallback if invalid month
+    }
+  } else {
+    dobDate = '1 July 1951'; // default if not provided
+}
+
+req.session.data['new-date-of-birth'] = dobDate;
+
+
+  res.redirect('/version-41/s1/account/reason-for-personal-details-change');
 })
 
 // Step 2 - add reason for changing names
-router.post([/reason-for-name-change/], function(req, res) {
-  req.session.data['reason-for-changing-names'] = req.body['reason-for-changing-names'];
-  res.redirect('/version-41/s1/account/check-before-changing-names');
+router.post([/reason-for-personal-details-change/], function(req, res) {
+  req.session.data['reason-for-changing-personal-details'] = req.body['reason-for-changing-personal-details'];
+  res.redirect('/version-41/s1/account/check-before-changing-personal-details');
 })
 
 // Step 3 - check your answers
-router.post([/check-before-changing-names/], function(req, res) {
-  req.session.data['change-names'] = 'yes';
+router.post([/check-before-changing-personal-details/], function(req, res) {
+  req.session.data['change-personal-details'] = 'yes';
   res.redirect('/version-41/s1/account/personal-details');
 })
 

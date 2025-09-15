@@ -127,7 +127,6 @@ Are you sure you want to remove invoices from this claim?
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const addMoreInvoicesBtn = document.getElementById("add-more-invoices-button");
   const tbody = document.querySelector(".nhsuk-table__body");
   const invoicesSection = document.getElementById("invoices-section");
   const noInvoicesMessage = document.getElementById("no-invoices-message");
@@ -154,11 +153,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Render invoices table / totals and handle empty state
   function renderInvoices() {
   tbody.innerHTML = "";
 
   if (!selectedInvoices.length) {
-    // Hide table, confirm, pagination
+    // Hide table, confirm, and pagination
     invoicesSection.style.display = "none";
     confirmButton.style.display = "none";
     pagination.style.display = "none";
@@ -166,17 +166,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     invoicesTotalEl.textContent = "0";
     monthsTotalEl.textContent = "0";
-
-    // 🔄 Change button to "Add invoices" (primary)
-    addMoreInvoicesBtn.textContent = "Add invoices";
-    addMoreInvoicesBtn.setAttribute("aria-label", "Add invoices");
-    addMoreInvoicesBtn.classList.remove("nhsuk-button--secondary");
-    addMoreInvoicesBtn.classList.add("nhsuk-button--primary");
-
     return;
   }
 
-  // Show table, confirm, pagination
+  // Show table, confirm, and pagination
   invoicesSection.style.display = "";
   confirmButton.style.display = "";
   pagination.style.display = "";
@@ -214,12 +207,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   monthsTotalEl.textContent = totalMonths;
-
-  // 🔄 Reset button back to "Add more invoices" (secondary)
-  addMoreInvoicesBtn.textContent = "Add more invoices";
-  addMoreInvoicesBtn.setAttribute("aria-label", "Add more invoices");
-  addMoreInvoicesBtn.classList.remove("nhsuk-button--primary");
-  addMoreInvoicesBtn.classList.add("nhsuk-button--secondary");
 }
 
 

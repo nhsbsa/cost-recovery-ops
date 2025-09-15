@@ -105,7 +105,7 @@
                                   </tr>
                                 </thead>
                                 <tbody class="nhsuk-table__body">
-                                  {% if data['change-names'] == 'yes' %}
+                                  {% if data['change-personal-details'] == 'yes' %}
 
                                     {% if data['new-birth-last-name'] %}
                                     <tr class="nhsuk-table__row">
@@ -128,8 +128,8 @@
                                       <td class="nhsuk-table__cell">
                                         <span class="nhsuk-table-responsive__heading">Reason for change</span>
                                         <p>
-                                          {% if data['reason-for-changing-names'] %}
-                                            {{ data['reason-for-changing-names'] }}
+                                          {% if data['reason-for-changing-personal-details'] %}
+                                            {{ data['reason-for-changing-personal-details'] }}
                                           {% else %}
                                             Reason for change explained here.
                                           {% endif %}
@@ -163,8 +163,8 @@
                                       <td class="nhsuk-table__cell">
                                         <span class="nhsuk-table-responsive__heading">Reason for change</span>
                                         <p>
-                                          {% if data['reason-for-changing-names'] %}
-                                            {{ data['reason-for-changing-names'] }}
+                                          {% if data['reason-for-changing-personal-details'] %}
+                                            {{ data['reason-for-changing-personal-details'] }}
                                           {% else %}
                                             Reason for change explained here.
                                           {% endif %}
@@ -198,8 +198,8 @@
                                       <td class="nhsuk-table__cell">
                                         <span class="nhsuk-table-responsive__heading">Reason for change</span>
                                         <p>
-                                          {% if data['reason-for-changing-names'] %}
-                                            {{ data['reason-for-changing-names'] }}
+                                          {% if data['reason-for-changing-personal-details'] %}
+                                            {{ data['reason-for-changing-personal-details'] }}
                                           {% else %}
                                             Reason for change explained here.
                                           {% endif %}
@@ -233,8 +233,8 @@
                                       <td class="nhsuk-table__cell">
                                         <span class="nhsuk-table-responsive__heading">Reason for change</span>
                                         <p>
-                                          {% if data['reason-for-changing-names'] %}
-                                            {{ data['reason-for-changing-names'] }}
+                                          {% if data['reason-for-changing-personal-details'] %}
+                                            {{ data['reason-for-changing-personal-details'] }}
                                           {% else %}
                                             Reason for change explained here.
                                           {% endif %}
@@ -320,7 +320,7 @@
                     <!-- End of Name card -->
 
 
-                    <!-- Start of Date of Birth card -->
+                    <!-- Start of Date of birth card -->
                     <div class="nhsuk-card">
                       <div class="nhsuk-card__content">
                         <div class="nhsuk-grid-row" style="margin-left: 2px;">
@@ -333,26 +333,30 @@
                         <div class="nhsuk-expander" style="background-color: #ffffff; padding-right: 10px; border: none; outline: none; box-shadow: none;">
                           <details class="nhsuk-details">
                             <summary aria-label="View date of birth history for this detail" class="nhsuk-details__summary" style="margin-left: -18px; margin-top: -21px; margin-bottom: -21px; outline: none;">
-                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_dob_Link">View changes to date of birth</span>
+                              <span role="button" class="nhsuk-details__summary-text" id="CaseHistory_name_Link">View changes to date of birth</span>
                             </summary>
-              
+                        
                             <div class="nhsuk-details__text" style="margin-top: 30px;">
-                              <table class="nhsuk-table-responsive" id="person-history-dob-table" style="margin-bottom: 9px;">
+                              <table class="nhsuk-table-responsive" id="person-history-name-table" style="margin-bottom: 9px;">
                                 <thead class="nhsuk-table__head">
                                   <tr>
                                     <th scope="col">Date and time</th>
                                     <th scope="col">Action</th>
-                                    <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
-                                    <th scope="col">Reason</th>
+                                    <th scope="col" style="min-width: 100px; white-space: nowrap;">Details</th>
+                                    <th scope="col">Reason for change</th>
                                     <th scope="col">Updated by</th>
                                   </tr>
                                 </thead>
                                 <tbody class="nhsuk-table__body">
-                                  {% if data['change-basic-personal-details'] == 'yes' %}
+                                  {% if data['change-personal-details'] == 'yes' %}
+
+                                  {% if data['new-date-of-birth-day'] and data['new-date-of-birth-day'] != '01' 
+                                  and data['new-date-of-birth-month'] and data['new-date-of-birth-month'] != '07' 
+                                  and data['new-date-of-birth-year'] and data['new-date-of-birth-year'] != '1951' %}
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateDOBChanged"></span></p>
+                                      <p id="currentDateFirstNamesChanged"></p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
@@ -360,49 +364,53 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p id="person-history-dob-details">
-                                        {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
-                                          {% set day = data['dob-day'] %}
-                                          {% set month = data['dob-month'] | int %}
-                                          {% set year = data['dob-year'] %}
-                              
-                                          {# Define month names #}
-                                          {% set month_names = [
-                                              "January", "February", "March", "April", "May", "June",
-                                              "July", "August", "September", "October", "November", "December"
-                                          ] %}
-                              
-                                          {# Get the month name #}
-                                          {% set month_name = month_names[month - 1] %}
-                              
-                                          {# Display the date in the format "day month year" #}
-                                          {{ day | int }} {{ month_name }} {{ year }}
+                                      <p>
+                                        {% set dobDay = data['new-date-of-birth-day'] | int %}
+                                        {% set dobMonth = data['new-date-of-birth-month'] | int %}
+                                        {% set dobYear = data['new-date-of-birth-year'] %}
+                                  
+                                        {# Pad day with leading zero if needed #}
+                                        {% if dobDay < 10 %}
+                                          {% set dobDay_str = '0' ~ dobDay %}
                                         {% else %}
-                                          11 July 1951
+                                          {% set dobDay_str = dobDay|string %}
                                         {% endif %}
+                                  
+                                        {# Pad month with leading zero if needed #}
+                                        {% if dobMonth < 10 %}
+                                          {% set dobMonth_str = '0' ~ dobMonth %}
+                                        {% else %}
+                                          {% set dobMonth_str = dobMonth|string %}
+                                        {% endif %}
+                                  
+                                        {{ dobDay_str }}/{{ dobMonth_str }}/{{ dobYear }}
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Reason</span>
-                                      <p id="person-history-dob-updated-by">
-                                        {% if data['reason-for-changing-dob'] %}
-                                          {{ data['reason-for-changing-dob'] }}
+                                      <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                      <p>
+                                        {% if data['reason-for-changing-personal-details'] %}
+                                          {{ data['reason-for-changing-personal-details'] }}
                                         {% else %}
-                                          Customer provided this info in FAS1Q
+                                          Reason for change explained here.
                                         {% endif %}
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                      <p id="person-history-dob-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                      <p>joe.bloggs@nhsbsa.nhs.uk</p>
                                     </td>
                                   </tr>
                                   {% endif %}
+                               
+
+                                  {% endif %}
+
 
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="person-history-dob-date-time_0">02/10/2024,<br>15:26</p>
+                                      <p id="person-history-name-date-time_0">02/10/2024,<br>15:26</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
@@ -410,19 +418,17 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p id="person-history-dob-details">
-                                        1 July 1951
+                                      <p id="person-history-name-details">
+                                        01/07/1951
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Reason</span>
-                                      <p id="person-history-dob-updated-by">
-                                        Not applicable
-                                      </p>
+                                      <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                      <p id="person-history-name-updated-by">Not applicable</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                      <p id="person-history-dob-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                      <p id="person-history-name-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -435,7 +441,7 @@
 
                       </div>
                     </div>
-                    <!-- End of Date of Birth card -->
+                    <!-- End of Date of birth card -->
 
 
                     <!-- Start of Current address card -->

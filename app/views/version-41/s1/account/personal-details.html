@@ -46,7 +46,7 @@
 
           
       
-          {% if data['change-names'] == 'yes' %}
+          {% if data['change-personal-details'] == 'yes' %}
           <div>
                         
             <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
@@ -54,7 +54,7 @@
                   <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
                </div>
                <div class="govuk-notification-banner__content">
-                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have changed {% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}’s names on their person record. These names will be used on any future entitlements, claims and resubmissions. View all changes in the Case history.</span>
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have changed {% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}’s details on their person record. These details will be used on any future entitlements, claims and resubmissions. View all changes in the Case history.</span>
                </div>
             </div>
          
@@ -217,23 +217,17 @@
                       
                     </dd>
                   </div>
-                </dl>
 
-                <div style="text-align: right;">
-                  <p><a href="change-names">Change<span class="nhsuk-u-visually-hidden">names</span></a></p>
-                </div>
-              
-                <dl class="nhsuk-summary-list">
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key">
                       Date of birth
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['change-dob'] == 'yes' %}
-                        {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
-                          {% set day = data['dob-day'] %}
-                          {% set month = data['dob-month'] | int %}
-                          {% set year = data['dob-year'] %}
+                      {% if data['change-personal-details'] == 'yes' and data['new-date-of-birth-day'] and data['new-date-of-birth-month'] and data['new-date-of-birth-year'] %}
+                        {% if data['new-date-of-birth-day'] and data['new-date-of-birth-month'] and data['new-date-of-birth-year'] %}
+                          {% set day = data['new-date-of-birth-day'] %}
+                          {% set month = data['new-date-of-birth-month'] | int %}
+                          {% set year = data['new-date-of-birth-year'] %}
               
                           {# Define month names #}
                           {% set month_names = [
@@ -247,6 +241,22 @@
                           {# Display the date in the format "day month year" #}
                           {{ day | int }} {{ month_name }} {{ year }}
                         {% endif %}
+                      {% elif data['dob-day'] and data['dob-month'] and data['dob-year'] %}
+                        {% set day = data['dob-day'] %}
+                        {% set month = data['dob-month'] | int %}
+                        {% set year = data['dob-year'] %}
+            
+                        {# Define month names #}
+                        {% set month_names = [
+                            "January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                        ] %}
+            
+                        {# Get the month name #}
+                        {% set month_name = month_names[month - 1] %}
+            
+                        {# Display the date in the format "day month year" #}
+                        {{ day | int }} {{ month_name }} {{ year }}  
                       {% else %}
                         1 July 1951
                       {% endif %}
@@ -256,6 +266,11 @@
                     </dd>
                   </div>
                 </dl>
+
+                <div style="text-align: right;">
+                  <p><a href="change-personal-details">Change<span class="nhsuk-u-visually-hidden">personal details</span></a></p>
+                </div>
+              
 
 
                 <br>

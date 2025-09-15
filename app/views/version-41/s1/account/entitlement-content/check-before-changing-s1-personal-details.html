@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Change first names on this S1 entitlement - Manage overseas entitlements and treatments - NHSBSA
+Check before changing personal details - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -37,11 +37,11 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                     <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 123456<br>Entitlement ID: 100001</p>
 
                     <h1 class="app-page-heading">
-                      Check your answers before changing first names
+                      Check your answers before changing personal details
                     </h1>
 
                     
-                    <form action="check-before-changing-s1-names" method="post">
+                    <form action="check-before-changing-s1-personal-details" method="post">
 
                       <dl class="nhsuk-summary-list">
                         <div class="nhsuk-summary-list__row">
@@ -56,7 +56,7 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                             {% endif %}
                           </dd>
                           <dd class="nhsuk-summary-list__actions">
-                            <a href="change-s1-names#new-s1-first-names">
+                            <a href="change-s1-personal-details#new-s1-first-names">
                               Change<span class="nhsuk-u-visually-hidden">first names</span>
                             </a>
                           </dd>
@@ -73,7 +73,7 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                             {% endif %}
                           </dd>
                           <dd class="nhsuk-summary-list__actions">
-                            <a href="change-s1-names#new-s1-birth-first-names">
+                            <a href="change-s1-personal-details#new-s1-birth-first-names">
                               Change<span class="nhsuk-u-visually-hidden">first names at birth</span>
                             </a>
                           </dd>
@@ -90,7 +90,7 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                             {% endif %}
                           </dd>
                           <dd class="nhsuk-summary-list__actions">
-                            <a href="change-s1-names#new-s1-last-name">
+                            <a href="change-s1-personal-details#new-s1-last-name">
                               Change<span class="nhsuk-u-visually-hidden">last name</span>
                             </a>
                           </dd>
@@ -107,8 +107,39 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                             {% endif %}
                           </dd>
                           <dd class="nhsuk-summary-list__actions">
-                            <a href="change-s1-names#new-s1-birth-last-name">
+                            <a href="change-s1-personal-details#new-s1-birth-last-name">
                               Change<span class="nhsuk-u-visually-hidden">last name at birth</span>
+                            </a>
+                          </dd>
+                        </div>
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Date of birth
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['new-s1-date-of-birth-day'] and data['new-s1-date-of-birth-month'] and data['new-s1-date-of-birth-year'] %}
+                                {% set day = data['new-s1-date-of-birth-day'] %}
+                                {% set month = data['new-s1-date-of-birth-month'] | int %}
+                                {% set year = data['new-s1-date-of-birth-year'] %}
+                    
+                                {# Define month names #}
+                                {% set month_names = [
+                                    "January", "February", "March", "April", "May", "June",
+                                    "July", "August", "September", "October", "November", "December"
+                                ] %}
+                    
+                                {# Get the month name #}
+                                {% set month_name = month_names[month - 1] %}
+                    
+                                {# Display the date in the format "day month year" #}
+                                {{ day | int }} {{ month_name }} {{ year }}
+                            {% else %}
+                                01 July 1951
+                            {% endif %}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <a href="change-s1-personal-details#new-s1-date-of-birth-day">
+                              Change<span class="nhsuk-u-visually-hidden">date of birth</span>
                             </a>
                           </dd>
                         </div>
@@ -117,11 +148,11 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                             Reason for change
                           </dt>
                           <dd class="nhsuk-summary-list__value">
-                            {{ data['reason-for-changing-s1-names'] }}
+                            {{ data['reason-for-changing-s1-personal-details'] }}
                           </dd>
                           <dd class="nhsuk-summary-list__actions">
-                            <a href="reason-for-s1-name-change#reason-for-changing-s1-names">
-                              Change<span class="nhsuk-u-visually-hidden">the reason for changing names on this entitlement</span>
+                            <a href="reason-for-s1-personal-details-change#reason-for-changing-s1-personal-details">
+                              Change<span class="nhsuk-u-visually-hidden">the reason for changing personal details on this entitlement</span>
                             </a>
                           </dd>
                         </div>

@@ -55,23 +55,49 @@ router.post([/s1-dependant-details-check/], function(req, res) {
 // =====================================================
 // Change names
 // =====================================================
-router.post([/change-s1-names/], function(req, res){
+router.post([/change-s1-personal-details/], function(req, res){
   req.session.data['new-s1-first-names'] = req.body['new-s1-first-names'];
   req.session.data['new-s1-birth-first-names'] = req.body['new-s1-birth-first-names'];
   req.session.data['new-s1-last-name'] = req.body['new-s1-last-name'];
   req.session.data['new-s1-birth-last-names'] = req.body['new-s1-birth-last-name'];
 
-  res.redirect('/version-41/s1/account/entitlement-content/reason-for-s1-name-change');
+  // Store the new date of birth
+  const S1DobDay = req.body['new-s1-date-of-birth-day'];
+  const S1DobMonth = req.body['new-s1-date-of-birth-month'];
+  const S1DobYear = req.body['new-s1-date-of-birth-year'];
+
+  // Month names
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  let S1DobDate;
+  if (S1DobDay && S1DobMonth && S1DobYear) {
+    const monthIndex = parseInt(S1DobMonth, 10) - 1;
+    if (monthIndex >= 0 && monthIndex < 12) {
+      const monthName = monthNames[monthIndex];
+      S1DobDate = `${parseInt(S1DobDay, 10)} ${monthName} ${S1DobYear}`;
+    } else {
+      S1DobDate = `${parseInt(S1DobDay, 10)} ${S1DobMonth} ${S1DobYear}`; // fallback if invalid month
+    }
+  } else {
+    S1DobDate = '1 July 1951'; // default if not provided
+}
+
+req.session.data['new-s1-date-of-birth'] = S1DobDate;
+
+  res.redirect('/version-41/s1/account/entitlement-content/reason-for-s1-personal-details-change');
 });
 
-router.post([/reason-for-s1-name-change/], function(req, res){
-  req.session.data['reason-for-changing-s1-names'] = req.body['reason-for-changing-s1-names'];
-  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-names');
+router.post([/reason-for-s1-personal-details-change/], function(req, res){
+  req.session.data['reason-for-changing-s1-personal-details'] = req.body['reason-for-changing-s1-personal-details'];
+  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-personal-details');
 });
 
 
-router.post([/check-before-changing-s1-names/], function(req, res){
-  req.session.data['change-s1-names'] = 'yes';
+router.post([/check-before-changing-s1-personal-details/], function(req, res){
+  req.session.data['change-s1-personal-details'] = 'yes';
 
   res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
 });
