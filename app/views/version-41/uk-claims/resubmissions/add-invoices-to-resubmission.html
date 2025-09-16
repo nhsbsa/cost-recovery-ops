@@ -714,19 +714,20 @@ UK claim ID 100005 - Select invoices to add to resubmission
 {% endblock %}
 
 {% block pageScripts %}
-<!-- Disable 'Add invoices to resubmission' button until at least one invoice has been selected -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const checkboxes = document.querySelectorAll(".invoice-checkbox");
     const addInvoicesButton = document.getElementById("add-invoices-button"); 
-    
+    const selectAllLink = document.getElementById("select-all-link");
+
     // Start disabled but keep the appearance normal
     addInvoicesButton.style.pointerEvents = "none"; 
     addInvoicesButton.style.opacity = "1"; // Ensures it doesn't look faded
 
+    // --- Shared helpers ---
     function updateButtonState() {
         const anyChecked = [...checkboxes].some(checkbox => checkbox.checked);
-        addInvoicesButton.style.pointerEvents = anyChecked ? "auto" : "none"; // Enable/disable clicks
+        addInvoicesButton.style.pointerEvents = anyChecked ? "auto" : "none"; 
     }
 
     function saveSelectedInvoices() {
@@ -736,14 +737,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 id: checkbox.value,
                 firstName: checkbox.dataset.firstname,
                 lastName: checkbox.dataset.lastname,
-                months: checkbox.dataset.months,
-                period: checkbox.dataset.period
+                months: checkbox.dataset.months,   // "Claimed: 5\nRemaining: 0"
+                period: checkbox.dataset.period    // "Claimed: ...\nRemaining: ..."
             }));
 
-        console.log("Saving invoices:", selectedInvoices); // Debugging line
+        console.log("Saving invoices:", selectedInvoices); // Debugging
         sessionStorage.setItem("selectedInvoices", JSON.stringify(selectedInvoices));
     }
 
+    // --- Event listeners ---
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener("change", () => {
             updateButtonState();
@@ -751,24 +753,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Initialize button state on page load
+    if (selectAllLink) {
+        selectAllLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            checkboxes.forEach(checkbox => { checkbox.checked = true; });
+            updateButtonState();
+            saveSelectedInvoices();
+        });
+    }
+
+    // Initialize button state
     updateButtonState();
 });
-
-// Select all invoices link
-// Handle "Select all" link click
-document.getElementById("select-all-link").addEventListener("click", function (e) {
-    e.preventDefault();
-
-    const checkboxes = document.querySelectorAll(".invoice-checkbox");
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = true;
-    });
-
-    // Trigger the same logic as individual checkbox changes
-    updateButtonState();
-    saveSelectedInvoices();
-});
-
 </script>
 {% endblock %}

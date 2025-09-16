@@ -138,13 +138,51 @@ document.addEventListener("DOMContentLoaded", function () {
   // Load from sessionStorage (fallback to empty array)
   let selectedInvoices = JSON.parse(sessionStorage.getItem("selectedInvoices")) || [];
 
+  if (!selectedInvoices.length) {
+  selectedInvoices = [
+    { id: "1", firstName: "John", lastName: "Smith", months: ["Jan", "Feb", "Mar", "Apr"], period: ["2023"] },
+    { id: "2", firstName: "Jane", lastName: "Doe", months: [], period: ["2023"] }
+  ];
+  sessionStorage.setItem("selectedInvoices", JSON.stringify(selectedInvoices));
+  }
+
+
   // Utility: count months for an invoice (handles arrays or newline strings)
   function getMonthsCount(invoice) {
-    if (!invoice) return 0;
-    if (Array.isArray(invoice.months)) return invoice.months.length;
-    if (!invoice.months) return 0;
-    return invoice.months.toString().split(/\r?\n/).filter(Boolean).length;
+  if (!invoice || !invoice.months) return 0;
+
+  // Normalize to a single string (handles arrays or newline-separated strings)
+  const str = Array.isArray(invoice.months) ? invoice.months.join('\n') : String(invoice.months);
+  const lines = str.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+
+  // Helper to get first numeric value for a label (e.g. "Remaining: 4")
+  function numberForLabel(label) {
+    for (const line of lines) {
+      const m = line.match(new RegExp(label + '\\s*:\\s*(\\d+)', 'i'));
+      if (m) return parseInt(m[1], 10);
+    }
+    return null;
   }
+
+  // 1) Try Remaining (if numeric)
+  const remaining = numberForLabel('Remaining');
+  if (remaining !== null) return remaining;
+
+  // 1b) If Remaining exists but is textual (e.g. "Fully withdrawn"), treat as 0
+  for (const line of lines) {
+    if (/^Remaining\s*:\s*(fully withdrawn|withdrawn|none|n\/a)$/i.test(line)) return 0;
+  }
+
+  // 2) Fallback to Claimed (if numeric)
+  const claimed = numberForLabel('Claimed');
+  if (claimed !== null) return claimed;
+
+  // 3) Nothing numeric found — return 0
+  return 0;
+  }
+
+
+
 
   // Small HTML-escape helper for names/strings
   function escapeHtml(s) {
