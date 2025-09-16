@@ -63,7 +63,8 @@ UK claim ID 100005 - View the resubmission documents
               </div>
             </div>
             
-            
+            <form action="resubmission-documents" method="post">
+
             
             <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
               <ul class="nhsuk-secondary-navigation__list">
@@ -107,14 +108,6 @@ UK claim ID 100005 - View the resubmission documents
                       </a>
                    </dd>
                 </div>
-                <div class="nhsuk-summary-list__row">
-                   <dt class="nhsuk-summary-list__key" id="summary-letter">Resubmission summary</dt>
-                   <dd class="nhsuk-summary-list__actions">
-                      <a aria-label="Download resubmission summary" href="/manage-overseas-entitlements-treatments/claim-resubs/view-document?documentId=34509" id="summaryletter" target="_new">
-                         <span id="summary_print_text">Download</span>
-                      </a>
-                   </dd>
-                </div>
 
                 {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                 <div class="nhsuk-summary-list__row">
@@ -134,6 +127,15 @@ UK claim ID 100005 - View the resubmission documents
                    </dd>
                 </div>
                 <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="s104-input-label">S104 input (.XML file for RINA resubmissions)</dt>
+                  <dd class="nhsuk-summary-list__actions">
+                    <a aria-label="Download S104 RINA XML" href="/manage-overseas-entitlements-treatments/claim-resubs/view-document?documentId=35289" id="s104Input" target="_new">
+                      <span id="schedule_print_text">Download</span>
+                   </a>
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
                    <dt class="nhsuk-summary-list__key" id="evidence-label">Evidence uploaded for all invoices</dt>
                    <dd class="nhsuk-summary-list__actions">
                       <a aria-label="Download all evidence uploaded for all treatments, excluding evidence uploaded by OVM" href="/manage-overseas-entitlements-treatments/claim-resubs/donwload-document-zip?documentId=35289&amp;documentType=Evidence" id="downloadAllEvidence" target="_new">
@@ -142,7 +144,7 @@ UK claim ID 100005 - View the resubmission documents
                    </dd>
                 </div>
                 <!-- Only display Withdrawal Letter document if in Credit Note journey -->
-                {% if status == 'Withdrawn' and (data['withdrawal-source'] == 'Department of Health and Social Care (DHSC)' or data['withdrawal-source'] == 'NHSBSA') %}
+                {% if status == 'Withdrawn' and withdrawal-source == 'Department of Health and Social Care (DHSC)' or withdrawal-source == 'NHSBSA' %}
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key" id="withdrawal-letter-label">Withdrawal letter</dt>
                   <dd class="nhsuk-summary-list__actions">

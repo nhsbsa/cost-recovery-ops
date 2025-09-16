@@ -158,6 +158,7 @@
                                   {% endif %}
                                   <!-- end of events for S1 cancellation -->
 
+                                  
                                   <!-- Start of events for changes to the date of residency in UK -->
                                   {% if data ['change-s1-date-of-uk-residency'] == 'yes' %}
                                   <tr class="nhsuk-table__row">
@@ -252,7 +253,64 @@
                                   <!-- End of events for changes to PIN -->
 
                                   <!-- Start of events for changes to any names -->
-                                  {% if data['change-s1-names'] == 'yes' %}
+                                  {% if data['change-s1-personal-details'] == 'yes' %}
+
+                                  {% if data['new-s1-date-of-birth-day'] and data['new-s1-date-of-birth-day'] != '01' 
+                                  or data['new-s1-date-of-birth-month'] and data['new-s1-date-of-birth-month'] != '07' 
+                                  or data['new-s1-date-of-birth-year'] and data['new-s1-date-of-birth-year'] != '1951' %}
+                                    <tr class="nhsuk-table__row">
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                        <p id="currentDateS1BirthLastNameChanged"></span></p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Action</span>
+                                        <p>Updated</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                        <p>Date of birth</p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Details</span>
+                                        <p>
+                                          {% set S1DobDay = data['new-s1-date-of-birth-day'] | int %}
+                                          {% set S1DobMonth = data['new-s1-date-of-birth-month'] | int %}
+                                          {% set S1DobYear = data['new-s1-date-of-birth-year'] %}
+                                    
+                                          {# Pad day with leading zero if needed #}
+                                          {% if S1DobDay < 10 %}
+                                            {% set S1DobDay_str = '0' ~ S1DobDay %}
+                                          {% else %}
+                                            {% set S1DobDay_str = S1DobDay|string %}
+                                          {% endif %}
+                                    
+                                          {# Pad month with leading zero if needed #}
+                                          {% if S1DobMonth < 10 %}
+                                            {% set S1DobMonth_str = '0' ~ S1DobMonth %}
+                                          {% else %}
+                                            {% set S1DobMonth_str = S1DobMonth|string %}
+                                          {% endif %}
+                                    
+                                          {{ S1DobDay_str }}/{{ S1DobMonth_str }}/{{ S1DobYear }}
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                        <p>
+                                          {% if data['reason-for-changing-s1-personal-details'] %}
+                                            {{ data['reason-for-changing-s1-personal-details'] }}
+                                          {% else %}
+                                            Reason for change explained here.
+                                          {% endif %}
+                                        </p>
+                                      </td>
+                                      <td class="nhsuk-table__cell">
+                                        <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                        <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                      </td>
+                                    </tr>
+                                    {% endif %}
 
                                     {% if data['new-s1-birth-last-name'] %}
                                     <tr class="nhsuk-table__row">
@@ -275,8 +333,8 @@
                                       <td class="nhsuk-table__cell">
                                         <span class="nhsuk-table-responsive__heading">Reason for update</span>
                                         <p>
-                                          {% if data['reason-for-changing-s1-names'] %}
-                                            {{ data['reason-for-changing-s1-names'] }}
+                                          {% if data['reason-for-changing-s1-personal-details'] %}
+                                            {{ data['reason-for-changing-s1-personal-details'] }}
                                           {% else %}
                                             Reason for change explained here.
                                           {% endif %}
@@ -310,8 +368,8 @@
                                       <td class="nhsuk-table__cell">
                                         <span class="nhsuk-table-responsive__heading">Reason for update</span>
                                         <p>
-                                          {% if data['reason-for-changing-s1-names'] %}
-                                            {{ data['reason-for-changing-s1-names'] }}
+                                          {% if data['reason-for-changing-s1-personal-details'] %}
+                                            {{ data['reason-for-changing-s1-personal-details'] }}
                                           {% else %}
                                             Reason for change explained here.
                                           {% endif %}
@@ -345,8 +403,8 @@
                                       <td class="nhsuk-table__cell">
                                         <span class="nhsuk-table-responsive__heading">Reason for update</span>
                                         <p>
-                                          {% if data['reason-for-changing-s1-names'] %}
-                                            {{ data['reason-for-changing-s1-names'] }}
+                                          {% if data['reason-for-changing-s1-personal-details'] %}
+                                            {{ data['reason-for-changing-s1-personal-details'] }}
                                           {% else %}
                                             Reason for change explained here.
                                           {% endif %}
@@ -380,8 +438,8 @@
                                       <td class="nhsuk-table__cell">
                                         <span class="nhsuk-table-responsive__heading">Reason for update</span>
                                         <p>
-                                          {% if data['reason-for-changing-s1-names'] %}
-                                            {{ data['reason-for-changing-s1-names'] }}
+                                          {% if data['reason-for-changing-s1-personal-details'] %}
+                                            {{ data['reason-for-changing-s1-personal-details'] }}
                                           {% else %}
                                             Reason for change explained here.
                                           {% endif %}

@@ -136,6 +136,36 @@
                       
                     </dd>
                   </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Date of birth
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dob-day'] and data['dob-month'] and data['dob-year'] %}
+                        {% set day = data['dob-day'] %}
+                        {% set month = data['dob-month'] | int %}
+                        {% set year = data['dob-year'] %}
+            
+                        {# Define month names #}
+                        {% set month_names = [
+                            "January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                        ] %}
+            
+                        {# Get the month name #}
+                        {% set month_name = month_names[month - 1] %}
+            
+                        {# Display the date in the format "day month year" #}
+                        {{ day | int }} {{ month_name }} {{ year }}  
+                      {% else %}
+                        1 July 1951
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
                 </dl>
 
                 <div style="text-align: right;">
