@@ -60,71 +60,73 @@ router.post([/dr-change-relationship/], function(req, res) {
 // S1/S072 entitlement registration - Dependant //
 
 // Select entitlement
-router.post([/which-entitlement/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/which-s1-entitlement');
+router.post([/dr-which-entitlement/], function(req, res){
+  var drEntitlementType = req.session.data['dr-entitlement-type'];
+  
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-which-s1-entitlement');
 })
 
 // Select type of S1 entitlement
-router.post([/which-s1-entitlement/], function(req, res) {
-  var s1EntitlementType = req.session.data['s1-entitlement-type'];
+router.post([/dr-which-s1-entitlement/], function(req, res) {
+  var drS1EntitlementType = req.session.data['dr-s1-entitlement-type'];
   
-  if (s1EntitlementType === 'E109') {
-    res.redirect('/version-41/s1/account/dependant/s072-registration/entitlement-details');
+  if (drS1EntitlementType === 'E109') {
+    res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-entitlement-details');
   } else {
-    res.redirect('/version-41/s1/account/dependant/s072-registration/entitlement-for');
+    res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-entitlement-for');
   }
 })
 
 
 // Select who the entitlement is for
-router.post([/entitlement-for/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/entitlement-details');
+router.post([/dr-entitlement-for/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-entitlement-details');
 })
 
 // Input entitlement details
-router.post([/entitlement-details/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/search-institution-ID');
+router.post([/dr-entitlement-details/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-search-institution-ID');
 })
 
 // Search by institution ID (to show functionality)
-router.post([/search-institution-ID/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/institution-ID-search-results');
+router.post([/dr-search-institution-ID/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-institution-ID-search-results');
 })
 
 // Search by institution name (to show functionality)
-router.post([/search-institution-name/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/institution-name-search-results');
+router.post([/dr-search-institution-name/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-institution-name-search-results');
 })
 
 // Institution ID search results
-router.post([/institution-ID-search-results/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/entitlement-details-cya');
+router.post([/dr-institution-ID-search-results/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-entitlement-details-cya');
 })
 
 // Institution name search results
-router.post([/institution-name-search-results/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/entitlement-details-cya');
+router.post([/dr-institution-name-search-results/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-entitlement-details-cya');
 })
 
 // Institution ID search results - not found (to show functionality)
-router.post([/institution-ID-search-results-none/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/add-new-institution-details');
+router.post([/dr-institution-ID-search-results-none/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-add-new-institution-details');
 })
 
 // Institution ID search results - not found (to show functionality)
-router.post([/institution-name-search-results-none/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/add-new-institution-details');
+router.post([/dr-institution-name-search-results-none/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-add-new-institution-details');
 })
 
 // Institution ID search results - not found (to show functionality)
-router.post([/add-new-institution-details/], function(req, res){
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/entitlement-details-cya');
+router.post([/dr-add-new-institution-details/], function(req, res){
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-entitlement-details-cya');
 })
 
 // Check your answers
-router.post([/entitlement-details-cya/], function(req, res){
+router.post([/dr-entitlement-details-cya/], function(req, res){
   req.session.data['dr-add-s1-entitlement'] = 'yes'
-  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/confirmation-s1-s072-added');
+  res.redirect('/version-41/s1/account/dependant/s1-s072-registration/dr-confirmation-s1-s072-added');
 })
 
 

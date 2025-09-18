@@ -37,18 +37,18 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                     <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 654321<br>Entitlement ID: 100002</p>
 
                     <h1 class="app-page-heading">
-                      Change Jane Doe's names on this entitlement
+                      Change {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s personal details on this entitlement
                     </h1>
 
                     
-                    <form action="dr-change-s1-names" method="post">
+                    <form action="dr-change-s1-personal-details" method="post">
 
 
-                      <p>A change to the names of this person will:
+                      <p>A change to the personal details of this person will:
                         <ul>
-                          <li>change their names on this entitlement</li>
-                          <li>change their names on any future claims and resubmissions against this entitlement</li>
-                          <li>not change their names on any claims and resubmissions that are in progress</li>
+                          <li>change their personal details on this entitlement</li>
+                          <li>change their personal details on any future claims and resubmissions against this entitlement</li>
+                          <li>not change their personal details on any claims and resubmissions that are in progress</li>
                         </ul>
                       </p>
 
@@ -83,6 +83,38 @@ Change first names on this S1 entitlement - Manage overseas entitlements and tre
                           Last name at birth, if different
                         </label>
                         <input class="nhsuk-input nhsuk-input--width-20" id="dr-new-s1-birth-last-name" name="dr-new-s1-birth-last-name" type="text">
+                      </div>
+
+                      <br>
+
+                      <label class="nhsuk-label" for="new-s1-date-of-birth-input-label">
+                        Date of birth
+                      </label>
+                      <div class="nhsuk-hint" id="example-hint">
+                        For example, 15 3 1984
+                      </div>
+                      <div class="nhsuk-date-input" id="dr-new-s1-date-of-birth">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="dr-new-s1-date-of-birth-day">
+                              Day
+                            </label> <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-new-s1-date-of-birth-day" name="dr-new-s1-date-of-birth-day" type="text" inputmode="numeric" value="29">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="dr-new-s1-date-of-birthe-month">
+                              Month
+                            </label> <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="dr-new-s1-date-of-birth-month" name="dr-new-s1-date-of-birth-month" type="text" inputmode="numeric" value="12">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="dr-new-s1-date-of-birth-year">
+                              Year
+                            </label> <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="dr-new-s1-date-of-birth-year" name="dr-new-s1-date-of-birth-year" type="text" inputmode="numeric" value="1975">
+                          </div>
+                        </div>
                       </div>
 
                                  

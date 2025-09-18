@@ -9,7 +9,7 @@
 -->
 
 <!-- Set the page title inside the pageTitle block -->
-{% block pageTitle %}View Case history - Person history - Manage overseas entitlements and treatments - NHSBSA{% endblock %}
+{% block pageTitle %}View Case history - Entitlement history - Manage overseas entitlements and treatments - NHSBSA{% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
 {% block beforeContent %}
@@ -85,7 +85,42 @@
                     <div class="nhsuk-card">
                       <div class="nhsuk-card__content">
                         <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                          <h3 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-s1-s072-entitlements">Entitlement ID: 100002</h3>
+                          <h3 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-s1-s072-entitlements">
+                            Entitlement ID: 100002<br>
+                            05/09/2024 to 
+                            
+                            {% if data['dr-update-s1-entitlement-end-date'] == 'yes' %}
+                              {% set day = data['dr-updated-s1-entitlement-end-date-day'] | int %}
+                              {% set month = data['dr-updated-s1-entitlement-end-date-month'] | int %}
+                              {% set year = data['dr-updated-s1-entitlement-end-date-year'] %}
+              
+                            {% elif data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
+                                  {% set day = data['dr-entitlement-end-date-day'] | int %}
+                                  {% set month = data['dr-entitlement-end-date-month'] | int %}
+                                  {% set year = data['dr-entitlement-end-date-year'] %}
+                  
+                            {% else %}
+                              {% set day = 15 %}
+                              {% set month = 10 %}
+                              {% set year = 2024 %}
+                            {% endif %}
+                
+                            {% if day < 10 %}
+                                {% set formatted_day = "0" + day | string %}
+                            {% else %}
+                                {% set formatted_day = day | string %}
+                            {% endif %}
+                
+                            {% if month < 10 %}
+                                {% set formatted_month = "0" + month | string %}
+                            {% else %}
+                                {% set formatted_month = month | string %}
+                            {% endif %}
+            
+                            {{ formatted_day }}/{{ formatted_month }}/{{ year }}
+
+
+                          </h3>
                         </div>
 
                         <hr class="gray-horizontal-line">
@@ -113,7 +148,7 @@
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateS1Cancelled"></span></p>
+                                      <p id="currentDateDRS1Cancelled"></span></p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
@@ -155,7 +190,7 @@
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateE109MainLinked"></span></p>
+                                      <p id="currentDateDRE109MainLinked"></span></p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
@@ -174,7 +209,7 @@
                                   <tr class="nhsuk-table__row">
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                      <p id="currentDateE109"></span></p>
+                                      <p id="currentDateDRE109"></span></p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Action</span>
@@ -229,7 +264,43 @@
                   <div class="nhsuk-card">
                     <div class="nhsuk-card__content">
                       <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                        <h3 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-s1-s072-entitlements">Entitlement ID: 100002</h3>
+                        <h3 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-s1-s072-entitlements">
+                          Entitlement ID: 100002<br>
+                          05/09/2024 to 
+                            
+                          {% if data['dr-update-s1-entitlement-end-date'] == 'yes' %}
+                            {% set day = data['dr-updated-s1-entitlement-end-date-day'] | int %}
+                            {% set month = data['dr-updated-s1-entitlement-end-date-month'] | int %}
+                            {% set year = data['dr-updated-s1-entitlement-end-date-year'] %}
+            
+                          {% elif data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
+                                {% set day = data['dr-entitlement-end-date-day'] | int %}
+                                {% set month = data['dr-entitlement-end-date-month'] | int %}
+                                {% set year = data['dr-entitlement-end-date-year'] %}
+                
+                          {% else %}
+                            {% set day = 16 %}
+                            {% set month = 10 %}
+                            {% set year = 2024 %}
+                          {% endif %}
+              
+                          {% if day < 10 %}
+                              {% set formatted_day = "0" + day | string %}
+                          {% else %}
+                              {% set formatted_day = day | string %}
+                          {% endif %}
+              
+                          {% if month < 10 %}
+                              {% set formatted_month = "0" + month | string %}
+                          {% else %}
+                              {% set formatted_month = month | string %}
+                          {% endif %}
+          
+                          {{ formatted_day }}/{{ formatted_month }}/{{ year }}
+
+
+
+                        </h3>
                       </div>
 
                       <hr class="gray-horizontal-line">
@@ -349,8 +420,65 @@
                                 {% endif %}
                                 <!-- End of events for changes to PIN -->
 
-                                <!-- Start of events for changes to any names -->
-                                {% if data['dr-change-s1-names'] == 'yes' %}
+                                <!-- Start of events for changes to any personal details -->
+                                {% if data['dr-change-s1-personal-details'] == 'yes' %}
+
+                                {% if data['dr-new-s1-date-of-birth-day'] and data['dr-new-s1-date-of-birth-day'] != '29' 
+                                or data['dr-new-s1-date-of-birth-month'] and data['dr-new-s1-date-of-birth-month'] != '12' 
+                                or data['dr-new-s1-date-of-birth-year'] and data['dr-new-s1-date-of-birth-year'] != '1975' %}
+                                  <tr class="nhsuk-table__row">
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                      <p id="currentDateDRS1BirthLastNameChanged"></span></p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Action</span>
+                                      <p>Updated</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                      <p>Date of birth</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Details</span>
+                                      <p>
+                                        {% set drS1DobDay = data['dr-new-s1-date-of-birth-day'] | int %}
+                                        {% set drS1DobMonth = data['dr-new-s1-date-of-birth-month'] | int %}
+                                        {% set drS1DobYear = data['dr-new-s1-date-of-birth-year'] %}
+                                  
+                                        {# Pad day with leading zero if needed #}
+                                        {% if drS1DobDay < 10 %}
+                                          {% set drS1DobDay_str = '0' ~ drS1DobDay %}
+                                        {% else %}
+                                          {% set drS1DobDay_str = drS1DobDay|string %}
+                                        {% endif %}
+                                  
+                                        {# Pad month with leading zero if needed #}
+                                        {% if drS1DobMonth < 10 %}
+                                          {% set drS1DobMonth_str = '0' ~ drS1DobMonth %}
+                                        {% else %}
+                                          {% set drS1DobMonth_str = drS1DobMonth|string %}
+                                        {% endif %}
+                                  
+                                        {{ drS1DobDay_str }}/{{ drS1DobMonth_str }}/{{ drS1DobYear }}
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                      <p>
+                                        {% if data['dr-reason-for-changing-s1-personal-details'] %}
+                                          {{ data['dr-reason-for-changing-s1-personal-details'] }}
+                                        {% else %}
+                                          Reason for change explained here.
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                      <p>joe.bloggs@nhsbsa.nhs.uk</p>
+                                    </td>
+                                  </tr>
+                                  {% endif %}
 
                                 {% if data['dr-new-s1-birth-last-name'] %}
                                 <tr class="nhsuk-table__row">
@@ -373,8 +501,8 @@
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Reason for update</span>
                                     <p>
-                                      {% if data['dr-reason-for-changing-s1-names'] %}
-                                        {{ data['dr-reason-for-changing-s1-names'] }}
+                                      {% if data['dr-reason-for-changing-s1-personal-details'] %}
+                                        {{ data['dr-reason-for-changing-s1-personal-details'] }}
                                       {% else %}
                                         Reason for change explained here.
                                       {% endif %}
@@ -408,8 +536,8 @@
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Reason for update</span>
                                     <p>
-                                      {% if data['dr-reason-for-changing-s1-names'] %}
-                                        {{ data['dr-reason-for-changing-s1-names'] }}
+                                      {% if data['dr-reason-for-changing-s1-personal-details'] %}
+                                        {{ data['dr-reason-for-changing-s1-personal-details'] }}
                                       {% else %}
                                         Reason for change explained here.
                                       {% endif %}
@@ -443,8 +571,8 @@
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Reason for update</span>
                                     <p>
-                                      {% if data['dr-reason-for-changing-s1-names'] %}
-                                        {{ data['dr-reason-for-changing-s1-names'] }}
+                                      {% if data['dr-reason-for-changing-s1-personal-details'] %}
+                                        {{ data['dr-reason-for-changing-s1-personal-details'] }}
                                       {% else %}
                                         Reason for change explained here.
                                       {% endif %}
@@ -478,8 +606,8 @@
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Reason for update</span>
                                     <p>
-                                      {% if data['dr-reason-for-changing-s1-names'] %}
-                                        {{ data['dr-reason-for-changing-s1-names'] }}
+                                      {% if data['dr-reason-for-changing-s1-personal-details'] %}
+                                        {{ data['dr-reason-for-changing-s1-personal-details'] }}
                                       {% else %}
                                         Reason for change explained here.
                                       {% endif %}
@@ -672,22 +800,30 @@ function setCurrentDateTime(elementId) {
     }
 }
 
-  // Set the date for each item
-  document.addEventListener("DOMContentLoaded", function () {
+   // Set the date for each item
+   document.addEventListener("DOMContentLoaded", function () {
     setCurrentDateTime("currentDateDRS1BirthLastNameChanged");  // Update to S1/S072 entitlement birth last name
     setCurrentDateTime("currentDateDRS1LastNameChanged");  // Update to S1/S072 entitlement last name
     setCurrentDateTime("currentDateDRS1BirthFirstNamesChanged");  // Update to S1/S072 entitlement birth first names
     setCurrentDateTime("currentDateDRS1FirstNamesChanged");  // Update to S1/S072 entitlement first names
-    setCurrentDateTime("currentDateDRS1UKResidencyChanged");  // Update to S1/S072 entitlement personal identification number (PIN)
+
+    setCurrentDateTime("currentDateDRS1UKResidencyChanged");  // Update to S1/S072 date of residency in UK
+
     setCurrentDateTime("currentDateDRS1PinChanged");  // Update to S1/S072 entitlement personal identification number (PIN)
+
     setCurrentDateTime("currentDateDRS1EntitlementEndDateChanged");  // Update to S1/S072 entitlement end date
+
     setCurrentDateTime("currentDateDRS1Cancelled");  // Update to S1/S072 entitlements for cancelling entitlement
+
     setCurrentDateTime("currentDateDRE109MainLinked");  // Update to E109 entitlements for adding a Main insured person
+
     setCurrentDateTime("currentDateDRE109");      // For Dependant E109 entitlements
-    setCurrentDateTime("currentDateDRS1Dependant");  // Update to S1/S072 entitlements for adding a dependant
-    setCurrentDateTime("currentDateDRS1");      // For S1/S072 entitlements
-    setCurrentDateTime("currentDateDREHIC");      // For EHIC entitlements
-    setCurrentDateTime("currentDateDRPRC");  // For PRC entitlements
+
+    setCurrentDateTime("currentDateDRS1Main");  // Update to S1/S072 entitlements for adding a dependant
+    
+    setCurrentDateTime("currentDRDateS1");      // For S1/S072 entitlements
+    setCurrentDateTime("currentDRDateEHIC");      // For EHIC entitlements
+    setCurrentDateTime("currentDRDatePRC");  // For PRC entitlements
 
   });
 </script>

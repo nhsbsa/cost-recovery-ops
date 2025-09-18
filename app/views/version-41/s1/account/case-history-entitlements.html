@@ -82,7 +82,41 @@
                     <div class="nhsuk-card">
                       <div class="nhsuk-card__content">
                         <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                          <h3 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-s1-s072-entitlements">Entitlement ID: 100001</h3>
+                          <h3 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-s1-s072-entitlements">
+                            Entitlement ID: 100001<br>
+                            05/09/2024 to 
+                            
+                            {% if data['update-s1-entitlement-end-date'] == 'yes' %}
+                              {% set day = data['updated-s1-entitlement-end-date-day'] | int %}
+                              {% set month = data['updated-s1-entitlement-end-date-month'] | int %}
+                              {% set year = data['updated-s1-entitlement-end-date-year'] %}
+              
+                            {% elif data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
+                                  {% set day = data['entitlement-end-date-day'] | int %}
+                                  {% set month = data['entitlement-end-date-month'] | int %}
+                                  {% set year = data['entitlement-end-date-year'] %}
+                  
+                            {% else %}
+                              {% set day = 16 %}
+                              {% set month = 10 %}
+                              {% set year = 2024 %}
+                            {% endif %}
+                
+                            {% if day < 10 %}
+                                {% set formatted_day = "0" + day | string %}
+                            {% else %}
+                                {% set formatted_day = day | string %}
+                            {% endif %}
+                
+                            {% if month < 10 %}
+                                {% set formatted_month = "0" + month | string %}
+                            {% else %}
+                                {% set formatted_month = month | string %}
+                            {% endif %}
+            
+                            {{ formatted_day }}/{{ formatted_month }}/{{ year }}
+                            
+                          </h3>
                         </div>
 
                         <hr class="gray-horizontal-line">
@@ -126,9 +160,7 @@
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Details</span>
-                                      <p>Entitlement cancelled<br>
-                                         Entitlement end date
-
+                                      <p>
                                         {# Check if entitlement end date is provided #}
                                           {% if data['entitlement-end-date-day'] and data['entitlement-end-date-month'] and data['entitlement-end-date-year'] %}
                                               {% set day = data['entitlement-end-date-day'] | int %}
@@ -149,6 +181,10 @@
                                               13/01/2025
                                           {% endif %}
                                       </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                      <p>Entitlement cancelled</p>
                                     </td>
                                     <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
@@ -698,7 +734,41 @@
                     <div class="nhsuk-card">
                       <div class="nhsuk-card__content">
                         <div class="nhsuk-grid-row" style="margin-left: 2px;">
-                          <h2 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-s1-s072-entitlements">Entitlement ID: 100003</h2>
+                          <h2 class="nhsuk-card__heading nhsuk-heading-s" id="entitlements-history-s1-s072-entitlements">
+                            Entitlement ID: 100003<br>
+                            06/01/2020 to 
+                                  
+                            {% if data['update-expired-s1-entitlement-end-date'] == 'yes' %}
+                                {% set day = data['updated-expired-s1-entitlement-end-date-day'] | int %}
+                                {% set month = data['updated-expired-s1-entitlement-end-date-month'] | int %}
+                                {% set year = data['updated-expired-s1-entitlement-end-date-year'] %}
+                
+                            {% elif data['expired-entitlement-end-date-day'] and data['expired-entitlement-end-date-month'] and data['expired-entitlement-end-date-year'] %}
+                                {% set day = data['expired-entitlement-end-date-day'] | int %}
+                                {% set month = data['expired-entitlement-end-date-month'] | int %}
+                                {% set year = data['expired-entitlement-end-date-year'] %}
+                
+                            {% else %}
+                                {% set day = 17 %}
+                                {% set month = 03 %}
+                                {% set year = 2020 %}
+                            {% endif %}
+                
+                            {% if day < 10 %}
+                                {% set formatted_day = "0" + day | string %}
+                            {% else %}
+                                {% set formatted_day = day | string %}
+                            {% endif %}
+                
+                            {% if month < 10 %}
+                                {% set formatted_month = "0" + month | string %}
+                            {% else %}
+                                {% set formatted_month = month | string %}
+                            {% endif %}
+                
+                            {{ formatted_day }}/{{ formatted_month }}/{{ year }}
+
+                          </h2>
                         </div>
 
                         <hr class="gray-horizontal-line">

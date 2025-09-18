@@ -48,14 +48,14 @@
       <div class="nhsuk-width-container-fluid">
         <div class="nhsuk-main-wrapper" id="maincontent">
 
-          {% if data['dr-change-s1-names'] == 'yes' %}
+          {% if data['dr-change-s1-personal-details'] == 'yes' %}
             <div>
               <div tabindex="-1" id="notificationHeader" class="govuk-notification-banner govuk-notification-banner--success" role="alert" data-module="govuk-notification-banner">
                 <div class="govuk-notification-banner__header">
                   <span class="govuk-notification-banner__title">Entitlement details updated</span>
                 </div>
                 <div class="govuk-notification-banner__content">
-                  <span class="govuk-notification-banner__heading big-text-wrap">You have changed {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s names on entitlement ID 100002. These names will be used on any future claims and resubmissions against this entitlement. View all changes in the Case history.</span>
+                  <span class="govuk-notification-banner__heading big-text-wrap">You have changed {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s personal details on entitlement ID 100002. These details will be used on any future claims and resubmissions against this entitlement. View all changes in the Case history.</span>
                 </div>
               </div>
             </div>
@@ -191,11 +191,59 @@
                       
                     </dd>
                   </div>
-              </dl>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Date of birth
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-e109-personal-details'] == 'yes' and data['dr-new-e109-date-of-birth-day'] and data['dr-new-e109-date-of-birth-month'] and data['dr-new-e109-date-of-birth-year'] %}
+                        {% if data['dr-new-e109-date-of-birth-day'] and data['dr-new-e109-date-of-birth-month'] and data['dr-new-e109-date-of-birth-year'] %}
+                          {% set day = data['dr-new-e109-date-of-birth-day'] %}
+                          {% set month = data['dr-new-e109-date-of-birth-month'] | int %}
+                          {% set year = data['dr-new-e109-date-of-birth-year'] %}
+              
+                          {# Define month names #}
+                          {% set month_names = [
+                              "January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"
+                          ] %}
+              
+                          {# Get the month name #}
+                          {% set month_name = month_names[month - 1] %}
+              
+                          {# Display the date in the format "day month year" #}
+                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% endif %}
+                      {% elif data['dr-e109-dob-day'] and data['dr-e109-dob-month'] and data['dr-e109-dob-year'] %}
+                        {% set day = data['dr-e109-dob-day'] %}
+                        {% set month = data['dr-e109-dob-month'] | int %}
+                        {% set year = data['dr-e109-dob-year'] %}
+            
+                        {# Define month names #}
+                        {% set month_names = [
+                            "January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                        ] %}
+            
+                        {# Get the month name #}
+                        {% set month_name = month_names[month - 1] %}
+            
+                        {# Display the date in the format "day month year" #}
+                        {{ day | int }} {{ month_name }} {{ year }}  
+                      {% else %}
+                        29 December 1975
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
+                </dl>
 
-              <div style="text-align: right;">
-                <p><a href="dr-change-e109-names">Change<span class="nhsuk-u-visually-hidden">names on this S1 entitlement</span></a></p>
-              </div>
+                <div style="text-align: right;">
+                  <p><a href="change-e109-personal-details">Change<span class="nhsuk-u-visually-hidden">personal details</span></a></p>
+                </div>
+              </dl>
 
 
                     <div class="nhsuk-summary-list__row">
@@ -607,11 +655,59 @@
                       
                     </dd>
                   </div>
-              </dl>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Date of birth
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['dr-change-s1-personal-details'] == 'yes' and data['dr-new-s1-date-of-birth-day'] and data['dr-new-s1-date-of-birth-month'] and data['dr-new-s1-date-of-birth-year'] %}
+                        {% if data['dr-new-s1-date-of-birth-day'] and data['dr-new-s1-date-of-birth-month'] and data['dr-new-s1-date-of-birth-year'] %}
+                          {% set day = data['dr-new-s1-date-of-birth-day'] %}
+                          {% set month = data['dr-new-s1-date-of-birth-month'] | int %}
+                          {% set year = data['dr-new-s1-date-of-birth-year'] %}
+              
+                          {# Define month names #}
+                          {% set month_names = [
+                              "January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"
+                          ] %}
+              
+                          {# Get the month name #}
+                          {% set month_name = month_names[month - 1] %}
+              
+                          {# Display the date in the format "day month year" #}
+                          {{ day | int }} {{ month_name }} {{ year }}
+                        {% endif %}
+                      {% elif data['dr-dob-day'] and data['dr-dob-month'] and data['dr-dob-year'] %}
+                        {% set day = data['dr-dob-day'] %}
+                        {% set month = data['dr-dob-month'] | int %}
+                        {% set year = data['dr-dob-year'] %}
+            
+                        {# Define month names #}
+                        {% set month_names = [
+                            "January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                        ] %}
+            
+                        {# Get the month name #}
+                        {% set month_name = month_names[month - 1] %}
+            
+                        {# Display the date in the format "day month year" #}
+                        {{ day | int }} {{ month_name }} {{ year }}  
+                      {% else %}
+                        29 December 1975
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
+                </dl>
 
-              <div style="text-align: right;">
-                <p><a href="dr-change-s1-names">Change<span class="nhsuk-u-visually-hidden">names on this S1 entitlement</span></a></p>
-              </div>
+                <div style="text-align: right;">
+                  <p><a href="dr-change-s1-personal-details">Change<span class="nhsuk-u-visually-hidden">personal details</span></a></p>
+                </div>
+              </dl>
 
 
               <dl class="nhsuk-summary-list">

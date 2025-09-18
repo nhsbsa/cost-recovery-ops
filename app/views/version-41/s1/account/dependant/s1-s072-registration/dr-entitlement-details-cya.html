@@ -36,7 +36,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
 
                     
                         
-                    <form action="entitlement-details-cya" method="post">
+                    <form action="dr-entitlement-details-cya" method="post">
 
                     <h1 class="app-page-heading">
                         <span class="nhsuk-caption-l">
@@ -52,8 +52,8 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Entitlement type</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['entitlement'] %}
-                            {{ data['entitlement'] }}
+                          {% if data['dr-entitlement-type'] %}
+                            {{ data['dr-entitlement-type'] }}
                           {% else %}
                             S1
                           {% endif %}
@@ -66,8 +66,8 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">S1 registration type</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-entitlement-type'] %}
-                            {{ data['s1-entitlement-type'] }}
+                          {% if data['dr-s1-entitlement-type'] %}
+                            {{ data['dr-s1-entitlement-type'] }}
                           {% else %}
                             S1/S072
                           {% endif %}
@@ -77,12 +77,12 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                         </dd>
                       </div>
 
-                      {% if data['s1-entitlement-type'] == 'S1/S072' %}
+                      {% if data['dr-s1-entitlement-type'] == 'S1/S072' %}
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Entitlement for</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['entitlement-for'] %}
-                            {{ data['entitlement-for'] }}
+                          {% if data['dr-entitlement-for'] %}
+                            {{ data['dr-entitlement-for'] }}
                           {% else %}
                             Main
                           {% endif %}
@@ -91,7 +91,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           <a href="entitlement-for"> Change<span class="nhsuk-u-visually-hidden">entitlement for</span> </a>
                         </dd>
                       </div>
-                      {% elif data['s1-entitlement-type'] == '+S072 (from an FAS1Q enquiry)' %}
+                      {% elif data['dr-s1-entitlement-type'] == '+S072 (from an FAS1Q enquiry)' %}
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Entitlement for</dt>
                         <dd class="nhsuk-summary-list__value">
@@ -101,7 +101,7 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                           
                         </dd>
                       </div>
-                      {% elif data['s1-entitlement-type'] == 'E109' %}
+                      {% elif data['dr-s1-entitlement-type'] == 'E109' %}
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Entitlement for</dt>
                         <dd class="nhsuk-summary-list__value">
@@ -127,13 +127,13 @@ Check your answers - Manage overseas entitlements and treatments - NHSBSA
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Personal identification number (PIN)</dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['entitlement-for'] == 'Main' %}
+                          {% if data['dr-entitlement-for'] == 'Main' %}
                             {% if data['s1-entitlement-pin'] %}
                               {{ data['s1-entitlement-pin'] }}
                             {% else %}
                               1234567890
                             {% endif %}
-                          {% elif data['entitlement-for'] == 'Dependant' %}
+                          {% elif data['dr-entitlement-for'] == 'Dependant' %}
                             {% if data['s1-entitlement-pin'] %}
                               {{ data['s1-entitlement-pin'] }}
                             {% else %}

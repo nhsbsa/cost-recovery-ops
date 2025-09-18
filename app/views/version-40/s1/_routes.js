@@ -205,9 +205,9 @@ router.post([/which-s1-entitlement/], function(req, res) {
   var s1EntitlementType = req.session.data['s1-entitlement-type'];
   
   if (s1EntitlementType === 'E109') {
-    res.redirect('/version-40/s1/account/dependant/s072-registration/entitlement-details');
+    res.redirect('/version-40/s1/account/dependant/s1-s072-registration/entitlement-details');
   } else {
-    res.redirect('/version-40/s1/account/dependant/s072-registration/entitlement-for');
+    res.redirect('/version-40/s1/account/dependant/s1-s072-registration/entitlement-for');
   }
 })
 

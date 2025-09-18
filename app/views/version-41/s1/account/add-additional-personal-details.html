@@ -34,6 +34,18 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                       "text": "Go back"
                     }) }}
                 
+                    <div class="nhsuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="nhsuk-error-summary" id="error-summary" style="display: none;">
+                      <h2 class="nhsuk-error-summary__title" id="error-summary-title">
+                        There is a problem
+                      </h2>
+                      <div class="nhsuk-error-summary__body">
+                        <ul class="nhsuk-list nhsuk-error-summary__list" role="list" id="error-summary-list">
+                          <li><a href="#sex-form-group">Select the sex</a></li>
+                        </ul>
+                      </div>
+                    </div>
+
+
                     <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 123456</p>
 
                     <h1 class="app-page-heading">
@@ -42,33 +54,28 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                     
                     <form action="add-additional-personal-details" method="post">
           
-                      <div class="nhsuk-form-group">
+                      <div class="nhsuk-form-group" id="sex-form-group">
                         <label class="nhsuk-label" for="sex-label">
-                            Sex
-                          </label>
+                          Sex
+                        </label>
+                        <span class="nhsuk-error-message" id="sex-error-message" style="display: none;">
+                          <span class="nhsuk-u-visually-hidden">Error:</span> Select the sex
+                        </span>
                         <div class="nhsuk-radios">
-                            <div class="nhsuk-radios__item">
+                          <div class="nhsuk-radios__item">
                             <input class="nhsuk-radios__input" id="sex-male" name="sex" type="radio" value="Male">
-                            <label class="nhsuk-label nhsuk-radios__label" for="sex-male">
-                                Male
-                            </label>
-                            </div>
-                    
-                            <div class="nhsuk-radios__item">
+                            <label class="nhsuk-label nhsuk-radios__label" for="sex-male">Male</label>
+                          </div>
+                          <div class="nhsuk-radios__item">
                             <input class="nhsuk-radios__input" id="sex-female" name="sex" type="radio" value="Female">
-                            <label class="nhsuk-label nhsuk-radios__label" for="sex-female">
-                                Female
-                            </label>
-                            </div>
-                    
-                            <div class="nhsuk-radios__item">
+                            <label class="nhsuk-label nhsuk-radios__label" for="sex-female">Female</label>
+                          </div>
+                          <div class="nhsuk-radios__item">
                             <input class="nhsuk-radios__input" id="sex-unknown" name="sex" type="radio" value="Unknown">
-                            <label class="nhsuk-label nhsuk-radios__label" for="sex-unknown">
-                                Unknown
-                            </label>
-                            </div>
+                            <label class="nhsuk-label nhsuk-radios__label" for="sex-unknown">Unknown</label>
+                          </div>
                         </div>
-                      </div>
+                      </div>                                           
                       
 
                       <div class="nhsuk-form-group">
@@ -304,7 +311,7 @@ Add additional personal details - Manage overseas entitlements and treatments - 
                       Contact number (optional)
                     </label>
                     <div class="nhsuk-hint" id="contact-number-hint">
-                      Include the country code. For example, (+44) for United Kingdom.
+                      Include the country code only if you know it. For example, +44 for United Kingdom.
                     </div>
                     <input class="nhsuk-input nhsuk-input--width-10" id="contact-number" name="contact-number" type="text"  autocomplete="cc-csc" value="">
                   </div>
@@ -335,15 +342,6 @@ Add additional personal details - Manage overseas entitlements and treatments - 
   })
 </script>
 
-<!-- autocomplete js for Contact number type -->
-<script type="text/javascript">
-  accessibleAutocomplete.enhanceSelectElement({
-    defaultValue : '',
-    autoselect : true,  
-    selectElement : document.querySelector('#contact-number-type')
-  })
-</script>
-
 <!-- DOB format -->
 <script>
   function updateFormattedDate() {
@@ -359,5 +357,42 @@ Add additional personal details - Manage overseas entitlements and treatments - 
 }
 
 document.addEventListener('DOMContentLoaded', updateFormattedDate);
+</script>
+
+<!-- Error message for Sex if not selected -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const sexFormGroup = document.getElementById("sex-form-group");
+    const errorMessage = document.getElementById("sex-error-message");
+    const errorSummary = document.getElementById("error-summary");
+
+    form.addEventListener("submit", function (e) {
+      const selectedSex = document.querySelector('input[name="sex"]:checked');
+      
+      if (!selectedSex) {
+        e.preventDefault(); // stop form submission
+
+        // Show inline error
+        sexFormGroup.classList.add("nhsuk-form-group--error");
+        errorMessage.style.display = "block";
+
+        // Show error summary
+        errorSummary.style.display = "block";
+        errorSummary.focus();
+
+        // Move focus to first error link in summary
+        const firstErrorLink = errorSummary.querySelector("a");
+        if (firstErrorLink) {
+          firstErrorLink.focus();
+        }
+      } else {
+        // Clear errors if fixed
+        sexFormGroup.classList.remove("nhsuk-form-group--error");
+        errorMessage.style.display = "none";
+        errorSummary.style.display = "none";
+      }
+    });
+  });
 </script>
 {% endblock %}

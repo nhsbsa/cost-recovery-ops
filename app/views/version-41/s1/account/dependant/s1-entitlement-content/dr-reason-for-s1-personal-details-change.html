@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Why are you making this change? - Manage overseas entitlements and treatments - NHSBSA
+Change first names on this S1 entitlement - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -34,36 +34,35 @@ Why are you making this change? - Manage overseas entitlements and treatments - 
                       "text": "Go back"
                     }) }}
 
-                    <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 654321</p>
+                    <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 654321<br>Entitlement ID: 100002</p>
 
                     
-                    <form action="dr-reason-for-name-change" method="post">
+                    <form action="dr-reason-for-s1-personal-details-change" method="post">
 
                       <div class="nhsuk-character-count" data-module="nhsuk-character-count" data-maxlength="255">
                         <div class="nhsuk-form-group">
                           <h1 class="nhsuk-label-wrapper">
-                            <label class="nhsuk-label nhsuk-label--xl" for="change-names-reason-label">
-                            Why are you making this change?
+                            <label class="nhsuk-label nhsuk-label--xl" for="reason-for-changing-s1-personal-details-heading">
+                              Why are you making this change?
                             </label>
                           </h1>
-                          <div class="nhsuk-hint" id="more-detail-hint">
-                            If you have been emailing someone, you may want to include an email reference number. Your comments will be displayed on the Person tab of the Case history.
-                          </div> <textarea class="nhsuk-textarea nhsuk-js-character-count" id="dr-reason-for-changing-names" name="dr-reason-for-changing-names" rows="5" aria-describedby="dr-reason-for-changing-names"></textarea>
+                          <div class="nhsuk-hint" id="reason-for-changing-s1-personal-details-hint">
+                            If you have been emailing someone, you may want to include an email reference number. Your comments will be displayed on the Entitlement tab in the Case history.
+                          </div> 
+                          <textarea class="nhsuk-textarea nhsuk-js-character-count" id="drReasonForChangingS1PersonalDetails" name="dr-reason-for-changing-s1-personal-details" rows="5" aria-describedby="dr-reason-for-changing-s1-personal-details-hint"></textarea>
                         </div>
                       
-                        <div class="nhsuk-hint nhsuk-character-count__message" id="dr-reason-for-changing-names">
+                        <div class="nhsuk-hint nhsuk-character-count__message" id="dr-reason-for-changing-s1-personal-details-info">
                           You can enter up to 255 characters
                         </div>
-                      
                       </div>
 
-                    
                                  
                       <button class="nhsuk-button" type="submit">
                         Continue
                       </button>
 
-                      <p style="margin-bottom: 60px;"><a href="personal-details">Cancel</a></p>
+                      <p style="margin-bottom: 60px;"><a href="../s1-entitlement-content/s1-entitlement-details">Cancel</a></p>
 
                     </form>
 

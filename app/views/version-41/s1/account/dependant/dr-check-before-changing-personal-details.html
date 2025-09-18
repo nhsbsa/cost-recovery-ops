@@ -35,13 +35,13 @@ Check your answers before adding additional details - Manage overseas entitlemen
                     }) }}
                 
                     
-                    <form action="dr-check-before-changing-names" method="post">
+                    <form action="dr-check-before-changing-personal-details" method="post">
           
                       <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 654321</p>
                   
                           <div class="nhsuk-form-group">
                             <label class="nhsuk-label" for="additional-personal-details-cya-header-label">
-                              <h1 class="nhsuk-heading-xl">Check your answers before changing Jane Doe's names</h1>
+                              <h1 class="nhsuk-heading-xl">Check your answers before changing {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}'s personal details</h1>
                             </label>
                           </div>
 
@@ -58,7 +58,7 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="dr-change-names#dr-new-first-names">
+                                <a href="dr-change-personal-details#dr-new-first-names">
                                   Change<span class="nhsuk-u-visually-hidden">first names</span>
                                 </a>
                               </dd>
@@ -75,7 +75,7 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="dr-change-names#dr-new-birth-first-names">
+                                <a href="dr-change-personal-details#dr-new-birth-first-names">
                                   Change<span class="nhsuk-u-visually-hidden">first names at birth</span>
                                 </a>
                               </dd>
@@ -92,7 +92,7 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="dr-change-names#dr-new-last-name">
+                                <a href="dr-change-personal-details#dr-new-last-name">
                                   Change<span class="nhsuk-u-visually-hidden">last name</span>
                                 </a>
                               </dd>
@@ -109,8 +109,39 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="dr-change-names#dr-new-birth-last-name">
+                                <a href="dr-change-personal-details#dr-new-birth-last-name">
                                   Change<span class="nhsuk-u-visually-hidden">last name at birth</span>
+                                </a>
+                              </dd>
+                            </div>
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                Date of birth
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['dr-new-date-of-birth-day'] and data['dr-new-date-of-birth-month'] and data['dr-new-date-of-birth-year'] %}
+                                    {% set day = data['dr-new-date-of-birth-day'] %}
+                                    {% set month = data['dr-new-date-of-birth-month'] | int %}
+                                    {% set year = data['dr-new-date-of-birth-year'] %}
+                        
+                                    {# Define month names #}
+                                    {% set month_names = [
+                                        "January", "February", "March", "April", "May", "June",
+                                        "July", "August", "September", "October", "November", "December"
+                                    ] %}
+                        
+                                    {# Get the month name #}
+                                    {% set month_name = month_names[month - 1] %}
+                        
+                                    {# Display the date in the format "day month year" #}
+                                    {{ day | int }} {{ month_name }} {{ year }}
+                                {% else %}
+                                    29 December 1975
+                                {% endif %}
+                              </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="dr-change-personal-details#dr-new-date-of-birth-day">
+                                  Change<span class="nhsuk-u-visually-hidden">date of birth</span>
                                 </a>
                               </dd>
                             </div>
@@ -119,15 +150,15 @@ Check your answers before adding additional details - Manage overseas entitlemen
                                 Reason for change
                               </dt>
                               <dd class="nhsuk-summary-list__value">
-                                {% if data['dr-reason-for-changing-names'] %}
-                                  {{ data['dr-reason-for-changing-names'] }}
+                                {% if data['dr-reason-for-changing-personal-details'] %}
+                                  {{ data['dr-reason-for-changing-personal-details'] }}
                                 {% else %}
                                   Reason for change explained here.
                                 {% endif %}
                               </dd>
                               <dd class="nhsuk-summary-list__actions">
-                                <a href="dr-reason-for-name-change#dr-reason-for-changing-names">
-                                  Change<span class="nhsuk-u-visually-hidden">reason for changing names</span>
+                                <a href="dr-reason-for-personal-details-change#dr-reason-for-changing-personal-details">
+                                  Change<span class="nhsuk-u-visually-hidden">reason for changing personal details</span>
                                 </a>
                               </dd>
                             </div>
