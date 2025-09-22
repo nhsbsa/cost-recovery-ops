@@ -111,7 +111,7 @@
                   <span class="govuk-notification-banner__title" id="govuk-notification-banner-title">Personal details updated</span>
                </div>
                <div class="govuk-notification-banner__content">
-                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have added a current address to {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}John{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s person record. View all changes in the Case history.</span>
+                  <span class="govuk-notification-banner__heading big-text-wrap" id="govuk-notification-banner-content">You have added a current address to {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s person record. View all changes in the Case history.</span>
                </div>
             </div>
          
@@ -430,18 +430,55 @@
                               
                               {{ data['dr-new-current-address-postcode'] }}<br>
                               {{ data['dr-new-current-address-country'] }}
+                          {% else %}
+                            100 Meldon Terrace<br>
+                            Heaton<br>
+                            Newcastle upon Tyne<br>
+                            NE6 5XQ<br>
+                            United Kingdom (UK)
                           {% endif %}
-                      {% else %}
+                      {% elif data['dr-add-current-address'] == 'yes' %}
+                        {# Check if any of the address fields have been added, otherwise fallback to default #}
+                        {% if data['dr-current-address-line-1'] or data['dr-current-address-line-2'] or data['dr-current-address-line-3'] or data['dr-current-address-town'] or data['dr-current-address-region'] or data['dr-current-address-postcode'] or data['dr-current-address-country'] %}
+                            {{ data['dr-current-address-line-1'] }}<br>
+                            
+                            {% if data['dr-current-address-line-2'] %}
+                                {{ data['dr-current-address-line-2'] }}<br>
+                            {% endif %}
+                            
+                            {% if data['dr-current-address-line-3'] %}
+                                {{ data['dr-current-address-line-3'] }}<br>
+                            {% endif %}
+                            
+                            {{ data['dr-current-address-town'] }}<br>
+                            
+                            {% if data['dr-current-address-region'] %}
+                                {{ data['dr-current-address-region'] }}<br>
+                            {% endif %}
+                            
+                            {{ data['dr-current-address-postcode'] }}<br>
+                            {{ data['dr-current-address-country'] }}
+                        {% else %}
                           1 Washington Street<br>
                           Worcester<br>
                           WR1 1NL<br>
                           United Kingdom (UK)
+                        {% endif %}
+
+                      {% else %}
+                        {# Leave field blank as no current address has been added, yet #}
                       {% endif %}
                   </dd>
                   <dd class="nhsuk-summary-list__actions">
+                    {% if data['dr-add-current-address'] == 'yes' %}
                       <a href="dr-change-current-address">
                           Change<span class="nhsuk-u-visually-hidden">current address</span>
                       </a>
+                    {% else %}
+                      <a href="dr-add-current-address">
+                        Add<span class="nhsuk-u-visually-hidden">current address</span>
+                      </a>
+                    {% endif %}
                   </dd>
                 </div>              
               </dl>

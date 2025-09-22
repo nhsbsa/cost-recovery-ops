@@ -467,6 +467,7 @@
                                     <th scope="col">Date and time</th>
                                     <th scope="col">Action</th>
                                     <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                                    <th scope="col">Reason for change</th>
                                     <th scope="col">Updated by</th>
                                     <!--th scope="col">Comments</th-->
                                   </tr>
@@ -514,20 +515,19 @@
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                      <p>
+                                        {% if data['reason-for-changing-current-address'] %}
+                                          {{ data['reason-for-changing-current-address'] }}
+                                        {% else %}
+                                          Reason for change explained here.
+                                        {% endif %}
+                                      </p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
                                       <p id="person-history-address-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                                     </td>
-                                    <!--td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Comments</span>
-                                      <p id="person-history-address-updated-by">
-                                        {# Check if any comments have been added, otherwise fallback to default #}
-                                        {% if data['address-change-comment'] %}
-                                          {{ data['address-change-comment'] }}
-                                        {% else %}
-                                        Individual informed us they had moved address
-                                        {% endif %}
-                                      </p>
-                                    </td-->
                                   </tr>
                                   {% endif %}
 
@@ -550,13 +550,13 @@
                                       </p>
                                     </td>
                                     <td class="nhsuk-table__cell">
+                                      <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                      <p id="person-history-name-updated-by">Not applicable</p>
+                                    </td>
+                                    <td class="nhsuk-table__cell">
                                       <span class="nhsuk-table-responsive__heading">Updated by</span>
                                       <p id="person-history-address-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                                     </td>
-                                    <!--td class="nhsuk-table__cell">
-                                      <span class="nhsuk-table-responsive__heading">Comments</span>
-                                      <p id="person-history-address-updated-by">None provided</p>
-                                    </td-->
                                   </tr>
                                 </tbody>
                               </table>

@@ -340,26 +340,61 @@ router.post([/dr-check-before-changing-additional-details/], function (req, res)
 });
 
 
+// Add a current address 
+// Step 1 - Add a current address
+router.post([/dr-add-current-address/], function (req, res) {
+
+  // Build the current address from individual form fields
+  req.session.data['dr-current-address'] = {
+    line1: req.body['dr-current-address-line-1'] || '',
+    line2: req.body['dr-current-address-line-2'] || '',
+    line3: req.body['dr-current-address-line-3'] || '',
+    town: req.body['dr-current-address-town'] || '',
+    region: req.body['dr-current-address-region'] || '',
+    postcode: req.body['dr-current-address-postcode'] || '',
+    country: req.body['dr-current-address-country'] || ''
+  };
+
+  // Redirect to the check-your-answers screen
+  res.redirect('/version-41/s1/account/dependant/dr-check-before-adding-current-address');
+});
+
+
+// Step 2 - Check your answers before adding the current address
+router.post([/dr-check-before-adding-current-address/], function (req, res) {
+  // Set session variable indicating the address change process has started
+  req.session.data['dr-add-current-address'] = 'yes';
+
+  // Redirect back to address details with updated data
+  res.redirect('/version-41/s1/account/dependant/personal-details');
+});
+
 // Change current address 
 // Step 1 - Change the current address
 router.post([/dr-change-current-address/], function (req, res) {
 
   // Build the new address from individual form fields
-  req.session.data['dr-new-address'] = {
-    line1: req.body['dr-new-address-line-1'] || '',
-    line2: req.body['dr-new-address-line-2'] || '',
-    line3: req.body['dr-new-address-line-3'] || '',
-    town: req.body['dr-new-address-town'] || '',
-    region: req.body['dr-new-address-region'] || '',
-    postcode: req.body['dr-new-address-postcode'] || '',
-    country: req.body['dr-new-address-country'] || ''
+  req.session.data['dr-new-current-address'] = {
+    line1: req.body['dr-new-current-address-line-1'] || '',
+    line2: req.body['dr-new-current-address-line-2'] || '',
+    line3: req.body['dr-new-current-address-line-3'] || '',
+    town: req.body['dr-new-current-address-town'] || '',
+    region: req.body['dr-new-current-address-region'] || '',
+    postcode: req.body['dr-new-current-address-postcode'] || '',
+    country: req.body['dr-new-current-address-country'] || ''
   };
 
   // Redirect to the check-your-answers screen
-  res.redirect('/version-41/s1/account/dependant/dr-check-before-changing-current-address');
+  res.redirect('/version-41/s1/account/dependant/dr-reason-for-current-address-change');
 });
 
-// Step 2 - Check your answers before changing current address
+// Step 2 - add reason for changing current address
+router.post([/dr-reason-for-current-address-change/], function(req, res) {
+  req.session.data['dr-reason-for-changing-current-address'] = req.body['dr-reason-for-changing-current-address'];
+  res.redirect('/version-41/s1/account/dependant/dr-check-before-changing-current-address');
+})
+
+// Step 3 - Check your answers before changing current address
 router.post([/dr-check-before-changing-current-address/], function (req, res) {
   // Set session variable indicating the address change process has started
   req.session.data['dr-change-current-address'] = 'yes';

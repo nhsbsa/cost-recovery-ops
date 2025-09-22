@@ -104,13 +104,13 @@ req.session.data['new-date-of-birth'] = dobDate;
   res.redirect('/version-41/s1/account/reason-for-personal-details-change');
 })
 
-// Step 2 - add reason for changing names
+// Step 2 - add reason for changing personal details
 router.post([/reason-for-personal-details-change/], function(req, res) {
   req.session.data['reason-for-changing-personal-details'] = req.body['reason-for-changing-personal-details'];
   res.redirect('/version-41/s1/account/check-before-changing-personal-details');
 })
 
-// Step 3 - check your answers
+// Step 3 - check your answers before changing personal details
 router.post([/check-before-changing-personal-details/], function(req, res) {
   req.session.data['change-personal-details'] = 'yes';
   res.redirect('/version-41/s1/account/personal-details');
@@ -184,10 +184,16 @@ router.post([/change-current-address/], function (req, res) {
   };
 
   // Redirect to the check-your-answers screen
-  res.redirect('/version-41/s1/account/check-before-changing-current-address');
+  res.redirect('/version-41/s1/account/reason-for-current-address-change');
 });
 
-// Step 2 - Check your answers before changing current address
+// Step 2 - add reason for changing current address
+router.post([/reason-for-current-address-change/], function(req, res) {
+  req.session.data['reason-for-changing-current-address'] = req.body['reason-for-changing-current-address'];
+  res.redirect('/version-41/s1/account/check-before-changing-current-address');
+})
+
+// Step 3 - Check your answers before changing current address
 router.post([/check-before-changing-current-address/], function (req, res) {
   // Set session variable indicating the address change process has started
   req.session.data['change-current-address'] = 'yes';

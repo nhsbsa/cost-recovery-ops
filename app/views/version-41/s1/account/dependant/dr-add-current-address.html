@@ -12,7 +12,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Update current address - Manage overseas entitlements and treatments - NHSBSA
+Add current address - Manage overseas entitlements and treatments - NHSBSA
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -46,74 +46,73 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
                       </div>
                     </div>
 
-                    <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 123456</p>
+                    <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 654321</p>
 
                     <h1 class="app-page-heading">
-                      Change {% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}’s current address on their person record
+                      Add {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s current address to their person record
                     </h1>
 
                     
-                    <form action="change-current-address" method="post">
+                    <form action="dr-add-current-address" method="post">
 
                       <div class="nhsuk-inset-text">
                         <span class="nhsuk-u-visually-hidden">Information: </span>
-                        <p>A change to the current address on this person record will not impact any entitlements, claims, submissions or documents.</p>
                         <p>You must enter Address line 1 and Country. If you do not know this information, select Go back.</p>
                       </div>
                       
-                      <div class="nhsuk-form-group" id="new-current-address-line-1-form-group">
-                        <label class="nhsuk-label" for="new-current-address-line-1">
+                      <div class="nhsuk-form-group" id="dr-current-address-line-1-form-group">
+                        <label class="nhsuk-label" for="dr-current-address-line-1">
                           Address line 1
                         </label>
                         <span class="nhsuk-error-message" id="address-line-1-error-message" style="display: none;">
                           <span class="nhsuk-u-visually-hidden">Error:</span> Enter address line 1
                         </span>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-current-address-line-1" name="new-current-address-line-1" type="text" autocomplete="address-line1" value="1 Washington Street">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-current-address-line-1" name="dr-current-address-line-1" type="text" autocomplete="address-line1">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-current-address-line-2-label">
+                        <label class="nhsuk-label" for="dr-current-address-line-2-label">
                           Address line 2 (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-current-address-line-2" name="new-current-address-line-2" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-current-address-line-2" name="dr-current-address-line-2" type="text"  autocomplete="cc-csc">
                       </div>
 
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-current-address-line-3-label">
+                        <label class="nhsuk-label" for="dr-current-address-line-3-label">
                           Address line 3 (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="new-current-address-line-3" name="new-current-address-line-3" type="text"  autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-current-address-line-3" name="dr-current-address-line-3" type="text"  autocomplete="cc-csc">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-current-address-town-label">
+                        <label class="nhsuk-label" for="dr-current-address-town-label">
                           Town or city (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-current-address-town" name="new-current-address-town" type="text" autocomplete="cc-csc" value="Worcester">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dr-current-address-town" name="dr-current-address-town" type="text" autocomplete="cc-csc">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-current-address-region-label">
+                        <label class="nhsuk-label" for="dr-current-address-region-label">
                           County, province or region (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" id="new-current-address-region" name="new-current-address-region" type="text" autocomplete="cc-csc">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dr-current-address-region" name="dr-current-address-region" type="text" autocomplete="cc-csc">
                       </div>
               
                       <div class="nhsuk-form-group">
-                        <label class="nhsuk-label" for="new-current-address-postcode-label">
+                        <label class="nhsuk-label" for="dr-current-address-postcode-label">
                           Postcode (optional)
                         </label>
-                        <input class="nhsuk-input nhsuk-input--width-10" id="new-current-address-postcode" name="new-current-address-postcode" type="text"  autocomplete="cc-csc" value="WR1 1NL">
+                        <input class="nhsuk-input nhsuk-input--width-10" id="dr-current-address-postcode" name="dr-current-address-postcode" type="text"  autocomplete="cc-csc">
                       </div>
 
-                      <div class="nhsuk-form-group" id="new-current-address-country-form-group">
-                        <label class="nhsuk-label" for="new-current-address-country">
+                      <div class="nhsuk-form-group" id="dr-current-address-country-form-group">
+                        <label class="nhsuk-label" for="dr-current-address-country">
                           Country
                         </label>
                         <span class="nhsuk-error-message" id="country-error-message" style="display: none;">
                           <span class="nhsuk-u-visually-hidden">Error:</span> Enter a country
                         </span>
-                        <input class="nhsuk-input nhsuk-u-width-one-third" list="countries" id="new-current-address-country" name="new-current-address-country" value="United Kingdom (UK)">
+                        <input class="nhsuk-input nhsuk-u-width-one-third" list="countries" id="dr-current-address-country" name="dr-current-address-country">
                         <datalist id="countries">
                           <option value="Austria (AT)">Austria (AT)</option>
                           <option value="Belgium (BE)">Belgium (BE)</option>
@@ -172,22 +171,21 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue : '',
     autoselect : true,  
-    selectElement : document.querySelector('#new-current-address-country')
+    selectElement : document.querySelector('#countries')
   })
 </script>
-
 
 <!-- Validation script if Address line 1 or Country not provided -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
 
-    const addressLine1Input = document.getElementById("new-current-address-line-1");
-    const addressLine1FormGroup = document.getElementById("new-current-address-line-1-form-group");
+    const addressLine1Input = document.getElementById("dr-current-address-line-1");
+    const addressLine1FormGroup = document.getElementById("dr-current-address-line-1-form-group");
     const addressLine1Error = document.getElementById("address-line-1-error-message");
 
-    const countryInput = document.getElementById("new-current-address-country");
-    const countryFormGroup = document.getElementById("new-current-address-country-form-group");
+    const countryInput = document.getElementById("dr-current-address-country");
+    const countryFormGroup = document.getElementById("dr-current-address-country-form-group");
     const countryError = document.getElementById("country-error-message");
 
     const errorSummary = document.getElementById("error-summary");
@@ -209,7 +207,7 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
         e.preventDefault();
         addressLine1FormGroup.classList.add("nhsuk-form-group--error");
         addressLine1Error.style.display = "block";
-        errors.push('<li><a href="#new-current-address-line-1-form-group">Enter address line 1</a></li>');
+        errors.push('<li><a href="#dr-current-address-line-1-form-group">Enter address line 1</a></li>');
       }
 
       // Check Country
@@ -217,7 +215,7 @@ Update current address - Manage overseas entitlements and treatments - NHSBSA
         e.preventDefault();
         countryFormGroup.classList.add("nhsuk-form-group--error");
         countryError.style.display = "block";
-        errors.push('<li><a href="#new-current-address-country-form-group">Enter a country</a></li>');
+        errors.push('<li><a href="#dr-current-address-country-form-group">Enter a country</a></li>');
       }
 
       // Show error summary if needed

@@ -445,6 +445,7 @@
 
 
                   <!-- Start of Current address card -->
+                  {% if data['dr-add-current-address'] == 'yes' %}
                   <div class="nhsuk-card">
                     <div class="nhsuk-card__content">
                       <div class="nhsuk-grid-row" style="margin-left: 2px;">
@@ -467,6 +468,7 @@
                                   <th scope="col">Date and time</th>
                                   <th scope="col">Action</th>
                                   <th scope="col" style="min-width: 200px; white-space: nowrap;">Details</th>
+                                  <th scope="col">Reason for change</th>
                                   <th scope="col">Updated by</th>
                                   <!--th scope="col">Comments</th-->
                                 </tr>
@@ -486,30 +488,40 @@
                                     <span class="nhsuk-table-responsive__heading">Details</span>
                                     <p id="person-history-address-details">
                                       {# Check if any of the address fields have been updated, otherwise fallback to default #}
-                                      {% if data['dr-new-address-line-1'] or data['dr-new-address-line-2'] or data['dr-new-address-town'] or data['dr-new-address-region'] or data['dr-new-address-postcode'] or data['dr-new-address-country'] %}
-                                        {{ data['dr-new-address-line-1'] }}<br>
+                                      {% if data['dr-new-current-address-line-1'] or data['dr-new-current-address-line-2'] or data['dr-new-current-address-town'] or data['dr-new-current-address-region'] or data['dr-new-current-address-postcode'] or data['dr-new-current-address-country'] %}
+                                        {{ data['dr-new-current-address-line-1'] }}<br>
                                   
-                                        {% if data['dr-new-address-line-2'] %}
-                                          {{ data['dr-new-address-line-2'] }}<br>
+                                        {% if data['dr-new-current-address-line-2'] %}
+                                          {{ data['dr-new-current-address-line-2'] }}<br>
                                         {% endif %}
                                         
-                                        {% if data['dr-new-address-line-3'] %}
-                                          {{ data['dr-new-address-line-3'] }}<br>
+                                        {% if data['dr-new-current-address-line-3'] %}
+                                          {{ data['dr-new-current-address-line-3'] }}<br>
                                         {% endif %}
                                         
-                                        {{ data['dr-new-address-town'] }}<br>
+                                        {{ data['dr-new-current-address-town'] }}<br>
                                         
-                                        {% if data['dr-new-address-region'] %}
-                                          {{ data['dr-new-address-region'] }}<br>
+                                        {% if data['dr-new-current-address-region'] %}
+                                          {{ data['dr-new-current-address-region'] }}<br>
                                         {% endif %}
                                         
-                                        {{ data['dr-new-address-postcode'] }}<br>
-                                        {{ data['dr-new-address-country'] }}
+                                        {{ data['dr-new-current-address-postcode'] }}<br>
+                                        {{ data['dr-new-current-address-country'] }}
                                       {% else %}
                                         100 Meldon Terrace<br>
                                         Newcastle upon Tyne<br>
                                         NE6 5XQ<br>
                                         United Kingdom (UK)
+                                      {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                    <p>
+                                      {% if data['dr-reason-for-changing-current-address'] %}
+                                        {{ data['dr-reason-for-changing-current-address'] }}
+                                      {% else %}
+                                        Reason for change explained here.
                                       {% endif %}
                                     </p>
                                   </td>
@@ -531,32 +543,57 @@
                                 </tr>
                                 {% endif %}
 
+                                
                                 <tr class="nhsuk-table__row">
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                    <p id="person-history-address-date-time_0">13/12/2024,<br>14:37</p>
+                                    <p id="currentDateDRAddressAdded"></span></p>
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Action</span>
-                                    <p>Created</p>
+                                    <p>Added</p>
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Details</span>
                                     <p id="person-history-address-details">
-                                      1 Washington Street<br>
-                                      Worcester<br>
-                                      WR1 1NL<br>
-                                      United Kingdom (UK)
+                                      {# Check if any of the address fields have been updated, otherwise fallback to default #}
+                                      {% if data['dr-current-address-line-1'] or data['dr-current-address-line-2'] or data['dr-current-address-town'] or data['dr-current-address-region'] or data['dr-current-address-postcode'] or data['dr-current-address-country'] %}
+                                        {{ data['dr-current-address-line-1'] }}<br>
+                                  
+                                        {% if data['dr-current-address-line-2'] %}
+                                          {{ data['dr-current-address-line-2'] }}<br>
+                                        {% endif %}
+                                        
+                                        {% if data['dr-current-address-line-3'] %}
+                                          {{ data['dr-current-address-line-3'] }}<br>
+                                        {% endif %}
+                                        
+                                        {{ data['dr-current-address-town'] }}<br>
+                                        
+                                        {% if data['dr-current-address-region'] %}
+                                          {{ data['dr-current-address-region'] }}<br>
+                                        {% endif %}
+                                        
+                                        {{ data['dr-current-address-postcode'] }}<br>
+                                        {{ data['dr-current-address-country'] }}
+                                      {% else %}
+                                        1 Washington Street<br>
+                                        Worcester<br>
+                                        WR1 1NL<br>
+                                        United Kingdom (UK)
+                                      {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for change</span>
+                                    <p>
+                                      Not applicable
                                     </p>
                                   </td>
                                   <td class="nhsuk-table__cell">
                                     <span class="nhsuk-table-responsive__heading">Updated by</span>
                                     <p id="person-history-address-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
                                   </td>
-                                  <!--td class="nhsuk-table__cell">
-                                    <span class="nhsuk-table-responsive__heading">Comments</span>
-                                    <p id="person-history-address-updated-by">None provided</p>
-                                  </td-->
                                 </tr>
                               </tbody>
                             </table>
@@ -568,7 +605,7 @@
 
                 </div>
                   </div>
-
+                {% endif %}
                 <!-- End of Current address card -->
                 
 
@@ -1317,6 +1354,7 @@ function setCurrentDateTime(elementId) {
     setCurrentDateTime("currentDateDRDOBChanged");  // For change of Date of birth
 
     setCurrentDateTime("currentDateDRAddressChanged");      // For change of current address
+    setCurrentDateTime("currentDateDRAddressAdded");      // For adding the current address if this was not previously entered when record was first created
 
     setCurrentDateTime("currentDateDRSexAdded");    // For adding the Sex
     setCurrentDateTime("currentDateDRSexChanged");    // For changing the Sex
