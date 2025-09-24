@@ -82,7 +82,7 @@ Are you sure you want to remove invoices from this claim?
               <!-- Inset text shown if no invoices -->
               <div id="no-invoices-message" class="nhsuk-inset-text" style="display:none;">
                 <span class="nhsuk-u-visually-hidden">Information: </span>
-                <p>You have removed all invoices. To continue, add invoices to the resubmission.</p>
+                <p>You have removed all invoices from this resubmission shell. To continue, add more invoices.</p>
               </div>
               
 
@@ -196,27 +196,29 @@ document.addEventListener("DOMContentLoaded", function () {
   tbody.innerHTML = "";
 
   if (!selectedInvoices.length) {
-    // Hide table, confirm, pagination
+    // Hide table and pagination but keep confirm button visible though disabled
     invoicesSection.style.display = "none";
-    confirmButton.style.display = "none";
     pagination.style.display = "none";
     noInvoicesMessage.style.display = "block";
 
     invoicesTotalEl.textContent = "0";
     monthsTotalEl.textContent = "0";
 
-    // 🔄 Change button to "Add invoices" (primary)
-    addMoreInvoicesBtn.textContent = "Add invoices";
-    addMoreInvoicesBtn.setAttribute("aria-label", "Add invoices");
-    addMoreInvoicesBtn.classList.remove("nhsuk-button--secondary");
-    addMoreInvoicesBtn.classList.add("nhsuk-button--primary");
+    // Disable the confirm/continue button instead of hiding it
+    confirmButton.disabled = true;
+    confirmButton.classList.add("nhsuk-button--disabled");
+
+    // Keep "Add more invoices" as secondary
+    addMoreInvoicesBtn.textContent = "Add more invoices";
+    addMoreInvoicesBtn.setAttribute("aria-label", "Add more invoices");
+    addMoreInvoicesBtn.classList.remove("nhsuk-button--primary");
+    addMoreInvoicesBtn.classList.add("nhsuk-button--secondary");
 
     return;
   }
 
-  // Show table, confirm, pagination
+  // Show table and pagination
   invoicesSection.style.display = "";
-  confirmButton.style.display = "";
   pagination.style.display = "";
   noInvoicesMessage.style.display = "none";
 
@@ -253,12 +255,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   monthsTotalEl.textContent = totalMonths;
 
-  // 🔄 Reset button back to "Add more invoices" (secondary)
+  // Enable confirm button when there are invoices
+  confirmButton.disabled = false;
+  confirmButton.classList.remove("nhsuk-button--disabled");
+
+  // Keep Add More Invoices button as secondary
   addMoreInvoicesBtn.textContent = "Add more invoices";
   addMoreInvoicesBtn.setAttribute("aria-label", "Add more invoices");
   addMoreInvoicesBtn.classList.remove("nhsuk-button--primary");
   addMoreInvoicesBtn.classList.add("nhsuk-button--secondary");
 }
+
 
 
 
