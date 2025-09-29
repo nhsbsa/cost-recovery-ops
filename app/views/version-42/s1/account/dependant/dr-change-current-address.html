@@ -1,0 +1,236 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Update current address - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <!-- Error summary -->
+                    <div class="nhsuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="nhsuk-error-summary" id="error-summary" style="display: none;">
+                      <h2 class="nhsuk-error-summary__title" id="error-summary-title">
+                        There is a problem
+                      </h2>
+                      <div class="nhsuk-error-summary__body">
+                        <ul class="nhsuk-list nhsuk-error-summary__list" role="list" id="error-summary-list">
+                          <!-- dynamically populated -->
+                        </ul>
+                      </div>
+                    </div>
+
+                    <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 654321</p>
+
+                    <h1 class="app-page-heading">
+                      Change {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}’s current address on their person record
+                    </h1>
+                    
+                    <form action="dr-change-current-address" method="post">
+
+                      <div class="nhsuk-inset-text">
+                        <span class="nhsuk-u-visually-hidden">Information: </span>
+                        <p>A change to the current address on this person record will not impact any entitlements, claims, submissions or documents.</p>
+                        <p>You must enter Address line 1 and Country. If you do not know this information, select Go back.</p>
+                      </div>
+                      
+                      <div class="nhsuk-form-group" id="dr-new-current-address-line-1-form-group">
+                        <label class="nhsuk-label" for="dr-new-current-address-line-1">
+                          Address line 1
+                        </label>
+                        <span class="nhsuk-error-message" id="address-line-1-error-message" style="display: none;">
+                          <span class="nhsuk-u-visually-hidden">Error:</span> Enter address line 1
+                        </span>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-new-current-address-line-1" name="dr-new-current-address-line-1" type="text" autocomplete="address-line1" value="1 Washington Street">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-current-address-line-2-label">
+                          Address line 2 (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-new-current-address-line-2" name="dr-new-current-address-line-2" type="text"  autocomplete="cc-csc">
+                      </div>
+
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-current-address-line-3-label">
+                          Address line 3 (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="dr-new-current-address-line-3" name="dr-new-current-address-line-3" type="text"  autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-current-address-town-label">
+                          Town or city (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dr-new-current-address-town" name="dr-new-current-address-town" type="text" autocomplete="cc-csc" value="Worcester">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-current-address-region-label">
+                          County, province or region (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" id="dr-new-current-address-region" name="dr-new-current-address-region" type="text" autocomplete="cc-csc">
+                      </div>
+              
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="new-current-address-postcode-label">
+                          Postcode (optional)
+                        </label>
+                        <input class="nhsuk-input nhsuk-input--width-10" id="dr-new-current-address-postcode" name="dr-new-current-address-postcode" type="text"  autocomplete="cc-csc" value="WR1 1NL">
+                      </div>
+
+                      <div class="nhsuk-form-group" id="new-current-address-country-form-group">
+                        <label class="nhsuk-label" for="new-current-address-country">
+                            Country
+                        </label>
+                        <span class="nhsuk-error-message" id="country-error-message" style="display: none;">
+                          <span class="nhsuk-u-visually-hidden">Error:</span> Enter a country
+                        </span>
+                        <input class="nhsuk-input nhsuk-u-width-one-third" list="countries" id="dr-new-current-address-country" name="dr-new-current-address-country" value="United Kingdom (UK)">
+                        <datalist id="countries">
+                          <option value="Austria (AT)">Austria (AT)</option>
+                          <option value="Belgium (BE)">Belgium (BE)</option>
+                          <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                          <option value="Croatia (HR)">Croatia (HR)</option>
+                          <option value="Cyprus (CY)">Cyprus (CY)</option>
+                          <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                          <option value="Denmark (DK)">Denmark (DK)</option>
+                          <option value="Estonia (EE)">Estonia (EE)</option>
+                          <option value="Finland (FI)">Finland (FI)</option>
+                          <option value="France (FR)">France (FR)</option>
+                          <option value="Germany (DE)">Germany (DE)</option>
+                          <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                          <option value="Greece (GR)">Greece (GR)</option>
+                          <option value="Hungary (HU)">Hungary (HU)</option>
+                          <option value="Iceland (IS)">Iceland (IS)</option>
+                          <option value="Ireland (IE)">Ireland (IE)</option>
+                          <option value="Italy (IT)">Italy (IT)</option>
+                          <option value="Latvia (LV)">Latvia (LV)</option>
+                          <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                          <option value="Lithuania (LT)">Lithuania (LT)</option>
+                          <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                          <option value="Malta (MT)">Malta (MT)</option>
+                          <option value="Netherlands (NL)">Netherlands (NL)</option>
+                          <option value="Norway (NO)">Norway (NO)</option>
+                          <option value="Poland (PL)">Poland (PL)</option>
+                          <option value="Portugal (PT)">Portugal (PT)</option>
+                          <option value="Romania (RO)">Romania (RO)</option>
+                          <option value="Slovakia (SK)">Slovakia (SK)</option>
+                          <option value="Slovenia (SI)">Slovenia (SI)</option>
+                          <option value="Spain (ES)">Spain (ES)</option>
+                          <option value="Sweden (SE)">Sweden (SE)</option>
+                          <option value="Switzerland (CH)">Switzerland (CH)</option>
+                          <option value="United Kingdom (UK)">United Kingdom (UK)</option>
+                      </datalist>
+                    </div>
+                                            
+                    <button class="nhsuk-button" style="margin-top: 20px; margin-bottom: 60px;" type="submit">
+                        Continue
+                    </button>
+
+                    </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#countries')
+  })
+</script>
+
+<!-- Validation script if Address line 1 or Country not provided -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    const addressLine1Input = document.getElementById("dr-new-current-address-line-1");
+    const addressLine1FormGroup = document.getElementById("dr-new-current-address-line-1-form-group");
+    const addressLine1Error = document.getElementById("address-line-1-error-message");
+
+    const countryInput = document.getElementById("dr-new-current-address-country");
+    const countryFormGroup = document.getElementById("dr-new-current-address-country-form-group");
+    const countryError = document.getElementById("country-error-message");
+
+    const errorSummary = document.getElementById("error-summary");
+    const errorSummaryList = document.getElementById("error-summary-list");
+
+    form.addEventListener("submit", function (e) {
+      let errors = [];
+
+      // Reset old errors
+      addressLine1FormGroup.classList.remove("nhsuk-form-group--error");
+      addressLine1Error.style.display = "none";
+      countryFormGroup.classList.remove("nhsuk-form-group--error");
+      countryError.style.display = "none";
+      errorSummary.style.display = "none";
+      errorSummaryList.innerHTML = "";
+
+      // Check Address line 1
+      if (!addressLine1Input.value.trim()) {
+        e.preventDefault();
+        addressLine1FormGroup.classList.add("nhsuk-form-group--error");
+        addressLine1Error.style.display = "block";
+        errors.push('<li><a href="#dr-new-current-address-line-1-form-group">Enter address line 1</a></li>');
+      }
+
+      // Check Country
+      if (!countryInput.value.trim()) {
+        e.preventDefault();
+        countryFormGroup.classList.add("nhsuk-form-group--error");
+        countryError.style.display = "block";
+        errors.push('<li><a href="#dr-new-current-address-country-form-group">Enter a country</a></li>');
+      }
+
+      // Show error summary if needed
+      if (errors.length > 0) {
+        errorSummaryList.innerHTML = errors.join("");
+        errorSummary.style.display = "block";
+        errorSummary.focus();
+
+        // Focus first link
+        const firstErrorLink = errorSummary.querySelector("a");
+        if (firstErrorLink) {
+          firstErrorLink.focus();
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}

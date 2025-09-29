@@ -1,0 +1,76 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Why are you making this change? - Update person details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    
+                        
+                    <form action="reason-for-changing-additional-details" method="post">
+
+                      <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 123456</p>
+                  
+                      <div class="nhsuk-character-count" data-module="nhsuk-character-count" data-maxlength="255">
+                        <div class="nhsuk-form-group">
+                          <h1 class="nhsuk-label-wrapper">
+                            <label class="nhsuk-label nhsuk-label--xl" for="change-additional-personal-details-reason-label">
+                            Why are you making this change?
+                            </label>
+                          </h1>
+                          <div class="nhsuk-hint" id="more-detail-hint">
+                            If you have been emailing someone, you may want to include an email reference number. Your comments will be displayed on the Person tab of the Case history.
+                          </div> <textarea class="nhsuk-textarea nhsuk-js-character-count" id="reason-for-changing-additional-details" name="reason-for-changing-additional-details" rows="5" aria-describedby="change-additional-personal-details-reason-hint"></textarea>
+                        </div>
+                      
+                        <div class="nhsuk-hint nhsuk-character-count__message" id="more-detail-info">
+                          You can enter up to 255 characters
+                        </div>
+                      
+                      </div>                          
+
+                      <button class="nhsuk-button nhsuk-button--primary" type="submit" id="continue-button">Continue</button>
+
+                      <p style="margin-bottom: 60px;">
+                        <a href="../account/personal-details">Cancel</a>
+                      </p>
+                  
+                    </form>
+          
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

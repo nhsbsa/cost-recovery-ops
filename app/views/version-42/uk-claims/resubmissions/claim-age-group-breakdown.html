@@ -1,0 +1,319 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - Age brackets
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">View Claim ID (Age brackets)</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">   
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l">Claim ID 123456 - Age brackets for<br>S1/S072 Article 63, 2.b - Mixed ages</h1>
+              </div>
+            </div>
+
+            
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-summary">Claim summary</a>
+                <span class="nhsuk-u-visually-hidden">View the overall summary for claim 123456</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-invoices">Invoices</a>
+                <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="claim-age-group-breakdown">Age brackets</a>
+                <span class="nhsuk-u-visually-hidden">View the age brackets for claim 123456</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-documents">Claim documents</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-resubmissions">Resubmissions</a>
+                <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="claim-history">Claim history</a>
+                <span class="nhsuk-u-visually-hidden">View case history for claim 123456</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+          
+            <!-- Beginning of Main claim summary content -->
+            <div class="nhsuk-grid-row">
+              <!-- Left panel begins -->
+              <div class="nhsuk-grid-column-one-half">
+
+                <h2 class="nhsuk-heading-m">Ages 0 to 19</h2>
+
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original number of invoices claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          10 invoices
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original total months claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          100 months
+                        </dd>
+                      </div>
+  
+                      {% if data['resubStatus'] == 'resubmission-completed' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Remaining total number of months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          100 months
+                        </dd>
+                      </div>
+                      {% endif %}
+                      
+                    </dl>
+                  </div>
+                </div>
+
+                <br>
+
+
+                <h2 class="nhsuk-heading-m">Ages 20 to 64</h2>
+
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original number of invoices claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          15 invoices
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original total months claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          150 months
+                        </dd>
+                      </div>
+  
+                      {% if data['resubStatus'] == 'resubmission-completed' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Remaining total number of months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          150 months
+                        </dd>
+                      </div>
+                      {% endif %}
+                      
+                    </dl>
+                  </div>
+                </div>
+
+                <br>
+
+
+                <h2 class="nhsuk-heading-m">Ages 65 and over</h2>
+
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original number of invoices claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          25 invoices
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original total months claimed
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          250 months
+                        </dd>
+                      </div>
+  
+                      {% if data['resubStatus'] == 'resubmission-completed' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Number of invoices contested
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          3 invoices
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total months contested
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          24 months
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total number of maintained months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          12 months
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total number of withdrawn months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          12 months
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Remaining total number of months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          238 months
+                        </dd>
+                      </div>
+                      {% endif %}
+                      
+                    </dl>
+                  </div>
+                </div>
+                      
+              
+            </div>
+              <!-- End of summary lists -->
+
+            
+        
+              
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const savedDetails = JSON.parse(localStorage.getItem("claimHistory"));
+
+    if (savedDetails) {
+        console.log("Loaded Claim History:", savedDetails);
+
+        // Only display "Sent to Member State" if dateClaimSent exists
+        if (savedDetails.dateClaimSent && savedDetails.dateClaimSent !== "Not provided") {
+            document.getElementById("displayClaimSentDate").textContent = savedDetails.dateClaimSent;
+            document.getElementById("currentDateS1ClaimSentToMS").textContent = getCurrentDateTime();
+            document.querySelector("#currentDateS1ClaimSentToMS").closest("tr").style.display = "table-row";
+        }
+
+        // Only display "Sent to DH" if dateS100Uploaded exists
+        if (savedDetails.dateS100Uploaded && savedDetails.dateS100Uploaded !== "Not provided") {
+            document.getElementById("displayS100UploadedDate").textContent = savedDetails.dateS100Uploaded;
+            document.getElementById("currentDateS1ClaimSentToDH").textContent = getCurrentDateTime();
+            document.querySelector("#currentDateS1ClaimSentToDH").closest("tr").style.display = "table-row";
+        }
+
+        // Always display "Created" log entry
+        document.getElementById("currentDateS1ClaimCreated").textContent = getCurrentDateTime();
+    } else {
+        console.log("No claim history found in localStorage.");
+    }
+
+    // Helper function to get formatted date and time
+    function getCurrentDateTime() {
+        const currentDate = new Date();
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const year = currentDate.getFullYear();
+        const hours = String(currentDate.getHours()).padStart(2, '0');
+        const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
+});
+</script>
+{% endblock %}
