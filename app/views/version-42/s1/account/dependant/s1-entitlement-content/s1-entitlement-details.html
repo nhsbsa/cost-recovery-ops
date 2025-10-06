@@ -596,7 +596,7 @@
                       First names
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['dr-change-s1-names'] == 'yes' and data['dr-new-s1-first-names']  %}
+                      {% if data['dr-change-s1-personal-details'] == 'yes' and data['dr-new-s1-first-names']  %}
                         {{ data['dr-new-s1-first-names'] }}
                       {% else %}
                         Jane
@@ -612,7 +612,7 @@
                       First names at birth, if different
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['dr-change-s1-names'] == 'yes' and data['dr-new-s1-birth-first-names'] %}
+                      {% if data['dr-change-s1-personal-details'] == 'yes' and data['dr-new-s1-birth-first-names'] %}
                         {{ data['dr-new-s1-birth-first-names'] }}
                       {% else %}
                         <span class="nhsuk-u-visually-hidden">Not provided</span>
@@ -629,7 +629,7 @@
                       Last name
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['dr-change-s1-names'] == 'yes' and data['dr-new-s1-last-name']  %}
+                      {% if data['dr-change-s1-personal-details'] == 'yes' and data['dr-new-s1-last-name']  %}
                         {{ data['dr-new-s1-last-name'] }}
                       {% else %}
                         Doe
@@ -645,7 +645,7 @@
                       Last name at birth, if different
                     </dt>
                     <dd class="nhsuk-summary-list__value">
-                      {% if data['dr-change-s1-names'] == 'yes' and data['dr-new-s1-birth-last-name'] %}
+                      {% if data['dr-change-s1-personal-details'] == 'yes' and data['dr-new-s1-birth-last-name'] %}
                         {{ data['dr-new-s1-birth-last-name'] }}
                       {% else %}
                         <span class="nhsuk-u-visually-hidden">Not provided</span>
@@ -1119,15 +1119,65 @@
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">First name</span>
-                        <span>John</span>
+                        <span>
+                        {% if data['change-s1-personal-details'] == 'yes' and data['new-s1-first-names']  %}
+                          {{ data['new-s1-first-names'] }}
+                        {% else %}
+                          John
+                        {% endif %}
+                        </span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Last name</span>
-                        <span>Doe</span>
+                        <span>
+                        {% if data['change-s1-personal-details'] == 'yes' and data['new-s1-last-name']  %}
+                          {{ data['new-s1-last-name'] }}
+                        {% else %}
+                          Doe
+                        {% endif %}
+                        </span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Date of birth</span>
-                        <span>04/01/1973</span>
+                        <span>
+                        {% if data['change-s1-personal-details'] == 'yes' and data['new-s1-date-of-birth-day'] and data['new-s1-date-of-birth-month'] and data['new-s1-date-of-birth-year'] %}
+                          {% if data['new-s1-date-of-birth-day'] and data['new-s1-date-of-birth-month'] and data['new-s1-date-of-birth-year'] %}
+                            {% set day = data['new-s1-date-of-birth-day'] %}
+                            {% set month = data['new-s1-date-of-birth-month'] | int %}
+                            {% set year = data['new-s1-date-of-birth-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}
+                          {% endif %}
+                        {% elif data['dob-day'] and data['dob-month'] and data['dob-year'] %}
+                          {% set day = data['dob-day'] %}
+                          {% set month = data['dob-month'] | int %}
+                          {% set year = data['dob-year'] %}
+              
+                          {# Define month names #}
+                          {% set month_names = [
+                              "January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"
+                          ] %}
+              
+                          {# Get the month name #}
+                          {% set month_name = month_names[month - 1] %}
+              
+                          {# Display the date in the format "day month year" #}
+                          {{ day | int }} {{ month_name }} {{ year }}  
+                        {% else %}
+                          1 July 1951
+                        {% endif %}
+                        </span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Action</span>

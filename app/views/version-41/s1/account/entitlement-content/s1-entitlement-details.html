@@ -744,16 +744,66 @@
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">First name</span>
-                          <span>Jane</span>
+                          <span>
+                            {% if data['dr-change-s1-personal-details'] == 'yes' and data['dr-new-s1-first-names']  %}
+                              {{ data['dr-new-s1-first-names'] }}
+                            {% else %}
+                              Jane
+                            {% endif %}
+                          </span>
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Last name</span>
-                          <span>Doe</span>
+                          <span>
+                            {% if data['dr-change-s1-personal-details'] == 'yes' and data['dr-new-s1-last-name']  %}
+                              {{ data['dr-new-s1-last-name'] }}
+                            {% else %}
+                              Doe
+                            {% endif %}
+                          </span>
                         </td>
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Date of birth</span>
-                          <span>29/12/1975</span>
-                        </td>                    
+                          <span>
+                            {% if data['dr-change-s1-personal-details'] == 'yes' and data['dr-new-s1-date-of-birth-day'] and data['dr-new-s1-date-of-birth-month'] and data['dr-new-s1-date-of-birth-year'] %}
+                            {% if data['dr-new-s1-date-of-birth-day'] and data['dr-new-s1-date-of-birth-month'] and data['dr-new-s1-date-of-birth-year'] %}
+                              {% set day = data['dr-new-s1-date-of-birth-day'] %}
+                              {% set month = data['dr-new-s1-date-of-birth-month'] | int %}
+                              {% set year = data['dr-new-s1-date-of-birth-year'] %}
+                  
+                              {# Define month names #}
+                              {% set month_names = [
+                                  "January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"
+                              ] %}
+                  
+                              {# Get the month name #}
+                              {% set month_name = month_names[month - 1] %}
+                  
+                              {# Display the date in the format "day month year" #}
+                              {{ day | int }} {{ month_name }} {{ year }}
+                            {% endif %}
+                          {% elif data['dr-dob-day'] and data['dr-dob-month'] and data['dr-dob-year'] %}
+                            {% set day = data['dr-dob-day'] %}
+                            {% set month = data['dr-dob-month'] | int %}
+                            {% set year = data['dr-dob-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            29 December 1975
+                          {% endif %}
+                          </span>
+                        </td>                          
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Action</span>
                           <a href="../dependant/personal-details">View<span class="nhsuk-u-visually-hidden">person record</span></a>

@@ -14,7 +14,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.post([/s1-dependant-personal-details/], function(req, res) {
   console.log(req.body.action);
   req.session.data['s1-add-dependant'] = 'yes';
-  res.redirect('/version-41/s1/account/entitlement-content/s1-confirmation-dependant-added');
+  res.redirect('/version-42/s1/account/entitlement-content/s1-confirmation-dependant-added');
 });
 
 // Enter dependant's details
@@ -26,9 +26,9 @@ router.post([/s1-create-new-dependant-record/], function(req, res){
 router.post([/add-dependant-address/], function(req, res) {
   const addDependantAddress = req.session.data['add-dependant-address'];
   if (addDependantAddress === 'yes'){
-    res.redirect('/version-41/s1/account/entitlement-content/enter-dependant-address');
+    res.redirect('/version-42/s1/account/entitlement-content/enter-dependant-address');
   } else {
-    res.redirect('/version-41/s1/account/entitlement-content/s1-dependant-details-check');
+    res.redirect('/version-42/s1/account/entitlement-content/s1-dependant-details-check');
   }
 });
 
@@ -42,9 +42,9 @@ router.post([/s1-dependant-details-check/], function(req, res) {
   console.log(req.body.action);
   req.session.data['s1-add-dependant'] = 'yes';
   if (req.body.action === 'add') {
-    res.redirect('/version-41/s1/account/entitlement-content/s1-create-new-dependant-record?number-of-dependants=2');
+    res.redirect('/version-42/s1/account/entitlement-content/s1-create-new-dependant-record?number-of-dependants=2');
   } else {
-    res.redirect('/version-41/s1/account/entitlement-content/s1-confirmation-dependant-added');
+    res.redirect('/version-42/s1/account/entitlement-content/s1-confirmation-dependant-added');
   }
 });
 
@@ -87,19 +87,19 @@ router.post([/change-s1-personal-details/], function(req, res){
 
 req.session.data['new-s1-date-of-birth'] = S1DobDate;
 
-  res.redirect('/version-41/s1/account/entitlement-content/reason-for-s1-personal-details-change');
+  res.redirect('/version-42/s1/account/entitlement-content/reason-for-s1-personal-details-change');
 });
 
 router.post([/reason-for-s1-personal-details-change/], function(req, res){
   req.session.data['reason-for-changing-s1-personal-details'] = req.body['reason-for-changing-s1-personal-details'];
-  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-personal-details');
+  res.redirect('/version-42/s1/account/entitlement-content/check-before-changing-s1-personal-details');
 });
 
 
 router.post([/check-before-changing-s1-personal-details/], function(req, res){
   req.session.data['change-s1-personal-details'] = 'yes';
 
-  res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
+  res.redirect('/version-42/s1/account/entitlement-content/s1-entitlement-details');
 });
 
 
@@ -109,19 +109,19 @@ router.post([/check-before-changing-s1-personal-details/], function(req, res){
 // Step 1 - change the S1 entitlement PIN
 router.post([/change-pin-s1/], function (req, res) {
   req.session.data['new-s1-pin'] = req.body['new-s1-pin'];
-  res.redirect('/version-41/s1/account/entitlement-content/reason-for-changing-s1-pin');
+  res.redirect('/version-42/s1/account/entitlement-content/reason-for-changing-s1-pin');
 });
 
 // Step 2 - Enter the reason for making a change to S1 entitlement PIN
 router.post([/reason-for-changing-s1-pin/], function(req, res){
   req.session.data['reason-for-changing-s1-pin'] = req.body['reason-for-changing-s1-pin'];
-  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-pin');
+  res.redirect('/version-42/s1/account/entitlement-content/check-before-changing-s1-pin');
 });
 
 // Step 3 - Check your answers before changing the S1 entitlement PIN
 router.post([/check-before-changing-s1-pin/], function (req, res) {
   req.session.data['change-s1-pin'] = 'yes';
-  res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
+  res.redirect('/version-42/s1/account/entitlement-content/s1-entitlement-details');
 });
 
 
@@ -150,19 +150,19 @@ router.post([/change-date-of-uk-residency-s1/], function (req, res) {
   }
   req.session.data['new-s1-uk-residency-date'] = dateS1UKResidency;
 
-  res.redirect('/version-41/s1/account/entitlement-content/reason-for-changing-s1-date-of-uk-residency');
+  res.redirect('/version-42/s1/account/entitlement-content/reason-for-changing-s1-date-of-uk-residency');
 });
 
 // Step 2 - Enter the reason for making a change to the date of UK residency
 router.post([/reason-for-changing-s1-date-of-uk-residency/], function(req, res){
   req.session.data['reason-for-changing-s1-date-of-uk-residency'] = req.body['reason-for-changing-s1-date-of-uk-residency'];
-  res.redirect('/version-41/s1/account/entitlement-content/check-before-changing-s1-date-of-uk-residency');
+  res.redirect('/version-42/s1/account/entitlement-content/check-before-changing-s1-date-of-uk-residency');
 });
 
 // Step 3 - Check your answers before changing the S1 entitlement date of UK residency
 router.post([/check-before-changing-s1-date-of-uk-residency/], function (req, res) {
   req.session.data['change-s1-date-of-uk-residency'] = 'yes';
-  res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
+  res.redirect('/version-42/s1/account/entitlement-content/s1-entitlement-details');
 });
 
 
@@ -177,19 +177,19 @@ router.post([/change-s1-entitlement-end-date/], function(req, res){
   const updatedS1EntitlementEndDate = day && month && year ? `${day}/${month}/${year}` : '17/03/2025';
   req.session.data['updated-s1-entitlement-end-date'] = updatedS1EntitlementEndDate;
   req.session.data['update-s1-entitlement-end-date'] = 'yes';
-  res.redirect('/version-41/s1/account/entitlement-content/s1-entitlement-details');
+  res.redirect('/version-42/s1/account/entitlement-content/s1-entitlement-details');
 });
 
 // =====================================================
 // GET route for entitlement details (final destination)
 // =====================================================
-router.get('/version-41/s1/account/entitlement-content/s1-entitlement-details', function (req, res) {
-  res.render('version-41/s1/account/entitlement-content/s1-entitlement-details', { data: req.session.data });
+router.get('/version-42/s1/account/entitlement-content/s1-entitlement-details', function (req, res) {
+  res.render('version-42/s1/account/entitlement-content/s1-entitlement-details', { data: req.session.data });
 });
 
 // View case history section for entitlements
-router.get('/version-41/s1/account/case-history-entitlements', function (req, res) {
-  res.render('version-41/s1/account/case-history-entitlements', {
+router.get('/version-42/s1/account/case-history-entitlements', function (req, res) {
+  res.render('version-42/s1/account/case-history-entitlements', {
     history: req.session.data['case-history-entitlements']
   });
 });
