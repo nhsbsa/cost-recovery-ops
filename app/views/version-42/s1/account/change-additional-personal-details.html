@@ -34,6 +34,17 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                       "text": "Go back"
                     }) }}
                 
+                    <div class="nhsuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="nhsuk-error-summary" id="error-summary" style="display: none;">
+                      <h2 class="nhsuk-error-summary__title" id="error-summary-title">
+                        There is a problem
+                      </h2>
+                      <div class="nhsuk-error-summary__body">
+                        <ul class="nhsuk-list nhsuk-error-summary__list" role="list" id="error-summary-list">
+                          <li><a href="#sex-form-group">Select the sex</a></li>
+                        </ul>
+                      </div>
+                    </div>
+
                     <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 123456</p>
                     
                     <h1 class="app-page-heading">
@@ -48,31 +59,34 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                         <p>A change to the additional details on this person record will not impact any entitlements, claims, resubmissions or documents.</p>
                       </div>
           
-                      <div class="nhsuk-form-group">
+                      <div class="nhsuk-form-group" id="sex-form-group">
                         <label class="nhsuk-label" for="sex-label">
-                            Sex
-                          </label>
+                          Sex
+                        </label>
+                        <span class="nhsuk-error-message" id="sex-error-message" style="display: none;">
+                          <span class="nhsuk-u-visually-hidden">Error:</span> Select the sex
+                        </span>
                         <div class="nhsuk-radios">
-                            <div class="nhsuk-radios__item">
+                          <div class="nhsuk-radios__item">
                             <input class="nhsuk-radios__input" id="updated-sex-male" name="updated-sex" type="radio" value="Male">
                             <label class="nhsuk-label nhsuk-radios__label" for="sex-male">
                                 Male
                             </label>
-                            </div>
-                    
-                            <div class="nhsuk-radios__item">
+                          </div>
+                  
+                          <div class="nhsuk-radios__item">
                             <input class="nhsuk-radios__input" id="updated-sex-female" name="updated-sex" type="radio" value="Female">
                             <label class="nhsuk-label nhsuk-radios__label" for="sex-female">
                                 Female
                             </label>
-                            </div>
+                          </div>
                     
-                            <div class="nhsuk-radios__item">
-                            <input class="nhsuk-radios__input" id="updated-sex-unknown" name="updated-sex" type="radio" value="Unknown" checked>
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="updated-sex-unknown" name="updated-sex" type="radio" value="Unknown">
                             <label class="nhsuk-label nhsuk-radios__label" for="sex-unknown">
                                 Unknown
                             </label>
-                            </div>
+                          </div>
                         </div>
                       </div>
                       
@@ -84,7 +98,7 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                         <div class="nhsuk-hint" id="nationality-input-hint">
                          For example, France
                         </div>
-                        <input class="nhsuk-input nhsuk-input--width-20" list="nationalities" id="updated-nationality" name="updated-nationality" value="">
+                        <input class="nhsuk-input nhsuk-input--width-20" list="nationalities" id="updated-nationality" name="updated-nationality">
                         <datalist id="nationalities">
                             <option id="1" value="Afghanistan">Afghanistan</option>
                             <option id="2" value="Albania">Albania</option>
@@ -292,7 +306,7 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                         A NINO is made up of 2 letters, 6 numbers and a final letter, which is always A, B, C, or D.<br>
                         For example, QQ 12 34 56 C.
                       </div>
-                      <input class="nhsuk-input nhsuk-u-width-one-third" id="updated-UK-national-insurance-number" name="updated-UK-national-insurance-number" type="text" value="">
+                      <input class="nhsuk-input nhsuk-u-width-one-third" id="updated-UK-national-insurance-number" name="updated-UK-national-insurance-number" type="text">
                     </div>
                     
                     <div class="nhsuk-form-group">
@@ -302,7 +316,7 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                       <div class="nhsuk-hint" id="email-address-hint">
                         For example, joe.bloggs@gmail.com
                       </div>
-                      <input class="nhsuk-input nhsuk-input--width-20" id="updated-email-address" name="updated-email-address" type="text"  autocomplete="cc-csc" value="john.doe@gmail.com">
+                      <input class="nhsuk-input nhsuk-input--width-20" id="updated-email-address" name="updated-email-address" type="text"  autocomplete="cc-csc">
                     </div>
 
                    <div class="nhsuk-form-group">
@@ -312,7 +326,7 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
                     <div class="nhsuk-hint" id="contact-number-hint">
                       Include the country code only if you know it. For example, +44 for United Kingdom.
                     </div>
-                    <input class="nhsuk-input nhsuk-input--width-10" id="updated-contact-number" name="updated-contact-number" type="text"  autocomplete="cc-csc" value="+447123456789">
+                    <input class="nhsuk-input nhsuk-input--width-10" id="updated-contact-number" name="updated-contact-number" type="text"  autocomplete="cc-csc">
                   </div>
 
                                             
@@ -341,4 +355,57 @@ Update personal details - Manage overseas entitlements and treatments - NHSBSA
   })
 </script>
 
+<!-- DOB format -->
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("residency-day").value;
+    const month = document.getElementById("residency-month").value;
+    const year = document.getElementById("residency-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "2 July 2024";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
+</script>
+
+<!-- Error message for Sex if not selected -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const sexFormGroup = document.getElementById("sex-form-group");
+    const errorMessage = document.getElementById("sex-error-message");
+    const errorSummary = document.getElementById("error-summary");
+
+    form.addEventListener("submit", function (e) {
+      const selectedSex = document.querySelector('input[name="updated-sex"]:checked');
+      
+      if (!selectedSex) {
+        e.preventDefault(); // stop form submission
+
+        // Show inline error
+        sexFormGroup.classList.add("nhsuk-form-group--error");
+        errorMessage.style.display = "block";
+
+        // Show error summary
+        errorSummary.style.display = "block";
+        errorSummary.focus();
+
+        // Move focus to first error link in summary
+        const firstErrorLink = errorSummary.querySelector("a");
+        if (firstErrorLink) {
+          firstErrorLink.focus();
+        }
+      } else {
+        // Clear errors if fixed
+        sexFormGroup.classList.remove("nhsuk-form-group--error");
+        errorMessage.style.display = "none";
+        errorSummary.style.display = "none";
+      }
+    });
+  });
+</script>
 {% endblock %}

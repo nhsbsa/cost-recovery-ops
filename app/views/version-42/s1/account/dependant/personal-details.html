@@ -282,13 +282,7 @@
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         {% if data['dr-change-additional-personal-details'] == 'yes' %}
-
-                            {{ data['dr-updated-sex'] }}
-
-                        {% elif data['dr-add-additional-personal-details'] == 'yes' %}
-
-                            {{ data['dr-sex'] }}
-
+                          {{ data['dr-updated-sex'] }}
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -304,13 +298,7 @@
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         {% if data['dr-change-additional-personal-details'] == 'yes' %}
-
-                            {{ data['dr-updated-nationality'] }}
-
-                        {% elif data['dr-add-additional-personal-details'] == 'yes' %}
-
-                            {{ data['dr-nationality'] }}
-
+                          {{ data['dr-updated-nationality'] }}
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -326,13 +314,7 @@
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         {% if data['dr-change-additional-personal-details'] == 'yes' %}
-
-                            {{ data['dr-updated-UK-national-insurance-number'] }}
-
-                        {% elif data['dr-add-additional-personal-details'] == 'yes' %}
-
-                            {{ data['dr-UK-national-insurance-number'] }}
-
+                          {{ data['dr-updated-UK-national-insurance-number'] }}
                         {% else %}
                           <span class="nhsuk-u-visually-hidden">Not provided</span>
                         {% endif %}
@@ -349,13 +331,7 @@
                     </dt>
                     <dd class="nhsuk-summary-list__value">
                       {% if data['dr-change-additional-personal-details'] == 'yes' %}
-
-                          {{ data['dr-updated-email-address'] }}
-
-                      {% elif data['dr-add-additional-personal-details'] == 'yes' %}
-
-                          {{ data['dr-email-address'] }}
-
+                        {{ data['dr-updated-email-address'] }}
                       {% else %}
                         <span class="nhsuk-u-visually-hidden">Not provided</span>
                       {% endif %}
@@ -372,13 +348,7 @@
                     </dt>
                     <dd class="nhsuk-summary-list__value">
                       {% if data['dr-change-additional-personal-details'] == 'yes' %}
-
-                          {{ data['dr-updated-contact-number'] }}
-
-                      {% elif data['dr-add-additional-personal-details'] == 'yes' %}
-
-                          {{ data['dr-contact-number'] }}
-
+                        {{ data['dr-updated-contact-number'] }}
                       {% else %}
                         <span class="nhsuk-u-visually-hidden">Not provided</span>
                       {% endif %}
@@ -390,11 +360,7 @@
                 </dl>
 
                 <div style="text-align: right;">
-                  {% if data['dr-add-additional-personal-details'] == 'yes' %}
-                    <p><a href="dr-change-additional-personal-details">Change<span class="nhsuk-u-visually-hidden">additional details</span></a></p>
-                  {% else %}
-                    <p><a href="dr-add-additional-personal-details">Add<span class="nhsuk-u-visually-hidden">additional details</span></a></p>
-                  {% endif %}
+                  <p><a href="dr-change-additional-personal-details">Change<span class="nhsuk-u-visually-hidden">additional details</span></a></p>
                 </div>
             </div>
             <!-- Personal details tabs content ends -->
@@ -437,48 +403,15 @@
                             NE6 5XQ<br>
                             United Kingdom (UK)
                           {% endif %}
-                      {% elif data['dr-add-current-address'] == 'yes' %}
-                        {# Check if any of the address fields have been added, otherwise fallback to default #}
-                        {% if data['dr-current-address-line-1'] or data['dr-current-address-line-2'] or data['dr-current-address-line-3'] or data['dr-current-address-town'] or data['dr-current-address-region'] or data['dr-current-address-postcode'] or data['dr-current-address-country'] %}
-                            {{ data['dr-current-address-line-1'] }}<br>
-                            
-                            {% if data['dr-current-address-line-2'] %}
-                                {{ data['dr-current-address-line-2'] }}<br>
-                            {% endif %}
-                            
-                            {% if data['dr-current-address-line-3'] %}
-                                {{ data['dr-current-address-line-3'] }}<br>
-                            {% endif %}
-                            
-                            {{ data['dr-current-address-town'] }}<br>
-                            
-                            {% if data['dr-current-address-region'] %}
-                                {{ data['dr-current-address-region'] }}<br>
-                            {% endif %}
-                            
-                            {{ data['dr-current-address-postcode'] }}<br>
-                            {{ data['dr-current-address-country'] }}
-                        {% else %}
-                          1 Washington Street<br>
-                          Worcester<br>
-                          WR1 1NL<br>
-                          United Kingdom (UK)
-                        {% endif %}
-
+                  
                       {% else %}
                         {# Leave field blank as no current address has been added, yet #}
                       {% endif %}
                   </dd>
                   <dd class="nhsuk-summary-list__actions">
-                    {% if data['dr-add-current-address'] == 'yes' %}
-                      <a href="dr-change-current-address">
-                          Change<span class="nhsuk-u-visually-hidden">current address</span>
-                      </a>
-                    {% else %}
-                      <a href="dr-add-current-address">
-                        Add<span class="nhsuk-u-visually-hidden">current address</span>
-                      </a>
-                    {% endif %}
+                    <a href="dr-change-current-address">
+                        Change<span class="nhsuk-u-visually-hidden">current address</span>
+                    </a>
                   </dd>
                 </div>              
               </dl>

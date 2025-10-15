@@ -117,28 +117,6 @@ router.post([/check-before-changing-personal-details/], function(req, res) {
 })
 
 
-
-// Add additional details to person record
-// Step 1 — Add additional personal details
-router.post([/add-additional-personal-details/], function(req, res){
-
-  req.session.data['sex'] = req.body['sex'];
-  req.session.data['nationality'] = req.body['nationality'];
-  req.session.data['UK-national-insurance-number'] = req.body['UK-national-insurance-number'];
-  req.session.data['email-address'] = req.body['email-address'];
-  req.session.data['contact-number'] = req.body['contact-number'];
-
-  res.redirect('/version-42/s1/account/additional-personal-details-cya');
-})
-
-// Step 2 - Check your answers before adding additional personal details
-router.post([/additional-personal-details-cya/], function(req, res){
-  req.session.data['add-additional-personal-details'] = 'yes'
-
-  res.redirect('/version-42/s1/account/personal-details');
-})
-
-
 // Change additional details on person record
 // Step 1 — Change additional personal details
 router.post([/change-additional-personal-details/], function (req, res) {
