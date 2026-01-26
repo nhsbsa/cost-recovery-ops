@@ -1,0 +1,134 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Change date of residency in UK - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+
+                    <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 123456<br>Entitlement ID: 100001</p>
+
+                    <h1 class="app-page-heading">
+                        Change date of residency in UK
+                    </h1>
+
+                    
+                    <form action="change-date-of-uk-residency-s1" method="post">
+
+                    <p>A change to the date of residency in the UK on this entitlement will:
+                       <ul>
+                        <li>change the entitlement holder's date of residency in the UK on this entitlement</li>
+                        <li>have no impact on any in-progress or future claims and resubmissions</li>
+                       </ul>
+                    </p>
+
+                    <div class="nhsuk-form-group" style="margin-top: 50px;">
+                      <label class="nhsuk-label" for="new-s1-uk-residency-date-label">
+                          Date of residency in UK
+                      </label>
+                      <div class="nhsuk-hint" id="new-s1-uk-residency-date-hint">
+                          For example, 2 10 2023
+                      </div>
+                      <div class="nhsuk-date-input">
+                          <div class="nhsuk-date-input__item">
+                              <label class="nhsuk-label nhsuk-date-input__label" id="new-s1-uk-residency-day-label" for="new-s1-uk-residency-day">Day</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
+                                     id="new-s1-uk-residency-day"
+                                     name="new-s1-uk-residency-day"
+                                     type="number"
+                                     pattern="[0-9]*"
+                                     inputmode="numeric"
+                                     maxlength="2"
+                                     oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                          </div>
+                  
+                          <div class="nhsuk-date-input__item">
+                              <label class="nhsuk-label nhsuk-date-input__label" id="new-s1-uk-residency-month-label" for="new-s1-uk-residency-month">Month</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2"
+                                     id="new-s1-uk-residency-month"
+                                     name="new-s1-uk-residency-month"
+                                     type="number"
+                                     pattern="[0-9]*"
+                                     inputmode="numeric"
+                                     maxlength="2"
+                                     oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                          </div>
+                  
+                          <div class="nhsuk-date-input__item">
+                              <label class="nhsuk-label nhsuk-date-input__label" id="new-s1-uk-residency-year-label" for="new-s1-uk-residency-year">Year</label>
+                              <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4"
+                                     id="new-s1-uk-residency-year"
+                                     name="new-s1-uk-residency-year"
+                                     type="number"
+                                     pattern="[0-9]*"
+                                     inputmode="numeric"
+                                     maxlength="4"
+                                     oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                          </div>
+                      </div>
+                  </div>
+                        
+                                            
+                    <button class="nhsuk-button" style="margin-top: 20px; margin-bottom: 60px;" type="submit">
+                    Continue
+                    </button>
+
+
+                    </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+
+<!-- Date format -->
+<script>
+  function updateFormattedDate() {
+    const day = document.getElementById("new-s1-uk-residency-day").value;
+    const month = document.getElementById("new-s1-uk-residency-month").value;
+    const year = document.getElementById("new-s1-uk-residency-year").value;
+
+    if (day && month && year) {
+        document.getElementById("formatted-date").textContent = formatDate(day, month, year);
+    } else {
+        document.getElementById("formatted-date").textContent = "2 July 2024";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateFormattedDate);
+</script>
+{% endblock %}

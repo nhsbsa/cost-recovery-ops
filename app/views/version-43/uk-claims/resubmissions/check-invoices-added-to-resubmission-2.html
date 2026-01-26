@@ -1,0 +1,271 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Are you sure you want to remove invoices from this claim?
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View Claim ID (Add invoices to resub)</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <form action="check-invoices-added-to-resubmission" method="post">
+
+            
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-two-thirds">
+                  <h1 class="nhsuk-heading-xl" style="margin-bottom: 20px;">
+                    Confirm you want to add these invoices to the resubmission
+                  </h1>
+                </div>
+              
+                <div class="nhsuk-grid-column-one-third" style="display: flex; justify-content: flex-end; align-items: flex-start;">
+                  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <button class="nhsuk-button nhsuk-button--primary" type="submit" id="confirm-button">
+                      Confirm
+                    </button>
+                    <a href="/version-43/uk-claims/resubmissions/add-invoices-to-resubmission">
+                      <button class="nhsuk-button nhsuk-button--secondary" type="button" id="add-more-invoices-button">
+                        Add more invoices
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <p id="invoices-summary"><b>
+                This resubmission will contain:<br>
+                total of months: <span id="monthsTotal">0</span><br>
+                invoices: <span id="invoicesTotal">0</span><br>
+              </b></p>
+              
+              <!-- Inset text shown if no invoices -->
+              <div id="no-invoices-message" class="nhsuk-inset-text" style="display:none;">
+                <span class="nhsuk-u-visually-hidden">Information: </span>
+                <p>You have removed all invoices. To continue, add invoices to the resubmission.</p>
+              </div>
+              
+
+                <div class="nhsuk-form-group" id="invoices-section">
+                  <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
+                    <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
+                      <tr role="row">
+                        <th role="columnheader" scope="col">Invoice ID</th>
+                        <th role="columnheader" scope="col">First names</th>
+                        <th role="columnheader" scope="col">Last name</th>
+                        <th role="columnheader" scope="col">Months</th>
+                        <th role="columnheader" scope="col">Accounting period</th>
+                        <th role="columnheader" scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody class="nhsuk-table__body"></tbody>
+                  </table>
+                </div>
+              
+                <!-- Pagination starts -->
+                <nav class="nav" role="navigation" aria-label="Pagination" id="pagination">
+                  <ul class="pagination">
+                    <li class="pagination__item">
+                      <a class="pagination__link current" href="#" aria-current="true">1</a>
+                    </li>
+                  </ul>
+                  <div class="pagination__summary navigation-mobile">Showing 1 - 2 of 2 invoices</div>
+                </nav>
+                <!-- Pagination ends -->
+
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tbody = document.querySelector(".nhsuk-table__body");
+  const invoicesSection = document.getElementById("invoices-section");
+  const noInvoicesMessage = document.getElementById("no-invoices-message");
+  const confirmButton = document.getElementById("confirm-button");
+  const invoicesTotalEl = document.getElementById("invoicesTotal");
+  const monthsTotalEl = document.getElementById("monthsTotal");
+
+  // Load from sessionStorage (fallback to empty array)
+  let selectedInvoices = JSON.parse(sessionStorage.getItem("selectedInvoices")) || [];
+
+  // Utility: count months for an invoice (handles arrays or newline strings)
+  function getMonthsCount(invoice) {
+    if (!invoice) return 0;
+    if (Array.isArray(invoice.months)) return invoice.months.length;
+    if (!invoice.months) return 0;
+    return invoice.months.toString().split(/\r?\n/).filter(Boolean).length;
+  }
+
+  // Small HTML-escape helper for names/strings
+  function escapeHtml(s) {
+    if (s === undefined || s === null) return "";
+    return String(s).replace(/[&<>"']/g, function (m) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+
+  // Render invoices table / totals and handle empty state
+  function renderInvoices() {
+  tbody.innerHTML = "";
+
+  if (!selectedInvoices.length) {
+    // Hide table, confirm, and pagination
+    invoicesSection.style.display = "none";
+    confirmButton.style.display = "none";
+    pagination.style.display = "none";
+    noInvoicesMessage.style.display = "block";
+
+    invoicesTotalEl.textContent = "0";
+    monthsTotalEl.textContent = "0";
+    return;
+  }
+
+  // Show table, confirm, and pagination
+  invoicesSection.style.display = "";
+  confirmButton.style.display = "";
+  pagination.style.display = "";
+  noInvoicesMessage.style.display = "none";
+
+  invoicesTotalEl.textContent = selectedInvoices.length;
+
+  let totalMonths = 0;
+  selectedInvoices.forEach(invoice => {
+    const tr = document.createElement("tr");
+    tr.dataset.id = invoice.id;
+
+    const monthsHtml = Array.isArray(invoice.months)
+      ? invoice.months.join("<br>")
+      : (invoice.months ? invoice.months.toString().split(/\r?\n/).join("<br>") : "");
+    const periodHtml = Array.isArray(invoice.period)
+      ? invoice.period.join("<br>")
+      : (invoice.period ? invoice.period.toString().split(/\r?\n/).join("<br>") : "");
+
+    tr.innerHTML = `
+      <td>${escapeHtml(invoice.id)}</td>
+      <td>${escapeHtml(invoice.firstName)}</td>
+      <td>${escapeHtml(invoice.lastName)}</td>
+      <td>${monthsHtml}</td>
+      <td>${periodHtml}</td>
+      <td>
+        <a href="#" class="nhsuk-link remove-invoice" data-id="${escapeHtml(invoice.id)}" aria-label="Remove invoice ${escapeHtml(invoice.id)}">
+          Remove
+        </a>
+      </td>
+    `;
+    tbody.appendChild(tr);
+
+    totalMonths += getMonthsCount(invoice);
+  });
+
+  monthsTotalEl.textContent = totalMonths;
+}
+
+
+
+  // Event delegation for remove button
+  tbody.addEventListener("click", function (e) {
+    const btn = e.target.closest(".remove-invoice");
+    if (!btn) return;
+
+    const id = btn.dataset.id;
+    if (!id) return;
+
+    // Remove invoice from array
+    selectedInvoices = selectedInvoices.filter(inv => String(inv.id) !== String(id));
+    // Persist
+    sessionStorage.setItem("selectedInvoices", JSON.stringify(selectedInvoices));
+    // Re-render
+    renderInvoices();
+  });
+
+  // Safety: prevent submitting the form when no invoices are present
+  const form = document.querySelector('form[action="check-invoices-added-to-resubmission"]');
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      if (!selectedInvoices.length) {
+        e.preventDefault();
+        alert("You have removed all invoices. To continue, add invoices to the resubmission.");
+      } else {
+        // OPTIONAL: If you want the server to receive the selectedInvoices array,
+        // set it into a hidden input before submit:
+        // let hidden = form.querySelector('input[name="selectedInvoicesJson"]');
+        // if (!hidden) {
+        //   hidden = document.createElement('input');
+        //   hidden.type = 'hidden';
+        //   hidden.name = 'selectedInvoicesJson';
+        //   form.appendChild(hidden);
+        // }
+        // hidden.value = JSON.stringify(selectedInvoices);
+      }
+    });
+  }
+
+  // Initial render
+  renderInvoices();
+});
+
+</script>
+
+<script>
+  // Ensure the table values display in the exact same way that they do on the previous screen
+  const checkbox = document.querySelector('.invoice-checkbox:checked');
+
+  if (checkbox) {
+    const months = checkbox.dataset.months.split(/\r?\n/).join('<br>');
+    document.getElementById('monthsDisplay').innerHTML = months;
+
+    const period = checkbox.dataset.period.split(/\r?\n/).join('<br>');
+    document.getElementById('periodDisplay').innerHTML = period;
+  }
+</script>
+
+{% endblock %}

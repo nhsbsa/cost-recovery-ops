@@ -1,0 +1,183 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Check your answers before adding additional details - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back"
+                    }) }}
+                
+                    
+                    <form action="dr-check-before-changing-personal-details" method="post">
+          
+                      <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 654321</p>
+                  
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label" for="additional-personal-details-cya-header-label">
+                              <h1 class="nhsuk-heading-xl">Check your answers before changing {% if data['dr-new-first-names'] %}{{ data['dr-new-first-names'] }}{% else %}Jane{% endif %} {% if data['dr-new-last-name'] %}{{ data['dr-new-last-name'] }}{% else %}Doe{% endif %}'s personal details</h1>
+                            </label>
+                          </div>
+
+                          <dl class="nhsuk-summary-list">
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                First names
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['dr-new-first-names'] %}
+                                  {{ data['dr-new-first-names'] }}
+                                {% else %}
+                                  Jane
+                                {% endif %}
+                              </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="dr-change-personal-details#dr-new-first-names">
+                                  Change<span class="nhsuk-u-visually-hidden">first names</span>
+                                </a>
+                              </dd>
+                            </div>
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                First names at birth, if different
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['dr-new-birth-first-names'] %}
+                                  {{ data['dr-new-birth-first-names'] }}
+                                {% else %}
+                                  Not provided
+                                {% endif %}
+                              </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="dr-change-personal-details#dr-new-birth-first-names">
+                                  Change<span class="nhsuk-u-visually-hidden">first names at birth</span>
+                                </a>
+                              </dd>
+                            </div>
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                Last name
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['dr-new-last-name'] %}
+                                  {{ data['dr-new-last-name'] }}
+                                {% else %}
+                                  Doe
+                                {% endif %}
+                              </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="dr-change-personal-details#dr-new-last-name">
+                                  Change<span class="nhsuk-u-visually-hidden">last name</span>
+                                </a>
+                              </dd>
+                            </div>
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                Last name at birth, if different
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['dr-new-birth-last-name'] %}
+                                  {{ data['dr-new-birth-last-name'] }}
+                                {% else %}
+                                  Not provided
+                                {% endif %}
+                              </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="dr-change-personal-details#dr-new-birth-last-name">
+                                  Change<span class="nhsuk-u-visually-hidden">last name at birth</span>
+                                </a>
+                              </dd>
+                            </div>
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                Date of birth
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['dr-new-date-of-birth-day'] and data['dr-new-date-of-birth-month'] and data['dr-new-date-of-birth-year'] %}
+                                    {% set day = data['dr-new-date-of-birth-day'] %}
+                                    {% set month = data['dr-new-date-of-birth-month'] | int %}
+                                    {% set year = data['dr-new-date-of-birth-year'] %}
+                        
+                                    {# Define month names #}
+                                    {% set month_names = [
+                                        "January", "February", "March", "April", "May", "June",
+                                        "July", "August", "September", "October", "November", "December"
+                                    ] %}
+                        
+                                    {# Get the month name #}
+                                    {% set month_name = month_names[month - 1] %}
+                        
+                                    {# Display the date in the format "day month year" #}
+                                    {{ day | int }} {{ month_name }} {{ year }}
+                                {% else %}
+                                    29 December 1975
+                                {% endif %}
+                              </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="dr-change-personal-details#dr-new-date-of-birth-day">
+                                  Change<span class="nhsuk-u-visually-hidden">date of birth</span>
+                                </a>
+                              </dd>
+                            </div>
+                            <div class="nhsuk-summary-list__row">
+                              <dt class="nhsuk-summary-list__key">
+                                Reason for change
+                              </dt>
+                              <dd class="nhsuk-summary-list__value">
+                                {% if data['dr-reason-for-changing-personal-details'] %}
+                                  {{ data['dr-reason-for-changing-personal-details'] }}
+                                {% else %}
+                                  Reason for change explained here.
+                                {% endif %}
+                              </dd>
+                              <dd class="nhsuk-summary-list__actions">
+                                <a href="dr-reason-for-personal-details-change#dr-reason-for-changing-personal-details">
+                                  Change<span class="nhsuk-u-visually-hidden">reason for changing personal details</span>
+                                </a>
+                              </dd>
+                            </div>
+                          </dl>
+
+                                            
+                          <button class="nhsuk-button" type="submit">
+                              Save and continue
+                          </button>
+
+                          <p style="margin-bottom: 60px;"><a href="../account/personal-details">Cancel</a></p>
+
+                    </form>
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

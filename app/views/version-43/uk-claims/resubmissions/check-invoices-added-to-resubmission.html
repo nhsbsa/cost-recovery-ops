@@ -1,0 +1,288 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Confirm you want to add these invoices to the resubmission
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__item">
+            View Claim ID (Add invoices to resub)</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <form action="check-invoices-added-to-resubmission" method="post">
+
+            
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-two-thirds">
+                  <h1 class="nhsuk-heading-xl" style="margin-bottom: 20px;">
+                    Confirm you want to add these invoices to the resubmission
+                  </h1>
+                </div>
+              
+                <div class="nhsuk-grid-column-one-third" style="display: flex; justify-content: flex-end; align-items: flex-start;">
+                  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <button class="nhsuk-button nhsuk-button--primary" type="submit" id="confirm-button">
+                      Confirm
+                    </button>
+                    <a href="/version-43/uk-claims/resubmissions/add-invoices-to-resubmission">
+                      <button class="nhsuk-button nhsuk-button--secondary" type="button" id="add-more-invoices-button">
+                        Add more invoices
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <p id="invoices-summary"><b>
+                This resubmission will contain:<br>
+                total of months: <span id="monthsTotal">0</span><br>
+                invoices: <span id="invoicesTotal">0</span><br>
+              </b></p>
+              
+              <!-- Inset text shown if no invoices -->
+              <div id="no-invoices-message" class="nhsuk-inset-text" style="display:none;">
+                <span class="nhsuk-u-visually-hidden">Information: </span>
+                <p>You have removed all invoices from this resubmission shell. To continue, add more invoices.</p>
+              </div>
+              
+
+                <div class="nhsuk-form-group" id="invoices-section">
+                  <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
+                    <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
+                      <tr role="row">
+                        <th role="columnheader" scope="col">Invoice ID</th>
+                        <th role="columnheader" scope="col">First names</th>
+                        <th role="columnheader" scope="col">Last name</th>
+                        <th role="columnheader" scope="col">Age bracket</th>
+                        <th role="columnheader" scope="col">Months</th>
+                        <th role="columnheader" scope="col">Accounting period</th>
+                        <th role="columnheader" scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody class="nhsuk-table__body"></tbody>
+                  </table>
+                </div>
+              
+                <!-- Pagination starts -->
+                <nav class="nav" role="navigation" aria-label="Pagination" id="pagination">
+                  <ul class="pagination">
+                    <li class="pagination__item">
+                      <a class="pagination__link current" href="#" aria-current="true">1</a>
+                    </li>
+                  </ul>
+                  <div class="pagination__summary navigation-mobile">Showing 1 - 3 of 3 invoices</div>
+                </nav>
+                <!-- Pagination ends -->
+
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const addMoreInvoicesBtn = document.getElementById("add-more-invoices-button");
+  const tbody = document.querySelector(".nhsuk-table__body");
+  const invoicesSection = document.getElementById("invoices-section");
+  const noInvoicesMessage = document.getElementById("no-invoices-message");
+  const confirmButton = document.getElementById("confirm-button");
+  const invoicesTotalEl = document.getElementById("invoicesTotal");
+  const monthsTotalEl = document.getElementById("monthsTotal");
+  const pagination = document.getElementById("pagination");
+
+  // Load from sessionStorage (fallback to dummy data for demo)
+  let selectedInvoices = JSON.parse(sessionStorage.getItem("selectedInvoices")) || [];
+
+  if (!selectedInvoices.length) {
+    selectedInvoices = [
+      { id: "1", firstName: "John", lastName: "Doe", ageBracket: "65 years and over", months: ["6"], period: ["2016"] },
+      { id: "2", firstName: "Alexander", lastName: "James", ageBracket: "65 years and over", months: ["7"], period: ["2016"] },
+      { id: "3", firstName: "Henri", lastName: "Savageon", ageBracket: "65 years and over", months: ["11"], period: ["2016"] }
+    ];
+    sessionStorage.setItem("selectedInvoices", JSON.stringify(selectedInvoices));
+  }
+
+  // --- Utility: count months for an invoice ---
+  function getMonthsCount(invoice) {
+    if (!invoice || !invoice.months) return 0;
+
+    const str = Array.isArray(invoice.months) ? invoice.months.join('\n') : String(invoice.months);
+    const lines = str.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+
+    function numberForLabel(label) {
+      for (const line of lines) {
+        const m = line.match(new RegExp(label + '\\s*:\\s*(\\d+)', 'i'));
+        if (m) return parseInt(m[1], 10);
+      }
+      return null;
+    }
+
+    const remaining = numberForLabel('Remaining');
+    if (remaining !== null) return remaining;
+
+    for (const line of lines) {
+      if (/^Remaining\s*:\s*(fully withdrawn|withdrawn|none|n\/a)$/i.test(line)) return 0;
+    }
+
+    const claimed = numberForLabel('Claimed');
+    if (claimed !== null) return claimed;
+
+    // ✅ fallback: if plain numbers like "6" or "7" are used
+    const numeric = lines.map(l => parseInt(l, 10)).filter(n => !isNaN(n));
+    if (numeric.length) return numeric.reduce((a, b) => a + b, 0);
+
+    return 0;
+  }
+
+  // --- Helper: escape HTML ---
+  function escapeHtml(s) {
+    if (s === undefined || s === null) return "";
+    return String(s).replace(/[&<>"']/g, function (m) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+
+  // --- Render invoices ---
+  function renderInvoices() {
+    tbody.innerHTML = "";
+
+    if (!selectedInvoices.length) {
+      invoicesSection.style.display = "none";
+      pagination.style.display = "none";
+      noInvoicesMessage.style.display = "block";
+
+      invoicesTotalEl.textContent = "0";
+      monthsTotalEl.textContent = "0";
+
+      confirmButton.disabled = true;
+      confirmButton.classList.add("nhsuk-button--disabled");
+
+      addMoreInvoicesBtn.textContent = "Add more invoices";
+      addMoreInvoicesBtn.classList.remove("nhsuk-button--primary");
+      addMoreInvoicesBtn.classList.add("nhsuk-button--secondary");
+      return;
+    }
+
+    invoicesSection.style.display = "";
+    pagination.style.display = "";
+    noInvoicesMessage.style.display = "none";
+
+    invoicesTotalEl.textContent = selectedInvoices.length;
+
+    let totalMonths = 0;
+    selectedInvoices.forEach(invoice => {
+      const tr = document.createElement("tr");
+      tr.dataset.id = invoice.id;
+
+      const monthsHtml = Array.isArray(invoice.months)
+        ? invoice.months.join("<br>")
+        : (invoice.months ? invoice.months.toString().split(/\r?\n/).join("<br>") : "");
+      const periodHtml = Array.isArray(invoice.period)
+        ? invoice.period.join("<br>")
+        : (invoice.period ? invoice.period.toString().split(/\r?\n/).join("<br>") : "");
+
+      tr.innerHTML = `
+        <td>${escapeHtml(invoice.id)}</td>
+        <td>${escapeHtml(invoice.firstName)}</td>
+        <td>${escapeHtml(invoice.lastName)}</td>
+        <td>${escapeHtml(invoice.ageBracket)}</td>
+        <td>${monthsHtml}</td>
+        <td>${periodHtml}</td>
+        <td>
+          <a href="#" class="nhsuk-link remove-invoice" data-id="${escapeHtml(invoice.id)}" aria-label="Remove invoice ${escapeHtml(invoice.id)}">
+            Remove
+          </a>
+        </td>
+      `;
+      tbody.appendChild(tr);
+
+      totalMonths += getMonthsCount(invoice);
+    });
+
+    monthsTotalEl.textContent = totalMonths;
+
+    confirmButton.disabled = false;
+    confirmButton.classList.remove("nhsuk-button--disabled");
+
+    addMoreInvoicesBtn.textContent = "Add more invoices";
+    addMoreInvoicesBtn.classList.remove("nhsuk-button--primary");
+    addMoreInvoicesBtn.classList.add("nhsuk-button--secondary");
+  }
+
+  // --- Remove invoice handler ---
+  tbody.addEventListener("click", function (e) {
+    const btn = e.target.closest(".remove-invoice");
+    if (!btn) return;
+
+    const id = btn.dataset.id;
+    if (!id) return;
+
+    selectedInvoices = selectedInvoices.filter(inv => String(inv.id) !== String(id));
+    sessionStorage.setItem("selectedInvoices", JSON.stringify(selectedInvoices));
+    renderInvoices();
+  });
+
+  // --- Form submission safety ---
+  const form = document.querySelector('form[action="check-invoices-added-to-resubmission"]');
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      if (!selectedInvoices.length) {
+        e.preventDefault();
+        alert("You have removed all invoices. To continue, add invoices to the resubmission.");
+      }
+    });
+  }
+
+  // --- Initial render ---
+  renderInvoices();
+});
+</script>
+
+{% endblock %}

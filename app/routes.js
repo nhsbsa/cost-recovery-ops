@@ -100,6 +100,10 @@ router.use('/version-42/resubmissions/v1', require('./views/version-42/_routes')
 router.use('/version-42/s1', require('./views/version-42/s1/_routes'));
 router.use('/version-42/uk-claims', require('./views/version-42/uk-claims/_routes'));
 router.use('/version-42/uk-claims/resubmissions', require('./views/version-42/uk-claims/resubmissions/_routes'));
+router.use('/version-43/resubmissions/v1', require('./views/version-43/_routes'));
+router.use('/version-43/s1', require('./views/version-43/s1/_routes'));
+router.use('/version-43/uk-claims', require('./views/version-43/uk-claims/_routes'));
+router.use('/version-43/uk-claims/resubmissions', require('./views/version-43/uk-claims/resubmissions/_routes'));
 
 
 

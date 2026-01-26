@@ -1,0 +1,290 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - Check your answers before partially maintaining and withdrawing months
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back"
+            }) }}
+    
+  
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">Check your answers before partially maintaining and withdrawing months</h1>
+             </div>
+          </div>
+
+          <form action="cya-partial-maintain-and-partial-withdraw" method="post">
+
+            <input type="hidden" name="invoice" value="{{ data.invoice }}">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+
+              <details class="nhsuk-details" style="padding: 0px; margin-bottom: 40px; background-color: transparent; border: none; box-shadow: none;">
+                <summary class="nhsuk-details__summary">
+                  <span class="nhsuk-details__summary-text">
+                    View past claim values
+                  </span>
+                </summary>
+               
+
+                <div class="nhsuk-details__text" style="margin-top: 20px; background-color: transparent;  box-shadow: none;">
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                         11
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original accounting period
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          01/01/2016 - 30/11/2016
+                        </dd>
+                      </div>
+                    </dl>
+                </div>
+                
+              </details>
+
+              
+
+            </div>
+          </div>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+
+              <h2 class="nhsuk-heading-s">Revised accounting period</h2>
+                
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="start-date-of-revised-accounting-period-label">Start date of the revised accounting period</dt>
+                  <dd class="nhsuk-summary-list__value" id="start-date-of-revised-accounting-period-value">
+                    {% if data['start-date-accounting-period-day'] and data['start-date-accounting-period-month'] and data['start-date-accounting-period-year'] %}
+                      {% set day = data['start-date-accounting-period-day'] | int %}
+                      {% set month = data['start-date-accounting-period-month'] | int %}
+                      {% set year = data['start-date-accounting-period-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/01/2016
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="enter-revised-accounting-period#start-date-accounting-period-day">Change<span class="nhsuk-u-visually-hidden">the start date of the revised accounting period</span></a></dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="end-date-of-revised-accounting-period-label">End date of the revised accounting period</dt>
+                  <dd class="nhsuk-summary-list__value" id="end-date-of-revised-accounting-period-value">
+                    {% if data['end-date-accounting-period-day'] and data['end-date-accounting-period-month'] and data['end-date-accounting-period-year'] %}
+                      {% set day = data['end-date-accounting-period-day'] | int %}
+                      {% set month = data['end-date-accounting-period-month'] | int %}
+                      {% set year = data['end-date-accounting-period-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      16/07/2016
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="enter-revised-accounting-period#end-date-accounting-period-day">Change<span class="nhsuk-u-visually-hidden">the end date of the revised accounting period</span></a></dd>
+                </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="total-number-of-partially-maintained-months-label">Total amount of maintained months</dt>
+                  <dd class="nhsuk-summary-list__value" id="total-number-of-partially-maintained-months-value">
+                    6
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions">
+                    <a href="enter-revised-accounting-period#total-number-of-months-to-be-maintained">Change<span class="nhsuk-u-visually-hidden">the total amount of maintained months</span></a></dd>
+                  </dd>
+                </div>
+              </dl>
+
+                  
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reasons-to-partially-maintain-months-label">Reason to partially maintain and withdraw months</dt>
+                    <dd class="nhsuk-summary-list__value" id="reasons-to-partially-maintain-months-value">
+                      {% if data['reasons-to-partially-maintain-and-withdraw-months'] %}
+                       {{ data['reasons-to-partially-maintain-and-withdraw-months'] }}
+                      {% else %}
+                        Contestation partially accepted and IMO concerned is decreased [02]
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions"><a href="reasons-to-partially-maintain-and-withdraw-months">Change<span class="nhsuk-u-visually-hidden">the reason to partially maintain and withdraw months</span></a></dd>
+                  </div>
+                  {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'Information requested updated [04]' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-partially-maintain-and-withdraw-label">Type of information requested</dt>
+                    <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-partially-maintain-and-withdraw-value">
+                      {% if data['type-information-requested-partially-maintain-and-withdraw'] %}
+                       {{ data['type-information-requested-partially-maintain-and-withdraw'] }}
+                      {% else %}
+                        S072 - Entitlement document - Residence [02]
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions"><a href="select-information-requested-partially-maintain-and-withdraw">Change<span class="nhsuk-u-visually-hidden">type of information requested</span></a></dd>
+                  </div>
+                  {% endif %}
+                  {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'The primary entitlement in state of residence starts on the date provided [06]' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reasons-to-partially-maintain-and-withdraw-months-label">Date the primary entitlement in state of residence started on</dt>
+                    <dd class="nhsuk-summary-list__value" id="reasons-to-partially-maintain-and-withdraw-months-value">
+                      {% if data['date-primary-entitlement-in-state-of-residence-starts-on-day-partial'] and data['date-primary-entitlement-in-state-of-residence-starts-on-month-partial'] and data['date-primary-entitlement-in-state-of-residence-starts-on-year-partial'] %}
+                        {% set day = data['date-primary-entitlement-in-state-of-residence-starts-on-day-partial'] | int %}
+                        {% set month = data['date-primary-entitlement-in-state-of-residence-starts-on-month-partial'] | int %}
+                        {% set year = data['date-primary-entitlement-in-state-of-residence-starts-on-year-partial'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+  
+                        {{ day }}/{{ month }}/{{ year }}
+                        
+                        
+                      {% else %}
+                        17/04/2026
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions"><a href="reasons-to-partially-maintain-and-withdraw-months">Change<span class="nhsuk-u-visually-hidden">date contestation received after deadline</span></a></dd>
+                  </div>
+                  {% endif %}
+                  {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'The person receives a pension in his/her state of residence as from the date provided, copy of the decision attached [07]' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="date-state-pension-received-label">Date state pension received</dt>
+                    <dd class="nhsuk-summary-list__value" id="date-state-pension-received-value">
+                      {% if data['date-state-pension-received-day-partial'] and data['date-state-pension-received-month-partial'] and data['date-state-pension-received-year-partial'] %}
+                        {% set day = data['date-state-pension-received-day-partial'] | int %}
+                        {% set month = data['date-state-pension-received-month-partial'] | int %}
+                        {% set year = data['date-state-pension-received-year-partial'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+  
+                        {{ day }}/{{ month }}/{{ year }}
+            
+                      {% else %}
+                        04/02/2015
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions"><a href="reasons-to-partially-maintain-and-withdraw-months">Change<span class="nhsuk-u-visually-hidden">date state pension received</span></a></dd>
+                  </div>
+                  {% endif %}
+                  {% if data['reasons-to-partially-maintain-and-withdraw-months'] == 'Other [99]' %}
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="other-reason-to-partially-maintain-and-withdraw-months-comments-label">Other reason - comments</dt>
+                    <dd class="nhsuk-summary-list__value" id="other-reason-to-partially-maintain-and-withdraw-months-comments-value">
+                      {% if data['other-partial-maintain-and-withdraw-reason-comments'] %}
+                        {{ data['other-partial-maintain-and-withdraw-reason-comments'] }}
+                      {% else %}
+                        Other partial maintain reason explained here.
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions"><a href="reasons-to-partially-maintain-and-withdraw-months">Change<span class="nhsuk-u-visually-hidden">other reason comments</span></a></dd>
+                  </div>
+                  {% endif %}
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="source-of-withdrawal-label">Source of withdrawal request</dt>
+                  <dd class="nhsuk-summary-list__value" id="source-of-withdrawal-value">
+                    {% if data['partial-withdrawal-source'] %}
+                     {{ data['partial-withdrawal-source'] }}
+                    {% else %}
+                      Member State
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="source-of-partial-withdrawal">Change<span class="nhsuk-u-visually-hidden">the source of withdrawal request</span></a></dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Additional comments (optional)</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['partial-additional-comments'] and data['partial-additional-comments'] %}
+                        {{ data['partial-additional-comments'] }}
+                      {% else %}
+                        None provided
+                      {% endif %}
+                    </dd>
+
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="partial-additional-comments"> Change<span class="nhsuk-u-visually-hidden">additional comments</span> </a>
+                    </dd>
+                  </dt>
+                </div>
+              </dl>
+
+            <br>
+
+              <button class="nhsuk-button nhsuk-button--primary" type="submit" id="save-and-continue-button">Save and continue</button>
+
+              <p><a href="invoice-details">Cancel</a></p>
+            </div>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
