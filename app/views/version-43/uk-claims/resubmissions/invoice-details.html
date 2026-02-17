@@ -18,29 +18,32 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
 <!-- Breadcrumb goes inside the beforeContent block -->
 {% block beforeContent %}
 <!--start breadcrumb-->
-<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
   <div class="nhsuk-width-container-fluid">
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full">
 
         <ol class="nhsuk-breadcrumb__list">
-          <li class="nhsuk-breadcrumb__item">
+          <li class="nhsuk-breadcrumb__list-item">
             <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">
+          <li class="nhsuk-breadcrumb__list-item">
             <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">
+          <li class="nhsuk-breadcrumb__list-item">
             <a class="nhsuk-breadcrumb__link" href="../resubmissions/invoices-within-resubmission">View Resub ID (Invoices within resubmission)</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">
+          <li class="nhsuk-breadcrumb__list-item">
             View details (Invoice details)
           </li>
         </ol>
       </div>
     </div>
 
-    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="uk-claims-search-results">Back to search results</a></p>
+    <a class="nhsuk-back-link" href="uk-claims-search-results">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search results
+    </a>
 
   </div>
 </nav>
@@ -72,11 +75,11 @@ UK claim ID 123456: Resub ID 0000001 - View invoice details
               </div>
 
               <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
-              {% if contestationData.reasons and contestationData.reasons | length > 0 %}
+              {% if contestationData.reasons and contestationData.reasons | length > 0 and data.resubStatus not in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
               <div class="nhsuk-grid-column-one-half" style="text-align: right;">
   
                 <!-- Top two buttons side by side -->
-                <div class="nhsuk-button-group" style="display: inline-flex; gap: 20px;">
+                <div class="nhsuk-button-group" style="display: inline-flex;">
                   <a href="reasons-to-maintain-months">
                     <button class="nhsuk-button nhsuk-button--secondary" type="submit">
                       Maintain<span class="nhsuk-u-visually-hidden"> invoice ID 387731 from claim ID 123456</span>

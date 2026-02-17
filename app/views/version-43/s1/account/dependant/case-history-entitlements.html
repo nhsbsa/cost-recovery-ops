@@ -13,26 +13,27 @@
 
 <!-- Breadcrumb goes inside the beforeContent block -->
 {% block beforeContent %}
-<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
   <div class="nhsuk-width-container-fluid">
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full">
         <ol class="nhsuk-breadcrumb__list">
-          <li class="nhsuk-breadcrumb__item">
+          <li class="nhsuk-breadcrumb__list-item">
             <a class="nhsuk-breadcrumb__link" href="../../search/search-by-person">Search (Person)</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">
+          <li class="nhsuk-breadcrumb__list-item">
             <a class="nhsuk-breadcrumb__link" href="../../search/search-results-none">Search results</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">Case history - Entitlement history</a>
+          <li class="nhsuk-breadcrumb__list-item">Case history - Entitlement history</a>
           </li>
         </ol>
       </div>
     </div>
 
-    <p class="nhsuk-breadcrumb__back">
-      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
-    </p>
+    <a class="nhsuk-back-link" href="search-results">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search results
+    </a>
   </div>
 </nav>
 {% endblock %}
@@ -326,6 +327,91 @@
                               </thead>
                               <tbody class="nhsuk-table__body">
                                 <!-- most recent update at top of table -->
+
+                                <!-- If user edits the cancellation details -->
+                                {% if data ['dr-edit-cancellation-details'] == 'Yes' and data['dr-cancelled-by'] != 'UK' %}
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p id="currentDateS1CancelledByAmended"></span></p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Cancelled by</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
+                                    <p>
+                                      {% if data['dr-cancelled-by'] %}
+                                        {{ data['dr-cancelled-by'] }}
+                                      {% else %}
+                                        The Member State
+                                      {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>Entitlement cancelled by UK or The Member State changed</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p id="entitlement-history-s1-s072-entitlements-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                  </td>
+                                </tr>
+                                {% endif %}
+                                {% if data ['dr-edit-cancellation-details'] == 'Yes' and data['dr-entitlement-end-date-day'] != '16' and data['dr-entitlement-end-date-month'] != '10' and data['dr-entitlement-end-date-year'] != '2024' %}
+                                <tr class="nhsuk-table__row">
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                    <p id="currentDateS1EntitlementEndDateAmended"></span></p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Action</span>
+                                    <p>Updated</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Detail updated</span>
+                                    <p>Entitlement end date</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Details</span>
+                                    <p>
+                                      {# Check if entitlement end date is provided #}
+                                        {% if data['dr-entitlement-end-date-day'] and data['dr-entitlement-end-date-month'] and data['dr-entitlement-end-date-year'] %}
+                                            {% set day = data['dr-entitlement-end-date-day'] | int %}
+                                            {% set month = data['dr-entitlement-end-date-month'] | int %}
+                                            {% set year = data['dr-entitlement-end-date-year'] | int %}
+
+                                            {% if day < 10 %}
+                                                {% set day = "0" ~ day %}
+                                            {% endif %}
+                                            
+                                            {% if month < 10 %}
+                                                {% set month = "0" ~ month %}
+                                            {% endif %}
+
+                                            {{ day }}/{{ month }}/{{ year }}
+                                        {% else %}
+                                          {# Display fallback date if no entitlement end date is entered #}
+                                            13/01/2025
+                                        {% endif %}
+                                    </p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Reason for update</span>
+                                    <p>End date of entitlement amended</p>
+                                  </td>
+                                  <td class="nhsuk-table__cell">
+                                    <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                    <p id="entitlement-history-s1-s072-entitlements-updated-by">joe.bloggs@nhsbsa.nhs.uk</p>
+                                  </td>
+                                </tr>
+                                {% endif %}
+
 
                                 <!-- Start of events for changes to the date of residency in UK -->
                                 {% if data ['dr-change-s1-date-of-uk-residency'] == 'yes' %}

@@ -13,26 +13,27 @@
 
 <!-- Breadcrumb goes inside the beforeContent block -->
 {% block beforeContent %}
-<nav class="nhsuk-breadcrumb nhsBSA-breadcrumb" aria-label="Breadcrumb">
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
   <div class="nhsuk-width-container-fluid">
     <div class="nhsuk-grid-row">
       <div class="nhsuk-grid-column-full">
         <ol class="nhsuk-breadcrumb__list">
-          <li class="nhsuk-breadcrumb__item">
+          <li class="nhsuk-breadcrumb__list-item">
             <a class="nhsuk-breadcrumb__link" href="../search/search-by-person">Search (Person)</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">
+          <li class="nhsuk-breadcrumb__list-item">
             <a class="nhsuk-breadcrumb__link" href="../search/search-results">Search results</a>
           </li>
-          <li class="nhsuk-breadcrumb__item">Entitlements and treatments</a>
+          <li class="nhsuk-breadcrumb__list-item">Entitlements and treatments</a>
           </li>
         </ol>
       </div>
     </div>
 
-    <p class="nhsuk-breadcrumb__back">
-      <a class="nhsuk-breadcrumb__backlink" href="">Back to search results</a>
-    </p>
+    <a class="nhsuk-back-link" href="search-results">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search
+    </a>
   </div>
 </nav>
 {% endblock %}
@@ -178,9 +179,9 @@
                                   {% set year = data['entitlement-end-date-year'] %}
                   
                               {% else %}
-                                  {% set day = 13 %}
-                                  {% set month = 1 %}
-                                  {% set year = 2025 %}
+                                  {% set day = 16 %}
+                                  {% set month = 10 %}
+                                  {% set year = 2024 %}
                               {% endif %}
                   
                               {% if day < 10 %}
@@ -227,15 +228,16 @@
                         </dl>
                         <!-- Entitlement details content ends -->
 
-                        <div class="nhsuk-action-link">
-                          <a class="nhsuk-action-link__link" href="../account/entitlement-content/s1-entitlement-details">
-                            <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="36" height="36">
-                              <path d="M0 0h24v24H0z" fill="none"></path>
-                              <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
+                        <div>
+                          <a class="nhsuk-action-link" href="../account/entitlement-content/s1-entitlement-details">
+                            <svg class="nhsuk-icon nhsuk-icon--arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+                              <path d="M12 2a10 10 0 0 0-10 9h11.7l-4-4a1 1 0 0 1 1.5-1.4l5.6 5.7a1 1 0 0 1 0 1.4l-5.6 5.7a1 1 0 0 1-1.5 0 1 1 0 0 1 0-1.4l4-4H2A10 10 0 1 0 12 2z" />
                             </svg>
                             <span class="nhsuk-action-link__text">View entitlement details</span>
                           </a>
                         </div>
+
+                        
 
                         <p>Claims and resubmissions linked to this entitlement</p>
                         {% set status = data.invoiceStatuses['John'] %}
@@ -318,11 +320,10 @@
                           </dl>
                           <!-- Entitlement details content ends -->
 
-                          <div class="nhsuk-action-link">
-                            <a class="nhsuk-action-link__link" href="../account/entitlement-content/expired-s1-entitlement-details">
-                              <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="36" height="36">
-                                <path d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
+                          <div>
+                            <a class="nhsuk-action-link" href="../account/entitlement-content/expired-s1-entitlement-details">
+                              <svg class="nhsuk-icon nhsuk-icon--arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+                                <path d="M12 2a10 10 0 0 0-10 9h11.7l-4-4a1 1 0 0 1 1.5-1.4l5.6 5.7a1 1 0 0 1 0 1.4l-5.6 5.7a1 1 0 0 1-1.5 0 1 1 0 0 1 0-1.4l4-4H2A10 10 0 1 0 12 2z" />
                               </svg>
                               <span class="nhsuk-action-link__text">View entitlement details</span>
                             </a>
@@ -399,12 +400,11 @@
                                 </dd>
                               </div>
                             </dl>
-          
-                            <div class="nhsuk-action-link">
-                              <a class="nhsuk-action-link__link" href="../account/entitlement-content/ehic-entitlement-details">
-                                <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="36" height="36">
-                                  <path d="M0 0h24v24H0z" fill="none"></path>
-                                  <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
+
+                            <div>
+                              <a class="nhsuk-action-link" href="../account/entitlement-content/ehic-entitlement-details">
+                                <svg class="nhsuk-icon nhsuk-icon--arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+                                  <path d="M12 2a10 10 0 0 0-10 9h11.7l-4-4a1 1 0 0 1 1.5-1.4l5.6 5.7a1 1 0 0 1 0 1.4l-5.6 5.7a1 1 0 0 1-1.5 0 1 1 0 0 1 0-1.4l4-4H2A10 10 0 1 0 12 2z" />
                                 </svg>
                                 <span class="nhsuk-action-link__text">View entitlement details</span>
                               </a>
@@ -506,12 +506,11 @@
                                 </dd>
                               </div>
                             </dl>
-          
-                            <div class="nhsuk-action-link">
-                              <a class="nhsuk-action-link__link" href="../account/entitlement-content/prc-entitlement-details">
-                                <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="36" height="36">
-                                  <path d="M0 0h24v24H0z" fill="none"></path>
-                                  <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
+
+                            <div>
+                              <a class="nhsuk-action-link" href="../account/entitlement-content/prc-entitlement-details">
+                                <svg class="nhsuk-icon nhsuk-icon--arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+                                  <path d="M12 2a10 10 0 0 0-10 9h11.7l-4-4a1 1 0 0 1 1.5-1.4l5.6 5.7a1 1 0 0 1 0 1.4l-5.6 5.7a1 1 0 0 1-1.5 0 1 1 0 0 1 0-1.4l4-4H2A10 10 0 1 0 12 2z" />
                                 </svg>
                                 <span class="nhsuk-action-link__text">View entitlement details</span>
                               </a>

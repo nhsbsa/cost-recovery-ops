@@ -299,4 +299,4 @@ export default ({
   tabs.forEach(el => {
     new Tabs(el, namespace, responsive, historyEnabled).init();
   });
-};
+};//# sourceMappingURL=tabs.js.map
