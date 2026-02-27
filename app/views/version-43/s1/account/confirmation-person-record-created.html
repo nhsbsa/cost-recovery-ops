@@ -26,34 +26,67 @@ Confirmation - New person record created - Manage overseas entitlements and trea
         <div class="nhsBSA-sidebar-content">
             <div class="nhsuk-width-container-fluid">
                 <div class="nhsuk-main-wrapper" id="maincontent">
-                    
-                  <div class="nhsuk-grid-column-two-thirds">
-    
-                      <div class="done-panel">
-                        <h1 class="nhsuk-heading-xl" id="person-record-confirmation">
-                          <span class="done-tick" id="done-tick">New person record created</span>
-                        </h1>
+                  
+                  <div class="nhsuk-grid-row">
+                    <div class="nhsuk-grid-column-two-thirds">
 
+                    <div class="nhsuk-panel nhsuk-panel--confirmation nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-4">
+
+                      <h1 style="font-size:40px;" class="nhsuk-panel__title">
+                        New person record created
+                      </h1>
+                      <div class="nhsuk-panel__body">
                         {% if data['first-name'] == 'John' or data['first-name'] == 'john' and data['last-name'] == 'Doe' or data['last-name'] == 'doe' %}
-                        <body class="nhsuk-caption-l">
-                          <span id="person-record-created-name">Name:</span>
-                          <h2 class="nhsuk-heading-l">
+                          Name: 
+                          <strong>
+                          {% if data['first-name'] and data['last-name'] %}
+                            {{ data['first-name'] }} {{ data['last-name'] }}
+                          {% else %}
+                            John Doe
+                          {% endif %}
+                          </strong>
+                          <br>
+                          Person record ID:
+                          <strong>
+                            123456
+                          </strong>
+
+                        {% elif data['first-name']|lower == 'jane' or data['last-name']|lower == 'doe' %}
+                          <div class="nhsuk-panel__body">
+                            Name: 
+                            <strong>
+                              {% if data['first-name'] and data['last-name'] %}
+                              {{ data['first-name'] }} {{ data['last-name'] }}
+                            {% else %}
+                              Jane Doe
+                            {% endif %}
+                            </strong>
+                            <br>
+                            Person record ID:
+                            <strong>
+                              654321
+                            </strong>
+                          </div>
+                        {% else%}
+                          <div class="nhsuk-panel__body">
+                            Name: 
+                            <strong>
                             {% if data['first-name'] and data['last-name'] %}
                               {{ data['first-name'] }} {{ data['last-name'] }}
                             {% else %}
                               John Doe
                             {% endif %}
-                          </h2>
-                        </body>
-                        
-
-                        <body class="nhsuk-caption-l">
-                          <span id="person-record-created-name">Person record ID:</span>
-                          <h2 class="nhsuk-heading-l">123456</h2>
-                        </body>
+                            </strong>
+                            <br>
+                            Person record ID:
+                            <strong>
+                              111111
+                            </strong>
+                          </div>
+                        {% endif %}
                       </div>
-
-                      
+                    </div>
+    
 
                       <div class="button-container">
                         <form action="../../s1/s072-registration/which-entitlement">
@@ -62,93 +95,26 @@ Confirmation - New person record created - Manage overseas entitlements and trea
                           </button>
                         </form>
             
+                        {% if data['first-name']|lower == 'jane' or data['last-name']|lower == 'doe' %}
+                        <form action="../account/dependant/personal-details">
+                          <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                            Go to person's record
+                          </button>
+                        </form>
+                        {% else %}
                         <form action="../account/personal-details">
                           <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
                             Go to person's record
                           </button>
                         </form>
+                        {% endif %}
                       </div>
 
                       <p><a href="../search/search-by-person">Return to Search</a></p>
 
-                      {% elif data['first-name']|lower == 'jane' or data['last-name']|lower == 'doe' %}
-                      <body class="nhsuk-caption-l">
-                        <span id="person-record-created-name">Name:</span>
-                        <h2 class="nhsuk-heading-l">
-                          {% if data['first-name'] and data['last-name'] %}
-                            {{ data['first-name'] }} {{ data['last-name'] }}
-                          {% else %}
-                            Jane Doe
-                          {% endif %}
-                        </h2>
-                      </body>
                       
-
-                      <body class="nhsuk-caption-l">
-                        <span id="person-record-created-name">Person record ID:</span>
-                        <h2 class="nhsuk-heading-l">654321</h2>
-                      </body>
+                    
                     </div>
-
-                    
-
-                    <div class="button-container">
-                      <form action="../../s1/s072-registration/which-entitlement">
-                        <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
-                          Add an entitlement
-                        </button>
-                      </form>
-          
-                      <form action="../account/dependant/personal-details">
-                        <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-                          Go to person's record
-                        </button>
-                      </form>
-                    </div>
-
-                    <p><a href="../search/search-by-person">Return to Search</a></p>
-                    
-                    
-                    {% else%}
-                    <body class="nhsuk-caption-l">
-                      <span id="person-record-created-name">Name:</span>
-                      <h2 class="nhsuk-heading-l">
-                        {% if data['first-name'] and data['last-name'] %}
-                          {{ data['first-name'] }} {{ data['last-name'] }}
-                        {% else %}
-                          John Doe
-                        {% endif %}
-                      </h2>
-                    </body>
-                    
-
-                    <body class="nhsuk-caption-l">
-                      <span id="person-record-created-name">Person record ID:</span>
-                      <h2 class="nhsuk-heading-l">111111</h2>
-                    </body>
-                  </div>
-
-                  
-
-                  <div class="button-container">
-                    <form action="../../s1/s072-registration/which-entitlement">
-                      <button style="margin-right:20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
-                        Add an entitlement
-                      </button>
-                    </form>
-        
-                    <form action="../account/personal-details">
-                      <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-                        Go to person's record
-                      </button>
-                    </form>
-                  </div>
-
-                  <p><a href="../search/search-by-person">Return to Search</a></p>
-                  {% endif %}
-                    
-
-                  </div>
                 
                 </div>
             </div>
