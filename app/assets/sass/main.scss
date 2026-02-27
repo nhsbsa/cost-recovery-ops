@@ -30,6 +30,29 @@
     padding: 1rem 0;
 }
 
+/* NESTED CARD AND EXPANDER */
+
+.nhsuk-card__content:has(.nhsuk-expander),
+.nhsuk-card__content:has(.nhsuk-expander) hr {
+  margin-bottom: 0;
+}
+
+.nhsuk-card .nhsuk-expander {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  border: none;
+}
+
+@include nhsuk-media-query($from: tablet ){
+
+  .nhsuk-card .nhsuk-expander {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+
+}
+
+
 
 ///////////////////////////////////////////
 // Add your custom CSS/Sass styles below...
@@ -103,6 +126,7 @@
 
 // Expander Tweaks
 
+/*
 .nhsuk-details__summary:before {
     bottom: 0;
     content: '';
@@ -119,6 +143,7 @@
     border-width: 7px 0 7px 12.124px;
     border-left-color: inherit;
 }
+    */
 
 .nhsuk-details__above--third {
     width: 33%;
@@ -733,14 +758,6 @@ color: #ffffff !important;
 }
 
 
-
-.nhsuk-details__summary {
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  padding-left: 24px;
-  position: relative;
-}
 .checkbox-dropdown {
   background-color: white;
   color: black;
@@ -1011,3 +1028,45 @@ TIMELINE
 		}
 	}
 }
+
+
+
+/* BREAKPOINTS */
+
+/*
+body::before {
+  padding: 0.625rem;
+  background-color: red;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  color: white;
+  content: 'mobile';
+  z-index: 999;
+}
+
+@include nhsuk-media-query($from: tablet) {
+
+  body::before {
+    content: 'tablet';
+  }
+
+}
+
+@include nhsuk-media-query($from: desktop) {
+
+  body::before {
+    content: 'desktop';
+  }
+
+}
+
+@include nhsuk-media-query($from: large-desktop) {
+
+  body::before {
+    content: 'large desktop';
+  }
+
+}
+  */
