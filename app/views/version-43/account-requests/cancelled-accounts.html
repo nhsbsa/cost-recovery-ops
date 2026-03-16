@@ -1,0 +1,321 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Cancelled accounts - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+                <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+              </li>
+            <li class="nhsuk-breadcrumb__list-item">Account requests (Cancelled)</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="../s1/search/search-by-person">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search for person
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+
+          {% if data['account-cancelled'] == 'Yes' %}
+          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+            <div class="nhsuk-notification-banner__header">
+              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                Success
+              </h2>
+            </div>
+            <div class="nhsuk-notification-banner__content">
+              <h3 class="nhsuk-notification-banner__heading">
+                Account details updated
+              </h3>
+              <p>The account for David Fuller has been cancelled.</p>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">
+                Cancelled accounts
+              </h1>
+            </div>
+          </div>
+
+          <!--start secondary navigation-->
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="pending-requests">Pending</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="approved-requests">Approved</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="rejected-requests">Rejected</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="cancelled-accounts">Cancelled</a>
+              </li>
+            </ul>
+          </nav>
+          <!--end secondary navigation-->
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <br><br>
+
+          <table class="nhsuk-table">
+            <caption class="nhsuk-u-visually-hidden nhsuk-table__caption">
+              Cancelled accounts
+            </caption>
+            <thead class="nhsuk-table__head">
+              <tr class="nhsuk-table__row">
+                <th scope="col" class="nhsuk-table__header">
+                  Name
+                </td>
+                <th scope="col" class="nhsuk-table__header">
+                  Trust
+                </td>
+                <th scope="col" class="nhsuk-table__header">
+                  Cancelled by
+                </td>
+                <th scope="col" class="nhsuk-table__header">
+                  Cancelled date
+                </td>
+                <th scope="col" class="nhsuk-table__header">
+                  Action
+                </td>
+              </tr>
+            </thead>
+            <tbody class="nhsuk-table__body">
+                
+              {% if data['account-cancelled'] == 'Yes' %}
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">David Fuller</td>
+                <td class="nhsuk-table__cell">Airedale NHS Foundation Trust</td>
+                <td class="nhsuk-table__cell">joe.bloggs@nhsbsa.nhs.uk</td>
+                <td class="nhsuk-table__cell">11/02/2026</td>
+                <td class="nhsuk-table__cell"><a href="#">View details</a></td>
+              </tr>
+              {% endif %}
+
+
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  Benjamin Malin
+                </td>
+                <td class="nhsuk-table__cell">
+                  Barts Health NHS Trust
+                </td>
+                <td class="nhsuk-table__cell">
+                  delia.davis@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                  11/01/2026
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a href="#">View details</a>
+                </td>
+              </tr>
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                    Celia Smith
+                </td>
+                <td class="nhsuk-table__cell">
+                    Airedale NHS Foundation Trust
+                </td>
+                <td class="nhsuk-table__cell">
+                    jade.cartwright@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                    28/12/2025
+                </td>
+                <td class="nhsuk-table__cell">
+                    <a href="view-approved-request">View details</a>
+                </td>
+              </tr>
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  Alexander Bovey
+                </td>
+                <td class="nhsuk-table__cell">
+                  Care UK
+                </td>
+                <td class="nhsuk-table__cell">
+                  jade.cartwright@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                  24/12/2025
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a href="#">View details</a>
+                </td>
+              </tr>
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  Lesley Holloway
+                </td>
+                <td class="nhsuk-table__cell">
+                   Dudley Integrated Health and Care Trust
+                </td>
+                <td class="nhsuk-table__cell">
+                  delia.davis@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                    19/11/2025
+                </td>
+                <td class="nhsuk-table__cell">
+                    <a href="#">View details</a>
+                </td>
+              </tr>
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  Amelia Longstaff
+                </td>
+                <td class="nhsuk-table__cell">
+                 East Cheshire NHS Trust
+                </td>
+                <td class="nhsuk-table__cell">
+                  delia.davis@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                  09/09/2025
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a href="#">View details</a>
+                </td>
+              </tr>
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  Kieran Amers
+                </td>
+                <td class="nhsuk-table__cell">
+                  Frimley Health NHS Foundation Trust
+                </td>
+                <td class="nhsuk-table__cell">
+                  jade.cartwright@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                  21/08/2025
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a href="#">View details</a>
+                </td>
+              </tr>
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  Steve Bailey
+                </td>
+                <td class="nhsuk-table__cell">
+                  Harrogate and District NHS Foundation Trust
+                </td>
+                <td class="nhsuk-table__cell">
+                  jade.cartwright@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                  24/05/2025
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a href="#">View details</a>
+                </td>
+              </tr>
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  Georgia Smith
+                </td>
+                <td class="nhsuk-table__cell">
+                  Kingston Hospital NHS Foundation Trust
+                </td>
+                <td class="nhsuk-table__cell">
+                  delia.davis@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                  19/02/2025
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a href="#">View details</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <!--start left navigation-->
+    <div class="nhsBSA-sidebar-nav">
+        <div class="side-nav">
+            <ul>
+            <div id="options" class="options">
+                <h3 class="nhsuk-heading-xs">Browse</h3>
+                <li>
+                <a href="../s1/search/search-by-person">Search</a>
+                </li>
+                
+                <h3 class="nhsuk-heading-xs">Actions</h3>
+                <li>
+                    <a href="pending-requests" class="active">Account requests<span class="notification-badge" style="background-color: #005eb8">8 </span></a>
+                    <a href="../review-treatments/treatments-to-review">Review treatments<span class="notification-badge" style="background-color: #005eb8">4 </span></a>
+                    <a href="">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                    <a href="../uk-claims/uk-claims-search-actual-cost">UK claims</a>
+                    <a href="../resubmissions/pending-resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                    <a href="#">Non-EU Reciprocal Healthcare (Quota)</a>
+                </li>
+            </div>
+            </ul>
+        </div>
+    </div>
+    <!--end left navigation-->
+
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#entitlement-country-drop')
+  })
+</script>
+{% endblock %}
