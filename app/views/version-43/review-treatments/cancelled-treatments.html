@@ -51,6 +51,22 @@ Cancelled treatments - Manage overseas entitlements and treatments
       <div class="nhsuk-width-container-fluid">
         <div class="nhsuk-main-wrapper" id="maincontent">
 
+          {% if data['treatment-cancelled'] == 'Yes' %}
+          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+            <div class="nhsuk-notification-banner__header">
+              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                Success
+              </h2>
+            </div>
+            <div class="nhsuk-notification-banner__content">
+              <h3 class="nhsuk-notification-banner__heading">
+                Treatment cancelled
+              </h3>
+              <p>Treatment 1292929930 has been cancelled.</p>
+            </div>
+          </div>
+          {% endif %}
+
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
               <h1 class="nhsuk-heading-xl">
@@ -67,11 +83,11 @@ Cancelled treatments - Manage overseas entitlements and treatments
               </li>
 
               <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="reviewed-treatments">Reviewed</a>
+                <a class="nhsuk-secondary-navigation__link" href="reviewed-treatments">Reviewed</a>
               </li>
 
               <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" href="cancelled-treatments">Cancelled</a>
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="cancelled-treatments">Cancelled</a>
               </li>
             </ul>
           </nav>
@@ -104,6 +120,25 @@ Cancelled treatments - Manage overseas entitlements and treatments
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
+              {% if data['treatment-cancelled'] == 'Yes' %}
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">
+                  Harold
+                </td>
+                <td class="nhsuk-table__cell">
+                  Simons
+                </td>
+                <td class="nhsuk-table__cell">
+                  17/03/2025
+                </td>
+                <td class="nhsuk-table__cell">
+                  joe.bloggs@nhsbsa.nhs.uk
+                </td>
+                <td class="nhsuk-table__cell">
+                  <a href="#">View</a>
+                </td>
+              </tr>
+              {% endif %}
               <tr class="nhsuk-table__row">
                 <td class="nhsuk-table__cell">
                   Layla
