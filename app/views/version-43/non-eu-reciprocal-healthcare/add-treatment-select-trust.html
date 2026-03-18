@@ -10,62 +10,46 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Select a trust to filter accounts - Manage overseas entitlements and treatments
+Trust name - Manage overseas entitlements and treatments
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
 {% block beforeContent %}
-<!--start breadcrumb-->
-<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
-  <div class="nhsuk-width-container-fluid">
-    <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-full">
-
-        <ol class="nhsuk-breadcrumb__list">
-            <li class="nhsuk-breadcrumb__list-item">
-              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
-            </li>
-            <li class="nhsuk-breadcrumb__list-item">
-              <a class="nhsuk-breadcrumb__link" href="pending-requests">Account requests</a>
-            </li>
-            <li class="nhsuk-breadcrumb__list-item">Select a trust</li>
-        </ol>
-
-      </div>
-    </div>
-
-    <a class="nhsuk-back-link" href="pending-requests">
-      <span class="nhsuk-u-visually-hidden">Back to </span>
-      Account requests
-    </a>
-
+<div class="app-phase-banner">
+  <div class="nhsuk-width-container app-phase-banner__container">
+    <p class="app-phase-banner__content">
+      <strong class="nhsuk-tag app-phase-banner__tag"> Beta </strong>
+      <span class="app-phase-banner__text">
+        This is a new service - your
+        <a href="#" target="_blank" id="feedback-form-beta" rel="noopener noreferrer" for="feedback-form">
+            feedback
+            <span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span>
+        </a>
+        will help us improve it.
+      </span>
+    </p>
   </div>
-</nav>
-<!--end breadcrumb-->
+</div>
 {% endblock %}
 
 <!-- Your page content goes inside the content block -->
 <!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
 {% block content %}
-<div class="nhsBSA-sidebar-container">
-  <div class="nhsBSA-sidebar-wrapper">
-    <div class="nhsBSA-sidebar-content">
-      <div class="nhsuk-width-container-fluid">
-        <div class="nhsuk-main-wrapper" id="maincontent">
+<div class="nhsuk-width-container">
+  <div class="nhsuk-main-wrapper">
+            
+    {{ backLink({
+      "href": "javascript:history.go(-1)",
+      "text": "Go back",
+      "classes": "nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-4"
+    }) }}
+ 
+          <span class="nhsuk-caption-l">Trust details</span>
+          <h1 class="nhsuk-heading-l">What was the name of the trust where treatment was received?</h1>
+          
+    
 
-          <div class="nhsuk-grid-row">
-            <div class="nhsuk-grid-column-full">
-              <h1 class="nhsuk-heading-xl">
-                Select a trust
-              </h1>
-            </div>
-          </div>
-
-         
-          <hr class="blue-horizontal-line">
-          <br><br>
-
-          <form action="filter-by-trust" method="post" novalidate>
+          <form action="add-treatment-select-trust" method="post" novalidate>
 
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
@@ -917,15 +901,12 @@ Select a trust to filter accounts - Manage overseas entitlements and treatments
               <!-- End of letter Y -->
 
            
-          
+              <p class="nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-6"><a href="../account/personal-details">Cancel</a></p>
 
               
           </form>
    
         </div>
       </div>
-    </div>
-  </div>
-</div>
 {% endblock %}
 

@@ -10,7 +10,7 @@
 
 <!-- Set the page title inside the pageTitle block -->
 {% block pageTitle %}
-Reviewed treatments - Manage overseas entitlements and treatments
+Pending entitlements - Manage overseas entitlements and treatments
 {% endblock %}
 
 <!-- Breadcrumb goes inside the beforeContent block -->
@@ -23,17 +23,17 @@ Reviewed treatments - Manage overseas entitlements and treatments
 
         <ol class="nhsuk-breadcrumb__list">
             <li class="nhsuk-breadcrumb__list-item">
-                <a class="nhsuk-breadcrumb__link" href="../search/search-by-person">Search</a>
+                <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
               </li>
-            <li class="nhsuk-breadcrumb__list-item">Treatments to be reviewed (Reviewed)</li>
+            <li class="nhsuk-breadcrumb__list-item">Pending entitlements (Pending)</li>
         </ol>
 
       </div>
     </div>
 
-    <a class="nhsuk-back-link" href="search-results">
+    <a class="nhsuk-back-link" href="../s1/search/search-by-person">
       <span class="nhsuk-u-visually-hidden">Back to </span>
-      Search
+      Search for person
     </a>
 
   </div>
@@ -51,26 +51,10 @@ Reviewed treatments - Manage overseas entitlements and treatments
       <div class="nhsuk-width-container-fluid">
         <div class="nhsuk-main-wrapper" id="maincontent">
 
-          {% if data['treatment-reviewed'] == 'Yes' %}
-          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
-            <div class="nhsuk-notification-banner__header">
-              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
-                Success
-              </h2>
-            </div>
-            <div class="nhsuk-notification-banner__content">
-              <h3 class="nhsuk-notification-banner__heading">
-                Treatment reviewed
-              </h3>
-              <p>Treatment 1292929930 has been reviewed.</p>
-            </div>
-          </div>
-          {% endif %}
-
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
               <h1 class="nhsuk-heading-xl">
-                Reviewed treatments
+                Pending entitlements
               </h1>
             </div>
           </div>
@@ -79,15 +63,11 @@ Reviewed treatments - Manage overseas entitlements and treatments
           <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
             <ul class="nhsuk-secondary-navigation__list">
               <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" href="treatments-to-review">To review</a>
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="pending-entitlements">Pending</a>
               </li>
 
               <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="reviewed-treatments">Reviewed</a>
-              </li>
-
-              <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" href="cancelled-treatments">Cancelled</a>
+                <a class="nhsuk-secondary-navigation__link" href="actioned-entitlements">Actioned</a>
               </li>
             </ul>
           </nav>
@@ -98,7 +78,7 @@ Reviewed treatments - Manage overseas entitlements and treatments
 
           <table class="nhsuk-table">
             <caption class="nhsuk-u-visually-hidden nhsuk-table__caption">
-              Reviewed treatments
+              Pending entitlements
             </caption>
             <thead class="nhsuk-table__head">
               <tr class="nhsuk-table__row">
@@ -109,10 +89,13 @@ Reviewed treatments - Manage overseas entitlements and treatments
                   Last name
                 </td>
                 <th scope="col" class="nhsuk-table__header">
-                  Reviewed date
+                  Entitlement
                 </td>
                 <th scope="col" class="nhsuk-table__header">
-                  Reviewed by
+                  Pending date
+                </td>
+                <th scope="col" class="nhsuk-table__header">
+                  Assigned to
                 </td>
                 <th scope="col" class="nhsuk-table__header">
                   Action
@@ -120,40 +103,45 @@ Reviewed treatments - Manage overseas entitlements and treatments
               </tr>
             </thead>
             <tbody class="nhsuk-table__body">
-              {% if data['treatment-reviewed'] == 'Yes' %}
+
+              {% if data['set-entitlement-status-to-actioned'] != 'Yes' %}
               <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">Harris</td>
+                <td class="nhsuk-table__cell">Davidson</td>
+                <td class="nhsuk-table__cell">PRC</td>
+                <td class="nhsuk-table__cell">21/03/2026</td>
                 <td class="nhsuk-table__cell">
-                  Harold
-                </td>
-                <td class="nhsuk-table__cell">
-                  Simons
-                </td>
-                <td class="nhsuk-table__cell">
-                  17/03/2026
-                </td>
-                <td class="nhsuk-table__cell">
+                {% if data['assign-pending-entitlement-to-me'] == 'Yes' %}
                   joe.bloggs@nhsbsa.nhs.uk
+                {% else %}
+                  -
+                {% endif %}
                 </td>
+                <td class="nhsuk-table__cell">
+                  <a href="view-pending-entitlement">View</a>
+                </td>
+              </tr>
+              {% endif %}
+          
+              <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">Stefano</td>
+                <td class="nhsuk-table__cell">Gionni</td>
+                <td class="nhsuk-table__cell">S2/E112</td>
+                <td class="nhsuk-table__cell">17/03/2026</td>
+                <td class="nhsuk-table__cell">jade.cartwright@nhsbsa.nhs.uk</td>
                 <td class="nhsuk-table__cell">
                   <a href="#">View</a>
                 </td>
               </tr>
-              {% endif %}
+          
               <tr class="nhsuk-table__row">
+                <td class="nhsuk-table__cell">Emilia</td>
+                <td class="nhsuk-table__cell">Alonso</td>
+                <td class="nhsuk-table__cell">EHIC</td>
+                <td class="nhsuk-table__cell">13/03/2026</td>
+                <td class="nhsuk-table__cell">delia.davis@nhsbsa.nhs.uk</td>
                 <td class="nhsuk-table__cell">
-                  Aidan
-                </td>
-                <td class="nhsuk-table__cell">
-                  Davies
-                </td>
-                <td class="nhsuk-table__cell">
-                  13/01/2026
-                </td>
-                <td class="nhsuk-table__cell">
-                  jade.cartwright@nhsbsa.nhs.uk
-                </td>
-                <td class="nhsuk-table__cell">
-                  <a href="view-reviewed-treatment">View</a>
+                  <a href="#">View</a>
                 </td>
               </tr>
             </tbody>
@@ -176,8 +164,8 @@ Reviewed treatments - Manage overseas entitlements and treatments
                 <h3 class="nhsuk-heading-xs">Actions</h3>
                 <li>
                     <a href="../account-requests/pending-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">8 </span></a>
-                    <a href="treatments-to-review" class="active">Review treatments<span class="notification-badge" style="background-color: #005eb8">4 </span></a>
-                    <a href="">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                    <a href="../review-treatments/treatments-to-review">Review treatments<span class="notification-badge" style="background-color: #005eb8">4 </span></a>
+                    <a href="pending-entitlements" class="active">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
                     <a href="../uk-claims/uk-claims-search-actual-cost">UK claims</a>
                     <a href="../resubmissions/pending-resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
                     <a href="../non-eu-reciprocal-healthcare/home">Non-EU Reciprocal Healthcare (Quota)</a>
@@ -190,4 +178,15 @@ Reviewed treatments - Manage overseas entitlements and treatments
 
   </div>
 </div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#entitlement-country-drop')
+  })
+</script>
 {% endblock %}
