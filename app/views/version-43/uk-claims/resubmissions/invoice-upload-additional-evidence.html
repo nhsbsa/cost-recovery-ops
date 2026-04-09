@@ -27,6 +27,38 @@ UK claim ID 123456: Resub ID 0000001 - Upload additional evidence
     <div class="nhsBSA-sidebar-content">
       <div class="nhsuk-width-container-fluid">
         <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <!-- Notification banner to notify user evidence has been removed -->
+          {% if data['evidenceRow1'] == 'Removed' %}
+          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+            <div class="nhsuk-notification-banner__header">
+              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                Success
+              </h2>
+            </div>
+            <div class="nhsuk-notification-banner__content">
+              <h3 class="nhsuk-notification-banner__heading">
+                File deleted
+              </h3>
+              <p>File example-evidence-1.pdf is deleted successfully</p>
+            </div>
+          </div>
+          {% elif data['evidenceRow2'] == 'Removed' %}
+          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+            <div class="nhsuk-notification-banner__header">
+              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                Success
+              </h2>
+            </div>
+            <div class="nhsuk-notification-banner__content">
+              <h3 class="nhsuk-notification-banner__heading">
+                File deleted
+              </h3>
+              <p>File example-evidence-2.pdf is deleted successfully</p>
+            </div>
+          </div>
+          {% endif %}
+          
         
           {{ backLink({
             "href": "javascript:history.go(-1)",
@@ -38,7 +70,7 @@ UK claim ID 123456: Resub ID 0000001 - Upload additional evidence
         <div class="nhsuk-grid-row">
           <div class="nhsuk-grid-column-two-thirds">
               <h1 class="nhsuk-heading-xl">Upload additional evidence</h1>
-              <hr class="blue-horizontal-line">
+              
            </div>
         </div>
         

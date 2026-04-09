@@ -164,9 +164,6 @@ Resub treatment details
                         <dd class="nhsuk-summary-list__value">
                           654321
                         </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
@@ -175,9 +172,6 @@ Resub treatment details
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           7824366
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
                         </dd>
                       </div>
   
@@ -188,9 +182,6 @@ Resub treatment details
                         <dd class="nhsuk-summary-list__value">
                           Jane
                         </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
                       </div>
   
                       <div class="nhsuk-summary-list__row">
@@ -199,9 +190,6 @@ Resub treatment details
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           Doe
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
                         </dd>
                       </div>
   
@@ -212,9 +200,6 @@ Resub treatment details
                         <dd class="nhsuk-summary-list__value">
                           34567890
                         </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
@@ -223,9 +208,6 @@ Resub treatment details
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           EHIC-Article 62
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
                         </dd>
                       </div>
 
@@ -236,9 +218,6 @@ Resub treatment details
                         <dd class="nhsuk-summary-list__value">
                           Spain (ES)
                         </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
@@ -247,9 +226,6 @@ Resub treatment details
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           TCA
-                        </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
                         </dd>
                       </div>
 
@@ -269,163 +245,153 @@ Resub treatment details
                             Contested
                           {% endif %}
                         </dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
                       </div>
 
                       {% if status == 'Maintained' %}
                         <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key">Maintain reason</dt>
+                          <dt class="nhsuk-summary-list__key">Reasons to maintain treatment</dt>
                           <dd class="nhsuk-summary-list__value">
-                            {% if data['reasons-to-maintain-treatment-cost'] %}
-                              {{ data['reasons-to-maintain-treatment-cost'] }}
-                            {% else %}
-                              Information requested updated
-                            {% endif %}
-                          </dd>
-                          <dd class="nhsuk-summary-list__actions">
-                            <!-- Action -->
-                          </dd>
-                        </div>
+                            {% set maintainReasons = data['reasons-to-maintain-treatment-cost'] %}
 
-                        {% if 'Contestation after deadline [03]' in data['reasons-to-maintain-treatment-cost'] %}
-                        <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key">Date contestation received after deadline</dt>
-                          <dd class="nhsuk-summary-list__value">
-                            {% if data['date-contestation-received-after-deadline-day-maintain'] and data['date-contestation-received-after-deadline-month-maintain'] and data['date-contestation-received-after-deadline-year-maintain'] %}
-                              {% set day = data['date-contestation-received-after-deadline-day-maintain'] | int %}
-                              {% set month = data['date-contestation-received-after-deadline-month-maintain'] | int %}
-                              {% set year = data['date-contestation-received-after-deadline-year-maintain'] %}
-                  
-                              {% if day < 10 %}
-                                  {% set day = "0" ~ day %}
-                              {% endif %}
-                              
-                              {% if month < 10 %}
-                                  {% set month = "0" ~ month %}
-                              {% endif %}
-        
-                              {{ day }}/{{ month }}/{{ year }}
-
+                            {% if maintainReasons %}
+                              <ol class="nhsuk-list nhsuk-list--number">
+                                {% if maintainReasons is string %}
+                                  <li>{{ maintainReasons }}</li>
+                                {% else %}
+                                  {% for maintainReason in maintainReasons %}
+                                    <li>{{ maintainReason }}</li>
+                                  {% endfor %}
+                                {% endif %}
+                              </ol>
                             {% else %}
-                              17/04/2026
-                            {% endif %}
-                          </dd>
-                          <dd class="nhsuk-summary-list__actions">
-                            <!-- Action -->
-                          </dd>
-                        </div>
-                        {% endif %}
-                        {% if 'Information requested updated [04]' in data['reasons-to-maintain-treatment-cost'] %}
-                        <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-maintain-label">Type of information requested</dt>
-                          <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-maintain-value">
-                            {% if data['type-of-information-requested-maintain'] %}
-                            {{ data['type-of-information-requested-maintain'] }}
-                            {% else %}
-                              S072 - Entitlement document - Residence [02]
+                              1. Copy of entitlement enclosed
                             {% endif %}
                           </dd>
                         </div>
-                        {% endif %}
-                        {% if 'Other [99]' in data['reasons-to-maintain-treatment-cost'] %}
-                        <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason - comments</dt>
-                          <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
-                            {% if data['other-maintain-reason-comments'] %}
-                              {{ data['other-maintain-reason-comments'] }}
-                            {% else %}
-                              Other maintain reason explained here.
-                            {% endif %}
-                          </dd>
-                          <dd class="nhsuk-summary-list__actions">
-                            <!-- Action -->
-                          </dd>
-                        </div>
-                        {% endif %}
-
-                        <!-- only display additional comments if user input comments during withdraw journey -->
-                        {% if data['add-maintain-additional-comments'] == 'yes' %}
-                        <div class="nhsuk-summary-list__row">
-                          <dt class="nhsuk-summary-list__key">Additional comments</dt>
-                          <dd class="nhsuk-summary-list__value">
-                              {{ data['maintain-additional-comments'] }}
-                          </dd>
-
-                          <dd class="nhsuk-summary-list__actions">
-                            <!-- Action -->
-                          </dd>
-                        </div>
-                        {% endif %}
 
                         <div class="nhsuk-summary-list__row">
                           <dt class="nhsuk-summary-list__key">Treatment start date</dt>
                           <dd class="nhsuk-summary-list__value">01/02/2023</dd>
-                          <dd class="nhsuk-summary-list__actions">
-                            <!-- Action -->
-                          </dd>
                         </div>
 
                         <div class="nhsuk-summary-list__row">
                           <dt class="nhsuk-summary-list__key">Treatment end date</dt>
                           <dd class="nhsuk-summary-list__value">01/02/2023</dd>
-                          <dd class="nhsuk-summary-list__actions">
-                            <!-- Action -->
-                          </dd>
                         </div>
 
                         <div class="nhsuk-summary-list__row">
                           <dt class="nhsuk-summary-list__key">Initial cost (£)</dt>
                           <dd class="nhsuk-summary-list__value">300.00</dd>
-                          <dd class="nhsuk-summary-list__actions">
-                            <!-- Action -->
-                          </dd>
                         </div>
 
                         <div class="nhsuk-summary-list__row">
                           <dt class="nhsuk-summary-list__key">Current cost (£)</dt>
                           <dd class="nhsuk-summary-list__value">300.00</dd>
-                          <dd class="nhsuk-summary-list__actions">
-                            <!-- Action -->
+                        </div>
+
+                        {% elif status == 'Withdrawn' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Source of withdrawal request</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['treatment-withdrawal-source'] %}
+                              {{ data['treatment-withdrawal-source'] }}
+                            {% else %}
+                              Member State
+                            {% endif %}
                           </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Reasons to withdraw treatment</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% set withdrawReasons = data['reasons-to-withdraw-treatment-cost'] %}
+  
+                            {% if withdrawReasons %}
+                              <ol class="nhsuk-list nhsuk-list--number">
+                                {% if withdrawReasons is string %}
+                                  <li>{{ withdrawReasons }}</li>
+                                {% else %}
+                                  {% for withdrawReason in withdrawReasons %}
+                                    <li>{{ withdrawReason }}</li>
+                                  {% endfor %}
+                                {% endif %}
+                              </ol>
+                            {% else %}
+                              1. Duplicate cost
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Treatment start date</dt>
+                          <dd class="nhsuk-summary-list__value">01/02/2023</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Treatment end date</dt>
+                          <dd class="nhsuk-summary-list__value">01/02/2023</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Withdrawn cost (£)</dt>
+                          <dd class="nhsuk-summary-list__value">300.00</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Initial cost (£)</dt>
+                          <dd class="nhsuk-summary-list__value">300.00</dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Current cost (£)</dt>
+                          <dd class="nhsuk-summary-list__value">0.00</dd>
                         </div>
 
                         
                         
 
                       
-                      {% else %}
+                      {% elif status == 'Partial' %}
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Treatment start date</dt>
                         <dd class="nhsuk-summary-list__value">01/02/2023</dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Treatment end date</dt>
                         <dd class="nhsuk-summary-list__value">01/02/2023</dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Initial cost (£)</dt>
                         <dd class="nhsuk-summary-list__value">300.00</dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Current cost (£)</dt>
+                        <dd class="nhsuk-summary-list__value">200.00</dd>
+                      </div>
+
+                      <!-- No decision has been made -->
+                      {% else %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Treatment start date</dt>
+                        <dd class="nhsuk-summary-list__value">01/02/2023</dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Treatment end date</dt>
+                        <dd class="nhsuk-summary-list__value">01/02/2023</dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Initial cost (£)</dt>
+                        <dd class="nhsuk-summary-list__value">300.00</dd>
                       </div>
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">Current cost (£)</dt>
                         <dd class="nhsuk-summary-list__value">300.00</dd>
-                        <dd class="nhsuk-summary-list__actions">
-                          <!-- Action -->
-                        </dd>
                       </div>
                       {% endif %}
                     </dl>
@@ -460,8 +426,164 @@ Resub treatment details
 
                 </div>
               </div>
-            </div>
             <!-- End of rina reference panel -->
+
+
+            <!-- Start of Partially maintained and withdrawn card -->
+            {% if status == 'Partial' %}
+            <div class="nhsuk-card">
+              <div class="nhsuk-card__content">
+
+                <h2 class="nhsuk-heading-m">Maintained treatment details</h2>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="start-date-of-maintained-treatment-label">Maintained treatment start date</dt>
+                    <dd class="nhsuk-summary-list__value" id="start-date-of-maintained-treatment-value">
+                    {% if data['start-date-maintained-treatment-day'] and data['start-date-maintained-treatment-month'] and data['start-date-maintained-treatment-year'] %}
+                      {% set day = data['start-date-maintained-treatment-day'] | int %}
+                      {% set month = data['start-date-maintained-treatment-month'] | int %}
+                      {% set year = data['start-date-maintained-treatment-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/02/2023
+                    {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="end-date-of-maintained-treatment-label">Maintained treatment end date</dt>
+                    <dd class="nhsuk-summary-list__value" id="end-date-of-maintained-treatment-value">
+                    {% if data['end-date-maintained-treatment-day'] and data['end-date-maintained-treatment-month'] and data['end-date-maintained-treatment-year'] %}
+                      {% set day = data['end-date-maintained-treatment-day'] | int %}
+                      {% set month = data['end-date-maintained-treatment-month'] | int %}
+                      {% set year = data['end-date-maintained-treatment-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/02/2023
+                    {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Maintained cost (£)</dt>
+                    <dd class="nhsuk-summary-list__value">
+                    {% if data['partial-maintained-treatment-cost'] %}
+                      {{ data['partial-maintained-treatment-cost'] }}
+                     {% else %}
+                       200.00
+                     {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Reasons to maintain treatment</dt>
+                    <dd class="nhsuk-summary-list__value">
+                    {% set partialMaintainReasons = data['reasons-to-partially-maintain-treatment-cost'] %}
+
+                    {% if partialMaintainReasons %}
+                      <ol class="nhsuk-list nhsuk-list--number">
+                        {% if partialMaintainReasons is string %}
+                          <li>{{ partialMaintainReasons }}</li>
+                        {% else %}
+                          {% for partialMaintainReason in partialMaintainReasons %}
+                            <li>{{ partialMaintainReason }}</li>
+                          {% endfor %}
+                        {% endif %}
+                      </ol>
+                    {% else %}
+                      1. Copy of entitlement enclosed
+                    {% endif %}
+                    </dd>
+                  </div>
+                </dl>
+
+
+                <h2 class="nhsuk-heading-m">Withdrawn treatment details</h2>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="start-date-of-withdrawn-treatment-label">Withdrawn treatment start date</dt>
+                    <dd class="nhsuk-summary-list__value" id="start-date-of-withdrawn-treatment-value">
+                      01/02/2023
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="end-date-of-withdrawn-treatment-label">Withdrawn treatment end date</dt>
+                    <dd class="nhsuk-summary-list__value" id="end-date-of-withdrawn-treatment-value">
+                      01/02/2023
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Withdrawn cost (£)</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['partial-withdrawn-treatment-cost'] %}
+                        {{ data['partial-withdrawn-treatment-cost'] }}
+                      {% else %}
+                        100.00
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Source of withdrawal request</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['treatment-partial-withdrawal-source'] %}
+                        {{ data['treatment-partial-withdrawal-source'] }}
+                      {% else %}
+                        Member State
+                      {% endif %}
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Reasons to withdraw treatment</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% set partialWithdrawnReasons = data['reasons-to-partially-withdraw-treatment-cost'] %}
+
+                      {% if partialWithdrawnReasons %}
+                        <ol class="nhsuk-list nhsuk-list--number">
+                          {% if partialWithdrawnReasons is string %}
+                            <li>{{ partialWithdrawnReasons }}</li>
+                          {% else %}
+                            {% for partialWithdrawnReason in partialWithdrawnReasons %}
+                              <li>{{ partialWithdrawnReason }}</li>
+                            {% endfor %}
+                          {% endif %}
+                        </ol>
+                      {% else %}
+                        1. Duplicate cost
+                      {% endif %}
+                    </dd>
+                  </div>
+                </dl>
+
+              </div>
+            </div>
+            
+            </div>
+            {% endif %}
+            
             
           <!-- End of Jane Doe's treatment details for resub ID: 0000001 -->
 

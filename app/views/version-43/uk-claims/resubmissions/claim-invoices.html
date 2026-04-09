@@ -121,6 +121,9 @@ UK claim ID 123456 - Claim invoices
         </div>
         <!--end search-->
 
+        {% set currentPage = data.page | default(1) | int %}
+        {% set totalPages = 5 %}
+
 
         <!-- Invoices table for Main claim, Article 63, 2.b, ages 20 to 64 years begins -->
         <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
@@ -486,20 +489,80 @@ UK claim ID 123456 - Claim invoices
       <!-- End of Invoices table for Article 63, 2.b - ages 20 to 64 years -->
 
 
-       <!-- Pagination starts -->
-        <nav class="nav" role="navigation" aria-label="Pagination">
-          <ul class="pagination">
-              <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
-              <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>
-              <li class="pagination__item"><a class="pagination__link" href="#">3</a></li>
-              <li class="pagination__item"><a class="pagination__link" href="#">4</a></li>
-              <li class="pagination__item"><a class="pagination__link" href="#">5</a></li>
-              <li class="pagination__item"><a class="pagination__link next" href="#">Next »</a></li>
-          </ul>
+       <!-- Pagination begins -->
+       <nav class="nhsuk-pagination nhsuk-pagination--numbered" role="navigation" aria-label="Pagination" style="display: flex; justify-content: center; align-items: center; margin-top: 24px; gap: 16px;">
 
-          <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 50 invoices</div>
-        </nav>
-        <!-- Pagination ends -->
+        {# Previous (hidden on page 1) #}
+        {% if currentPage > 1 %}
+        <a href="?page={{ currentPage - 1 }}" class="nhsuk-pagination__previous" rel="prev">
+          <svg class="nhsuk-icon nhsuk-icon--arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+            <path d="M10.7 6.3c.4.4.4 1 0 1.4L7.4 11H19a1 1 0 0 1 0 2H7.4l3.3 3.3c.4.4.4 1 0 1.4a1 1 0 0 1-1.4 0l-5-5A1 1 0 0 1 4 12c0-.3.1-.5.3-.7l5-5a1 1 0 0 1 1.4 0Z" />
+          </svg>
+          <span class="nhsuk-pagination__title">
+            Previous<span class="nhsuk-u-visually-hidden"> page</span>
+          </span>
+        </a>
+        {% endif %}
+
+        <ul class="nhsuk-pagination__list">
+
+          {# Always show page 1 #}
+          <li class="nhsuk-pagination__item {% if currentPage == 1 %}nhsuk-pagination__item--current{% endif %}">
+            <a class="nhsuk-pagination__link"
+              href="?page=1"
+              {% if currentPage == 1 %}aria-current="page"{% endif %}>
+              1
+            </a>
+          </li>
+
+          {# Ellipsis after 1 (if far away) #}
+          {% if currentPage > 3 %}
+            <li class="nhsuk-pagination__item nhsuk-pagination__item--ellipsis">&ctdot;</li>
+          {% endif %}
+
+          {# Pages around current (current -1, current, current +1) #}
+          {% for page in range(currentPage - 1, currentPage + 2) %}
+            {% if page > 1 and page < totalPages %}
+              <li class="nhsuk-pagination__item {% if page == currentPage %}nhsuk-pagination__item--current{% endif %}">
+                <a class="nhsuk-pagination__link"
+                  href="?page={{ page }}"
+                  {% if page == currentPage %}aria-current="page"{% endif %}>
+                  {{ page }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+
+          {# Ellipsis before last #}
+          {% if currentPage < totalPages - 2 %}
+            <li class="nhsuk-pagination__item nhsuk-pagination__item--ellipsis">&ctdot;</li>
+          {% endif %}
+
+          {# Always show last page (12) #}
+          <li class="nhsuk-pagination__item {% if currentPage == totalPages %}nhsuk-pagination__item--current{% endif %}">
+            <a class="nhsuk-pagination__link"
+              href="?page={{ totalPages }}"
+              {% if currentPage == totalPages %}aria-current="page"{% endif %}>
+              {{ totalPages }}
+            </a>
+          </li>
+
+        </ul>
+
+        {# Next #}
+        {% if currentPage < totalPages %}
+          <a href="?page={{ currentPage + 1 }}" class="nhsuk-pagination__next" rel="next">
+            <span class="nhsuk-pagination__title">
+              Next<span class="nhsuk-u-visually-hidden"> page</span>
+            </span>
+            <svg class="nhsuk-icon nhsuk-icon--arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+              <path d="m14.7 6.3 5 5c.2.2.3.4.3.7 0 .3-.1.5-.3.7l-5 5a1 1 0 0 1-1.4-1.4l3.3-3.3H5a1 1 0 0 1 0-2h11.6l-3.3-3.3a1 1 0 1 1 1.4-1.4Z" />
+            </svg>
+          </a>
+        {% endif %}
+
+    </nav>
+    <!-- Pagination ends -->
       
 
               
