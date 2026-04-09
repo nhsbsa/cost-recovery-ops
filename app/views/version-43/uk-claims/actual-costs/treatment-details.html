@@ -1,0 +1,478 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Resub treatment details
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="treatments-within-resubmission">View Resub ID (Treatments linked to resub)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            View details (Treatment details)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="treatments-within-resubmission">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      View Resub ID (Treatments linked to resub)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+{% set treatment = data['treatment'] %}
+{% set status = data.treatmentStatuses[treatment] %}
+
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+          
+            
+            {% set contestationData = data.contestation_reasons[data.treatment] %}
+            <!-- Start of Jane Doe's treatment details for resub ID: 0000001 --->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                  Resub ID 7824366: Claim ID 345680<br>
+                  (Treatment ID 387731) - Treatment details
+                </h1>
+              </div>
+
+
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Three buttons disappear once status marked as peer reviewed -->
+                {% if data.resubStatus not in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex;">
+                  <a href="reasons-to-maintain-treatment-cost">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 123456</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-treatment-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 123456</span>
+                    </button>
+                  </a>
+
+                  <a href="enter-maintained-treatment-dates">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partial<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 123456</span>
+                    </button>
+                  </a>
+                </div>
+                {% endif %}
+                
+              </div>
+
+          
+            </div>
+
+            
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="treatment-details?treatment=Jane">Treatment details</a>
+                <span class="nhsuk-u-visually-hidden">View details for treatment ID 387731</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="treatment-reasons-for-contestation?treatment=Jane">Reason for contestation</a>
+                <span class="nhsuk-u-visually-hidden">View or add reason for contestation for treatment ID 387731</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="contact-ovm?treatment=Jane">OVM contact</a>
+                <span class="nhsuk-u-visually-hidden">View OVM contact details for treatment ID 387731</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="request-prc?treatment=Jane">Request for a PRC</a>
+                <span class="nhsuk-u-visually-hidden">View request for a PRC for treatment ID 387731</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="treatment-evidence?treatment=Jane">Evidence</a>
+                <span class="nhsuk-u-visually-hidden">View evidence for treatment ID 387731</span>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="ovm-details?treatment=Jane">OVM details</a>
+                <span class="nhsuk-u-visually-hidden">View OVM details for treatment ID 387731</span>
+              </li>
+            </ul>
+          </nav>
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <!--end secondary navigation-->
+
+          <br><br>
+          
+            <!-- Beginning of content -->
+            <div class="nhsuk-grid-row">
+              <!-- Start of treatment details panel -->
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+                    <dl class="nhsuk-summary-list">
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Person ID
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          654321
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Resub IDs linked to this treatment
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          7824366
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First name
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Jane
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Doe
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Personal identification number
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          34567890
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Entitlement
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          EHIC-Article 62
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Country of claim
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Spain (ES)
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Agreement type
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          TCA
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Treatment status
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% set status = data.treatmentStatuses['Jane'] %}
+                          {% if status == 'Maintained' %}
+                            Maintained
+                          {% elif status == 'Withdrawn' %}
+                            Withdrawn
+                          {% elif status == 'Partial' %}
+                            Partial
+                          {% else %}
+                            Contested
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      {% if status == 'Maintained' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Maintain reason</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['reasons-to-maintain-treatment-cost'] %}
+                              {{ data['reasons-to-maintain-treatment-cost'] }}
+                            {% else %}
+                              Information requested updated
+                            {% endif %}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        {% if 'Contestation after deadline [03]' in data['reasons-to-maintain-treatment-cost'] %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Date contestation received after deadline</dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['date-contestation-received-after-deadline-day-maintain'] and data['date-contestation-received-after-deadline-month-maintain'] and data['date-contestation-received-after-deadline-year-maintain'] %}
+                              {% set day = data['date-contestation-received-after-deadline-day-maintain'] | int %}
+                              {% set month = data['date-contestation-received-after-deadline-month-maintain'] | int %}
+                              {% set year = data['date-contestation-received-after-deadline-year-maintain'] %}
+                  
+                              {% if day < 10 %}
+                                  {% set day = "0" ~ day %}
+                              {% endif %}
+                              
+                              {% if month < 10 %}
+                                  {% set month = "0" ~ month %}
+                              {% endif %}
+        
+                              {{ day }}/{{ month }}/{{ year }}
+
+                            {% else %}
+                              17/04/2026
+                            {% endif %}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+                        {% endif %}
+                        {% if 'Information requested updated [04]' in data['reasons-to-maintain-treatment-cost'] %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="date-contestation-received-after-deadline-maintain-label">Type of information requested</dt>
+                          <dd class="nhsuk-summary-list__value" id="date-contestation-received-after-deadline-maintain-value">
+                            {% if data['type-of-information-requested-maintain'] %}
+                            {{ data['type-of-information-requested-maintain'] }}
+                            {% else %}
+                              S072 - Entitlement document - Residence [02]
+                            {% endif %}
+                          </dd>
+                        </div>
+                        {% endif %}
+                        {% if 'Other [99]' in data['reasons-to-maintain-treatment-cost'] %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason - comments</dt>
+                          <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
+                            {% if data['other-maintain-reason-comments'] %}
+                              {{ data['other-maintain-reason-comments'] }}
+                            {% else %}
+                              Other maintain reason explained here.
+                            {% endif %}
+                          </dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+                        {% endif %}
+
+                        <!-- only display additional comments if user input comments during withdraw journey -->
+                        {% if data['add-maintain-additional-comments'] == 'yes' %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Additional comments</dt>
+                          <dd class="nhsuk-summary-list__value">
+                              {{ data['maintain-additional-comments'] }}
+                          </dd>
+
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+                        {% endif %}
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Treatment start date</dt>
+                          <dd class="nhsuk-summary-list__value">01/02/2023</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Treatment end date</dt>
+                          <dd class="nhsuk-summary-list__value">01/02/2023</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Initial cost (£)</dt>
+                          <dd class="nhsuk-summary-list__value">300.00</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">Current cost (£)</dt>
+                          <dd class="nhsuk-summary-list__value">300.00</dd>
+                          <dd class="nhsuk-summary-list__actions">
+                            <!-- Action -->
+                          </dd>
+                        </div>
+
+                        
+                        
+
+                      
+                      {% else %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Treatment start date</dt>
+                        <dd class="nhsuk-summary-list__value">01/02/2023</dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Treatment end date</dt>
+                        <dd class="nhsuk-summary-list__value">01/02/2023</dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Initial cost (£)</dt>
+                        <dd class="nhsuk-summary-list__value">300.00</dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">Current cost (£)</dt>
+                        <dd class="nhsuk-summary-list__value">300.00</dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <!-- Action -->
+                        </dd>
+                      </div>
+                      {% endif %}
+                    </dl>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- End of resub details panel -->
+
+            <!-- Start of RINA reference for S104 panel -->
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="contested-treatment-rina-reference-label">
+                      <b>Contested treatment member state reference (optional)</b>
+                    </label>
+                    <div class="nhsuk-hint">
+                      This is the 'individual COC_IMO number Debtor Liaison Body' which is found on the SED S102.
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="contested-treatment-rina-reference" name="contested-treatment-rina-reference" type="text" value="">
+                  </div>
+  
+                  <div class="button-container">
+                    <div class="action-buttons">
+                      <a class="nhsuk-button style=padding-right:10px;" id="save-contested-treatment-rina-reference" href="#" style="margin-right:20px; margin-top: 10px;">Save reference</a>
+                      <button class="nhsuk-button nhsuk-button--secondary" style="margin-top: 10px;" type="submit" id="editContestedTreatmentRinaReferenceButton" name="action" value="contested-treatment-rina-reference">Edit reference</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- End of rina reference panel -->
+            
+          <!-- End of Jane Doe's treatment details for resub ID: 0000001 -->
+
+            
+          
+
+        
+    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

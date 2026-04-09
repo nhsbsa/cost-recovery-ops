@@ -1,0 +1,343 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Request for PRC
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="treatments-within-resubmission">View Resub ID (Treatments linked to resub)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            View details (Request for a PRC)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="treatments-within-resubmission">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      View Resub ID (Treatments linked to resub)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {% if data['treatment'] == 'Jane' %}
+            {% set contestationData = data.contestation_reasons[data.treatment] %}
+            <!-- Start of Jane Doe's treatment details for resub ID: 7824366 --->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                  Resub ID 7824366: Claim ID 345680<br>
+                  (Treatment ID 387731) - Request for a PRC
+                </h1>
+              </div>
+
+
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex;">
+                  <a href="reasons-to-maintain-treatment-cost">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-treatment-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+
+                  <a href="enter-revised-prc">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partial<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div>              
+
+
+
+            </div>
+            
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-details?treatment=Jane">Treatment details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-reasons-for-contestation?treatment=Jane">Reason for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="contact-ovm?treatment=Jane">OVM contact</a>
+                  <span class="nhsuk-u-visually-hidden">View OVM contact details for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="request-prc?treatment=Jane">Request for a PRC</a>
+                  <span class="nhsuk-u-visually-hidden">View request for a PRC for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-evidence?treatment=Jane">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="ovm-details?treatment=Jane">OVM details</a>
+                  <span class="nhsuk-u-visually-hidden">View OVM details for treatment ID 387731</span>
+                </li>
+              </ul>
+            </nav>
+  
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <form action="request-prc" method="post">
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-start-date-label">Actual treatment start date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">Actual treatment end date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-end-date">01/02/2023</dd>
+                  </div>
+                </dl>
+
+
+                
+                  <h2 class="nhsuk-heading-s nhsuk-u-margin-0">What are the start and end dates needed for the PRC?</h2>
+
+                  <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                    
+                    <legend class="nhsuk-fieldset__legend">
+                      <span class="nhsuk-label" style="margin-top: 20px;">PRC start date</span>
+                    </legend>
+
+                    <div class="nhsuk-hint" id="enter-prc-start-date-hint">
+                      For example, 31 3 2022
+                    </div>
+          
+                    <div class="nhsuk-date-input" id="start-date-prc">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="start-date-prc-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="start-date-prc-day" name="start-date-prc-day" type="text" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="start-date-prc-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="start-date-prc-month" name="start-date-prc-month" type="text" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="start-date-prc-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="start-date-prc-year" name="start-date-prc-year" type="text" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+
+
+                  <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                    
+                    <legend class="nhsuk-fieldset__legend">
+                      <span class="nhsuk-label" style="margin-top: 20px;">PRC end date</span>
+                    </legend>
+
+                    <div class="nhsuk-hint" id="enter-prc-end-date-hint">
+                      For example, 31 3 2022
+                    </div>
+          
+                    <div class="nhsuk-date-input" id="end-date-prc">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="end-date-prc-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="end-date-prc-day" name="end-date-prc-day" type="text" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="end-date-prc-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="end-date-prc-month" name="end-date-prc-month" type="text" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="end-date-prc-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="end-date-prc-year" name="end-date-prc-year" type="text" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+
+
+                  <div class="nhsuk-form-group">
+                    <fieldset class="nhsuk-fieldset">
+                       <legend class="nhsuk-label ">How the PRC was requested?</legend>
+                       
+                       <div class="nhsuk-radios">
+                          <div class="nhsuk-radios__item">
+                             <input class="nhsuk-radios__input" id="prc-requested-by-paper" name="prc-requested-by" type="radio" value="Paper">
+                             <label class="nhsuk-label nhsuk-radios__label" for="prc-requested-by-paper">Paper</label>
+                          </div>
+                          <div class="nhsuk-radios__item">
+                             <input class="nhsuk-radios__input" id="prc-requested-by-rina" name="prc-requested-by" type="radio" value="RINA">
+                             <label class="nhsuk-label nhsuk-radios__label" for="prc-requested-by-rina">RINA</label>
+                          </div>
+                       </div>
+                    </fieldset>
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="number-of-attachments-requested-label">How many attachments were added for the S044?</label>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="requestForPRC_noOfAttachment" type="number" name="number-of-attachments-requested" value="">
+                  </div>
+
+                
+                <button class="nhsuk-button"  type="submit">Continue</button>
+              
+              </form>
+              <!-- End of main content-->
+              {% endif %}
+
+              
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+  .nhsuk-summary-list__key {
+    font-size: 19px;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  const textarea = document.querySelector('#otherContestedReason');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 255;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 1000);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,113 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Check withdrawn cost details
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+    
+  
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">Check these details before submitting</h1>
+             </div>
+          </div>
+
+          <form action="cya-withdraw-treatment-cost" method="post">
+
+          
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+  
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Source of withdrawal request
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                    {% if data['treatment-withdrawal-source'] %}
+                     {{ data['treatment-withdrawal-source'] }}
+                    {% else %}
+                      Member State
+                    {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="source-of-treatment-withdrawal">Change<span class="nhsuk-u-visually-hidden">source of withdrawal request</span></a>
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Reasons to withdraw treatment
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% set withdrawReasons = data['reasons-to-withdraw-treatment-cost'] %}
+  
+                      {% if withdrawReasons %}
+                        <ol class="nhsuk-list nhsuk-list--number">
+                          {% if withdrawReasons is string %}
+                            <li>{{ withdrawReasons }}</li>
+                          {% else %}
+                            {% for withdrawReason in withdrawReasons %}
+                              <li>{{ withdrawReason }}</li>
+                            {% endfor %}
+                          {% endif %}
+                        </ol>
+                      {% else %}
+                        1. Duplicate cost
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="reasons-to-withdraw-treatment-cost">Change<span class="nhsuk-u-visually-hidden">reasons to maintain treatment</span></a>
+                    </dd>
+                  </div>
+                </dl>
+  
+              </div>
+            </div>
+
+
+              <button class="nhsuk-button nhsuk-button--primary" type="submit" id="submit-button">Submit</button>
+
+              <p><a href="treatment-details">Cancel</a></p>
+            </div>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

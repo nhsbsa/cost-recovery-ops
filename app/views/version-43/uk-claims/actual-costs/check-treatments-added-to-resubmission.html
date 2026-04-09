@@ -1,0 +1,274 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Confirm you want to add these invoices to the resubmission
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View Claim ID (Treatment forms)</li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+
+              <!-- Notifcation shown if no treatments -->
+              <div id="no-treatments-message" class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner" style="display:none;">
+                <div class="nhsuk-notification-banner__header">
+                  <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                    Success
+                  </h2>
+                </div>
+                <div class="nhsuk-notification-banner__content">
+                  <h3 class="nhsuk-notification-banner__heading">
+                    Treatment form removed from selection
+                  </h3>
+                  <p>Treatment form 338223275 has been removed and will not be added to this resubmission.</p>
+                </div>
+              </div>
+              <!-- End of notification -->
+
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-two-thirds">
+                  <h1 class="nhsuk-heading-xl" style="margin-bottom: 20px;">
+                    Confirm you want to add these treatments to the resubmission
+                  </h1>
+                </div>
+              
+                <div class="nhsuk-grid-column-one-third" style="display: flex; justify-content: flex-end; align-items: flex-start;">
+                  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <form action="resubmissions" method="post">
+                      <button class="nhsuk-button nhsuk-button--primary" type="submit" id="confirm-button">
+                        Confirm
+                      </button>
+                    </form>
+                    <a href="/version-43/uk-claims/actual-costs/add-treatments-to-resubmission">
+                      <button class="nhsuk-button nhsuk-button--secondary" type="button" id="add-more-invoices-button">
+                        Add more treatments forms
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+             
+              <p style="margin-top: 20px;"><b>Current cost total: <span id="valuesTotal">0</span></b></p>
+              <p style="margin-top: -10px;"><b>Treatments added: <span id="treatmentsTotal">0</span></p></b>
+              
+              
+              
+
+                <div class="nhsuk-form-group" id="treatments-section">
+                  <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
+                    <thead role="rowgroup" class="nhsuk-table__head" id="treatments">
+                      <tr role="row">
+                        <th role="columnheader" scope="col">Treatment ID</th>
+                        <th role="columnheader" scope="col">First name</th>
+                        <th role="columnheader" scope="col">Last name</th>
+                        <th role="columnheader" scope="col">Entitlement</th>
+                        <th role="columnheader" scope="col">Initial cost (£)</th>
+                        <th role="columnheader" scope="col">Current cost (£) </th>
+                        <th role="columnheader" scope="col">Agreement</th>
+                        <th role="columnheader" scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody class="nhsuk-table__body"></tbody>
+                  </table>
+                </div>
+
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const addMoreTreatmentsBtn = document.getElementById("add-more-treatments-button");
+  const tbody = document.querySelector(".nhsuk-table__body");
+  const treatmentsSection = document.getElementById("treatments-section");
+  const noTreatmentsMessage = document.getElementById("no-treatments-message");
+  const confirmButton = document.getElementById("confirm-button");
+  const treatmentsTotalEl = document.getElementById("treatmentsTotal");
+  const valuesTotalEl = document.getElementById("valuesTotal");
+  const pagination = document.getElementById("pagination");
+
+  // Load from sessionStorage
+  let selectedTreatments = JSON.parse(sessionStorage.getItem("selectedTreatments")) || [];
+
+  // --- Utility: total current cost ---
+  function getValueCount(treatment) {
+    return parseFloat(treatment.currentCost || 0);
+  }
+
+  // --- Helper: escape HTML ---
+  function escapeHtml(s) {
+    if (s === undefined || s === null) return "";
+    return String(s).replace(/[&<>"']/g, function (m) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+
+  // --- Render treatments ---
+  function renderTreatments() {
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+
+    if (!selectedTreatments.length) {
+      if (treatmentsSection) treatmentsSection.style.display = "none";
+      if (pagination) pagination.style.display = "none";
+      if (noTreatmentsMessage) noTreatmentsMessage.style.display = "block";
+
+      if (treatmentsTotalEl) treatmentsTotalEl.textContent = "0";
+      if (valuesTotalEl) valuesTotalEl.textContent = "£0.00";
+
+      if (confirmButton) {
+        confirmButton.disabled = true;
+        confirmButton.classList.add("nhsuk-button--disabled");
+      }
+
+      if (addMoreTreatmentsBtn) {
+        addMoreTreatmentsBtn.textContent = "Add more treatments";
+        addMoreTreatmentsBtn.classList.remove("nhsuk-button--primary");
+        addMoreTreatmentsBtn.classList.add("nhsuk-button--secondary");
+      }
+
+      return;
+    }
+
+    if (treatmentsSection) treatmentsSection.style.display = "";
+    if (pagination) pagination.style.display = "";
+    if (noTreatmentsMessage) noTreatmentsMessage.style.display = "none";
+
+    if (treatmentsTotalEl) {
+      treatmentsTotalEl.textContent = selectedTreatments.length;
+    }
+
+    let totalValues = 0;
+
+    selectedTreatments.forEach(treatment => {
+      const tr = document.createElement("tr");
+      tr.dataset.id = treatment.id;
+
+      tr.innerHTML = `
+        <td>${escapeHtml(treatment.id)}</td>
+        <td>${escapeHtml(treatment.firstName)}</td>
+        <td>${escapeHtml(treatment.lastName)}</td>
+        <td>${escapeHtml(treatment.entitlement)}</td>
+        <td>${escapeHtml(treatment.initialCost)}</td>
+        <td>${escapeHtml(treatment.currentCost)}</td>
+        <td>${escapeHtml(treatment.agreement)}</td>
+        <td>
+          <a href="#" class="nhsuk-link remove-treatment" data-id="${escapeHtml(treatment.id)}">
+            Remove
+          </a>
+        </td>
+      `;
+
+      tbody.appendChild(tr);
+
+      totalValues += getValueCount(treatment);
+    });
+
+    // Format as GBP
+    if (valuesTotalEl) {
+      valuesTotalEl.textContent = totalValues.toLocaleString("en-GB", {
+        style: "currency",
+        currency: "GBP"
+      });
+    }
+
+    if (confirmButton) {
+      confirmButton.disabled = false;
+      confirmButton.classList.remove("nhsuk-button--disabled");
+    }
+
+    if (addMoreTreatmentsBtn) {
+      addMoreTreatmentsBtn.textContent = "Add more treatments";
+      addMoreTreatmentsBtn.classList.remove("nhsuk-button--primary");
+      addMoreTreatmentsBtn.classList.add("nhsuk-button--secondary");
+    }
+  }
+
+  // --- Remove treatment ---
+  if (tbody) {
+    tbody.addEventListener("click", function (e) {
+      const btn = e.target.closest(".remove-treatment");
+      if (!btn) return;
+
+      e.preventDefault(); // 🔥 IMPORTANT FIX
+
+      const id = btn.dataset.id;
+
+      selectedTreatments = selectedTreatments.filter(t => String(t.id) !== String(id));
+      sessionStorage.setItem("selectedTreatments", JSON.stringify(selectedTreatments));
+
+      renderTreatments();
+    });
+  }
+
+  // --- Form safety ---
+  const form = document.querySelector('form[action="check-treatments-added-to-resubmission"]');
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      if (!selectedTreatments.length) {
+        e.preventDefault();
+        alert("You have removed all treatments. To continue, add treatments.");
+      }
+    });
+  }
+
+  // --- Init ---
+  renderTreatments();
+});
+</script>
+
+{% endblock %}

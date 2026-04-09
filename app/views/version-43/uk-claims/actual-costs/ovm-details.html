@@ -1,0 +1,272 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Resub treatment OVM details
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="treatments-within-resubmission">View Resub ID (Treatments linked to resub)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            View details (OVM details)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="treatments-within-resubmission">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      View Resub ID (Treatments linked to resub)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {% if data['treatment'] == 'Jane' %}
+            {% set contestationData = data.contestation_reasons[data.treatment] %}
+            <!-- Start of Jane Doe's treatment details for resub ID: 7824366 --->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                  Resub ID 7824366: Claim ID 345680<br>
+                  (Treatment ID 387731) - OVM details
+                </h1>
+              </div>
+
+
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex;">
+                  <a href="reasons-to-maintain-treatment-cost">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-treatment-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+
+                  <a href="enter-revised-prc">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partial<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div>              
+
+
+
+            </div>
+            
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-details?treatment=Jane">Treatment details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-reasons-for-contestation?treatment=Jane">Reason for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="contact-ovm?treatment=Jane">OVM contact</a>
+                  <span class="nhsuk-u-visually-hidden">View OVM contact details for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="request-prc?treatment=Jane">Request for a PRC</a>
+                  <span class="nhsuk-u-visually-hidden">View request for a PRC for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-evidence?treatment=Jane">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="ovm-details?treatment=Jane">OVM details</a>
+                  <span class="nhsuk-u-visually-hidden">View OVM details for treatment ID 387731</span>
+                </li>
+              </ul>
+            </nav>
+  
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <form action="request-prc" method="post">
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="ovm-name-label">OVM name</dt>
+                     <dd class="nhsuk-summary-list__value" id="ovm-name">Hailey Smith</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="ovm-email-address-label">OVM email address</dt>
+                     <dd class="nhsuk-summary-list__value" id="ovm-email-address">hailey.smith@nhstrust.net</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="ovm-telephone-number-label">Telephone number</dt>
+                    <dd class="nhsuk-summary-list__value" id="ovm-telephone-number">07123456789</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="ovm-status-label">OVM status</dt>
+                      <dd class="nhsuk-summary-list__value" id="ovm-status">Active</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="trust-name-label">Trust name</dt>
+                    <dd class="nhsuk-summary-list__value" id="trust-name">	Royal Free London NHS Foundation Trust</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="trust-email-address-label">Trust email address</dt>
+                    <dd class="nhsuk-summary-list__value" id="trust-email-address">rxxxxt140@nhs.net</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="trust-status-label">Trust status</dt>
+                      <dd class="nhsuk-summary-list__value" id="trust-status">Active</dd>
+                  </div>
+                </dl>
+
+
+                
+                <h2 class="nhsuk-heading-s">Add a note for the trust or the OVM (optional)</h2>
+                
+                <div class="nhsuk-form-group">
+                  <label class="nhsuk-label nhsuk-u-visually-hidden" for="ovmNotes">Note for trust</label>
+                  <div class="nhsuk-hint">(For example, OVM has left the trust, OVM has switched from one trust to another.)</div>
+                  
+                  <textarea class="nhsuk-textarea" id="ovmNotes" name="ovm-note" form="confirmationForm" method="post" rows="5"></textarea>
+                </div>
+                  
+
+                  
+
+                
+                <button class="nhsuk-button"  type="submit">Submit</button>
+              
+              </form>
+              <!-- End of main content-->
+              {% endif %}
+
+              
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+  .nhsuk-summary-list__key {
+    font-size: 19px;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  const textarea = document.querySelector('#otherContestedReason');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 255;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 1000);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
+{% endblock %}

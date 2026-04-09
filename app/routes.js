@@ -107,6 +107,7 @@ router.use('/version-43/resubmissions/v1', require('./views/version-43/_routes')
 router.use('/version-43/review-treatments', require('./views/version-43/review-treatments/_routes'));
 router.use('/version-43/s1', require('./views/version-43/s1/_routes'));
 router.use('/version-43/uk-claims', require('./views/version-43/uk-claims/_routes'));
+router.use('/version-43/uk-claims/actual-costs', require('./views/version-43/uk-claims/actual-costs/_routes'));
 router.use('/version-43/uk-claims/resubmissions', require('./views/version-43/uk-claims/resubmissions/_routes'));
 
 

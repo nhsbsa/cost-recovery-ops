@@ -11,31 +11,20 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 
 // Search for UK Claims - Actual cost
 router.post([/uk-claims-search-actual-cost/], function(req, res) {
-  // Capture form data from the POST request
-  const searchEntitlementArticleType = req.body['search-entitlement-article-type'];
+    // Capture form data from the POST request
+    const searchEntitlementArticleType = req.body['search-entitlement-article-type'];
+    const searchYearOfClaim = req.body['search-year-of-claim'];  // Capture Year
+    const searchEntitlementCountry = req.body['entitlement-country'];  // Capture Country
   
-  // Store these in the session or database
-  req.session.data['search-entitlement-article-type'] = searchEntitlementArticleType;
-
-  // Initialize resubmissions data if not already present
-  if (!data.resubmissions) {
-    data.resubmissions = {
-      "1160158": {
-        status: "peer-review-requested",
-        invoiceStatuses: { Jane: "", John: "" },
-        dhDateEntered: "",
-        msDateEntered: ""
-      },
-      "7790992": {
-        status: "invoices-added-to-resub",
-        invoiceStatuses: {},
-        dhDateEntered: "",
-        msDateEntered: ""
-      }
-    };
-  }
-
-  res.redirect('/version-43/uk-claims/uk-claims-search-results');
+    // Store these in the session
+    req.session.data['search-entitlement-article-type'] = searchEntitlementArticleType;
+    req.session.data['search-year-of-claim'] = searchYearOfClaim;
+    req.session.data['search-entitlement-country'] = searchEntitlementCountry;
+  
+    console.log("Session Data:", req.session.data);  // Debugging line
+  
+    // Redirect to search results page
+  res.redirect('/version-43/uk-claims/uk-claims-search-results-found');
 })
 
 // Search for UK Claims - Average cost
