@@ -218,15 +218,16 @@ router.post([/create-new-actual-cost-resubmission/], function(req, res) {
   res.redirect('/version-43/uk-claims/actual-costs/confirmation-actual-cost-resubmission-created');
 });
 
-// Pull through the input data onto the cya screen
-router.get([/confirmation-actual-cost-resubmission-created/], function(req, res) {
+
+// Confirmation Actual Costs resubmission created
+router.post([/confirmation-actual-cost-resubmission-created/], function(req, res) {
+
 
   // Conditional flag to track resubmission
   req.session.data['create-new-resub'] = 'yes';
 
-  res.render('version-43/resubmissions/pending-resubmissions', {
-    data: req.session.data
-  });
+  // Redirect to the pending resubmissions screen
+  res.redirect('/version-43/resubmissions/pending-resubmissions');
 });
 
 
