@@ -725,4 +725,44 @@ router.get([/treatment-details/], function(req, res) {
     data: req.session.data
   });
 });
+
+
+// Request a PRC //
+// PRC details
+router.post('/request-prc', function(req, res) {
+  // PRC start date
+  const prcStartDateDay = req.body['start-date-prc-day'];
+  const prcStartDateMonth = req.body['start-date-prc-month'];
+  const prcStartDateYear = req.body['start-date-prc-year'];
+  const prcStartDate = prcStartDateDay && prcStartDateMonth && prcStartDateYear
+    ? `${prcStartDateDay}/${prcStartDateMonth}/${prcStartDateYear}`
+    : '01/02/2023';
+  req.session.data['start-date-prc'] = prcStartDate;
+
+  // PRC end date
+  const prcEndDateDay = req.body['end-date-prc-day'];
+  const prcEndDateMonth = req.body['end-date-prc-month'];
+  const prcEndDateYear = req.body['end-date-prc-year'];
+  const prcEndDate = prcEndDateDay && prcEndDateMonth && prcEndDateYear
+    ? `${prcEndDateDay}/${prcEndDateMonth}/${prcEndDateYear}`
+    : '01/02/2023';
+  req.session.data['end-date-prc'] = prcEndDate;
+
+  // Store other form fields
+  req.session.data['prc-requested-by'] = req.body['prc-requested-by'];
+  req.session.data['number-of-attachments-requested'] = req.body['number-of-attachments-requested'];
+
+  // Redirect to cya screen
+  res.redirect('/version-43/uk-claims/actual-costs/cya-request-prc');
+});
+
+// Check the PRC details
+router.post('/cya-request-prc', function(req, res) {
+
+  // Conditional flag to track if evidence has been uploaded
+  req.session.data['prc-request-details-submitted'] = 'yes';
+
+  // Redirect to the Request a PRC screen
+  res.redirect('/version-43/uk-claims/actual-costs/request-prc');
+});
 module.exports = router;

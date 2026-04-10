@@ -62,7 +62,7 @@ Request for PRC
         <div class="nhsuk-width-container-fluid">
           <div class="nhsuk-main-wrapper" id="maincontent">
 
-            {% if data['treatment'] == 'Jane' %}
+            
             {% set contestationData = data.contestation_reasons[data.treatment] %}
             <!-- Start of Jane Doe's treatment details for resub ID: 7824366 --->
             <div class="nhsuk-grid-row">
@@ -147,6 +147,225 @@ Request for PRC
             
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-two-thirds">
+
+                {% if data['rina-ref-submitted'] == 'yes' %}
+
+                <div class="nhsuk-inset-text">
+                  <span class="nhsuk-u-visually-hidden">Information: </span>
+                  <p>Send the PRC request via an email or RINA to the relevant institution with the S044 form under the evidence tab</p>
+                </div>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-start-date-label">Actual treatment start date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">Actual treatment end date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-start-date-label">PRC start date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="prc-end-date-label">PRC end date</dt>
+                      <dd class="nhsuk-summary-list__value" id="prc-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-requsted-by-label">How the PRC was requested?</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-requested-by">
+                    {% if data['prc-requested-by'] %}
+                      {{ data['prc-requested-by'] }}
+                    {% else %}
+                      RINA
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">No. of attachments for S044</dt>
+                    <dd class="nhsuk-summary-list__value" id="treatment-end-date">
+                    {% if data['number-of-attachments-requested'] %}
+                      {{ data['number-of-attachments-requested'] }}
+                    {% else %}
+                      1
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="request-for-prc-rina-ref-label">RINA reference number</dt>
+                    <dd class="nhsuk-summary-list__value" id="request-for-prc-rina-ref">
+                    {% if data['prc-request-rina-ref'] %}
+                      {{ data['prc-request-rina-ref'] }}
+                    {% else %}
+                      0987654321
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-request-follow-up-date-label">PRC request follow up date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-request-follow-up-date">
+                      10/04/2026
+                    </dd>
+                  </div>
+                </dl>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-request-follow-up-date-label">PRC request follow up date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-request-follow-up-date">
+                      08/05/2026
+                    </dd>
+                  </div>
+                </dl>
+
+                <div class="button-container">
+                  <form action="prc-received">
+                    <button style="margin-right:20px; margin-top: 20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                      PRC received
+                    </button>
+                  </form>
+      
+                  <form action="prc-not-received">
+                    <button style="margin-top: 20px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                      PRC not received
+                    </button>
+                  </form>
+                </div>
+                
+
+                {% elif data['prc-request-details-submitted'] == 'yes' %}
+
+                <h2 class="nhsuk-heading-s">Enter RINA reference no.</h2>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-start-date-label">Actual treatment start date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">Actual treatment end date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-start-date-label">PRC start date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="prc-end-date-label">PRC end date</dt>
+                      <dd class="nhsuk-summary-list__value" id="prc-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-requsted-by-label">How the PRC was requested?</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-requested-by">
+                    {% if data['prc-requested-by'] %}
+                      {{ data['prc-requested-by'] }}
+                    {% else %}
+                      RINA
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">No. of attachments for S044</dt>
+                    <dd class="nhsuk-summary-list__value" id="treatment-end-date">
+                    {% if data['number-of-attachments-requested'] %}
+                      {{ data['number-of-attachments-requested'] }}
+                    {% else %}
+                      1
+                    {% endif %}
+                    </dd>
+                   </div>
+                </dl>
+
+                {% if data['prc-requested-by'] == 'RINA' %}
+                <div class="nhsuk-form-group">
+                  <label class="nhsuk-label" for="prc-request-rina-ref-label">RINA reference number</label>
+                  <input class="nhsuk-input nhsuk-input--width-10" id="prc-request-rina-ref" type="number" name="prc-request-rina-ref" value="">
+                </div>
+                {% endif %}
+
+                <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                    
+                  <legend class="nhsuk-fieldset__legend">
+                    <span class="nhsuk-label" style="margin-top: 20px;">PRC requested date</span>
+                  </legend>
+
+                  <div class="nhsuk-hint" id="prc-request-submitted-date-hint">
+                    For example, 31 3 2022
+                  </div>
+        
+                  <div class="nhsuk-date-input" id="prc-request-submitted">
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-submitted-day">
+                          Day
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="prc-request-submitted-day" name="prc-request-submitted-day" type="text" inputmode="numeric" value="10" disabled>
+                      </div>
+                    </div>
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-submitted-month">
+                          Month
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="prc-request-submitted-month" name="prc-request-submitted-month" type="text" inputmode="numeric" value="04" disabled>
+                      </div>
+                    </div>
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-submitted-year">
+                          Year
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="prc-request-submitted-year" name="prc-request-submitted-year" type="text" inputmode="numeric" value="2026" disabled>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+
+
+                <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                  
+                  <legend class="nhsuk-fieldset__legend">
+                    <span class="nhsuk-label" style="margin-top: 20px;">PRC request follow up date</span>
+                  </legend>
+
+                  <div class="nhsuk-hint" id="prc-request-follow-up-date-hint">
+                    For example, 31 3 2022
+                  </div>
+        
+                  <div class="nhsuk-date-input" id="prc-request-follow-up">
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-follow-up-day">
+                          Day
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="prc-request-follow-up-day" name="prc-request-follow-up-day" type="text" inputmode="numeric" value="08" disabled>
+                      </div>
+                    </div>
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-follow-up-month">
+                          Month
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="prc-request-follow-up-month" name="prc-request-follow-up-month" type="text" inputmode="numeric" value="05" disabled>
+                      </div>
+                    </div>
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-follow-up-year">
+                          Year
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="prc-request-follow-up-year" name="prc-request-follow-up-year" type="text" inputmode="numeric" value="2026" disabled>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <a href="request-prc?rina-ref-submitted=yes" class="nhsuk-button">
+                  Submit
+                </a>
+
+                {% else %}
 
                 <dl class="nhsuk-summary-list">
                   <div class="nhsuk-summary-list__row">
@@ -266,10 +485,11 @@ Request for PRC
 
                 
                 <button class="nhsuk-button"  type="submit">Continue</button>
+                {% endif %}
               
               </form>
               <!-- End of main content-->
-              {% endif %}
+              
 
               
         </div>

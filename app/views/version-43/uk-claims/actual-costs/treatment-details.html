@@ -235,7 +235,9 @@ Resub treatment details
                         </dt>
                         <dd class="nhsuk-summary-list__value">
                           {% set status = data.treatmentStatuses['Jane'] %}
-                          {% if status == 'Maintained' %}
+                          {% if data['prc-request-details-submitted'] == 'yes' %}
+                            Waiting for PRC
+                          {% elif status == 'Maintained' %}
                             Maintained
                           {% elif status == 'Withdrawn' %}
                             Withdrawn
