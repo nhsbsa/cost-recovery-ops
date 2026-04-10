@@ -62,6 +62,22 @@ Request for PRC
         <div class="nhsuk-width-container-fluid">
           <div class="nhsuk-main-wrapper" id="maincontent">
 
+            {% if data['prc-uploaded'] == 'yes' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  File upload
+                </h3>
+                <p>PRC uploaded successfully</p>
+              </div>
+            </div>
+            {% endif %}
+
             
             {% set contestationData = data.contestation_reasons[data.treatment] %}
             <!-- Start of Jane Doe's treatment details for resub ID: 7824366 --->
@@ -143,12 +159,210 @@ Request for PRC
 
             <br><br>
 
-            <form action="request-prc" method="post">
+            
             
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-two-thirds">
 
-                {% if data['rina-ref-submitted'] == 'yes' %}
+                {% if data['prc-uploaded'] == 'yes' %}
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-start-date-label">Actual treatment start date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">Actual treatment end date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-start-date-label">PRC start date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="prc-end-date-label">PRC end date</dt>
+                      <dd class="nhsuk-summary-list__value" id="prc-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-requsted-by-label">How the PRC was requested?</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-requested-by">
+                    {% if data['prc-requested-by'] %}
+                      {{ data['prc-requested-by'] }}
+                    {% else %}
+                      RINA
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">No. of attachments for S044</dt>
+                    <dd class="nhsuk-summary-list__value" id="treatment-end-date">
+                    {% if data['number-of-attachments-requested'] %}
+                      {{ data['number-of-attachments-requested'] }}
+                    {% else %}
+                      1
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="request-for-prc-rina-ref-label">RINA reference number</dt>
+                    <dd class="nhsuk-summary-list__value" id="request-for-prc-rina-ref">
+                    {% if data['prc-response-not-received-rina-ref'] %}
+                      {{ data['prc-response-not-received-rina-ref'] }}
+                    {% else %}
+                      0987654321
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-request-submitted-date-label">PRC requested date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-request-submitted-date">
+                      10/04/2026
+                    </dd>
+                  </div>
+                </dl>
+
+                <!-- Only display this section if user said no response received first, and then said another response received -->
+                {% if data['prc-not-received'] == 'yes' %}
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reason-for-no-prc-label">Response received</dt>
+                    <dd class="nhsuk-summary-list__value" id="reason-for-no-prc">
+                    {% if data['reason-for-no-prc'] %}
+                      {{ data['reason-for-no-prc'] }}
+                    {% else %}
+                      No reply received
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="response-received-date-label">Response received date</dt>
+                    <dd class="nhsuk-summary-list__value" id="response-received-date">
+                      08/05/2026
+                    </dd>
+                  </div>
+                </dl>
+                {% endif %}
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-response-received-date-label">Response received</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-response-received-date">
+                      PRC received
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-received-date-label">PRC received</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-received-date">
+                      05/06/2026
+                    </dd>
+                  </div>
+                </dl>
+
+
+
+                {% elif data['prc-not-received'] == 'yes' %}
+                <div class="nhsuk-inset-text">
+                  <span class="nhsuk-u-visually-hidden">Information: </span>
+                  <p>Send the PRC request via an email or RINA to the relevant institution with the S044 form under the evidence tab</p>
+                </div>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-start-date-label">Actual treatment start date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">Actual treatment end date</dt>
+                     <dd class="nhsuk-summary-list__value" id="treatment-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-start-date-label">PRC start date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="prc-end-date-label">PRC end date</dt>
+                      <dd class="nhsuk-summary-list__value" id="prc-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-requsted-by-label">How the PRC was requested?</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-requested-by">
+                    {% if data['prc-requested-by'] %}
+                      {{ data['prc-requested-by'] }}
+                    {% else %}
+                      RINA
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="treatment-end-date-label">No. of attachments for S044</dt>
+                    <dd class="nhsuk-summary-list__value" id="treatment-end-date">
+                    {% if data['number-of-attachments-requested'] %}
+                      {{ data['number-of-attachments-requested'] }}
+                    {% else %}
+                      1
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="request-for-prc-rina-ref-label">RINA reference number</dt>
+                    <dd class="nhsuk-summary-list__value" id="request-for-prc-rina-ref">
+                    {% if data['prc-response-not-received-rina-ref'] %}
+                      {{ data['prc-response-not-received-rina-ref'] }}
+                    {% else %}
+                      0987654321
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-request-submitted-date-label">PRC requested date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-request-submitted-date">
+                      10/04/2026
+                    </dd>
+                  </div>
+                </dl>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="reason-for-no-prc-label">Response received</dt>
+                    <dd class="nhsuk-summary-list__value" id="reason-for-no-prc">
+                    {% if data['reason-for-no-prc'] %}
+                      {{ data['reason-for-no-prc'] }}
+                    {% else %}
+                      No reply received
+                    {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="response-received-date-label">Response received date</dt>
+                    <dd class="nhsuk-summary-list__value" id="response-received-date">
+                      08/05/2026
+                    </dd>
+                  </div>
+                </dl>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="prc-request-follow-up-date-label">PRC request follow up date</dt>
+                    <dd class="nhsuk-summary-list__value" id="prc-request-follow-up-date">
+                      05/06/2026
+                    </dd>
+                  </div>
+                </dl>
+
+                <div class="button-container">
+                  <form action="upload-prc">
+                    <button style="margin-right:20px; margin-top: 20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
+                      PRC received
+                    </button>
+                  </form>
+      
+                  
+                    <button style="margin-top: 20px;" class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+                      PRC not received
+                    </button>
+                </div>
+
+
+                {% elif data['rina-ref-submitted'] == 'yes' %}
 
                 <div class="nhsuk-inset-text">
                   <span class="nhsuk-u-visually-hidden">Information: </span>
@@ -220,7 +434,7 @@ Request for PRC
                 </dl>
 
                 <div class="button-container">
-                  <form action="prc-received">
+                  <form action="upload-prc">
                     <button style="margin-right:20px; margin-top: 20px;" class="nhsuk-button style=padding-right:10px;" type="submit">
                       PRC received
                     </button>
@@ -366,6 +580,8 @@ Request for PRC
                 </a>
 
                 {% else %}
+
+                <form action="request-prc" method="post">
 
                 <dl class="nhsuk-summary-list">
                   <div class="nhsuk-summary-list__row">

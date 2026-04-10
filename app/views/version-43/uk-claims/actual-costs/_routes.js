@@ -759,8 +759,34 @@ router.post('/request-prc', function(req, res) {
 // Check the PRC details
 router.post('/cya-request-prc', function(req, res) {
 
-  // Conditional flag to track if evidence has been uploaded
+  // Conditional flag to track if PRC request details were submitted
   req.session.data['prc-request-details-submitted'] = 'yes';
+
+  // Redirect to the Request a PRC screen
+  res.redirect('/version-43/uk-claims/actual-costs/request-prc');
+});
+
+// Check the PRC details
+router.post('/prc-not-received', function(req, res) {
+
+  // Store reason why PRC not received
+  req.session.data['reason-for-no-prc'] = req.body['reason-for-no-prc'];
+
+  // Store RINA reference
+  req.session.data['prc-response-not-received-rina-ref'] = req.body['prc-response-not-received-rina-ref'];
+
+  // Conditional flag to track if PRC response recieved
+  req.session.data['prc-not-received'] = 'yes';
+
+  // Redirect to the Request a PRC screen
+  res.redirect('/version-43/uk-claims/actual-costs/request-prc');
+});
+
+// Upload a copy of the PRC
+router.post('/upload-prc', function(req, res) {
+
+  // Conditional flag to track if PRC request details were submitted
+  req.session.data['prc-uploaded'] = 'yes';
 
   // Redirect to the Request a PRC screen
   res.redirect('/version-43/uk-claims/actual-costs/request-prc');

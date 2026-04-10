@@ -79,7 +79,7 @@ Resubs evidence details
             {% endif %}
           
                 
-            {% if data['treatment'] == 'Jane' %}
+            
             {% set contestationData = data.contestation_reasons[data.treatment] %}
             <!-- Start of Jane Doe's treatment details for resub ID: 7824366 --->
             <div class="nhsuk-grid-row">
@@ -164,67 +164,78 @@ Resubs evidence details
                 
                 <div class="nhsuk-summary-list__row">
                   {% if data['upload-new-evidence'] == 'yes' %}
-                  <a role="button" class="nhsuk-button" style="padding: 12px 16px;" id="evidence-upload" href="treatment-upload-evidence?treatment=John&upload-evidence-separately=yes">
+                  <a role="button" class="nhsuk-button" style="padding: 12px 16px;" id="evidence-upload" href="treatment-upload-evidence?upload-evidence-separately=yes">
                     <span id="upload-evidence-button">Upload new evidence</span>
                   </a>
                   {% else %}
-                  <a role="button" class="nhsuk-button" style="padding: 12px 16px;" id="evidence-upload" href="treatment-upload-evidence?treatment=John">
+                  <a role="button" class="nhsuk-button" style="padding: 12px 16px;" id="evidence-upload" href="treatment-upload-evidence">
                       <span id="upload-evidence-button">Upload new evidence</span>
                   </a>
                   {% endif %}
                 </div>
             
-                
                   
-                  {% if data['upload-new-evidence'] == 'yes' %}
+                {% if data['upload-new-evidence'] == 'yes' or data['prc-uploaded'] == 'yes' %}
+                <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
+                
 
                     {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
                       <!-- Evidence table only shows when there's evidence -->
-                      <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
 
                       <div id="evidenceSection">
+                        <div id="evidenceContainer">
+                          <table id="evidenceTable" class="nhsuk-table">
+                            <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                            <thead role="rowgroup" class="nhsuk-table__head">
+                              <tr role="row">
+                                <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                                <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                                <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody class="nhsuk-table__body">
+                              <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                <td class="nhsuk-table__cell">
+                                  <b>PRC.pdf</b>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                </td>
+                              </tr>
 
-                      <div id="evidenceContainer">
-                        <table id="evidenceTable" class="nhsuk-table">
-                          <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
-                          <thead role="rowgroup" class="nhsuk-table__head">
-                            <tr role="row">
-                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
-                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
-                              <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
-                            </tr>
-                          </thead>
-                          <tbody class="nhsuk-table__body">
-                            {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' %}
-                            <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
-                              <td class="nhsuk-table__cell">
-                                <b>example-evidence-2.pdf</b>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <a href="#" target="_blank" rel="noopener">View file to print or download</a>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
-                              </td>
-                            </tr>
-                            {% endif %}
+                              {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' and data['upload-new-evidence'] == 'yes' %}
+                              <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                <td class="nhsuk-table__cell">
+                                  <b>example-evidence-2.pdf</b>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                </td>
+                              </tr>
+                              {% endif %}
 
-                            {% if data['evidenceRow2'] != 'Removed' %}
-                            <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
-                              <td class="nhsuk-table__cell">
-                                <b>example-evidence-1.pdf</b>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <a href="#" target="_blank" rel="noopener">View file to print or download</a>
-                              </td>
-                              <td class="nhsuk-table__cell">
-                                <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
-                              </td>
-                            </tr>
-                            {% endif %}
-                          </tbody>
-                        </table>
-                      </div>
+                              {% if data['evidenceRow2'] != 'Removed' and data['upload-new-evidence'] == 'yes' %}
+                              <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                                <td class="nhsuk-table__cell">
+                                  <b>example-evidence-1.pdf</b>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                                </td>
+                              </tr>
+                              {% endif %}
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     {% endif %}
                     
@@ -243,26 +254,31 @@ Resubs evidence details
                       </tr>
                     </thead>
                     <tbody class="nhsuk-table__body">
-                      <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                      <tr role="row" class="nhsuk-table__row" id="s080">
                         <td class="nhsuk-table__cell">
                           <b>S080 treatment form</b>
                         </td>
                         <td class="nhsuk-table__cell">
                           <a href="#" target="_blank" rel="noopener">View file to print or download</a>
                         </td>
+                      </tr>
+                      {% if data['prc-request-details-submitted'] == 'yes' %}
+                      <tr role="row" class="nhsuk-table__row" id="s044">
                         <td class="nhsuk-table__cell">
-                          
+                          <b>S044 form</b>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <a href="#" target="_blank" rel="noopener">View file to print or download</a>
                         </td>
                       </tr>
+                      {% endif %}
                     </tbody>
                   </table>
 
             
             </div>
           </div>
-          {% endif %}
         <!-- End of main content-->
-        <!-- End of Jane Doe's evidence -->
   
         </div>
       </div>
