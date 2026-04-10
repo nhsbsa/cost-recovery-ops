@@ -1,0 +1,275 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Create new resubmission
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">Create new resubmission</li>
+        </ol>
+      </div>
+    </div>
+    
+    <a class="nhsuk-back-link" href="uk-claims-search-results">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search results
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <h1 class="nhsuk-heading-xl">
+                  Resubmission details
+                </h1>
+              </div>
+            </div>
+
+            <form action="create-new-actual-cost-resubmission"  method="post">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+
+                <div
+                  style="border: 3px; border-style: solid; border-color:lightgray; background-color:rgb(252, 252, 252); padding:20px 20px 1px 20px;">
+
+                  <dl class="nhsuk-summary-list">
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Claim month
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        May 2023
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Article type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        EHIC and PRC - Article 62
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Spain (ES)
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date of submission
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        07/04/2026
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Claim sent by
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        joe.bloggs@nhsbsa.nhs.uk
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date by which contestation must be submitted by the member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        04/01/2028
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total number of invoices
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        2
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Total cost (£)
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        500
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+
+
+              <div class="nhsuk-grid-column-one-half">
+
+                <div style="border: 3px; border-style: solid; border-color:lightgray; background-color:rgb(252, 252, 252); padding:20px 20px 1px 20px;">
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="date-contestation-received-label">
+                      <b>Contestation received on</b>
+                    </label>
+                    <div class="nhsuk-hint">
+                      For example, 31 3 2022
+                    </div>
+
+                    <div class="nhsuk-date-input" id="date-contestation-received">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-received-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-contestation-received-day" name="date-contestation-received-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-received-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-contestation-received-month" name="date-contestation-received-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-contestation-received-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-contestation-received-year" name="date-contestation-received-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="number-of-contested-treatments-label">
+                      <b>Number of contested treatments</b>
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-10" id="number-of-contested-treatments" name="number-of-contested-invoices" type="text" inputmode="numeric">
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="value-contested-label">
+                      <b>Value contested (£)</b>
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-10" id="value-contested" name="value-contested" type="text" inputmode="numeric">
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="member-state-reference-label">
+                      <b>Member state reference</b>
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-10" id="member-state-reference" name="member-state-reference" type="text">
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="date-on-contestation-letter-label">
+                      <b>Date on contestation letter from member state</b>
+                    </label>
+
+                    <div class="nhsuk-date-input" id="date-on-contestation-letter">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-on-contestation-letter-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-on-contestation-letter-day" name="date-on-contestation-letter-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-on-contestation-letter-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-on-contestation-letter-month" name="date-on-contestation-letter-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-on-contestation-letter-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-on-contestation-letter-year" name="date-on-contestation-letter-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  
+                
+              
+                  <button class="nhsuk-button" style="margin-top: 20px;" type="submit">
+                    Create new resubmission
+                  </button>
+              </form>  
+                
+              
+            </div>
+
+          </div>
+
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

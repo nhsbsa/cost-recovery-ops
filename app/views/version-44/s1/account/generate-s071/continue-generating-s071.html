@@ -1,0 +1,253 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+View the details for John Doe - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back",
+                      "classes": "nhsuk-u-margin-bottom-4"
+                    }) }}
+
+                    
+                        
+                    <form action="continue-generating-s071" method="post">
+                  
+                    <div class="nhsuk-form-group">
+                      <span class="nhsuk-caption-l">Generate an S071</span>
+                      <label class="nhsuk-label" for="view-person-record-details">
+                        <h1 class="nhsuk-heading-xl">View the details for John Doe</h1>
+                      </label>
+                    </div>
+
+                    <h2 class="nhsuk-heading-m">Personal details</h2>
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First names
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['change-names'] == 'yes' and data['new-first-names'] %}
+                            {{ data['new-first-names'] }}
+                          {% else %}
+                            John
+                          {% endif %}
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First names at birth, if different
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['change-names'] == 'yes' and data['new-birth-first-names'] %}
+                            {{ data['new-birth-first-names'] }}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %} 
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['change-names'] == 'yes' and data['new-last-name'] %}
+                            {{ data['new-last-name'] }}
+                          {% else %}
+                            Doe
+                          {% endif %}
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name at birth, if different
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['change-names'] == 'yes' and data['new-birth-last-name'] %}
+                            {{ data['new-birth-last-name'] }}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %} 
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date of birth
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['change-personal-details'] == 'yes' and data['new-date-of-birth-day'] and data['new-date-of-birth-month'] and data['new-date-of-birth-year'] %}
+                            {% if data['new-date-of-birth-day'] and data['new-date-of-birth-month'] and data['new-date-of-birth-year'] %}
+                              {% set day = data['new-date-of-birth-day'] %}
+                              {% set month = data['new-date-of-birth-month'] | int %}
+                              {% set year = data['new-date-of-birth-year'] %}
+                  
+                              {# Define month names #}
+                              {% set month_names = [
+                                  "January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"
+                              ] %}
+                  
+                              {# Get the month name #}
+                              {% set month_name = month_names[month - 1] %}
+                  
+                              {# Display the date in the format "day month year" #}
+                              {{ day | int }} {{ month_name }} {{ year }}
+                            {% endif %}
+                          {% elif data['dob-day'] and data['dob-month'] and data['dob-year'] %}
+                            {% set day = data['dob-day'] %}
+                            {% set month = data['dob-month'] | int %}
+                            {% set year = data['dob-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            1 July 1951
+                          {% endif %}
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Sex
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['change-additional-personal-details'] == 'yes' %}
+                            {{ data['updated-sex'] }}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %}
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Country of nationality
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['change-additional-personal-details'] == 'yes' %}
+                            {{ data['updated-nationality'] }}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %}
+                        </dd>
+                      </div>
+                    </dl>
+                    
+
+                    <h2 class="nhsuk-heading-m">Address details</h2>
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First names
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['change-current-address'] == 'yes' %}
+                            {# Check if any of the address fields have been updated, otherwise fallback to default #}
+                            {% if data['new-current-address-line-1'] or data['new-current-address-line-2'] or data['new-current-address-line-3'] or data['new-current-address-town'] or data['new-current-address-region'] or data['new-current-address-postcode'] or data['new-current-address-country'] %}
+                                {{ data['new-current-address-line-1'] }}<br>
+                                
+                                {% if data['new-current-address-line-2'] %}
+                                    {{ data['new-current-address-line-2'] }}<br>
+                                {% endif %}
+                                
+                                {% if data['new-current-address-line-3'] %}
+                                    {{ data['new-current-address-line-3'] }}<br>
+                                {% endif %}
+                                
+                                {{ data['new-current-address-town'] }}<br>
+                                
+                                {% if data['new-current-address-region'] %}
+                                    {{ data['new-current-address-region'] }}<br>
+                                {% endif %}
+                                
+                                {{ data['new-current-address-postcode'] }}<br>
+                                {{ data['new-current-address-country'] }}
+                            {% endif %}
+                          {% else %}
+                              1 Washington Street<br>
+                              Worcester<br>
+                              WR1 1NL<br>
+                              United Kingdom (UK)
+                          {% endif %}
+                        </dd>
+                      </div>
+                    </dl>
+
+
+                    <div class="nhsuk-form-group">
+                      <fieldset class="nhsuk-fieldset" aria-describedby="example-hints-hint">
+                        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--m">
+                          <h2 class="nhsuk-fieldset__heading" style="margin-top: 20px;">
+                            Do you want to generate an S071 using these details?
+                          </h2>
+                        </legend>
+                        <div class="nhsuk-hint" id="example-hints-hint">
+                          If these details are incorrect, you can continue and amend them later once you receive a positive reply.
+                        </div>
+                        <div class="nhsuk-radios" data-module="nhsuk-radios">
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="continue-generating-s071-yes" name="continue-generating-s071" type="radio" value="Yes">
+                            <label class="nhsuk-label nhsuk-radios__label" for="continue-generating-s071-yes">
+                              Yes
+                            </label>
+                          </div>
+                          <div class="nhsuk-radios__item">
+                            <input class="nhsuk-radios__input" id="continue-generating-s071-no" name="continue-generating-s071" type="radio" value="No">
+                            <label class="nhsuk-label nhsuk-radios__label" for="continue-generating-s071-no">
+                              No, I want to return to S1/S072 requests
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    
+
+                    <button class="nhsuk-button" style="margin-top: 20px; margin-bottom: 60px;" type="submit">
+                      Submit
+                    </button>
+                        
+                    </form>
+                  
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

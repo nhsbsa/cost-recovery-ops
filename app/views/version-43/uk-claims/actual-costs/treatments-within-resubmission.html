@@ -365,20 +365,37 @@ Treatments linked to resub
                   <td role="cell" class="nhsuk-table__cell">
                     <span class="nhsuk-table-responsive__heading">Status</span>
                     {% set status = data.treatmentStatuses['Jane'] %}
-                    {% if data['rina-ref-submitted'] == 'yes' %}
+
+                    {% if data['prc-uploaded'] == 'yes' %}
+                      {# Always fall back to actual treatment status #}
+                      {% if status == 'Maintained' %}
+                        <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
+                      {% elif status == 'Withdrawn' %}
+                        <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                      {% elif status == 'Partial' %}
+                        <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                      {% else %}
+                        <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
+                      {% endif %}
+
+                    {% elif data['rina-ref-submitted'] == 'yes' %}
                       <strong class="nhsuk-tag nhsuk-tag--yellow">Waiting for PRC</strong>
+
                     {% elif data['prc-request-details-submitted'] == 'yes' %}
                       <strong class="nhsuk-tag nhsuk-tag--aqua-green">Decision pending</strong>
-                    {% elif status == 'Maintained' %}
-                      <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
-                    {% elif status == 'Withdrawn' %}
-                      <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
-                    {% elif status == 'Partial' %}
-                      <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
-                    {% else %}
-                      <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
-                    {% endif %}
 
+                    {% else %}
+                      {# Default state #}
+                      {% if status == 'Maintained' %}
+                        <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
+                      {% elif status == 'Withdrawn' %}
+                        <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                      {% elif status == 'Partial' %}
+                        <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                      {% else %}
+                        <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
+                      {% endif %}
+                    {% endif %}
                   </td>
                   <td role="cell" class="nhsuk-table__cell">
                     <span class="nhsuk-table-responsive__heading">Action</span>

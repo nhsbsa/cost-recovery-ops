@@ -25,7 +25,7 @@ router.get([/resubmission-summary/], function(req, res) {
   const data = req.session.data;
 
   // === Status calculation logic
-  const statuses = data.Treatmentstatuses || {};
+  const statuses = data.TreatmentStatuses || {};
   const treatmentList = ['Jane'];
 
   const allReviewed = Object.keys(statuses).length === treatmentList.length &&
@@ -99,9 +99,7 @@ router.get([/resubmission-summary/], function(req, res) {
     data,
     showResubSummary,
     maintainedTreatments,
-    withdrawnTreatments,
-    maintainedMonths,
-    withdrawnMonths
+    withdrawnTreatments
   });
 });
 
@@ -790,5 +788,20 @@ router.post('/upload-prc', function(req, res) {
 
   // Redirect to the Request a PRC screen
   res.redirect('/version-43/uk-claims/actual-costs/request-prc');
+});
+
+
+// Add notes to OVM details //
+// Add a new note
+router.post('/ovm-details', function(req, res) {
+
+  // Store the note
+  req.session.data['ovm-note'] = req.body['ovm-note'];
+
+  // Conditional flag to track if new note added
+  req.session.data['new-ovm-note'] = 'yes';
+
+  // Redirect to the OVM details with new note displayed
+  res.redirect('/version-43/uk-claims/actual-costs/ovm-details');
 });
 module.exports = router;

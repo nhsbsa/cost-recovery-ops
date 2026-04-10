@@ -1,0 +1,602 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+View pending resubmissions
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">Resubmissions (Pending)</li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h1 class="nhsuk-heading-xl" style="margin-bottom: 0;">
+                    Pending resubmissions (resubs)
+                  </h1>
+                  <a href="#">
+                    <button class="nhsuk-button" type="submit">
+                      Filter
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+  
+            <!--start secondary navigation-->
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="pending-resubmissions">Pending</a>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="completed-resubmissions">Completed</a>
+                </li>
+              </ul>
+            </nav>
+            <!-- end secondary navigation -->
+  
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <br><br>
+  
+            {% set currentPage = data.page | default(1) | int %}
+            {% set totalPages = 12 %}
+  
+                <!-- Start of pending resubmissions table -->
+                <table role="table" id="invoicesTable" class="nhsuk-table-responsive">
+                  <thead role="rowgroup" class="nhsuk-table__head" id="invoices">
+                    <tr role="row">
+                      <th role="columnheader" class="" scope="col">
+                        Resub ID
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Claim ID
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Country
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Reply deadline
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Assigned to
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Resub status
+                      </th>
+                      <th role="columnheader" class="" scope="col">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+  
+                  <tbody class="nhsuk-table__body">
+                    {% if data['create-new-resub'] == 'yes' and data['entitlement-article-type'] == 'EHIC and PRC - Article 62' and data.resubStatus != 'resubmission-completed' %}
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>7824366</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>345680</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>Spain (ES)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>28/04/2027</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        {% if data.resubStatus == 'assigned-for-review' or data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' %}
+                          <span>nina.evans@nhsbsa.nhs.uk</span>
+                        {% else %}
+                          <span>joe.bloggs@nhsbsa.nhs.uk</span>
+                        {% endif %}
+                      </td>                      
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        {% if data.resubStatus == 'resubmission-sent-to-dh' %}
+                          <strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong>
+                        {% elif data.resubStatus == 'peer-reviewed' %}
+                          <strong class="nhsuk-tag nhsuk-tag">Ready to send</strong>
+                        {% elif data.resubStatus == 'assigned-for-review' %}
+                          <strong class="nhsuk-tag nhsuk-tag--white">Under review</strong>
+                        {% elif data.resubStatus == 'peer-review-requested' %}
+                          <strong class="nhsuk-tag nhsuk-tag--blue">To review</strong>
+                        {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                          <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                        {% elif data.resubStatus == 'treatments-added-to-resub' %}
+                          <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                        {% else %}
+                          <strong class="nhsuk-tag nhsuk-tag--grey">To action</strong>
+                        {% endif %}
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="../uk-claims/actual-costs/resubmissions">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 7824366</span></span>
+                      </td>
+                    </tr>
+                    {% endif %}
+
+
+                    {% if data['create-new-resub'] == 'yes' %}
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>0000001</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>123456</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>France (FR)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>04/06/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        {% if data.resubStatus == 'assigned-for-review' or data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' %}
+                          <span>nina.evans@nhsbsa.nhs.uk</span>
+                        {% else %}
+                          <span>joe.bloggs@nhsbsa.nhs.uk</span>
+                        {% endif %}
+                      </td>                      
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        {% if data.resubStatus == 'resubmission-sent-to-dh' %}
+                        <strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong>
+                        {% elif data.resubStatus == 'peer-reviewed' %}
+                          <strong class="nhsuk-tag nhsuk-tag">Ready to send</strong>
+                        {% elif data.resubStatus == 'assigned-for-review' %}
+                          <strong class="nhsuk-tag nhsuk-tag--white">Under review</strong>
+                        {% elif data.resubStatus == 'peer-review-requested' %}
+                          <strong class="nhsuk-tag nhsuk-tag--blue">To review</strong>
+                        {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                          <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                        {% elif data.resubStatus == 'treatments-added-to-resub' %}
+                          <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                        {% else %}
+                          <strong class="nhsuk-tag nhsuk-tag--grey">To action</strong>
+                        {% endif %}
+                        </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="../uk-claims/resubmissions/claim-resubmissions">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 7790992</span></span>
+                      </td>
+                    </tr>
+                    {% endif %}
+
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>1102938</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>138292</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>Germany (DE)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>05/03/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        <span>nina.evans@nhsbsa.nhs.uk</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--green">In progress</strong></span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="#">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 1102938</span></span>
+                      </td>
+                    </tr>
+
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>1102388</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>187374</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>Italy (IT)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>03/03/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        <span>james.harper@nhsbsa.nhs.uk</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--green">In progress</strong></span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="#">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 1102388</span></span>
+                      </td>
+                    </tr>
+
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>1109383</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>294833</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>Portugal (PT)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>01/03/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        <span>nina.evans@nhsbsa.nhs.uk</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--blue">To review</strong></span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="#">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 1109383</span></span>
+                      </td>
+                    </tr>
+
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>1103882</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>383773</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>France (FR)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>24/02/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        <span>nina.evans@nhsbsa.nhs.uk</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--purple">Ready to send</strong></span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="#">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 1103882</span></span>
+                      </td>
+                    </tr>
+
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>2218229</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>223819</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>Spain (ES)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>21/02/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        <span>joe.bloggs@nhsbsa.nhs.uk</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--blue">To review</strong></span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="#">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 1109383</span></span>
+                      </td>
+                    </tr>
+
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>1293480</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>992374</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>France (FR)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>18/02/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        <span>joe.bloggs@nhsbsa.nhs.uk</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--blue">To review</strong></span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="#">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 1109383</span></span>
+                      </td>
+                    </tr>
+
+                    {% if data['create-new-resub'] != 'yes' and data['entitlement-article-type'] != 'EHIC and PRC - Article 62' and data.resubStatus != 'resubmission-completed' %}
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>3928831</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>193828</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>Italy (IT)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>13/02/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        <span>james.harper@nhsbsa.nhs.uk</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--purple">Ready to send</strong></span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="#">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 1103882</span></span>
+                      </td>
+                    </tr>
+
+                    <tr role="row" class="nhsuk-table__row">
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub ID</span>
+                        <span>8333282</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Claim ID</span>
+                        <span>927728</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Country</span>
+                        <span>Portugal (PT)</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Reply deadline</span>
+                        <span>13/02/2026</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Assigned to</span>
+                        <span>joe.bloggs@nhsbsa.nhs.uk</span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Resub status</span>
+                        <span><strong class="nhsuk-tag no-caps nhsuk-tag--blue">To review</strong></span>
+                      </td>
+                      <td role="cell" class="nhsuk-table__cell">
+                        <span class="nhsuk-table-responsive__heading">Action</span>
+                        <span><a href="#">View resubmission</a><span class="nhsuk-u-visually-hidden">ID 1109383</span></span>
+                      </td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+
+        
+
+
+                <!-- Pagination begins -->
+                  <nav class="nhsuk-pagination nhsuk-pagination--numbered"
+                  role="navigation"
+                  aria-label="Pagination"
+                  style="display: flex; justify-content: center; align-items: center; margin-top: 24px; gap: 16px;">
+
+                  {# Previous (hidden on page 1) #}
+                  {% if currentPage > 1 %}
+                  <a href="?page={{ currentPage - 1 }}" class="nhsuk-pagination__previous" rel="prev">
+                  <svg class="nhsuk-icon nhsuk-icon--arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+                    <path d="M10.7 6.3c.4.4.4 1 0 1.4L7.4 11H19a1 1 0 0 1 0 2H7.4l3.3 3.3c.4.4.4 1 0 1.4a1 1 0 0 1-1.4 0l-5-5A1 1 0 0 1 4 12c0-.3.1-.5.3-.7l5-5a1 1 0 0 1 1.4 0Z" />
+                  </svg>
+                  <span class="nhsuk-pagination__title">
+                    Previous<span class="nhsuk-u-visually-hidden"> page</span>
+                  </span>
+                  </a>
+                  {% endif %}
+
+                  {# Calculate 5-page sliding window #}
+                  {% set startPage = currentPage - 2 %}
+                  {% set endPage = currentPage + 2 %}
+
+                  {# Adjust if below 1 #}
+                  {% if startPage < 1 %}
+                  {% set endPage = endPage + (1 - startPage) %}
+                  {% set startPage = 1 %}
+                  {% endif %}
+
+                  {# Adjust if above totalPages #}
+                  {% if endPage > totalPages %}
+                  {% set startPage = startPage - (endPage - totalPages) %}
+                  {% set endPage = totalPages %}
+                  {% endif %}
+
+                  {# Safety check #}
+                  {% if startPage < 1 %}
+                  {% set startPage = 1 %}
+                  {% endif %}
+
+                  <ul class="nhsuk-pagination__list">
+
+                  {# Show first page if outside window #}
+                  {% if startPage > 1 %}
+                  <li class="nhsuk-pagination__item">
+                    <a class="nhsuk-pagination__link" href="?page=1">1</a>
+                  </li>
+
+                  {% if startPage > 2 %}
+                    <li class="nhsuk-pagination__item nhsuk-pagination__item--ellipsis">&ctdot;</li>
+                  {% endif %}
+                  {% endif %}
+
+                  {# Main window (always up to 5 pages) #}
+                  {% for page in range(startPage, endPage + 1) %}
+                  <li class="nhsuk-pagination__item {% if page == currentPage %}nhsuk-pagination__item--current{% endif %}">
+                    <a class="nhsuk-pagination__link"
+                        href="?page={{ page }}"
+                        {% if page == currentPage %}aria-current="page"{% endif %}>
+                      {{ page }}
+                    </a>
+                  </li>
+                  {% endfor %}
+
+                  {# Show last page if outside window #}
+                  {% if endPage < totalPages %}
+                  {% if endPage < totalPages - 1 %}
+                    <li class="nhsuk-pagination__item nhsuk-pagination__item--ellipsis">&ctdot;</li>
+                  {% endif %}
+
+                  <li class="nhsuk-pagination__item">
+                    <a class="nhsuk-pagination__link" href="?page={{ totalPages }}">{{ totalPages }}</a>
+                  </li>
+                  {% endif %}
+
+                  </ul>
+
+                  {# Next #}
+                  {% if currentPage < totalPages %}
+                  <a href="?page={{ currentPage + 1 }}" class="nhsuk-pagination__next" rel="next">
+                  <span class="nhsuk-pagination__title">
+                    Next<span class="nhsuk-u-visually-hidden"> page</span>
+                  </span>
+                  <svg class="nhsuk-icon nhsuk-icon--arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+                    <path d="m14.7 6.3 5 5c.2.2.3.4.3.7 0 .3-.1.5-.3.7l-5 5a1 1 0 0 1-1.4-1.4l3.3-3.3H5a1 1 0 0 1 0-2h11.6l-3.3-3.3a1 1 0 1 1 1.4-1.4Z" />
+                  </svg>
+                  </a>
+                  {% endif %}
+
+                  </nav>
+                <!-- Pagination ends -->
+
+            
+  
+  
+          </div>
+        </div>
+      </div>
+
+<!--start left navigation-->
+<div class="nhsBSA-sidebar-nav">
+  <div class="side-nav">
+    <ul>
+      <div id="options" class="options">
+        <h3 class="nhsuk-heading-xs">Browse</h3>
+        <li>
+          <a href="../s1/search/search-by-person">Search</a>
+        </li>
+        
+        <h3 class="nhsuk-heading-xs">Actions</h3>
+        <li>
+          <a href="../account-requests/pending-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">8 </span></a>
+          <a href="../review-treatments/treatments-to-review">Review treatments<span class="notification-badge" style="background-color: #005eb8">4 </span></a>
+          <a href="../pending-entitlements/pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+          <a href="../uk-claims/uk-claims-search-actual-cost">UK claims</a>
+          <a href="pending-resubmissions" class="active">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+          <a href="../non-eu-reciprocal-healthcare/home">Non-EU Reciprocal Healthcare (Quota)</a>
+        </li>
+      </div>
+    </ul>
+  </div>
+</div>
+<!--end left navigation-->
+
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#entitlement-country-drop')
+  })
+</script>
+{% endblock %}

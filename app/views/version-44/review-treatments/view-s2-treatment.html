@@ -1,0 +1,357 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Review treatment - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="treatments-to-review">Treatments to be reviewed (To review)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">Review treatment (1292929930)</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="pending-requests">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Account requests
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          {% if data['assign-to-me'] == 'Yes' %}
+          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+            <div class="nhsuk-notification-banner__header">
+              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                Success
+              </h2>
+            </div>
+            <div class="nhsuk-notification-banner__content">
+              <h3 class="nhsuk-notification-banner__heading">
+                Treatment assigned to you
+              </h3>
+              <p>Treatment 1292929930 has been assigned to joe.bloggs@nhsbsa.nhs.uk for review.</p>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+              <h1 class="nhsuk-heading-l">
+                Review treatment (1292929930)
+                <td class="nhsuk-table__cell">
+                  <strong class="nhsuk-tag nhsuk-tag--green">
+                    Processed
+                  </strong>
+                </td>
+              </h1>
+
+              {% if data['assign-to-me'] != 'Yes' %}
+              <p><a class="nhsuk-breadcrumb__link nhsuk-u-font-size-16" href="view-s2-treatment?assign-to-me=Yes">Assign to me</a></p>
+              {% endif %}
+
+            </div>
+
+            <div class="nhsuk-grid-column-one-half">
+
+              {% if data['assign-to-me'] == 'Yes' %}
+              <a href="reviewed-treatments?treatment-reviewed=Yes"><button style="margin-right: 10px;" class="nhsuk-button" type="submit">Set as reviewed</button></a>
+              <a href="reason-for-treatment-cancellation"><button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">Cancel treatment</button></a>
+              {% endif %}
+
+              <a class="patient-record-link nhsuk-u-font-size-16" style="float: right; margin-top: 20px;" id="patient-record-link" href="#">View patient record</a>
+            
+            </div>
+
+          </div>
+
+          <form action="view-s1-treatment" method="post" novalidate>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+
+              <!-- Left card begins -->
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+
+                <p class="nhsuk-body-m"><b>Reason to review:</b> Ordinary Residence</p>
+
+                <h2 class="nhsuk-heading-s">OVM contact details</h2>
+
+                <dl class="nhsuk-summary-list">
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Name</dd>
+                      <dt class="nhsuk-summary-list__value" id="full-name">Hannah Campbell</dt>
+                   </div>
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Email address:</dd>
+                      <dt class="nhsuk-summary-list__value" id="email-address">h.campbell@trustname.net</dt>
+                   </div>
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Telephone number</dd>
+                      <dt class="nhsuk-summary-list__value" id="phone-number">07123456789</dt>
+                   </div>
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Trust</dd>
+                      <dt class="nhsuk-summary-list__value" id="trust-name">Airedale NHS Foundation Trust</dt>
+                   </div>
+                </dl>
+
+
+                <h2 class="nhsuk-heading-s">Treatment details</h2>
+
+                <dl class="nhsuk-summary-list">
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">First name</dd>
+                      <dt class="nhsuk-summary-list__value" id="first-name">Harold</dt>
+                   </div>
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Last name</dd>
+                      <dt class="nhsuk-summary-list__value" id="last-name">Simons</dt>
+                   </div>
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Entitlement type</dd>
+                      <dt class="nhsuk-summary-list__value" id="entitlement">S2/E112</dt>
+                   </div>
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Treatment start date</dd>
+                      <dt class="nhsuk-summary-list__value" id="start-date">01/03/2026</dt>
+                   </div>
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Treatment end date</dd>
+                      <dt class="nhsuk-summary-list__value" id="end-date">14/03/2026</dt>
+                   </div>
+                   <div class="nhsuk-summary-list__row">
+                      <dd class="nhsuk-summary-list__key">Treatment cost (£)</dd>
+                      <dt class="nhsuk-summary-list__value" id="cost">130.00</dt>
+                   </div>
+                </dl>
+
+
+                <details class="nhsuk-details">
+                  <summary class="nhsuk-details__summary">
+                    <span class="nhsuk-details__summary-text">
+                      View S2/E112 details
+                    </span>
+                  </summary>
+                  <div class="nhsuk-details__text">
+                      <dl class="nhsuk-summary-list">
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Issuing member state</dd>
+                            <dt class="nhsuk-summary-list__value" id="country">France (FR)</dt>
+                         </div>
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Name</dd>
+                            <dt class="nhsuk-summary-list__value" id="name">Simons</dt>
+                         </div>
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Given names</dd>
+                            <dt class="nhsuk-summary-list__value" id="givenNames">Harold</dt>
+                         </div>
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Date of birth</dd>
+                            <dt class="nhsuk-summary-list__value" id="dob">13/12/1994</dt>
+                         </div>
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Personal Identification Number</dd>
+                            <dt class="nhsuk-summary-list__value" id="pin">123456789012S2</dt>
+                         </div>
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Identification number of the institution</dd>
+                            <dt class="nhsuk-summary-list__value" id="insitutution-identification-number">0305300000</dt>
+                         </div>
+                         
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Name of the institution</dd>
+                            <dt class="nhsuk-summary-list__value" id="institution-name">Caisse Regionale des Professions Liberales D'ile de France</dt>
+                         </div>
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Identification number of the card</dd>
+                            <dt class="nhsuk-summary-list__value" id="identification-number-card">12345678901234567890</dt>
+                         </div>
+                         <div class="nhsuk-summary-list__row">
+                            <dd class="nhsuk-summary-list__key">Expiry date</dd>
+                            <dt class="nhsuk-summary-list__value" id="expiry-date"></dt>
+                         </div>
+                         
+                      </dl>
+                   </div>
+                </details>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- Left card ends -->
+
+            <!-- Right card begins -->
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+
+                 <h2 class="nhsuk-heading-s">Treatment history</h2>
+                 
+                 <div class="nhsuk-table-responsive new-filtered-table">
+                    <table role="table" class="nhsuk-table new-table">
+                       <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Treatment history</caption>
+                       <thead role="rowgroup" class="nhsuk-table__head">
+                          <tr role="row">
+                             <th role="columnheader" scope="col">Entitlement</th>
+                             <th role="columnheader" scope="col">Start date</th>
+                             <th role="columnheader" scope="col">End date</th>
+                             <th role="columnheader" scope="col">Last updated</th>
+                          </tr>
+                       </thead>
+                       <tbody id="result" class="nhsuk-table__body">
+                          <tr role="row" class="nhsuk-table__row">
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Entitlement</span>
+                                <p id="entitlement_type_0">S2/E112</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Start date</span>
+                                <p id="treatment_StartDate0">01/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">End date</span>
+                                <p id="treatment_EndDate0">14/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell"><span class="nhsuk-table-responsive__heading">Last updated</span>
+                                <p id="treatment_ProcessDate0">15/01/2025</p></td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Entitlement</span>
+                                <p id="entitlement_type_1">PRC</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Start date</span>
+                                <p id="treatment_StartDate1">01/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">End date</span>
+                                <p id="treatment_EndDate1">14/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell"><span class="nhsuk-table-responsive__heading">Last updated</span>
+                                <p id="treatment_ProcessDate1">15/01/2025</p></td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Entitlement</span>
+                                <p id="entitlement_type_2">PRC</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Start date</span>
+                                <p id="treatment_StartDate2">01/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">End date</span>
+                                <p id="treatment_EndDate2">14/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell"><span class="nhsuk-table-responsive__heading">Last updated</span>
+                                <p id="treatment_ProcessDate2">15/01/2025</p></td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Entitlement</span>
+                                <p id="entitlement_type_3">PRC</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Start date</span>
+                                <p id="treatment_StartDate3">01/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">End date</span>
+                                <p id="treatment_EndDate3">14/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell"><span class="nhsuk-table-responsive__heading">Last updated</span>
+                                <p id="treatment_ProcessDate3">15/01/2025</p></td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Entitlement</span>
+                                <p id="entitlement_type_4">S2/E112</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Start date</span>
+                                <p id="treatment_StartDate4">06/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">End date</span>
+                                <p id="treatment_EndDate4">29/01/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell"><span class="nhsuk-table-responsive__heading">Last updated</span>
+                                <p id="treatment_ProcessDate4">29/01/2025</p></td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Entitlement</span>
+                                <p id="entitlement_type_5">S2/E112</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Start date</span>
+                                <p id="treatment_StartDate5">01/02/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">End date</span>
+                                <p id="treatment_EndDate5">14/02/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell"><span class="nhsuk-table-responsive__heading">Last updated</span>
+                                <p id="treatment_ProcessDate5">28/02/2025</p></td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Entitlement</span>
+                                <p id="entitlement_type_6">PRC</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Start date</span>
+                                <p id="treatment_StartDate6">01/02/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">End date</span>
+                                <p id="treatment_EndDate6">28/02/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell"><span class="nhsuk-table-responsive__heading">Last updated</span>
+                                <p id="treatment_ProcessDate6">28/02/2025</p></td>
+                          </tr>
+                          <tr role="row" class="nhsuk-table__row">
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Entitlement</span>
+                                <p id="entitlement_type_7">PRC</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">Start date</span>
+                                <p id="treatment_StartDate7">01/03/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell "><span class="nhsuk-table-responsive__heading">End date</span>
+                                <p id="treatment_EndDate7">25/03/2025</p></td>
+                             <td role="cell" class="nhsuk-table__cell"><span class="nhsuk-table-responsive__heading">Last updated</span>
+                                <p id="treatment_ProcessDate7">27/03/2025</p></td>
+                          </tr>
+                       </tbody>
+                    </table>
+                 </div>
+                 <!--  for pagination -->
+                 <div>
+                  <nav class="nhsuk-pagination" role="navigation" aria-label="treatment history pagination">
+                  <ul class="nhsuk-list nhsuk-pagination__list">
+                    
+                    <li class="nhsuk-pagination-item--next">
+                      <a class="nhsuk-pagination__link nhsuk-pagination__link--next" id="pagination-next" href="#">
+                          <span class="nhsuk-pagination__title">Next</span>
+                          <span class="nhsuk-u-visually-hidden">:</span>
+                          <span class="nhsuk-pagination__link nhsuk-pagination__page">Page 1 of 3</span>
+                          <svg class="nhsuk-icon nhsuk-icon__arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M19.6 11.66l-2.73-3A.51.51 0 0 0 16 9v2H5a1 1 0 0 0 0 2h11v2a.5.5 0 0 0 .32.46.39.39 0 0 0 .18 0 .52.52 0 0 0 .37-.16l2.73-3a.5.5 0 0 0 0-.64z"></path>
+                      </svg>
+                      </a>
+                    </li>
+                  </ul>
+                  </nav>
+                 </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- Right card ends -->
+
+              
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

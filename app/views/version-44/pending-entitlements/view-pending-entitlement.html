@@ -1,0 +1,193 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Pending entitlement details - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="../pending-entitlements/pending-entitlements">Pending entitlements (Pending)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">View pending entitlement (Harris Davidson)</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="../pending-entitlements/pending-entitlements">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Pending entitlements
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          {% if data['institution-details-updated'] == 'Yes' %}
+          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+            <div class="nhsuk-notification-banner__header">
+              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                Success
+              </h2>
+            </div>
+            <div class="nhsuk-notification-banner__content">
+              <h3 class="nhsuk-notification-banner__heading">
+                Institution details updated
+              </h3>
+              <p>The details for this entitlement are complete. Select 'Set as actioned' to amend the status of the entitlement.</p>
+            </div>
+          </div>
+          {% elif data['assign-pending-entitlement-to-me'] == 'Yes' %}
+          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+            <div class="nhsuk-notification-banner__header">
+              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                Success
+              </h2>
+            </div>
+            <div class="nhsuk-notification-banner__content">
+              <h3 class="nhsuk-notification-banner__heading">
+                Record assigned to you
+              </h3>
+              <p>This record has been assigned to joe.bloggs@nhsbsa.nhs.uk</p>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+              <h1 class="nhsuk-heading-l">
+                Pending entitlement details for Harris Davidson
+              </h1>
+
+              {% if data['assign-pending-entitlement-to-me'] != 'Yes' %}
+              <p><a class="nhsuk-breadcrumb__link nhsuk-u-font-size-16" href="view-pending-entitlement?assign-pending-entitlement-to-me=Yes">Assign to me</a></p>
+              {% endif %}
+
+            </div>
+          </div>
+
+          
+
+          <form action="view-pending-entitlement" method="post" novalidate>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+
+              {% if data['assign-pending-entitlement-to-me'] != 'Yes' %}
+              <div class="nhsuk-inset-text">
+                <span class="nhsuk-u-visually-hidden">Information: </span>
+                <p>You must assign the record to yourself to change the institution details.</p>
+              </div>
+              {% endif %}
+
+              {% if data['assign-pending-entitlement-to-me'] == 'Yes' and data ['institution-details-updated'] == 'Yes' %}
+              <button id="set-as-actioned-button" class="nhsuk-button  nhsuk-u-margin-bottom-5" type="submit">Set as Actioned</button>
+              {% endif %}
+          </form>
+
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+
+                  <h2 class="nhsuk-heading-s">Institution details</h2>
+
+                  <p><b>Note:</b> The institution details provided from the OVM must match CAI website.</p>
+
+                  <p>Details of the institution was sent to <a href="#">nhsbsa.ovmqueries@nhsbsa.nhs.uk</a> on 19-January-2026</p>
+                  
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                       <dt class="nhsuk-summary-list__key">Entitlement information</dt>
+                       <dd class="nhsuk-summary-list__value" id="no-of-ehic-treatments">PRC with 1 treatments</dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                       <dt class="nhsuk-summary-list__key">Country of issue</dt>
+                       <dd class="nhsuk-summary-list__value" id="country">France (FR)</dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                       <dt class="nhsuk-summary-list__key">Institution ID</dt>
+                       <dd class="nhsuk-summary-list__value" id="instituion-id">
+                        {% if data['institution-details-updated'] == 'Yes' %}
+                          0305300000
+                        {% else %}
+                          00000001
+                        {% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                       <dt class="nhsuk-summary-list__key">Institution acronym</dt>
+                       <dd class="nhsuk-summary-list__value" id="isntitution-acronym">
+                        {% if data['institution-details-updated'] == 'Yes' %}
+                          RSI PL IdF
+                        {% else %}
+                          -
+                        {% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                       <dt class="nhsuk-summary-list__key">Institution name</dt>
+                       <dd class="nhsuk-summary-list__value" id="institution-name">
+                        {% if data['institution-details-updated'] == 'Yes' %}
+                          CAISSE REGIONALE DES PROFESSIONS LIBERALES D'ILE DE FRANCE
+                        {% else %}
+                          -
+                        {% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                       <dt class="nhsuk-summary-list__key">Institution address</dt>
+                       <dd class="nhsuk-summary-list__value" id="institution-address">
+                        {% if data['institution-details-updated'] == 'Yes' %}
+                          22 RUE VIOLET, 75015 PARIS
+                        {% else %}
+                          -
+                        {% endif %}
+                      </dd>
+                    </div>
+                 </dl>
+
+                 <a href="edit-institution-details" id="edit-institution-details-button" class="nhsuk-button nhsuk-button--secondary nhsuk-u-margin-bottom-5">Edit institution ID</a>
+
+                </div>
+              </div>
+
+              
+          
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

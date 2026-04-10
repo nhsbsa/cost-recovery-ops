@@ -1,0 +1,417 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Treatments linked to resub
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View Resub ID (Treatments linked to resub)</li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="resubmissions">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      View Claim ID (Resubmissions)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+          
+
+            {% if data['resubStatus'] ==  'peer-reviewed' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Resub peer reviewed
+                </h3>
+                <p>Resub 7824366 has been peer reviewed.</p>
+              </div>
+            </div>
+
+            {% elif data['resubStatus'] == 'peer-review-requested' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Resub sent for peer review
+                </h3>
+                <p>Resub 7824366 has been sent to nhsbsa.ohsukclaims@nhsbsa.nhs.uk for peer review.</p>
+              </div>
+            </div>
+            {% endif %}
+
+            {% set status = data.treatmentStatuses['Jane'] %}
+            {% if status == 'Maintained' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Treatment maintained
+                </h3>
+                <p>Treatment 387731 status set as maintained</p>
+              </div>
+            </div>
+            {% elif status == 'Withdrawn' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Treatment withdrawn
+                </h3>
+                <p>Treatment 387731 status set as withdrawn</p>
+              </div>
+            </div>
+            {% elif status == 'Partial' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Treatment partial
+                </h3>
+                <p>Treatment 387731 status set as partial</p>
+              </div>
+            </div>
+            {% endif %}
+
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <h1 class="nhsuk-heading-l" style="margin-bottom: 20px;">
+                        Resub ID 7824366: Claim ID 345680<br>
+                        Treatment linked to resub
+                    </h1>
+                  </div>
+                  {% if data.resubStatus == 'ready-to-send-for-peer-review' %}
+                  <div>
+                    <a href="treatments-within-resubmission?send-for-peer-review=yes">
+                      <button class="nhsuk-button" type="submit">
+                        Send for peer review
+                      </button>
+                    </a>
+                  </div>
+                  {% elif data.resubStatus == 'assigned-for-review' %}
+                  <div>
+                    <a href="treatments-within-resubmission?set-as-peer-reviewed=yes">
+                      <button class="nhsuk-button" type="submit">
+                        Set as peer reviewed
+                      </button>
+                    </a>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="treatments-within-resubmission">Treatments linked to resub</a>
+                    <span class="nhsuk-u-visually-hidden">View the treatments within resubmission 7824366</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="resubmission-documents">Resubmission documents</a>
+                    <span class="nhsuk-u-visually-hidden">View the documents within resubmission 7824366</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="resubmission-summary">Resubmission summary</a>
+                    <span class="nhsuk-u-visually-hidden">View the summary for resubmission 7824366</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="resubmission-history">Resubmission history</a>
+                    <span class="nhsuk-u-visually-hidden">View the history of resubmission 7824366</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <!-- start search-->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-hint">
+                Search for a single treatment using the treatment ID number or a person's last name.
+                Search for up to 8 treatment at once by separating each treatment ID number with a comma.
+                For example, 10637, 16095, 17011
+              </div>
+
+              <div class="nhsuk-search-input-button">
+                <input class="nhsuk-search__input-treatments nhsuk-input nhsuk-input--width-30" id="filterSearchClaimTreatments" name="filterSearchClaimTreatments" type="search" autocomplete="off" value="">
+                <button class="nhsuk-button nhsuk-button--small" data-module="nhsuk-button" type="submit">
+                  Search
+                </button>
+              </div>
+
+            </div>
+          </div>
+          <!--end search-->
+
+          <details class="nhsuk-details">
+            <summary class="nhsuk-details__summary">
+              <span class="nhsuk-details__summary-text">
+                Filter by status
+              </span>
+            </summary>
+              <div class="nhsuk-details__text">
+                <p>Select all status that you want to filter the resubmissions by.</p>
+                <div class="nhsuk-checkboxes">
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="contested" name="treatments-within-resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="contested">
+                      Contested
+                    </label>
+                  </div>
+            
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="maintained" name="treatments-within-resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="maintained">
+                      Maintained
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="partial" name="treatments-within-resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="partial">
+                      Partial
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="withdrawn" name="treatments-within-resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="withdrawn">
+                      Withdrawn
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="waiting-for-ovm" name="treatments-within-resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="waiting-for-ovm">
+                      Waiting for OVM
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="waiting-for-ovm" name="treatments-within-resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="waiting-for-ovm">
+                      Waiting for OVM
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="waiting-for-ovm-prc" name="treatments-within-resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="waiting-for-ovm-prc">
+                      Waiting for OVM/PRC
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="decision-pending" name="treatments-within-resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="decision-pending">
+                      Decision pending
+                    </label>
+                  </div>
+            
+                </div>
+                <br>
+                <a href="#"><button  class="nhsuk-button" type="submit">
+                  Apply
+                </button></a>
+              </div>
+            </details>
+
+            <form action="treatments-within-resubmission" method="post">
+        
+        
+            <!-- Start of treatments table -->
+            <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
+              <thead role="rowgroup" class="nhsuk-table__head" id="treatments">
+                <tr role="row">
+                  <th role="columnheader" class="" scope="col">
+                    Treatment ID
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    First name
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Last name
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Entitlement
+                  </th>
+                  {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                  <th role="columnheader" class="" scope="col">
+                    Previous cost (£)
+                  </th>
+                  {% endif %}
+                  <th role="columnheader" class="" scope="col">
+                    Current cost (£)
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Status
+                  </th>
+                  <th role="columnheader" class="" scope="col">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody class="nhsuk-table__body">
+                <tr role="row" class="nhsuk-table__row">
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Treatment ID</span>
+                    <span>387731</span>
+                  </td>
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">First name</span>
+                    <span>Jane</span>
+                  </td>
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Last name</span>
+                    <span>Doe</span>
+                  </td>
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                    <span>EHIC</span>
+                  </td>
+                  {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Previous cost (£)</span>
+                      300.00
+                  </td>
+                  {% endif %}
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Current cost (£)</span>
+                    {% set status = data.treatmentStatuses['Jane'] %}
+                    {% if status == 'Maintained' %}
+                      300.00
+                    {% elif status == 'Withdrawn' %}
+                      0.00
+                    {% elif status == 'Partial' %}
+                      200.00
+                    {% else %}
+                      300.00
+                    {% endif %}
+                  </td>
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Status</span>
+                    {% set status = data.treatmentStatuses['Jane'] %}
+
+{% if data['prc-uploaded'] == 'yes' %}
+  {# Always fall back to actual treatment status #}
+  {% if status == 'Maintained' %}
+    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
+  {% elif status == 'Withdrawn' %}
+    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+  {% elif status == 'Partial' %}
+    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+  {% else %}
+    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
+  {% endif %}
+
+{% elif data['rina-ref-submitted'] == 'yes' %}
+  <strong class="nhsuk-tag nhsuk-tag--yellow">Waiting for PRC</strong>
+
+{% elif data['prc-request-details-submitted'] == 'yes' %}
+  <strong class="nhsuk-tag nhsuk-tag--aqua-green">Decision pending</strong>
+
+{% else %}
+  {# Default state #}
+  {% if status == 'Maintained' %}
+    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
+  {% elif status == 'Withdrawn' %}
+    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+  {% elif status == 'Partial' %}
+    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+  {% else %}
+    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
+  {% endif %}
+{% endif %}
+                  </td>
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Action</span>
+                    <span><a href="treatment-details?treatment=Jane" aria-describedby="treatment-status">View treatment details</a><span class="nhsuk-u-visually-hidden">for Jane Doe</span></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- End of treatments table -->
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
