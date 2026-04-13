@@ -50,7 +50,7 @@ router.post('/enter-date-of-uk-residency', function(req, res) {
   req.session.data['date-of-residency-in-uk'] = dateResidencyInUK;
 
 
-  res.redirect('/version-44/s1/account/generate-S071/select-citizen-status');
+  res.redirect('/version-44/s1/account/generate-s071/select-citizen-status');
 })
 
 
@@ -60,7 +60,7 @@ router.post('/select-citizen-status', function(req, res) {
   // Store the citizen status
   req.session.data['s1-request-citizen-status'] = req.body['s1-request-citizen-status'];
 
-  res.redirect('/version-44/s1/account/generate-S071/enter-member-state-details');
+  res.redirect('/version-44/s1/account/generate-s071/enter-member-state-details');
 })
 
 // Enter the date of residency in UK
@@ -72,19 +72,19 @@ router.post('/enter-member-state-details', function(req, res) {
   // Store the Personal Identification Number (PIN)
   req.session.data['s1-request-pin'] = req.body['s1-request-pin'];
 
-  res.redirect('/version-44/s1/account/generate-S071/search-for-institution-by-id');
+  res.redirect('/version-44/s1/account/generate-s071/search-for-institution-by-id');
 })
 
 // Search for the institution by ID
 router.post('/search-for-institution-by-id', function(req, res) {
 
-  res.redirect('/version-44/s1/account/generate-S071/search-for-institution-by-id-results');
+  res.redirect('/version-44/s1/account/generate-s071/search-for-institution-by-id-results');
 })
 
 // Search for the institution by name
 router.post('/search-for-institution-by-name', function(req, res) {
 
-  res.redirect('/version-44/s1/account/generate-S071/search-for-institution-by-name-results');
+  res.redirect('/version-44/s1/account/generate-s071/search-for-institution-by-name-results');
 })
 
 
@@ -137,12 +137,21 @@ router.post('/enter-entitlement-period', function(req, res) {
   
     req.session.data['s1-request-entitlement-end-date'] = s1RequestEntitlementEndDate;
 
-  res.redirect('/version-44/s1/account/generate-S071/cya-generate-s071');
+  res.redirect('/version-44/s1/account/generate-s071/cya-generate-s071');
 })
 
 // Check your answers before generating the S071
 router.post('/cya-generate-s071', function(req, res) {
 
-  res.redirect('/version-44/s1/account/generate-S071/confirmation-s071-generated');
+  // Mark S071 document as generated
+  req.session.data['s071-generated'] = 'Yes'
+
+  res.redirect('/version-44/s1/account/generate-s071/confirmation-s071-generated');
+})
+
+// View new S071 in the 'Documents' section
+router.post('/confirmation-s071-generated', function(req, res) {
+
+  res.redirect('/version-44/s1/account/system-generated-documents');
 })
 module.exports = router;
