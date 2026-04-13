@@ -75,5 +75,74 @@ router.post('/enter-member-state-details', function(req, res) {
   res.redirect('/version-44/s1/account/generate-S071/search-for-institution-by-id');
 })
 
+// Search for the institution by ID
+router.post('/search-for-institution-by-id', function(req, res) {
 
+  res.redirect('/version-44/s1/account/generate-S071/search-for-institution-by-id-results');
+})
+
+// Search for the institution by name
+router.post('/search-for-institution-by-name', function(req, res) {
+
+  res.redirect('/version-44/s1/account/generate-S071/search-for-institution-by-name-results');
+})
+
+
+// Enter the entitlement period
+router.post('/enter-entitlement-period', function(req, res) {
+  
+  // Store the start date of the S1 request
+  const s1RequestEntitlementStartDateDay = req.body['s1-request-entitlement-start-date-day'];
+  const s1RequestEntitlementStartDateMonth = req.body['s1-request-entitlement-start-date-month'];
+  const s1RequestEntitlementStartDateYear = req.body['s1-request-entitlement-start-date-year'];
+
+  // Month names
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  let s1RequestEntitlementStartDate;
+  if (s1RequestEntitlementStartDateDay && s1RequestEntitlementStartDateMonth && s1RequestEntitlementStartDateYear) {
+    const monthIndex = parseInt(s1RequestEntitlementStartDateMonth, 10) - 1;
+    if (monthIndex >= 0 && monthIndex < 12) {
+      const monthName = monthNames[monthIndex];
+      s1RequestEntitlementStartDate = `${parseInt(s1RequestEntitlementStartDateDay, 10)} ${monthName} ${s1RequestEntitlementStartDateYear}`;
+    } else {
+      s1RequestEntitlementStartDate = `${parseInt(s1RequestEntitlementStartDateDay, 10)} ${s1RequestEntitlementStartDateMonth} ${s1RequestEntitlementStartDateYear}`; // fallback if invalid month
+    }
+  } else {
+    s1RequestEntitlementStartDate = '01 January 2026'; // default if not provided
+}
+
+  req.session.data['s1-request-entitlement-start-date'] = s1RequestEntitlementStartDate;
+
+    // Store the date of residency in the UK
+    const s1RequestEntitlementEndDateDay = req.body['s1-request-entitlement-end-date-day'];
+    const s1RequestEntitlementEndDateMonth = req.body['s1-request-entitlement-end-date-month'];
+    const s1RequestEntitlementEndDateYear = req.body['s1-request-entitlement-end-date-year'];
+  
+    let s1RequestEntitlementEndDate;
+    if (s1RequestEntitlementEndDateDay && s1RequestEntitlementEndDateMonth && s1RequestEntitlementEndDateYear) {
+      const monthIndex = parseInt(s1RequestEntitlementEndDateMonth, 10) - 1;
+      if (monthIndex >= 0 && monthIndex < 12) {
+        const monthName = monthNames[monthIndex];
+        s1RequestEntitlementEndDate = `${parseInt(s1RequestEntitlementEndDateDay, 10)} ${monthName} ${s1RequestEntitlementEndDateYear}`;
+      } else {
+        s1RequestEntitlementEndDate = `${parseInt(s1RequestEntitlementEndDateDay, 10)} ${s1RequestEntitlementEndDateMonth} ${s1RequestEntitlementEndDateYear}`; // fallback if invalid month
+      }
+    } else {
+      s1RequestEntitlementEndDate = '31 December 2026'; // default if not provided
+  }
+  
+    req.session.data['s1-request-entitlement-end-date'] = s1RequestEntitlementEndDate;
+
+  res.redirect('/version-44/s1/account/generate-S071/cya-generate-s071');
+})
+
+// Check your answers before generating the S071
+router.post('/cya-generate-s071', function(req, res) {
+
+  res.redirect('/version-44/s1/account/generate-S071/confirmation-s071-generated');
+})
 module.exports = router;

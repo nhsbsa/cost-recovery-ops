@@ -9,6 +9,53 @@ router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded
 
 // Person record (Main insured) //
 
+// Generate, send, and track S071 //
+// Enter the date the S071 was sent to the Member State
+router.post('/enter-date-s071-sent-to-ms', function(req, res) {
+  
+  // Store the date the S071 was sent to the Member State
+  const dateS071SentToMSDay = req.body['date-s071-sent-to-ms-day'];
+  const dateS071SentToMSMonth = req.body['date-s071-sent-to-ms-month'];
+  const dateS071SentToMSYear = req.body['date-s071-sent-to-ms-year'];
+
+  // Month names
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  let dateS071SentToMS;
+  if (dateS071SentToMSDay && dateS071SentToMSMonth && dateS071SentToMSYear) {
+    const monthIndex = parseInt(dateS071SentToMSMonth, 10) - 1;
+    if (monthIndex >= 0 && monthIndex < 12) {
+      const monthName = monthNames[monthIndex];
+      dateS071SentToMS = `${parseInt(dateS071SentToMSDay, 10)} ${monthName} ${dateS071SentToMSYear}`;
+    } else {
+      dateS071SentToMS = `${parseInt(dateS071SentToMSDay, 10)} ${dateS071SentToMSMonth} ${dateS071SentToMSYear}`; // fallback if invalid month
+    }
+  } else {
+    dateS071SentToMS = '20 March 2026'; // default if not provided
+}
+
+  req.session.data['date-s071-sent-to-ms'] = dateS071SentToMS;
+
+  // Redirect to enter the RINA reference for sending the S071 to the Member State
+  res.redirect('/version-44/s1/account/s071-sent-to-ms-rina-ref');
+})
+
+// Enter the RINA reference for sending the S071 to the Member State
+router.post('/s071-sent-to-ms-rina-ref', function(req, res) {
+  
+  // Store the RINA reference associated with sending the S071 to the Member State
+  const s071SentToMSRINARef = req.body['s071-sent-to-ms-rina-ref'];
+
+  // Set flag that both the date the S071 was sent to the Member State and the RINA ref have been entered
+  req.session.data['date-and-rina-ref-s071-sent-captured'] = 'Yes';
+
+  // Redirect to S1/S072 requests section where new request appears
+  res.redirect('/version-44/s1/account/s1-requests');
+})
+
 
 // Notes section //
 

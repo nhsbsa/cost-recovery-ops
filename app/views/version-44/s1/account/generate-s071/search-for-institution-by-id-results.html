@@ -37,7 +37,7 @@ Search for an institution by ID - Manage overseas entitlements and treatments - 
 
                     
                         
-                    <form action="search-for-institution-by-id" method="post">
+                    <form action="search-for-institution-by-id-results" method="post">
                   
                     <div class="nhsuk-form-group">
                       <span class="nhsuk-caption-l">Generate an S071</span>
@@ -70,15 +70,61 @@ Search for an institution by ID - Manage overseas entitlements and treatments - 
                           <span>Enter the institution ID</span>
                         </p>
                       </div>
-                      <input class="nhsuk-input nhsuk-input--width-20" id="institutionName" type="text" autocomplete="off" name="searchInstitutionDTO.institutionName" value=""/>
+                      <input class="nhsuk-input nhsuk-input--width-20" id="institutionName" type="text" autocomplete="off" name="search-institution-id-results" value="0305300000"/>
                     </div>
-                    
 
-                    <button class="nhsuk-button" type="submit">
-                      Search
-                    </button>
+                    <div class="nhsuk-form-group">
+                      <button class="nhsuk-button" type="submit">
+                        Search
+                      </button>
 
-                    <p style="margin-bottom: 60px;"><a href="../s1-requests">Cancel</a></p>
+                      <p style="margin-bottom: 20px;"><a href="../s1-requests">Cancel</a></p>
+                    </div>
+
+                    <!-- when total records found result table start-->
+                    <div id="result">
+                      <div role="alert" class="nhsuk-label--m" id="non_zero_records">
+                        <h2 class="nhsuk-label--m">1 result found</h2>
+                      </div>
+                    </div>
+
+                    <div class="nhsuk-hint">Select the correct institution to continue.</div>
+
+                    <table role="table" class="nhsuk-table-responsive nhsuk-u-padding-bottom-6" id="institution-table">
+                      <caption class="nhsuk-table__caption"></caption>
+                      <thead role="rowgroup" class="nhsuk-table__head">
+                        <tr role="row">
+                          <th role="columnheader" scope="col">Institution ID</th>
+                          <th role="columnheader" scope="col">Institution name</th>
+                          <th role="columnheader" scope="col">Institution address</th>
+                          <th role="columnheader" scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="nhsuk-table__body">
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Institution ID</span>
+                            <p id="institutionDTO.institutionNumber_0">0305300000</p>
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Institution name</span>
+                            <p id="institutionDTO.institutionName_0">Caisse Regionale des Professions Liberales D'ile de France</p>
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Institution address</span>
+                            <p id="institutionDTO.fullAddress_0">
+                              22 Rue Violet<br>
+                              Paris<br>
+                              75015<br>
+                              France (FR)
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Action</span>
+                            <a aria-label="Select the institution with the institution ID 104940005" href="enter-entitlement-period" id="institution-id-select">Select</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                         
                     </form>
                   

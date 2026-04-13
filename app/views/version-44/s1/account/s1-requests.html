@@ -44,13 +44,28 @@
     <div class="nhsBSA-sidebar-content">
       <div class="nhsuk-width-container-fluid">
         <div class="nhsuk-main-wrapper" id="maincontent">
+
+          {% if data['s071-generated'] == 'Yes' and data['date-and-rina-ref-s071-sent-captured'] == 'Yes' %}
+          <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+            <div class="nhsuk-notification-banner__header">
+              <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                Success
+              </h2>
+            </div>
+            <div class="nhsuk-notification-banner__content">
+              <h3 class="nhsuk-notification-banner__heading">
+                Date S071 request and RINA reference added
+              </h3>
+              <p>You have added the date the S071 request was sent to Caisse Regionale des Professions Liberales D'ile de France, and the RINA reference. These details are attached to request 11273947781.</p>
+            </div>
+          </div>
+          {% endif %}
           
 
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-full">
                 <h1 class="nhsuk-heading-xl">S1/S072 requests</h1>
-
-                    <a href="../account/generate-s071/continue-generating-s071" class="nhsuk-button" style="float: right; margin-bottom: 20px;" role="button" data-module="nhsuk-button">
+                    <a href="../account/generate-s071/continue-generating-s071" class="nhsuk-button" style="float: right; margin-bottom: 40px;" role="button" data-module="nhsuk-button">
                       Generate an S071
                     </a>
                   </div>
@@ -59,24 +74,24 @@
                 <div class="nhsuk-grid-row">
                   <div class="nhsuk-grid-column-full">
                     
-                    {% if data['s071-generated'] == 'yes' %}
+                    {% if data['s071-generated'] == 'Yes' and data['date-and-rina-ref-s071-sent-captured'] == 'Yes' %}
                     
                     <!-- S1/S072 request begins -->
                       <details class="nhsuk-details nhsuk-expander">
                         <summary class="nhsuk-details__summary">
                           <span role="button" class="nhsuk-details__summary-text" id="s1-request-id"
                                 aria-label="S1/S072 - Valid: 01/01/2026 - France (FR)">
-                              S1/S072 - Valid: from 01/01/2026 to 
+                              S1/S072 - Valid: from 
                               
-                              {% if data['cancel-s1-entitlement'] == 'yes' %}
-                                  {% set day = data['entitlement-end-date-day'] | int %}
-                                  {% set month = data['entitlement-end-date-month'] | int %}
-                                  {% set year = data['entitlement-end-date-year'] %}
+                              {% if data['s1-request-entitlement-start-date-day'] and data['s1-request-entitlement-start-date-month'] and data['s1-request-entitlement-start-date-year'] %}
+                                {% set day = data['s1-request-entitlement-start-date-day'] %}
+                                {% set month = data['s1-request-entitlement-start-date-month'] | int %}
+                                {% set year = data['s1-request-entitlement-start-date-year'] %}
                   
                               {% else %}
-                                  {% set day = 16 %}
-                                  {% set month = 10 %}
-                                  {% set year = 2024 %}
+                                {% set day = 01 %}
+                                {% set month = 01 %}
+                                {% set year = 2026 %}
                               {% endif %}
                   
                               {% if day < 10 %}
@@ -91,7 +106,36 @@
                                   {% set formatted_month = month | string %}
                               {% endif %}
                   
-                              {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
+                              {{ formatted_day }}/{{ formatted_month }}/{{ year }} 
+                              
+                              to 
+
+                              {% if data['s1-request-entitlement-end-date-day'] and data['s1-request-entitlement-end-date-month'] and data['s1-request-entitlement-end-date-year'] %}
+                                {% set day = data['s1-request-entitlement-end-date-day'] %}
+                                {% set month = data['s1-request-entitlement-end-date-month'] | int %}
+                                {% set year = data['s1-request-entitlement-end-date-year'] %}
+                  
+                              {% else %}
+                                {% set day = 31 %}
+                                {% set month = 12 %}
+                                {% set year = 2026 %}
+                              {% endif %}
+                  
+                              {% if day < 10 %}
+                                  {% set formatted_day = "0" + day | string %}
+                              {% else %}
+                                  {% set formatted_day = day | string %}
+                              {% endif %}
+                  
+                              {% if month < 10 %}
+                                  {% set formatted_month = "0" + month | string %}
+                              {% else %}
+                                  {% set formatted_month = month | string %}
+                              {% endif %}
+                  
+                              {{ formatted_day }}/{{ formatted_month }}/{{ year }} 
+                              
+                              - France (FR)
                           </span>
                       
                           <strong class="nhsuk-tag nhsuk-tag--green" style="margin-left: 15px; margin-top: 8px;" id="s1-request-status-tag">
@@ -120,9 +164,29 @@
                                 <tr class="nhsuk-table__row">
                                   <td class="nhsuk-table__cell" data-label="RINA reference">1838883130</td>
                                   <td class="nhsuk-table__cell" data-label="MOET reference">11273947781</td>
-                                  <td class="nhsuk-table__cell" data-label="Date request sent">6 March 2026</td>
+                                  <td class="nhsuk-table__cell" data-label="Date request sent">
+                                    {% if data['date-s071-sent-to-ms-date-day'] and data['date-s071-sent-to-ms-month'] and data['date-s071-sent-to-ms-date-year'] %}
+                                      {% set day = data['date-s071-sent-to-ms-date-day'] %}
+                                      {% set month = data['date-s071-sent-to-ms-date-month'] | int %}
+                                      {% set year = data['date-s071-sent-to-ms-date-year'] %}
+                          
+                                      {# Define month names #}
+                                      {% set month_names = [
+                                          "January", "February", "March", "April", "May", "June",
+                                          "July", "August", "September", "October", "November", "December"
+                                      ] %}
+                          
+                                      {# Get the month name #}
+                                      {% set month_name = month_names[month - 1] %}
+                          
+                                      {# Display the date in the format "day month year" #}
+                                      {{ day | int }} {{ month_name }} {{ year }} 
+                                    {% else %}
+                                      6 March 2026
+                                    {% endif %}
+                                  </td>
                                   <td class="nhsuk-table__cell" data-label="Sent by">joe.bloggs@nhsbsa.nhs.uk</td>
-                                  <td class="nhsuk-table__cell" data-label="Action"><a href="s1-request-details">View request</a></td>
+                                  <td class="nhsuk-table__cell" data-label="Action"><a href="/version-44/s1/account/s1-requests/s1-request-details">View request</a></td>
                               </tbody>
                             </table>
                           
@@ -163,8 +227,8 @@
           <li><a href="personal-details">Personal details</a></li>
           <li><a href="entitlements-and-treatments">Entitlements and treatments</a></li>
           <li><a class="active" href="s1-requests">S1/S072 requests</a></li>
+          <li><a href="system-generated-documents">Documents</a></li>
           <li><a href="case-history-person">Case history</a></li>
-          <!--li><a href="documents">Documents</a></li-->
           <li><a href="notes">Notes</a></li>
         </ul>
       </div>

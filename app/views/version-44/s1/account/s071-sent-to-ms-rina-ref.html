@@ -1,0 +1,72 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Enter the RINA reference - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back",
+                      "classes": "nhsuk-u-margin-bottom-4"
+                    }) }}
+
+                    
+                        
+                    <form action="s071-sent-to-ms-rina-ref" method="post">
+                  
+                    <div class="nhsuk-form-group">
+                      <span class="nhsuk-caption-l">Send S071 to the member state</span>
+                      <label class="nhsuk-label" for="enter-rina-ref-for-sending-s071-to-ms">
+                        <h1 class="nhsuk-heading-xl">Enter the RINA reference</h1>
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-hint" id="uk-residency-date-hint">
+                      This may be a combination of numbers and letters. For example, ABC12839302.
+                    </div>
+                    <div class="nhsuk-date-input">
+                      <input class="nhsuk-input nhsuk-input--width-20" id="s071-sent-to-ms-rina-ref" name="s071-sent-to-ms-rina-ref" type="text">
+                    </div>
+                    
+
+                    <button class="nhsuk-button" style="margin-top: 40px;" type="submit">
+                      Save and submit
+                    </button>
+
+                    <p style="margin-bottom: 60px;"><a href="system-generated-documents">Cancel</a></p>
+                        
+                    </form>
+                  
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
