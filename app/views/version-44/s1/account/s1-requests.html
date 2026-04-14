@@ -79,63 +79,36 @@
                     <!-- S1/S072 request begins -->
                       <details class="nhsuk-details nhsuk-expander">
                         <summary class="nhsuk-details__summary">
-                          <span role="button" class="nhsuk-details__summary-text" id="s1-request-id"
-                                aria-label="S1/S072 - Valid: 01/01/2026 - France (FR)">
-                              S1/S072 - Valid: from 
-                              
-                              {% if data['s1-request-entitlement-start-date-day'] and data['s1-request-entitlement-start-date-month'] and data['s1-request-entitlement-start-date-year'] %}
-                                {% set day = data['s1-request-entitlement-start-date-day'] %}
-                                {% set month = data['s1-request-entitlement-start-date-month'] | int %}
-                                {% set year = data['s1-request-entitlement-start-date-year'] %}
-                  
-                              {% else %}
-                                {% set day = 1 %}
-                                {% set month = 1 %}
-                                {% set year = 2026 %}
-                              {% endif %}
-                  
-                              {% if day < 10 %}
-                                  {% set formatted_day = "0" + day | string %}
-                              {% else %}
-                                  {% set formatted_day = day | string %}
-                              {% endif %}
-                  
-                              {% if month < 10 %}
-                                  {% set formatted_month = "0" + month | string %}
-                              {% else %}
-                                  {% set formatted_month = month | string %}
-                              {% endif %}
-                  
-                              {{ formatted_day }}/{{ formatted_month }}/{{ year }} 
-                              
-                              to 
+                          <span role="button" class="nhsuk-details__summary-text" id="s1-request-id">
+                            S1/S072 - Valid:
+                          
+                            {# ---- START DATE ---- #}
+                            {% set s_day = (data['s1-request-entitlement-start-date-day'] or 1) | int %}
+                            {% set s_month = (data['s1-request-entitlement-start-date-month'] or 1) | int %}
+                            {% set s_year = data['s1-request-entitlement-start-date-year'] or 2026 %}
 
-                              {% if data['s1-request-entitlement-end-date-day'] and data['s1-request-entitlement-end-date-month'] and data['s1-request-entitlement-end-date-year'] %}
-                                {% set day = data['s1-request-entitlement-end-date-day'] %}
-                                {% set month = data['s1-request-entitlement-end-date-month'] | int %}
-                                {% set year = data['s1-request-entitlement-end-date-year'] %}
-                  
-                              {% else %}
-                                {% set day = 31 %}
-                                {% set month = 12 %}
-                                {% set year = 2026 %}
-                              {% endif %}
-                  
-                              {% if day < 10 %}
-                                  {% set formatted_day = "0" + day | string %}
-                              {% else %}
-                                  {% set formatted_day = day | string %}
-                              {% endif %}
-                  
-                              {% if month < 10 %}
-                                  {% set formatted_month = "0" + month | string %}
-                              {% else %}
-                                  {% set formatted_month = month | string %}
-                              {% endif %}
-                  
-                              {{ formatted_day }}/{{ formatted_month }}/{{ year }} 
-                              
-                              - France (FR)
+                            {% set s_day = ("0" + s_day) if s_day < 10 else s_day %}
+                            {% set s_month = ("0" + s_month) if s_month < 10 else s_month %}
+                          
+                            {{ s_day }}/{{ s_month }}/{{ s_year }}
+                          
+                            {# ---- END DATE (ONLY IF EXISTS) ---- #}
+                            {% if data['s1-request-entitlement-end-date-day'] 
+                                and data['s1-request-entitlement-end-date-month'] 
+                                and data['s1-request-entitlement-end-date-year'] %}
+
+                            {% set e_day = data['s1-request-entitlement-end-date-day'] | int %}
+                            {% set e_month = data['s1-request-entitlement-end-date-month'] | int %}
+                            {% set e_year = data['s1-request-entitlement-end-date-year'] %}
+
+                            {% set e_day = ("0" + e_day) if e_day < 10 else e_day %}
+                            {% set e_month = ("0" + e_month) if e_month < 10 else e_month %}
+
+                            - {{ e_day }}/{{ e_month }}/{{ e_year }}
+
+                            {% endif %}
+                          
+                            - France (FR)
                           </span>
                       
                           <strong class="nhsuk-tag nhsuk-tag--green" style="margin-left: 15px; margin-top: 8px;" id="s1-request-status-tag">

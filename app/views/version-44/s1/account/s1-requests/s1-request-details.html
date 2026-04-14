@@ -102,7 +102,7 @@
                         First names at birth, if different
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        Not provided
+                        Not provided 
                       </dd>
                     </div>
                     <div class="nhsuk-summary-list__row">
@@ -150,7 +150,11 @@
                         Citizen status
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        Pensioner
+                        {% if data['s1-request-citizen-status'] %}
+                          {{ data['s1-request-citizen-status'] }}
+                        {% else %}
+                          Pensioner
+                        {% endif %}
                       </dd>
                     </div>
                   </dl>
@@ -175,7 +179,25 @@
                         Date of residency in UK (optional)
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        Not provided
+                        {% if data['date-of-residency-in-uk-day'] and data['date-of-residency-in-uk-month'] and data['date-of-residency-in-uk-year'] %}
+                          {% set day = data['date-of-residency-in-uk-day'] %}
+                          {% set month = data['date-of-residency-in-uk-month'] | int %}
+                          {% set year = data['date-of-residency-in-uk-year'] %}
+              
+                          {# Define month names #}
+                          {% set month_names = [
+                              "January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"
+                          ] %}
+              
+                          {# Get the month name #}
+                          {% set month_name = month_names[month - 1] %}
+              
+                          {# Display the date in the format "day month year" #}
+                          {{ day | int }} {{ month_name }} {{ year }}  
+                        {% else %}
+                          21 August 2024
+                        {% endif %}
                       </dd>
                     </div>
                   </dl>
@@ -208,7 +230,11 @@
                           Issuing country
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          France (FR)
+                          {% if data['s1-request-issuing-country'] %}
+                            {{ data['s1-request-issuing-country'] }}
+                          {% else %}
+                            France (FR)
+                          {% endif %}
                         </dd>
                       </div>
                       <div class="nhsuk-summary-list__row">
@@ -216,7 +242,11 @@
                           Personal identification number (PIN)
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          Not provided
+                          {% if data['s1-request-pin'] %}
+                            {{ data['s1-request-pin'] }}
+                          {% else %}
+                            Not provided
+                          {% endif %}
                         </dd>
                       </div>
                       <div class="nhsuk-summary-list__row">
@@ -224,7 +254,25 @@
                           Start date
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          1 January 2026
+                          {% if data['s1-request-entitlement-start-date-day'] and data['s1-request-entitlement-start-date-month'] and data['s1-request-entitlement-start-date-year'] %}
+                            {% set day = data['s1-request-entitlement-start-date-day'] %}
+                            {% set month = data['s1-request-entitlement-start-date-month'] | int %}
+                            {% set year = data['s1-request-entitlement-start-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            1 January 2026
+                          {% endif %}
                         </dd>
                       </div>
                       <div class="nhsuk-summary-list__row">
@@ -232,7 +280,25 @@
                           End date (optional)
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          Open-ended
+                          {% if data['s1-request-entitlement-end-date-day'] and data['s1-request-entitlement-end-date-month'] and data['s1-request-entitlement-end-date-year'] %}
+                            {% set day = data['s1-request-entitlement-end-date-day'] %}
+                            {% set month = data['s1-request-entitlement-end-date-month'] | int %}
+                            {% set year = data['s1-request-entitlement-end-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            Open-ended
+                          {% endif %}
                         </dd>
                       </div>
                     </dl>
