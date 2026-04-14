@@ -61,13 +61,22 @@ router.post('/s071-sent-to-ms-rina-ref', function(req, res) {
 
 // Add a new note
 router.post([/add-note/], function(req, res) {
+
   // Retrieve the submitted note and note type
   const noteType = req.body['note-type'];
+  const rinaReference = req.body['rina-ref-number'];
   const note = req.body['note'];
 
-  // Store these in the session or database
-  req.session.data['note-type'] = noteType;
-  req.session.data['note'] = note;
+  // Ensure notes array exists
+  req.session.data.notes = req.session.data.notes || [];
+
+  // Add new note
+  req.session.data.notes.push({
+    type: noteType,
+    rinaRef: rinaReference,
+    text: note
+  });
+
 
   // Set flag that a new note was added
   req.session.data['new-note'] = 'yes';
@@ -76,7 +85,29 @@ router.post([/add-note/], function(req, res) {
   res.redirect('/version-44/s1/account/notes');
 });
 
+// Add a second new note
+router.post([/add-second-note/], function(req, res) {
+  
+  // Retrieve the submitted note and note type
+  const noteType2 = req.body['note-type-2'];
+  const rinaReference2 = req.body['rina-ref-number-2'];
+  const note2 = req.body['note2'];
 
+  req.session.data.notes = req.session.data.notes || [];
+
+  req.session.data.notes.push({
+    type: noteType2,
+    rinaRef: rinaReference2,
+    text: note2
+  });
+
+
+  // Set flag that a second note was added
+  req.session.data['add-second-note'] = 'yes';
+
+  // Redirect back to the Main record notes screen
+  res.redirect('/version-44/s1/account/notes');
+});
 
 // Search for a person & create a new person record // 
 

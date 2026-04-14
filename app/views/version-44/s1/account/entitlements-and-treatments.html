@@ -160,112 +160,11 @@
 
 
                 
-                <!-- S1/S072 entitlement expander begins -->
-                <h3 class="nhsuk-heading-m" style="margin-top: 50px;" id="s1-s072-entitlements-heading">S1/S072 entitlements</h3>
-
                 
-                  <details class="nhsuk-details nhsuk-expander">
-                    <summary class="nhsuk-details__summary">
-                          <span role="button" class="nhsuk-details__summary-text" id="entitlement-type"
-                                aria-label="S1/S072 - Valid: 05/09/2024 - France (FR)">
-                              S1/S072 - Valid: from 05/09/2024 to 
-                              
-                              {% if data['cancel-s1-entitlement'] == 'yes' %}
-                                  {% set day = data['entitlement-end-date-day'] | int %}
-                                  {% set month = data['entitlement-end-date-month'] | int %}
-                                  {% set year = data['entitlement-end-date-year'] %}
-                  
-                              {% else %}
-                                  {% set day = 16 %}
-                                  {% set month = 10 %}
-                                  {% set year = 2024 %}
-                              {% endif %}
-                  
-                              {% if day < 10 %}
-                                  {% set formatted_day = "0" + day | string %}
-                              {% else %}
-                                  {% set formatted_day = day | string %}
-                              {% endif %}
-                  
-                              {% if month < 10 %}
-                                  {% set formatted_month = "0" + month | string %}
-                              {% else %}
-                                  {% set formatted_month = month | string %}
-                              {% endif %}
-                  
-                              {{ formatted_day }}/{{ formatted_month }}/{{ year }} - France (FR)
-                          </span>
-                        
-                          
-                  
-                          <strong class="nhsuk-tag nhsuk-tag--red" style="margin-left: 15px; margin-top: 8px;" id="entitlement-status-tag">
-                              Cancelled
-                          </strong>
-                      </summary>
-                  
-
-                    <div class="nhsuk-details__text">
-                      
-
-                        <dl class="nhsuk-summary-list">
-                          <div class="nhsuk-summary-list__row">
-                            <dt class="nhsuk-summary-list__key">
-                              Personal identification number (PIN)
-                            </dt>
-                            <dd class="nhsuk-summary-list__value">
-                              {% if data['change-s1-pin'] == 'yes' %}
-                                {{ data['new-s1-pin'] }}
-                              {% else %}
-                                1234567890
-                              {% endif %}
-                            </dd>
-                          </div>
-                        </dl>
-                        <!-- Entitlement details content ends -->
-
-                        <div>
-                          <a class="nhsuk-action-link" href="../account/entitlement-content/s1-entitlement-details">
-                            <svg class="nhsuk-icon nhsuk-icon--arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
-                              <path d="M12 2a10 10 0 0 0-10 9h11.7l-4-4a1 1 0 0 1 1.5-1.4l5.6 5.7a1 1 0 0 1 0 1.4l-5.6 5.7a1 1 0 0 1-1.5 0 1 1 0 0 1 0-1.4l4-4H2A10 10 0 1 0 12 2z" />
-                            </svg>
-                            <span class="nhsuk-action-link__text">View entitlement details</span>
-                          </a>
-                        </div>
-
-                        
-
-                        <p>Claims and resubmissions linked to this entitlement</p>
-                        {% set status = data.invoiceStatuses['John'] %}
-                        <!-- TABLE START -->
-                        <table role="table" class="nhsuk-table" id="resubmissionsTable">
-                          <thead class="nhsuk-table__head">
-                            <tr class="nhsuk-table__row">
-                              <th scope="col" class="nhsuk-table__header">Claim ID</th>
-                              <th scope="col" class="nhsuk-table__header">Invoice ID</th>
-                              <th scope="col" class="nhsuk-table__header">Linked resub IDs</th>
-                              <th scope="col" class="nhsuk-table__header">Year of claim</th>
-                              <th scope="col" class="nhsuk-table__header">Claimed accounting period</th>
-                              <th scope="col" class="nhsuk-table__header">Claimed months</th>
-                              <th scope="col" class="nhsuk-table__header">Maintained months</th>
-                            </tr>
-                          </thead>
-
-                          <tbody class="nhsuk-table__body">
-                            <tr class="nhsuk-table__row">
-                              <td class="nhsuk-table__cell" data-label="Claim ID"><a href="../../uk-claims/resubmissions/claim-summary">100005</a></td>
-                              <td class="nhsuk-table__cell" data-label="Invoice ID">387731</td>
-                              <td class="nhsuk-table__cell" data-label="Linked resub IDs">{% if data['create-new-resub'] == 'yes' %}<a href="../../uk-claims/resubmissions/invoices-within-resubmission">1160158</a>,{% endif %} <a href="#">7790992</a></td>
-                              <td class="nhsuk-table__cell" data-label="Year of claim">2024</td>
-                              <td class="nhsuk-table__cell" data-label="Claimed accounting period">05/09/2024 - 31/12/2024</td>
-                              <td class="nhsuk-table__cell" data-label="Claimed months">4</td>
-                              <td class="nhsuk-table__cell" data-label="Maintained months">{% if data['create-new-resub'] == 'yes' and status == 'Partial' %} 1 {% else %} 4 {% endif %}</td>
-                          </tbody>
-                        </table>
-                      
-                      </div>
-
-                  </details>
-                <!-- S1/S072 entitlement expander ends -->
+                <h3 class="nhsuk-heading-m" style="margin-top: 50px;" id="s1-s072-entitlements-heading">S1/S072 entitlements</h3>
+                <!-- S1/S072 entitlements section begins -->
+                
+  
 
                   
                   <!-- Expired S1/S072 entitlement expander begins -->
