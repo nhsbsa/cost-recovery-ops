@@ -117,8 +117,8 @@
                       <div class="nhsbsa-timeline__header">
                           <h3 class="nhsuk-heading-m nhsuk-u-margin-bottom-1"><b>X009 sent</b><span class="nhsuk-caption-l nhsuk-caption--bottom" style="display: inline;"> by United Kingdom (UK)</span>
                               <span class="nhsuk-caption-m nhsuk-caption--bottom" style="margin-bottom: 10px;">
-                                3 April 2026,<br>
-                                09:43am
+                                17 April 2026,<br>
+                                13:52pm
                               </span>
                           </h3>
                       </div>
@@ -138,15 +138,52 @@
                           </div>
                         </details>
                       </div>
+                    </div>
+
+                    <div class="nhsbsa-timeline__item nhsuk-u-margin-bottom-6">
+                      <div class="nhsbsa-timeline__header">
+                          <h3 class="nhsuk-heading-m nhsuk-u-margin-bottom-1"><b>S071 sent</b><span class="nhsuk-caption-l nhsuk-caption--bottom" style="display: inline;"> by United Kingdom (UK)</span>
+                              <span class="nhsuk-caption-m nhsuk-caption--bottom" style="margin-bottom: 10px;">
+                                {% if data['date-s071-sent-to-ms-day'] and data['date-s071-sent-to-ms-month'] and data['date-s071-sent-to-ms-year'] %}
+                                  {% set day = data['date-s071-sent-to-ms-day'] %}
+                                  {% set month = data['date-s071-sent-to-ms-month'] | int %}
+                                  {% set year = data['date-s071-sent-to-ms-year'] %}
+                      
+                                  {# Define month names #}
+                                  {% set month_names = [
+                                      "January", "February", "March", "April", "May", "June",
+                                      "July", "August", "September", "October", "November", "December"
+                                  ] %}
+                      
+                                  {# Get the month name #}
+                                  {% set month_name = month_names[month - 1] %}
+                      
+                                  {# Display the date in the format "day month year" #}
+                                  {{ day | int }} {{ month_name }} {{ year }} 
+                                {% else %}
+                                  6 March 2026
+                                {% endif %}<br>
+                                13:22pm
+                              </span>
+                          </h3>
+                      </div>
+                      <div class="nhsbsa-timeline__description">
+                        <details class="nhsuk-details">
+                          <summary class="nhsuk-details__summary">
+                            <span class="nhsuk-details__summary-text">
+                              View details
+                            </span>
+                          </summary>
+                          <div class="nhsuk-details__text">
+                            <span class="actioned-by" style=" color: #6f777b;">
+                              Actioned by joe.bloggs@nhsbsa.nhs.uk
+                            </span>
+                          </div>
+                        </details>
+                      </div>
+                    </div>
+    
                   </div>
-    
-                    
-    
-                    
-    
-                    
-    
-                </div>
                   
                 </div>
               </div>
