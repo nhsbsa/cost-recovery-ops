@@ -49,6 +49,13 @@ router.post('/s071-sent-to-ms-rina-ref', function(req, res) {
   // Store the RINA reference associated with sending the S071 to the Member State
   const s071SentToMSRINARef = req.body['s071-sent-to-ms-rina-ref'];
 
+  // Redirect to S1/S072 requests section where new request appears
+  res.redirect('/version-44/s1/account/cya-s071-confirmation');
+})
+
+// Check your answers
+router.post('/cya-s071-confirmation', function(req, res) {
+
   // Set flag that both the date the S071 was sent to the Member State and the RINA ref have been entered
   req.session.data['date-and-rina-ref-s071-sent-captured'] = 'Yes';
 

@@ -158,7 +158,8 @@ router.post([/claim-summary/], function(req, res) {
   req.session.data['claim-sent-to-ms-by'] = req.body['claim-sent-to-ms-by'];
   req.session.data['s080-uploaded-by'] = req.body['s080-uploaded-by'];
   req.session.data['claim-sent-by'] = req.body['claim-sent-by'];
-  req.session.data['rina-claim-rina-ref-no'] = req.body['rina-claim-rina-ref-no'];
+  req.session.data['local-rina-id'] = req.body['local-rina-id'];
+  req.session.data['international-rina-id'] = req.body['international-rina-id'];
 
   // Conditional flag to track claim summary details updated
   req.session.data['claim-summary-details-updated'] = 'yes';

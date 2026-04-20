@@ -1,0 +1,115 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+View the details for John Doe - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back",
+                      "classes": "nhsuk-u-margin-bottom-4"
+                    }) }}
+
+                    
+                        
+                    <form action="cya-s071-confirmation" method="post">
+                  
+                    <div class="nhsuk-form-group">
+                      <span class="nhsuk-caption-l">Send S071 to the member state</span>
+                      <label class="nhsuk-label" for="view-person-record-details">
+                        <h1 class="nhsuk-heading-xl">Check your answers to confirm the S071 was sent to the member state</h1>
+                      </label>
+                    </div>
+
+                    <dl class="nhsuk-summary-list" style="margin-bottom: 60px;">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date the S071 sent to the member state
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['date-s071-sent-to-ms-day'] and data['date-s071-sent-to-ms-month'] and data['date-s071-sent-to-ms-year'] %}
+                            {% set day = data['date-s071-sent-to-ms-day'] %}
+                            {% set month = data['date-s071-sent-to-ms-month'] | int %}
+                            {% set year = data['date-s071-sent-to-ms-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            6 March 2026
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="enter-date-s071-sent-to-ms#date-s071-sent-to-ms-day">
+                            Change<span class="nhsuk-u-visually-hidden">date S071 sent to the member state</span>
+                          </a>
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          RINA reference
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['s071-sent-to-ms-rina-ref'] %}
+                            {{ data['s071-sent-to-ms-rina-ref'] }}
+                          {% else %}
+                            ABC123456789
+                          {% endif %}
+                        </dd>
+                        <dd class="nhsuk-summary-list__actions">
+                          <a href="s071-sent-to-ms-rina-ref#s071-sent-to-ms-rina-ref">
+                            Change<span class="nhsuk-u-visually-hidden">RINA reference</span>
+                          </a>
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <button class="nhsuk-button" type="submit">
+                      Save and submit
+                    </button>
+
+                    <p style="margin-bottom: 60px;"><a href="../s1-requests">Cancel</a></p>
+                        
+                    </form>
+                  
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
