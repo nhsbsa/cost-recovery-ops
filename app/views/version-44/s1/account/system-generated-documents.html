@@ -78,9 +78,13 @@ View documents - Upload - Manage overseas entitlements and treatments - NHSBSA
                         <th role="columnheader" class="" scope="col">
                           Document type
                         </th>
+                        {% if data['date-and-rina-ref-s071-sent-captured'] == 'Yes' %}
+
+                        {% else %}
                         <th role="columnheader" class="" scope="col">
                           Action
                         </th>
+                        {% endif %}
                       </tr>
                     </thead>
                   
@@ -105,12 +109,16 @@ View documents - Upload - Manage overseas entitlements and treatments - NHSBSA
                           <span class="nhsuk-table-responsive__heading">Document type</span>
                           <span>S071</span>
                         </td>
+                        {% if data['date-and-rina-ref-s071-sent-captured'] == 'Yes' %}
+
+                        {% else %}
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Action</span>
                           <span>
                             <a href="enter-date-s071-sent-to-ms">Confirm date S071 sent to MS</a>
                           </span>
                         </td>
+                        {% endif %}
                       </tr>   
                     </tbody>
                   </table>
