@@ -725,6 +725,181 @@ router.get([/treatment-details/], function(req, res) {
   });
 });
 
+// Select the reason/s for contestation
+router.post('/treatment-reasons-for-contestation', function(req, res) {
+
+  let contestationReasons =
+    req.session.data['reasons-for-contestation'] || [];
+
+  // Convert to array if only one checkbox selected
+  if (!Array.isArray(contestationReasons)) {
+    contestationReasons = [contestationReasons];
+  }
+
+  const reasonsRequiringAdditionalDetails = [
+    'A duplicate or double treatment has been claimed',
+    'The claimant is insured for their healthcare in the UK by another means. For example at the time of treatment they had an S1 or they were ordinarily resident in the UK',
+    'The entitlement document is not valid or only covers part of the treatment period'
+  ];
+
+  // Check whether ANY selected reason requires details
+  const requiresAdditionalDetails = contestationReasons.some(reason =>
+    reasonsRequiringAdditionalDetails.includes(reason)
+  );
+
+  if (requiresAdditionalDetails) {
+
+    req.session.data['additional-details-required'] = 'yes';
+
+    res.redirect('/version-44/uk-claims/actual-costs/enter-additional-details-from-ms');
+
+  } else {
+
+    req.session.data['additional-details-required'] = 'no';
+
+    res.redirect('/version-44/uk-claims/actual-costs/treatment-reasons-for-contestation');
+  }
+
+});
+
+router.post('/enter-additional-details-from-ms', function(req, res) {
+  // Store the EHIC start date
+  const ehicStartDateDay = req.body['ehic-start-date-day'];
+  const ehicStartDateMonth = req.body['ehic-start-date-month'];
+  const ehicStartDateYear = req.body['ehic-start-date-year'];
+  const ehicStartDate = ehicStartDateDay && ehicStartDateMonth && ehicStartDateYear
+    ? `${ehicStartDateDay}/${ehicStartDateMonth}/${ehicStartDateYear}`
+    : undefined;
+  req.session.data['ehic-start-date'] = ehicStartDate;
+  
+
+  // Store the EHIC end date
+  const ehicEndDateDay = req.body['ehic-end-date-day'];
+  const ehicEndDateMonth = req.body['ehic-end-date-month'];
+  const ehicEndDateYear = req.body['ehic-end-date-year'];
+  const ehicEndDate = ehicEndDateDay && ehicEndDateMonth && ehicEndDateYear
+    ? `${ehicEndDateDay}/${ehicEndDateMonth}/${ehicEndDateYear}`
+    : undefined;
+  req.session.data['ehic-end-date'] = ehicEndDate;
+
+  // Store the Member state reference letter ID
+  req.session.data['ms-reference-letter-id'] = req.body['ms-reference-letter-id'];
+
+  // Store the date on the Member state reference letter
+  const dateOnMSReferenceLetterDay = req.body['date-on-ms-reference-letter-day'];
+  const dateOnMSReferenceLetterMonth = req.body['date-on-ms-reference-letter-month'];
+  const dateOnMSReferenceLetterYear = req.body['date-on-ms-reference-letter-year'];
+  const dateOnMSReferenceLetter = dateOnMSReferenceLetterDay && dateOnMSReferenceLetterMonth && dateOnMSReferenceLetterYear
+    ? `${dateOnMSReferenceLetterDay}/${dateOnMSReferenceLetterMonth}/${dateOnMSReferenceLetterYear}`
+    : undefined;
+  req.session.data['date-on-ms-reference-letter'] = dateOnMSReferenceLetter;
+
+  // Store the duplicate treatment ID 1
+  req.session.data['duplicate-treatment-id-1'] = req.body['duplicate-treatment-id-1'];
+
+  // Store the duplicate treatment ID 2
+  req.session.data['duplicate-treatment-id-2'] = req.body['duplicate-treatment-id-2'];
+
+  // Store the start date of the UK issued S1
+  const startDateOfUKIssuedS1Day = req.body['start-date-of-uk-issued-s1-day'];
+  const startDateOfUKIssuedS1Month = req.body['start-date-of-uk-issued-s1-month'];
+  const startDateOfUKIssuedS1Year = req.body['start-date-of-uk-issued-s1-year'];
+  const startDateOfUKIssuedS1 = startDateOfUKIssuedS1Day && startDateOfUKIssuedS1Month && startDateOfUKIssuedS1Year
+    ? `${startDateOfUKIssuedS1Day}/${startDateOfUKIssuedS1Month}/${startDateOfUKIssuedS1Year}`
+    : undefined;
+  req.session.data['start-date-of-uk-issued-s1'] = startDateOfUKIssuedS1;
+
+  // Store the end date of the UK issued S1
+  const endDateOfUKIssuedS1Day = req.body['end-date-of-uk-issued-s1-day'];
+  const endDateOfUKIssuedS1Month = req.body['end-date-of-uk-issued-s1-month'];
+  const endDateOfUKIssuedS1Year = req.body['end-date-of-uk-issued-s1-year'];
+  const endDateOfUKIssuedS1 = endDateOfUKIssuedS1Day && endDateOfUKIssuedS1Month && endDateOfUKIssuedS1Year
+    ? `${endDateOfUKIssuedS1Day}/${endDateOfUKIssuedS1Month}/${endDateOfUKIssuedS1Year}`
+    : undefined;
+  req.session.data['end-date-of-uk-issued-s1'] = endDateOfUKIssuedS1;
+
+  // Redirect to cya screen
+  res.redirect('/version-44/uk-claims/actual-costs/cya-reason-for-contestation');
+});
+
+// Check the PRC details
+router.post('/cya-reason-for-contestation', function(req, res) {
+
+  // Clear flag if previously set
+  req.session.data['additional-details-required'] = 'yes'
+
+  // Redirect to the Request a PRC screen
+  res.redirect('/version-44/uk-claims/actual-costs/treatment-reasons-for-contestation');
+});
+
+
+// OVM Contact
+// What do you need to request from the Overseas Visitor Manager (OVM)?
+router.post('/contact-ovm', function(req, res) {
+
+  let contactOVMReasons = req.body['reasons-to-contact-ovm'] || [];
+
+  // Ensure it's always an array
+  if (!Array.isArray(contactOVMReasons)) {
+    contactOVMReasons = [contactOVMReasons];
+  }
+
+  // Remove unwanted values like "_unchecked"
+  contactOVMReasons = contactOVMReasons.filter(r => r && r !== '_unchecked');
+
+  // Enable the 'Response received from OVM' to display
+  req.session.data['reason-to-contact-ovm-submitted'] = 'Yes'
+
+  res.redirect('/version-44/uk-claims/actual-costs/contact-ovm')
+
+})
+
+// Select the response received from the OVM
+router.post('/ovm-response', function(req, res) {
+
+  let ovmResponse = req.body['ovm-response-received'] || [];
+
+  // Ensure it's always an array
+  if (!Array.isArray(ovmResponse)) {
+    ovmResponse = [ovmResponse];
+  }
+
+  // Remove unwanted values like "_unchecked"
+  ovmResponse = ovmResponse.filter(r => r && r !== '_unchecked');
+
+  // Store the response in the session data
+  req.session.data['ovm-response-received'] = ovmResponse;
+
+  // Mark response received
+  req.session.data['ovm-response-received'] = 'Yes'
+
+  res.redirect('/version-44/uk-claims/actual-costs/request-additional-information-from-ovm');
+});
+
+// Do you want to request any additional information from the OVM?
+router.post('/request-additional-information-from-ovm', function(req, res) {
+
+  const requestAdditionalInformationFromOVM = req.session.data['request-additional-information-from-ovm']
+
+  if (requestAdditionalInformationFromOVM === 'Yes'){
+    res.redirect('/version-44/uk-claims/actual-costs/reason-for-additional-info-from-ovm')
+  } else {
+    res.redirect('/version-44/uk-claims/actual-costs/contact-ovm')
+  }
+
+})
+
+// Check the PRC details
+router.post('/reason-for-additional-info-from-ovm', function(req, res) {
+
+  const reasonForContactingOVMAgain = req.session.data['request-additional-info-reasons-to-contact-ovm']
+
+  req.session.data['more-details-required-from-ovm'] = 'Yes'
+
+  // Redirect to the Request a PRC screen
+  res.redirect('/version-44/uk-claims/actual-costs/contact-ovm');
+});
+
 
 // Request a PRC //
 // PRC details

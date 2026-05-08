@@ -1,0 +1,222 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+OVM response for contested resubmission
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+    
+            <form action="ovm-response" method="post">
+
+            <div class="nhsuk-grid-row">
+            
+            <fieldset class="nhsuk-fieldset" aria-describedby="maintain-hint">
+  
+              <div class="nhsuk-form-group">
+                <div class="nhsuk-grid-column-full">
+                  <h1 class="nhsuk-heading-xl">
+                    Overseas Visitors Manager (OVM) response received
+                  </h1>
+                </div>
+              </div>
+
+              <div class="nhsuk-form-group">
+                <div class="nhsuk-grid-column-two-thirds">
+                  <h2 class="nhsuk-heading-l">
+                    What was the OVM's response to our request?
+                  </h2>
+              
+                  <div id="maintain-hint" class="nhsuk-hint" style="margin-top: 20px; margin-bottom: 20px;">
+                    Select all responses that apply. Add any additional information in the text box provided.
+                  </div>
+                
+                  <div class="nhsuk-checkboxes nhsuk-checkboxes--conditional" data-module="nhsuk-checkboxes">
+                
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="copy-of-entitlement-received" name="ovm-response-received" type="checkbox" value="Copy of the entitlement received">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="copy-of-entitlement-received">
+                        Copy of the entitlement received
+                      </label>
+                    </div>
+                
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="breakdown-of-costs-received" name="ovm-response-received" type="checkbox" value="Breakdown of costs received">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="breakdown-of-costs-received">
+                        Breakdown of costs received
+                      </label>
+                    </div>
+                
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="confirmation-costs-are-correct" name="ovm-response-received" type="checkbox" value="Confirmation that the costs are correct">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="confirmation-costs-are-correct">
+                        Confirmation that the costs are correct
+                      </label>
+                    </div>
+                
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="confirmation-costs-are-not-correct" name="ovm-response-received" type="checkbox" value="Confirmation that the costs are not correct">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="confirmation-costs-are-not-correct">
+                        Confirmation that the costs are not correct
+                      </label>
+                    </div>
+                
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="confirmation-of-duplicate-treatment" name="ovm-response-received" type="checkbox" value="Confirmation that this is a duplicate treatment">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="confirmation-of-duplicate-treatment">
+                        Confirmation that this is a duplicate treatment
+                      </label>
+                    </div>
+                
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="confirmation-this-is-not-a-duplicate-treatment" name="ovm-response-received" type="checkbox" value="Confirmation that this is not a duplicate treatment">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="confirmation-this-is-not-a-duplicate-treatment">
+                        Confirmation that this is not a duplicate treatment
+                      </label>
+                    </div>
+                
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="confirmation-of-the-treatment-dates" name="ovm-response-received" type="checkbox" value="Confirmation of the treatment dates">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="confirmation-of-the-treatment-dates">
+                        Confirmation of the treatment dates
+                      </label>
+                    </div>
+                
+                    <div class="nhsuk-checkboxes__item">
+                      <input class="nhsuk-checkboxes__input" id="other-response-received" name="ovm-response-received" type="checkbox" value="Other" data-aria-controls="conditional-other">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="other-response-received">
+                        Other
+                      </label>
+                    </div>
+                    <!-- Conditional textarea -->
+                    <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-other">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label" for="otherOVMResponseComments">
+                          Enter details
+                        </label>
+                        <textarea class="nhsuk-textarea" id="otherOVMResponseComments" name="other-ovm-response-comments" rows="5" maxlength="500"></textarea>
+                      </div>
+                    </div>
+
+                    </div>
+                
+                </div>
+              </div>
+              
+            </fieldset>
+
+            </div>
+
+            <div class="nhsuk-form-group" style="margin-top: -14px">
+              <label class="nhsuk-label" for="ovmResponseAdditionalInformationComments">
+                <strong> Additional information (optional): </strong>
+              </label>
+              
+              <textarea class="nhsuk-textarea" id="ovmResponseAdditionalInformationComments" rows="5" name="ovm-response-additional-information-comments"></textarea>
+            </div>
+                  
+
+            <button class="nhsuk-button nhsuk-button--primary" type="submit" id="save-and-continue-button">Save and continue</button>
+        
+
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+  .wide-select {
+    width: 100%;
+    max-width: 100%; /* Ensures it doesn't get constrained by default select styles */
+  }
+</style>
+
+<script>
+  const textarea = document.querySelector('#otherMaintainReasonComments');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 500;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 1000);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
+{% endblock %}
+

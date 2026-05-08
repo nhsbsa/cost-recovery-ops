@@ -147,7 +147,131 @@ Reason for contacting OVM
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-two-thirds">
 
-              <h2 class="nhsuk-heading-m" id="claim-resub-treatment-header">What do you need to request from the Overseas Visitor Manager (OVM)?</h2>
+              {% if data['reason-to-contact-ovm-submitted'] == 'Yes' %}
+              <h2 class="nhsuk-heading-m" id="OVM-contact-history-header">OVM contact history</h2>
+
+              <h3 class="nhsuk-heading-s" id="enquiry-1-header">Enquiry 1</h2>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="email-sent-date-label">Date request was sent to OVM</dt>
+                     <dd class="nhsuk-summary-list__value" id="enquiry_0_email-sent-date">08/05/2026</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                     <dt class="nhsuk-summary-list__key" id="ovm-contacted-reasons-label">Information requested</dt>
+                     <dd class="nhsuk-summary-list__value">
+                    {% set contactOVMReasons = data['reasons-to-contact-ovm'] %}
+
+                     {% if contactOVMReasons %}
+                       <ol class="nhsuk-list nhsuk-list--number">
+                         {% if contactOVMReasons is string %}
+                           <li>{{ contactOVMReasons }}</li>
+                         {% else %}
+                           {% for contactOVMReasons in contactOVMReasons %}
+                             <li>{{ contactOVMReasons }}</li>
+                           {% endfor %}
+                         {% endif %}
+                       </ol>
+                     {% else %}
+                       1. Confirmation of whether this is a duplicate treatment or not<br>
+                       (Duplicate treatment ID: 123456)
+                     {% endif %}
+                     </dd>
+                  </div>
+               </dl>
+
+               {% if data['ovm-response-received'] == 'Yes' %}
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="email-sent-date-label">Date response was received</dt>
+                    <dd class="nhsuk-summary-list__value" id="enquiry_0_email-sent-date">11/05/2026</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="ovm-contacted-reasons-label">Response from OVM</dt>
+                    <dd class="nhsuk-summary-list__value">
+                    {% set ovmResponse = data['reasons-to-contact-ovm'] %}
+
+                    {% if ovmResponse %}
+                      <ol class="nhsuk-list nhsuk-list--number">
+                        {% if ovmResponse is string %}
+                          <li>{{ ovmResponse }}</li>
+                        {% else %}
+                          {% for ovmResponse in ovmResponse %}
+                            <li>{{ ovmResponse }}</li>
+                          {% endfor %}
+                        {% endif %}
+                      </ol>
+                    {% else %}
+                      1. Confirmation that this is not a duplicate treatment
+                    {% endif %}
+                    </dd>
+                  </div>
+                </dl>
+
+                <a href="/version-44/uk-claims/actual-costs/ovm-response">
+                  <button class="nhsuk-button" style="margin-top: 30px;" type="button" id="response-received-from-ovm-button">
+                    Request information from the OVM
+                  </button>
+                </a>
+                
+                <!-- If a second enquiry was sent -->
+                {% if data['more-details-required-from-ovm'] == 'Yes' %}
+                <h3 class="nhsuk-heading-s" id="enquiry-1-header">Enquiry 2</h2>
+
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                       <dt class="nhsuk-summary-list__key" id="email-sent-date-label">Date request was sent to OVM</dt>
+                       <dd class="nhsuk-summary-list__value" id="enquiry_0_email-sent-date">14/05/2026</dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                       <dt class="nhsuk-summary-list__key" id="ovm-contacted-reasons-label">Information requested</dt>
+                       <dd class="nhsuk-summary-list__value">
+                      {% set contactOVMReasons = data['reasons-to-contact-ovm'] %}
+  
+                       {% if contactOVMReasons %}
+                         <ol class="nhsuk-list nhsuk-list--number">
+                           {% if contactOVMReasons is string %}
+                             <li>{{ contactOVMReasons }}</li>
+                           {% else %}
+                             {% for contactOVMReasons in contactOVMReasons %}
+                               <li>{{ contactOVMReasons }}</li>
+                             {% endfor %}
+                           {% endif %}
+                         </ol>
+                       {% else %}
+                         1. Confirmation that the costs are correct
+                       {% endif %}
+                       </dd>
+                    </div>
+                 </dl>
+
+                    {% if data['second-response-received'] == 'Yes' %}
+                    <a href="/version-44/uk-claims/actual-costs/ovm-response">
+                      <button class="nhsuk-button" style="margin-top: 30px;" type="button" id="response-received-from-ovm-button">
+                        Request information from the OVM
+                      </button>
+                    </a>
+                    {% else %}
+                    <a href="/version-44/uk-claims/actual-costs/ovm-response?second-response-received=Yes">
+                      <button class="nhsuk-button" style="margin-top: 30px;" type="button" id="response-received-from-ovm-button">
+                        Response received from OVM
+                      </button>
+                    </a>
+                    {% endif %}
+                {% endif %}
+
+               {% else %}
+                <a href="/version-44/uk-claims/actual-costs/ovm-response">
+                  <button class="nhsuk-button" style="margin-top: 30px;" type="button" id="response-received-from-ovm-button">
+                    Response received from OVM
+                  </button>
+                </a>
+               {% endif %}
+
+              
+
+              {% else %}
+              <h2 class="nhsuk-heading-m" id="reason-to-contact-ovm-header">What do you need to request from the Overseas Visitor Manager (OVM)?</h2>
                 
               <span class="nhsuk-hint" style="margin-top: -9px;">Select all that apply. All requests will be added to the automatic email sent to the OVM.</span>
                     
@@ -176,7 +300,7 @@ Reason for contacting OVM
                 </div>
               
                 <div class="nhsuk-checkboxes__item">
-                  <input class="nhsuk-checkboxes__input" id="confirmation-of-duplicate-treatment" name="reasons-to-contact-ovm" type="checkbox" value="Duplicate treatment" data-aria-controls="conditional-duplicate">
+                  <input class="nhsuk-checkboxes__input" id="confirmation-of-duplicate-treatment" name="reasons-to-contact-ovm" type="checkbox" value="Confirmation of whether this is a duplicate treatment or not" data-aria-controls="conditional-duplicate">
                   <label class="nhsuk-label nhsuk-checkboxes__label" for="confirmation-of-duplicate-treatment">
                     Confirmation of whether this is a duplicate treatment or not
                   </label>
@@ -193,7 +317,7 @@ Reason for contacting OVM
                 </div>
               
                 <div class="nhsuk-checkboxes__item">
-                  <input class="nhsuk-checkboxes__input" id="confirmation-costs-are-correct" name="reasons-to-contact-ovm" type="checkbox" value="Costs correct">
+                  <input class="nhsuk-checkboxes__input" id="confirmation-costs-are-correct" name="reasons-to-contact-ovm" type="checkbox" value="Confirmation that the costs are correct">
                   <label class="nhsuk-label nhsuk-checkboxes__label" for="confirmation-costs-are-correct">
                     Confirmation that the costs are correct
                   </label>
@@ -218,11 +342,12 @@ Reason for contacting OVM
               </div>
               
                 
-                <button class="nhsuk-button" style="margin-top: 30px;" type="submit">Save and submit</button>
-              
-              </form>
-              <!-- End of main content-->
+              <button class="nhsuk-button" style="margin-top: 30px;" type="submit">Save and submit</button>
               {% endif %}
+              
+            </form>
+            <!-- End of main content-->
+            {% endif %}
 
               
         </div>
