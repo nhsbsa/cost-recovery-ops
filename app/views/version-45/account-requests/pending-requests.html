@@ -1,0 +1,275 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Pending account requests - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+                <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+              </li>
+            <li class="nhsuk-breadcrumb__list-item">Account requests (Pending)</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="../s1/search/search-by-person">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search for person
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">
+                Account requests
+              </h1>
+
+              <div class="button-container" style="float: right;">
+                
+                {% if data['filter-by-trust'] == 'Yes' %}
+                  <a href="filter-by-trust"><button style="margin-right:20px; float: right; margin-top: -100px;" class="nhsuk-button" type="submit">Select a different trust</button></a>
+                  <a href="#"><button class="nhsuk-button nhsuk-button--secondary" style="margin-top: -100px;" data-module="nhsuk-button" type="submit">Remove trust filter</button></a>
+                {% else %}
+                  <a href="filter-by-trust"><button style="margin-right:20px; float: right; margin-top: -100px;" class="nhsuk-button" type="submit">Filter by trust</button></a>
+                {% endif %}
+              </div>
+
+            </div>
+          </div>
+
+          <!--start secondary navigation-->
+          <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+            <ul class="nhsuk-secondary-navigation__list">
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" aria-current="page" href="pending-requests">Pending</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="approved-requests">Approved</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="rejected-requests">Rejected</a>
+              </li>
+
+              <li class="nhsuk-secondary-navigation__item">
+                <a class="nhsuk-secondary-navigation__link" href="cancelled-accounts">Cancelled</a>
+              </li>
+            </ul>
+          </nav>
+          <!--end secondary navigation-->
+
+          <hr style="border-bottom:1px solid #ccc; margin:0">
+          <br><br>
+
+          {% if data['filter-by-trust'] == 'Yes' %}
+          <h2 class="nhsuk-heading-s">
+            Showing results for
+            <span class="nhsuk-tag nhsuk-tag--green" style="margin-right: 20px; margin-left: 10px;">Airedale NHS Foundation Trust</span>
+          </h2>
+          {% endif %}
+
+          <table class="nhsuk-table">
+            <caption class="nhsuk-u-visually-hidden nhsuk-table__caption">
+              Pending requests
+            </caption>
+            <thead class="nhsuk-table__head">
+              <tr class="nhsuk-table__row">
+                <th scope="col" class="nhsuk-table__header">
+                  Name
+                </td>
+                <th scope="col" class="nhsuk-table__header">
+                  Trust
+                </td>
+                <th scope="col" class="nhsuk-table__header">
+                  Request date
+                </td>
+                <th scope="col" class="nhsuk-table__header">
+                  Action
+                </td>
+              </tr>
+            </thead>
+            <tbody class="nhsuk-table__body">
+
+                {% if data['filter-by-trust'] == 'Yes' %}
+              
+                  {% if data['account-approved'] != 'Yes' or data['account-rejected'] != 'Yes' %}
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Josephine Dylan</td>
+                    <td class="nhsuk-table__cell">Airedale NHS Foundation Trust</td>
+                    <td class="nhsuk-table__cell">10/03/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="review-pending-request">Make decision</a>
+                    </td>
+                  </tr>
+                  {% endif %}
+              
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Jack Toovey</td>
+                    <td class="nhsuk-table__cell">Airedale NHS Foundation Trust</td>
+                    <td class="nhsuk-table__cell">22/01/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="#">Make decision</a>
+                    </td>
+                  </tr>
+              
+                {% else %}
+              
+
+                  {% if data['account-approved'] != 'Yes' or data['account-rejected'] != 'Yes' %}
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Josephine Dylan</td>
+                    <td class="nhsuk-table__cell">Airedale NHS Foundation Trust</td>
+                    <td class="nhsuk-table__cell">10/03/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="review-pending-request">Make decision</a>
+                    </td>
+                  </tr>
+                  {% endif %}
+              
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">David Hackett</td>
+                    <td class="nhsuk-table__cell">Barts Health NHS Trust</td>
+                    <td class="nhsuk-table__cell">21/02/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="#">Make decision</a>
+                    </td>
+                  </tr>
+              
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Graeme Cooke</td>
+                    <td class="nhsuk-table__cell">
+                      Birmingham Community Healthcare NHS Foundation Trust
+                    </td>
+                    <td class="nhsuk-table__cell">12/02/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="#">Make decision</a>
+                    </td>
+                  </tr>
+              
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Emma Tait</td>
+                    <td class="nhsuk-table__cell">East Cheshire NHS Trust</td>
+                    <td class="nhsuk-table__cell">12/02/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="#">Make decision</a>
+                    </td>
+                  </tr>
+              
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Gayle Porter</td>
+                    <td class="nhsuk-table__cell">Devon Partnership NHS Trust</td>
+                    <td class="nhsuk-table__cell">07/02/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="#">Make decision</a>
+                    </td>
+                  </tr>
+              
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Jack Toovey</td>
+                    <td class="nhsuk-table__cell">Airedale NHS Foundation Trust</td>
+                    <td class="nhsuk-table__cell">22/01/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="#">Make decision</a>
+                    </td>
+                  </tr>
+              
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Gabriel Akowuah</td>
+                    <td class="nhsuk-table__cell">Hertfordshire Community NHS Trust</td>
+                    <td class="nhsuk-table__cell">13/01/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="#">Make decision</a>
+                    </td>
+                  </tr>
+              
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell">Faisal Hussain</td>
+                    <td class="nhsuk-table__cell">East London NHS Foundation Trust</td>
+                    <td class="nhsuk-table__cell">09/01/2026</td>
+                    <td class="nhsuk-table__cell">
+                      <a href="#">Make decision</a>
+                    </td>
+                  </tr>
+              
+                {% endif %}
+              
+              </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <!--start left navigation-->
+    <div class="nhsBSA-sidebar-nav">
+        <div class="side-nav">
+            <ul>
+            <div id="options" class="options">
+                <h3 class="nhsuk-heading-xs">Browse</h3>
+                <li>
+                <a href="../s1/search/search-by-person">Search</a>
+                </li>
+                
+                <h3 class="nhsuk-heading-xs">Actions</h3>
+                <li>
+                    <a href="pending-requests" class="active">Account requests<span class="notification-badge" style="background-color: #005eb8">8 </span></a>
+                    <a href="../review-treatments/treatments-to-review">Review treatments<span class="notification-badge" style="background-color: #005eb8">4 </span></a>
+                    <a href="../pending-entitlements/pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                    <a href="../uk-claims/uk-claims-search-actual-cost">UK claims</a>
+                    <a href="../resubmissions/pending-resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                    <a href="../non-eu-reciprocal-healthcare/home">Non-EU Reciprocal Healthcare (Quota)</a>
+                </li>
+            </div>
+            </ul>
+        </div>
+    </div>
+    <!--end left navigation-->
+
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<!-- autocomplete js -->
+<script type="text/javascript">
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue : '',
+    autoselect : true,  
+    selectElement : document.querySelector('#entitlement-country-drop')
+  })
+</script>
+{% endblock %}

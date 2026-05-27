@@ -121,6 +121,17 @@ router.use('/version-44/uk-claims', require('./views/version-44/uk-claims/_route
 router.use('/version-44/uk-claims/actual-costs', require('./views/version-44/uk-claims/actual-costs/_routes'));
 router.use('/version-44/uk-claims/resubmissions', require('./views/version-44/uk-claims/resubmissions/_routes'));
 
+router.use('/version-45/account-requests', require('./views/version-45/account-requests/_routes'));
+router.use('/version-45/non-eu-reciprocal-healthcare', require('./views/version-45/non-eu-reciprocal-healthcare/_routes'));
+router.use('/version-45/pending-entitlements', require('./views/version-45/pending-entitlements/_routes'));
+router.use('/version-45/resubmissions/v1', require('./views/version-45/_routes'));
+router.use('/version-45/review-treatments', require('./views/version-45/review-treatments/_routes'));
+router.use('/version-45/s1', require('./views/version-45/s1/_routes'));
+router.use('/version-45/s1/account/generate-s071', require('./views/version-45/s1/account/generate-s071/_routes'));
+router.use('/version-45/uk-claims', require('./views/version-45/uk-claims/_routes'));
+router.use('/version-45/uk-claims/actual-costs', require('./views/version-45/uk-claims/actual-costs/_routes'));
+router.use('/version-45/uk-claims/resubmissions', require('./views/version-45/uk-claims/resubmissions/_routes'));
+
 
 
 

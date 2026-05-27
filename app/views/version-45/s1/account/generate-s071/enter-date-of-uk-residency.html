@@ -1,0 +1,85 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Enter the date of residency in UK - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back",
+                      "classes": "nhsuk-u-margin-bottom-4"
+                    }) }}
+
+                    
+                        
+                    <form action="enter-date-of-uk-residency" method="post">
+                  
+                    <div class="nhsuk-form-group">
+                      <span class="nhsuk-caption-l">Generate an S071</span>
+                      <label class="nhsuk-label" for="view-person-record-details">
+                        <h1 class="nhsuk-heading-xl">Enter the date of residency in UK</h1>
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-hint" id="uk-residency-date-hint">
+                      For example, 1 1 2020
+                    </div>
+                    <div class="nhsuk-date-input">
+                      <div class="nhsuk-date-input__item">
+                          <label class="nhsuk-label nhsuk-date-input__label" id="date-of-residency-in-uk-day-label" for="date-of-residency-in-uk-day">Day</label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-of-residency-in-uk-day" name="date-of-residency-in-uk-day" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                      </div>
+              
+                      <div class="nhsuk-date-input__item">
+                          <label class="nhsuk-label nhsuk-date-input__label" id="date-of-residency-in-uk-month-label" for="date-of-residency-in-uk-month">Month</label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-of-residency-in-uk-month" name="date-of-residency-in-uk-month" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                      </div>
+              
+                      <div class="nhsuk-date-input__item">
+                          <label class="nhsuk-label nhsuk-date-input__label" id="date-of-residency-in-uk-year-label" for="date-of-residency-in-uk-year">Year</label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-of-residency-in-uk-year" name="date-of-residency-in-uk-year" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="4" oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                      </div>
+                    </div>
+                    
+
+                    <button class="nhsuk-button" style="margin-top: 40px;" type="submit">
+                      Continue
+                    </button>
+
+                    <p><a href="../s1-requests">Cancel</a></p>
+                        
+                    </form>
+                  
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

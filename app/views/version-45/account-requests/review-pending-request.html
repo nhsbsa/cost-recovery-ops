@@ -1,0 +1,161 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Account request decision - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="pending-requests">Account requests (Pending)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">Account request (Josephine Dylan)</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="pending-requests">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Account requests
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">
+                Account request decision
+              </h1>
+            </div>
+          </div>
+
+          <form action="review-pending-request" method="post" novalidate>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+
+                  <h2>Josephine Dylan</h2>
+                  
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Email address
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        josephine.dylan@trustname.net
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Telephone number
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        07345678900
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Region
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        England
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Trust
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Airedale NHS Foundation Trust
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Request date
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        10/03/2026
+                      </dd>
+                    </div>
+                  </dl>
+
+                </div>
+              </div>
+
+              <div class="nhsuk-form-group">
+                <fieldset class="nhsuk-fieldset" aria-describedby="account-approval">
+                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+                      <span class="nhsuk-fieldset__heading">Do you want to approve this account request?</span>
+                  </legend>
+                  
+                  <div class="nhsuk-radios">
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="account-request-approve" name="approve-account" type="radio" value="Yes">
+                        <label class="nhsuk-label nhsuk-radios__label" for="account-request-approve">Yes</label>
+                      </div>
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="account-request-reject" name="approve-account" type="radio" value="No">
+                        <label class="nhsuk-label nhsuk-radios__label" for="account-request-reject">No</label>
+                      </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-full">
+                    <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                      Continue
+                    </button>
+                </div>
+              </div>
+
+              
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
