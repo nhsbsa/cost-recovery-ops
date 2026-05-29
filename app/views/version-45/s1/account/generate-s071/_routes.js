@@ -164,7 +164,7 @@ router.post('/review-institution-details', function(req, res) {
     req.session.data['s071-sent-to-ms'] = 'Yes'
     res.redirect('/version-45/s1/account/generate-s071/confirmation-s071-sent-to-ms')
   } else {
-    res.redirect('/version-45/s1/account/s1-requests')
+    res.redirect('/version-45/s1/account/system-generated-documents')
   }
 })
 

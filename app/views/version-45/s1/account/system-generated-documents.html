@@ -78,13 +78,12 @@ View documents - Upload - Manage overseas entitlements and treatments - NHSBSA
                         <th role="columnheader" class="" scope="col">
                           Document type
                         </th>
-                        {% if data['s071-sent-to-ms'] == 'Yes' %}
-
-                        {% else %}
+                        <th role="columnheader" class="" scope="col">
+                          Document status
+                        </th>
                         <th role="columnheader" class="" scope="col">
                           Action
                         </th>
-                        {% endif %}
                       </tr>
                     </thead>
                   
@@ -109,16 +108,27 @@ View documents - Upload - Manage overseas entitlements and treatments - NHSBSA
                           <span class="nhsuk-table-responsive__heading">Document type</span>
                           <span>S071</span>
                         </td>
-                        {% if data['s071-sent-to-ms'] == 'Yes' %}
-
-                        {% else %}
                         <td role="cell" class="nhsuk-table__cell">
-                          <span class="nhsuk-table-responsive__heading">Action</span>
+                          <span class="nhsuk-table-responsive__heading">Document status</span>
                           <span>
-                            <a href="/version-45/s1/account/generate-s071/review-institution-details">Send S071 to member state</a>
+                            <strong class="nhsuk-tag nhsuk-tag--grey" id="s1-request-status-tag">
+                              Ready to send to MS
+                            </strong>
                           </span>
                         </td>
-                        {% endif %}
+                        
+                        <td role="cell" class="nhsuk-table__cell">
+                          <span class="nhsuk-table-responsive__heading">Action</span>
+                          {% if data['s071-sent-to-ms'] == 'Yes' %}
+                          <span>
+                            <a href="/version-45/s1/account/view-sent-s071">View</a>
+                          </span>
+                          {% else %}
+                          <span>
+                            <a href="/version-45/s1/account/view-s071">View</a>
+                          </span>
+                          {% endif %}
+                        </td>
                       </tr>   
                     </tbody>
                   </table>
