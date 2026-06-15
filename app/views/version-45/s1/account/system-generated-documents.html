@@ -111,9 +111,15 @@ View documents - Upload - Manage overseas entitlements and treatments - NHSBSA
                         <td role="cell" class="nhsuk-table__cell">
                           <span class="nhsuk-table-responsive__heading">Document status</span>
                           <span>
+                            {% if data['s071-sent-to-ms'] == 'Yes' %}
+                            <strong class="nhsuk-tag nhsuk-tag--green" id="s1-request-status-tag">
+                              Sent to MS
+                            </strong>
+                            {% else %}
                             <strong class="nhsuk-tag nhsuk-tag--grey" id="s1-request-status-tag">
                               Ready to send to MS
                             </strong>
+                            {% endif %}
                           </span>
                         </td>
                         
@@ -121,7 +127,7 @@ View documents - Upload - Manage overseas entitlements and treatments - NHSBSA
                           <span class="nhsuk-table-responsive__heading">Action</span>
                           {% if data['s071-sent-to-ms'] == 'Yes' %}
                           <span>
-                            <a href="/version-45/s1/account/view-sent-s071">View</a>
+                            <a href="/version-45/s1/account/s1-requests/s1-request-details">View request details</a>
                           </span>
                           {% else %}
                           <span>
