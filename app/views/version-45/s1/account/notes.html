@@ -196,7 +196,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                       <p>{{ note.type }}</p>
                     </td>
 
-                    <td role="cell" class="nhsuk-table__cell">
+                    <td role="cell" class="nhsuk-table__cell comments-cell">
                       <span class="nhsuk-table-responsive__heading">Comments</span>
 
                       {% if note.rinaRef %}
@@ -234,7 +234,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                       <span class="nhsuk-table-responsive__heading">Document type (optional)</span>
                       <p>{{ data['document-type'] if data['document-type'] else 'DL1609' }}</p>
                     </td-->
-                    <td role="cell" class="nhsuk-table__cell">
+                    <td role="cell" class="nhsuk-table__cell comments-cell">
                       <span class="nhsuk-table-responsive__heading">Comments</span>
                       <!-- Only display comments if they are present -->
                       {% if data['dl1609-comments'] %}
@@ -269,7 +269,7 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
                       <span class="nhsuk-table-responsive__heading">Document type (optional)</span>
                       <p>{{ data['document-type'] if data['document-type'] else 'Not provided' }}</p>
                     </td-->
-                    <td role="cell" class="nhsuk-table__cell">
+                    <td role="cell" class="nhsuk-table__cell comments-cell">
                       {% if data['rina-reference-number'] %}
                         <p><b>RINA reference number: {{ data['rina-reference-number'] }}</b></p>
                       {% else %}
@@ -334,14 +334,6 @@ Notes - Manage overseas entitlements and treatments - NHSBSA
     
 {% block pageScripts %}
 <!-- autocomplete js -->
-<script type="text/javascript">
-  accessibleAutocomplete.enhanceSelectElement({
-    defaultValue : '',
-    autoselect : true,  
-    selectElement : document.querySelector('#note-type-drop')
-  })
-</script>
-
 <script type="text/javascript">
     accessibleAutocomplete.enhanceSelectElement({
       defaultValue : '',

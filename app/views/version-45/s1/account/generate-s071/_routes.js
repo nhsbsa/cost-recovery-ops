@@ -173,4 +173,22 @@ router.post('/confirmation-s071-sent-to-ms', function(req, res) {
 
   res.redirect('/version-45/s1/account/s1-requests');
 })
+
+// Are you sure you want to cancel generating an S071?
+router.get('/cancel-generate-s071', function (req, res) {
+  req.session.data['return-url'] = req.query.from
+
+  res.render('version-45/s1/account/generate-s071/cancel-generate-s071')
+})
+
+router.post('/cancel-generate-s071', function (req, res) {
+  const cancelGeneratingS071 =
+    req.session.data['cancel-generating-s071']
+
+  if (cancelGeneratingS071 === 'Yes') {
+    res.redirect('/version-45/s1/account/s1-requests')
+  } else {
+    res.redirect(req.session.data['return-url'])
+  }
+})
 module.exports = router;
