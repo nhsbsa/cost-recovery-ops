@@ -27,7 +27,7 @@
           <li class="nhsuk-breadcrumb__list-item">
             <a class="nhsuk-breadcrumb__link" href="../s1-requests">S1/S071 requests</a>
           </li>
-          <li class="nhsuk-breadcrumb__list-item">View request 1838883130 (Request details)</a>
+          <li class="nhsuk-breadcrumb__list-item">View request 1912292991 (Request details)</a>
           </li>
         </ol>
       </div>
@@ -53,7 +53,7 @@
             <div class="nhsuk-grid-column-full">
               <h1 class="nhsuk-heading-l">
                 S071 request<br>
-                RINA reference: 1838883130<br>
+                RINA reference: 1912292991<br>
                 MOET reference: 11273947781
               </h1>
             </div>
@@ -66,12 +66,10 @@
               <li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s1-request-details">Request details</a>
               </li>
-              
-              {% if data['dr-s071-linked-to-main'] == 'Yes' %}
+
               <li class="nhsuk-secondary-navigation__item">
-                <a class="nhsuk-secondary-navigation__link" href="s1-dependants">Dependants</a>
+                <a class="nhsuk-secondary-navigation__link" href="s1-main-insured">Main insured</a>
               </li>
-              {% endif %}
 
               <li class="nhsuk-secondary-navigation__item">
                 <a class="nhsuk-secondary-navigation__link" href="s1-request-history">Request history</a>
@@ -96,7 +94,7 @@
                         First names
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        John
+                        Jane
                       </dd>
                     </div>
                     <div class="nhsuk-summary-list__row">
@@ -128,7 +126,7 @@
                         Date of birth
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        1 July 1951
+                        29 December 1973
                       </dd>
                     </div>
                     <div class="nhsuk-summary-list__row">
@@ -136,7 +134,7 @@
                         Sex
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        Male
+                        Female
                       </dd>
                     </div>
                     <div class="nhsuk-summary-list__row">
@@ -152,10 +150,10 @@
                         Citizen status
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['s1-request-citizen-status'] %}
-                          {{ data['s1-request-citizen-status'] }}
+                        {% if data['dr-s1-request-citizen-status'] %}
+                          {{ data['dr-s1-request-citizen-status'] }}
                         {% else %}
-                          Pensioner
+                          Family member of pensioner
                         {% endif %}
                       </dd>
                     </div>
@@ -181,10 +179,10 @@
                         Date of residency in UK
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data['date-of-residency-in-uk-day'] and data['date-of-residency-in-uk-month'] and data['date-of-residency-in-uk-year'] %}
-                          {% set day = data['date-of-residency-in-uk-day'] %}
-                          {% set month = data['date-of-residency-in-uk-month'] | int %}
-                          {% set year = data['date-of-residency-in-uk-year'] %}
+                        {% if data['dr-date-of-residency-in-uk-day'] and data['dr-date-of-residency-in-uk-month'] and data['dr-date-of-residency-in-uk-year'] %}
+                          {% set day = data['dr-date-of-residency-in-uk-day'] %}
+                          {% set month = data['dr-date-of-residency-in-uk-month'] | int %}
+                          {% set year = data['dr-date-of-residency-in-uk-year'] %}
               
                           {# Define month names #}
                           {% set month_names = [
@@ -198,7 +196,7 @@
                           {# Display the date in the format "day month year" #}
                           {{ day | int }} {{ month_name }} {{ year }}  
                         {% else %}
-                          21 August 2024
+                          21 August 2025
                         {% endif %}
                       </dd>
                     </div>
@@ -232,8 +230,8 @@
                           Issuing country
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-request-issuing-country'] %}
-                            {{ data['s1-request-issuing-country'] }}
+                          {% if data['dr-s1-request-issuing-country'] %}
+                            {{ data['dr-s1-request-issuing-country'] }}
                           {% else %}
                             France (FR)
                           {% endif %}
@@ -244,8 +242,8 @@
                           Personal identification number (PIN) (optional)
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-request-pin'] %}
-                            {{ data['s1-request-pin'] }}
+                          {% if data['dr-s1-request-pin'] %}
+                            {{ data['dr-s1-request-pin'] }}
                           {% else %}
                             Not provided
                           {% endif %}
@@ -256,10 +254,10 @@
                           Start date
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-request-entitlement-start-date-day'] and data['s1-request-entitlement-start-date-month'] and data['s1-request-entitlement-start-date-year'] %}
-                            {% set day = data['s1-request-entitlement-start-date-day'] %}
-                            {% set month = data['s1-request-entitlement-start-date-month'] | int %}
-                            {% set year = data['s1-request-entitlement-start-date-year'] %}
+                          {% if data['dr-s1-request-entitlement-start-date-day'] and data['dr-s1-request-entitlement-start-date-month'] and data['dr-s1-request-entitlement-start-date-year'] %}
+                            {% set day = data['dr-s1-request-entitlement-start-date-day'] %}
+                            {% set month = data['dr-s1-request-entitlement-start-date-month'] | int %}
+                            {% set year = data['dr-s1-request-entitlement-start-date-year'] %}
                 
                             {# Define month names #}
                             {% set month_names = [
@@ -282,10 +280,10 @@
                           End date (optional)
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          {% if data['s1-request-entitlement-end-date-day'] and data['s1-request-entitlement-end-date-month'] and data['s1-request-entitlement-end-date-year'] %}
-                            {% set day = data['s1-request-entitlement-end-date-day'] %}
-                            {% set month = data['s1-request-entitlement-end-date-month'] | int %}
-                            {% set year = data['s1-request-entitlement-end-date-year'] %}
+                          {% if data['dr-s1-request-entitlement-end-date-day'] and data['dr-s1-request-entitlement-end-date-month'] and data['dr-s1-request-entitlement-end-date-year'] %}
+                            {% set day = data['dr-s1-request-entitlement-end-date-day'] %}
+                            {% set month = data['dr-s1-request-entitlement-end-date-month'] | int %}
+                            {% set year = data['dr-s1-request-entitlement-end-date-year'] %}
                 
                             {# Define month names #}
                             {% set month_names = [
@@ -341,8 +339,8 @@
     <div class="nhsBSA-sidebar-nav">
       <div class="side-nav">
         <h3>
-          John Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
-          <span class="nhsuk-u-visually-hidden"> - </span>123456</span>
+          Jane Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>654321</span>
         </h3>
         <ul id="options" class="options">
           <li><a href="../personal-details">Personal details</a></li>

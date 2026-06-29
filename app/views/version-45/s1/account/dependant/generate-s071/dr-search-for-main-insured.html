@@ -1,0 +1,168 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search for the main insured person - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-two-thirds">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back",
+                      "classes": "nhsuk-u-margin-bottom-4"
+                    }) }}
+
+                    
+                        
+                    <form action="dr-search-for-main-insured" method="post">
+                  
+                    <div class="nhsuk-form-group">
+                      {% if data['from-documents'] == 'Yes' %}
+                      <span class="nhsuk-caption-l">Link main insured to dependant S071</span>
+                      {% else %}
+                      <span class="nhsuk-caption-l">Generate an S071 for {% if data['dr-s1-request-citizen-status'] %} {{ data['dr-s1-request-citizen-status'] | lower }} {% else %} family member of pensioner {% endif %}</span>
+                      {% endif %}
+                      <label class="nhsuk-label" for="enter-the-entitlement-period">
+                        <h1 class="nhsuk-heading-xl">Search for the main insured person using personal details</h1>
+                      </label>
+                    </div>
+
+                    <p><b>Enter at least 2 pieces of information, then select Search.</b></p>
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label">
+                        First names (Given names or forenames)
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, ph or Philip.
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-20" id="search-for-main-first-names" name="search-for-main-first-names" type="text">
+                    </div>
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label">
+                        Last name (Name or surname)
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, sm or Smith.
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-20" id="search-for-main-last-name" name="search-for-main-first-names" type="text">
+                    </div>
+
+                    <div class="nhsuk-form-group">
+                      <div class="nhsuk-label">
+                        Date of birth
+                      </div>
+                      <div class="nhsuk-hint" id="search-for-main-date-of-birth-hint">
+                        For example, 15 10 1984
+                      </div>
+                      <div class="nhsuk-date-input">
+                        <div class="nhsuk-date-input__item">
+                            <label class="nhsuk-label nhsuk-date-input__label" id="search-for-main-date-of-birth-day-label" for="search-for-main-date-of-birth-day">Day</label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="search-for-main-date-of-birth-day" name="search-for-main-date-of-birth-day" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                        </div>
+                
+                        <div class="nhsuk-date-input__item">
+                            <label class="nhsuk-label nhsuk-date-input__label" id="search-for-main-date-of-birth-month-label" for="search-for-main-date-of-birth-month">Month</label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="search-for-main-date-of-birth-month" name="search-for-main-date-of-birth-month" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                        </div>
+                
+                        <div class="nhsuk-date-input__item">
+                            <label class="nhsuk-label nhsuk-date-input__label" id="search-for-main-date-of-birth-year-label" for="search-for-main-date-of-birth-year">Year</label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="search-for-main-date-of-birth-year" name="search-for-main-date-of-birth-year" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="4" oninput="this.value=this.value.slice(0,this.maxLength); updateFormattedDate();">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" id="search-for-main-entitlement-country-label" for="search-for-main-entitlement-country" class="form-label">
+                        Entitlement country
+                      </label>
+                      <input class="nhsuk-input nhsuk-input--width-20" list="countries" id="dr-entitlement-country-drop" name="search-for-main-entitlement-country">
+                      <datalist id="countries">
+                        <option value="" selected="selected"></option>
+                        <option value="Austria (AT)">Austria (AT)</option>
+                        <option value="Belgium (BE)">Belgium (BE)</option>
+                        <option value="Bulgaria (BG)">Bulgaria (BG)</option>
+                        <option value="Croatia (HR)">Croatia (HR)</option>
+                        <option value="Cyprus (CY)">Cyprus (CY)</option>
+                        <option value="Czech Republic (CZ)">Czech Republic (CZ)</option>
+                        <option value="Denmark (DK)">Denmark (DK)</option>
+                        <option value="Estonia (EE)">Estonia (EE)</option>
+                        <option value="Finland (FI)">Finland (FI)</option>
+                        <option value="France (FR)">France (FR)</option>
+                        <option value="Germany (DE)">Germany (DE)</option>
+                        <option value="Gibraltar (GI)">Gibraltar (GI)</option>
+                        <option value="Greece (GR)">Greece (GR)</option>
+                        <option value="Hungary (HU)">Hungary (HU)</option>
+                        <option value="Iceland (IS)">Iceland (IS)</option>
+                        <option value="Ireland (IE)">Ireland (IE)</option>
+                        <option value="Italy (IT)">Italy (IT)</option>
+                        <option value="Latvia (LV)">Latvia (LV)</option>
+                        <option value="Liechtenstein (LI)">Liechtenstein (LI)</option>
+                        <option value="Lithuania (LT)">Lithuania (LT)</option>
+                        <option value="Luxembourg (LU)">Luxembourg (LU)</option>
+                        <option value="Malta (MT)">Malta (MT)</option>
+                        <option value="Netherlands (NL)">Netherlands (NL)</option>
+                        <option value="Norway (NO)">Norway (NO)</option>
+                        <option value="Poland (PL)">Poland (PL)</option>
+                        <option value="Portugal (PT)">Portugal (PT)</option>
+                        <option value="Romania (RO)">Romania (RO)</option>
+                        <option value="Slovakia (SK)">Slovakia (SK)</option>
+                        <option value="Slovenia (SI)">Slovenia (SI)</option>
+                        <option value="Spain (ES)">Spain (ES)</option>
+                        <option value="Sweden (SE)">Sweden (SE)</option>
+                        <option value="Switzerland (CH)">Switzerland (CH)</option>
+                      </datalist>            
+                    </div>
+                    
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label">
+                        Personal identification number (PIN)
+                      </label>
+                      <div class="nhsuk-hint">
+                        The PIN format is different for each member state. It may include numbers, letters and other characters.
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-20" id="search-for-main-pin" name="search-for-main-pin" type="text">
+                    </div>
+                    
+
+                    <button class="nhsuk-button" style="margin-top: 20px;" type="submit">
+                      Search
+                    </button>
+
+                    <p style="margin-bottom: 60px;"><a href="dr-cancel-generate-s071?from=/version-45/s1/account/dependant/generate-s071/dr-search-for-main-insured">Cancel</a></p>
+                        
+                    </form>
+                  
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
