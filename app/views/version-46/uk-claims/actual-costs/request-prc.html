@@ -90,6 +90,8 @@ Request for PRC
               </div>
 
 
+              <!-- Do not show these three buttons until the reason for contestation has been added. Hide the buttons again once the resub has been peer reviewed. -->
+              {% if contestationData.reasons and contestationData.reasons | length > 0 and data.resubStatus not in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
               <div class="nhsuk-grid-column-one-half" style="text-align: right;">
   
                 <!-- Top two buttons side by side -->
@@ -113,7 +115,8 @@ Request for PRC
                   </a>
                 </div>
                 
-              </div>              
+              </div>     
+              {% endif %}         
 
 
 

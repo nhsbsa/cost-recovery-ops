@@ -73,6 +73,7 @@ Reason for contestation
                 </h1>
               </div>
 
+              {% if contestationData.reasons and contestationData.reasons | length > 0 and data.resubStatus not in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
               <div class="nhsuk-grid-column-one-half" style="text-align: right;">
   
                 <!-- Top two buttons side by side -->
@@ -97,6 +98,7 @@ Reason for contestation
                 </div>
                 
               </div>
+              {% endif %}
 
 
             </div>
@@ -147,25 +149,34 @@ Reason for contestation
               <div class="nhsuk-grid-column-one-half">
 
               <dl class="nhsuk-summary-list">
-              <div class="nhsuk-summary-list__row">
-                <dt class="nhsuk-summary-list__key">Reason for contestation</dt>
-                <dd class="nhsuk-summary-list__value">
-                  {% for reason in contestationData.reasons %}
-                  <p class="nhsuk-body">{{ reason }}</p>
-                  {% endfor %}
-                </dd>
-              </div>
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">Reasons for contestation</dt>
+                  <dd class="nhsuk-summary-list__value">
+                    {% for reason in contestationData.reasons %}
+                    <p class="nhsuk-body">{{ reason }}</p>
+                    {% endfor %}
+                  </dd>
+                </div>
+              </dl>
 
               
               {% if 'A duplicate or double treatment has been claimed' in contestationData.reasons %}
+              <dl class="nhsuk-summary-list">
                 <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-the-costs-are-to-be-settled-by-actual-costs-from-label">A duplicate or double treatment has been claimed</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-the-costs-are-to-be-settled-by-actual-costs-from-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
-                  </dd>
+                  <dt class="nhsuk-summary-list__key" id="start-date-ehic-label">Start date of EHIC</dt>
+                  <dd class="nhsuk-summary-list__value" id="start-date-ehic-value">01/01/2026</dd>
                 </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="end-date-ehic-label">End date of EHIC</dt>
+                  <dd class="nhsuk-summary-list__value" id="end-date-ehic-value">01/03/2026</dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="member-state-reference-label">Member state reference letter ID</dt>
+                  <dd class="nhsuk-summary-list__value" id="member-state-reference-value">123456</dd>
+                </div>
+              </dl>
               {% endif %}
 
               {% if 'Claim was sent to incorrect member state' in contestationData.reasons %}
