@@ -1,0 +1,322 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Resubs evidence details
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="treatments-within-resubmission">View Resub ID (Treatments linked to resub)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            View details (Evidence)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="treatments-within-resubmission">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      View Resub ID (Treatments linked to resub)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {% if data['upload-new-evidence'] == 'yes' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  File upload
+                </h3>
+                <p>One file uploaded successfully</p>
+              </div>
+            </div>
+            {% endif %}
+          
+                
+            
+            {% set contestationData = data.contestation_reasons[data.treatment] %}
+            <!-- Start of Jane Doe's treatment details for resub ID: 7824366 --->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                  Resub ID 7824366: Claim ID 345680<br>
+                  (Treatment ID 387731) - Evidence
+                </h1>
+              </div>
+
+              <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+  
+                <!-- Top two buttons side by side -->
+                <div class="nhsuk-button-group" style="display: inline-flex;">
+                  <a href="reasons-to-maintain-treatment-cost">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Maintain<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+              
+                  <a href="source-of-treatment-withdrawal">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Withdraw<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+
+                  <a href="enter-maintained-treatment-dates">
+                    <button class="nhsuk-button nhsuk-button--secondary" type="submit">
+                      Partial<span class="nhsuk-u-visually-hidden"> treatment ID 387731 from claim ID 345680</span>
+                    </button>
+                  </a>
+                </div>
+                
+              </div>
+
+
+            </div>
+            
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-details?treatment=Jane">Treatment details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-reasons-for-contestation?treatment=Jane">Reason for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="contact-ovm?treatment=Jane">OVM contact</a>
+                  <span class="nhsuk-u-visually-hidden">View OVM contact details for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="request-prc?treatment=Jane">Request for a PRC</a>
+                  <span class="nhsuk-u-visually-hidden">View request for a PRC for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="treatment-evidence?treatment=Jane">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for treatment ID 387731</span>
+                </li>
+  
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="ovm-details?treatment=Jane">OVM details</a>
+                  <span class="nhsuk-u-visually-hidden">View OVM details for treatment ID 387731</span>
+                </li>
+              </ul>
+            </nav>
+  
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+          
+          <!-- Beginning of content -->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-three-quarters">
+                
+                <div class="nhsuk-summary-list__row">
+                  {% if data['upload-new-evidence'] == 'yes' %}
+                  <a role="button" class="nhsuk-button" style="padding: 12px 16px;" id="evidence-upload" href="treatment-upload-evidence?upload-evidence-separately=yes">
+                    <span id="upload-evidence-button">Upload new evidence</span>
+                  </a>
+                  {% else %}
+                  <a role="button" class="nhsuk-button" style="padding: 12px 16px;" id="evidence-upload" href="treatment-upload-evidence">
+                      <span id="upload-evidence-button">Upload new evidence</span>
+                  </a>
+                  {% endif %}
+                </div>
+            
+                  
+                {% if data['upload-new-evidence'] == 'yes' or data['prc-uploaded'] == 'yes' %}
+                <h2 class="nhsuk-card__heading nhsuk-heading-m">Uploaded evidence</h2>
+                
+
+                    {% if (data['evidenceRow1'] != 'Removed' or data['evidenceRow2'] != 'Removed') %}
+                      <!-- Evidence table only shows when there's evidence -->
+
+                      <div id="evidenceSection">
+                        <div id="evidenceContainer">
+                          <table id="evidenceTable" class="nhsuk-table">
+                            <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">Uploaded evidence</caption>
+                            <thead role="rowgroup" class="nhsuk-table__head">
+                              <tr role="row">
+                                <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                                <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                                <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody class="nhsuk-table__body">
+                              <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                <td class="nhsuk-table__cell">
+                                  <b>PRC.pdf</b>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                </td>
+                              </tr>
+
+                              {% if data['more-evidence'] == 'yes' and data['evidenceRow1'] != 'Removed' and data['upload-new-evidence'] == 'yes' %}
+                              <tr role="row" class="nhsuk-table__row" id="evidenceRow2">
+                                <td class="nhsuk-table__cell">
+                                  <b>example-evidence-2.pdf</b>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" class="removeEvidence" data-row="evidenceRow2">Delete</a>
+                                </td>
+                              </tr>
+                              {% endif %}
+
+                              {% if data['evidenceRow2'] != 'Removed' and data['upload-new-evidence'] == 'yes' %}
+                              <tr role="row" class="nhsuk-table__row" id="evidenceRow1">
+                                <td class="nhsuk-table__cell">
+                                  <b>example-evidence-1.pdf</b>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                                </td>
+                                <td class="nhsuk-table__cell">
+                                  <a href="#" class="removeEvidence" data-row="evidenceRow1">Delete</a>
+                                </td>
+                              </tr>
+                              {% endif %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    {% endif %}
+                    
+                  {% endif %}
+                  
+                  
+                  <h2 class="nhsuk-card__heading nhsuk-heading-m">System-generated documents</h2>
+
+                  <table id="system-generated-docs-table" class="nhsuk-table">
+                    <caption class="nhsuk-table__caption nhsuk-u-visually-hidden">System-generated documents</caption>
+                    <thead role="rowgroup" class="nhsuk-table__head">
+                      <tr role="row">
+                        <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">File</th>
+                        <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Link</th>
+                        <th role="columnheader" class="nhsuk-u-visually-hidden" scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody class="nhsuk-table__body">
+                      <tr role="row" class="nhsuk-table__row" id="s080">
+                        <td class="nhsuk-table__cell">
+                          <b>S080 treatment form</b>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                        </td>
+                      </tr>
+                      {% if data['prc-request-details-submitted'] == 'yes' %}
+                      <tr role="row" class="nhsuk-table__row" id="s044">
+                        <td class="nhsuk-table__cell">
+                          <b>S044 form</b>
+                        </td>
+                        <td class="nhsuk-table__cell">
+                          <a href="#" target="_blank" rel="noopener">View file to print or download</a>
+                        </td>
+                      </tr>
+                      {% endif %}
+                    </tbody>
+                  </table>
+
+            
+            </div>
+          </div>
+        <!-- End of main content-->
+  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const evidenceTable = document.getElementById('evidenceTable');
+    const noEvidenceTextContainer = document.getElementById('noEvidenceTextContainer');
+    const evidenceSection = document.getElementById('evidenceSection');
+  
+    function updateUIBasedOnEvidence() {
+      if (!evidenceTable || evidenceTable.getElementsByTagName('tbody')[0].rows.length === 0) {
+        noEvidenceTextContainer.style.display = 'block';
+        evidenceSection.style.display = 'none';
+      } else {
+        noEvidenceTextContainer.style.display = 'none';
+        evidenceSection.style.display = 'block';
+      }
+    }
+  
+    if (evidenceTable) {
+      evidenceTable.addEventListener('click', function(event) {
+        if (event.target.classList.contains('removeEvidence')) {
+          event.preventDefault();
+          const rowId = event.target.getAttribute('data-row');
+          const row = document.getElementById(rowId);
+          row.remove();
+          updateUIBasedOnEvidence();
+        }
+      });
+    }
+  
+    updateUIBasedOnEvidence();
+  });
+  </script>
+  {% endblock %}

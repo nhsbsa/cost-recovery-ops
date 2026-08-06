@@ -1,0 +1,131 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Reason for account cancellation - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="approved-requests">Account requests (Approved)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="view-approved-request">Account request (David Fuller)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">Reason</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="review-pending-request">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Account request (David Fuller)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">
+                What is the reason for cancelling the account?
+              </h1>
+            </div>
+          </div>
+
+          <form action="reason-for-account-cancellation" method="post" novalidate>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+
+              <div class="nhsuk-form-group">
+                <div class="nhsuk-radios nhsuk-radios--conditional">
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-cancellation-ovm-moved-to-another-trust" name="reason-for-cancellation" type="radio" value="OVM has moved to a different trust">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-ovm-moved-to-another-trust">OVM has moved to a different NHS trust</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-cancellation-ovm-left-nhs" name="reason-for-cancellation" type="radio" value="OVM has left the NHS">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-ovm-left-nhs">OVM has left the NHS</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-cancellation-rovt-account-issues" name="reason-for-cancellation" type="radio" value="ROVT account issues, so the OVM has requested a new account">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-rovt-account-issues">ROVT account issues, so the OVM has requested a new account</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-cancellation-mfa-issues" name="reason-for-cancellation" type="radio" value="OVM is experiencing issues with MFA">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-mfa-issues">OVM is experiencing issues with MFA</label>
+                  </div>
+                </div>
+              
+                <div class="nhsuk-radios__item" data-module="nhsuk-radios">
+                  <input class="nhsuk-radios__input" id="reason-for-cancellation-other" name="reason-for-cancellation" type="radio" value="Other" data-aria-controls="conditional-other-account-cancellation-reason" aria-expanded="false">
+                  <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-other">
+                    Other
+                  </label>
+                </div>
+                <!-- Conditionally revealed textarea -->
+                <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-other-account-cancellation-reason">
+                  <div class="nhsuk-form-group">
+                    <div class="nhsuk-hint" for="otherAccountCancellationReasonComments">
+                      Enter another reason.
+                    </hint>
+                      <textarea class="nhsuk-textarea" id="otherAccountCancellationReasonComments" rows="7" name="other-account-cancellation-reason-comments" maxlength="500"></textarea>
+                      <p id="charactersRemaining" class="nhsuk-hint" style="margin-top: -20px;" aria-hidden="true">500 characters remaining</p>
+                      <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 500 characters</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+             <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Continue
+                  </button>
+              </div>
+            </div>
+
+              
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,174 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search for an institution by name - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-full">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back",
+                      "classes": "nhsuk-u-margin-bottom-4"
+                    }) }}
+
+                    
+                        
+                    <form action="change-s1-institution-details-search-by-name-results" method="post">
+                  
+                    <div class="nhsuk-form-group">
+                      <p class="nhsuk-u-font-size-22" style="color: grey;">{% if data['new-first-names'] %}{{ data['new-first-names'] }}{% else %}John{% endif %} {% if data['new-last-name'] %}{{ data['new-last-name'] }}{% else %}Doe{% endif %}<br>Person record ID - 123456<br>Entitlement ID: 100001</p>
+                      <label class="nhsuk-label" for="view-person-record-details">
+                        <h1 class="nhsuk-heading-xl">Search for an institution in {% if data['s1-request-issuing-country'] %}{{ data['s1-request-issuing-country'] }}{% else %}France{% endif %}</h1>
+                      </label>
+                    </div>
+
+                    <details class="nhsuk-details">
+                      <summary class="nhsuk-details__summary">
+                        <span class="nhsuk-details__summary-text">
+                          View current institution details
+                        </span>
+                      </summary>
+      
+                      <div class="nhsuk-details__text" style="margin-top: 20px; background-color: transparent;  box-shadow: none;">
+                        <dl class="nhsuk-summary-list">
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">
+                              Institution ID
+                            </dt>
+                            <dd class="nhsuk-summary-list__value">
+                              Not provided
+                            </dd>
+                          </div>
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">
+                              Institution name
+                            </dt>
+                            <dd class="nhsuk-summary-list__value">
+                              CAISSE REGIONALE DES ARTISANS ET COMMERCANTS DU RHONE
+                            </dd>
+                          </div>
+                          <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">
+                              Institution address
+                            </dt>
+                            <dd class="nhsuk-summary-list__value">
+                              55 AVENUE MARECHAL FOCH, 69453 LYON CEDEX 06
+                            </dd>
+                          </div>
+                        </dl>
+                      </div>
+                    </details>
+
+                    <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+                      <ul class="nhsuk-secondary-navigation__list">
+                        <li class="nhsuk-secondary-navigation__item">
+                          <a class="nhsuk-secondary-navigation__link" id="tab_institution_id" href="change-s1-institution-details-search-by-id">Institution ID</a>
+                          <span class="nhsuk-u-visually-hidden">Search for an institution by ID</span>
+                        </li>
+
+                        <li class="nhsuk-secondary-navigation__item">
+                          <a class="nhsuk-secondary-navigation__link" id="tab_institution_id" aria-current="page" href="change-s1-institution-details-search-by-name-results">Institution name</a>
+                          <span class="nhsuk-u-visually-hidden">Search for an institution by name</span>
+                        </li>
+                      </ul>
+                      
+                    </nav>
+                    <hr style="border-bottom:1px solid #ccc; margin:0">
+                      
+                    <br>
+
+                    <div class="nhsuk-form-group" style="margin-top: 20px;">
+                      <div id="institutionName-hint" class="nhsuk-label">
+                        <p class="nhsuk-hint">
+                          <span>Enter the institution name</span>
+                        </p>
+                      </div>
+                      <input class="nhsuk-input nhsuk-u-width-two-thirds" id="institutionName" type="text" autocomplete="off" name="search-institution-name" value="CAISSE REGIONALE DES ARTISANS ET COMMERCANTS DU RHONE">
+                    </div>
+                    
+                    <div class="nhsuk-form-group">
+                      <button class="nhsuk-button" type="submit">
+                        Search
+                      </button>
+
+                      <p style="margin-bottom: 20px;"><a href="cancel-changing-s1-entitlement-details?from=/version-46/s1/account/change-s1-institution-details-search-by-name-results">Cancel</a></p>
+                    </div>
+                      
+
+                    <!-- when records found result table start-->
+                    <div id="result">
+                      <div role="alert" class="nhsuk-label--m" id="non_zero_records">
+                        <h2 class="nhsuk-label--m">1 result found</h2>
+                      </div>
+                    </div>
+
+                    <div class="nhsuk-hint">Select the correct institution to continue.</div>
+
+                    <table role="table" class="nhsuk-table-responsive nhsuk-u-padding-bottom-6" id="institution-table">
+                      <caption class="nhsuk-table__caption"></caption>
+                      <thead role="rowgroup" class="nhsuk-table__head">
+                        <tr role="row">
+                          <th role="columnheader" scope="col">Institution ID</th>
+                          <th role="columnheader" scope="col">Institution name</th>
+                          <th role="columnheader" scope="col">Institution address</th>
+                          <th role="columnheader" scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="nhsuk-table__body">
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Institution ID</span>
+                            <p id="institutionDTO.institutionNumber_0">0304500000 - RSI RHONE</p>
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Institution name</span>
+                            <p id="institutionDTO.institutionName_0">CAISSE REGIONALE DES ARTISANS ET COMMERCANTS DU RHONE</p>
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Institution address</span>
+                            <p id="institutionDTO.fullAddress_0">
+                              55 AVENUE MARECHAL FOCH, 69453 LYON CEDEX 06
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                            <span class="nhsuk-table-responsive__heading">Action</span>
+                            <a aria-label="Select the institution with the institution ID 104940005" href="reason-for-changing-s1-institution-details" id="institution-name-select">Select</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                      
+                  </form>
+                
+                </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

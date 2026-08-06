@@ -1,0 +1,188 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Check your answers before cancelling the account - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="approved-requests">Account requests (Approved)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="view-approved-request">Account request (David Fuller)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="reason-for-account-cancellation">Reason</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">Check your answers</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="reason-for-account-cancellation">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Reason
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">Check your answers before cancelling David Fuller's account</h1>
+             </div>
+          </div>
+
+          <form action="cya-cancel-account" method="post">
+
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+
+              <details class="nhsuk-details">
+                <summary class="nhsuk-details__summary">
+                  <span class="nhsuk-details__summary-text">
+                    View account details
+                  </span>
+                </summary>
+
+                <div class="nhsuk-details__text" style="margin-top: 20px; background-color: transparent;  box-shadow: none;">
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        OVM's name
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        David Fuller
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Email address
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        david.fuller@trustname.net
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Telephone number
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        071234567890
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Region
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        England
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Trust
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Airedale NHS Foundation Trust
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Request date
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        10/02/2026
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+  
+              </details>
+
+            
+
+
+
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="reasons-to-maintain-months-label">Reason for account cancellation</dt>
+                  <dd class="nhsuk-summary-list__value" id="reasons-to-maintain-months-value">
+                    {% if data['reason-for-cancellation'] %}
+                     {{ data['reason-for-cancellation'] }}
+                    {% else %}
+                      OVM has moved to a different NHS trust
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="reason-for-account-cancellation">Change<span class="nhsuk-u-visually-hidden">the reason for account cancellation</span></a></dd>
+                </div>
+                {% if 'Other' in data ['reason-for-cancellation'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason - comments</dt>
+                  <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
+                    {% if data['other-account-cancellation-reason-comments'] %}
+                      {{ data['other-account-cancellation-reason-comments'] }}
+                    {% else %}
+                      Other reason explained here.
+                    {% endif %}
+                  </dd>
+                  <dd class="nhsuk-summary-list__actions"><a href="reason-for-account-cancellation">Change<span class="nhsuk-u-visually-hidden">other reason comments</span></a></dd>
+                </div>
+                {% endif %}
+              </dl>
+              
+              <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                Save and submit
+              </button>
+
+              </div>
+            </div>
+
+              
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
