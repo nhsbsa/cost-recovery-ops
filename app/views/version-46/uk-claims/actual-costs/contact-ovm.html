@@ -182,16 +182,26 @@ Reason for contacting OVM
                   </div>
                </dl>
 
-               {% if data['ovm-response-received'] == 'Yes' %}
+               {% if data['ovm-response-submitted'] == 'Yes' %}
                 <dl class="nhsuk-summary-list" style="margin-bottom: 60px;">
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key" id="email-sent-date-label">Date response was received</dt>
                     <dd class="nhsuk-summary-list__value" id="enquiry_0_email-sent-date">11/05/2026</dd>
                   </div>
                   <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="dynamics-email-reference-label">Dynamics email reference number</dt>
+                    <dd class="nhsuk-summary-list__value" id="dynamics-email-reference-value">
+                      {% if data['ovm-response-dynamics-ref'] %}
+                        {{ data['ovm-response-dynamics-ref'] }}
+                      {% else %}
+                        23783993
+                      {% endif %}
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key" id="ovm-contacted-reasons-label">Response from OVM</dt>
                     <dd class="nhsuk-summary-list__value">
-                    {% set ovmResponse = data['reasons-to-contact-ovm'] %}
+                    {% set ovmResponse = data['ovm-response-received'] %}
 
                     {% if ovmResponse %}
                       <ol class="nhsuk-list nhsuk-list--number">
