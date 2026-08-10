@@ -153,10 +153,23 @@ Reason for contestation
                   <dt class="nhsuk-summary-list__key">Reasons for contestation</dt>
                   <dd class="nhsuk-summary-list__value">
                     {% for reason in contestationData.reasons %}
-                    <p class="nhsuk-body">{{ reason }}</p>
+                    <p class="nhsuk-body">{{ loop.index }}. {{ reason }}</p>
                     {% endfor %}
                   </dd>
                 </div>
+                {% if 'Other - add reason in the text box' in contestationData.reasons %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="other-contestation-reason-comments-label">
+                    Other reasons
+                  </dt>
+                  <dd class="nhsuk-summary-list__value" id="other-contestation-reason-comments-value">
+                    <p class="nhsuk-body">
+                      {{ contestationData.otherContestationReason }}
+                    </p>
+                  </dd>
+                </div>
+              
+              {% endif %}
               </dl>
 
               
@@ -164,128 +177,439 @@ Reason for contestation
               <dl class="nhsuk-summary-list">
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key" id="start-date-ehic-label">Start date of EHIC</dt>
-                  <dd class="nhsuk-summary-list__value" id="start-date-ehic-value">01/01/2026</dd>
+                  <dd class="nhsuk-summary-list__value" id="start-date-ehic-value">
+                    {% if data['ehic-start-date-day'] and data['ehic-start-date-month'] and data['ehic-start-date-year'] %}
+                      {% set day = data['ehic-start-date-day'] | int %}
+                      {% set month = data['ehic-start-date-month'] | int %}
+                      {% set year = data['ehic-start-date-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/01/2026
+                    {% endif %}
+                  </dd>
                 </div>
 
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key" id="end-date-ehic-label">End date of EHIC</dt>
-                  <dd class="nhsuk-summary-list__value" id="end-date-ehic-value">01/03/2026</dd>
+                  <dd class="nhsuk-summary-list__value" id="end-date-ehic-value">
+                    {% if data['ehic-end-date-day'] and data['ehic-end-date-month'] and data['ehic-end-date-year'] %}
+                      {% set day = data['ehic-end-date-day'] | int %}
+                      {% set month = data['ehic-end-date-month'] | int %}
+                      {% set year = data['ehic-end-date-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/03/2026
+                    {% endif %}
+                  </dd>
                 </div>
 
                 <div class="nhsuk-summary-list__row">
                   <dt class="nhsuk-summary-list__key" id="member-state-reference-label">Member state reference letter ID</dt>
-                  <dd class="nhsuk-summary-list__value" id="member-state-reference-value">123456</dd>
+                  <dd class="nhsuk-summary-list__value" id="member-state-reference-value">
+                   {% if data['ms-reference-letter-id'] %}
+                    {{ data['ms-reference-letter-id'] }}
+                   {% else %}
+                     2883822734
+                   {% endif %}
+                  </dd>
                 </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-on-member-state-reference-label">Date on member state reference letter</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-on-member-state-reference-value">
+                   {% if data['date-on-ms-reference-letter-day'] and data['date-on-ms-reference-letter-month'] and data['date-on-ms-reference-letter-year'] %}
+                    {% set day = data['date-on-ms-reference-letter-day'] | int %}
+                    {% set month = data['date-on-ms-reference-letter-month'] | int %}
+                    {% set year = data['date-on-ms-reference-letter-year'] %}
+        
+                    {% if day < 10 %}
+                        {% set day = "0" ~ day %}
+                    {% endif %}
+                    
+                    {% if month < 10 %}
+                        {% set month = "0" ~ month %}
+                    {% endif %}
+
+                    {{ day }}/{{ month }}/{{ year }}
+                  {% else %}
+                    07/05/2026
+                  {% endif %}
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duplicate-treatment-id-1-label">Duplicate treatment ID 1</dt>
+                  <dd class="nhsuk-summary-list__value" id="duplicate-treatment-id-1-value">
+                   {% if data['duplicate-treatment-id-1'] %}
+                    {{ data['duplicate-treatment-id-1'] }}
+                   {% else %}
+                    123456
+                   {% endif %}
+                  </dd>
+                </div>
+                
+
+                {% if data['duplicate-treatment-id-2'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duplicate-treatment-id-2-label">Duplicate treatment ID 2</dt>
+                  <dd class="nhsuk-summary-list__value" id="duplicate-treatment-id-2-value">
+                    {{ data['duplicate-treatment-id-2'] }}
+                  </dd>
+                </div>
+                {% endif %}
+
+                {% if data['start-date-of-uk-issued-s1-day'] and data['start-date-of-uk-issued-s1-month'] and data['start-date-of-uk-issued-s1-year'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="start-date-of-s1-label">Start date of UK issued S1</dt>
+                  <dd class="nhsuk-summary-list__value" id="start-date-of-s1-value">
+                    {% set day = data['start-date-of-uk-issued-s1-day'] | int %}
+                      {% set month = data['start-date-of-uk-issued-s1-month'] | int %}
+                      {% set year = data['start-date-of-uk-issued-s1-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                  </dd>
+                </div>
+                {% endif %}
+
+                {% if data['end-date-of-uk-issued-s1-day'] and data['end-date-of-uk-issued-s1-month'] and data['end-date-of-uk-issued-s1-year'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="end-date-of-s1-label">End date of UK issued S1</dt>
+                  <dd class="nhsuk-summary-list__value" id="end-date-of-s1-value">
+                    {% set day = data['end-date-of-uk-issued-s1-day'] | int %}
+                      {% set month = data['end-date-of-uk-issued-s1-month'] | int %}
+                      {% set year = data['end-date-of-uk-issued-s1-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                  </dd>
+                </div>
+                {% endif %}
               </dl>
               {% endif %}
 
-              {% if 'Claim was sent to incorrect member state' in contestationData.reasons %}
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-the-costs-are-to-be-settled-by-actual-costs-until-label">Claim was sent to incorrect member state</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-the-costs-are-to-be-settled-by-actual-costs-until-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
-                  </dd>
-                </div>
-              {% endif %}
-
-              {% if 'Either incorrect patient information has been given or the member state cannot determine if the patient is insured' in contestationData.reasons %}
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="duplicated-global-imo-reference-label">Either incorrect patient information has been given or the member state cannot determine if the patient is insured</dt>
-                  <dd class="nhsuk-summary-list__value" id="duplicated-global-imo-reference-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
-                  </dd>
-                </div>
-              {% endif %}
-
-              {% if 'Incorrect entitlement submitted for the claimant' in contestationData.reasons %}
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-entitlement-in-state-of-residence-started-on-label">Incorrect entitlement submitted for the claimant</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-entitlement-in-state-of-residence-started-on-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
-                  </dd>
-                </div>
-              {% endif %}
-
-              {% if 'Incorrect treatment information provided' in contestationData.reasons %}
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-family-member-became-entitled-to-benefits-in-state-of-residence-label">Incorrect treatment information provided</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-family-member-became-entitled-to-benefits-in-state-of-residence-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
-                  </dd>
-                </div>
-              {% endif %}
-
-              {% if 'Member state needs a copy of entitlement document' in contestationData.reasons %}
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-person-began-receiving-pension-in-state-of-residence-label">Member state needs a copy of entitlement document</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-person-began-receiving-pension-in-state-of-residence-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
-                  </dd>
-                </div>
-              {% endif %}
 
               {% if 'The claimant is insured for their healthcare in the UK by another means. For example at the time of treatment they had an S1 or they were ordinarily resident in the UK' in contestationData.reasons %}
+              <dl class="nhsuk-summary-list">
                 <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-person-died-label">The claimant is insured for their healthcare in the UK by another means. For example at the time of treatment they had an S1 or they were ordinarily resident in the UK</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-person-died-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
+                  <dt class="nhsuk-summary-list__key" id="start-date-ehic-label">Start date of EHIC</dt>
+                  <dd class="nhsuk-summary-list__value" id="start-date-ehic-value">
+                    {% if data['ehic-start-date-day'] and data['ehic-start-date-month'] and data['ehic-start-date-year'] %}
+                      {% set day = data['ehic-start-date-day'] | int %}
+                      {% set month = data['ehic-start-date-month'] | int %}
+                      {% set year = data['ehic-start-date-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/01/2026
+                    {% endif %}
                   </dd>
                 </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="end-date-ehic-label">End date of EHIC</dt>
+                  <dd class="nhsuk-summary-list__value" id="end-date-ehic-value">
+                    {% if data['ehic-end-date-day'] and data['ehic-end-date-month'] and data['ehic-end-date-year'] %}
+                      {% set day = data['ehic-end-date-day'] | int %}
+                      {% set month = data['ehic-end-date-month'] | int %}
+                      {% set year = data['ehic-end-date-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/03/2026
+                    {% endif %}
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="member-state-reference-label">Member state reference letter ID</dt>
+                  <dd class="nhsuk-summary-list__value" id="member-state-reference-value">
+                   {% if data['ms-reference-letter-id'] %}
+                    {{ data['ms-reference-letter-id'] }}
+                   {% else %}
+                     2883822734
+                   {% endif %}
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-on-member-state-reference-label">Date on member state reference letter</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-on-member-state-reference-value">
+                   {% if data['date-on-ms-reference-letter-day'] and data['date-on-ms-reference-letter-month'] and data['date-on-ms-reference-letter-year'] %}
+                    {% set day = data['date-on-ms-reference-letter-day'] | int %}
+                    {% set month = data['date-on-ms-reference-letter-month'] | int %}
+                    {% set year = data['date-on-ms-reference-letter-year'] %}
+        
+                    {% if day < 10 %}
+                        {% set day = "0" ~ day %}
+                    {% endif %}
+                    
+                    {% if month < 10 %}
+                        {% set month = "0" ~ month %}
+                    {% endif %}
+
+                    {{ day }}/{{ month }}/{{ year }}
+                  {% else %}
+                    07/05/2026
+                  {% endif %}
+                  </dd>
+                </div>
+
+                {% if data['duplicate-treatment-id-1'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duplicate-treatment-id-1-label">Duplicate treatment ID 1</dt>
+                  <dd class="nhsuk-summary-list__value" id="duplicate-treatment-id-1-value">
+                    {{ data['duplicate-treatment-id-1'] }}
+                  </dd>
+                </div>
+                {% endif %}
+
+                {% if data['duplicate-treatment-id-2'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duplicate-treatment-id-2-label">Duplicate treatment ID 2</dt>
+                  <dd class="nhsuk-summary-list__value" id="duplicate-treatment-id-2-value">
+                    {{ data['duplicate-treatment-id-2'] }}
+                  </dd>
+                </div>
+                {% endif %}
+
+                {% if data['start-date-of-uk-issued-s1-day'] and data['start-date-of-uk-issued-s1-month'] and data['start-date-of-uk-issued-s1-year'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="start-date-of-s1-label">Start date of UK issued S1</dt>
+                  <dd class="nhsuk-summary-list__value" id="start-date-of-s1-value">
+                    {% set day = data['start-date-of-uk-issued-s1-day'] | int %}
+                      {% set month = data['start-date-of-uk-issued-s1-month'] | int %}
+                      {% set year = data['start-date-of-uk-issued-s1-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                  </dd>
+                </div>
+                {% endif %}
+
+                {% if data['end-date-of-uk-issued-s1-day'] and data['end-date-of-uk-issued-s1-month'] and data['end-date-of-uk-issued-s1-year'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="end-date-of-s1-label">End date of UK issued S1</dt>
+                  <dd class="nhsuk-summary-list__value" id="end-date-of-s1-value">
+                    {% set day = data['end-date-of-uk-issued-s1-day'] | int %}
+                      {% set month = data['end-date-of-uk-issued-s1-month'] | int %}
+                      {% set year = data['end-date-of-uk-issued-s1-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                  </dd>
+                </div>
+                {% endif %}
+              </dl>
               {% endif %}
+
 
               {% if 'The entitlement document is not valid or only covers part of the treatment period' in contestationData.reasons %}
+              <dl class="nhsuk-summary-list">
                 <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-imo-introduced-after-deadline-label">The entitlement document is not valid or only covers part of the treatment period</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-imo-introduced-after-deadline-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
+                  <dt class="nhsuk-summary-list__key" id="start-date-ehic-label">Start date of EHIC</dt>
+                  <dd class="nhsuk-summary-list__value" id="start-date-ehic-value">
+                    {% if data['ehic-start-date-day'] and data['ehic-start-date-month'] and data['ehic-start-date-year'] %}
+                      {% set day = data['ehic-start-date-day'] | int %}
+                      {% set month = data['ehic-start-date-month'] | int %}
+                      {% set year = data['ehic-start-date-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/01/2026
+                    {% endif %}
                   </dd>
                 </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="end-date-ehic-label">End date of EHIC</dt>
+                  <dd class="nhsuk-summary-list__value" id="end-date-ehic-value">
+                    {% if data['ehic-end-date-day'] and data['ehic-end-date-month'] and data['ehic-end-date-year'] %}
+                      {% set day = data['ehic-end-date-day'] | int %}
+                      {% set month = data['ehic-end-date-month'] | int %}
+                      {% set year = data['ehic-end-date-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                    {% else %}
+                      01/03/2026
+                    {% endif %}
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="member-state-reference-label">Member state reference letter ID</dt>
+                  <dd class="nhsuk-summary-list__value" id="member-state-reference-value">
+                   {% if data['ms-reference-letter-id'] %}
+                    {{ data['ms-reference-letter-id'] }}
+                   {% else %}
+                     2883822734
+                   {% endif %}
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="date-on-member-state-reference-label">Date on member state reference letter</dt>
+                  <dd class="nhsuk-summary-list__value" id="date-on-member-state-reference-value">
+                   {% if data['date-on-ms-reference-letter-day'] and data['date-on-ms-reference-letter-month'] and data['date-on-ms-reference-letter-year'] %}
+                    {% set day = data['date-on-ms-reference-letter-day'] | int %}
+                    {% set month = data['date-on-ms-reference-letter-month'] | int %}
+                    {% set year = data['date-on-ms-reference-letter-year'] %}
+        
+                    {% if day < 10 %}
+                        {% set day = "0" ~ day %}
+                    {% endif %}
+                    
+                    {% if month < 10 %}
+                        {% set month = "0" ~ month %}
+                    {% endif %}
+
+                    {{ day }}/{{ month }}/{{ year }}
+                  {% else %}
+                    07/05/2026
+                  {% endif %}
+                  </dd>
+                </div>
+
+                {% if data['duplicate-treatment-id-1'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duplicate-treatment-id-1-label">Duplicate treatment ID 1</dt>
+                  <dd class="nhsuk-summary-list__value" id="duplicate-treatment-id-1-value">
+                    {{ data['duplicate-treatment-id-1'] }}
+                  </dd>
+                </div>
+                {% endif %}
+
+                {% if data['duplicate-treatment-id-2'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="duplicate-treatment-id-2-label">Duplicate treatment ID 2</dt>
+                  <dd class="nhsuk-summary-list__value" id="duplicate-treatment-id-2-value">
+                    {{ data['duplicate-treatment-id-2'] }}
+                  </dd>
+                </div>
+                {% endif %}
+
+                {% if data['start-date-of-uk-issued-s1-day'] and data['start-date-of-uk-issued-s1-month'] and data['start-date-of-uk-issued-s1-year'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="start-date-of-s1-label">Start date of UK issued S1</dt>
+                  <dd class="nhsuk-summary-list__value" id="start-date-of-s1-value">
+                    {% set day = data['start-date-of-uk-issued-s1-day'] | int %}
+                      {% set month = data['start-date-of-uk-issued-s1-month'] | int %}
+                      {% set year = data['start-date-of-uk-issued-s1-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                  </dd>
+                </div>
+                {% endif %}
+
+                {% if data['end-date-of-uk-issued-s1-day'] and data['end-date-of-uk-issued-s1-month'] and data['end-date-of-uk-issued-s1-year'] %}
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key" id="end-date-of-s1-label">End date of UK issued S1</dt>
+                  <dd class="nhsuk-summary-list__value" id="end-date-of-s1-value">
+                    {% set day = data['end-date-of-uk-issued-s1-day'] | int %}
+                      {% set month = data['end-date-of-uk-issued-s1-month'] | int %}
+                      {% set year = data['end-date-of-uk-issued-s1-year'] %}
+          
+                      {% if day < 10 %}
+                          {% set day = "0" ~ day %}
+                      {% endif %}
+                      
+                      {% if month < 10 %}
+                          {% set month = "0" ~ month %}
+                      {% endif %}
+
+                      {{ day }}/{{ month }}/{{ year }}
+                  </dd>
+                </div>
+                {% endif %}
+              </dl>
               {% endif %}
 
-              {% if 'The institution details are incorrect or missing' in contestationData.reasons %}
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-contestation-imo-reply-received-after-deadline-label">The institution details are incorrect or missing</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-contestation-imo-reply-received-after-deadline-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
-                  </dd>
-                </div>
-              {% endif %}
-
-              {% if 'The institution needs a detailed breakdown of the treatment costs' in contestationData.reasons %}
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="date-person-moved-to-another-state-label">The institution needs a detailed breakdown of the treatment costs</dt>
-                  <dd class="nhsuk-summary-list__value" id="date-person-moved-to-another-state-value">
-                    <p class="nhsuk-body">
-                    
-                    </p>
-                  </dd>
-                </div>
-              {% endif %}
-
-              {% if 'Other - add reason in the text box' in contestationData.reasons %}
-                <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key" id="other-contestation-reason-comments-label">Other - add reason in the text box</dt>
-                  <dd class="nhsuk-summary-list__value" id="other-contestation-reason-comments-value">
-                    <p class="nhsuk-body">{{ contestationData.otherContestationReason or 'Other contestation reason explained here.' }}</p>
-                  </dd>
-                </div>
-              {% endif %}
 
               </dl>
 
@@ -327,43 +651,50 @@ Reason for contestation
                     </div>
 
                     <div class="nhsuk-checkboxes__item" data-module="nhsuk-checkboxes"> 
-                      <input class="nhsuk-checkboxes__input" id="entitlement-doc-is-unknown-or-not-found" name="reasons-for-contestation" type="checkbox" value="Incorrect treatment information provided" data-aria-controls="conditional-contestation-reason-4" aria-expanded="false">
-                      <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-doc-is-unknown-or-not-found">
+                      <input class="nhsuk-checkboxes__input" id="incorrect-entitlement-submitted" name="reasons-for-contestation" type="checkbox" value="Incorrect entitlement submitted for the claimant" data-aria-controls="conditional-contestation-reason-4" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="incorrect-entitlement-submitted">
+                        Incorrect entitlement submitted for the claimant
+                      </label>
+                    </div>
+
+                    <div class="nhsuk-checkboxes__item" data-module="nhsuk-checkboxes"> 
+                      <input class="nhsuk-checkboxes__input" id="incorrect-treatment-submitted" name="reasons-for-contestation" type="checkbox" value="Incorrect treatment information provided" data-aria-controls="conditional-contestation-reason-5" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="incorrect-treatment-submitted">
                         Incorrect treatment information provided
                       </label>
                     </div>
 
                     <div class="nhsuk-checkboxes__item" data-module="nhsuk-checkboxes"> 
-                      <input class="nhsuk-checkboxes__input" id="lump-sum-category-is-incorrect" name="reasons-for-contestation" type="checkbox" value="Member state needs a copy of entitlement document" data-aria-controls="conditional-contestation-reason-5" aria-expanded="false">
-                      <label class="nhsuk-label nhsuk-checkboxes__label" for="lump-sum-category-is-incorrect">
+                      <input class="nhsuk-checkboxes__input" id="ms-needs-copy-of-entitlement" name="reasons-for-contestation" type="checkbox" value="Member state needs a copy of entitlement document" data-aria-controls="conditional-contestation-reason-6" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="ms-needs-copy-of-entitlement">
                         Member state needs a copy of entitlement document
                       </label>
                     </div>
 
                     <div class="nhsuk-checkboxes__item" data-module="nhsuk-checkboxes"> 
-                      <input class="nhsuk-checkboxes__input" id="person-not-insured-during-lump-sum-period" name="reasons-for-contestation" type="checkbox" value="The claimant is insured for their healthcare in the UK by another means. For example at the time of treatment they had an S1 or they were ordinarily resident in the UK" data-aria-controls="conditional-contestation-reason-6" aria-expanded="false">
-                      <label class="nhsuk-label nhsuk-checkboxes__label" for="person-not-insured-during-lump-sum-period">
+                      <input class="nhsuk-checkboxes__input" id="person-insured-by-other-ms" name="reasons-for-contestation" type="checkbox" value="The claimant is insured for their healthcare in the UK by another means. For example at the time of treatment they had an S1 or they were ordinarily resident in the UK" data-aria-controls="conditional-contestation-reason-7" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="person-insured-by-other-ms">
                         The claimant is insured for their healthcare in the UK by another means. For example at the time of treatment they had an S1 or they were ordinarily resident in the UK
                       </label>
                     </div>
 
                     <div class="nhsuk-checkboxes__item" data-module="nhsuk-checkboxes"> 
-                      <input class="nhsuk-checkboxes__input" id="period-of-lump-sum-not-covered-by-entitlement-period" name="reasons-for-contestation" type="checkbox" value="The entitlement document is not valid or only covers part of the treatment period" data-aria-controls="conditional-contestation-reason-7" aria-expanded="false">
-                      <label class="nhsuk-label nhsuk-checkboxes__label" for="period-of-lump-sum-not-covered-by-entitlement-period">
+                      <input class="nhsuk-checkboxes__input" id="entitlement-not-valid-for-entire-treatment-period" name="reasons-for-contestation" type="checkbox" value="The entitlement document is not valid or only covers part of the treatment period" data-aria-controls="conditional-contestation-reason-8" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="entitlement-not-valid-for-entire-treatment-period">
                         The entitlement document is not valid or only covers part of the treatment period
                       </label>
                     </div>
 
                     <div class="nhsuk-checkboxes__item" data-module="nhsuk-checkboxes"> 
-                      <input class="nhsuk-checkboxes__input" id="period-of-lump-sum-partially-covered-by-entitlement-period" name="reasons-for-contestation" type="checkbox" value="The institution details are incorrect or missing" data-aria-controls="conditional-contestation-reason-8" aria-expanded="false">
-                      <label class="nhsuk-label nhsuk-checkboxes__label" for="period-of-lump-sum-partially-covered-by-entitlement-period">
+                      <input class="nhsuk-checkboxes__input" id="institution-details-incorrect-or-missing" name="reasons-for-contestation" type="checkbox" value="The institution details are incorrect or missing" data-aria-controls="conditional-contestation-reason-9" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="institution-details-incorrect-or-missing">
                         The institution details are incorrect or missing
                       </label>
                     </div>
 
                     <div class="nhsuk-checkboxes__item" data-module="nhsuk-checkboxes"> 
-                      <input class="nhsuk-checkboxes__input" id="costs-to-be-settled-by-actual-costs-from-date-given" name="reasons-for-contestation" type="checkbox" value="The institution needs a detailed breakdown of the treatment costs" data-aria-controls="conditional-contestation-reason-9" aria-expanded="false">
-                      <label class="nhsuk-label nhsuk-checkboxes__label" for="costs-to-be-settled-by-actual-costs-from-date-given">
+                      <input class="nhsuk-checkboxes__input" id="institution-needs-breakdown-of-treatment-cost" name="reasons-for-contestation" type="checkbox" value="The institution needs a detailed breakdown of the treatment costs" data-aria-controls="conditional-contestation-reason-10" aria-expanded="false">
+                      <label class="nhsuk-label nhsuk-checkboxes__label" for="institution-needs-breakdown-of-treatment-cost">
                         The institution needs a detailed breakdown of the treatment costs
                       </label>
                     </div>

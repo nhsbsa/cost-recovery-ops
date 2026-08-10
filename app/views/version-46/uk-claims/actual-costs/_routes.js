@@ -725,16 +725,32 @@ router.get([/treatment-details/], function(req, res) {
   });
 });
 
-// Select the reason/s for contestation
 router.post('/treatment-reasons-for-contestation', function(req, res) {
 
-  let contestationReasons =
-    req.session.data['reasons-for-contestation'] || [];
+  let contestationReasons = req.body['reasons-for-contestation'] || [];
 
-  // Convert to array if only one checkbox selected
+  // Convert to array if only one checkbox is selected
   if (!Array.isArray(contestationReasons)) {
     contestationReasons = [contestationReasons];
   }
+
+  // Remove unchecked values
+  contestationReasons = contestationReasons.filter(reason => reason !== '_unchecked');
+
+  // Capture the free-text "Other" reason
+  const otherContestationReason = req.body['other-contestation-reason'] || '';
+
+  // Make sure contestation_reasons exists
+  req.session.data.contestation_reasons =
+    req.session.data.contestation_reasons || {};
+
+  // Store the selected reasons against the treatment
+  const treatment = req.session.data.treatment || 'Jane';
+
+  req.session.data.contestation_reasons[treatment] = {
+    reasons: contestationReasons,
+    otherContestationReason: otherContestationReason
+  };
 
   const reasonsRequiringAdditionalDetails = [
     'A duplicate or double treatment has been claimed',
@@ -742,7 +758,6 @@ router.post('/treatment-reasons-for-contestation', function(req, res) {
     'The entitlement document is not valid or only covers part of the treatment period'
   ];
 
-  // Check whether ANY selected reason requires details
   const requiresAdditionalDetails = contestationReasons.some(reason =>
     reasonsRequiringAdditionalDetails.includes(reason)
   );
@@ -758,6 +773,7 @@ router.post('/treatment-reasons-for-contestation', function(req, res) {
     req.session.data['additional-details-required'] = 'no';
 
     res.redirect('/version-46/uk-claims/actual-costs/treatment-reasons-for-contestation');
+
   }
 
 });
