@@ -233,21 +233,22 @@ Reason for contacting OVM
                     <div class="nhsuk-summary-list__row">
                        <dt class="nhsuk-summary-list__key" id="ovm-contacted-reasons-label">Information requested</dt>
                        <dd class="nhsuk-summary-list__value">
-                      {% set contactOVMReasons = data['reasons-to-contact-ovm'] %}
-  
-                       {% if contactOVMReasons %}
-                         <ol class="nhsuk-list nhsuk-list--number">
-                           {% if contactOVMReasons is string %}
-                             <li>{{ contactOVMReasons }}</li>
-                           {% else %}
-                             {% for contactOVMReasons in contactOVMReasons %}
-                               <li>{{ contactOVMReasons }}</li>
-                             {% endfor %}
-                           {% endif %}
-                         </ol>
-                       {% else %}
-                         1. Confirmation that the costs are correct
-                       {% endif %}
+                        {% set contactOVMReasons = data['reasons-to-contact-ovm'] %}
+
+                        {% if contactOVMReasons %}
+                          <ol class="nhsuk-list nhsuk-list--number">
+                            {% if contactOVMReasons is string %}
+                              <li>{{ contactOVMReasons }}</li>
+                            {% else %}
+                              {% for reason in contactOVMReasons %}
+                                <li>{{ reason }}</li>
+                              {% endfor %}
+                            {% endif %}
+                          </ol>
+                        {% else %}
+                          1. Confirmation of whether this is a duplicate treatment or not<br>
+                          (Duplicate treatment ID: 123456)
+                        {% endif %}
                        </dd>
                     </div>
                  </dl>

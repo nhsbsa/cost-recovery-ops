@@ -851,48 +851,95 @@ router.post('/cya-reason-for-contestation', function(req, res) {
 
 // OVM Contact
 // What do you need to request from the Overseas Visitor Manager (OVM)?
-router.post('/contact-ovm', function (req, res) {
+router.post('/contact-ovm', function(req, res) {
 
   let contactOVMReasons = req.body['reasons-to-contact-ovm'] || [];
 
+  // Ensure it's always an array
   if (!Array.isArray(contactOVMReasons)) {
     contactOVMReasons = [contactOVMReasons];
   }
 
-  // Remove unchecked values
-  contactOVMReasons = contactOVMReasons.filter(reason =>
-    reason && reason !== '_unchecked'
-  );
+  // Remove unwanted values such as "_unchecked"
+  contactOVMReasons = contactOVMReasons.filter(function(reason) {
+    return reason && reason !== '_unchecked';
+  });
 
-  // Store the CLEAN array
+  // Capture the "Other" free-text comments
+  const otherContactOVMReasonComments =
+    (req.body['other-reason-to-contact-ovm-comments'] || '').trim();
+
+  // If "Other" was selected and comments have been entered,
+  // combine them into the same list item
+  if (otherContactOVMReasonComments) {
+    contactOVMReasons = contactOVMReasons.map(function(reason) {
+
+      if (reason === 'Other') {
+        return 'Other - ' + otherContactOVMReasonComments;
+      }
+
+      return reason;
+
+    });
+  }
+
+  // Store the reasons in session
   req.session.data['reasons-to-contact-ovm'] = contactOVMReasons;
 
+  // Also store the free-text separately
+  req.session.data['other-reason-to-contact-ovm-comments'] =
+    otherContactOVMReasonComments;
+
+  // Mark the page as submitted
   req.session.data['reason-to-contact-ovm-submitted'] = 'Yes';
 
-  res.redirect('/version-46/uk-claims/actual-costs/contact-ovm');
+  res.redirect('/version-46/uk-claims/actual-costs/contact-ovm?treatment=Jane');
+
 });
 
 // Select the response received from the OVM
 router.post('/ovm-response', function(req, res) {
 
-  const ovmResponseDynamicsReference = req.session.data['ovm-response-dynamics-ref']
+  // Capture the Dynamics reference number in the session data
+  const ovmResponseDynamicsReference = req.session.data['ovm-response-dynamics-ref'];
+
   // Store the Dynamics reference number in the session data
   req.session.data['ovm-response-dynamics-ref'] = ovmResponseDynamicsReference;
 
+  // Capture the "Other" free-text response
+  const otherOVMResponseComments = (req.body['other-ovm-response-comments'] || '').trim();
+
+  // Capture the selected OVM responses
   let ovmResponse = req.body['ovm-response-received'] || [];
 
-  // Ensure it's always an array
   if (!Array.isArray(ovmResponse)) {
     ovmResponse = [ovmResponse];
   }
 
-  // Remove unwanted values like "_unchecked"
-  ovmResponse = ovmResponse.filter(r => r && r !== '_unchecked');
+  // Remove unwanted values such as "_unchecked"
+  ovmResponse = ovmResponse.filter(function(response) {
+    return response && response !== '_unchecked';
+  });
 
+  // If "Other" has been selected and free-text has been entered
+  if (otherOVMResponseComments) {
+    ovmResponse = ovmResponse.filter(function(response) {
+      return response !== 'Other';
+    });
+
+    ovmResponse.push(otherOVMResponseComments);
+  }
+
+  // Store the responses in session data
   req.session.data['ovm-response-received'] = ovmResponse;
+
+  // Store the free-text separately as well, in case it is needed elsewhere
+  req.session.data['other-ovm-response-comments'] = otherOVMResponseComments;
+
   req.session.data['ovm-response-submitted'] = 'Yes';
 
   res.redirect('/version-46/uk-claims/actual-costs/request-additional-information-from-ovm');
+
 });
 
 // Do you want to request any additional information from the OVM?
