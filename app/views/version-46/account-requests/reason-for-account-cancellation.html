@@ -16,34 +16,7 @@ Reason for account cancellation - Manage overseas entitlements and treatments
 <!-- Breadcrumb goes inside the beforeContent block -->
 {% block beforeContent %}
 <!--start breadcrumb-->
-<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
-  <div class="nhsuk-width-container-fluid">
-    <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-full">
 
-        <ol class="nhsuk-breadcrumb__list">
-            <li class="nhsuk-breadcrumb__list-item">
-              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
-            </li>
-            <li class="nhsuk-breadcrumb__list-item">
-              <a class="nhsuk-breadcrumb__link" href="approved-requests">Account requests (Approved)</a>
-            </li>
-            <li class="nhsuk-breadcrumb__list-item">
-              <a class="nhsuk-breadcrumb__link" href="view-approved-request">Account request (David Fuller)</a>
-            </li>
-            <li class="nhsuk-breadcrumb__list-item">Reason</li>
-        </ol>
-
-      </div>
-    </div>
-
-    <a class="nhsuk-back-link" href="review-pending-request">
-      <span class="nhsuk-u-visually-hidden">Back to </span>
-      Account request (David Fuller)
-    </a>
-
-  </div>
-</nav>
 <!--end breadcrumb-->
 {% endblock %}
 
@@ -56,6 +29,12 @@ Reason for account cancellation - Manage overseas entitlements and treatments
     <div class="nhsBSA-sidebar-content">
       <div class="nhsuk-width-container-fluid">
         <div class="nhsuk-main-wrapper" id="maincontent">
+
+          {{ backLink({
+            "href": "javascript:history.go(-1)",
+            "text": "Go back",
+            "classes": "nhsuk-u-margin-bottom-4"
+          }) }}
 
           <div class="nhsuk-grid-row">
             <div class="nhsuk-grid-column-full">
@@ -118,6 +97,8 @@ Reason for account cancellation - Manage overseas entitlements and treatments
                   </button>
               </div>
             </div>
+
+            <p style="margin-top: 20px;"><a href="exit-cancelling-ovms-account?from=/version-46/account-requests/reason-for-account-cancellation">Cancel</a></p>
 
               
           </form>

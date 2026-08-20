@@ -1046,4 +1046,24 @@ router.post('/ovm-details', function(req, res) {
   // Redirect to the OVM details with new note displayed
   res.redirect('/version-46/uk-claims/actual-costs/ovm-details');
 });
+
+// Add a new note
+router.post('/enter-new-ovm-name', function(req, res) {
+
+  // Store the note
+  req.session.data['ovm-name'] = req.body['ovm-name'];
+
+  // Redirect to the OVM details with new note displayed
+  res.redirect('/version-46/uk-claims/actual-costs/check-new-ovm-details');
+});
+
+// Add a new note
+router.post('/check-new-ovm-details', function(req, res) {
+
+  // Conditional flag to track if OVM details updated to an active OVM
+  req.session.data['ovm-details-updated'] = 'Yes';
+
+  // Redirect to the OVM details with new note displayed
+  res.redirect('/version-46/uk-claims/actual-costs/ovm-details');
+});
 module.exports = router;

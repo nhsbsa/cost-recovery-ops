@@ -1,0 +1,106 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Enter the name of the OVM who should be the new point of contact - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+    
+            <form action="enter-new-ovm-name" method="post">
+
+            <div class="nhsuk-grid-row">
+            
+            <fieldset class="nhsuk-fieldset" aria-describedby="maintain-hint">
+  
+              <div class="nhsuk-form-group">
+                <div class="nhsuk-grid-column-two-thirds">
+                  <h1 class="nhsuk-heading-xl">
+                    Enter the name of the OVM who should be the new point of contact
+                  </h1>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" id="ovm-name-label" for="ovm-name" class="form-label">
+                      OVM's name
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-20" list="ovm-name" id="ovm-name-drop" name="ovm-name">
+                    <datalist id="ovm-name">
+                      <option value="Aaliyah Bennett">Aaliyah Bennett</option>
+                      <option value="Amelia Carter">Amelia Carter</option>
+                      <option value="Benjamin Clarke">Benjamin Clarke</option>
+                      <option value="Charlotte Davies">Charlotte Davies</option>
+                      <option value="Daniel Evans">Daniel Evans</option>
+                      <option value="Eleanor Foster">Eleanor Foster</option>
+                      <option value="Freddie Graham">Freddie Graham</option>
+                      <option value="Grace Harrison">Grace Harrison</option>
+                      <option value="Hannah Jackson">Hannah Jackson</option>
+                      <option value="Isaac Kelly">Isaac Kelly</option>
+                      <option value="Jack Lewis">Jack Lewis</option>
+                      <option value="Katie Mitchell">Katie Mitchell</option>
+                      <option value="Liam Nichols">Liam Nichols</option>
+                      <option value="Megan Oliver">Megan Oliver</option>
+                      <option value="Nathan Parker">Nathan Parker</option>
+                      <option value="Olivia Roberts">Olivia Roberts</option>
+                      <option value="Peter Smith">Peter Smith</option>
+                      <option value="Rachel Taylor">Rachel Taylor</option>
+                      <option value="Samuel Turner">Samuel Turner</option>
+                      <option value="Sophie Walker">Sophie Walker</option>
+                      <option value="Thomas Williams">Thomas Williams</option>
+                      <option value="Victoria Wood">Victoria Wood</option>
+                      <option value="William Adams">William Adams</option>
+                      <option value="Zoe Anderson">Zoe Anderson</option>
+                    </datalist>            
+                 </div>
+                  
+                
+                </div>
+              </div>
+              
+            </fieldset>
+
+            </div>
+
+            
+
+            <button class="nhsuk-button nhsuk-button--primary" type="submit" id="continue-button">Continue</button>
+        
+
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
