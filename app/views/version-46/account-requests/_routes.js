@@ -105,14 +105,14 @@ router.get('/exit-cancelling-ovms-account', function (req, res) {
     res.render('version-46/account-requests/exit-cancelling-ovms-account')
   })
   
-  router.post('/exit-cancelling-ovms-account', function (req, res) {
-    const exitCancelOVMSAccountJourney =
-      req.session.data['exit-cancel-ovms-account-journey']
-  
-    if (exitCancelOVMSAccountJourney === 'Yes') {
-      res.redirect('/version-46/account-requests/view-approved-request')
-    } else {
-      res.redirect(req.session.data['return-url'])
-    }
-  })
+router.post('/exit-cancelling-ovms-account', function (req, res) {
+const exitCancelOVMSAccountJourney =
+    req.session.data['exit-cancel-ovms-account-journey']
+
+if (exitCancelOVMSAccountJourney === 'Yes') {
+    res.redirect('/version-46/account-requests/view-approved-request')
+} else {
+    res.redirect(req.session.data['return-url'])
+}
+})
 module.exports = router

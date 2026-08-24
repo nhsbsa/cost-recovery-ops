@@ -71,9 +71,9 @@ Resub treatment OVM details
               </div>
               <div class="nhsuk-notification-banner__content">
                 <h3 class="nhsuk-notification-banner__heading">
-                  The OVM's details have been added
+                  OVM details updated
                 </h3>
-                <p>This change has been documented in the notes.</p>
+                <p>View changes  in the Notes section of the OVM details tab.</p>
               </div>
             </div>
             {% endif %}
@@ -186,35 +186,43 @@ Resub treatment OVM details
                 <dl class="nhsuk-summary-list">
                   <div class="nhsuk-summary-list__row">
                      <dt class="nhsuk-summary-list__key" id="ovm-name-label">OVM name</dt>
-                     {% if data['ovm-details-updated'] == 'Yes' %}
-                     <dd class="nhsuk-summary-list__value" id="ovm-name">{{ data['ovm-name'] }}</dd>
-                     {% else %}
-                     <dd class="nhsuk-summary-list__value" id="ovm-name">Hailey Smith</dd>
-                     {% endif %}
+                     <dd class="nhsuk-summary-list__value" id="ovm-name">
+                      {% if data['ovm-details-updated'] == 'Yes' %}
+                        {{ data['ovm-name'] }}
+                      {% else %}
+                        Hailey Smith
+                      {% endif %}
+                     </dd>
                   </div>
                   <div class="nhsuk-summary-list__row">
                      <dt class="nhsuk-summary-list__key" id="ovm-email-address-label">OVM email address</dt>
-                     {% if data['ovm-details-updated'] == 'Yes' %}
-                      grace.harrison@royalfreelondon.nhs.net
-                     {% else %}
-                     <dd class="nhsuk-summary-list__value" id="ovm-email-address">hailey.smith@nhstrust.net</dd>
-                     {% endif %}
+                     <dd class="nhsuk-summary-list__value" id="ovm-email-address">
+                      {% if data['ovm-details-updated'] == 'Yes' %}
+                        grace.harrison@royalfreelondon.nhs.net
+                      {% else %}
+                        hailey.smith@nhstrust.net
+                      {% endif %}
+                     </dd>
                   </div>
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key" id="ovm-telephone-number-label">Telephone number</dt>
-                    {% if data['ovm-details-updated'] == 'Yes' %}
-                      07712345678
-                    {% else %}
-                    <dd class="nhsuk-summary-list__value" id="ovm-telephone-number">07123456789</dd>
-                    {% endif %}
+                    <dd class="nhsuk-summary-list__value" id="ovm-telephone-number">
+                      {% if data['ovm-details-updated'] == 'Yes' %}
+                        07712345678
+                      {% else %}
+                        07123456789
+                      {% endif %}
+                    </dd>
                   </div>
                   <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key" id="ovm-status-label">OVM status</dt>
-                      {% if data['ovm-status'] == 'active' %}
-                      <dd class="nhsuk-summary-list__value" id="ovm-status">Active</dd>
+                    <dt class="nhsuk-summary-list__key" id="ovm-status-label">OVM status</dt>
+                    <dd class="nhsuk-summary-list__value" id="ovm-status">
+                      {% if data['ovm-details-updated'] == 'Yes' %}
+                        Active
                       {% else %}
-                      <dd class="nhsuk-summary-list__value" id="ovm-status">Inactive</dd>
+                        Inactive
                       {% endif %}
+                    </dd>
                   </div>
                   <div class="nhsuk-summary-list__row">
                     <dt class="nhsuk-summary-list__key" id="trust-name-label">Trust name</dt>
@@ -250,11 +258,11 @@ Resub treatment OVM details
                 </dl>
 
                 
-                <h2 class="nhsuk-heading-s">Add a note for the trust or the OVM (optional)</h2>
+                <h2 class="nhsuk-heading-s" style="margin-bottom: 10px;">Add a note about the trust or OVM (optional)</h2>
                 
                 <div class="nhsuk-form-group">
                   <label class="nhsuk-label nhsuk-u-visually-hidden" for="ovmNotes">Note for trust</label>
-                  <div class="nhsuk-hint">(For example, OVM has left the trust, OVM has switched from one trust to another.)</div>
+                  <div class="nhsuk-hint">For example, the OVM has left the trust or moved to a different trust.</div>
                   
                   <textarea class="nhsuk-textarea" id="ovmNote" name="ovm-note" method="post" rows="5"></textarea>
                 </div>

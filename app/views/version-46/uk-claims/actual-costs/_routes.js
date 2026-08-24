@@ -1066,4 +1066,22 @@ router.post('/check-new-ovm-details', function(req, res) {
   // Redirect to the OVM details with new note displayed
   res.redirect('/version-46/uk-claims/actual-costs/ovm-details');
 });
+
+// Are you sure you want to cancel updating the OVM's details?
+router.get('/cancel-updating-ovms-details', function (req, res) {
+  req.session.data['return-url'] = req.query.from
+
+  res.render('version-46/uk-claims/actual-costs/cancel-updating-ovms-details')
+})
+
+router.post('/cancel-updating-ovms-details', function (req, res) {
+  const cancelUpdatingOVMSDetails =
+    req.session.data['cancel-updating-ovms-details']
+
+  if (cancelUpdatingOVMSDetails === 'Yes') {
+    res.redirect('/version-46/uk-claims/actual-costs/ovm-details')
+  } else {
+    res.redirect(req.session.data['return-url'])
+  }
+})
 module.exports = router;
