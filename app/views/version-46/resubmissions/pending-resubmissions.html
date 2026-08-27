@@ -173,11 +173,11 @@ View pending resubmissions
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Reply deadline</span>
-                        <span>04/06/2026</span>
+                        <span>20/08/2027</span>
                       </td>
                       <td role="cell" class="nhsuk-table__cell">
                         <span class="nhsuk-table-responsive__heading">Assigned to</span>
-                        {% if data.resubStatus == 'assigned-for-review' or data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' %}
+                        {% if data.resubStatus == 'resubmission-sent-to-dh' %}
                           <span>nina.evans@nhsbsa.nhs.uk</span>
                         {% else %}
                           <span>joe.bloggs@nhsbsa.nhs.uk</span>
@@ -187,15 +187,11 @@ View pending resubmissions
                         <span class="nhsuk-table-responsive__heading">Resub status</span>
                         {% if data.resubStatus == 'resubmission-sent-to-dh' %}
                         <strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong>
-                        {% elif data.resubStatus == 'peer-reviewed' %}
+                        {% elif data.resubStatus == 'ready-to-send' %}
                           <strong class="nhsuk-tag nhsuk-tag">Ready to send</strong>
-                        {% elif data.resubStatus == 'assigned-for-review' %}
-                          <strong class="nhsuk-tag nhsuk-tag--white">Under review</strong>
-                        {% elif data.resubStatus == 'peer-review-requested' %}
-                          <strong class="nhsuk-tag nhsuk-tag--blue">To review</strong>
-                        {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                        {% elif data.resubStatus == 'documents-to-be-generated' %}
                           <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
-                        {% elif data.resubStatus == 'treatments-added-to-resub' %}
+                        {% elif data.resubStatus == 'invoices-added-to-resub' %}
                           <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
                         {% else %}
                           <strong class="nhsuk-tag nhsuk-tag--grey">To action</strong>

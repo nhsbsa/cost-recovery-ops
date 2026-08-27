@@ -105,12 +105,114 @@ UK claim ID 123456 - View the resubmission summary
                   <div class="nhsuk-card__content">
                     <dl class="nhsuk-summary-list">
 
+                      {% if data['resub-shell-edited'] == 'yes' %}
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
                           Contestation received on
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          4 June 2025
+                        {% if data['new-date-contestation-received-day'] and data['new-date-contestation-received-month'] and data['new-date-contestation-received-year'] %}
+
+                          {% set day = data['new-date-contestation-received-day'] | int %}
+                          {% set month = data['new-date-contestation-received-month'] | int %}
+                          {% set year = data['new-date-contestation-received-year'] %}
+                        
+                          {% set months = [
+                            'January',
+                            'February',
+                            'March',
+                            'April',
+                            'May',
+                            'June',
+                            'July',
+                            'August',
+                            'September',
+                            'October',
+                            'November',
+                            'December'
+                          ] %}
+                        
+                          {{ day }} {{ months[month - 1] }} {{ year }}
+                          
+                        {% endif %}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Member state reference
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {{ data['new-member-state-reference'] }}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date on contestation letter
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                        {% if data['new-date-on-contestation-letter-day'] and data['new-date-on-contestation-letter-month'] and data['new-date-on-contestation-letter-year'] %}
+
+                          {% set day = data['new-date-on-contestation-letter-day'] | int %}
+                          {% set month = data['new-date-on-contestation-letter-month'] | int %}
+                          {% set year = data['new-date-on-contestation-letter-year'] %}
+                        
+                          {% set months = [
+                            'January',
+                            'February',
+                            'March',
+                            'April',
+                            'May',
+                            'June',
+                            'July',
+                            'August',
+                            'September',
+                            'October',
+                            'November',
+                            'December'
+                          ] %}
+                        
+                          {{ day }} {{ months[month - 1] }} {{ year }}
+                        
+                        {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          UK deadline to reply
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          31 August 2027
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Number of contested invoices
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {{ data['new-number-of-contested-invoices'] }}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Total number of contested months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {{ data['new-number-of-contested-months'] }}
+                        </dd>
+                      </div>
+
+                      {% else %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Contestation received on
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          2 September 2026
                         </dd>
                       </div>
 
@@ -128,7 +230,7 @@ UK claim ID 123456 - View the resubmission summary
                           Date on contestation letter
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          4 June 2025
+                          31 August 2026
                         </dd>
                       </div>
   
@@ -137,7 +239,7 @@ UK claim ID 123456 - View the resubmission summary
                           UK deadline to reply
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          4 June 2026
+                          31 August 2027
                         </dd>
                       </div>
   
@@ -146,7 +248,7 @@ UK claim ID 123456 - View the resubmission summary
                           Number of contested invoices
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          3
+                          2
                         </dd>
                       </div>
   
@@ -155,9 +257,10 @@ UK claim ID 123456 - View the resubmission summary
                           Total number of contested months
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          24
+                          7
                         </dd>
                       </div>
+                      {% endif %}
 
                       <div class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
@@ -182,7 +285,7 @@ UK claim ID 123456 - View the resubmission summary
                           Member state
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          France
+                          France (FR)
                         </dd>
                       </div>
 
@@ -219,6 +322,7 @@ UK claim ID 123456 - View the resubmission summary
                           {% endif %}
                         </dd>
                       </div>
+                      
 
                       <!--pdiv class="nhsuk-summary-list__row">
                         <dt class="nhsuk-summary-list__key">
@@ -261,13 +365,13 @@ UK claim ID 123456 - View the resubmission summary
                         Created on
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        13 March 2025
+                        2 September 2026
                       </dd>
                     </div>
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Assigned to
+                        Invoices added by
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         joe.bloggs@nhsbsa.nhs.uk
@@ -276,11 +380,11 @@ UK claim ID 123456 - View the resubmission summary
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Work completion date
+                        Resub documents generated by
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data.resubStatus in ['peer-review-requested', 'assigned-for-review', 'peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                          04 June 2025
+                        {% if data.resubStatus in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                          joe.bloggs@nhsbsa.nhs.uk
                         {% else %}
                           -
                         {% endif %}
@@ -289,24 +393,11 @@ UK claim ID 123456 - View the resubmission summary
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Peer reviewed by
+                        Date resub documents generated
                       </dt>
                       <dd class="nhsuk-summary-list__value">
-                        {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                          nina.evans@nhsbsa.nhs.uk
-                        {% else %}
-                          -
-                        {% endif %}
-                      </dd>
-                    </div>
-
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Peer review completion date
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                          13 June 2025
+                        {% if data.resubStatus in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                          2 September 2026
                         {% else %}
                           -
                         {% endif %}
@@ -314,18 +405,140 @@ UK claim ID 123456 - View the resubmission summary
                     </div>
                   </dl>
 
+                  {% if data['date-acknowledgement-letter-sent-to-ms-day'] and data['date-acknowledgement-letter-sent-to-ms-month'] and data['date-acknowledgement-letter-sent-to-ms-year'] %}
 
-                  {% if data.resubStatus in ['peer-reviewed', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date the acknowledgement letter was sent to the member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% set day = data['date-acknowledgement-letter-sent-to-ms-day'] | int %}
+                        {% set month = data['date-acknowledgement-letter-sent-to-ms-month'] | int %}
+                        {% set year = data['date-acknowledgement-letter-sent-to-ms-year'] %}
+
+                        {% set months = [
+                          'January',
+                          'February',
+                          'March',
+                          'April',
+                          'May',
+                          'June',
+                          'July',
+                          'August',
+                          'September',
+                          'October',
+                          'November',
+                          'December'
+                        ] %}
+
+                        {{ day }} {{ months[month - 1] }} {{ year }}
+                      </dd>
+                    </div>
+                  </dl>
+
+                {% elif data['resub-shell-edited'] == 'yes' %}
+
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Date the acknowledgement letter was sent to the member state
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+
+                        {% if data['new-date-acknowledgement-letter-sent-to-ms-day'] and data['new-date-acknowledgement-letter-sent-to-ms-month'] and data['new-date-acknowledgement-letter-sent-to-ms-year'] %}
+
+                          {% set day = data['new-date-acknowledgement-letter-sent-to-ms-day'] | int %}
+                          {% set month = data['new-date-acknowledgement-letter-sent-to-ms-month'] | int %}
+                          {% set year = data['new-date-acknowledgement-letter-sent-to-ms-year'] %}
+
+                          {% set months = [
+                            'January',
+                            'February',
+                            'March',
+                            'April',
+                            'May',
+                            'June',
+                            'July',
+                            'August',
+                            'September',
+                            'October',
+                            'November',
+                            'December'
+                          ] %}
+
+                          {{ day }} {{ months[month - 1] }} {{ year }}
+
+                        {% endif %}
+
+                      </dd>
+                    </div>
+                  </dl>
+                  
+
+                  {% else %}
                   <div class="nhsuk-form-group" style="margin-top: 30px;">
                     <label class="nhsuk-label" for="call-no">
-                      <b>When was the resubmission sent to the member state? (Optional)</b>
+                      <b>When was the acknowledgement sent to the member state? (Optional)</b>
                     </label>
                     <div class="nhsuk-hint" id="contact-hint">
-                      You must enter the name of the person who sent the resub if you answer this question.
+                      You must enter the name of the person who sent the acknowledgement letter if you answer this question.
                     </div>
                     <div class="nhsuk-hint" id="contact-hint">
                       For example, 31 3 2022
                     </div>
+
+                    <div class="nhsuk-date-input" id="date-acknowledgement-letter-sent-to-ms">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-acknowledgement-letter-sent-to-ms-day" name="date-acknowledgement-letter-sent-to-ms-day" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ dateParts[0] }}" >
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-acknowledgement-letter-sent-to-ms-month" name="date-acknowledgement-letter-sent-to-ms-month" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ dateParts[1] }}" >
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-acknowledgement-letter-sent-to-ms-year" name="date-acknowledgement-letter-sent-to-ms-year" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ dateParts[2] }}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  <div class="nhsuk-form-group" style="margin-top: 30px;">
+                    <label class="nhsuk-label" for="name-of-person-who-sent-acknowledgement-letter-label">
+                     <b>Who sent the acknowledgement letter? (Optional)</b>
+                    </label>
+                    <div class="nhsuk-hint" id="name-of-person-who-sent-acknowledgement-letter-hint-1">
+                      You must enter the date the acknowledgement letter was sent if you answer this question.
+                    </div>
+                    <div class="nhsuk-hint" id="name-of-person-who-sent-acknowledgement-letter-hint-2">
+                      Enter their full name
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="resubmission-sent-to-ms-by" name="resubmission-sent-to-ms-by" type="text" value="{{ data['resubmission-sent-to-ms-by'] }}">
+                  </div>
+
+                  <hr>
+                  
+
+
+                  {% if data.resubStatus in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                  <div class="nhsuk-form-group" style="margin-top: 30px;">
+                    <label class="nhsuk-label" for="call-no">
+                      <b>When was the resubmission sent to the member state? (Optional)</b>
+                    </label>
 
                     {% if data['date-resubmission-sent-to-ms'] %}
                       {% set dateParts = data['date-resubmission-sent-to-ms'].split('/') %}
@@ -366,9 +579,6 @@ UK claim ID 123456 - View the resubmission summary
                      <b>Who sent the resubmission? (Optional)</b>
                     </label>
                     <div class="nhsuk-hint" id="contact-hint">
-                      You must enter the date the resub was sent if you answer this question.
-                    </div>
-                    <div class="nhsuk-hint" id="contact-hint">
                       Enter their full name
                     </div>
                     <input class="nhsuk-input nhsuk-input--width-20" id="resubmission-sent-to-ms-by" name="resubmission-sent-to-ms-by" type="text" value="{{ data['resubmission-sent-to-ms-by'] }}">
@@ -380,9 +590,6 @@ UK claim ID 123456 - View the resubmission summary
                     <label class="nhsuk-label" for="date-resubmission-uploaded-to-dh-exchange-label">
                       <b>When was the resubmission uploaded to the DH eXchange?</b>
                     </label>
-                    <div class="nhsuk-hint" id="contact-hint">
-                      For example, 31 3 2022
-                    </div>
 
                     {% if data['date-resubmission-uploaded-to-dh-exchange'] %}
                       {% set dateParts = data['date-resubmission-uploaded-to-dh-exchange'].split('/') %}

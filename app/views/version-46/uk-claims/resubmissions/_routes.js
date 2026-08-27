@@ -27,17 +27,15 @@ router.get([/resubmission-summary/], function(req, res) {
 
   // === Status calculation logic
   const statuses = data.invoiceStatuses || {};
-  const invoiceList = ['John', 'Alexander', 'Henri'];
+  const invoiceList = ['Jane', 'John'];
 
   const allReviewed = Object.keys(statuses).length === invoiceList.length &&
                       Object.values(statuses).every(status => status !== '');
 
   const statusPriority = [
     'invoices-added-to-resub',
-    'ready-to-send-for-peer-review',
-    'peer-review-requested',
-    'assigned-for-review',
-    'peer-reviewed',
+    'documents-to-be-generated',
+    'ready-to-send',
     'resubmission-sent-to-dh',
     'resubmission-completed'
   ];
@@ -46,7 +44,7 @@ router.get([/resubmission-summary/], function(req, res) {
   let currentIndex = statusPriority.indexOf(currentStatus);
 
   if (!currentStatus || currentStatus === 'invoices-added-to-resub') {
-    currentStatus = allReviewed ? 'ready-to-send-for-peer-review' : 'invoices-added-to-resub';
+    currentStatus = allReviewed ? 'documents-to-be-generated' : 'invoices-added-to-resub';
     currentIndex = statusPriority.indexOf(currentStatus);
   }
 
@@ -68,9 +66,9 @@ router.get([/resubmission-summary/], function(req, res) {
   }
 
   if (allReviewed) {
-    const reviewedIndex = statusPriority.indexOf('ready-to-send-for-peer-review');
+    const reviewedIndex = statusPriority.indexOf('documents-to-be-generated');
     if (reviewedIndex > currentIndex) {
-      currentStatus = 'ready-to-send-for-peer-review';
+      currentStatus = 'documents-to-be-generated';
     }
   }
 
@@ -129,6 +127,15 @@ router.post([/create-new-resubmission/], function(req, res) {
     : '12/03/2025';
   req.session.data['date-on-contestation-letter'] = dateOnContestationLetter;
 
+  // Date acknowledgement letter sent to the member state
+  const acknowledgmentLetterDay = req.body['date-acknowledgement-letter-sent-to-ms-day'];
+  const acknowledgmentLetterMonth = req.body['date-acknowledgement-letter-sent-to-ms-month'];
+  const acknowledgmentLetterYear = req.body['date-acknowledgement-letter-sent-to-ms-year'];
+  const dateAcknowledgementLetterSent = acknowledgmentLetterDay && acknowledgmentLetterMonth && acknowledgmentLetterYear
+    ? `${acknowledgmentLetterDay}/${acknowledgmentLetterMonth}/${acknowledgmentLetterYear}`
+    : 'Not provided';
+  req.session.data['date-acknowledgement-letter-sent-to-ms'] = dateAcknowledgementLetterSent;
+
   // Store other form fields
   req.session.data['number-of-contested-invoices'] = req.body['number-of-contested-invoices'];
   req.session.data['number-of-contested-months'] = req.body['number-of-contested-months'];
@@ -149,6 +156,55 @@ router.get([/create-new-resubmission-cya/], function(req, res) {
   });
 });
 
+
+// Edit resubmission details
+router.post([/edit-resubmission-details/], function(req, res) {
+  // New date contestation received
+  const newReceivedDay = req.body['date-contestation-received-day'];
+  const newReceivedMonth = req.body['date-contestation-received-month'];
+  const newReceivedYear = req.body['date-contestation-received-year'];
+  const newDateContestationReceived = newReceivedDay && newReceivedMonth && newReceivedYear
+    ? `${newReceivedDay}/${newReceivedMonth}/${newReceivedYear}`
+    : '31/08/2026';
+  req.session.data['new-date-contestation-received'] = newDateContestationReceived;
+
+  // New date on contestation letter
+  const newLetterDay = req.body['new-date-on-contestation-letter-day'];
+  const newLetterMonth = req.body['new-date-on-contestation-letter-month'];
+  const newLetterYear = req.body['new-date-on-contestation-letter-year'];
+  const newDateOnContestationLetter = newLetterDay && newLetterMonth && newLetterYear
+    ? `${newLetterDay}/${newLetterMonth}/${newLetterYear}`
+    : '31/08/2026';
+  req.session.data['new-date-on-contestation-letter'] = newDateOnContestationLetter;
+
+  // New date acknowledgement letter sent to the member state
+  const newAcknowledgmentLetterDay = req.body['new-date-acknowledgement-letter-sent-to-ms-day'];
+  const newAcknowledgmentLetterMonth = req.body['new-date-acknowledgement-letter-sent-to-ms-month'];
+  const newAcknowledgmentLetterYear = req.body['new-date-acknowledgement-letter-sent-to-ms-year'];
+  const newDateAcknowledgementLetterSent = newAcknowledgmentLetterDay && newAcknowledgmentLetterMonth && newAcknowledgmentLetterYear
+    ? `${newAcknowledgmentLetterDay}/${newAcknowledgmentLetterMonth}/${newAcknowledgmentLetterYear}`
+    : 'Not provided';
+  req.session.data['new-date-acknowledgement-letter-sent-to-ms'] = newDateAcknowledgementLetterSent;
+
+  // Store other form fields
+  req.session.data['new-number-of-contested-invoices'] = req.body['new-number-of-contested-invoices'];
+  req.session.data['new-number-of-contested-months'] = req.body['new-number-of-contested-months'];
+  req.session.data['new-member-state-reference'] = req.body['new-member-state-reference'];
+
+  // Redirect to next screen
+  res.redirect('/version-46/uk-claims/resubmissions/edit-resubmission-details-cya');
+});
+
+// Pull through the input data onto the cya screen
+router.get([/edit-resubmission-details-cya/], function(req, res) {
+
+  // Conditional flag to track resubmission
+  req.session.data['resub-shell-edited'] = 'yes';
+
+  res.render('version-46/uk-claims/resubmissions/edit-resubmission-details-cya', {
+    data: req.session.data
+  });
+});
 
 
 // Handle invoice selection on the add-invoices-to-resubmission screen
@@ -191,10 +247,8 @@ router.get([/claim-resubmissions/], function(req, res) {
 
   const statusPriority = [
     'invoices-added-to-resub',
-    'ready-to-send-for-peer-review',
-    'peer-review-requested',
-    'assigned-for-review',
-    'peer-reviewed',
+    'documents-to-be-generated',
+    'ready-to-send',
     'resubmission-sent-to-dh',
     'resubmission-completed'
   ];
@@ -218,14 +272,14 @@ router.get([/claim-resubmissions/], function(req, res) {
 
   // --- Invoice review checks ---
   const statuses = data.invoiceStatuses || {};
-  const invoiceList = ['John', 'Alexander', 'Henri'];
+  const invoiceList = ['Jane', 'John'];
 
   const allReviewed = Object.keys(statuses).length === invoiceList.length &&
                       Object.values(statuses).every(status => status !== '');
 
   if (allReviewed) {
-    if (statusPriority.indexOf('ready-to-send-for-peer-review') > statusPriority.indexOf(desiredStatus)) {
-      desiredStatus = 'ready-to-send-for-peer-review';
+    if (statusPriority.indexOf('documents-to-be-generated') > statusPriority.indexOf(desiredStatus)) {
+      desiredStatus = 'documents-to-be-generated';
     }
   }
 
@@ -243,6 +297,19 @@ router.post([/resubmission-summary/], function (req, res) {
   data['resub-summary-details-updated'] = 'yes';
 
   const existingStatus = data.resubStatus || '';
+
+  // === Acknowledgement letter sent to MS date handling ===
+  const acknowledgementLetterMSDay = req.body['date-acknowledgement-letter-sent-to-ms-day'];
+  const acknowledgementLetterMSMonth = req.body['date-acknowledgement-letter-sent-to-ms-month'];
+  const acknowledgementLetterMSYear = req.body['date-acknowledgement-letter-sent-to-ms-year'];
+
+  const acknowledgementLetterMSDateEntered = acknowledgementLetterMSDay && acknowledgementLetterMSMonth && acknowledgementLetterMSYear;
+
+  if (acknowledgementLetterMSDateEntered) {
+    data['date-acknowledgement-letter-sent-to-ms'] = `${acknowledgementLetterMSDay}/${acknowledgementLetterMSMonth}/${acknowledgementLetterMSYear}`;
+  } else if (!data['date-acknowledgement-letter-sent-to-ms']) {
+    data['date-acknowledgement-letter-sent-to-ms'] = '';
+  }
 
   // === Claim sent to MS date handling ===
   const msDay = req.body['date-resubmission-sent-to-ms-day'];
@@ -273,19 +340,15 @@ router.post([/resubmission-summary/], function (req, res) {
   // === Status Upgrade Logic ===
   const statusPriority = [
     'invoices-added-to-resub',
-    'ready-to-send-for-peer-review',
-    'peer-review-requested',
-    'assigned-for-review',
-    'peer-reviewed',
+    'documents-to-be-generated',
+    'ready-to-send',
     'resubmission-sent-to-dh',
     'resubmission-completed'
   ];
 
   const reviewStatuses = [
-    'ready-to-send-for-peer-review',
-    'peer-review-requested',
-    'assigned-for-review',
-    'peer-reviewed'
+    'documents-to-be-generated',
+    'ready-to-send'
   ];
 
   let desiredStatus = existingStatus;
@@ -312,17 +375,17 @@ router.post([/resubmission-summary/], function (req, res) {
 
   // === Recheck invoice reviews and auto-upgrade ===
   const statuses = data.invoiceStatuses || {};
-  const invoiceList = ['John', 'Alexander', 'Henri'];
+  const invoiceList = ['Jane', 'John'];
 
   const allReviewed = Object.keys(statuses).length === invoiceList.length &&
                       Object.values(statuses).every(status => status !== '');
 
   if (allReviewed) {
-    const reviewIndex = statusPriority.indexOf('ready-to-send-for-peer-review');
+    const reviewIndex = statusPriority.indexOf('documents-to-be-generated');
     const currentStatusIndex = statusPriority.indexOf(data.resubStatus);
 
     if (reviewIndex > currentStatusIndex) {
-      data.resubStatus = 'ready-to-send-for-peer-review';
+      data.resubStatus = 'documents-to-be-generated';
     }
   }
 
@@ -584,9 +647,8 @@ router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
 
   const invoice = req.session.data.invoice; // e.g. 'John'
   const invoiceMonths = {
-    'John': 6,
-    'Alexander': 7,
-    'Henri': 11
+    'Jane': 0,
+    'John': 4
   };
 
   // Set status as 'Partial'
@@ -599,8 +661,8 @@ router.post([/cya-partial-maintain-and-partial-withdraw/], function(req, res) {
   req.session.data.invoiceMonthSplits = req.session.data.invoiceMonthSplits || {};
 
   req.session.data.invoiceMonthSplits[invoice] = {
-    maintained: 6, // Adjust this if letting users decide
-    withdrawn: 5   // Remaining from Henri's total of 11 months
+    maintained: 1, // 1 month maintained from John
+    withdrawn: 6   // 3 months withdrawn from Jane plus 3 months withdrawn from John
   };
 
   res.redirect('/version-46/uk-claims/resubmissions/invoices-within-resubmission');
@@ -673,9 +735,8 @@ router.post([/withdraw-additional-comments/], function(req, res) {
 router.post([/cya-withdraw/], function(req, res) {
   const invoice = req.session.data.invoice; // e.g. 'Jane'
   const invoiceMonths = {
-    'John': 6,
-    'Alexander': 7,
-    'Henri': 11
+    'Jane': 0,
+    'John': 4
   };
 
   // Set invoice status
@@ -777,16 +838,15 @@ router.post([/cya-maintain/], function(req, res) {
 
   // Original months per invoice
   const invoiceMonths = {
-    'John': 6,
-    'Alexander': 7,
-    'Henri': 11
+    'Jane': 0,
+    'John': 4
   };
 
   if (invoice) {
     req.session.data.invoiceStatuses = req.session.data.invoiceStatuses || {};
     req.session.data.invoiceStatuses[invoice] = 'Maintained';
 
-    // Update invoiceMonthSplits (was missing!)
+    // Update invoiceMonthSplits
     req.session.data.invoiceMonthSplits = req.session.data.invoiceMonthSplits || {};
     req.session.data.invoiceMonthSplits[invoice] = {
       maintained: invoiceMonths[invoice] || 0,
@@ -801,29 +861,21 @@ router.post([/cya-maintain/], function(req, res) {
 router.get([/invoices-within-resubmission/], function (req, res) {
   const data = req.session.data;
   const statuses = data.invoiceStatuses || {};
-  const invoiceList = ['John', 'Alexander', 'Henri'];
+  const invoiceList = ['Jane', 'John'];
 
   const allReviewed = Object.keys(statuses).length === invoiceList.length &&
                       Object.values(statuses).every(status => status !== '');
 
   const currentStatus = data.resubStatus;
 
-  // Update to 'ready-to-send-for-peer-review' if everything reviewed and we're still in early status
+  // Update to 'documents-to-be-generated' if everything reviewed and we're still in early status
   if (allReviewed && (!currentStatus || currentStatus === 'invoices-added-to-resub')) {
-    data.resubStatus = 'ready-to-send-for-peer-review';
+    data.resubStatus = 'documents-to-be-generated';
   }
 
   // Handle transitions
-  if (req.query['send-for-peer-review'] === 'yes') {
-    data.resubStatus = 'peer-review-requested';
-  }
-
-  if (req.query['assign-to-me'] === 'yes') {
-    data.resubStatus = 'assigned-for-review';
-  }
-
-  if (req.query['set-as-peer-reviewed'] === 'yes') {
-    data.resubStatus = 'peer-reviewed';
+  if (req.query['documents-to-be-generated'] === 'yes') {
+    data.resubStatus = 'ready-to-send';
   }
 
   res.render('version-46/uk-claims/resubmissions/invoices-within-resubmission', {
@@ -887,14 +939,14 @@ router.get([/resubmission-history/], function (req, res) {
   const showUploadedToDHRow = summaryUpdated && data['date-resubmission-uploaded-to-dh-exchange'];
   const showDeliveredToMSRow = summaryUpdated && data['date-resubmission-delivered-to-ms'];
 
-  const isPeerReviewed = data.resubStatus === 'peer-reviewed';
+  const isReadyToSend = data.resubStatus === 'ready-to-send';
 
   res.render('version-46/uk-claims/resubmissions/resubmission-history', {
     data,
     showSentToMSRow,
     showUploadedToDHRow,
     showDeliveredToMSRow,
-    isPeerReviewed
+    isReadyToSend
   });
 });
 

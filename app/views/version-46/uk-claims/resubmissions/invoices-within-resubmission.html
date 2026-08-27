@@ -57,7 +57,7 @@ UK claim ID 123456 - Invoices within resubmission
           <div class="nhsuk-main-wrapper" id="maincontent">
           
 
-            {% if data['resubStatus'] ==  'peer-reviewed' %}
+            {% if data['resubStatus'] == 'ready-to-send' %}
             <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
               <div class="nhsuk-notification-banner__header">
                 <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
@@ -66,24 +66,9 @@ UK claim ID 123456 - Invoices within resubmission
               </div>
               <div class="nhsuk-notification-banner__content">
                 <h3 class="nhsuk-notification-banner__heading">
-                  Resub peer reviewed
+                  Resubmission documents generated
                 </h3>
-                <p>Resub 0000001 has been peer reviewed.</p>
-              </div>
-            </div>
-
-            {% elif data['resubStatus'] == 'peer-review-requested' %}
-            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
-              <div class="nhsuk-notification-banner__header">
-                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
-                  Success
-                </h2>
-              </div>
-              <div class="nhsuk-notification-banner__content">
-                <h3 class="nhsuk-notification-banner__heading">
-                  Resub sent for peer review
-                </h3>
-                <p>Resub 0000001 has been sent for peer review.</p>
+                <p>Resub 1160158 now ready to send to the member state.</p>
               </div>
             </div>
             {% endif %}
@@ -98,22 +83,16 @@ UK claim ID 123456 - Invoices within resubmission
                         Invoices within resub
                     </h1>
                   </div>
-                  {% if data.resubStatus == 'ready-to-send-for-peer-review' %}
+                  {% if data.resubStatus == 'documents-to-be-generated' %}
                   <div>
-                    <a href="invoices-within-resubmission?send-for-peer-review=yes">
+                    <a href="invoices-within-resubmission?resubStatus=ready-to-send">
                       <button class="nhsuk-button" type="submit">
-                        Send for peer review
+                        Generate resubmission documents
                       </button>
                     </a>
                   </div>
-                  {% elif data.resubStatus == 'assigned-for-review' %}
-                  <div>
-                    <a href="invoices-within-resubmission?set-as-peer-reviewed=yes">
-                      <button class="nhsuk-button" type="submit">
-                        Set as peer reviewed
-                      </button>
-                    </a>
-                  </div>
+                  {% elif data.resubStatus == 'ready-to-send' %}
+
                   {% endif %}
                 </div>
               </div>
@@ -232,9 +211,6 @@ UK claim ID 123456 - Invoices within resubmission
                   Last name
                 </th>
                 <th role="columnheader" class="" scope="col">
-                  Age bracket
-                </th>
-                <th role="columnheader" class="" scope="col">
                   Months
                 </th>
                 <th role="columnheader" class="" scope="col">
@@ -253,6 +229,59 @@ UK claim ID 123456 - Invoices within resubmission
               <tr role="row" class="nhsuk-table__row">
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Invoice ID</span>
+                  <span>298473</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">First names</span>
+                  <span>Jane</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Last name</span>
+                  <span>Doe</span>
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Months</span>
+                  {% set status = data.invoiceStatuses['Jane'] %}
+                  {% if status == 'Withdrawn' %}
+                    <span>Previous: 3</span><br>
+                    <span>Remaining: 0</span><br>
+                  {% else %}
+                    <span>3</span>
+                  {% endif %}
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
+                  {% set status = data.invoiceStatuses['Jane'] %}
+                  {% if status == 'Withdrawn' %}
+                    <span>Previous: 05/10/2025 - 31/12/2025</span><br>
+                    <span>Remaining: Fully withdrawn</span>
+                  {% else %}
+                    <span>05/10/2025 - 31/12/2025</span>
+                  {% endif %}
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Status</span>
+                  {% set status = data.invoiceStatuses['Jane'] %}
+                  {% if status == 'Partial' %}
+                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                  {% elif status == 'Withdrawn' %}
+                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
+                  {% elif status == 'Maintained' %}
+                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
+                  {% else %}
+                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
+                  {% endif %}
+
+                </td>
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Action</span>
+                  <span><a href="invoice-details?invoice=Jane" aria-describedby="invoice-status">View invoice details</a><span class="nhsuk-u-visually-hidden">for Jane Doe</span></span>
+                </td>
+              </tr>
+
+              <tr role="row" class="nhsuk-table__row">
+                <td role="cell" class="nhsuk-table__cell">
+                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
                   <span>387731</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -264,38 +293,34 @@ UK claim ID 123456 - Invoices within resubmission
                   <span>Doe</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months</span>
                   {% set status = data.invoiceStatuses['John'] %}
-                  {% if status == 'Maintained' %}
-                    <span>Previous: 6</span><br>
-                    <span>Remaining: 6</span><br>
+                  {% if status == 'Partial' %}
+                    <span>Previous: 4</span><br>
+                    <span>Remaining: 1</span><br>
                   {% else %}
-                    <span>6</span>
+                    <span>4</span>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
                   {% set status = data.invoiceStatuses['John'] %}
-                  {% if status == 'Maintained' %}
-                    <span>Previous: 01/07/2016 - 31/12/2016</span><br>
-                    <span>Remaining: 01/07/2016 - 31/12/2016</span>
+                  {% if status == 'Partial' %}
+                    <span>Previous: 05/09/2025 - 31/12/2025</span><br>
+                    <span>Remaining: 05/09/2025 - 16/10/2025</span>
                   {% else %}
-                    <span>01/07/2016 - 31/12/2016</span>
+                    <span>05/09/2025 - 31/12/2025</span>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Status</span>
                   {% set status = data.invoiceStatuses['John'] %}
-                  {% if status == 'Maintained' %}
-                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
+                  {% if status == 'Partial' %}
+                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
                   {% elif status == 'Withdrawn' %}
                     <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
-                  {% elif status == 'Partial' %}
-                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
+                  {% elif status == 'Maintained' %}
+                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
                   {% else %}
                     <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
                   {% endif %}
@@ -304,120 +329,6 @@ UK claim ID 123456 - Invoices within resubmission
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
                   <span><a href="invoice-details?invoice=John" aria-describedby="invoice-status">View invoice details</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
-                </td>
-              </tr>
-
-              <tr role="row" class="nhsuk-table__row">
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
-                  <span>384211</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">First names</span>
-                  <span>Alexander</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Last name</span>
-                  <span>James</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Months</span>
-                  {% set status = data.invoiceStatuses['Alexander'] %}
-                  {% if status == 'Withdrawn' %}
-                    <span>Previous: 7</span><br>
-                    <span>Remaining: 0</span><br>
-                  {% else %}
-                    <span>7</span>
-                  {% endif %}
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  {% set status = data.invoiceStatuses['Alexander'] %}
-                  {% if status == 'Withdrawn' %}
-                    <span>Previous: 01/01/2016 - 29/07/2016</span><br>
-                    <span>Remaining: Fully withdrawn</span>
-                  {% else %}
-                    <span>01/01/2016 - 29/07/2016</span>
-                  {% endif %}
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Status</span>
-                  {% set status = data.invoiceStatuses['Alexander'] %}
-                  {% if status == 'Withdrawn' %}
-                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
-                  {% elif status == 'Maintained' %}
-                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
-                  {% elif status == 'Partial' %}
-                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
-                  {% else %}
-                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
-                  {% endif %}
-
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Action</span>
-                  <span><a href="invoice-details?invoice=Alexander" aria-describedby="invoice-status">View invoice details</a><span class="nhsuk-u-visually-hidden">for Alexander James</span></span>
-                </td>
-              </tr>
-
-              <tr role="row" class="nhsuk-table__row">
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Invoice ID</span>
-                  <span>199455</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">First names</span>
-                  <span>Henri</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Last name</span>
-                  <span>Savageon</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Months</span>
-                  {% set status = data.invoiceStatuses['Henri'] %}
-                  {% if status == 'Partial' %}
-                    <span>Previous: 11</span><br>
-                    <span>Remaining: 6</span><br>
-                  {% else %}
-                    <span>11</span>
-                  {% endif %}
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  {% set status = data.invoiceStatuses['Henri'] %}
-                  {% if status == 'Partial' %}
-                    <span>Previous: 01/01/2016 - 30/11/2016</span><br>
-                    <span>Remaining: 01/01/2016 - 16/07/2016</span>
-                  {% else %}
-                    <span>01/01/2016 - 30/11/2016</span>
-                  {% endif %}
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Status</span>
-                  {% set status = data.invoiceStatuses['Henri'] %}
-                  {% if status == 'Partial' %}
-                    <strong class="nhsuk-tag nhsuk-tag--purple">Partial</strong>
-                  {% elif status == 'Maintained' %}
-                    <strong class="nhsuk-tag nhsuk-tag--blue">Maintained</strong>
-                  {% elif status == 'Withdrawn' %}
-                    <strong class="nhsuk-tag nhsuk-tag--grey">Withdrawn</strong>
-                  {% else %}
-                    <strong class="nhsuk-tag nhsuk-tag--white">Contested</strong>
-                  {% endif %}
-
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Action</span>
-                  <span><a href="invoice-details?invoice=Henri" aria-describedby="invoice-status">View invoice details</a><span class="nhsuk-u-visually-hidden">for Henri Savageon</span></span>
                 </td>
               </tr>
             </tbody>
@@ -431,7 +342,7 @@ UK claim ID 123456 - Invoices within resubmission
                   <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
               </ul>
 
-              <div class="pagination__summary navigation-mobile">Showing 1 - 3 of 3 invoices</div>
+              <div class="pagination__summary navigation-mobile">Showing 1 - 2 of 2 invoices</div>
             </nav>
             <!-- Pagination ends -->
 

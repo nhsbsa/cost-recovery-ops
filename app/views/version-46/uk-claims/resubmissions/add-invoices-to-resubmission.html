@@ -55,7 +55,7 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h1 class="nhsuk-heading-l" style="margin-bottom: 0;">
                       Claim ID 123456 - Invoices for<br>
-                      S1/S072 Article 63, 2.b - Mixed ages
+                      S1/S072 Article 63, 2.b - 65 years and over
                     </h1>
                     <button class="nhsuk-button" type="submit" id="add-invoices-button">
                       Add invoices to resubmission
@@ -76,11 +76,6 @@ UK claim ID 123456 - Select invoices to add to resubmission
                 <li class="nhsuk-secondary-navigation__item">
                   <a class="nhsuk-secondary-navigation__link" aria-current="page" href="claim-invoices">Invoices</a>
                   <span class="nhsuk-u-visually-hidden">Search for an invoice</span>
-                </li>
-
-                <li class="nhsuk-secondary-navigation__item">
-                  <a class="nhsuk-secondary-navigation__link" href="claim-age-group-breakdown">Age brackets</a>
-                  <span class="nhsuk-u-visually-hidden">View the age brackets for claim 123456</span>
                 </li>
 
                 <li class="nhsuk-secondary-navigation__item">
@@ -148,9 +143,6 @@ UK claim ID 123456 - Select invoices to add to resubmission
                 Last name
               </th>
               <th role="columnheader" class="" scope="col">
-                Age bracket
-              </th>
-              <th role="columnheader" class="" scope="col">
                 Months claimed
               </th>
               <th role="columnheader" class="" scope="col">
@@ -175,11 +167,10 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             value="928429"
                             id="checkoxId_01"
                             name="selectedInvoices"
-                            data-firstname="John"
+                            data-firstname="Jane"
                             data-lastname="Doe"
-                            data-agebracket="20 to 64 years"
-                            data-months="Claimed: 6"
-                            data-period="Claimed: 01/01/2016 - 30/06/2016">
+                            data-months="Claimed: 3"
+                            data-period="Claimed: 05/10/2025 - 31/12/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_01">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -194,27 +185,31 @@ UK claim ID 123456 - Select invoices to add to resubmission
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">First names</span>
-                  <span>John</span>
+                  <span>Jane</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Last name</span>
                   <span>Doe</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>20 to 64 years</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
-                  <span>Claimed: 6</span>
+                  <span>Claimed: 3</span>
+                  {% if data.resubStatus == 'resubmission-completed' %}
+                  <br>
+                  <span>Remaining: 0</span>
+                  {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 01/01/2016 - 30/06/2016</span>
+                  <span>Claimed: 05/10/2025 - 31/12/2025</span>
+                  {% if data.resubStatus == 'resubmission-completed' %}
+                  <br>
+                  <span>Remaining: Fully withdrawn</span>
+                  {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
-                  <span><a href="../s1/account/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
+                  <span><a href="../s1/account/dependant/personal-details">View person record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
                 </td>
               </tr>
     
@@ -232,9 +227,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="John"
                             data-lastname="Doe"
-                            data-agebracket="65 years and over"
-                            data-months="Claimed: 6"
-                            data-period="Claimed: 01/07/2016 - 31/12/2016">
+                            data-months="Claimed: 4"
+                            data-period="Claimed: 05/09/2025 - 31/12/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_02">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -256,23 +250,19 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>Doe</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
-                  <span>Claimed: 6</span>
+                  <span>Claimed: 4</span>
                   {% if data.resubStatus == 'resubmission-completed' %}
                   <br>
-                  <span>Remaining: 6</span>
+                  <span>Remaining: 1</span>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 01/07/2016 - 31/12/2016</span>
+                  <span>Claimed: 05/09/2025 - 31/12/2025</span>
                   {% if data.resubStatus == 'resubmission-completed' %}
                   <br>
-                  <span>Remaining: 01/07/2016 - 31/12/2016</span>
+                  <span>Remaining: 05/09/2025 - 31/09/2025</span>
                   {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
@@ -295,9 +285,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="Timothee"
                             data-lastname="Fabien"
-                            data-agebracket="0 to 19 years"
                             data-months="Claimed: 5"
-                            data-period="Claimed: 01/01/2016 - 30/06/2016">
+                            data-period="Claimed: 01/01/2025 - 30/06/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_03">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -319,16 +308,12 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>Fabien</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>0 to 19 years</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>Claimed: 5</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 01/01/2016 - 31/05/2016</span>
+                  <span>Claimed: 01/01/2025 - 31/05/2025</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -351,9 +336,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="Madeline"
                             data-lastname="Fay"
-                            data-agebracket="20 to 64 years"
                             data-months="Claimed: 7"
-                            data-period="Claimed: 06/02/2016 - 31/08/2016">
+                            data-period="Claimed: 06/02/2025 - 31/08/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_04">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -375,16 +359,12 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>Fay</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>20 to 64 years</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>Claimed: 7</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 06/02/2016 - 31/08/2016</span>
+                  <span>Claimed: 06/02/2025 - 31/08/2025</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -407,9 +387,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="Francine"
                             data-lastname="Gosse"
-                            data-agebracket="65 years and over"
                             data-months="Claimed: 3"
-                            data-period="Claimed: 04/05/2016 - 29/07/2016">
+                            data-period="Claimed: 04/05/2025 - 29/07/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_05">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -431,16 +410,12 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>Gosse</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>Claimed: 3</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 04/05/2016 - 29/07/2016</span>
+                  <span>Claimed: 04/05/2025 - 29/07/2025</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -463,9 +438,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="Alexander"
                             data-lastname="James"
-                            data-agebracket="65 years and over"
                             data-months="Claimed: 7"
-                            data-period="Claimed: 01/01/2016 - 29/07/2016">
+                            data-period="Claimed: 01/01/2025 - 29/07/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_06">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -487,22 +461,12 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>James</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>Claimed: 7</span>
-                  {% if data.resubStatus == 'resubmission-completed' %}
-                  <br><span>Remaining: 0</span>
-                  {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 01/01/2016 - 29/07/2016</span>
-                  {% if data.resubStatus == 'resubmission-completed' %}
-                  <span>Remaining: Fully withdrawn</span>
-                  {% endif %}
+                  <span>Claimed: 01/01/2025 - 29/07/2025</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -524,9 +488,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="Ambre"
                             data-lastname="Olivier"
-                            data-agebracket="0 to 19 years"
                             data-months="Claimed: 8"
-                            data-period="Claimed: 02/03/2016 - 21/10/2016">
+                            data-period="Claimed: 02/03/2025 - 21/10/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_07">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -548,16 +511,12 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>Olivier</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>0 to 19 years</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>Claimed: 8</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 02/03/2016 - 21/10/2016</span>
+                  <span>Claimed: 02/03/2025 - 21/10/2025</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -579,9 +538,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="Suzanne"
                             data-lastname="Paris"
-                            data-agebracket="65 years and over"
                             data-months="Claimed: 3"
-                            data-period="Claimed: 04/02/2016 - 26/04/2016">
+                            data-period="Claimed: 04/02/2025 - 26/04/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_08">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -603,16 +561,12 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>Paris</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>Claimed: 3</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 04/02/2016 - 26/04/2016</span>
+                  <span>Claimed: 04/02/2025 - 26/04/2025</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -634,9 +588,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="Henri"
                             data-lastname="Savageon"
-                            data-agebracket="65 years and over"
                             data-months="Claimed: 11"
-                            data-period="Claimed: 01/01/2016 - 30/11/2016">
+                            data-period="Claimed: 01/01/2025 - 30/11/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_09">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -658,22 +611,12 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>Savageon</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>Claimed: 11</span>
-                  {% if data.resubStatus == 'resubmission-completed' %}
-                  <br><span>Remaining: 6</span>
-                  {% endif %}
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 01/01/2016 - 30/11/2016</span>
-                  {% if data.resubStatus == 'resubmission-completed' %}
-                  <br><span>Remaining: 01/01/2016 - 30/06/2016</span>
-                  {% endif %}
+                  <span>Claimed: 01/01/2025 - 30/11/2025</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -696,9 +639,8 @@ UK claim ID 123456 - Select invoices to add to resubmission
                             name="selectedInvoices"
                             data-firstname="Charles"
                             data-lastname="Thomas"
-                            data-agebracket="65 years and over"
                             data-months="Claimed: 9"
-                            data-period="Claimed: 03/01/2016 - 30/09/2016">
+                            data-period="Claimed: 03/01/2025 - 30/09/2025">
                               <label class="nhsuk-label nhsuk-checkboxes__label" for="checkoxId_10">
                                 <span class="nhsuk-u-visually-hidden">All checkboxes</span>
                               </label>
@@ -720,16 +662,12 @@ UK claim ID 123456 - Select invoices to add to resubmission
                   <span>Thomas</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Age bracket</span>
-                  <span>65 years and over</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Months claimed</span>
                   <span>Claimed: 9</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Accounting period</span>
-                  <span>Claimed: 03/01/2016 - 30/09/2016</span>
+                  <span>Claimed: 03/01/2025 - 30/09/2025</span>
                 </td>
                 <td role="cell" class="nhsuk-table__cell">
                   <span class="nhsuk-table-responsive__heading">Action</span>
@@ -742,19 +680,94 @@ UK claim ID 123456 - Select invoices to add to resubmission
           <!-- End of Invoices table -->
     
     
-           <!-- Pagination starts -->
-            <nav class="nav" role="navigation" aria-label="Pagination">
-              <ul class="pagination">
-                  <li class="pagination__item"><a class="pagination__link current" href="#" aria-current="true">1</a></li>
-                  <li class="pagination__item"><a class="pagination__link current" href="#">2</a></li>
-                  <li class="pagination__item"><a class="pagination__link current" href="#">3</a></li>
-                  <li class="pagination__item"><a class="pagination__link current" href="#">4</a></li>
-                  <li class="pagination__item"><a class="pagination__link current" href="#">5</a></li>
-              </ul>
-    
-              <div class="pagination__summary navigation-mobile">Showing 1 - 10 of 50 invoices</div>
+           <!-- Pagination begins -->
+            <nav class="nhsuk-pagination nhsuk-pagination--numbered"
+            role="navigation"
+            aria-label="Pagination"
+            style="display: flex; justify-content: center; align-items: center; margin-top: 24px; gap: 16px;">
+
+            {# Previous (hidden on page 1) #}
+            {% if currentPage > 1 %}
+            <a href="?page={{ currentPage - 1 }}" class="nhsuk-pagination__previous" rel="prev">
+            <svg class="nhsuk-icon nhsuk-icon--arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+              <path d="M10.7 6.3c.4.4.4 1 0 1.4L7.4 11H19a1 1 0 0 1 0 2H7.4l3.3 3.3c.4.4.4 1 0 1.4a1 1 0 0 1-1.4 0l-5-5A1 1 0 0 1 4 12c0-.3.1-.5.3-.7l5-5a1 1 0 0 1 1.4 0Z" />
+            </svg>
+            <span class="nhsuk-pagination__title">
+              Previous<span class="nhsuk-u-visually-hidden"> page</span>
+            </span>
+            </a>
+            {% endif %}
+
+            {# Calculate 5-page sliding window #}
+            {% set startPage = currentPage - 2 %}
+            {% set endPage = currentPage + 2 %}
+
+            {% if startPage < 1 %}
+            {% set endPage = endPage + (1 - startPage) %}
+            {% set startPage = 1 %}
+            {% endif %}
+
+            {% if endPage > totalPages %}
+            {% set startPage = startPage - (endPage - totalPages) %}
+            {% set endPage = totalPages %}
+            {% endif %}
+
+            {% if startPage < 1 %}
+            {% set startPage = 1 %}
+            {% endif %}
+
+            <ul class="nhsuk-pagination__list">
+
+            {# Show first page if outside window #}
+            {% if startPage > 1 %}
+            <li class="nhsuk-pagination__item">
+              <a class="nhsuk-pagination__link" href="?page=1">1</a>
+            </li>
+
+            {% if startPage > 2 %}
+              <li class="nhsuk-pagination__item nhsuk-pagination__item--ellipsis">&ctdot;</li>
+            {% endif %}
+            {% endif %}
+
+            {# Main 5-page window #}
+            {% for page in range(startPage, endPage + 1) %}
+            <li class="nhsuk-pagination__item {% if page == currentPage %}nhsuk-pagination__item--current{% endif %}">
+              <a class="nhsuk-pagination__link"
+                  href="?page={{ page }}"
+                  {% if page == currentPage %}aria-current="page"{% endif %}>
+                {{ page }}
+              </a>
+            </li>
+            {% endfor %}
+
+            {# Show last page if outside window #}
+            {% if endPage < totalPages %}
+            {% if endPage < totalPages - 1 %}
+              <li class="nhsuk-pagination__item nhsuk-pagination__item--ellipsis">&ctdot;</li>
+            {% endif %}
+
+            <li class="nhsuk-pagination__item">
+              <a class="nhsuk-pagination__link" href="?page={{ totalPages }}">{{ totalPages }}</a>
+            </li>
+            {% endif %}
+
+            </ul>
+
+            {# Next #}
+            {% if currentPage < totalPages %}
+            <a href="?page={{ currentPage + 1 }}" class="nhsuk-pagination__next" rel="next">
+            <span class="nhsuk-pagination__title">
+              Next<span class="nhsuk-u-visually-hidden"> page</span>
+            </span>
+            <svg class="nhsuk-icon nhsuk-icon--arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+              <path d="m14.7 6.3 5 5c.2.2.3.4.3.7 0 .3-.1.5-.3.7l-5 5a1 1 0 0 1-1.4-1.4l3.3-3.3H5a1 1 0 0 1 0-2h11.6l-3.3-3.3a1 1 0 1 1 1.4-1.4Z" />
+            </svg>
+            </a>
+            {% endif %}
+
             </nav>
             <!-- Pagination ends -->
+      
 
           </form>
 

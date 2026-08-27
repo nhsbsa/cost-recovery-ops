@@ -26,7 +26,7 @@ Account cancelled - Manage overseas entitlements and treatments
               <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
             </li>
             <li class="nhsuk-breadcrumb__list-item">
-              <a class="nhsuk-breadcrumb__link" href="canncelled-accounts">Account requests (Cancelled)</a>
+              <a class="nhsuk-breadcrumb__link" href="cancelled-accounts">Account requests (Cancelled)</a>
             </li>
             <li class="nhsuk-breadcrumb__list-item">Account request (David Fuller)</li>
         </ol>
@@ -116,12 +116,34 @@ Account cancelled - Manage overseas entitlements and treatments
 
                     <div class="nhsuk-summary-list__row">
                       <dt class="nhsuk-summary-list__key">
-                        Cancelled date
+                        Date cancelled
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         06/08/2026
                       </dd>
                     </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="reasons-to-maintain-months-label">Reason for account cancellation</dt>
+                      <dd class="nhsuk-summary-list__value" id="reasons-to-maintain-months-value">
+                        {% if data['reason-for-cancellation'] %}
+                         {{ data['reason-for-cancellation'] }}
+                        {% else %}
+                          OVM has moved to a different NHS trust
+                        {% endif %}
+                      </dd>
+                    </div>
+                    {% if 'Other' in data ['reason-for-cancellation'] %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key" id="other-maintain-reason-comments-label">Other reason - comments</dt>
+                      <dd class="nhsuk-summary-list__value" id="other-maintain-reason-comments-value">
+                        {% if data['other-account-cancellation-reason-comments'] %}
+                          {{ data['other-account-cancellation-reason-comments'] }}
+                        {% else %}
+                          Other reason explained here.
+                        {% endif %}
+                      </dd>
+                    </div>
+                    {% endif %}
                   </dl>
 
                 </div>
