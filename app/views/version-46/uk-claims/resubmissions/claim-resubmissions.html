@@ -204,7 +204,9 @@ UK claim ID 123456 - Resubmissions
                   <th scope="col" class="nhsuk-table__header">Resubmission ID</th>
                   <th scope="col" class="nhsuk-table__header">Deadline to reply</th>
                   <th scope="col" class="nhsuk-table__header">Assigned to</th>
+                  {% if data['add-invoices-to-resub'] == 'yes' and data.resubStatus not in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
                   <th scope="col" class="nhsuk-table__header">Assign</th>
+                  {% endif %}
                   <th scope="col" class="nhsuk-table__header">Status</th>
                   <th scope="col" class="nhsuk-table__header">Action</th>
                 </tr>
@@ -214,11 +216,21 @@ UK claim ID 123456 - Resubmissions
                 <tr class="nhsuk-table__row">
                   <td class="nhsuk-table__cell" data-label="Resubmission ID">0000001</td>
                   <td class="nhsuk-table__cell" data-label="Deadline to reply">20/08/2027</td>
-                  <td class="nhsuk-table__cell" data-label="Assigned to">joe.bloggs@nhsbsa.nhs.uk</td>
-
-                  <td class="nhsuk-table__cell" data-label="Assign">
-                    <a href="claim-resubmissions?assigned-to-another-co=yes">Assign to me</a>
+                  
+                  
+                  <td class="nhsuk-table__cell" data-label="Assigned to">
+                  {% if data['add-invoices-to-resub'] == 'yes' %}
+                    joe.bloggs@nhsbsa.nhs.uk
+                  {% else %}
+                    -
+                  {% endif %}
                   </td>
+
+                  {% if data['add-invoices-to-resub'] == 'yes' and data.resubStatus not in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                    <td class="nhsuk-table__cell" data-label="Assign">
+                      <a href="claim-resubmissions?assigned-to-another-co=yes">Assign to me</a>
+                    </td>
+                  {% endif %}
 
                   <td class="nhsuk-table__cell" data-label="Status">
                     {% if data.resubStatus == 'resubmission-completed' %}
