@@ -405,76 +405,105 @@ UK claim ID 123456 - View the resubmission summary
                     </div>
                   </dl>
 
-                  {% if data['date-acknowledgement-letter-sent-to-ms-day'] and data['date-acknowledgement-letter-sent-to-ms-month'] and data['date-acknowledgement-letter-sent-to-ms-year'] %}
+                  {% if data['date-acknowledgement-letter-sent-to-ms-day'] and data['date-acknowledgement-letter-sent-to-ms-month'] and data['date-acknowledgement-letter-sent-to-ms-year'] and data['resubmission-sent-to-ms-by'] %}
 
-                  <dl class="nhsuk-summary-list">
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Date the acknowledgement letter was sent to the member state
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-                        {% set day = data['date-acknowledgement-letter-sent-to-ms-day'] | int %}
-                        {% set month = data['date-acknowledgement-letter-sent-to-ms-month'] | int %}
-                        {% set year = data['date-acknowledgement-letter-sent-to-ms-year'] %}
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="date-acknowledgement-letter-sent-to-ms-label">
+                      <b>Date the acknowledgement letter was sent to the member state (optional)</b>
+                    </label>
 
-                        {% set months = [
-                          'January',
-                          'February',
-                          'March',
-                          'April',
-                          'May',
-                          'June',
-                          'July',
-                          'August',
-                          'September',
-                          'October',
-                          'November',
-                          'December'
-                        ] %}
-
-                        {{ day }} {{ months[month - 1] }} {{ year }}
-                      </dd>
+                    <div class="nhsuk-date-input" id="date-acknowledgement-letter-sent-to-ms">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-acknowledgement-letter-sent-to-ms-day" name="date-acknowledgement-letter-sent-to-ms-day" type="text" pattern="[0-9]*" inputmode="numeric" value="01">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-acknowledgement-letter-sent-to-ms-month" name="date-acknowledgement-letter-sent-to-ms-month" type="text" pattern="[0-9]*" inputmode="numeric" value="09">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-acknowledgement-letter-sent-to-ms-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-acknowledgement-letter-sent-to-ms-year" name="date-acknowledgement-letter-sent-to-ms-year" type="text" pattern="[0-9]*" inputmode="numeric" value="2026">
+                        </div>
+                      </div>
                     </div>
-                  </dl>
 
-                {% elif data['resub-shell-edited'] == 'yes' %}
+                  </div>
 
-                  <dl class="nhsuk-summary-list">
-                    <div class="nhsuk-summary-list__row">
-                      <dt class="nhsuk-summary-list__key">
-                        Date the acknowledgement letter was sent to the member state
-                      </dt>
-                      <dd class="nhsuk-summary-list__value">
-
-                        {% if data['new-date-acknowledgement-letter-sent-to-ms-day'] and data['new-date-acknowledgement-letter-sent-to-ms-month'] and data['new-date-acknowledgement-letter-sent-to-ms-year'] %}
-
-                          {% set day = data['new-date-acknowledgement-letter-sent-to-ms-day'] | int %}
-                          {% set month = data['new-date-acknowledgement-letter-sent-to-ms-month'] | int %}
-                          {% set year = data['new-date-acknowledgement-letter-sent-to-ms-year'] %}
-
-                          {% set months = [
-                            'January',
-                            'February',
-                            'March',
-                            'April',
-                            'May',
-                            'June',
-                            'July',
-                            'August',
-                            'September',
-                            'October',
-                            'November',
-                            'December'
-                          ] %}
-
-                          {{ day }} {{ months[month - 1] }} {{ year }}
-
-                        {% endif %}
-
-                      </dd>
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="name-of-person-who-sent-acknowledgement-letter-label">
+                     <b>Name of the person who sent the acknowledgement letter (optional)</b>
+                    </label>
+                    <div class="nhsuk-hint" id="name-of-person-who-sent-acknowledgement-letter-hint-1">
+                      You must enter the date the acknowledgement letter was sent if you enter this information.
                     </div>
-                  </dl>
-                  
+                    <div class="nhsuk-hint" id="name-of-person-who-sent-acknowledgement-letter-hint-2">
+                      Enter their full name
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="acknowledgement-letter-sent-to-ms-by" name="acknowledgement-letter-sent-to-ms-by" type="text" value="Nina Evans">
+                  </div>
+
+
+                  {% elif data['resub-shell-edited'] == 'yes' %}
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="new-date-acknowledgement-letter-sent-to-ms-label">
+                      <b>Date the acknowledgement letter was sent to the member state (optional)</b>
+                    </label>
+
+                    <div class="nhsuk-date-input" id="new-date-acknowledgement-letter-sent-to-ms">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="new-date-acknowledgement-letter-sent-to-ms-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="new-date-acknowledgement-letter-sent-to-ms-day" name="new-date-acknowledgement-letter-sent-to-ms-day" type="text" pattern="[0-9]*" inputmode="numeric" value="01">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="new-date-acknowledgement-letter-sent-to-ms-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="new-date-acknowledgement-letter-sent-to-ms-month" name="new-date-acknowledgement-letter-sent-to-ms-month" type="text" pattern="[0-9]*" inputmode="numeric" value="09">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="new-date-acknowledgement-letter-sent-to-ms-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="new-date-acknowledgement-letter-sent-to-ms-year" name="new-date-acknowledgement-letter-sent-to-ms-year" type="text" pattern="[0-9]*" inputmode="numeric" value="2026">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="new-name-of-person-who-sent-acknowledgement-letter-label">
+                    <b>Name of the person who sent the acknowledgement letter (optional)</b>
+                    </label>
+                    <div class="nhsuk-hint" id="new-name-of-person-who-sent-acknowledgement-letter-hint-1">
+                      You must enter the date the acknowledgement letter was sent if you enter this information.
+                    </div>
+                    <div class="nhsuk-hint" id="new-name-of-person-who-sent-acknowledgement-letter-hint-2">
+                      Enter their full name
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="new-acknowledgement-letter-sent-to-ms-by" name="new-acknowledgement-letter-sent-to-ms-by" type="text" value="Nina Evans">
+                  </div>
+                    
 
                   {% else %}
                   <div class="nhsuk-form-group" style="margin-top: 30px;">
@@ -515,11 +544,11 @@ UK claim ID 123456 - View the resubmission summary
                       </div>
                     </div>
                   </div>
-                  {% endif %}
+                  
 
                   <div class="nhsuk-form-group" style="margin-top: 30px;">
                     <label class="nhsuk-label" for="name-of-person-who-sent-acknowledgement-letter-label">
-                     <b>Who sent the acknowledgement letter? (Optional)</b>
+                      <b>Who sent the acknowledgement letter? (Optional)</b>
                     </label>
                     <div class="nhsuk-hint" id="name-of-person-who-sent-acknowledgement-letter-hint-1">
                       You must enter the date the acknowledgement letter was sent if you answer this question.
@@ -529,12 +558,12 @@ UK claim ID 123456 - View the resubmission summary
                     </div>
                     <input class="nhsuk-input nhsuk-input--width-20" id="resubmission-sent-to-ms-by" name="resubmission-sent-to-ms-by" type="text" value="{{ data['resubmission-sent-to-ms-by'] }}">
                   </div>
-
-                  <hr>
-                  
+                  {% endif %}
 
 
                   {% if data.resubStatus in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                  <hr>
+
                   <div class="nhsuk-form-group" style="margin-top: 30px;">
                     <label class="nhsuk-label" for="call-no">
                       <b>When was the resubmission sent to the member state? (Optional)</b>
@@ -576,7 +605,7 @@ UK claim ID 123456 - View the resubmission summary
 
                   <div class="nhsuk-form-group" style="margin-top: 30px;">
                     <label class="nhsuk-label" for="resubmission-sent-to-ms-by-label">
-                     <b>Who sent the resubmission? (Optional)</b>
+                      <b>Who sent the resubmission? (Optional)</b>
                     </label>
                     <div class="nhsuk-hint" id="contact-hint">
                       Enter their full name
@@ -627,7 +656,7 @@ UK claim ID 123456 - View the resubmission summary
 
                   <div class="nhsuk-form-group" style="margin-top: 30px;">
                     <label class="nhsuk-label" for="resubmission-uploaded-to-dh-exchange-by-label">
-                     <b>Who uploaded the resubmission? (Optional)</b>
+                      <b>Who uploaded the resubmission? (Optional)</b>
                     </label>
                     <div class="nhsuk-hint" id="contact-hint">
                       Enter their full name
@@ -675,26 +704,26 @@ UK claim ID 123456 - View the resubmission summary
                       </div>
                     </div>
                   </div>
+                  {% endif %}
+
 
                   <!-- Preserve key status data between submissions -->
-                  <input type="hidden" name="sent-for-peer-review" value="{{ data['sent-for-peer-review'] }}">
+                  
 
                   <div class="button-container">
                     <div class="action-buttons">
-                      <button class="nhsuk-button" type="submit" style="margin-right: 20px; margin-top: 20px;">
+                      <!-- Conditionally show Save resub summary button -->
+                      <button class="nhsuk-button" type="submit" style="margin-right: 20px; ">
                         Save resub summary
                       </button>
                   
-                      <!-- Conditionally show Edit Claim Summary button -->
-                      {% if data['resub-summary-details-updated'] == 'yes' %}
-                        <button class="nhsuk-button nhsuk-button--secondary" type="submit" id="editResubButton" name="action" value="editResubSummary" style="margin-top: 20px;">
-                          Edit resub summary
-                        </button>
-                      {% endif %}
+                      <button class="nhsuk-button nhsuk-button--secondary" type="submit" id="editResubButton" name="action" value="editResubSummary">
+                        Edit resub summary
+                      </button>
 
                     </div>
                   </div>
-                  {% endif %}
+                  
 
               </div>
             </div>
