@@ -397,7 +397,7 @@ UK claim ID 123456 - View the resubmission summary
                       </dt>
                       <dd class="nhsuk-summary-list__value">
                         {% if data.resubStatus in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                          2 September 2026
+                          <p id="currentDateResubDocsGenerated"></p>
                         {% else %}
                           -
                         {% endif %}
@@ -739,4 +739,32 @@ UK claim ID 123456 - View the resubmission summary
   </div>
 </div>
 
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+// Function to set the current date and time
+function setCurrentDateTime(elementId) {
+    var dateElement = document.getElementById(elementId);
+
+    if (dateElement) {
+        var currentDate = new Date();
+
+        // Format date as DD/MM/YYYY
+        var day = String(currentDate.getDate());
+        var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+        var month = monthNames[currentDate.getMonth()];
+        var year = currentDate.getFullYear();
+        var formattedDate = `${day} ${month} ${year}`;
+
+        // Set formatted date and time with line break
+        dateElement.innerHTML = `${formattedDate}`;
+    }
+}
+
+// Set the date for each item
+document.addEventListener("DOMContentLoaded", function () {
+  setCurrentDateTime("currentDateResubDocsGenerated");    // Current date resub docs generated
+});
+</script>
 {% endblock %}
