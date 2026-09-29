@@ -1,0 +1,116 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Reason for cancelling treatment - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="treatments-to-review">Treatments to be reviewed (To review)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+               <a class="nhsuk-breadcrumb__link" href="view-s2-treatment">Review treatment (1292929930)</a>
+             </li>
+            <li class="nhsuk-breadcrumb__list-item">Cancel treatment</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="pending-requests">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Review treatment (1292929930)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">
+                Why are you cancelling this treatment?
+              </h1>
+            </div>
+          </div>
+
+          <form action="reason-for-treatment-cancellation" method="post" novalidate>
+
+            <div class="nhsuk-grid-row">
+               <div class="nhsuk-grid-column-one-half">
+   
+                 <div class="nhsuk-hint">
+                   Select all reasons that apply
+                 </div>
+   
+   
+                 <div class="nhsuk-form-group">
+                   <div class="nhsuk-checkboxes">
+                     <div class="nhsuk-checkboxes__item">
+                       <input class="nhsuk-checkboxes__input" id="reason-for-treatment-cancellation-duplicate-costs" name="reason-for-treatment-cancellation" type="checkbox" value="Duplicate costs">
+                       <label class="nhsuk-label nhsuk-checkboxes__label" for="reason-for-treatment-cancellation-duplicate-costs">Duplicate costs</label>
+                     </div>
+                     <div class="nhsuk-checkboxes__item">
+                       <input class="nhsuk-checkboxes__input" id="reason-for-treatment-cancellation-duplicate-treatment-dates" name="reason-for-treatment-cancellation" type="checkbox" value="Duplicate treatment dates">
+                       <label class="nhsuk-label nhsuk-checkboxes__label" for="reason-for-treatment-cancellation-duplicate-treatment-dates">Duplicate treatment dates</label>
+                     </div>
+                     <div class="nhsuk-checkboxes__item">
+                       <input class="nhsuk-checkboxes__input" id="reason-for-treatment-cancellation-patient-ordinarily-resident" name="reason-for-treatment-cancellation" type="checkbox" value="Patient is ordinarily resident">
+                       <label class="nhsuk-label nhsuk-checkboxes__label" for="reason-for-treatment-cancellation-patient-ordinarily-resident">Patient is ordinarily resident</label>
+                     </div>
+                     <div class="nhsuk-checkboxes__item">
+                        <input class="nhsuk-checkboxes__input" id="reason-for-treatment-cancellation-other" name="reason-for-treatment-cancellation" type="checkbox" value="Other">
+                        <label class="nhsuk-label nhsuk-checkboxes__label" for="reason-for-treatment-cancellation-other">Other</label>
+                      </div>
+                   </div>
+                 </div>
+   
+                <div class="nhsuk-grid-row">
+                 <div class="nhsuk-grid-column-full">
+                     <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                       Save and submit
+                     </button>
+                 </div>
+               </div>
+
+              
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

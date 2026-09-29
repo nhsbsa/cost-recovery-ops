@@ -1,0 +1,479 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}View S071 document - Manage overseas entitlements and treatments - NHSBSA{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../../search/search-by-person">Search (Person)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../../search/search-results">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../account/system-generated-documents">Documents</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View document 293498939311</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="../account/system-generated-documents">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Documents
+    </a>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-l">
+                S071 document<br>
+                Document ID: 293498939311
+              </h1>
+
+              {% if data['dr-s071-sent-to-ms'] != 'Yes' %}
+              <a href="../dependant/generate-s071/dr-search-for-main-insured?from-documents=Yes" class="nhsuk-button" style="float: right; margin-bottom: 20px;" role="button" data-module="nhsuk-button">
+                Search for and link main insured
+              </a>
+              {% else %}
+              <a href="../dependant/generate-s071/review-institution-details" class="nhsuk-button" style="float: right; margin-bottom: 20px;" role="button" data-module="nhsuk-button">
+                Send S071 to the member state
+              </a>
+              {% endif %}
+            </div>
+          </div>
+      
+
+
+          <div class="nhsuk-grid-row">   
+
+            <!-- Beginning of left card content -->
+
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  
+                  <h2 class="nhsuk-heading-m">Personal details</h2>
+
+                    <dl class="nhsuk-summary-list" style="margin-bottom: 60px;">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First names
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-change-names'] == 'yes' and data['dr-new-first-names'] %}
+                            {{ data['dr-new-first-names'] }}
+                          {% else %}
+                            Jane
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          First names at birth, if different
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-change-names'] == 'yes' and data['dr-new-birth-first-names'] %}
+                            {{ data['dr-new-birth-first-names'] }}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %} 
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-change-names'] == 'yes' and data['dr-new-last-name'] %}
+                            {{ data['dr-new-last-name'] }}
+                          {% else %}
+                            Doe
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Last name at birth, if different
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-change-names'] == 'yes' and data['dr-new-birth-last-name'] %}
+                            {{ data['dr-new-birth-last-name'] }}
+                          {% else %}
+                            <span class="nhsuk-u-visually-hidden">Not provided</span>
+                          {% endif %} 
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date of birth
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-change-personal-details'] == 'yes' and data['dr-new-date-of-birth-day'] and data['dr-new-date-of-birth-month'] and data['dr-new-date-of-birth-year'] %}
+                            {% if data['dr-new-date-of-birth-day'] and data['dr-new-date-of-birth-month'] and data['dr-new-date-of-birth-year'] %}
+                              {% set day = data['dr-new-date-of-birth-day'] %}
+                              {% set month = data['dr-new-date-of-birth-month'] | int %}
+                              {% set year = data['dr-new-date-of-birth-year'] %}
+                  
+                              {# Define month names #}
+                              {% set month_names = [
+                                  "January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"
+                              ] %}
+                  
+                              {# Get the month name #}
+                              {% set month_name = month_names[month - 1] %}
+                  
+                              {# Display the date in the format "day month year" #}
+                              {{ day | int }} {{ month_name }} {{ year }}
+                            {% endif %}
+                          {% elif data['dr-dob-day'] and data['dr-dob-month'] and data['dr-dob-year'] %}
+                            {% set day = data['dr-dob-day'] %}
+                            {% set month = data['dr-dob-month'] | int %}
+                            {% set year = data['dr-dob-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            29 December 1973
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Sex
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-change-additional-personal-details'] == 'yes' %}
+                            {{ data['dr-updated-sex'] }}
+                          {% else %}
+                            Female
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Country of nationality
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-change-additional-personal-details'] == 'yes' %}
+                            {{ data['dr-updated-nationality'] }}
+                          {% else %}
+                            France (FR)
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          
+                        </dd-->
+                      </div>
+                    </dl>
+                    
+
+                    <h2 class="nhsuk-heading-m">Address details</h2>
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Address
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-change-current-address'] == 'yes' %}
+                            {# Check if any of the address fields have been updated, otherwise fallback to default #}
+                            {% if data['dr-new-current-address-line-1'] or data['dr-new-current-address-line-2'] or data['dr-new-current-address-line-3'] or data['dr-new-current-address-town'] or data['dr-new-current-address-region'] or data['dr-new-current-address-postcode'] or data['dr-new-current-address-country'] %}
+                                {{ data['dr-new-current-address-line-1'] }}<br>
+                                
+                                {% if data['dr-new-current-address-line-2'] %}
+                                    {{ data['dr-new-current-address-line-2'] }}<br>
+                                {% endif %}
+                                
+                                {% if data['dr-new-current-address-line-3'] %}
+                                    {{ data['dr-new-current-address-line-3'] }}<br>
+                                {% endif %}
+                                
+                                {{ data['dr-new-current-address-town'] }}<br>
+                                
+                                {% if data['dr-new-current-address-region'] %}
+                                    {{ data['dr-new-current-address-region'] }}<br>
+                                {% endif %}
+                                
+                                {{ data['dr-new-current-address-postcode'] }}<br>
+                                {{ data['dr-new-current-address-country'] }}
+                            {% endif %}
+                          {% else %}
+                              1 Washington Street<br>
+                              Worcester<br>
+                              WR1 1NL<br>
+                              United Kingdom (UK)
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__value">
+                          
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date of residency in UK
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-date-of-residency-in-uk-day'] and data['dr-date-of-residency-in-uk-month'] and data['dr-date-of-residency-in-uk-year'] %}
+                            {% set day = data['dr-date-of-residency-in-uk-day'] %}
+                            {% set month = data['dr-date-of-residency-in-uk-month'] | int %}
+                            {% set year = data['dr-date-of-residency-in-uk-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            21 August 2025
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          <a href="dr-enter-date-of-uk-residency#dr-date-of-residency-in-uk-day">
+                            Change<span class="nhsuk-u-visually-hidden">date of residency in UK</span>
+                          </a>
+                        </dd-->
+                      </div>
+                    </dl>
+
+
+                    <h2 class="nhsuk-heading-m">Entitlement details</h2>
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Citizen status
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-s1-request-citizen-status'] %}
+                            {{ data['dr-s1-request-citizen-status'] }}
+                          {% else %}
+                            Family member of pensioner
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          <a href="dr-select-citizen-status">
+                            Change<span class="nhsuk-u-visually-hidden">citizen status</span>
+                          </a>
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Issuing country
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-s1-request-issuing-country'] %}
+                            {{ data['dr-s1-request-issuing-country'] }}
+                          {% else %}
+                            France (FR)
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          <a href="dr-enter-member-state-details#dr-s1-request-issuing-country">
+                            Change<span class="nhsuk-u-visually-hidden">issuing country</span>
+                          </a>
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Personal identification number (PIN) (optional)
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-s1-request-pin'] %}
+                            {{ data['dr-s1-request-pin'] }}
+                          {% else %}
+                            Not provided
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          <a href="dr-enter-member-state-details#dr-s1-request-pin">
+                            Change<span class="nhsuk-u-visually-hidden">personal identification number (PIN)</span>
+                          </a>
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Institution ID
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          CLEISS0000
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          <a href="dr-search-for-institution-by-id#dr-search-institution-id">
+                            Change<span class="nhsuk-u-visually-hidden">institution ID</span>
+                          </a>
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Institution name
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          Centre des liasons europeennes et international de securite sociale
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          <a href="dr-search-for-institution-by-name#dr-search-institution-name">
+                            Change<span class="nhsuk-u-visually-hidden">institution name</span>
+                          </a>
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Start date
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-s1-request-entitlement-start-date-day'] and data['dr-s1-request-entitlement-start-date-month'] and data['dr-s1-request-entitlement-start-date-year'] %}
+                            {% set day = data['dr-s1-request-entitlement-start-date-day'] %}
+                            {% set month = data['dr-s1-request-entitlement-start-date-month'] | int %}
+                            {% set year = data['dr-s1-request-entitlement-start-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            1 January 2026
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          <a href="dr-enter-entitlement-period#dr-s1-request-entitlement-start-date-day">
+                            Change<span class="nhsuk-u-visually-hidden">start date of entitlement</span>
+                          </a>
+                        </dd-->
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          End date (optional)
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['dr-s1-request-entitlement-end-date-day'] and data['dr-s1-request-entitlement-end-date-month'] and data['dr-s1-request-entitlement-end-date-year'] %}
+                            {% set day = data['dr-s1-request-entitlement-end-date-day'] %}
+                            {% set month = data['dr-s1-request-entitlement-end-date-month'] | int %}
+                            {% set year = data['dr-s1-request-entitlement-end-date-year'] %}
+                
+                            {# Define month names #}
+                            {% set month_names = [
+                                "January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"
+                            ] %}
+                
+                            {# Get the month name #}
+                            {% set month_name = month_names[month - 1] %}
+                
+                            {# Display the date in the format "day month year" #}
+                            {{ day | int }} {{ month_name }} {{ year }}  
+                          {% else %}
+                            Open-ended
+                          {% endif %}
+                        </dd>
+                        <!--dd class="nhsuk-summary-list__actions">
+                          <a href="dr-enter-entitlement-period#dr-s1-request-entitlement-end-date-day">
+                            Change<span class="nhsuk-u-visually-hidden">end date of entitlement</span>
+                          </a>
+                        </dd-->
+                      </div>
+                    </dl>
+                    
+
+                  </div>
+                </div>
+                <!-- End of right card content -->
+              </div>
+
+            
+          
+            
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Left-hand navigation -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <h3>
+          Jane Doe<span class="nhsuk-caption-m nhsuk-caption--bottom">
+          <span class="nhsuk-u-visually-hidden"> - </span>654321</span>
+        </h3>
+        <ul id="options" class="options">
+          <li><a href="../dependant/personal-details">Personal details</a></li>
+          <li><a href="../dependant/entitlements-and-treatments">Entitlements and treatments</a></li>
+          <li><a href="../dependant/s1-requests">S1/S071 requests</a></li>
+          <li><a class="active" href="../dependant/system-generated-documents">Documents</a></li>
+          <li><a href="../dependant/case-history-person">Case history</a></li>
+          <li><a href="../dependant/notes">Notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End of navigation -->
+
+  </div>
+</div>
+<!-- End of main content -->
+{% endblock %}

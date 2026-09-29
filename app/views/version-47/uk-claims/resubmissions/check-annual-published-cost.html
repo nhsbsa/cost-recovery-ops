@@ -1,0 +1,153 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - Confirm the annual amount is correct - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+    
+            <form action="check-annual-published-cost" method="post">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+              <div class="nhsuk-form-group">
+            
+                <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--xl">
+                    <h1 class="nhsuk-fieldset__heading">
+                      You entered £{% if data['annual-published-cost'] %}{{ data['annual-published-cost'] }}{% else %}1,118.87{% endif %} as the annual amount
+                    </h1>
+                  </legend>
+
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Financial year
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        2023
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Article type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Article 63, 2.b.
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Age bracket
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['s110-age-bracket'] %}{{ data['s110-age-bracket'] }}{% else %}0 to 19 years{% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Country
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        France (FR)
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Discount rate
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        15%
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Average cost per month
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['s110-age-bracket'] == '65 years and over' %}
+                          £452.67
+                        {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                          £165.06
+                        {% else %}
+                          £74.59
+                        {% endif %}
+                      </dd>
+                    </div>
+                  </dl>
+                  
+                  <h2 class="nhsuk-heading-m">Confirm the annual amount is correct</h2>
+
+                  <div class="nhsuk-radios" data-module="nhsuk-radios">
+
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="annual-published-cost-correct-yes" name="annual-published-cost-correct" type="radio" value="Yes" data-aria-controls="source-1">
+                      <label class="nhsuk-label nhsuk-radios__label" for="annual-published-cost-correct-yes">
+                        Yes, the amount is correct
+                      </label>
+                    </div>
+              
+                    <div class="nhsuk-radios__item">
+                      <input class="nhsuk-radios__input" id="annual-published-cost-correct-no" name="annual-published-cost-correct" type="radio" value="No" data-aria-controls="source-2">
+                      <label class="nhsuk-label nhsuk-radios__label" for="annual-published-cost-correct-no">
+                        No, I want to change the amount
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+            
+              </div>
+            
+
+              <button class="nhsuk-button nhsuk-button--primary" style="margin-top: 20px;" type="submit" id="submit-button">Submit</button>
+
+              <p style="margin-bottom: 60px;"><a href="cancel-claim-conversion?from=/version-47/uk-claims/resubmissions/check-annual-published-cost">Cancel</a></p>
+
+            </div>
+
+
+
+
+          </div>
+        </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

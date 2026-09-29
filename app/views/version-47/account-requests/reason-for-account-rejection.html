@@ -1,0 +1,112 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Reason for account request rejection - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="../s1/search/search-by-person">Search</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="pending-requests">Account requests (Pending)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">
+              <a class="nhsuk-breadcrumb__link" href="review-pending-request">Account request (Josephine Dylan)</a>
+            </li>
+            <li class="nhsuk-breadcrumb__list-item">Reason</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="review-pending-request">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Account request (Josephine Dylan)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">
+                What is the reason for rejecting the request?
+              </h1>
+            </div>
+          </div>
+
+          <form action="reason-for-account-rejection" method="post" novalidate>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+
+              <div class="nhsuk-hint">
+                Select a reason
+              </div>
+
+
+              <div class="nhsuk-form-group">
+                <div class="nhsuk-radios nhsuk-radios--conditional">
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-rejection-not-eligible" name="reason-for-rejection" type="radio" value="Not eligible">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-rejection-not-eligible">Not eligible</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-rejection-missing-info" name="reason-for-rejection" type="radio" value="Missing or inaccurate information">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-rejection-missing-info">Missing or inaccurate information</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-rejection-unable-contact" name="reason-for-rejection" type="radio" value="Unable to contact">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-rejection-unable-contact">Unable to contact</label>
+                  </div>
+                </div>
+              </div>
+
+             <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Save and submit
+                  </button>
+              </div>
+            </div>
+
+              
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

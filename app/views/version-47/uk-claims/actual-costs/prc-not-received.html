@@ -1,0 +1,141 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+PRC request no response received
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+    
+  
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">PRC not received from member state</h1>
+             </div>
+          </div>
+
+          <form action="prc-not-received" method="post">
+
+          
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+  
+                <fieldset class="nhsuk-fieldset" aria-describedby="reason-for-no-prc-hint">
+                  <legend class="nhsuk-label" style="margin-bottom: 30px;">
+                    Select a reason for not receiving a PRC
+                  </legend>
+                    <div class="nhsuk-radios" data-module="nhsuk-radios">
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="reason-for-no-prc-no-reply" name="reason-for-no-prc" type="radio" value="No reply received">
+                        <label class="nhsuk-label nhsuk-radios__label" for="reason-for-no-prc-no-reply">
+                          No reply received
+                        </label>
+                      </div>
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="reason-for-no-prc-ms-confirmed-person-not-eligible" name="reason-for-no-prc" type="radio" value="Member state has confirmed person is not eligible for the treatment dates">
+                        <label class="nhsuk-label nhsuk-radios__label" for="reason-for-no-prc-ms-confirmed-person-not-eligible">
+                          Member state has confirmed person is not eligible for the treatment dates
+                        </label>
+                      </div>
+                      <div class="nhsuk-radios__item">
+                        <input class="nhsuk-radios__input" id="reason-for-no-prc-other" name="reason-for-no-prc" type="radio" value="Other">
+                        <label class="nhsuk-label nhsuk-radios__label" for="reason-for-no-prc-other">
+                          Other, please specify a reason
+                        </label>
+                      </div>
+                      <br>
+                        <textarea class="nhsuk-textarea" id="otherPRCNotReceivedReason" rows="5" name="other-prc-not-received-reason"></textarea>
+                    </div>
+                </fieldset>
+
+                {% if data['prc-requested-by'] == 'RINA' %}
+                <div class="nhsuk-form-group">
+                  <label class="nhsuk-label" for="prc-request-rina-ref-label">RINA reference number</label>
+                  <input class="nhsuk-input nhsuk-input--width-10" id="prc-request-rina-ref" type="number" name="prc-request-rina-ref" value="0987654321">
+                </div>
+                {% endif %}
+
+                <fieldset class="nhsuk-fieldset" aria-describedby="example-hint" role="group">
+                  <legend class="nhsuk-fieldset__legend">
+                    <span class="nhsuk-label">PRC request follow up date</span>
+                  </legend>
+
+                  <div class="nhsuk-hint" id="prc-request-follow-up-date-hint">
+                    For example, 31 3 2022
+                  </div>
+        
+                  <div class="nhsuk-date-input" id="prc-request-follow-up">
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-follow-up-day">
+                          Day
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="prc-request-follow-up-day" name="prc-request-follow-up-day" type="text" inputmode="numeric" value="08" disabled>
+                      </div>
+                    </div>
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-follow-up-month">
+                          Month
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="prc-request-follow-up-month" name="prc-request-follow-up-month" type="text" inputmode="numeric" value="05" disabled>
+                      </div>
+                    </div>
+                    <div class="nhsuk-date-input__item">
+                      <div class="nhsuk-form-group">
+                        <label class="nhsuk-label nhsuk-date-input__label" for="prc-request-follow-up-year">
+                          Year
+                        </label>
+                        <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="prc-request-follow-up-year" name="prc-request-follow-up-year" type="text" inputmode="numeric" value="2026" disabled>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+  
+              </div>
+            </div>
+
+
+              <button class="nhsuk-button nhsuk-button--primary" type="submit" id="submit-button">Submit</button>
+
+            </div>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

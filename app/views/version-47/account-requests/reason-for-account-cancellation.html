@@ -1,0 +1,168 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Reason for account cancellation - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          {{ backLink({
+            "href": "javascript:history.go(-1)",
+            "text": "Go back",
+            "classes": "nhsuk-u-margin-bottom-4"
+          }) }}
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+              <h1 class="nhsuk-heading-xl">
+                What is the reason for cancelling the account?
+              </h1>
+            </div>
+          </div>
+
+          <form action="reason-for-account-cancellation" method="post" novalidate>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+
+              <div class="nhsuk-form-group">
+                <div class="nhsuk-radios nhsuk-radios--conditional">
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-cancellation-ovm-moved-to-another-trust" name="reason-for-cancellation" type="radio" value="OVM has moved to a different trust">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-ovm-moved-to-another-trust">OVM has moved to a different NHS trust</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-cancellation-ovm-left-nhs" name="reason-for-cancellation" type="radio" value="OVM has left the NHS">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-ovm-left-nhs">OVM has left the NHS</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-cancellation-rovt-account-issues" name="reason-for-cancellation" type="radio" value="ROVT account issues, so the OVM has requested a new account">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-rovt-account-issues">ROVT account issues, so the OVM has requested a new account</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="reason-for-cancellation-mfa-issues" name="reason-for-cancellation" type="radio" value="OVM is experiencing issues with MFA">
+                    <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-mfa-issues">OVM is experiencing issues with MFA</label>
+                  </div>
+                </div>
+              
+                <div class="nhsuk-radios__item" data-module="nhsuk-radios">
+                  <input class="nhsuk-radios__input" id="reason-for-cancellation-other" name="reason-for-cancellation" type="radio" value="Other" data-aria-controls="conditional-other-account-cancellation-reason" aria-expanded="false">
+                  <label class="nhsuk-label nhsuk-radios__label" for="reason-for-cancellation-other">
+                    Other
+                  </label>
+                </div>
+                <!-- Conditionally revealed textarea -->
+                <div class="nhsuk-radios__conditional nhsuk-radios__conditional--hidden" id="conditional-other-account-cancellation-reason">
+                  <div class="nhsuk-form-group">
+                    <div class="nhsuk-hint" for="otherAccountCancellationReasonComments">
+                      Enter another reason.
+                    </hint>
+                      <textarea class="nhsuk-textarea" id="otherAccountCancellationReasonComments" rows="7" name="other-account-cancellation-reason-comments" maxlength="255"></textarea>
+                      <p id="charactersRemaining" class="nhsuk-hint" style="margin-top: -20px;" aria-hidden="true">255 characters remaining</p>
+                      <p id="char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 255 characters</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+             <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Continue
+                  </button>
+              </div>
+            </div>
+
+            <p style="margin-top: 20px;"><a href="exit-cancelling-ovms-account?from=/version-47/account-requests/reason-for-account-cancellation">Cancel</a></p>
+
+              
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  const textarea = document.querySelector('#otherAccountCancellationReasonComments');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 255;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 255);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
+{% endblock %}
+

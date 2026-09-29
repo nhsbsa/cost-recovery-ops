@@ -1,0 +1,178 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Check these details before submitting
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+    
+  
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">Check these details before submitting</h1>
+             </div>
+          </div>
+
+          <form action="cya-request-prc" method="post">
+
+          
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+  
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Actual treatment start date
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      01/02/2023
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      Actual treatment end date
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      01/02/2023
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      PRC start date
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['start-date-prc-day'] and data['start-date-prc-month'] and data['start-date-prc-year'] %}
+                        {% set day = data['start-date-prc-day'] | int %}
+                        {% set month = data['start-date-prc-month'] | int %}
+                        {% set year = data['start-date-prc-year'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+
+                        {{ day }}/{{ month }}/{{ year }}
+                      {% else %}
+                        01/02/2023
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="request-prc#start-date-prc-day">Change<span class="nhsuk-u-visually-hidden">PRC start date</span></a>
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      PRC end date
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['end-date-prc-day'] and data['end-date-prc-month'] and data['end-date-prc-year'] %}
+                        {% set day = data['end-date-prc-day'] | int %}
+                        {% set month = data['end-date-prc-month'] | int %}
+                        {% set year = data['end-date-prc-year'] %}
+            
+                        {% if day < 10 %}
+                            {% set day = "0" ~ day %}
+                        {% endif %}
+                        
+                        {% if month < 10 %}
+                            {% set month = "0" ~ month %}
+                        {% endif %}
+
+                        {{ day }}/{{ month }}/{{ year }}
+                      {% else %}
+                        01/02/2023
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="request-prc#end-date-prc-day">Change<span class="nhsuk-u-visually-hidden">PRC end date</span></a>
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      How the PRC was requested?
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['prc-requested-by'] %}
+                        {{ data['prc-requested-by'] }}
+                      {% else %}
+                        RINA
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="request-prc#prc-requested-by">Change<span class="nhsuk-u-visually-hidden">how the PRC was requested</span></a>
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">
+                      No. of attachments for S044
+                    </dt>
+                    <dd class="nhsuk-summary-list__value">
+                      {% if data['number-of-attachments-requested'] %}
+                        {{ data['number-of-attachments-requested'] }}
+                      {% else %}
+                        1
+                      {% endif %}
+                    </dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="request-prc#number-of-attachments-requested">Change<span class="nhsuk-u-visually-hidden">number of attachments for S044</span></a>
+                    </dd>
+                  </div>
+                </dl>
+  
+              </div>
+            </div>
+
+
+              <button class="nhsuk-button nhsuk-button--primary" type="submit" id="submit-button">Submit</button>
+
+            </div>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

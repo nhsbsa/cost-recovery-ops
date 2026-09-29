@@ -1,0 +1,323 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+View claim resub
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View Claim ID (Resubmissions)</li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="uk-claims-search-results">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search results
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+
+            
+            {% if data['resubStatus'] == 'treatments-added-to-resub' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Selected treatments added to resub 7824366
+                </h3>
+                <p>Treatments linked to the resub are set to contested status. Select View treatments on Resub ID 7824366 to review.</p>
+              </div>
+            </div>
+
+            {% elif data['resubStatus'] == 'assigned-for-review' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Resub assigned for peer review
+                </h3>
+                <p>Resub 7824366 has been assigned to nina.evans@nhsbsa.nhs.uk. for peer review.</p>
+              </div>
+            </div>
+            {% endif %}
+
+
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h1 class="nhsuk-heading-l" style="margin-bottom: 25px;">
+                    Claim ID 345680 - Resubmissions
+                  </h1>
+                  <a href="create-new-actual-cost-resubmission">
+                    <button class="nhsuk-button" type="submit">
+                      Create new resubmission
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <form action="resubmissions" method="post">
+            
+            <!--start secondary navigation-->
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-forms">Treatment forms</a>
+                  <span class="nhsuk-u-visually-hidden">Search for a treatment form</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-documents">Claim documents</a>
+                  <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-summary">Claim summary</a>
+                  <span class="nhsuk-u-visually-hidden">View the overall summary for claim 345680</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="resubmissions">Resubmissions</a>
+                  <span class="nhsuk-u-visually-hidden">View resubmissions for claim 345680</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-history">Claim history</a>
+                  <span class="nhsuk-u-visually-hidden">View case history for claim 345680</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+
+            {% if data['create-new-resub'] == 'yes' %}
+            <details class="nhsuk-details" >
+              <summary class="nhsuk-details__summary">
+                <span class="nhsuk-details__summary-text">
+                  Filter by status
+                </span>
+              </summary>
+              <div class="nhsuk-details__text">
+                <p>Select all status you want to filter the resubmissions by.</p>
+                <div class="nhsuk-checkboxes">
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="to-action" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="to-action">
+                      To action
+                    </label>
+                  </div>
+            
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="in-progress" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="in-progress">
+                      In progress
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="to-review" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="to-review">
+                      To review
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="under-review" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="under-review">
+                      Under review
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="sent-to-dh" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="sent-to-dh">
+                      Send to DH
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="complete" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="complete">
+                      Complete
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="print-failed" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="Print failed">
+                      Print failed
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="ready-to-send" name="resubmission-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="Ready to send">
+                      Ready to send
+                    </label>
+                  </div>
+            
+                </div>
+                <br>
+                <a href="#"><button  class="nhsuk-button" type="submit">
+                  Apply
+                </button></a>
+              </div>
+            </details>
+        
+            
+            <!-- TABLE START -->
+            <table role="table" class="nhsuk-table-responsive" id="resubmissionsTable">
+              <thead class="nhsuk-table__head">
+                <tr class="nhsuk-table__row">
+                  <th scope="col" class="nhsuk-table__header">Resub ID</th>
+                  <th scope="col" class="nhsuk-table__header">Deadline to reply</th>
+                  <th scope="col" class="nhsuk-table__header">Assigned to</th>
+                  <th scope="col" class="nhsuk-table__header">Peer reviewed by</th>
+                  <th scope="col" class="nhsuk-table__header">Status</th>
+                  <th scope="col" class="nhsuk-table__header">Treatment status</th>
+                  <th scope="col" class="nhsuk-table__header">Action</th>
+                </tr>
+              </thead>
+
+              <tbody class="nhsuk-table__body">
+                <tr class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell" data-label="Resubmission ID">7824366</td>
+                  <td class="nhsuk-table__cell" data-label="Deadline to reply">28/04/2027</td>
+
+                  <td class="nhsuk-table__cell" data-label="Assigned to">
+                    {% if data.resubStatus == 'treatments-added-to-resub' or data.resubStatus == 'ready-to-send-for-peer-review' or data.resubStatus == 'peer-review-requested' or data.resubStatus == 'assigned-for-review' or data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or data.resubStatus == 'resubmission-completed' %}
+                      joe.bloggs@nhsbsa.nhs.uk
+                    {% else %}
+                      -
+                    {% endif %}
+                  </td>
+
+                  <td class="nhsuk-table__cell" data-label="Peer reviewed by">
+                    {% if data.resubStatus == 'peer-review-requested' %}
+                      <a href="resubmissions?resubStatus=assigned-for-review">Assign to me</a>
+                    {% elif data.resubStatus == 'assigned-for-review' or data.resubStatus == 'peer-reviewed' or data.resubStatus == 'resubmission-sent-to-dh' or data.resubStatus == 'resubmission-completed' %}
+                      nina.evans@nhsbsa.nhs.uk
+                    {% else %}
+                      -
+                    {% endif %}
+                  </td>
+
+                  <td class="nhsuk-table__cell" data-label="Status">
+                    {% if data.resubStatus == 'resubmission-completed' %}
+                      <strong class="nhsuk-tag nhsuk-tag--purple">Complete</strong>
+                    {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong>
+                    {% elif data.resubStatus == 'peer-reviewed' %}
+                      <strong class="nhsuk-tag nhsuk-tag">Ready to send</strong>
+                    {% elif data.resubStatus == 'assigned-for-review' %}
+                      <strong class="nhsuk-tag nhsuk-tag--white">Under review</strong>
+                    {% elif data.resubStatus == 'peer-review-requested' %}
+                      <strong class="nhsuk-tag nhsuk-tag--blue">To review</strong>
+                    {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                    {% elif data.resubStatus == 'treatments-added-to-resub' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                    {% else %}
+                      <strong class="nhsuk-tag nhsuk-tag--grey">To action</strong>
+                    {% endif %}
+                  </td>
+
+                  <td class="nhsuk-table__cell" data-label="Treatment status">
+                    {% if data.resubStatus == 'resubmission-completed' or data.resubStatus == 'resubmission-sent-to-dh' or data.resubStatus == 'peer-reviewed' or data.resubStatus == 'assigned-for-review' or data.resubStatus == 'peer-review-requested' or data.resubStatus == 'ready-to-send-for-peer-review' or data.resubStatus == 'treatments-added-to-resub' %}
+                      Added
+                    {% else %}
+                      <a href="add-treatments-to-resubmission">Add treatments</a>
+                    {% endif %}
+                  </td>
+
+                  <td class="nhsuk-table__cell" data-label="Action">
+                    {% if data.resubStatus == 'resubmission-completed' %}
+                      <a href="treatments-within-resubmission">View treatments</a>
+                    {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
+                      <a href="treatments-within-resubmission">View treatments</a>
+                    {% elif data.resubStatus == 'peer-reviewed' %}
+                      <a href="treatments-within-resubmission">View treatments</a>
+                    {% elif data.resubStatus == 'assigned-for-review' %}
+                      <a href="treatments-within-resubmission">View treatments</a>
+                    {% elif data.resubStatus == 'peer-review-requested' %}
+                      <p>-</p>
+                    {% elif data.resubStatus == 'ready-to-send-for-peer-review' %}
+                      <a href="treatments-within-resubmission">View treatments</a>
+                    {% elif data.resubStatus == 'treatments-added-to-resub' %}
+                      <a href="treatments-within-resubmission">View treatments</a>
+                    {% else %}
+                      -
+                    {% endif %}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- TABLE END -->
+            {% else %}
+              <p><b>No resubmissions have been created.</b></p>
+            {% endif %}
+            
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
