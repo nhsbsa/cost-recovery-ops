@@ -321,11 +321,23 @@ UK claim ID 123456 - Claim summary
                       </div>
 
                       <div class="nhsuk-form-group" style="margin-top: 30px;">
-                        <label class="nhsuk-label" for="completion-date">
-                          <b>RINA reference number</b>
+                        <label class="nhsuk-label" for="local-rina-id">
+                          <b>Local RINA ID</b>
                         </label>
+                        <div class="nhsuk-hint">You can add more than one local RINA ID at once by separating each ID with a comma. For example, 2827291119, 188282991, 1919828222.</div>
+                        <textarea class="nhsuk-textarea" id="rina-claim-local-rina-id" name="rina-claim-local-rina-id" rows="3" aria-describedby="rina-claim-local-rina-id-hint">{{ '1111111111A019, 222222222A2064, 33333333333A65' }}</textarea>
+                        <p id="local-rina-characters-remaining" class="nhsuk-hint" style="margin-top: -20px;" aria-hidden="true">47 characters remaining</p>
+                        <p id="local-rina-char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 47 characters</p>
+                      </div>
 
-                        <input class="nhsuk-input nhsuk-input--width-20" id="rina-claim-rina-ref-no" name="rina-claim-rina-ref-no" type="text" value="100005789111">
+                      <div class="nhsuk-form-group" style="margin-top: 30px;">
+                        <label class="nhsuk-label" for="international-rina-id">
+                          <b>International RINA ID</b>
+                        </label>
+                        <div class="nhsuk-hint">You can add more than one international RINA ID at once by separating each ID with a comma. For example, 2827291119, 188282991, 1919828222.</div>
+                        <textarea class="nhsuk-textarea" id="rina-claim-international-rina-id" name="rina-claim-international-rina-id" rows="3" aria-describedby="rina-claim-international-rina-id-hint">{{ '1111111111111111111111111111111, 2222222222222222222222222222222, 3333333333333333333333333333333' }}</textarea>
+                        <p id="international-rina-characters-remaining" class="nhsuk-hint" style="margin-top: -20px;" aria-hidden="true">98 characters remaining</p>
+                        <p id="international-rina-char-count-screen-reader" class="nhsuk-u-visually-hidden" aria-live="polite">You can enter up to 98 characters</p>
                       </div>
 
 
@@ -517,5 +529,73 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     }
 });
+</script>
+
+<script>
+  const textareas = [
+    {
+      textarea: document.querySelector('#rina-claim-local-rina-id'),
+      countRemaining: document.querySelector('#local-rina-characters-remaining'),
+      staticMsg: document.querySelector('#local-rina-char-count-screen-reader'),
+      maxCharacters: 47
+    },
+    {
+      textarea: document.querySelector('#rina-claim-international-rina-id'),
+      countRemaining: document.querySelector('#international-rina-characters-remaining'),
+      staticMsg: document.querySelector('#international-rina-char-count-screen-reader'),
+      maxCharacters: 98
+    }
+  ];
+
+  textareas.forEach(({ textarea, countRemaining, staticMsg, maxCharacters }) => {
+    let timeoutId;
+
+    function getRemainingCharacters() {
+      const textEntered = textarea.value.trim();
+
+      return maxCharacters - textEntered.length;
+    }
+
+    function updateCharacterCount() {
+      const remainingCharacters = getRemainingCharacters();
+
+      if (remainingCharacters >= 0) {
+        countRemaining.textContent =
+          `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      } else {
+        const charactersTooMany = Math.abs(remainingCharacters);
+
+        countRemaining.textContent =
+          `You have ${charactersTooMany} character${charactersTooMany === 1 ? '' : 's'} too many`;
+      }
+    }
+
+    function updateScreenReaderMessage() {
+      clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(() => {
+        const remainingCharacters = getRemainingCharacters();
+
+        if (remainingCharacters < 0) {
+          const charactersTooMany = Math.abs(remainingCharacters);
+
+          staticMsg.textContent =
+            `You have ${charactersTooMany} character${charactersTooMany === 1 ? '' : 's'} too many`;
+        } else {
+          staticMsg.textContent =
+            `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+        }
+      }, 1000);
+    }
+
+    textarea.addEventListener('input', () => {
+      updateCharacterCount();
+      updateScreenReaderMessage();
+    });
+
+    // Update character count if textarea has a value on page load
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
 </script>
 {% endblock %}
