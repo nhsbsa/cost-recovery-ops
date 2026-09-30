@@ -1,0 +1,511 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - View the S110 global note - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/reimbursement-of-claim">View Claim ID (Reimbursement of claim)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View S110 global note (123456789A019)</li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="../reimbursement-of-claim">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      View claim (Reimbursement of claim)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                  <h1 class="nhsuk-heading-l" style="margin-bottom: 20px;">
+                    Claim ID 123456: S110 global note for S1/S072 Article 63, 2.b - {% if data['s110-age-bracket'] == '65 years and over' %}
+                    65 years and over
+                  {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                    20 to 64 years
+                  {% else %}
+                    0 to 19 years
+                  {% endif %}
+                  </h1>
+              </div>
+            </div>
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="s110-global-note">S110 global note CLA_IMO</a>
+                  <span class="nhsuk-u-visually-hidden">View the S110 global note for 
+                    {% if data['s110-age-bracket'] == '65 years and over' %}
+                      65 years and over
+                    {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                      20 to 64 years
+                    {% else %}
+                      0 to 19 years
+                    {% endif %}
+                  </span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s110-documents">Claim for reimbursement documents</a>
+                  <span class="nhsuk-u-visually-hidden">View the claim for reimbursement documents for 
+                    {% if data['s110-age-bracket'] == '65 years and over' %}
+                      65 years and over
+                    {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                      20 to 64 years
+                    {% else %}
+                      0 to 19 years
+                    {% endif %}
+                  </span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s112-contestation-of-fixed-amounts">S112 contestations of fixed amounts</a>
+                  <span class="nhsuk-u-visually-hidden">View the S112 contestations of fixed amounts for
+                    {% if data['s110-age-bracket'] == '65 years and over' %}
+                      65 years and over
+                    {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                      20 to 64 years
+                    {% else %}
+                      0 to 19 years
+                    {% endif %}
+                  </span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-for-reimbursement-history">Claim for reimbursement history</a>
+                  <span class="nhsuk-u-visually-hidden">View the claim for reimbursement history for
+                    {% if data['s110-age-bracket'] == '65 years and over' %}
+                      65 years and over
+                    {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                      20 to 64 years
+                    {% else %}
+                      0 to 19 years
+                    {% endif %}
+                  </span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <form action="s110-global-note" method="post">
+
+            <!-- Beginning of content -->
+            <div class="nhsuk-grid-row">
+              <!-- Start of left panel -->
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    <h2 class="nhsuk-heading-m">S110 global note CLA_IMO</h2>
+                    
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Global IMO reference creditor liaison body
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['s110-age-bracket'] == '65 years and over' %}
+                            123456A65
+                          {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                            123456A2064
+                          {% else %}
+                            123456A019
+                          {% endif %}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Global CLA_IMO reference creditor liaison body
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['s110-age-bracket'] == '65 years and over' %}
+                            123456A65
+                          {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                            123456A2064
+                          {% else %}
+                            123456A019
+                          {% endif %}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Financial year
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          2023
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Lump sum category
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['s110-age-bracket'] == '65 years and over' %}
+                            IR 987/2009, Art 64, Age 65+
+                          {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                            IR 987/2009, Art 64, Age 20-64
+                          {% else %}
+                            IR 987/2009, Art 64, Age 0-19
+                          {% endif %}
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <h3 class="nhsuk-heading-s">Claim calculation</h3>
+                    
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Average cost per month
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['s110-age-bracket'] == '65 years and over' %}
+                            £480.96
+                          {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                            £175.37
+                          {% else %}
+                            £79.25
+                          {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Currency
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          GBP (Great British Pounds)
+                        </dd>
+                      </div>
+
+                      
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Original total number of months
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['s110-age-bracket'] == '65 years and over' %}
+                            250
+                          {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                            150
+                          {% else %}
+                            100
+                          {% endif %}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date cost published
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          19 August 2026
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <h3 class="nhsuk-heading-s">Total amount of the claim</h3>
+                    
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Amount in GBP
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['s110-age-bracket'] == '65 years and over' %}
+                            £120,240
+                          {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                            £26,305.50
+                          {% else %}
+                            £7,925.00
+                          {% endif %}
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <h3 class="nhsuk-heading-s">Bank account creditor liaison body</h3>
+                    
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          IBAN
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          GB187391NHSI828932
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          BIC-SWIFT
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          NWKGB3P
+                        </dd>
+                      </div>
+                    </dl>
+                </div>
+              </div>
+
+            </div>
+              <!-- End of left panel -->
+
+            
+            <!-- Start of right panel -->
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+                  
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="date-conversion-letter-sent-to-ms-label">
+                      <b>When was the conversion letter sent to the member state?</b>
+                    </label>
+
+                    <div class="nhsuk-hint">
+                      You must enter the name of the person who sent the conversion letter if you answer this question.
+                    </div>
+                    <div class="nhsuk-hint">
+                      For example, 31 3 2022
+                    </div>
+
+                    <div class="nhsuk-date-input" id="date-conversion-letter-sent-to-ms">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-conversion-letter-sent-to-ms-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-conversion-letter-sent-to-ms-day" name="date-conversion-letter-sent-to-ms-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-conversion-letter-sent-to-ms-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-conversion-letter-sent-to-ms-month" name="date-conversion-letter-sent-to-ms-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-conversion-letter-sent-to-ms-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-conversion-letter-sent-to-ms-year" name="date-conversion-letter-sent-to-ms-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="name-of-person-who-sent-conversion-letter-label">
+                     <b>Who sent the conversion letter to the member state?</b>
+                    </label>
+                    <div class="nhsuk-hint" id="name-of-person-who-sent-conversion-letter-hint-1">
+                      You must enter the date the conversion letter was sent if you enter this information.
+                    </div>
+                    <div class="nhsuk-hint" id="name-of-person-who-sent-conversion-letter-hint-2">
+                      Enter their full name
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="conversion-letter-sent-to-ms-by" name="conversion-letter-sent-to-ms-by" type="text">
+                  </div>
+
+                  <hr>
+                  
+                  <div class="nhsuk-form-group" style="margin-top: 30px;">
+                    <label class="nhsuk-label" for="date-comversion-letter-sent-to-dhsc-label">
+                      <b>When was the conversion letter sent to the Department of Health and Social Care (DHSC)?</b>
+                    </label>
+                    <div class="nhsuk-hint" id="contact-hint">
+                      You must enter the name of the person who sent the conversion letter to the DHSC if you answer this question.
+                    </div>
+
+                    <div class="nhsuk-date-input" id="date-comversion-letter-sent-to-dhsc">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-comversion-letter-sent-to-dhsc-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-comversion-letter-sent-to-dhsc-day" name="date-comversion-letter-sent-to-dhsc-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-comversion-letter-sent-to-dhsc-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-comversion-letter-sent-to-dhsc-month" name="date-comversion-letter-sent-to-dhsc-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-comversion-letter-sent-to-dhsc-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-comversion-letter-sent-to-dhsc-year" name="date-comversion-letter-sent-to-dhsc-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                  <div class="nhsuk-form-group" style="margin-top: 30px;">
+                    <label class="nhsuk-label" for="name-of-person-who-sent-conversion-letter-to-dhsc-label">
+                      <b>Who sent the conversion letter to the DHSC?</b>
+                    </label>
+                    <div class="nhsuk-hint" id="name-of-person-who-sent-conversion-letter-to-dhsc-hint-1">
+                      You must enter the date the acknowledgement letter was sent to the DHSC if you enter this information.
+                    </div>
+                    <div class="nhsuk-hint" id="name-of-person-who-sent-conversion-letter-to-dhsc-hint-2">
+                      Enter their full name
+                    </div>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="conversion-letter-sent-to-dhsc-by" name="conversion-letter-sent-to-dhsc-by" type="text">
+                  </div>
+
+                  <hr>
+
+                  <div class="nhsuk-form-group" style="margin-top: 30px;">
+                    <label class="nhsuk-label" for="date-s111-acknowledgement-letter-received-label">
+                      <b>When was the S111 acknowledgement letter received?</b>
+                    </label>
+
+                    <div class="nhsuk-date-input" id="date-s111-acknowledgement-letter-received">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-s111-acknowledgement-letter-received-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-s111-acknowledgement-letter-received-day" name="date-s111-acknowledgement-letter-received-day" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ dateParts[0] }}" >
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-s111-acknowledgement-letter-received-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-s111-acknowledgement-letter-received-month" name="date-s111-acknowledgement-letter-received-month" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ dateParts[1] }}" >
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="date-s111-acknowledgement-letter-received-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-s111-acknowledgement-letter-received-year" name="date-s111-acknowledgement-letter-received-year" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ dateParts[2] }}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+
+                  <!-- Preserve key status data between submissions -->
+                  
+
+                  <div class="button-container">
+                    <div class="action-buttons">
+                      <!-- Conditionally show Save resub summary button -->
+                      <button class="nhsuk-button" type="submit" style="margin-right: 20px; ">
+                        Save resub summary
+                      </button>
+                  
+                      <button class="nhsuk-button nhsuk-button--secondary" type="submit" id="editResubButton" name="action" value="editResubSummary">
+                        Edit resub summary
+                      </button>
+
+                    </div>
+                  </div>
+                  
+
+              </div>
+            </div>
+
+          </div>
+        <!-- End of right panel -->
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+// Function to set the current date and time
+function setCurrentDateTime(elementId) {
+    var dateElement = document.getElementById(elementId);
+
+    if (dateElement) {
+        var currentDate = new Date();
+
+        // Format date as DD/MM/YYYY
+        var day = String(currentDate.getDate());
+        var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+        var month = monthNames[currentDate.getMonth()];
+        var year = currentDate.getFullYear();
+        var formattedDate = `${day} ${month} ${year}`;
+
+        // Set formatted date and time with line break
+        dateElement.innerHTML = `${formattedDate}`;
+    }
+}
+
+// Set the date for each item
+document.addEventListener("DOMContentLoaded", function () {
+  setCurrentDateTime("currentDateResubDocsGenerated");    // Current date resub docs generated
+});
+</script>
+{% endblock %}

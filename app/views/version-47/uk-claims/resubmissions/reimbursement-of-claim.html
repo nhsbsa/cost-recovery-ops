@@ -55,39 +55,43 @@ UK claim ID 123456 - Resubmissions
           <div class="nhsuk-main-wrapper" id="maincontent">
 
             {% set convertedAgeBrackets = data['converted-age-brackets'] or [] %}
-
-            
-            {% if data['resubStatus'] == 'invoices-added-to-resub' %}
-            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
-              <div class="nhsuk-notification-banner__header">
-                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
-                  Success
-                </h2>
-              </div>
-              <div class="nhsuk-notification-banner__content">
-                <h3 class="nhsuk-notification-banner__heading">
-                  Selected invoices added to resub 0000001
-                </h3>
-                <p>Invoices linked to the resub are set to contested status.</p>
-              </div>
-            </div>
-            {% endif %}
-
-
-
             
             <div class="nhsuk-grid-row">
               <div class="nhsuk-grid-column-full">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
+            
                   <h1 class="nhsuk-heading-l" style="margin-bottom: 25px;">
                     Claim ID 123456 - Reimbursement of claim for<br>
                     S1/S072 Article 63, 2.b - Mixed ages
                   </h1>
+            
                   {% if convertedAgeBrackets.length < 3 %}
-                  <a href="select-age-bracket-for-conversion" class="nhsuk-button" type="submit">
-                      Convert claim into GBP
-                  </a>
+
+                    {% if convertedAgeBrackets.length == 2 %}
+
+                      {% if '0 to 19 years' not in convertedAgeBrackets %}
+                        <a href="enter-annual-published-cost?s110-age-bracket=0%20to%2019%20years" class="nhsuk-button">
+                          Convert claim into GBP
+                        </a>
+
+                      {% elif '20 to 64 years' not in convertedAgeBrackets %}
+                        <a href="enter-annual-published-cost?s110-age-bracket=20%20to%2064%20years" class="nhsuk-button">
+                          Convert claim into GBP
+                        </a>
+
+                      {% elif '65 years and over' not in convertedAgeBrackets %}
+                        <a href="enter-annual-published-cost?s110-age-bracket=65%20years%20and%20over" class="nhsuk-button">Convert claim into GBP
+                        </a>
+                      {% endif %}
+
+                    {% else %}
+                      <a href="select-age-bracket-for-conversion" class="nhsuk-button">
+                        Convert claim into GBP
+                      </a>
+                    {% endif %}
+
                   {% endif %}
+            
                 </div>
               </div>
             </div>
@@ -148,51 +152,69 @@ UK claim ID 123456 - Resubmissions
                   <dl class="nhsuk-summary-list">
                 
                     {% if '0 to 19 years' in convertedAgeBrackets %}
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          0 to 19 years
-                        </dt>
-                        <dd class="nhsuk-summary-list__actions">
-                          <a class="nhsuk-link" href="#">
-                            View<span class="nhsuk-u-visually-hidden">
-                              S110 global note for 0 to 19 years
-                            </span>
-                          </a>
-                        </dd>
-                      </div>
-                    {% endif %}
-                
-                    {% if '20 to 64 years' in convertedAgeBrackets %}
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          20 to 64 years
-                        </dt>
-                        <dd class="nhsuk-summary-list__actions">
-                          <a class="nhsuk-link" href="#">
-                            View<span class="nhsuk-u-visually-hidden">
-                              S110 global note for ages 20 to 64 years
-                            </span>
-                          </a>
-                        </dd>
-                      </div>
-                    {% endif %}
-                
-                    {% if '65 years and over' in convertedAgeBrackets %}
-                      <div class="nhsuk-summary-list__row">
-                        <dt class="nhsuk-summary-list__key">
-                          65 years and over
-                        </dt>
-                        <dd class="nhsuk-summary-list__actions">
-                          <a class="nhsuk-link" href="#">
-                            View<span class="nhsuk-u-visually-hidden">
-                              S110 global note for 65 years and over
-                            </span>
-                          </a>
-                        </dd>
-                      </div>
-                    {% endif %}
-            
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        0 to 19 years
+                      </dt>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a class="nhsuk-link" href="s110-global-note?s110-age-bracket=0%20to%2019%20years">
+                          View<span class="nhsuk-u-visually-hidden">
+                            S110 global note for 0 to 19 years
+                          </span>
+                        </a>
+                      </dd>
+                    </div>
+                  {% endif %}
+
+                  {% if '20 to 64 years' in convertedAgeBrackets %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        20 to 64 years
+                      </dt>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a class="nhsuk-link" href="s110-global-note?s110-age-bracket=20%20to%2064%20years">
+                          View<span class="nhsuk-u-visually-hidden">
+                            S110 global note for ages 20 to 64 years
+                          </span>
+                        </a>
+                      </dd>
+                    </div>
+                  {% endif %}
+
+                  {% if '65 years and over' in convertedAgeBrackets %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        65 years and over
+                      </dt>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a class="nhsuk-link" href="s110-global-note?s110-age-bracket=65%20years%20and%20over">
+                          View<span class="nhsuk-u-visually-hidden">
+                            S110 global note for 65 years and over
+                          </span>
+                        </a>
+                      </dd>
+                    </div>
+                  {% endif %}
                   </dl>
+
+                  {% if convertedAgeBrackets.length == 3 %}
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Conversion letter
+                      </dt>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a class="nhsuk-link" href="#">
+                          View<span class="nhsuk-u-visually-hidden">
+                            Download
+                          </span>
+                        </a>
+                      </dd>
+                    </div>
+                  </dl>
+                  {% endif %}
+
+
             
                   {% else %}
                     <p><b>This claim has not been converted into GBP.</b></p>
