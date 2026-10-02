@@ -953,14 +953,30 @@ router.get([/resubmission-history/], function (req, res) {
 // Claim for reimbursement of fixed amounts (S110 - S113) //
 
 // Select the age bracket you want to convert into GBP
-router.post([/select-age-bracket-for-conversion/], function(req, res) {
+router.post([/select-age-bracket-for-conversion/], function (req, res) {
 
-  // Store the selected age bracket in the session
   const s110AgeBracket = req.body['s110-age-bracket'];
+
+  // Store the currently selected age bracket
   req.session.data['s110-age-bracket'] = s110AgeBracket;
 
-  // Redirect to enter the annual published cost for article type and age bracket
-  res.redirect('/version-47/uk-claims/resubmissions/enter-annual-published-cost');
+  // Get previously converted age brackets
+  const convertedAgeBrackets =
+    req.session.data['converted-age-brackets'] || [];
+
+  // Add the selected bracket if it hasn't already been converted
+  if (!convertedAgeBrackets.includes(s110AgeBracket)) {
+    convertedAgeBrackets.push(s110AgeBracket);
+  }
+
+  // Save the updated list
+  req.session.data['converted-age-brackets'] = convertedAgeBrackets;
+
+  // Redirect to enter the annual published cost
+  res.redirect(
+    '/version-47/uk-claims/resubmissions/enter-annual-published-cost'
+  );
+
 });
 
 // Conditionally display remaining unselected age brackets
@@ -993,7 +1009,8 @@ router.get([/select-age-bracket-for-conversion/], function (req, res) {
   res.render(
     'version-47/uk-claims/resubmissions/select-age-bracket-for-conversion',
     {
-      remainingAgeBrackets
+      remainingAgeBrackets,
+      s110AgeBracket: req.session.data['s110-age-bracket']
     }
   );
 
@@ -1066,25 +1083,202 @@ router.post([/enter-date-cost-published/], function(req, res) {
 
 router.get([/confirmation-claim-for-reimbursement-converted/], function (req, res) {
 
-    const ageBrackets = [
-      '0 to 19 years',
-      '20 to 64 years',
-      '65 years and over'
-    ];
+  const ageBrackets = [
+    '0 to 19 years',
+    '20 to 64 years',
+    '65 years and over'
+  ];
 
-    const convertedAgeBrackets =
-      req.session.data['converted-age-brackets'] || [];
+  const convertedAgeBrackets =
+    req.session.data['converted-age-brackets'] || [];
 
-    const remainingAgeBrackets = ageBrackets.filter(
-      bracket => !convertedAgeBrackets.includes(bracket)
-    );
+  const remainingAgeBrackets = ageBrackets.filter(
+    bracket => !convertedAgeBrackets.includes(bracket)
+  );
 
-  res.render('version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted',
-      {
-        remainingAgeBrackets
-      }
-    );
+  res.render(
+    'version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted',
+    {
+      remainingAgeBrackets,
+      s110AgeBracket: req.session.data['s110-age-bracket']
+    }
+  );
 
-  }
-);
+});
+
+// ============================================================
+// S110 GLOBAL NOTE - 0 TO 19 YEARS
+// ============================================================
+
+router.get([/a019-s110-global-note/], function (req, res) {
+
+  const data = req.session.data['a019-s110-global-note'] || {};
+
+  res.render(
+    'version-47/uk-claims/resubmissions/a019-s110-global-note',
+    {
+      data
+    }
+  );
+
+});
+
+router.post([/a019-s110-global-note/], function (req, res) {
+
+  req.session.data['a019-s110-global-note'] = {
+    dateConversionLetterSentToMSDay:
+      req.body['date-conversion-letter-sent-to-ms-day'],
+
+    dateConversionLetterSentToMSMonth:
+      req.body['date-conversion-letter-sent-to-ms-month'],
+
+    dateConversionLetterSentToMSYear:
+      req.body['date-conversion-letter-sent-to-ms-year'],
+
+    conversionLetterSentToMSBy:
+      req.body['conversion-letter-sent-to-ms-by'],
+
+    dateConversionLetterSentToDHSC_Day:
+      req.body['date-conversion-letter-sent-to-dhsc-day'],
+
+    dateConversionLetterSentToDHSC_Month:
+      req.body['date-conversion-letter-sent-to-dhsc-month'],
+
+    dateConversionLetterSentToDHSC_Year:
+      req.body['date-conversion-letter-sent-to-dhsc-year'],
+
+    conversionLetterSentToDHSCBy:
+      req.body['conversion-letter-sent-to-dhsc-by'],
+
+    dateS111AcknowledgementLetterReceivedDay:
+      req.body['date-s111-acknowledgement-letter-received-day'],
+
+    dateS111AcknowledgementLetterReceivedMonth:
+      req.body['date-s111-acknowledgement-letter-received-month'],
+
+    dateS111AcknowledgementLetterReceivedYear:
+      req.body['date-s111-acknowledgement-letter-received-year']
+  };
+
+  res.redirect('/version-47/uk-claims/resubmissions/a019-s110-global-note');
+
+});
+
+
+// ============================================================
+// S110 GLOBAL NOTE - 20 TO 64 YEARS
+// ============================================================
+
+router.get([/a2064-s110-global-note/], function (req, res) {
+
+  const data = req.session.data['a2064-s110-global-note'] || {};
+
+  res.render(
+    'version-47/uk-claims/resubmissions/a2064-s110-global-note',
+    {
+      data
+    }
+  );
+
+});
+
+router.post([/a2064-s110-global-note/], function (req, res) {
+
+  req.session.data['a2064-s110-global-note'] = {
+    dateConversionLetterSentToMSDay:
+      req.body['date-conversion-letter-sent-to-ms-day'],
+
+    dateConversionLetterSentToMSMonth:
+      req.body['date-conversion-letter-sent-to-ms-month'],
+
+    dateConversionLetterSentToMSYear:
+      req.body['date-conversion-letter-sent-to-ms-year'],
+
+    conversionLetterSentToMSBy:
+      req.body['conversion-letter-sent-to-ms-by'],
+
+    dateConversionLetterSentToDHSC_Day:
+      req.body['date-conversion-letter-sent-to-dhsc-day'],
+
+    dateConversionLetterSentToDHSC_Month:
+      req.body['date-conversion-letter-sent-to-dhsc-month'],
+
+    dateConversionLetterSentToDHSC_Year:
+      req.body['date-conversion-letter-sent-to-dhsc-year'],
+
+    conversionLetterSentToDHSCBy:
+      req.body['conversion-letter-sent-to-dhsc-by'],
+
+    dateS111AcknowledgementLetterReceivedDay:
+      req.body['date-s111-acknowledgement-letter-received-day'],
+
+    dateS111AcknowledgementLetterReceivedMonth:
+      req.body['date-s111-acknowledgement-letter-received-month'],
+
+    dateS111AcknowledgementLetterReceivedYear:
+      req.body['date-s111-acknowledgement-letter-received-year']
+  };
+
+  res.redirect('/version-47/uk-claims/resubmissions/a2064-s110-global-note');
+
+});
+
+
+// ============================================================
+// S110 GLOBAL NOTE - 65 YEARS AND OVER
+// ============================================================
+
+router.get([/a65-s110-global-note/], function (req, res) {
+
+  const data = req.session.data['a65-s110-global-note'] || {};
+
+  res.render(
+    'version-47/uk-claims/resubmissions/a65-s110-global-note',
+    {
+      data
+    }
+  );
+
+});
+
+router.post([/a65-s110-global-note/], function (req, res) {
+
+  req.session.data['a65-s110-global-note'] = {
+    dateConversionLetterSentToMSDay:
+      req.body['date-conversion-letter-sent-to-ms-day'],
+
+    dateConversionLetterSentToMSMonth:
+      req.body['date-conversion-letter-sent-to-ms-month'],
+
+    dateConversionLetterSentToMSYear:
+      req.body['date-conversion-letter-sent-to-ms-year'],
+
+    conversionLetterSentToMSBy:
+      req.body['conversion-letter-sent-to-ms-by'],
+
+    dateConversionLetterSentToDHSC_Day:
+      req.body['date-conversion-letter-sent-to-dhsc-day'],
+
+    dateConversionLetterSentToDHSC_Month:
+      req.body['date-conversion-letter-sent-to-dhsc-month'],
+
+    dateConversionLetterSentToDHSC_Year:
+      req.body['date-conversion-letter-sent-to-dhsc-year'],
+
+    conversionLetterSentToDHSCBy:
+      req.body['conversion-letter-sent-to-dhsc-by'],
+
+    dateS111AcknowledgementLetterReceivedDay:
+      req.body['date-s111-acknowledgement-letter-received-day'],
+
+    dateS111AcknowledgementLetterReceivedMonth:
+      req.body['date-s111-acknowledgement-letter-received-month'],
+
+    dateS111AcknowledgementLetterReceivedYear:
+      req.body['date-s111-acknowledgement-letter-received-year']
+  };
+
+  res.redirect('/version-47/uk-claims/resubmissions/a65-s110-global-note');
+
+});
 module.exports = router;

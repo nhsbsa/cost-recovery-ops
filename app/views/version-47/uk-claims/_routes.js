@@ -45,6 +45,67 @@ router.post(['/uk-claims-search-average-cost/'], function(req, res) {
   res.redirect('/version-47/uk-claims/uk-claims-search-results-found');
 })
 
+
+router.get('/uk-claims-search-results-found', function(req, res) {
+
+  const convertedAgeBrackets =
+    req.session.data['converted-age-brackets'] || [];
+
+  const allAgeBracketsConverted =
+    convertedAgeBrackets.includes('0 to 19 years') &&
+    convertedAgeBrackets.includes('20 to 64 years') &&
+    convertedAgeBrackets.includes('65 years and over');
+
+  const a019 =
+    req.session.data['a019-s110-global-note'] || {};
+
+  const a2064 =
+    req.session.data['a2064-s110-global-note'] || {};
+
+  const a65 =
+    req.session.data['a65-s110-global-note'] || {};
+
+  const s110Complete =
+    allAgeBracketsConverted &&
+
+    a019.dateConversionLetterSentToMSDay &&
+    a019.dateConversionLetterSentToMSMonth &&
+    a019.dateConversionLetterSentToMSYear &&
+    a019.conversionLetterSentToMSBy &&
+
+    a2064.dateConversionLetterSentToMSDay &&
+    a2064.dateConversionLetterSentToMSMonth &&
+    a2064.dateConversionLetterSentToMSYear &&
+    a2064.conversionLetterSentToMSBy &&
+
+    a65.dateConversionLetterSentToMSDay &&
+    a65.dateConversionLetterSentToMSMonth &&
+    a65.dateConversionLetterSentToMSYear &&
+    a65.conversionLetterSentToMSBy;
+
+    const s111Complete =
+    a019.dateS111AcknowledgementLetterReceivedDay &&
+    a019.dateS111AcknowledgementLetterReceivedMonth &&
+    a019.dateS111AcknowledgementLetterReceivedYear &&
+
+    a2064.dateS111AcknowledgementLetterReceivedDay &&
+    a2064.dateS111AcknowledgementLetterReceivedMonth &&
+    a2064.dateS111AcknowledgementLetterReceivedYear &&
+
+    a65.dateS111AcknowledgementLetterReceivedDay &&
+    a65.dateS111AcknowledgementLetterReceivedMonth &&
+    a65.dateS111AcknowledgementLetterReceivedYear;
+
+  res.render(
+    'version-47/uk-claims/uk-claims-search-results-found',
+    {
+      allAgeBracketsConverted,
+      s110Complete: Boolean(s110Complete),
+      s111Complete: Boolean(s111Complete)
+    }
+  );
+});
+
 // Search for UK Claims - Average cost
 router.post([/uk-claims-search-by-id/], function(req, res) {
   // Capture form data from the POST request

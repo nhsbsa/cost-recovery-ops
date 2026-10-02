@@ -401,11 +401,26 @@ Search for UK claims
                                 <p class="responsive-table-values" id="searchClaimCountry_0">France (FR)</p>
                             </td>
                             <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Status</span>
-                                <p class="responsive-table-values">
-                                    <strong id="searchClaimStatus_0" strong="" style="color: #354550" ;=""
-                                        class="nhsuk-tag no-caps nhsuk-tag--purple">Claimed</strong>
-                                </p>
+                              {% if s111Complete %}
+                                <strong id="searchClaimStatus_0" class="nhsuk-tag nhsuk-tag--purple">
+                                  S111 received
+                                </strong>
+                            
+                              {% elif s110Complete %}
+                                <strong id="searchClaimStatus_0" class="nhsuk-tag nhsuk-tag--pink">
+                                  S110 sent to MS
+                                </strong>
+                            
+                              {% elif allAgeBracketsConverted %}
+                                <strong id="searchClaimStatus_0" class="nhsuk-tag nhsuk-tag--aqua-green">
+                                  Converted
+                                </strong>
+                            
+                              {% else %}
+                                <strong id="searchClaimStatus_0" class="nhsuk-tag nhsuk-tag--purple">
+                                  Claimed
+                                </strong>
+                              {% endif %}
                             </td>
                             <td role="cell" class="nhsuk-table__cell" value="341515">
                                 <span class="nhsuk-table-responsive__heading">Action</span>
