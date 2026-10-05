@@ -1,0 +1,116 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - Check your answers before creating the S113 reply to the contestation - Manage overseas entitlements and treatments
+{% endblock %}
+
+
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">
+                  Check your answers before creating the S113 reply to the contestation
+                </h1>
+              </div>
+            </div>
+
+            <form action="a019-s113-reply-cya" method="post">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+                  <dl class="nhsuk-summary-list">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Global RPY_COC_CLA_IMO reference creditor liaison body
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['a019-global-rpy-coc-cla-imo-reference-creditor-liason-body'] %}
+                          {{ data['a019-global-rpy-coc-cla-imo-reference-creditor-liason-body'] }}
+                        {% else %}
+                          3351/113_1
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="a019-create-s113-reply#a019-global-rpy-coc-cla-imo-reference-creditor-liason-body">Change<span class="nhsuk-u-visually-hidden">Global RPY_COC_CLA_IMO reference creditor liaison body</span></a>
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Contestation accepted
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['a019-accept-contestation'] %}
+                          {{ data['a019-accept-contestation'] }}
+                        {% else %}
+                          No
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="a019-accept-contestation">Change<span class="nhsuk-u-visually-hidden">decision on contestation</span></a>
+                      </dd>
+                    </div>
+                    {% if data['a019-accept-contestation'] == 'No' %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Reason for not accepting the contestation
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['reason-for-not-accepting-a019-contestation-comments'] %}
+                          {{ data['reason-for-not-accepting-a019-contestation-comments'] }}
+                        {% else %}
+                          Reason for not accepting contestation explained here.
+                        {% endif %}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="a019-accept-contestation#reason-for-not-accepting-a019-contestation-comments">Change<span class="nhsuk-u-visually-hidden">reason for not accepting the contestation</span></a>
+                      </dd>
+                    </div>
+                    {% endif %}
+                    
+                  
+                    <button style="margin-top: 40px;" class="nhsuk-button nhsuk-button--primary" type="submit">
+                      Save and continue
+                    </button>
+
+                    <p style="margin-bottom: 60px;"><a href="cancel-creating-s113-reply?from=/version-47/uk-claims/resubmissions/a019-accept-contestation">Cancel</a></p>
+
+              </div>
+            </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

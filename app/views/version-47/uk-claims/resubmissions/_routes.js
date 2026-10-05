@@ -1281,4 +1281,122 @@ router.post([/a65-s110-global-note/], function (req, res) {
   res.redirect('/version-47/uk-claims/resubmissions/a65-s110-global-note');
 
 });
+
+
+// ============================================================
+// S112 CONTESTATION - 0 TO 19 YEARS
+// ============================================================
+
+router.post([/a019-add-s112-contestation/], function (req, res) {
+
+  req.session.data['a019-global-coc-cla-imo-reference-debtor-liason-body'] =
+    req.body['a019-global-coc-cla-imo-reference-debtor-liason-body'];
+
+  req.session.data['a019-s112-reason-for-contestation'] =
+    req.body['a019-s112-reason-for-contestation'];
+
+  req.session.data['a019-revised-annual-amount'] =
+    req.body['a019-revised-annual-amount'];
+
+  req.session.data['date-a019-s112-contestation-sent-by-ms-day'] =
+    req.body['date-a019-s112-contestation-sent-by-ms-day'];
+
+  req.session.data['date-a019-s112-contestation-sent-by-ms-month'] =
+    req.body['date-a019-s112-contestation-sent-by-ms-month'];
+
+  req.session.data['date-a019-s112-contestation-sent-by-ms-year'] =
+    req.body['date-a019-s112-contestation-sent-by-ms-year'];
+
+  req.session.data['date-a019-s112-contestation-received-day'] =
+    req.body['date-a019-s112-contestation-received-day'];
+
+  req.session.data['date-a019-s112-contestation-received-month'] =
+    req.body['date-a019-s112-contestation-received-month'];
+
+  req.session.data['date-a019-s112-contestation-received-year'] =
+    req.body['date-a019-s112-contestation-received-year'];
+
+  res.redirect('/version-47/uk-claims/resubmissions/a019-s112-contestation-cya');
+});
+
+// Confirm S112 contestation 
+router.post([/a019-s112-contestation-cya/], function (req, res) {
+
+  req.session.data['a019-contestation-added'] = 'Yes';
+
+  res.redirect('/version-47/uk-claims/resubmissions/confirmation-a019-contestation-added');
+});
+
+// Confirm S112 contestation 
+router.post([/a019-create-s113-reply/], function (req, res) {
+
+  // Store the Global RPY_COC_CLA_IMO reference creditor liaison body in the session
+  req.session.data['a019-global-rpy-coc-cla-imo-reference-creditor-liason-body'] =
+    req.body['a019-global-rpy-coc-cla-imo-reference-creditor-liason-body'];
+
+  res.redirect('/version-47/uk-claims/resubmissions/a019-accept-contestation');
+});
+
+router.post([/a019-accept-contestation/], function (req, res) {
+
+  // Store whether the contestation is accepted
+  req.session.data['a019-accept-contestation'] =
+    req.body['a019-accept-contestation'];
+
+  // If the contestation is not accepted, store the reason
+  if (req.body['a019-accept-contestation'] === 'No') {
+    req.session.data['reason-for-not-accepting-a019-contestation-comments'] =
+      req.body['reason-for-not-accepting-a019-contestation-comments'];
+  } else {
+    // Clear any previous reason if the user changes their answer to Yes
+    delete req.session.data['reason-for-not-accepting-a019-contestation-comments'];
+  }
+
+  res.redirect('/version-47/uk-claims/resubmissions/a019-s113-reply-cya');
+});
+
+// Confirm S113 reply 
+router.post([/a019-s113-reply-cya/], function (req, res) {
+
+  req.session.data['a019-s113-created'] = 'Yes';
+
+  res.redirect('/version-47/uk-claims/resubmissions/confirmation-a019-s113-reply-created');
+});
+
+// Add date S113 sent to the member state
+router.post('/view-a019-contestation', function (req, res) {
+
+  // Store the date the S113 reply was sent to the member state
+  req.session.data['date-a019-s113-reply-sent-to-ms-day'] =
+    req.body['date-a019-s113-reply-sent-to-ms-day'];
+
+  req.session.data['date-a019-s113-reply-sent-to-ms-month'] =
+    req.body['date-a019-s113-reply-sent-to-ms-month'];
+
+  req.session.data['date-a019-s113-reply-sent-to-ms-year'] =
+    req.body['date-a019-s113-reply-sent-to-ms-year'];
+
+  // Store the name of the person who sent the S113
+  req.session.data['s113-sent-to-ms-by'] =
+    req.body['s113-sent-to-ms-by'];
+
+  // Only mark as complete when ALL S113 sent details have been entered
+  if (
+    req.body['date-a019-s113-reply-sent-to-ms-day'] &&
+    req.body['date-a019-s113-reply-sent-to-ms-month'] &&
+    req.body['date-a019-s113-reply-sent-to-ms-year'] &&
+    req.body['s113-sent-to-ms-by']
+  ) {
+    req.session.data['a019-s113-sent-to-ms-date-added'] = 'Yes';
+  } else {
+    delete req.session.data['a019-s113-sent-to-ms-date-added'];
+  }
+
+  // Stay on the same page
+  res.redirect('/version-47/uk-claims/resubmissions/view-a019-contestation');
+});
+
+router.get('/view-a019-contestation/', function (req, res) {
+  res.render('version-47/uk-claims/resubmissions/view-a019-contestation');
+});
 module.exports = router;

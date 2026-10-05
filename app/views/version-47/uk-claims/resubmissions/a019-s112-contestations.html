@@ -1,0 +1,186 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - View S112 contestations of global claim for fixed amounts - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/reimbursement-of-claim">View Claim ID (Reimbursement of claim)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View S110 global note (Contestations of fixed amounts)</li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="a019-s112-contestations">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      S110 global note (Contestations of fixed amounts)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+            
+                  <h1 class="nhsuk-heading-l" style="width: 66.666%; margin-bottom: 20px;">
+                    Claim ID 123456: Contestations of claim for reimbursement of fixed amounts for S1/S072 Article 63, 2.b - 0 to 19 years
+                  </h1>
+            
+                  <a href="a019-add-s112-contestation"
+                     class="nhsuk-button"
+                     style="margin-left: auto; flex-shrink: 0;">
+                    Add contestation of global claim
+                  </a>
+            
+                </div>
+              </div>
+            </div>
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="a019-s110-global-note">S110 global note CLA_IMO</a>
+                  <span class="nhsuk-u-visually-hidden">View the S110 global note for 0 to 19 years</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="a019-s110-documents">Claim for reimbursement documents</a>
+                  <span class="nhsuk-u-visually-hidden">View the claim for reimbursement documents for 0 to 19 years</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="a019-s112-contestation-of-fixed-amounts">S112 contestations of fixed amounts</a>
+                  <span class="nhsuk-u-visually-hidden">View the S112 contestations of fixed amounts for 0 to 19 years</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="a019-claim-for-reimbursement-history">Claim for reimbursement history</a>
+                  <span class="nhsuk-u-visually-hidden">View the claim for reimbursement history for 0 to 19 years</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <form action="a019-s112-contestations" method="post">
+
+            {% if data['a019-contestation-added'] == 'Yes' %}
+              <!-- TABLE START -->
+              <table role="table" class="nhsuk-table-responsive" id="a019S112ContestationsTable">
+                <thead class="nhsuk-table__head">
+                  <tr class="nhsuk-table__row">
+                    <th scope="col" class="nhsuk-table__header">Contestation ID</th>
+                    <th scope="col" class="nhsuk-table__header">Status</th>
+                    <th scope="col" class="nhsuk-table__header">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody class="nhsuk-table__body">
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell" data-label="Contestation ID">2828229</td>
+                    <td class="nhsuk-table__cell" data-label="Status">
+                      {% if data['a019-s113-sent-to-ms-date-added'] == 'Yes' %}
+                        <strong class="nhsuk-tag nhsuk-tag--green">Complete</strong>
+                      {% else %}
+                        <strong class="nhsuk-tag nhsuk-tag--grey">To action</strong>
+                      {% endif %}
+                    </td>
+
+                    <td class="nhsuk-table__cell" data-label="Action">
+                      {% if data['a019-s113-sent-to-ms-date-added'] == 'Yes' %}
+                        <a href="view-a019-contestation">View</a>
+                      {% elif data['a019-s113-created'] == 'Yes' %}
+                        <a href="view-a019-contestation">Add date S113 sent to the member state</a>
+                      {% elif data['a019-contestation-added'] == 'Yes' %}
+                      <!-- S112 added, S113 not yet created -->
+                        <a href="view-a019-contestation">View</a>
+                      {% endif %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- TABLE END -->
+            {% else %}
+              <p><b>This claim for reimbursement has not been contested.</b></p>
+            {% endif %}
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+// Function to set the current date and time
+function setCurrentDateTime(elementId) {
+    var dateElement = document.getElementById(elementId);
+
+    if (dateElement) {
+        var currentDate = new Date();
+
+        // Format date as DD/MM/YYYY
+        var day = String(currentDate.getDate());
+        var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+        var month = monthNames[currentDate.getMonth()];
+        var year = currentDate.getFullYear();
+        var formattedDate = `${day} ${month} ${year}`;
+
+        // Set formatted date and time with line break
+        dateElement.innerHTML = `${formattedDate}`;
+    }
+}
+
+// Set the date for each item
+document.addEventListener("DOMContentLoaded", function () {
+  setCurrentDateTime("currentDateResubDocsGenerated");    // Current date resub docs generated
+});
+</script>
+{% endblock %}

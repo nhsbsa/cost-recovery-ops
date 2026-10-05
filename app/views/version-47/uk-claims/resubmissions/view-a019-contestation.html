@@ -1,0 +1,332 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - View S112 contestation of global claim for fixed amounts - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="a019-s110-global-note">View S110 global note (Contestations of fixed amounts)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View S112 contestation of global claim for fixed amounts</li>
+        </ol>
+      </div>
+    </div>
+    
+    <a class="nhsuk-back-link" href="a019-s112-contestations">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      S110 global note (Contestations of fixed amounts)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+              <div class="nhsuk-grid-row">
+                <div class="nhsuk-grid-column-full">
+                  <div style="display: flex; align-items: flex-start;">
+              
+                    <h1 class="nhsuk-heading-xl" style="width: 66.666%; margin-bottom: 40px;">
+                      Claim ID 123456: Contestation ID 2828229: S112 contestation of global claim for fixed amounts
+                    </h1>
+              
+                    {% if data['a019-s113-created'] != 'Yes' %}
+                    <a href="a019-create-s113-reply"
+                       class="nhsuk-button"
+                       style="margin-left: auto; margin-top: 0; flex-shrink: 0;">
+                      Create S113 reply to contestation
+                    </a>
+                    {% endif %}
+              
+                  </div>
+                </div>
+              </div>
+
+
+            <!-- Beginning of content -->
+            <div class="nhsuk-grid-row">
+              <!-- Start of left panel -->
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    <h2 class="nhsuk-heading-m">S112 contestation of global claim for fixed amounts</h2>
+                    
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Global IMO reference creditor liaison body
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          123456A019
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Global CLA_IMO reference creditor liaison body
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          123456A019RPY
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Global COC_CLA_IMO reference debtor liaison body
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['a019-global-coc-cla-imo-reference-debtor-liason-body'] %}
+                            {{ data['a019-global-coc-cla-imo-reference-debtor-liason-body'] }}
+                          {% else %}
+                            S112.OUT.I.V.2026/22
+                          {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Reason for contestation
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['a019-s112-reason-for-contestation'] %}
+                            {{ data['a019-s112-reason-for-contestation'] }}
+                          {% else %}
+                            Lump sum correction [02]
+                          {% endif %}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Revised annual amount
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['a019-revised-annual-amount'] %}
+                            {{ data['a019-revised-annual-amount'] }}
+                          {% else %}
+                            £74.59
+                          {% endif %}
+                        </dd>
+                      </div>
+  
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date contestation sent by member state
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['date-a019-s112-contestation-sent-by-ms-day'] and data['date-a019-s112-contestation-sent-by-ms-month'] and data['date-a019-s112-contestation-sent-by-ms-year'] %}
+                            {% set day = data['date-a019-s112-contestation-sent-by-ms-day'] | int %}
+                            {% set month = data['date-a019-s112-contestation-sent-by-ms-month'] | int %}
+                            {% set year = data['date-a019-s112-contestation-sent-by-ms-year'] %}
+                
+                            {% if day < 10 %}
+                                {% set day = "0" ~ day %}
+                            {% endif %}
+                            
+                            {% if month < 10 %}
+                                {% set month = "0" ~ month %}
+                            {% endif %}
+      
+                            {{ day }}/{{ month }}/{{ year }}
+                          {% else %}
+                            21 October 2026
+                          {% endif %}
+                        </dd>
+                      </div>
+
+                      
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date contestation received
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['date-a019-s112-contestation-received-day'] and data['date-a019-s112-contestation-received-month'] and data['date-a019-s112-contestation-received-year'] %}
+                            {% set day = data['date-a019-s112-contestation-received-day'] | int %}
+                            {% set month = data['date-a019-s112-contestation-received-month'] | int %}
+                            {% set year = data['date-a019-s112-contestation-received-year'] %}
+                
+                            {% if day < 10 %}
+                                {% set day = "0" ~ day %}
+                            {% endif %}
+                            
+                            {% if month < 10 %}
+                                {% set month = "0" ~ month %}
+                            {% endif %}
+      
+                            {{ day }}/{{ month }}/{{ year }}
+                          {% else %}
+                            21 October 2026
+                          {% endif %}
+                        </dd>
+                      </div>
+                    </dl>
+
+                  </div>
+                </div>
+              </div>
+
+                   
+              {% if data['a019-s113-created'] == 'Yes' %}
+              <div class="nhsuk-grid-column-one-half">
+
+                <!-- Start of right panel -->
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    <h2 class="nhsuk-heading-m">S113 reply to contestation of global claim for fixed amounts</h2>
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Global RPY_COC_CLA_IMO reference creditor liaison body
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['a019-global-rpy-coc-cla-imo-reference-creditor-liason-body'] %}
+                            {{ data['a019-global-rpy-coc-cla-imo-reference-creditor-liason-body'] }}
+                          {% else %}
+                            3351/113_1
+                          {% endif %}
+                        </dd>
+                      </div>
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Contestation accepted
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['a019-accept-contestation'] %}
+                            {{ data['a019-accept-contestation'] }}
+                          {% else %}
+                            No
+                          {% endif %}
+                        </dd>
+                      </div>
+                      {% if data['a019-accept-contestation'] == 'No' %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Reason for not accepting the contestation
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['reason-for-not-accepting-a019-contestation-comments'] %}
+                            {{ data['reason-for-not-accepting-a019-contestation-comments'] }}
+                          {% else %}
+                            Reason for not accepting contestation explained here.
+                          {% endif %}
+                        </dd>
+                      </div>
+                      {% endif %}
+                    </dl>
+                    
+                    <form action="view-a019-contestation" method="post">
+                      
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="date-a019-s113-reply-sent-to-ms-label">
+                        <b>Enter the date the S113 reply was sent by the member state</b>
+                      </label>
+                      <div class="nhsuk-hint">
+                        You must enter the name of the person who sent the S113 if you answer this question.
+                      </div>
+                      <div class="nhsuk-hint">
+                        For example, 31 3 2025.
+                      </div>
+
+                      <div class="nhsuk-date-input" id="date-a019-s113-reply-sent-to-ms">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-a019-s113-reply-sent-to-ms-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-a019-s113-reply-sent-to-ms-day" name="date-a019-s113-reply-sent-to-ms-day" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ data['date-a019-s113-reply-sent-to-ms-day'] }}">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-a019-s113-reply-sent-to-ms-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-a019-s113-reply-sent-to-ms-month" name="date-a019-s113-reply-sent-to-ms-month" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ data['date-a019-s113-reply-sent-to-ms-month'] }}">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-a019-s113-reply-sent-to-ms-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-a019-s113-reply-sent-to-ms-year" name="date-a019-s113-reply-sent-to-ms-year" type="text" pattern="[0-9]*" inputmode="numeric" value="{{ data['date-a019-s113-reply-sent-to-ms-year'] }}">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="name-of-person-who-sent-s113-label">
+                       <b>Enter the name of the person that sent the S113 to the member state</b>
+                      </label>
+                      <div class="nhsuk-hint" id="name-of-person-who-sent-s113-hint-1">
+                        You must enter the date that the S113 was sent to the member state if you answer this question.
+                      </div>
+                      <div class="nhsuk-hint" id="name-of-person-who-sent-s113-hint-2">
+                        Enter their full name
+                      </div>
+                      <input class="nhsuk-input nhsuk-input--width-20" id="s113-sent-to-ms-by" name="s113-sent-to-ms-by" type="text" value="{{ data['s113-sent-to-ms-by'] }}">
+                    </div>
+
+                    
+                      <div class="button-container">
+                        <div class="action-buttons">
+                          <button class="nhsuk-button" type="submit" style="margin-right: 20px; ">
+                            Save S113 reply details
+                          </button>
+                      
+                          <button class="nhsuk-button nhsuk-button--secondary" type="submit" id="editS113detailsButton" name="action" value="editS113DetailsButton">
+                            Edit S113 reply details
+                          </button>
+    
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+
+              </div>
+              {% endif %}
+              <!-- End of right-hand panel -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
