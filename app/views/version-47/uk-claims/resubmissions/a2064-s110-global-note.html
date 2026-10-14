@@ -181,7 +181,32 @@ UK claim ID 123456 - View the S110 global note - Manage overseas entitlements an
                           Date cost published
                         </dt>
                         <dd class="nhsuk-summary-list__value">
-                          19 August 2026
+                          {% if dateCostPublished.day and dateCostPublished.month and dateCostPublished.year %}
+                      
+                            {% set day = dateCostPublished.day | int %}
+                            {% set month = dateCostPublished.month | int %}
+                            {% set year = dateCostPublished.year %}
+                      
+                            {% set months = [
+                              'January',
+                              'February',
+                              'March',
+                              'April',
+                              'May',
+                              'June',
+                              'July',
+                              'August',
+                              'September',
+                              'October',
+                              'November',
+                              'December'
+                            ] %}
+                      
+                            {{ day }} {{ months[month - 1] }} {{ year }}
+                      
+                          {% else %}
+                            21 August 2026
+                          {% endif %}
                         </dd>
                       </div>
                     </dl>

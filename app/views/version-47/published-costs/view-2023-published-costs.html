@@ -1,0 +1,317 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+View published costs for 2023
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+
+
+            <form action="view-2023-published-costs" method="post">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-xl">
+                  Published costs for 2023
+                </h1>
+
+                <p>Average monthly costs are calculated automatically from the annual costs.</p>
+
+
+                <!-- Start of Article 63, 2.a costs -->
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    <h2 class="nhsuk-heading-m">Article 63, 2.a</h2>
+
+                      <h3 class="nhsuk-heading-s">0 to 19 years</h3>
+                      
+                      <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Annual amount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['019-annual-cost-632a'] %}
+                              £{{ data['019-annual-cost-632a'] }}
+                            {% else %}
+                              £1,118.87
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 20% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-019-632a'] or '74.59' }}
+                          </dd>
+                        </div>
+                      </dl>
+
+
+                      <h3 class="nhsuk-heading-s">20 to 64 years</h3>
+                      
+                      <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Annual amount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['2064-annual-cost-632a'] %}
+                              £{{ data['2064-annual-cost-632a'] }}
+                            {% else %}
+                              £2,475.84
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 20% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-2064-632a'] or '165.06' }}
+                          </dd>
+                        </div>
+                      </dl>
+
+
+                      <h3 class="nhsuk-heading-s">65 years and over</h3>
+                      
+                      <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Annual amount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['65-annual-cost-632a'] %}
+                              £{{ data['65-annual-cost-632a'] }}
+                            {% else %}
+                              £6,790.06
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 20% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-65-632a'] or '452.67' }}
+                          </dd>
+                        </div>
+                      </dl>
+
+                  </div>
+                </div>
+                <!-- End of Article 63, 2.a costs -->
+
+
+                <!-- Start of Article 63, 2.b costs -->
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    <h2 class="nhsuk-heading-m">Article 63, 2.b</h2>
+
+                      <h3 class="nhsuk-heading-s">0 to 19 years</h3>
+                      
+                      <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Annual amount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['019-annual-cost-632b'] %}
+                              £{{ data['019-annual-cost-632b'] }}
+                            {% else %}
+                              £1,118.87
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 20% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-019-632b-20'] or '74.59' }}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 15% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-019-632b-15'] or '79.25' }}
+                          </dd>
+                        </div>
+                      </dl>
+
+
+                      <h3 class="nhsuk-heading-s">20 to 64 years</h3>
+                      
+                      <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Annual amount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['2064-annual-cost-632b'] %}
+                              £{{ data['2064-annual-cost-632b'] }}
+                            {% else %}
+                              £2,475.84
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 20% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-2064-632b-20'] or '165.06' }}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 15% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-2064-632b-15'] or '175.37' }}
+                          </dd>
+                        </div>
+                      </dl>
+
+
+                      <h3 class="nhsuk-heading-s">65 years and over</h3>
+                      
+                      <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Annual amount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {% if data['65-annual-cost-632b'] %}
+                              £{{ data['65-annual-cost-632b'] }}
+                            {% else %}
+                              £6,790.06
+                            {% endif %}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 20% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-65-632b-20'] or '452.67' }}
+                          </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Average monthly cost inclusive of 15% discount
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            £{{ data['monthly-cost-65-632b-15'] or '480.96' }}
+                          </dd>
+                        </div>
+                      </dl>
+
+                  </div>
+                </div>
+                <!-- End of Article 63, 2.b costs -->
+
+
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date costs published
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {% if data['date-costs-published-day'] and data['date-costs-published-month'] and data['date-costs-published-year'] %}
+                            {% set day = data['date-costs-published-day'] | int %}
+                            {% set month = data['date-costs-published-month'] | int %}
+                            {% set year = data['date-costs-published-year'] %}
+                            {% set months = [
+                              'January', 'February', 'March', 'April', 'May', 'June',
+                              'July', 'August', 'September', 'October', 'November', 'December'
+                            ] %}
+
+                            {{ day }} {{ months[month - 1] }} {{ year }}
+                          {% else %}
+                            21 August 2026
+                          {% endif %}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Added to the system by
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          joe.bloggs@nhsbsa.nhs.uk
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Date added to the system
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          7 October 2026
+                        </dd>
+                      </div>
+                    </dl>
+
+                  </div>
+                </div>
+
+                
+                
+              </div>
+            </div>
+              
+
+          </form>
+         
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

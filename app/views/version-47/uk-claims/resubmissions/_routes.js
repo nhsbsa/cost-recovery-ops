@@ -953,26 +953,14 @@ router.get([/resubmission-history/], function (req, res) {
 // Claim for reimbursement of fixed amounts (S110 - S113) //
 
 // Select the age bracket you want to convert into GBP
-router.post([/select-age-bracket-for-conversion/], function (req, res) {
+router.post([/select-age-bracket-for-conversion/], function(req, res) {
 
-  const s110AgeBracket = req.body['s110-age-bracket'];
+  const s110AgeBracket =
+    req.body['s110-age-bracket'];
 
-  // Store the currently selected age bracket
-  req.session.data['s110-age-bracket'] = s110AgeBracket;
+  req.session.data['s110-age-bracket'] =
+    s110AgeBracket;
 
-  // Get previously converted age brackets
-  const convertedAgeBrackets =
-    req.session.data['converted-age-brackets'] || [];
-
-  // Add the selected bracket if it hasn't already been converted
-  if (!convertedAgeBrackets.includes(s110AgeBracket)) {
-    convertedAgeBrackets.push(s110AgeBracket);
-  }
-
-  // Save the updated list
-  req.session.data['converted-age-brackets'] = convertedAgeBrackets;
-
-  // Redirect to enter the annual published cost
   res.redirect(
     '/version-47/uk-claims/resubmissions/enter-annual-published-cost'
   );
@@ -1028,42 +1016,85 @@ router.post([/enter-annual-published-cost/], function(req, res) {
 
 // Confirm the annual amount is correct
 router.post([/check-annual-published-cost/], function(req, res) {
-  const annualPublishedCostCorrect = req.session.data['annual-published-cost-correct']
+
+  // Store the user's answer
+  req.session.data['annual-published-cost-correct'] =
+    req.body['annual-published-cost-correct'];
+
+  const annualPublishedCostCorrect =
+    req.body['annual-published-cost-correct'];
 
   if (annualPublishedCostCorrect === 'Yes') {
-    // Store that this age bracket has been converted
-    const ageBracket = req.session.data['s110-age-bracket'];
+
+    // If the publication date has NOT been entered yet,
+    // ask the user to enter it.
+    if (!req.session.data['date-cost-published']) {
+
+      return res.redirect(
+        '/version-47/uk-claims/resubmissions/enter-date-cost-published'
+      );
+
+    }
+
+    // Publication date already exists,
+    // so mark the CURRENT age bracket as converted.
+    const currentAgeBracket =
+      req.session.data['s110-age-bracket'];
 
     const convertedAgeBrackets =
       req.session.data['converted-age-brackets'] || [];
 
-    if (!convertedAgeBrackets.includes(ageBracket)) {
-      convertedAgeBrackets.push(ageBracket);
+    if (!convertedAgeBrackets.includes(currentAgeBracket)) {
+      convertedAgeBrackets.push(currentAgeBracket);
     }
 
     req.session.data['converted-age-brackets'] =
       convertedAgeBrackets;
 
-    res.redirect('enter-date-cost-published');
+    // Skip the date screen
+    return res.redirect(
+      '/version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted'
+    );
 
   } else {
-    res.redirect('/version-47/uk-claims/resubmissions/enter-annual-published-cost')
+
+    // User wants to change the annual amount
+    return res.redirect(
+      '/version-47/uk-claims/resubmissions/enter-annual-published-cost'
+    );
+
   }
-})
+
+});
 
 // Enter the date the cost was published
 router.post([/enter-date-cost-published/], function(req, res) {
-  // Date cost published
-  const costPublishedDay = req.body['date-cost-published-day'];
-  const costPublishedMonth = req.body['date-cost-published-month'];
-  const costPublishedYear = req.body['date-cost-published-year'];
-  const dateCostPublished = costPublishedDay && costPublishedMonth && costPublishedYear
-    ? `${costPublishedDay}/${costPublishedMonth}/${costPublishedYear}`
-    : '19/08/2026';
-  req.session.data['date-cost-published'] = dateCostPublished;
 
-  // Add the current age bracket to the converted list
+  const costPublishedDay =
+    req.body['date-cost-published-day'];
 
+  const costPublishedMonth =
+    req.body['date-cost-published-month'];
+
+  const costPublishedYear =
+    req.body['date-cost-published-year'];
+
+  // Store individual date fields
+  req.session.data['date-cost-published-day'] = costPublishedDay;
+  req.session.data['date-cost-published-month'] = costPublishedMonth;
+  req.session.data['date-cost-published-year'] = costPublishedYear;
+
+  // Store the combined publication date
+  if (
+    costPublishedDay &&
+    costPublishedMonth &&
+    costPublishedYear
+  ) {
+    req.session.data['date-cost-published'] =
+      `${costPublishedDay}/${costPublishedMonth}/${costPublishedYear}`;
+  }
+
+  // Mark the current age bracket as converted
   const currentAgeBracket =
     req.session.data['s110-age-bracket'];
 
@@ -1076,9 +1107,11 @@ router.post([/enter-date-cost-published/], function(req, res) {
 
   req.session.data['converted-age-brackets'] =
     convertedAgeBrackets;
-  
-  // Redirect to confirmation screen
-  res.redirect('/version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted');
+
+  res.redirect(
+    '/version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted'
+  );
+
 });
 
 router.get([/confirmation-claim-for-reimbursement-converted/], function (req, res) {
@@ -1110,14 +1143,22 @@ router.get([/confirmation-claim-for-reimbursement-converted/], function (req, re
 // S110 GLOBAL NOTE - 0 TO 19 YEARS
 // ============================================================
 
-router.get([/a019-s110-global-note/], function (req, res) {
+router.get([/a019-s110-global-note/], function(req, res) {
 
-  const data = req.session.data['a019-s110-global-note'] || {};
+  const data =
+    req.session.data['a019-s110-global-note'] || {};
+
+  const dateCostPublished = {
+    day: req.session.data['date-cost-published-day'],
+    month: req.session.data['date-cost-published-month'],
+    year: req.session.data['date-cost-published-year']
+  };
 
   res.render(
     'version-47/uk-claims/resubmissions/a019-s110-global-note',
     {
-      data
+      data,
+      dateCostPublished
     }
   );
 
@@ -1169,14 +1210,22 @@ router.post([/a019-s110-global-note/], function (req, res) {
 // S110 GLOBAL NOTE - 20 TO 64 YEARS
 // ============================================================
 
-router.get([/a2064-s110-global-note/], function (req, res) {
+router.get([/a2064-s110-global-note/], function(req, res) {
 
-  const data = req.session.data['a2064-s110-global-note'] || {};
+  const data =
+    req.session.data['a2064-s110-global-note'] || {};
+
+  const dateCostPublished = {
+    day: req.session.data['date-cost-published-day'],
+    month: req.session.data['date-cost-published-month'],
+    year: req.session.data['date-cost-published-year']
+  };
 
   res.render(
     'version-47/uk-claims/resubmissions/a2064-s110-global-note',
     {
-      data
+      data,
+      dateCostPublished
     }
   );
 
@@ -1228,14 +1277,22 @@ router.post([/a2064-s110-global-note/], function (req, res) {
 // S110 GLOBAL NOTE - 65 YEARS AND OVER
 // ============================================================
 
-router.get([/a65-s110-global-note/], function (req, res) {
+router.get([/a65-s110-global-note/], function(req, res) {
 
-  const data = req.session.data['a65-s110-global-note'] || {};
+  const data =
+    req.session.data['a65-s110-global-note'] || {};
+
+  const dateCostPublished = {
+    day: req.session.data['date-cost-published-day'],
+    month: req.session.data['date-cost-published-month'],
+    year: req.session.data['date-cost-published-year']
+  };
 
   res.render(
     'version-47/uk-claims/resubmissions/a65-s110-global-note',
     {
-      data
+      data,
+      dateCostPublished
     }
   );
 

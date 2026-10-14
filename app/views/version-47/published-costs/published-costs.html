@@ -1,0 +1,400 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search for a published cost by financial year
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container-fluid">
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-full">
+      
+          <ol class="nhsuk-breadcrumb__list">
+            <li class="nhsuk-breadcrumb__list-item">Published costs</li>
+          </ol>
+        </div>
+      </div>
+  
+      <a class="nhsuk-back-link" href="published-costs">
+        <span class="nhsuk-u-visually-hidden">Back to </span>
+        Search
+      </a>
+
+    </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            <form action="uk-claims-search-by-id" method="post">
+
+            {% if data['published-costs-for-2023-submitted'] == 'Yes' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  New published costs added
+                </h3>
+                <p>New published costs for 2023 have been added.</p>
+              </div>
+            </div>
+            {% endif %}
+
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h1 class="nhsuk-heading-xl">
+                    Published costs
+                  </h1>
+
+                  {% if data['published-costs-for-2023-submitted'] != 'Yes' %}
+                  <a href="enter-published-costs-for-article-632a" class="nhsuk-button">
+                    Add published costs for 2023
+                  </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Beginning of content -->
+
+            <div class="nhsuk-grid-row">
+              <!-- Start of search card -->
+              <div class="nhsuk-grid-column-full">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    <h2 class="nhsuk-heading-m">Search for published costs by financial year</h2>
+
+                    <div class="nhsuk-form-group">
+                      <input class="nhsuk-input nhsuk-input--width-5" id="search-published-costs-by-financial-year" name="search-published-costs-by-financial-year" type="text">
+                    </div>
+
+                    <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                      Search
+                    </button>
+
+                  </div>
+                </div>
+              </div>
+              <!-- End of search card -->
+            </div>
+
+
+            <div class="nhsuk-grid-row">
+              <!-- Start of published costs panel -->
+              <div class="nhsuk-grid-column-full">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    {% if data['published-costs-for-2023-submitted'] == 'Yes' %}
+                    <p>Showing 1 - 10 of 22 published costs</p>
+                    {% else %}
+                    <p>Showing 1 - 10 of 21 published costs</p>
+                    {% endif %}
+
+                    <table class="nhsuk-table nhsuk-table--responsive" role="table">
+                      <caption class="nhsuk-table__caption">
+                        Published costs by financial year
+                      </caption>
+                      <thead class="nhsuk-table__head" role="rowgroup">
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header nhsuk-u-width-one-third" scope="col" role="columnheader">
+                            Financial year
+                          </th>
+                          <th class="nhsuk-table__header nhsuk-u-width-one-quarter" scope="col" role="columnheader">
+                            Date costs published
+                          </th>
+                          <th class="nhsuk-table__header" scope="col" role="columnheader">
+                            Action
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="nhsuk-table__body">
+                        {% if data['published-costs-for-2023-submitted'] == 'Yes' %}
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2023</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">21/08/2026</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="view-2023-published-costs">View</a></span>
+                          </td>
+                        </tr>
+                        {% endif %}
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2022</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">22/08/2025</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2021</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">12/08/2024</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2020</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">28/08/2023</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2019</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">23/08/2022</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2018</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">18/08/2021</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2017</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">17/08/2020</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2016</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">12/08/2019</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2015</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">29/08/2018</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2014</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">11/08/2017</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        {% if data['published-costs-for-2023-submitted'] != 'Yes' %}
+                        <tr class="nhsuk-table__row" role="row">
+                          <th class="nhsuk-table__header" scope="row" role="rowheader">
+                            <span class="nhsuk-table__heading">2013</span>
+                          </th>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading">22/08/2016</span>
+                          </td>
+                          <td class="nhsuk-table__cell" role="cell">
+                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
+                          </td>
+                        </tr>
+                        {% endif %}
+                      </tbody>
+                    </table>
+                    
+                    <!-- Pagination begins -->
+                  <nav class="nhsuk-pagination nhsuk-pagination--numbered"
+                  role="navigation"
+                  aria-label="Pagination"
+                  style="display: flex; justify-content: center; align-items: center; margin-top: 24px; gap: 16px;">
+
+                  {# Previous (hidden on page 1) #}
+                  {% if currentPage > 1 %}
+                  <a href="?page={{ currentPage - 1 }}" class="nhsuk-pagination__previous" rel="prev">
+                  <svg class="nhsuk-icon nhsuk-icon--arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+                    <path d="M10.7 6.3c.4.4.4 1 0 1.4L7.4 11H19a1 1 0 0 1 0 2H7.4l3.3 3.3c.4.4.4 1 0 1.4a1 1 0 0 1-1.4 0l-5-5A1 1 0 0 1 4 12c0-.3.1-.5.3-.7l5-5a1 1 0 0 1 1.4 0Z" />
+                  </svg>
+                  <span class="nhsuk-pagination__title">
+                    Previous<span class="nhsuk-u-visually-hidden"> page</span>
+                  </span>
+                  </a>
+                  {% endif %}
+
+                  {# Calculate 5-page sliding window #}
+                  {% set startPage = currentPage - 2 %}
+                  {% set endPage = currentPage + 2 %}
+
+                  {# Adjust if below 1 #}
+                  {% if startPage < 1 %}
+                  {% set endPage = endPage + (1 - startPage) %}
+                  {% set startPage = 1 %}
+                  {% endif %}
+
+                  {# Adjust if above totalPages #}
+                  {% if endPage > totalPages %}
+                  {% set startPage = startPage - (endPage - totalPages) %}
+                  {% set endPage = totalPages %}
+                  {% endif %}
+
+                  {# Safety check #}
+                  {% if startPage < 1 %}
+                  {% set startPage = 1 %}
+                  {% endif %}
+
+                  <ul class="nhsuk-pagination__list">
+
+                  {# Show first page if outside window #}
+                  {% if startPage > 1 %}
+                  <li class="nhsuk-pagination__item">
+                    <a class="nhsuk-pagination__link" href="?page=1">1</a>
+                  </li>
+
+                  {% if startPage > 2 %}
+                    <li class="nhsuk-pagination__item nhsuk-pagination__item--ellipsis">&ctdot;</li>
+                  {% endif %}
+                  {% endif %}
+
+                  {# Main window (always up to 5 pages) #}
+                  {% for page in range(startPage, endPage + 1) %}
+                  <li class="nhsuk-pagination__item {% if page == currentPage %}nhsuk-pagination__item--current{% endif %}">
+                    <a class="nhsuk-pagination__link"
+                        href="?page={{ page }}"
+                        {% if page == currentPage %}aria-current="page"{% endif %}>
+                      {{ page }}
+                    </a>
+                  </li>
+                  {% endfor %}
+
+                  {# Show last page if outside window #}
+                  {% if endPage < totalPages %}
+                  {% if endPage < totalPages - 1 %}
+                    <li class="nhsuk-pagination__item nhsuk-pagination__item--ellipsis">&ctdot;</li>
+                  {% endif %}
+
+                  <li class="nhsuk-pagination__item">
+                    <a class="nhsuk-pagination__link" href="?page={{ totalPages }}">{{ totalPages }}</a>
+                  </li>
+                  {% endif %}
+
+                  </ul>
+
+                  {# Next #}
+                  {% if currentPage < totalPages %}
+                  <a href="?page={{ currentPage + 1 }}" class="nhsuk-pagination__next" rel="next">
+                  <span class="nhsuk-pagination__title">
+                    Next<span class="nhsuk-u-visually-hidden"> page</span>
+                  </span>
+                  <svg class="nhsuk-icon nhsuk-icon--arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+                    <path d="m14.7 6.3 5 5c.2.2.3.4.3.7 0 .3-.1.5-.3.7l-5 5a1 1 0 0 1-1.4-1.4l3.3-3.3H5a1 1 0 0 1 0-2h11.6l-3.3-3.3a1 1 0 1 1 1.4-1.4Z" />
+                  </svg>
+                  </a>
+                  {% endif %}
+
+                  </nav>
+                <!-- Pagination ends -->
+
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End of published costs card -->
+            </div>
+
+              
+          </form>
+         
+          </div>
+        </div>
+      </div>
+      
+<!-- Side nav -->
+    <div class="nhsBSA-sidebar-nav">
+      <div class="side-nav">
+        <ul>
+          <div id="options" class="options">
+            <h3 class="nhsuk-heading-xs">Browse</h3>
+              <li>
+                <a href="../s1/search/search-by-person">Search</a>
+              </li>
+            
+            <h3 class="nhsuk-heading-xs">Actions</h3>      
+              <li>
+                <a href="../account-requests/pending-requests">Account requests<span class="notification-badge" style="background-color: #005eb8">8 </span></a>
+                <a href="../review-treatments/treatments-to-review">Review treatments<span class="notification-badge" style="background-color: #005eb8">4 </span></a>
+                <a href="../pending-entitlements/pending-entitlements">Pending entitlements<span class="notification-badge" style="background-color: #005eb8">3 </span></a>
+                <a href="../uk-claims/uk-claims-search-actual-cost">UK claims</a>
+                <a href="../resubmissions/pending-resubmissions">Resubmissions<span class="notification-badge" style="background-color: #005eb8">4</span></a>
+                <a href="published-costs" class="active">Published costs</a>
+                <a href="../non-eu-reciprocal-healthcare/home">Non-EU Reciprocal Healthcare (Quota)</a>
+              </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+</div>
+{% endblock %}

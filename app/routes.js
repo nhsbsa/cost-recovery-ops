@@ -146,6 +146,7 @@ router.use('/version-46/uk-claims/resubmissions', require('./views/version-46/uk
 router.use('/version-47/account-requests', require('./views/version-47/account-requests/_routes'));
 router.use('/version-47/non-eu-reciprocal-healthcare', require('./views/version-47/non-eu-reciprocal-healthcare/_routes'));
 router.use('/version-47/pending-entitlements', require('./views/version-47/pending-entitlements/_routes'));
+router.use('/version-47/published-costs', require('./views/version-47/published-costs/_routes'));
 router.use('/version-47/resubmissions/v1', require('./views/version-47/_routes'));
 router.use('/version-47/review-treatments', require('./views/version-47/review-treatments/_routes'));
 router.use('/version-47/s1', require('./views/version-47/s1/_routes'));
