@@ -1,0 +1,149 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - Enter the annual amount - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+    
+            <form action="review-average-cost" method="post">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+              <div class="nhsuk-form-group">
+            
+                <fieldset class="nhsuk-fieldset" aria-describedby="example-hint">
+                  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--xl">
+                    {% if data['s110-age-bracket'] == '65 years and over' %}
+                      <h1 class="nhsuk-fieldset__heading">
+                        The calculated average cost per month for 65 years and over is £{{ data['monthly-cost-65-632b-20'] or '452.67' }}
+                      </h1>
+                    {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                      <h1 class="nhsuk-fieldset__heading">
+                        The calculated average cost per month for 20 to 64 years is £{{ data['monthly-cost-2064-632b-20'] or '165.06' }}
+                      </h1>
+                    {% else %}
+                      <h1 class="nhsuk-fieldset__heading">
+                        The calculated average cost per month for 0 to 19 years is £{{ data['monthly-cost-019-632b-20'] or '74.59' }}
+                      </h1>
+                    {% endif %}
+                  </legend>
+            
+                  <dl class="nhsuk-summary-list" style="margin-top: 20px;">
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Financial year
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        2023
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Article type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        Article 63, 2.b
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Age bracket
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['s110-age-bracket'] %}
+                          {{ data['s110-age-bracket'] }}
+                        {% else %}
+                          0 to 19 years
+                        {% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Country
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        France (FR)
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Annual amount
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {% if data['s110-age-bracket'] == '65 years and over' %}
+                          £{{ data['65-annual-cost-632b'] or '6,790.06' }}
+                        {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                          £{{ data['2064-annual-cost-632b'] or '2,475.84' }}
+                        {% else %}
+                          £{{ data['019-annual-cost-632b'] or '1,118.87' }}
+                        {% endif %}
+                      </dd>
+                    </div>
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Discount rate
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        20%
+                      </dd>
+                    </div>
+                  </dl>
+                  
+                </fieldset>
+            
+              </div>
+            
+
+              <button class="nhsuk-button nhsuk-button--primary" type="submit" id="continue-button">Continue and convert claim</button>
+
+              <p style="margin-bottom: 60px;"><a href="cancel-claim-conversion?from=/version-47/uk-claims/resubmissions/review-average-cost">Cancel</a></p>
+
+            </div>
+
+
+
+
+          </div>
+        </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

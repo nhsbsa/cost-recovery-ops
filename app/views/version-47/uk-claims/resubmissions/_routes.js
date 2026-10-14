@@ -950,194 +950,202 @@ router.get([/resubmission-history/], function (req, res) {
   });
 });
 
-// Claim for reimbursement of fixed amounts (S110 - S113) //
 
-// Select the age bracket you want to convert into GBP
-router.post([/select-age-bracket-for-conversion/], function(req, res) {
 
-  const s110AgeBracket =
-    req.body['s110-age-bracket'];
 
-  req.session.data['s110-age-bracket'] =
-    s110AgeBracket;
+ // Claim for reimbursement of fixed amounts (S110 - S113)
 
-  res.redirect(
-    '/version-47/uk-claims/resubmissions/enter-annual-published-cost'
-  );
+ const s110AgeBrackets = [
+  '0 to 19 years',
+  '20 to 64 years',
+  '65 years and over'
+];
 
-});
+// Map annual published costs and calculated average monthly costs
+// by age bracket and article type
+const s110AverageCosts = {
+  '0 to 19 years': {
+    article632a: {
+      annualCost: '019-annual-cost-632a'
+    },
+    article632b: {
+      annualCost: '019-annual-cost-632b',
+      cost20: 'monthly-cost-019-632b-20',
+      cost15: 'monthly-cost-019-632b-15'
+    }
+  },
 
-// Conditionally display remaining unselected age brackets
+  '20 to 64 years': {
+    article632a: {
+      annualCost: '2064-annual-cost-632a'
+    },
+    article632b: {
+      annualCost: '2064-annual-cost-632b',
+      cost20: 'monthly-cost-2064-632b-20',
+      cost15: 'monthly-cost-2064-632b-15'
+    }
+  },
+
+  '65 years and over': {
+    article632a: {
+      annualCost: '65-annual-cost-632a'
+    },
+    article632b: {
+      annualCost: '65-annual-cost-632b',
+      cost20: 'monthly-cost-65-632b-20',
+      cost15: 'monthly-cost-65-632b-15'
+    }
+  }
+};
+
+
+
+// Select an age bracket
 router.get([/select-age-bracket-for-conversion/], function (req, res) {
 
-  const ageBrackets = [
-    '0 to 19 years',
-    '20 to 64 years',
-    '65 years and over'
-  ];
+    const convertedAgeBrackets = req.session.data['converted-age-brackets'] || [];
 
-  const convertedAgeBrackets =
-    req.session.data['converted-age-brackets'] || [];
-
-  const remainingAgeBrackets = ageBrackets.filter(
-    bracket => !convertedAgeBrackets.includes(bracket)
-  );
-
-  // If only one age bracket remains, skip the selection screen
-  if (remainingAgeBrackets.length === 1) {
-
-    req.session.data['s110-age-bracket'] =
-      remainingAgeBrackets[0];
-
-    return res.redirect(
-      '/version-47/uk-claims/resubmissions/enter-annual-published-cost'
+    const remainingAgeBrackets = s110AgeBrackets.filter(bracket => !convertedAgeBrackets.includes(bracket)
     );
-  }
 
-  res.render(
-    'version-47/uk-claims/resubmissions/select-age-bracket-for-conversion',
-    {
-      remainingAgeBrackets,
-      s110AgeBracket: req.session.data['s110-age-bracket']
-    }
-  );
-
-});
-
-// Enter the annual published cost for article type and age bracket
-router.post([/enter-annual-published-cost/], function(req, res) {
-
-  // Store the annual published cost for article type and age bracket in session data
-  req.session.data['annual-published-cost'] = req.body['annual-published-cost'];
-
-  // Redirect to check the annual published cost for article type and age bracket
-  res.redirect('/version-47/uk-claims/resubmissions/check-annual-published-cost');
-});
-
-// Confirm the annual amount is correct
-router.post([/check-annual-published-cost/], function(req, res) {
-
-  // Store the user's answer
-  req.session.data['annual-published-cost-correct'] =
-    req.body['annual-published-cost-correct'];
-
-  const annualPublishedCostCorrect =
-    req.body['annual-published-cost-correct'];
-
-  if (annualPublishedCostCorrect === 'Yes') {
-
-    // If the publication date has NOT been entered yet,
-    // ask the user to enter it.
-    if (!req.session.data['date-cost-published']) {
-
+    // No brackets remain
+    if (remainingAgeBrackets.length === 0) {
       return res.redirect(
-        '/version-47/uk-claims/resubmissions/enter-date-cost-published'
+        '/version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted'
       );
-
     }
 
-    // Publication date already exists,
-    // so mark the CURRENT age bracket as converted.
-    const currentAgeBracket =
-      req.session.data['s110-age-bracket'];
+    // If only one bracket remains, skip selection
+    if (remainingAgeBrackets.length === 1) {
+      req.session.data['s110-age-bracket'] =
+        remainingAgeBrackets[0];
 
-    const convertedAgeBrackets =
-      req.session.data['converted-age-brackets'] || [];
-
-    if (!convertedAgeBrackets.includes(currentAgeBracket)) {
-      convertedAgeBrackets.push(currentAgeBracket);
+      return res.redirect('/version-47/uk-claims/resubmissions/review-average-cost');
     }
 
-    req.session.data['converted-age-brackets'] =
-      convertedAgeBrackets;
-
-    // Skip the date screen
-    return res.redirect(
-      '/version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted'
+    res.render('version-47/uk-claims/resubmissions/select-age-bracket-for-conversion',
+      {
+        remainingAgeBrackets,
+        s110AgeBracket: req.session.data['s110-age-bracket']
+      }
     );
+  }
+);
 
-  } else {
 
-    // User wants to change the annual amount
-    return res.redirect(
-      '/version-47/uk-claims/resubmissions/enter-annual-published-cost'
+// Save the selected age bracket
+router.post([/select-age-bracket-for-conversion/], function (req, res) {
+
+    const selectedAgeBracket = req.body['s110-age-bracket'];
+
+    const convertedAgeBrackets = req.session.data['converted-age-brackets'] || [];
+
+    const remainingAgeBrackets = s110AgeBrackets.filter(bracket => !convertedAgeBrackets.includes(bracket));
+
+    // Only allow a bracket that has not already been converted
+    if (!remainingAgeBrackets.includes(selectedAgeBracket)) {
+      return res.redirect(
+        '/version-47/uk-claims/resubmissions/select-age-bracket-for-conversion'
+      );
+    }
+
+    req.session.data['s110-age-bracket'] = selectedAgeBracket;
+
+    res.redirect('/version-47/uk-claims/resubmissions/review-average-cost');
+  }
+);
+
+
+// Review the system-calculated average cost
+router.get([/review-average-cost/], function (req, res) {
+
+    const currentAgeBracket = req.session.data['s110-age-bracket'];
+
+    // Ensure an age bracket has been selected
+    if (!s110AverageCosts[currentAgeBracket]) {
+      return res.redirect(
+        '/version-47/uk-claims/resubmissions/select-age-bracket-for-conversion'
+      );
+    }
+
+    const costKeys = s110AverageCosts[currentAgeBracket];
+
+    res.render('version-47/uk-claims/resubmissions/review-average-cost',
+      {
+        s110AgeBracket: currentAgeBracket,
+        averageCost20:
+          req.session.data[costKeys.cost20],
+        averageCost15:
+          req.session.data[costKeys.cost15]
+      }
     );
-
   }
+);
 
-});
 
-// Enter the date the cost was published
-router.post([/enter-date-cost-published/], function(req, res) {
+// Confirm the age bracket conversion
+router.post([/review-average-cost/], function (req, res) {
 
-  const costPublishedDay =
-    req.body['date-cost-published-day'];
+    const currentAgeBracket = req.session.data['s110-age-bracket'];
 
-  const costPublishedMonth =
-    req.body['date-cost-published-month'];
+    const convertedAgeBrackets = req.session.data['converted-age-brackets'] || [];
 
-  const costPublishedYear =
-    req.body['date-cost-published-year'];
+    // Prevent duplicate or invalid conversions
+    if (
+      !s110AverageCosts[currentAgeBracket] ||
+      convertedAgeBrackets.includes(currentAgeBracket)
+    ) {
+      return res.redirect('/version-47/uk-claims/resubmissions/select-age-bracket-for-conversion');
+    }
 
-  // Store individual date fields
-  req.session.data['date-cost-published-day'] = costPublishedDay;
-  req.session.data['date-cost-published-month'] = costPublishedMonth;
-  req.session.data['date-cost-published-year'] = costPublishedYear;
-
-  // Store the combined publication date
-  if (
-    costPublishedDay &&
-    costPublishedMonth &&
-    costPublishedYear
-  ) {
-    req.session.data['date-cost-published'] =
-      `${costPublishedDay}/${costPublishedMonth}/${costPublishedYear}`;
-  }
-
-  // Mark the current age bracket as converted
-  const currentAgeBracket =
-    req.session.data['s110-age-bracket'];
-
-  const convertedAgeBrackets =
-    req.session.data['converted-age-brackets'] || [];
-
-  if (!convertedAgeBrackets.includes(currentAgeBracket)) {
+    // Mark this age bracket as converted
     convertedAgeBrackets.push(currentAgeBracket);
+
+    req.session.data['converted-age-brackets'] =convertedAgeBrackets;
+
+    res.redirect('/version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted');
   }
+);
 
-  req.session.data['converted-age-brackets'] =
-    convertedAgeBrackets;
 
-  res.redirect(
-    '/version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted'
-  );
-
-});
-
+// Show conversion confirmation and remaining brackets
 router.get([/confirmation-claim-for-reimbursement-converted/], function (req, res) {
 
-  const ageBrackets = [
-    '0 to 19 years',
-    '20 to 64 years',
-    '65 years and over'
-  ];
+    const convertedAgeBrackets = req.session.data['converted-age-brackets'] || [];
 
-  const convertedAgeBrackets =
-    req.session.data['converted-age-brackets'] || [];
+    const remainingAgeBrackets = s110AgeBrackets.filter(bracket => !convertedAgeBrackets.includes(bracket)
+    );
 
-  const remainingAgeBrackets = ageBrackets.filter(
-    bracket => !convertedAgeBrackets.includes(bracket)
-  );
+    res.render('version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted',
+      {
+        remainingAgeBrackets,
+        s110AgeBracket: req.session.data['s110-age-bracket'],
+        allAgeBracketsConverted:
+          remainingAgeBrackets.length === 0
+      }
+    );
+  }
+);
 
-  res.render(
-    'version-47/uk-claims/resubmissions/confirmation-claim-for-reimbursement-converted',
-    {
-      remainingAgeBrackets,
-      s110AgeBracket: req.session.data['s110-age-bracket']
+
+// Continue after conversion confirmation
+router.post([/confirmation-claim-for-reimbursement-converted/], function (req, res) {
+
+    const convertedAgeBrackets = req.session.data['converted-age-brackets'] || [];
+
+    const remainingAgeBrackets = s110AgeBrackets.filter(bracket => !convertedAgeBrackets.includes(bracket)
+    );
+
+    // All three age brackets have been converted
+    if (remainingAgeBrackets.length === 0) {return res.redirect('/version-47/uk-claims/resubmissions/view-s110-conversion');
     }
-  );
 
-});
+    // Return to selection; the GET route skips it
+    // automatically when only one bracket remains
+    res.redirect('/version-47/uk-claims/resubmissions/select-age-bracket-for-conversion');
+  }
+);
+
 
 // ============================================================
 // S110 GLOBAL NOTE - 0 TO 19 YEARS
