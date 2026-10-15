@@ -893,6 +893,8 @@ router.post('/contact-ovm', function(req, res) {
   // Mark the page as submitted
   req.session.data['reason-to-contact-ovm-submitted'] = 'Yes';
 
+  req.session.data['follow-up-emails-triggered'] = 'Yes';
+
   res.redirect('/version-47/uk-claims/actual-costs/contact-ovm?treatment=Jane');
 
 });
