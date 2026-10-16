@@ -66,7 +66,7 @@ UK claim ID 123456 - Resubmissions
               </div>
               <div class="nhsuk-notification-banner__content">
                 <h3 class="nhsuk-notification-banner__heading">
-                  Selected invoices added to resub 0000001
+                  Selected invoices added to resub 0000002
                 </h3>
                 <p>Invoices linked to the resub are set to contested status.</p>
               </div>
@@ -206,7 +206,7 @@ UK claim ID 123456 - Resubmissions
               </div>
             </details-->
         
-            {% if data['create-new-resub'] == 'yes' %}
+            
             <!-- TABLE START -->
             <table role="table" class="nhsuk-table-responsive" id="resubmissionsTable">
               <thead class="nhsuk-table__head">
@@ -215,7 +215,7 @@ UK claim ID 123456 - Resubmissions
                   <th scope="col" class="nhsuk-table__header">Deadline to reply</th>
                   <th scope="col" class="nhsuk-table__header">Assigned to</th>
                   {% if data['add-invoices-to-resub'] == 'yes' and data.resubStatus not in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                  <th scope="col" class="nhsuk-table__header">Assign</th>
+                    <th scope="col" class="nhsuk-table__header">Assign</th>
                   {% endif %}
                   <th scope="col" class="nhsuk-table__header">Status</th>
                   <th scope="col" class="nhsuk-table__header">Action</th>
@@ -223,63 +223,84 @@ UK claim ID 123456 - Resubmissions
               </thead>
 
               <tbody class="nhsuk-table__body">
+
+                <!-- New resubmission -->
+                {% if data['create-new-resub'] == 'yes' %}
+                  <tr class="nhsuk-table__row">
+                    <td class="nhsuk-table__cell" data-label="Resubmission ID">0000002</td>
+
+                    <td class="nhsuk-table__cell" data-label="Deadline to reply">
+                      {% if data['new-resub-deadline'] %}
+                        {{ data['new-resub-deadline'] }}
+                      {% else %}
+                        -
+                      {% endif %}
+                    </td>
+
+                    <td class="nhsuk-table__cell" data-label="Assigned to">
+                      {% if data['add-invoices-to-resub'] == 'yes' %}
+                        joe.bloggs@nhsbsa.nhs.uk
+                      {% else %}
+                        -
+                      {% endif %}
+                    </td>
+
+                    {% if data['add-invoices-to-resub'] == 'yes' and data.resubStatus not in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
+                      <td class="nhsuk-table__cell" data-label="Assign">
+                        <a href="claim-resubmissions?assigned-to-another-co=yes">Assign to me</a>
+                      </td>
+                    {% endif %}
+
+                    <td class="nhsuk-table__cell" data-label="Status">
+                      {% if data.resubStatus == 'resubmission-completed' %}
+                        <strong class="nhsuk-tag nhsuk-tag--green">Complete</strong>
+                      {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
+                        <strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong>
+                      {% elif data.resubStatus == 'ready-to-send' %}
+                        <strong class="nhsuk-tag nhsuk-tag--blue">Ready to send</strong>
+                      {% elif data.resubStatus == 'documents-to-be-generated' %}
+                        <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                      {% elif data['add-invoices-to-resub'] == 'yes' %}
+                        <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
+                      {% else %}
+                        <strong class="nhsuk-tag nhsuk-tag--grey">To action</strong>
+                      {% endif %}
+                    </td>
+
+                    <td class="nhsuk-table__cell" data-label="Action">
+                      {% if data.resubStatus in ['resubmission-completed', 'resubmission-sent-to-dh', 'ready-to-send', 'documents-to-be-generated'] %}
+                        <a href="invoices-within-resubmission">View invoices</a>
+                      {% elif data['add-invoices-to-resub'] == 'yes' %}
+                        <a href="invoices-within-resubmission">Review invoices</a>
+                      {% else %}
+                        <a href="add-invoices-to-resubmission">Add invoices</a> or
+                        <a href="edit-resubmission-details">Change resubmission details</a>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endif %}
+
+                <!-- Existing completed resubmission -->
                 <tr class="nhsuk-table__row">
                   <td class="nhsuk-table__cell" data-label="Resubmission ID">0000001</td>
-                  <td class="nhsuk-table__cell" data-label="Deadline to reply">20/08/2027</td>
-                  
-                  
-                  <td class="nhsuk-table__cell" data-label="Assigned to">
-                  {% if data['add-invoices-to-resub'] == 'yes' %}
-                    joe.bloggs@nhsbsa.nhs.uk
-                  {% else %}
-                    -
-                  {% endif %}
-                  </td>
 
-                  {% if data['add-invoices-to-resub'] == 'yes' and data.resubStatus not in ['ready-to-send', 'resubmission-sent-to-dh', 'resubmission-completed'] %}
-                    <td class="nhsuk-table__cell" data-label="Assign">
-                      <a href="claim-resubmissions?assigned-to-another-co=yes">Assign to me</a>
-                    </td>
-                  {% endif %}
+                  <td class="nhsuk-table__cell" data-label="Deadline to reply">20/08/2027</td>
+
+                  <td class="nhsuk-table__cell" data-label="Assigned to">joe.bloggs@nhsbsa.nhs.uk</td>
 
                   <td class="nhsuk-table__cell" data-label="Status">
-                    {% if data.resubStatus == 'resubmission-completed' %}
-                      <strong class="nhsuk-tag nhsuk-tag--green">Complete</strong>
-                    {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
-                      <strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong>
-                    {% elif data.resubStatus == 'ready-to-send' %}
-                      <strong class="nhsuk-tag nhsuk-tag--blue">Ready to send</strong>
-                    {% elif data.resubStatus == 'documents-to-be-generated' %}
-                      <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
-                    {% elif data['add-invoices-to-resub'] == 'yes' %}
-                      <strong class="nhsuk-tag nhsuk-tag--green">In progress</strong>
-                    {% else %}
-                      <strong class="nhsuk-tag nhsuk-tag--grey">To action</strong>
-                    {% endif %}
+                    <strong class="nhsuk-tag nhsuk-tag--green">Complete</strong>
                   </td>
 
                   <td class="nhsuk-table__cell" data-label="Action">
-                    {% if data.resubStatus == 'resubmission-completed' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
-                    {% elif data.resubStatus == 'resubmission-sent-to-dh' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
-                    {% elif data.resubStatus == 'ready-to-send' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
-                    {% elif data.resubStatus == 'documents-to-be-generated' %}
-                      <a href="invoices-within-resubmission">View invoices</a>
-                    {% elif data['add-invoices-to-resub'] == 'yes' %}
-                      <a href="invoices-within-resubmission">Review invoices</a>
-                    {% else %}
-                      <a href="add-invoices-to-resubmission">Add invoices</a> or <a href="edit-resubmission-details">Change resubmission details</a>
-                    {% endif %}
+                    <a href="completed-invoices-within-resubmission">View invoices</a>
                   </td>
                 </tr>
+
               </tbody>
             </table>
             <!-- TABLE END -->
-            {% else %}
-              <p><b>No resubmissions have been created.</b></p>
-            {% endif %}
+
             
           </form>
 
