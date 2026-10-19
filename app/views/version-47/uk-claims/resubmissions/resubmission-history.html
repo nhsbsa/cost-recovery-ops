@@ -122,54 +122,13 @@ UK claim ID 123456 - View the resubmission history
                     
                     <tbody class="nhsuk-table__body">
 
-                        {% if showDeliveredToMSRow %}
-                          <tr role="row" class="nhsuk-table__row">
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                13/09/2026<br>
-                                14:39
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Action</span>
-                                Delivered to member state
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Details</span>
-                                Resubmission delivered to member state on {{ data['date-resubmission-delivered-to-ms'] }}
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                nina.evans@nhsbsa.nhs.uk
-                            </td>
-                          </tr>
-                        {% endif %}
-                        {% if showSentToMSRow %}
-                          <tr role="row" class="nhsuk-table__row">
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                13/09/2026,<br>
-                                14:39
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Action</span>
-                                Sent to member state
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Details</span>
-                                Resubmission sent to member state on {{ data['date-resubmission-sent-to-ms'] or '22/03/2025' }} and status changed to Complete
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                nina.evans@nhsbsa.nhs.uk
-                            </td>
-                          </tr>
-                        {% endif %}
-                        {% if showUploadedToDHRow %}
+                        
+                          
                         <tr role="row" class="nhsuk-table__row">
                           <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Date and time</span>
-                              13/09/2026,<br>
-                              14:39
+                              12/09/2023,<br>
+                              11:28
                           </td>
                           <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Action</span>
@@ -177,19 +136,56 @@ UK claim ID 123456 - View the resubmission history
                           </td>
                           <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Details</span>
-                              Resubmission uploaded to DH eXchange on {{ data['date-resubmission-uploaded-to-dh-exchange'] or '22/03/2025' }} and status changed to Sent to DH
+                              Resubmission uploaded to DH eXchange on 12/09/2023 and status changed to Sent to DH
                           </td>
                           <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Updated by</span>
-                              joe.bloggs@nhsbsa.nhs.uk
+                              nina.evans@nhsbsa.nhs.uk
                           </td>
                         </tr>
-                        {% endif %}
-                        {% if data.resubStatus in ['ready-to-send'] or data.resubStatus in ['resubmission-sent-to-dh', 'resubmission-completed'] %}
+
                         <tr role="row" class="nhsuk-table__row">
                           <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Date and time</span>
-                              01/09/2026,<br>
+                              04/09/2023<br>
+                              14:39
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              Delivered to member state
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              Resubmission delivered to member state on 04/09/2023
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              nina.evans@nhsbsa.nhs.uk
+                          </td>
+                        </tr>
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              04/09/2023,<br>
+                              14:39
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              Sent to member state
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              Resubmission sent to member state on 04/09/2023 and status changed to Complete
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              nina.evans@nhsbsa.nhs.uk
+                          </td>
+                        </tr>
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              04/09/2023,<br>
                               10:12
                           </td>
                           <td role="cell" class="nhsuk-table__cell">
@@ -205,11 +201,11 @@ UK claim ID 123456 - View the resubmission history
                               joe.bloggs@nhsbsa.nhs.uk
                           </td>
                         </tr>
-                        {% endif %}
+
                         <tr role="row" class="nhsuk-table__row">
                           <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Date and time</span>
-                              20/08/2026,<br>
+                              02/09/2023,<br>
                               10:32
                           </td>
                           <td role="cell" class="nhsuk-table__cell">

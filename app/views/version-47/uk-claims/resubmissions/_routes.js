@@ -1360,8 +1360,8 @@ router.post([/a019-add-s112-contestation/], function (req, res) {
   req.session.data['a019-s112-reason-for-contestation'] =
     req.body['a019-s112-reason-for-contestation'];
 
-  req.session.data['a019-revised-annual-amount'] =
-    req.body['a019-revised-annual-amount'];
+  req.session.data['a019-revised-lump-sum'] =
+    req.body['a019-revised-lump-sum'];
 
   req.session.data['date-a019-s112-contestation-sent-by-ms-day'] =
     req.body['date-a019-s112-contestation-sent-by-ms-day'];
@@ -1478,8 +1478,8 @@ router.post([/a2064-add-s112-contestation/], function (req, res) {
   req.session.data['a2064-s112-reason-for-contestation'] =
     req.body['a2064-s112-reason-for-contestation'];
 
-  req.session.data['a2064-revised-annual-amount'] =
-    req.body['a2064-revised-annual-amount'];
+  req.session.data['a2064-revised-lump-sum'] =
+    req.body['a2064-revised-lump-sum'];
 
   req.session.data['date-a2064-s112-contestation-sent-by-ms-day'] =
     req.body['date-a2064-s112-contestation-sent-by-ms-day'];
@@ -1595,8 +1595,8 @@ router.post([/a65-add-s112-contestation/], function (req, res) {
   req.session.data['a65-s112-reason-for-contestation'] =
     req.body['a65-s112-reason-for-contestation'];
 
-  req.session.data['a65-revised-annual-amount'] =
-    req.body['a65-revised-annual-amount'];
+  req.session.data['a65-revised-lump-sum'] =
+    req.body['a65-revised-lump-sum'];
 
   req.session.data['date-a65-s112-contestation-sent-by-ms-day'] =
     req.body['date-a65-s112-contestation-sent-by-ms-day'];
