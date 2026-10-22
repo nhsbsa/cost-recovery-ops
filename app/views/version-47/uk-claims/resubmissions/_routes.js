@@ -6,6 +6,23 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.json()); // to support JSON bodies
 router.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 
+// Average cost claims //
+
+
+router.get([/claim-history/], function (req, res) {
+
+  const conversionHistory =
+    req.session.data['s110-conversion-history'] || [];
+
+  res.render(
+    'version-47/uk-claims/resubmissions/claim-history',
+    {
+      conversionHistory
+    }
+  );
+
+});
+
 
 // Average Cost Resubmissions //
 
@@ -1213,6 +1230,19 @@ router.post([/a019-s110-global-note/], function (req, res) {
 
 });
 
+router.get([/a019-claim-for-reimbursement-history/], function (req, res) {
+
+  const data = req.session.data['a019-s110-global-note'] || {};
+
+  res.render(
+    'version-47/uk-claims/resubmissions/a019-claim-for-reimbursement-history',
+    {
+      data
+    }
+  );
+
+});
+
 
 // ============================================================
 // S110 GLOBAL NOTE - 20 TO 64 YEARS
@@ -1280,6 +1310,18 @@ router.post([/a2064-s110-global-note/], function (req, res) {
 
 });
 
+router.get([/a2064-claim-for-reimbursement-history/], function (req, res) {
+
+  const data = req.session.data['a2064-s110-global-note'] || {};
+
+  res.render(
+    'version-47/uk-claims/resubmissions/a2064-claim-for-reimbursement-history',
+    {
+      data
+    }
+  );
+
+});
 
 // ============================================================
 // S110 GLOBAL NOTE - 65 YEARS AND OVER
@@ -1347,6 +1389,18 @@ router.post([/a65-s110-global-note/], function (req, res) {
 
 });
 
+router.get([/a65-claim-for-reimbursement-history/], function (req, res) {
+
+  const data = req.session.data['a65-s110-global-note'] || {};
+
+  res.render(
+    'version-47/uk-claims/resubmissions/a65-claim-for-reimbursement-history',
+    {
+      data
+    }
+  );
+
+});
 
 // ============================================================
 // S112 CONTESTATION - 0 TO 19 YEARS

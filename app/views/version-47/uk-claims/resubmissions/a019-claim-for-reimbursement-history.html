@@ -1,0 +1,257 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456 - View S112 contestations of global claim for fixed amounts - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/reimbursement-of-claim">View Claim ID (Reimbursement of claim)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View S110 global note (Claim for reimbursement history)</li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="a019-s112-contestations">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      S110 global note (Contestations of fixed amounts)
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l">
+                  Claim ID 123456: Claim for reimbursement history for S1/S072 Article 63, 2.b - 0 to 19 years
+                </h1>
+              </div>
+            </div>
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="a019-s110-global-note">S110 global note CLA_IMO</a>
+                  <span class="nhsuk-u-visually-hidden">View the S110 global note for 0 to 19 years</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="a019-s112-contestation-of-fixed-amounts">S112 contestations of fixed amounts</a>
+                  <span class="nhsuk-u-visually-hidden">View the S112 contestations of fixed amounts for 0 to 19 years</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="a019-claim-for-reimbursement-history">Claim for reimbursement history</a>
+                  <span class="nhsuk-u-visually-hidden">View the claim for reimbursement history for 0 to 19 years</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <form action="a019-claim-for-reimbursement-history" method="post">
+
+            <!-- Start of Claim for reimbursement of fixed amounts table -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+
+                {% set msDateEntered = data.dateConversionLetterSentToMSDay and data.dateConversionLetterSentToMSMonth and data.dateConversionLetterSentToMSYear %}
+                {% set dhscDateEntered = data.dateConversionLetterSentToDHSC_Day and data.dateConversionLetterSentToDHSC_Month and data.dateConversionLetterSentToDHSC_Year %}
+                {% set s111DateEntered = data.dateS111AcknowledgementLetterReceivedDay and data.dateS111AcknowledgementLetterReceivedMonth and data.dateS111AcknowledgementLetterReceivedYear %}
+
+                {% if msDateEntered or dhscDateEntered or s111DateEntered %}
+
+                  <table role="claimSummaryTable" class="nhsuk-table-responsive">
+                      <thead role="rowgroup" class="nhsuk-table__head">
+                          <tr role="row">
+                              <th role="columnheader" class="" scope="col">
+                                  Date and time
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Action
+                              </th>
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Details
+                              </th>
+                              <th role="columnheader" class="" scope="col">
+                                  Updated by
+                              </th>
+                          </tr>
+                      </thead>
+          
+                      <tbody class="nhsuk-table__body">
+                        {% if s111DateEntered %}
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                <p id="currentDateS111Received"></p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                Updated
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Details</span>
+                                Member state acknowledged claim for reimbursement of fixed amounts on {{ data.dateS111AcknowledgementLetterReceivedDay }}/{{ data.dateS111AcknowledgementLetterReceivedMonth }}/{{ data.dateS111AcknowledgementLetterReceivedYear }}.
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                joe.bloggs@nhsbsa.nhs.uk
+                            </td>
+                          </tr>
+                        {% endif %}
+                        {% if dhscDateEntered %}
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                <p id="currentDateS110SentToDHSC"></p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                Sent to DH
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Details</span>
+                                Claim for reimbursement of fixed amounts for 0 to 19 years was sent to the DHSC on {{ data.dateConversionLetterSentToDHSC_Day }}/{{ data.dateConversionLetterSentToDHSC_Month }}/{{ data.dateConversionLetterSentToDHSC_Year }}.
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                nina.evans@nhsbsa.nhs.uk
+                            </td>
+                          </tr>
+                        {% endif %}
+                        {% if msDateEntered %}
+                          <tr role="row" class="nhsuk-table__row">
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Date and time</span>
+                                <p id="currentDateS110SentToMS"></p>
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Action</span>
+                                Sent to member state
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Details</span>
+                                Claim for reimbursement of fixed amounts for 0 to 19 years sent to member state on {{ data.dateConversionLetterSentToMSDay }}/{{ data.dateConversionLetterSentToMSMonth }}/{{ data.dateConversionLetterSentToMSYear }}.
+                            </td>
+                            <td role="cell" class="nhsuk-table__cell">
+                                <span class="nhsuk-table-responsive__heading">Updated by</span>
+                                joe.bloggs@nhsbsa.nhs.uk
+                            </td>
+                          </tr>
+                        {% endif %}
+                      </tbody>
+                  </table>
+                  {% endif %}
+
+              </div>
+          </div>
+          <!-- End of Claim for reimbursement of fixed amounts history table -->
+
+          
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+// Function to set the current date and time
+function setCurrentDateTime(elementId) {
+    var dateElement = document.getElementById(elementId);
+
+    if (dateElement) {
+        var currentDate = new Date();
+
+        // Format date as DD/MM/YYYY
+        var day = String(currentDate.getDate());
+        var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+        var month = monthNames[currentDate.getMonth()];
+        var year = currentDate.getFullYear();
+        var formattedDate = `${day} ${month} ${year}`;
+
+        // Set formatted date and time with line break
+        dateElement.innerHTML = `${formattedDate}`;
+    }
+}
+
+// Set the date for each item
+document.addEventListener("DOMContentLoaded", function () {
+  setCurrentDateTime("currentDateResubDocsGenerated");    // Current date resub docs generated
+});
+
+
+function setCurrentDateTime(elementId) {
+  const element = document.getElementById(elementId);
+
+  if (!element) return;
+
+  const now = new Date();
+
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = now.getFullYear();
+
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+
+  element.textContent = `${day}/${month}/${year}, ${hours}:${minutes}`;
+}
+
+// Set the date and time for each item
+document.addEventListener("DOMContentLoaded", function () {
+  setCurrentDateTime("currentDateS110SentToDHSC");
+  setCurrentDateTime("currentDateS111Received");
+  setCurrentDateTime("currentDateS110SentToMS");
+});
+
+</script>
+{% endblock %}

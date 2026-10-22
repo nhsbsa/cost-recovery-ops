@@ -130,27 +130,66 @@ UK claim ID 123456 - Claim history
                     </thead>
                     
                     <tbody class="nhsuk-table__body">
-                        {% if data['change-basic-personal-details'] == 'yes' %}
+                      {% if data['converted-age-brackets'] and '65 years and over' in data['converted-age-brackets'] %}
                         <tr role="row" class="nhsuk-table__row">
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Date and time</span>
-                                16/04/2023,<br>
-                                14:19
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Action</span>
-                                Claim documents regenerated
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Details</span>
-                                Changes made to John Doe's personal details.
-                            </td>
-                            <td role="cell" class="nhsuk-table__cell">
-                                <span class="nhsuk-table-responsive__heading">Updated by</span>
-                                joe.bloggs@nhs.net
-                            </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              <p id="currentDateA65S110Created"></p>
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              Created
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              Claim for reimbursement of fixed amounts created for 65 years and over
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              joe.bloggs@nhsbsa.nhs.uk
+                          </td>
                         </tr>
-                        {% endif %}
+                      {% endif %}
+                      {% if data['converted-age-brackets'] and '20 to 64 years' in data['converted-age-brackets'] %}
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              <p id="currentDateA2064S110Created"></p>
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              Created
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              Claim for reimbursement of fixed amounts created for 20 to 64 years
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              joe.bloggs@nhsbsa.nhs.uk
+                          </td>
+                        </tr>
+                      {% endif %}
+                      {% if data['converted-age-brackets'] and '0 to 19 years' in data['converted-age-brackets'] %}
+                        <tr role="row" class="nhsuk-table__row">
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Date and time</span>
+                              <p id="currentDateA019S110Created"></p>
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Action</span>
+                              Created
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Details</span>
+                              Claim for reimbursement of fixed amounts created for 0 to 19 years
+                          </td>
+                          <td role="cell" class="nhsuk-table__cell">
+                              <span class="nhsuk-table-responsive__heading">Updated by</span>
+                              joe.bloggs@nhsbsa.nhs.uk
+                          </td>
+                        </tr>
+                      {% endif %}
                         <tr role="row" class="nhsuk-table__row">
                           <td role="cell" class="nhsuk-table__cell">
                               <span class="nhsuk-table-responsive__heading">Date and time</span>
@@ -259,4 +298,39 @@ UK claim ID 123456 - Claim history
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+// Set the date for each item
+document.addEventListener("DOMContentLoaded", function () {
+  setCurrentDateTime("currentDateResubDocsGenerated");    // Current date resub docs generated
+});
+
+
+function setCurrentDateTime(elementId) {
+  const element = document.getElementById(elementId);
+
+  if (!element) return;
+
+  const now = new Date();
+
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = now.getFullYear();
+
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+
+  element.textContent = `${day}/${month}/${year}, ${hours}:${minutes}`;
+}
+
+// Set the date and time for each item
+document.addEventListener("DOMContentLoaded", function () {
+  setCurrentDateTime("currentDateA65S110Created");
+  setCurrentDateTime("currentDateA2064S110Created");
+  setCurrentDateTime("currentDateA019S110Created");
+});
+
+</script>
 {% endblock %}
