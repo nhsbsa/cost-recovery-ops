@@ -96,12 +96,26 @@ router.get('/uk-claims-search-results-found', function(req, res) {
     a65.dateS111AcknowledgementLetterReceivedMonth &&
     a65.dateS111AcknowledgementLetterReceivedYear;
 
+    // S112 contestation status
+    const s112Complete =
+    req.session.data['a019-contestation-added'] === 'Yes' ||
+    req.session.data['a2064-contestation-added'] === 'Yes' ||
+    req.session.data['a65-contestation-added'] === 'Yes';
+
+    // S113 reply status
+    const s113Complete =
+    req.session.data['a019-s113-sent-to-ms-date-added'] === 'Yes' ||
+    req.session.data['a2064-s113-sent-to-ms-date-added'] === 'Yes' ||
+    req.session.data['a65-s113-sent-to-ms-date-added'] === 'Yes';
+
   res.render(
     'version-47/uk-claims/uk-claims-search-results-found',
     {
       allAgeBracketsConverted,
       s110Complete: Boolean(s110Complete),
-      s111Complete: Boolean(s111Complete)
+      s111Complete: Boolean(s111Complete),
+      s112Complete: Boolean(s112Complete),
+      s113Complete: Boolean(s113Complete)
     }
   );
 });
