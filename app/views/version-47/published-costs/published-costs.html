@@ -144,7 +144,17 @@ Search for a published cost by financial year
                             <span class="nhsuk-table__heading">2023</span>
                           </th>
                           <td class="nhsuk-table__cell" role="cell">
-                            <span class="nhsuk-table__heading">21/08/2026</span>
+                            <span class="nhsuk-table__heading">
+                            {% if data['date-costs-published-day'] and data['date-costs-published-month'] and data['date-costs-published-year'] %}
+                              {% set day = data['date-costs-published-day'] | int %}
+                              {% set month = data['date-costs-published-month'] | int %}
+                              {% set year = data['date-costs-published-year'] %}
+                            
+                              {{ ('0' if day < 10 else '') }}{{ day }}/{{ ('0' if month < 10 else '') }}{{ month }}/{{ year }}
+                            {% else %}
+                              21/08/2026
+                            {% endif %}
+                            </span>
                           </td>
                           <td class="nhsuk-table__cell" role="cell">
                             <span class="nhsuk-table__heading"><a href="view-2023-published-costs">View</a></span>
