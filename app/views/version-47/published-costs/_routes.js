@@ -133,4 +133,22 @@ router.post([/cya-before-submitting-published-costs/], function (req, res) {
   
 res.redirect('/version-47/published-costs/published-costs');
 });
+
+// Are you sure you want to cancel adding published costs?
+router.get('/cancel-adding-published-costs', function (req, res) {
+  req.session.data['return-url'] = req.query.from
+
+  res.render('version-47/published-costs/cancel-adding-published-costs')
+})
+
+router.post('/cancel-adding-published-costs', function (req, res) {
+  const cancelAddingPublishedCosts =
+    req.session.data['cancel-adding-published-costs']
+
+  if (cancelAddingPublishedCosts === 'Yes') {
+    res.redirect('/version-47/published-costs/published-costs')
+  } else {
+    res.redirect(req.session.data['return-url'])
+  }
+})
 module.exports = router;
