@@ -78,6 +78,10 @@ Search for a published cost by financial year
                   <a href="enter-published-costs-for-article-632a" class="nhsuk-button">
                     Add published costs for 2023
                   </a>
+                  {% else %}
+                  <a href="#" class="nhsuk-button">
+                    Add published costs for 2024
+                  </a>
                   {% endif %}
                 </div>
               </div>
@@ -115,9 +119,9 @@ Search for a published cost by financial year
                   <div class="nhsuk-card__content">
 
                     {% if data['published-costs-for-2023-submitted'] == 'Yes' %}
-                    <p>Showing 1 - 8 of 22 published costs</p>
+                    <p>Showing 1 - 8 of 10 published costs</p>
                     {% else %}
-                    <p>Showing 1 - 8 of 21 published costs</p>
+                    <p>Showing 1 - 8 of 9 published costs</p>
                     {% endif %}
 
                     <table class="nhsuk-table" role="table">
@@ -238,6 +242,7 @@ Search for a published cost by financial year
                             <span class="nhsuk-table__heading"><a href="#">View</a></span>
                           </td>
                         </tr>
+                        {% if data['published-costs-for-2023-submitted'] != 'Yes' %}
                         <tr class="nhsuk-table__row" role="row">
                           <th class="nhsuk-table__header" scope="row" role="rowheader">
                             <span class="nhsuk-table__heading">2015</span>
@@ -249,32 +254,10 @@ Search for a published cost by financial year
                             <span class="nhsuk-table__heading"><a href="#">View</a></span>
                           </td>
                         </tr>
-                        <tr class="nhsuk-table__row" role="row">
-                          <th class="nhsuk-table__header" scope="row" role="rowheader">
-                            <span class="nhsuk-table__heading">2014</span>
-                          </th>
-                          <td class="nhsuk-table__cell" role="cell">
-                            <span class="nhsuk-table__heading">11/08/2017</span>
-                          </td>
-                          <td class="nhsuk-table__cell" role="cell">
-                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
-                          </td>
-                        </tr>
-                        {% if data['published-costs-for-2023-submitted'] != 'Yes' %}
-                        <tr class="nhsuk-table__row" role="row">
-                          <th class="nhsuk-table__header" scope="row" role="rowheader">
-                            <span class="nhsuk-table__heading">2013</span>
-                          </th>
-                          <td class="nhsuk-table__cell" role="cell">
-                            <span class="nhsuk-table__heading">22/08/2016</span>
-                          </td>
-                          <td class="nhsuk-table__cell" role="cell">
-                            <span class="nhsuk-table__heading"><a href="#">View</a></span>
-                          </td>
-                        </tr>
                         {% endif %}
                       </tbody>
                     </table>
+                    
                     
                     <!-- Pagination begins -->
                     <div style="display: flex; justify-content: center; width: 100%; margin-top: -60px; margin-bottom: -40px;">
@@ -285,15 +268,10 @@ Search for a published cost by financial year
                               1
                             </a>
                           </li>
-                          
+                      
                           <li class="nhsuk-pagination__item">
-                            <a class="nhsuk-pagination__link" href="#" aria-label="Page 8">
+                            <a class="nhsuk-pagination__link" href="#" aria-label="Page 2">
                               2
-                            </a>
-                          </li>
-                          <li class="nhsuk-pagination__item">
-                            <a class="nhsuk-pagination__link" href="#" aria-label="Page 9">
-                              3
                             </a>
                           </li>
                         </ul>
@@ -308,7 +286,7 @@ Search for a published cost by financial year
                       </nav>
                     </div>
                     <!-- Pagination ends -->
-
+                    
                     
                   </div>
                 </div>
