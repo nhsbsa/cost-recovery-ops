@@ -1,0 +1,92 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Claim ID 123456 - Claim converted successfully - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-row">
+                    <div class="nhsuk-grid-column-two-thirds">
+                            
+                      <div class="nhsuk-panel nhsuk-panel--confirmation nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-4">
+
+                        <h1 style="font-size:40px;" class="nhsuk-panel__title">
+                          {% if data['s110-age-bracket'] == '65 years and over' %}
+                            Claim for 65 years and over converted successfully
+                          {% elif data['s110-age-bracket'] == '20 to 64 years' %}
+                            Claim for 20 to 64 years converted successfully
+                          {% else %}
+                            Claim for 0 to 19 years converted successfully
+                          {% endif %}
+                        </h1>
+                        <div class="nhsuk-panel__body">
+                            The total cost of this claim is £{% if data['s110-age-bracket'] == '65 years and over' %}113,167.50{% elif data['s110-age-bracket'] == '20 to 64 years' %}24,759.00{% else %}7,459.00{% endif %}
+                        </div>
+                      </div>
+
+                      
+
+                      <div class="button-container">
+
+                        {# Show "Convert another" only when there are brackets remaining #}
+                        {% if remainingAgeBrackets.length > 0 %}
+                          <form action="select-age-bracket-for-conversion">
+                            <button style="margin-right:20px; margin-top:20px;" class="nhsuk-button" type="submit">
+                              Convert another age bracket
+                            </button>
+                          </form>
+                        {% endif %}
+                      
+                      
+                        {# S110 global note link changes according to the bracket just converted #}
+                        {% if s110AgeBracket == '0 to 19 years' %}
+                          <a href="/version-48/uk-claims/resubmissions/a019-s110-global-note" class="nhsuk-button {% if remainingAgeBrackets.length > 0 %}nhsuk-button--secondary{% endif %}" style="margin-top:20px;">
+                            Go to the S110 global note
+                          </a>
+                      
+                        {% elif s110AgeBracket == '20 to 64 years' %}
+                          <a href="/version-48/uk-claims/resubmissions/a2064-s110-global-note" class="nhsuk-button {% if remainingAgeBrackets.length > 0 %}nhsuk-button--secondary{% endif %}" style="margin-top:20px;">
+                            Go to the S110 global note
+                          </a>
+                      
+                        {% elif s110AgeBracket == '65 years and over' %}
+                          <a href="/version-48/uk-claims/resubmissions/a65-s110-global-note" class="nhsuk-button {% if remainingAgeBrackets.length > 0 %}nhsuk-button--secondary{% endif %}" style="margin-top:20px;">
+                            Go to the S110 global note
+                          </a>
+                        {% endif %}
+                      
+                      </div>
+
+                      <p><a href="/version-48/uk-claims/resubmissions/reimbursement-of-claim">Return to Reimbursement of claim tab</a></p>
+                  </div>
+
+                  
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

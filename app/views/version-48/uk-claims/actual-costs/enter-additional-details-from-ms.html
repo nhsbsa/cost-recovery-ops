@@ -1,0 +1,275 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Contestation details
+{% endblock %}
+
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <h1 class="nhsuk-heading-xl">
+                  Additional details provided by member state
+                </h1>
+              </div>
+            </div>
+
+            <form action="enter-additional-details-from-ms"  method="post">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+
+                <div
+                  style="border: 3px; border-style: solid; border-color:lightgray; background-color:rgb(252, 252, 252); padding:20px 20px 1px 20px;">
+
+                  
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="ehic-start-date-label">
+                        <b>Start date of EHIC (optional)</b>
+                      </label>
+                      <div class="nhsuk-hint">
+                        For example, 31 3 2022
+                      </div>
+  
+                      <div class="nhsuk-date-input" id="ehic-start-date">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="ehic-start-date-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="ehic-start-date-day" name="ehic-start-date-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="ehic-start-date-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="ehic-start-date-month" name="ehic-start-date-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="ehic-start-date-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="ehic-start-date-year" name="ehic-start-date-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="ehic-end-date-label">
+                        <b>End date of EHIC (optional)</b>
+                      </label>
+  
+                      <div class="nhsuk-date-input" id="ehic-end-date">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="ehic-end-date-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="ehic-end-date-day" name="ehic-end-date-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="ehic-end-date-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="ehic-end-date-month" name="ehic-end-date-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="ehic-end-date-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="ehic-end-date-year" name="ehic-end-date-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="ms-reference-letter-id-label">
+                        <b>Member state reference letter ID (optional)</b>
+                      </label>
+                      <input class="nhsuk-input nhsuk-input--width-20" id="ms-reference-letter-id" name="ms-reference-letter-id" type="text" inputmode="numeric">
+                    </div>
+
+                    <div class="nhsuk-form-group">
+                      <label class="nhsuk-label" for="date-on-ms-reference-letter-label">
+                        <b>Date on member state reference letter (optional)</b>
+                      </label>
+  
+                      <div class="nhsuk-date-input" id="date-on-ms-reference-letter">
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-on-ms-reference-letter-day">
+                              Day
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-on-ms-reference-letter-day" name="date-on-ms-reference-letter-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-on-ms-reference-letter-month">
+                              Month
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="date-on-ms-reference-letter-month" name="date-on-ms-reference-letter-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                        <div class="nhsuk-date-input__item">
+                          <div class="nhsuk-form-group">
+                            <label class="nhsuk-label nhsuk-date-input__label" for="date-on-ms-reference-letter-year">
+                              Year
+                            </label>
+                            <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="date-on-ms-reference-letter-year" name="date-on-ms-reference-letter-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                </div>
+              </div>
+
+
+              <div class="nhsuk-grid-column-one-half">
+
+                <div style="border: 3px; border-style: solid; border-color:lightgray; background-color:rgb(252, 252, 252); padding:20px 20px 1px 20px;">
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="duplicate-treatment-id-1-label">
+                      <b>Duplicate treatment ID 1 (optional)</b>
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="duplicate-treatment-id-1" name="duplicate-treatment-id-1" type="text" inputmode="numeric">
+                  </div>
+
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="duplicate-treatment-id-2-label">
+                      <b>Duplicate treatment ID 2 (optional)</b>
+                    </label>
+                    <input class="nhsuk-input nhsuk-input--width-20" id="duplicate-treatment-id-2" name="duplicate-treatment-id-2" type="text" inputmode="numeric">
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="start-date-of-uk-issued-s1-label">
+                      <b>Start date of UK issued S1 (optional)</b>
+                    </label>
+                    <div class="nhsuk-hint">
+                      For example, 31 3 2022
+                    </div>
+
+                    <div class="nhsuk-date-input" id="start-date-of-uk-issued-s1">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="start-date-of-uk-issued-s1-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="start-date-of-uk-issued-s1-day" name="start-date-of-uk-issued-s1-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="start-date-of-uk-issued-s1-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="start-date-of-uk-issued-s1-month" name="start-date-of-uk-issued-s1-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="start-date-of-uk-issued-s1-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="start-date-of-uk-issued-s1-year" name="start-date-of-uk-issued-s1-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="nhsuk-form-group">
+                    <label class="nhsuk-label" for="end-date-of-uk-issued-s1-label">
+                      <b>End date of UK issued S1 (optional)</b>
+                    </label>
+
+                    <div class="nhsuk-date-input" id="end-date-of-uk-issued-s1">
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="end-date-of-uk-issued-s1-day">
+                            Day
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="end-date-of-uk-issued-s1-day" name="end-date-of-uk-issued-s1-day" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="end-date-of-uk-issued-s1-month">
+                            Month
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2" id="end-date-of-uk-issued-s1-month" name="end-date-of-uk-issued-s1-month" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                      <div class="nhsuk-date-input__item">
+                        <div class="nhsuk-form-group">
+                          <label class="nhsuk-label nhsuk-date-input__label" for="end-date-of-uk-issued-s1-year">
+                            Year
+                          </label>
+                          <input class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-4" id="end-date-of-uk-issued-s1-year" name="end-date-of-uk-issued-s1-year" type="text" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              
+                <button class="nhsuk-button" style="margin-top: 20px;" type="submit">
+                  Continue
+                </button>
+
+              </form>  
+                
+              
+            </div>
+
+          </div>
+
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

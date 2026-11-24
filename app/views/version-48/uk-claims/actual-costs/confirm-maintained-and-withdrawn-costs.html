@@ -1,0 +1,158 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Confirmat maintained and withdrawn treatment costs
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            {{ backLink({
+              "href": "javascript:history.go(-1)",
+              "text": "Go back",
+              "classes": "nhsuk-u-margin-bottom-4"
+            }) }}
+    
+  
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-full">
+                <h1 class="nhsuk-heading-xl">Confirm the maintained and withdrawn treatment costs</h1>
+             </div>
+          </div>
+
+          <form action="confirm-maintained-and-withdrawn-costs" method="post">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+    
+              <h2 class="nhsuk-heading-s">Contested treatment details</h2>
+
+              <dl class="nhsuk-summary-list">
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                    Treatment start date
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                    01/02/2023
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                    Treatment start date
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                    01/02/2023
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                    Initial cost (£)
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                    300.00
+                  </dd>
+                </div>
+
+                <div class="nhsuk-summary-list__row">
+                  <dt class="nhsuk-summary-list__key">
+                    Current cost (£)
+                  </dt>
+                  <dd class="nhsuk-summary-list__value">
+                    300.00
+                  </dd>
+                </div>
+              </dl>
+            </div>
+              
+            <div class="nhsuk-grid-column-one-half">
+
+              <h2 class="nhsuk-heading-s">Maintained treatment details</h2>
+
+              <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="maintained-treatment-start-date-label">Maintained start date</dt>
+                    <dd class="nhsuk-summary-list__value" id="maintained-treatment-start-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="maintained-treatment-end-date-label">Maintained end date</dt>
+                    <dd class="nhsuk-summary-list__value" id="maintained-treatment-end-date">01/02/2023</dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="partial-maintained-cost-label">
+                        <label for="partial-maintained-cost">Maintained cost (£)</label>
+                    </dt>
+                    <dd class="nhsuk-summary-list__value" id="partial-maintained-cost">
+                        <input class="nhsuk-input  nhsuk-input--width-20" id="partial-maintained-cost" type="text" aria-label="maintained-cost-of-treatment" name="partial-maintained-treatment-cost" value="">
+                    </dd>
+                  </div>
+              </dl>
+            </div>
+
+            <div class="nhsuk-grid-column-one-half">
+
+              <h2 class="nhsuk-heading-s">Withdrawn treatment details</h2>
+
+              <dl class="nhsuk-summary-list">
+                 <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="withdrawn-treatment-start-date-label">Withdrawn start date</dt>
+                    <dd class="nhsuk-summary-list__value" id="withdrawn-treatment-start-date">01/02/2023</dd>
+                 </div>
+                 <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="withdrawn-treatment-end-date-label">Withdrawn end date</dt>
+                    <dd class="nhsuk-summary-list__value" id="withdrawn-treatment-end-date">01/02/2023</dd>
+                 </div>
+                 <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="partial-withdrawn-cost-label">
+                       <label for="partial-withdrawn-cost">Withdrawn cost (£)</label>
+                    </dt>
+                    <dd class="nhsuk-summary-list__value" id="partial-withdrawn-cost">
+                       <input class="nhsuk-input  nhsuk-input--width-20" id="partial-withdrawn-cost" type="text" aria-label="withdrawn-cost-of-treatment" name="partial-withdrawn-treatment-cost" value="">
+                    </dd>
+                 </div>
+              </dl>
+           </div>
+
+          </div>
+
+                  
+             <button class="nhsuk-button nhsuk-button--primary" style="margin-top: 20px;" type="submit" value="submit" id="continue-button">Continue</button>
+
+             <p><a href="treatment-evidence" id="upload-evidence-cancel-link" aria-label="Cancel uploading evidence">Cancel</a></p>
+
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

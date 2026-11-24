@@ -1,0 +1,94 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Search for an institution by institution name - Manage overseas entitlements and treatments - NHSBSA
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+        <div class="nhsBSA-sidebar-content">
+            <div class="nhsuk-width-container-fluid">
+                <div class="nhsuk-main-wrapper" id="maincontent">
+                    
+                  <div class="nhsuk-grid-column-full">
+                    
+                    {{ backLink({
+                      "href": "javascript:history.go(-1)",
+                      "text": "Go back",
+                      "classes": "nhsuk-u-margin-bottom-4"
+                    }) }}
+
+                    
+                        
+                    <form action="search-institution-name" method="post">
+
+                      <h1 class="app-page-heading">
+                        <span class="nhsuk-caption-l">
+                          S1/S072 entitlement registration
+                            <span class="nhsuk-u-visually-hidden"> - </span>
+                        </span>
+                        Search for an institution in {% if data['s1-entitlement-country-of-issue'] %}{{ data['s1-entitlement-country-of-issue'] }}{% else %}France{% endif %}
+                      </h1>
+
+
+
+                      <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+                        <ul class="nhsuk-secondary-navigation__list">
+                          <li class="nhsuk-secondary-navigation__item">
+                            <a class="nhsuk-secondary-navigation__link" id="tab_institution_id" href="search-institution-ID">Institution ID</a>
+                            <span class="nhsuk-u-visually-hidden">Search for an institution by ID</span>
+                          </li>
+
+                          <li class="nhsuk-secondary-navigation__item">
+                            <a class="nhsuk-secondary-navigation__link" id="tab_institution_id" aria-current="page" href="search-institution-name">Institution name</a>
+                            <span class="nhsuk-u-visually-hidden">Search for an institution by name</span>
+                          </li>
+                        </ul>
+                        
+                      </nav>
+                      <hr style="border-bottom:1px solid #ccc; margin:0">
+
+                      <br>
+
+                      <div class="nhsuk-form-group">
+                        <div id="institutionName-hint" class="nhsuk-label">
+                          <p class="nhsuk-hint">
+                            <span>Enter the institution name as it is shown on the S1/S072 form.</span>
+                          </p>
+                        </div>
+                        <input class="nhsuk-input nhsuk-u-width-two-thirds" id="institutionName" type="text" autocomplete="off" name="searchInstitutionDTO.institutionName" value=""/>
+                      </div>
+
+                      <div class="nhsuk-form-group">
+                        <button class="nhsuk-button" data-module="nhsuk-button" type="submit">Search</button>
+
+                        <p><a href="../account/entitlements-and-treatments">Cancel</a></p>
+                      </div>
+
+                    </form>
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

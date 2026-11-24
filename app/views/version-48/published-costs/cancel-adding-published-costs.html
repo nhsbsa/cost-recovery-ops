@@ -1,0 +1,80 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Confirm you want to cancel adding published costs - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          {{ backLink({
+            "href": "javascript:history.go(-1)",
+            "text": "Go back",
+            "classes": "nhsuk-u-margin-bottom-4"
+          }) }}
+
+          <form action="cancel-adding-published-costs" method="post">
+                  
+            <h1 class="nhsuk-label-wrapper">
+              <label class="nhsuk-label nhsuk-label--xl" for="confirm-cancellation-adding-published-costs-label">
+                Are you sure you want to cancel?
+              </label>
+            </h1>
+            <div class="nhsuk-hint" id="cancel-adding-published-costs-hint">
+              The information that you have entered will not be saved.
+            </div>
+
+
+            <div class="nhsuk-form-group">
+              <div class="nhsuk-radios">
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="cancel-adding-published-costs-yes" name="cancel-adding-published-costs" type="radio" value="Yes">
+                    <label class="nhsuk-label nhsuk-radios__label" for="cancel-adding-published-costs-yes">Yes, I want to cancel</label>
+                  </div>
+                  <div class="nhsuk-radios__item">
+                    <input class="nhsuk-radios__input" id="cancel-adding-published-costs-no" name="cancel-adding-published-costs" type="radio" value="No">
+                    <label class="nhsuk-label nhsuk-radios__label" for="cancel-adding-published-costs-no">No, I do not want to cancel</label>
+                  </div>
+              </div>
+            </div>
+
+              
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                  <button class="nhsuk-button nhsuk-u-margin-top-2 nhsuk-u-margin-bottom-2" type="submit">
+                    Submit
+                  </button>
+              </div>
+            </div>
+
+              
+          </form>
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

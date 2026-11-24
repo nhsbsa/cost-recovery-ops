@@ -1,0 +1,255 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+UK claim ID 123456: Resub ID 0000001 - View invoice details
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../../resubmissions/pending-resubmissions">Resubs (Pending)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/claim-resubmissions">View Claim ID (Resubmissions)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../resubmissions/invoices-within-resubmission">View Resub ID (Invoices within resubmission)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            View details (Invoice details)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="uk-claims-search-results">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search results
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            {% if data['invoice'] == 'Jane' %}
+            {% set contestationData = data.contestation_reasons[data.invoice] %}
+            <!-- Start of Jane Doe's info -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 123456: Resub ID 0000001<br>
+                    (Invoice ID 298473) - Invoice details
+                </h1>
+              </div>
+            </div>
+              
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=Jane">Invoice details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for invoice ID 298473</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-reasons-for-contestation?invoice=Jane">Reason for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 298473</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=Jane">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 298473</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Reason for contestation</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      <p class="nhsuk-body">Other [99]</p>
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="other-contestation-reason-comments-label">Other reason comments</dt>
+                    <dd class="nhsuk-summary-list__value" id="other-contestation-reason-comments-value">
+                      <p class="nhsuk-body">Main insured John Doe died 16/10/2023</p>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+
+            {% elif data['invoice'] == 'John' %}
+            {% set contestationData = data.contestation_reasons[data.invoice] %}
+            <!-- Start of John Doe's info -->
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <h1 class="nhsuk-heading-l" style="display:inline-block; margin-right:20px;">
+                    Claim ID 123456: Resub ID 0000001<br>
+                    (Invoice ID 387731) - Invoice details
+                </h1>
+              </div>
+            </div>
+            
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-details?invoice=John">Invoice details</a>
+                  <span class="nhsuk-u-visually-hidden">View details for invoice ID 387731</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="invoice-reasons-for-contestation?invoice=John">Reason for contestation</a>
+                  <span class="nhsuk-u-visually-hidden">View or add reason for contestation for invoice ID 387731</span>
+                </li>
+
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="invoice-evidence?invoice=John">Evidence</a>
+                  <span class="nhsuk-u-visually-hidden">View evidence for invoice ID 387731</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-one-half">
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Reason for contestation</dt>
+                    <dd class="nhsuk-summary-list__value">
+                      <p class="nhsuk-body">The person died [18]</p>
+                    </dd>
+                  </div>
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key" id="date-person-died-label">Date the person died</dt>
+                    <dd class="nhsuk-summary-list__value" id="date-person-died-value">
+                      <p class="nhsuk-body">
+                        15/10/2023
+                      </p>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            {% endif %}
+
+
+
+              </div>
+            </div>
+            <!-- End of main content-->
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<style>
+  .nhsuk-summary-list__key {
+    font-size: 19px;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  const textarea = document.querySelector('#otherContestedReason');
+  const countRemaining = document.getElementById('charactersRemaining');
+  const staticMsg = document.querySelector('#char-count-screen-reader');
+  const maxCharacters = 255;
+  let timeoutId;
+
+  function updateCharacterCount() {
+    const textEntered = textarea.value;
+    const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+    const addition = newLines?.length || 0;
+    const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+
+    if (remainingCharacters >= 0) {
+      countRemaining.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      countRemaining.classList.remove('nhsbsa-count-error-message');
+      countRemaining.classList.add('nhsuk-hint');
+      textarea.classList.remove('nhsuk-textarea--error');
+    } else {
+      countRemaining.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      countRemaining.classList.add('nhsbsa-count-error-message');
+      countRemaining.classList.remove('nhsuk-hint');
+      textarea.classList.add('nhsuk-textarea--error');
+    }
+  }
+
+  function updateScreenReaderMessage() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const textEntered = textarea.value;
+      const newLines = textEntered.match(/(\r\n|\n|\r)/g);
+      const addition = newLines?.length || 0;
+      const remainingCharacters = maxCharacters - textEntered.length + addition - (newLines?.length || 0);
+      // TO DO ADD FIX FOR 1 CHARACTER
+      if (remainingCharacters < 0) {
+        staticMsg.textContent = `You have ${Math.abs(remainingCharacters)} character${Math.abs(remainingCharacters) === 1 ? '' : 's'} too many`;
+      } else {
+        staticMsg.textContent = `You have ${remainingCharacters} character${remainingCharacters === 1 ? '' : 's'} remaining`;
+      }
+    }, 1000);
+  }
+
+  textarea.addEventListener('input', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+
+  // Update character count if textarea has a value on page load
+  window.addEventListener('load', () => {
+    updateCharacterCount();
+    updateScreenReaderMessage();
+  });
+</script>
+{% endblock %}

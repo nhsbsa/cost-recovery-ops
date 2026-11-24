@@ -1,0 +1,287 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+View claim resub
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View Claim ID (Credit notes)</li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="uk-claims-search-results">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search results
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+
+            
+            {% if data['creditNoteStatus'] == 'treatments-added-to-credit-note' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Selected treatments added to resub 8191113
+                </h3>
+              </div>
+            </div>
+
+            {% elif data['creditNoteStatus'] == 'assigned-for-review' %}
+            <div class="nhsuk-notification-banner nhsuk-notification-banner--success" role="alert" aria-labelledby="nhsuk-notification-banner-title" data-module="nhsuk-notification-banner">
+              <div class="nhsuk-notification-banner__header">
+                <h2 class="nhsuk-notification-banner__title" id="nhsuk-notification-banner-title">
+                  Success
+                </h2>
+              </div>
+              <div class="nhsuk-notification-banner__content">
+                <h3 class="nhsuk-notification-banner__heading">
+                  Resub assigned for peer review
+                </h3>
+                <p>Resub 7824366 has been assigned to nina.evans@nhsbsa.nhs.uk. for peer review.</p>
+              </div>
+            </div>
+            {% endif %}
+
+
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-full">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h1 class="nhsuk-heading-l" style="margin-bottom: 25px;">
+                    Claim ID 345680 - Credit notes (S085)
+                  </h1>
+                  <a href="add-treatments-to-credit-note">
+                    <button class="nhsuk-button" type="submit">
+                      Create new credit note (S085)
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <form action="credit-notes" method="post">
+            
+            <!--start secondary navigation-->
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatment-forms">Treatment forms</a>
+                  <span class="nhsuk-u-visually-hidden">Search for a treatment form</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-documents">Claim documents</a>
+                  <span class="nhsuk-u-visually-hidden">Complete any outstanding actions</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-summary">Claim summary</a>
+                  <span class="nhsuk-u-visually-hidden">View the overall summary for claim 345680</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="resubmissions">Resubmissions</a>
+                  <span class="nhsuk-u-visually-hidden">View resubmissions for claim 345680</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page" href="credit-notes">Credit ntoes</a>
+                  <span class="nhsuk-u-visually-hidden">View credit notes for claim 345680</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="claim-history">Claim history</a>
+                  <span class="nhsuk-u-visually-hidden">View case history for claim 345680</span>
+                </li>
+              </ul>
+            </nav>
+
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+
+            {% if data.creditNoteStatus == 'treatments-added-to-credit-note' %}
+            <details class="nhsuk-details" >
+              <summary class="nhsuk-details__summary">
+                <span class="nhsuk-details__summary-text">
+                  Filter by status
+                </span>
+              </summary>
+              <div class="nhsuk-details__text">
+                <p>Select all status you want to filter the credit notes by.</p>
+                <div class="nhsuk-checkboxes">
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="to-review" name="credit-note-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="to-review">
+                      To review
+                    </label>
+                  </div>
+            
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="in-progress" name="credit-note-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="in-progress">
+                      In progress
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="sent-to-dh" name="credit-note-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="sent-to-dh">
+                      Sent to DH
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="sent-to-ms" name="credit-note-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="sent-to-ms">
+                      Sent to MS
+                    </label>
+                  </div>
+        
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="complete" name="credit-note-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="complete">
+                      Complete
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="print-failed" name="credit-note-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="print-failed">
+                      Print failed
+                    </label>
+                  </div>
+
+                  <div class="nhsuk-checkboxes__item">
+                    <input class="nhsuk-checkboxes__input" id="ready-to-send" name="credit-note-status" type="checkbox">
+                    <label class="nhsuk-label nhsuk-checkboxes__label" for="ready-to-send">
+                      Ready to send
+                    </label>
+                  </div>
+            
+                </div>
+                <br>
+                <a href="#"><button  class="nhsuk-button" type="submit">
+                  Apply
+                </button></a>
+              </div>
+            </details>
+        
+            
+            <!-- TABLE START -->
+            <table role="table" class="nhsuk-table-responsive" id="creditNotesTable">
+              <thead class="nhsuk-table__head">
+                <tr class="nhsuk-table__row">
+                  <th scope="col" class="nhsuk-table__header">Credit note ID</th>
+                  <th scope="col" class="nhsuk-table__header">Assigned to</th>
+                  <th scope="col" class="nhsuk-table__header">Assign to me</th>
+                  <th scope="col" class="nhsuk-table__header">Status</th>
+                  <th scope="col" class="nhsuk-table__header">Action</th>
+                </tr>
+              </thead>
+
+              <tbody class="nhsuk-table__body">
+                <tr class="nhsuk-table__row">
+                  <td class="nhsuk-table__cell" data-label="Credit ID">8191113</td>
+                  <td class="nhsuk-table__cell" data-label="Assigned to">
+                    {% if data.creditNoteStatus == 'treatments-added-to-credit-note' or data.creditNoteStatus == 'credit-note-sent-to-ms' or data.creditNoteStatus == 'credit-note-sent-to-dh' or data.creditNoteStatus == 'credit-note-completed' %}
+                      joe.bloggs@nhsbsa.nhs.uk
+                    {% else %}
+                      -
+                    {% endif %}
+                  </td>
+
+                  <td class="nhsuk-table__cell" data-label="Assign to me">
+                    <a href="credit-notes?assigned-to-another-co=yes">Assign</a>
+                  </td>
+
+
+                  <td class="nhsuk-table__cell" data-label="Status">
+                    {% if data.creditNoteStatus == 'credit-note-completed' %}
+                      <strong class="nhsuk-tag nhsuk-tag--purple">Complete</strong>
+                    {% elif data.creditNoteStatus == 'credit-note-sent-to-ms' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">Sent to MS</strong>
+                    {% elif data.creditNoteStatus == 'credit-note-sent-to-dh' %}
+                      <strong class="nhsuk-tag nhsuk-tag--green">Sent to DH</strong>
+                    {% else %}
+                      <strong class="nhsuk-tag nhsuk-tag--grey">To review</strong>
+                    {% endif %}
+                  </td>
+
+                  <td class="nhsuk-table__cell" data-label="Action">
+                    {% if data.creditNoteStatus == 'credit-note-completed' %}
+                      <a href="treatments-within-credit-note">View treatments</a>
+                    {% elif data.creditNoteStatus == 'credit-note-sent-to-ms' %}
+                      <a href="treatments-within-credit-note">View treatments</a>
+                    {% elif data.creditNoteStatus == 'credit-note-sent-to-dh' %}
+                      <a href="treatments-within-credit-note">View treatments</a>
+                    {% else %}
+                      <a href="treatments-within-credit-note">View treatments</a>
+                    {% endif %}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- TABLE END -->
+            {% else %}
+              <p><b>No credit notes have been created.</b></p>
+            {% endif %}
+            
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

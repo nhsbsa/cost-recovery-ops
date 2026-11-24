@@ -1,0 +1,73 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout-sidebar.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Quota number - Manage overseas entitlements and treatments
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<div class="app-phase-banner">
+  <div class="nhsuk-width-container app-phase-banner__container">
+    <p class="app-phase-banner__content">
+      <strong class="nhsuk-tag app-phase-banner__tag"> Beta </strong>
+      <span class="app-phase-banner__text">
+        This is a new service - your
+        <a href="#" target="_blank" id="feedback-form-beta" rel="noopener noreferrer" for="feedback-form">
+            feedback
+            <span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span>
+        </a>
+        will help us improve it.
+      </span>
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsuk-width-container">
+  <div class="nhsuk-main-wrapper">
+            
+    {{ backLink({
+      "href": "javascript:history.go(-1)",
+      "text": "Go back",
+      "classes": "nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-4"
+    }) }}
+ 
+    <span class="nhsuk-caption-l">Non-EU Reciprocal Healthcare (Quota) agreement details</span>
+      <h1 class="nhsuk-heading-l">What is the Quota number for this patient?</h1>
+
+          <form action="enter-quota-number" method="post" novalidate>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+              <div class="nhsuk-input-wrapper">
+                <input class="nhsuk-input nhsuk-input--width-20" id="quota-number" name="quota-number" type="text" spellcheck="false">
+              </div>
+
+              <button class="nhsuk-button nhsuk-u-margin-top-4" type="submit">
+                Continue
+              </button>
+
+           
+              <p class="nhsuk-u-margin-bottom-7"><a href="../non-eu-reciprocal-healthcare/home">Cancel</a></p>
+
+            </div>
+          </div>
+
+          </form>
+   
+  </div>
+</div>
+{% endblock %}
+
