@@ -1,0 +1,232 @@
+
+{% extends 'layout-sidebar.html' %}
+
+{% block pageTitle %}
+Check your answers before adding this treatment to the S085 credit note
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+
+{# Default to Charlie when viewing the page directly in the prototype #}
+{% set treatment = data['credit-note-treatment'] or 'Charlie' %}
+
+{# Retrieve answers saved against this treatment #}
+{% set treatmentDetails = (data.creditedTreatmentDetails or {})[treatment] or {} %}
+
+{# Retrieve the partial credit answers #}
+{% set partialCredit = treatmentDetails['partially-credit-treatment-cost'] or 'No' %}
+{% set fullPeriod = treatmentDetails['credit-full-treatment-period'] or 'No' %}
+
+{# Treatment-specific current details #}
+{% if treatment == 'Charlie' %}
+  {% set currentStartDate = '01/03/2025' %}
+  {% set currentEndDate = '05/03/2025' %}
+  {% set currentCost = '300.00' %}
+
+{% elif treatment == 'Joel' %}
+  {% set currentStartDate = '01/03/2025' %}
+  {% set currentEndDate = '05/03/2025' %}
+  {% set currentCost = '499.00' %}
+
+{% elif treatment == 'Elijah' %}
+  {% set currentStartDate = '01/03/2025' %}
+  {% set currentEndDate = '05/03/2025' %}
+  {% set currentCost = '55.00' %}
+{% endif %}
+
+{# Determine the cost being credited #}
+{% if partialCredit == 'Yes' %}
+  {% set costToCredit = treatmentDetails['treatment-cost-to-credit'] or '30.00' %}
+{% else %}
+  {% set costToCredit = currentCost %}
+{% endif %}
+
+{# Reason for crediting the treatment cost #}
+{% set reason = treatmentDetails['reason-for-crediting-treatment'] or 'Reason for crediting treatment cost provided here.' %}
+
+{# Treatment period entered by the user, with prototype defaults #}
+{% set startDay = treatmentDetails['treatment-start-date-to-credit-day'] or '01' %}
+{% set startMonth = treatmentDetails['treatment-start-date-to-credit-month'] or '03' %}
+{% set startYear = treatmentDetails['treatment-start-date-to-credit-year'] or '2025' %}
+
+{% set endDay = treatmentDetails['treatment-end-date-to-credit-day'] or '05' %}
+{% set endMonth = treatmentDetails['treatment-end-date-to-credit-month'] or '03' %}
+{% set endYear = treatmentDetails['treatment-end-date-to-credit-year'] or '2025' %}
+
+{# Determine which treatment dates should be displayed #}
+{% if partialCredit == 'No' or fullPeriod == 'Yes' %}
+
+  {# Use the original treatment dates when crediting the full treatment #}
+  {% set creditedStartDate = currentStartDate %}
+  {% set creditedEndDate = currentEndDate %}
+
+{% else %}
+
+  {# Format the dates entered by the user #}
+  {% set startDay = startDay | int %}
+  {% set startMonth = startMonth | int %}
+  {% set endDay = endDay | int %}
+  {% set endMonth = endMonth | int %}
+
+  {% if startDay < 10 %}
+    {% set startDay = '0' ~ startDay %}
+  {% endif %}
+
+  {% if startMonth < 10 %}
+    {% set startMonth = '0' ~ startMonth %}
+  {% endif %}
+
+  {% if endDay < 10 %}
+    {% set endDay = '0' ~ endDay %}
+  {% endif %}
+
+  {% if endMonth < 10 %}
+    {% set endMonth = '0' ~ endMonth %}
+  {% endif %}
+
+  {% set creditedStartDate = startDay ~ '/' ~ startMonth ~ '/' ~ startYear %}
+  {% set creditedEndDate = endDay ~ '/' ~ endMonth ~ '/' ~ endYear %}
+
+{% endif %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          {{ backLink({
+            "href": "javascript:history.go(-1)",
+            "text": "Go back",
+            "classes": "nhsuk-u-margin-bottom-4"
+          }) }}
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+              <h1 class="nhsuk-heading-xl">
+                Check your answers before adding this treatment to the S085 credit note
+              </h1>
+              <p>Check the details for {{ treatment }} before continuing.</p>
+            </div>
+          </div>
+
+          <form action="cya-credit-treatment-cost" method="post">
+
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+
+                <h2 class="nhsuk-heading-m">Current treatment details</h2>
+
+                <dl class="nhsuk-summary-list">
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Current treatment start date</dt>
+                    <dd class="nhsuk-summary-list__value">{{ currentStartDate }}</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Current treatment end date</dt>
+                    <dd class="nhsuk-summary-list__value">{{ currentEndDate }}</dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Current treatment cost (£)</dt>
+                    <dd class="nhsuk-summary-list__value">{{ currentCost }}</dd>
+                  </div>
+                </dl>
+
+                <h2 class="nhsuk-heading-m">Credit details</h2>
+
+                <dl class="nhsuk-summary-list">
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Partial credit of treatment cost</dt>
+                    <dd class="nhsuk-summary-list__value">{{ partialCredit }}</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="partially-credit-treatment-cost">
+                        Change<span class="nhsuk-u-visually-hidden"> partial credit of treatment cost</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  {% if partialCredit == 'Yes' %}
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">Credit treatment period in full</dt>
+                      <dd class="nhsuk-summary-list__value">{{ fullPeriod }}</dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="credit-full-treatment-period">
+                          Change<span class="nhsuk-u-visually-hidden"> credit treatment period in full</span>
+                        </a>
+                      </dd>
+                    </div>
+                  {% endif %}
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Start date of treatment to be credited</dt>
+                    <dd class="nhsuk-summary-list__value">{{ creditedStartDate }}</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      {% if partialCredit == 'Yes' and fullPeriod == 'Yes' %}
+                        <a href="credit-full-treatment-period">
+                      {% else %}
+                        <a href="enter-treatment-period-to-credit#treatment-start-date-to-credit-day">
+                      {% endif %}
+                        Change<span class="nhsuk-u-visually-hidden"> start date of treatment to be credited</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">End date of treatment to be credited</dt>
+                    <dd class="nhsuk-summary-list__value">{{ creditedEndDate }}</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      {% if partialCredit == 'Yes' and fullPeriod == 'Yes' %}
+                        <a href="credit-full-treatment-period">
+                      {% else %}
+                        <a href="enter-treatment-period-to-credit#treatment-end-date-to-credit-day">
+                      {% endif %}
+                        Change<span class="nhsuk-u-visually-hidden"> end date of treatment to be credited</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Treatment cost to be credited (£)</dt>
+                    <dd class="nhsuk-summary-list__value">{{ costToCredit }}</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="enter-treatment-cost-to-credit#treatment-cost-to-credit">
+                        Change<span class="nhsuk-u-visually-hidden"> treatment cost to be credited</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                  <div class="nhsuk-summary-list__row">
+                    <dt class="nhsuk-summary-list__key">Reason for crediting treatment cost</dt>
+                    <dd class="nhsuk-summary-list__value">{{ reason }}</dd>
+                    <dd class="nhsuk-summary-list__actions">
+                      <a href="reason-for-crediting-treatment#reason-for-crediting-treatment">
+                        Change<span class="nhsuk-u-visually-hidden"> reason for crediting treatment cost</span>
+                      </a>
+                    </dd>
+                  </div>
+
+                </dl>
+              </div>
+            </div>
+
+            <button class="nhsuk-button nhsuk-button--primary" type="submit" id="submit-button">
+              Save and continue
+            </button>
+
+            <p><a href="credit-note-treatment">Cancel</a></p>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

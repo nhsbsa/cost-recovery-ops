@@ -1125,6 +1125,28 @@ router.post('/cancel-updating-ovms-details', function (req, res) {
 
 //////////////////////////////
 
+// Treatment IDs used in credit note notifications
+const creditNoteTreatmentIds = {
+  Charlie: '559015570',
+  Joel: '559015572',
+  Elijah: '559015577'
+};
+
+// Save a notification for an individual treatment status change
+function setTreatmentStatusNotification(req, treatmentName, status) {
+
+  const treatmentId = creditNoteTreatmentIds[treatmentName];
+
+  req.session.data.treatmentStatuses =
+    req.session.data.treatmentStatuses || {};
+
+  req.session.data.treatmentStatuses[treatmentName] = status;
+
+  req.session.data.creditNoteNotification = {
+    status: status,
+    message: `Treatment ${treatmentId} marked as ${status.toLowerCase()}`
+  };
+}
 
 // Add treatments to credit note
 router.post([/add-treatments-to-credit-note/], function(req, res) {
@@ -1137,19 +1159,14 @@ router.post([/add-treatments-to-credit-note/], function(req, res) {
   res.redirect('/version-48/uk-claims/actual-costs/check-treatments-added-to-credit-note');
 });
 
-
+// Check treatments added to credit note
 router.post([/check-treatments-added-to-credit-note/], function(req, res) {
-  const selectedTreatments = req.body.selectedTreatments || []; // this is an array of selected IDs
 
-  // Save them into the session
-  req.session.data.selectedTreatments = selectedTreatments;
+  // Confirm credit note created with treatments added
+  req.session.data['credit-note-created'] = 'yes';
 
-  // Optional: Set other status flags
-  req.session.data['add-treatments-to-credit-note'] = 'yes';
   req.session.data.creditNoteStatus = 'treatments-added-to-credit-note';
-  req.session.data.updateCreditNoteSummary = true;
 
-  // Redirect to Credit Notes tab
   res.redirect('/version-48/uk-claims/actual-costs/credit-notes');
 });
 
@@ -1161,44 +1178,306 @@ router.get([/credit-notes/], function(req, res) {
     data['create-new-credit-note'] = req.query['create-new-credit-note'];
   }
 
-  const existingStatus = data.resubStatus || '';
+  // Check whether a new credit note has been created
+  const creditNoteCreated = req.session.data['credit-note-created'] === 'yes';
 
-  const statusPriority = [
-    'treatments-added-to-credit-note',
-    'credit-note-sent-to-ms',
-    'credit-note-completed'
-  ];
-
-  const currentIndex = statusPriority.indexOf(existingStatus);
-  let desiredStatus = existingStatus;
+  // Determine credit note status
+  let desiredStatus = data.creditNoteStatus || '';
 
   // --- Date checks ---
   const msDateEntered = data['date-credit-note-sent-to-ms'];
 
   if (msDateEntered) {
-    if (statusPriority.indexOf('credit-note-sent-to-ms') > currentIndex) {
-      desiredStatus = 'credit-note-sent-to-ms';
-    }
-  }
-
-  // --- Treatment review checks ---
-  const statuses = data.treatmentStatuses || {};
-  const treatmentList = ['Jane'];
-
-  const allReviewed = Object.keys(statuses).length === treatmentList.length &&
-                      Object.values(statuses).every(status => status !== '');
-
-  if (allReviewed) {
-    if (statusPriority.indexOf('ready-to-generate-s085') > statusPriority.indexOf(desiredStatus)) {
-      desiredStatus = 'ready-to-generate-s085';
-    }
+    desiredStatus = 'credit-note-sent-to-ms';
   }
 
   // --- Final save ---
-  data.resubStatus = desiredStatus;
+  data.creditNoteStatus = desiredStatus;
 
   res.render('version-48/uk-claims/actual-costs/credit-notes', {
-    data
+    data,
+    creditNoteCreated
   });
+});
+
+// View the treatments included in the credit note
+router.get([/credit-note-treatment/], function (req, res) {
+
+  req.session.data['credit-note-treatment'] =
+    req.query['credit-note-treatment'];
+
+  res.render('version-48/uk-claims/actual-costs/credit-note-treatment', {
+    data: req.session.data
+  });
+
+});
+
+
+// Do you want to partially credit the treatment cost?
+router.post([/partially-credit-treatment-cost/], function (req, res) {
+  const data = req.session.data;
+  const treatmentName = data['credit-note-treatment'] || 'Charlie';
+
+  data.creditedTreatmentDetails = data.creditedTreatmentDetails || {};
+  data.creditedTreatmentDetails[treatmentName] =
+    data.creditedTreatmentDetails[treatmentName] || {};
+
+  const treatmentDetails = data.creditedTreatmentDetails[treatmentName];
+
+  treatmentDetails['partially-credit-treatment-cost'] =
+    req.body['partially-credit-treatment-cost'];
+
+  // Retain the selected value in the existing session field
+  data['partially-credit-treatment-cost'] =
+    req.body['partially-credit-treatment-cost'];
+
+  if (treatmentDetails['partially-credit-treatment-cost'] === 'Yes') {
+    res.redirect('/version-48/uk-claims/actual-costs/credit-full-treatment-period');
+  } else {
+    res.redirect('/version-48/uk-claims/actual-costs/reason-for-crediting-treatment');
+  }
+});
+
+
+// Do you want to credit the treatment period in full?
+router.post([/credit-full-treatment-period/], function (req, res) {
+  const data = req.session.data;
+  const treatmentName = data['credit-note-treatment'] || 'Charlie';
+
+  data.creditedTreatmentDetails = data.creditedTreatmentDetails || {};
+  data.creditedTreatmentDetails[treatmentName] =
+    data.creditedTreatmentDetails[treatmentName] || {};
+
+  const treatmentDetails = data.creditedTreatmentDetails[treatmentName];
+
+  treatmentDetails['credit-full-treatment-period'] =
+    req.body['credit-full-treatment-period'];
+
+  data['credit-full-treatment-period'] =
+    req.body['credit-full-treatment-period'];
+
+  if (treatmentDetails['credit-full-treatment-period'] === 'Yes') {
+
+    // Use the original treatment period when crediting the full period
+    if (treatmentName === 'Charlie') {
+      treatmentDetails['treatment-start-date-to-credit-day'] = '01';
+      treatmentDetails['treatment-start-date-to-credit-month'] = '03';
+      treatmentDetails['treatment-start-date-to-credit-year'] = '2025';
+      treatmentDetails['treatment-end-date-to-credit-day'] = '05';
+      treatmentDetails['treatment-end-date-to-credit-month'] = '03';
+      treatmentDetails['treatment-end-date-to-credit-year'] = '2025';
+    } else if (treatmentName === 'Joel') {
+      treatmentDetails['treatment-start-date-to-credit-day'] = '01';
+      treatmentDetails['treatment-start-date-to-credit-month'] = '03';
+      treatmentDetails['treatment-start-date-to-credit-year'] = '2025';
+      treatmentDetails['treatment-end-date-to-credit-day'] = '05';
+      treatmentDetails['treatment-end-date-to-credit-month'] = '03';
+      treatmentDetails['treatment-end-date-to-credit-year'] = '2025';
+    } else {
+      treatmentDetails['treatment-start-date-to-credit-day'] = '01';
+      treatmentDetails['treatment-start-date-to-credit-month'] = '03';
+      treatmentDetails['treatment-start-date-to-credit-year'] = '2025';
+      treatmentDetails['treatment-end-date-to-credit-day'] = '05';
+      treatmentDetails['treatment-end-date-to-credit-month'] = '03';
+      treatmentDetails['treatment-end-date-to-credit-year'] = '2025';
+    }
+
+    res.redirect('/version-48/uk-claims/actual-costs/enter-treatment-cost-to-credit');
+
+  } else {
+    res.redirect('/version-48/uk-claims/actual-costs/enter-treatment-period-to-credit');
+  }
+});
+
+
+// Enter the treatment period to credit
+router.post([/enter-treatment-period-to-credit/], function (req, res) {
+  const data = req.session.data;
+  const treatmentName = data['credit-note-treatment'] || 'Charlie';
+
+  data.creditedTreatmentDetails = data.creditedTreatmentDetails || {};
+  data.creditedTreatmentDetails[treatmentName] =
+    data.creditedTreatmentDetails[treatmentName] || {};
+
+  const treatmentDetails = data.creditedTreatmentDetails[treatmentName];
+
+  // Save the start date using the existing field names
+  treatmentDetails['treatment-start-date-to-credit-day'] =
+    req.body['treatment-start-date-to-credit-day'];
+
+  treatmentDetails['treatment-start-date-to-credit-month'] =
+    req.body['treatment-start-date-to-credit-month'];
+
+  treatmentDetails['treatment-start-date-to-credit-year'] =
+    req.body['treatment-start-date-to-credit-year'];
+
+  // Save the end date using the existing field names
+  treatmentDetails['treatment-end-date-to-credit-day'] =
+    req.body['treatment-end-date-to-credit-day'];
+
+  treatmentDetails['treatment-end-date-to-credit-month'] =
+    req.body['treatment-end-date-to-credit-month'];
+
+  treatmentDetails['treatment-end-date-to-credit-year'] =
+    req.body['treatment-end-date-to-credit-year'];
+
+  // Retain the existing session fields for compatibility
+  data['treatment-start-date-to-credit-day'] =
+    req.body['treatment-start-date-to-credit-day'];
+
+  data['treatment-start-date-to-credit-month'] =
+    req.body['treatment-start-date-to-credit-month'];
+
+  data['treatment-start-date-to-credit-year'] =
+    req.body['treatment-start-date-to-credit-year'];
+
+  data['treatment-end-date-to-credit-day'] =
+    req.body['treatment-end-date-to-credit-day'];
+
+  data['treatment-end-date-to-credit-month'] =
+    req.body['treatment-end-date-to-credit-month'];
+
+  data['treatment-end-date-to-credit-year'] =
+    req.body['treatment-end-date-to-credit-year'];
+
+  res.redirect('/version-48/uk-claims/actual-costs/enter-treatment-cost-to-credit');
+});
+
+
+// Enter the treatment cost to credit
+router.post([/enter-treatment-cost-to-credit/], function (req, res) {
+  const data = req.session.data;
+  const treatmentName = data['credit-note-treatment'] || 'Charlie';
+
+  const rawCost = String(req.body['treatment-cost-to-credit'] || '')
+    .replace(/[£,]/g, '');
+
+  const numericCost = parseFloat(rawCost);
+
+  const formattedCost = Number.isFinite(numericCost)
+    ? numericCost.toFixed(2)
+    : '0.00';
+
+  data.creditedTreatmentDetails = data.creditedTreatmentDetails || {};
+  data.creditedTreatmentDetails[treatmentName] =
+    data.creditedTreatmentDetails[treatmentName] || {};
+
+  data.creditedTreatmentDetails[treatmentName]['treatment-cost-to-credit'] =
+    formattedCost;
+
+  // Retain the original field name
+  data['treatment-cost-to-credit'] = formattedCost;
+
+  res.redirect('/version-48/uk-claims/actual-costs/reason-for-crediting-treatment');
+});
+
+
+// Enter the reason for crediting the treatment cost
+router.post([/reason-for-crediting-treatment/], function (req, res) {
+  const data = req.session.data;
+  const treatmentName = data['credit-note-treatment'] || 'Charlie';
+
+  data.creditedTreatmentDetails = data.creditedTreatmentDetails || {};
+  data.creditedTreatmentDetails[treatmentName] =
+    data.creditedTreatmentDetails[treatmentName] || {};
+
+  data.creditedTreatmentDetails[treatmentName]['reason-for-crediting-treatment'] =
+    req.body['reason-for-crediting-treatment'];
+
+  // Retain the original field name
+  data['reason-for-crediting-treatment'] =
+    req.body['reason-for-crediting-treatment'];
+
+  res.redirect('/version-48/uk-claims/actual-costs/cya-credit-treatment-cost');
+});
+
+
+// Pull through the input data onto the CYA screen
+router.get([/cya-credit-treatment-cost/], function (req, res) {
+  const data = req.session.data;
+  const treatmentName = data['credit-note-treatment'] || 'Charlie';
+
+  data.creditedTreatmentDetails = data.creditedTreatmentDetails || {};
+  data.creditedTreatmentDetails[treatmentName] =
+    data.creditedTreatmentDetails[treatmentName] || {};
+
+  res.render('version-48/uk-claims/actual-costs/cya-credit-treatment-cost', {
+    data: data
+  });
+});
+
+
+// Check your answers before crediting the treatment cost
+router.post([/cya-credit-treatment-cost/], function (req, res) {
+  const data = req.session.data;
+  const treatmentName = data['credit-note-treatment'] || 'Charlie';
+
+  const treatmentDetails =
+    data.creditedTreatmentDetails &&
+    data.creditedTreatmentDetails[treatmentName];
+
+  // Read the credited amount from the selected treatment
+  const rawCost = String(
+    treatmentDetails &&
+    treatmentDetails['treatment-cost-to-credit'] || '0'
+  ).replace(/[£,]/g, '');
+
+  const creditedAmount = parseFloat(rawCost);
+
+  data.treatmentStatuses = data.treatmentStatuses || {};
+  data.creditedAmounts = data.creditedAmounts || {};
+
+  // Save the credited amount against the individual treatment
+  data.creditedAmounts[treatmentName] = Number.isFinite(creditedAmount)
+    ? creditedAmount
+    : 0;
+
+  // Save the individual treatment status and create its notification
+  setTreatmentStatusNotification(req, treatmentName, 'Credited');
+
+  res.redirect('/version-48/uk-claims/actual-costs/treatments-within-credit-note');
+});
+
+
+// Treatments included in credit note
+router.get([/treatments-within-credit-note/], function (req, res) {
+  const data = req.session.data;
+  const notification = data.creditNoteNotification;
+
+  delete data.creditNoteNotification;
+
+  res.render('version-48/uk-claims/actual-costs/treatments-within-credit-note', {
+    data,
+    notification
+  });
+});
+
+// Generate S085
+router.post([/generate-s085/], function (req, res) {
+
+  const data = req.session.data;
+
+  // Check all three treatments have been credited
+  const allTreatmentsCredited =
+    data.treatmentStatuses &&
+    data.treatmentStatuses['Charlie'] === 'Credited' &&
+    data.treatmentStatuses['Joel'] === 'Credited' &&
+    data.treatmentStatuses['Elijah'] === 'Credited';
+
+  if (allTreatmentsCredited) {
+
+    // Record that S085 has been generated
+    data['s085-generated'] = 'Yes';
+
+    // Set success notification
+    data.creditNoteNotification = {
+      status: 'S085 generated',
+      message: 'S085 generated'
+    };
+
+  }
+
+  res.redirect('/version-48/uk-claims/actual-costs/treatments-within-credit-note');
+
 });
 module.exports = router;

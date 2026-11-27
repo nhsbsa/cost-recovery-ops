@@ -76,16 +76,19 @@ Confirm you want to add these invoices to the credit note (S085)
               
                 <div class="nhsuk-grid-column-one-third" style="display: flex; justify-content: flex-end; align-items: flex-start;">
                   <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                    <form action="credit-notes" method="post">
+
+                    <form action="check-treatments-added-to-credit-note" method="post">
                       <button class="nhsuk-button nhsuk-button--primary" type="submit" id="confirm-button">
                         Confirm
                       </button>
                     </form>
+
                     <a href="/version-48/uk-claims/actual-costs/add-treatments-to-credit-note">
                       <button class="nhsuk-button nhsuk-button--secondary" type="button" id="add-more-invoices-button">
                         Add more treatments
                       </button>
                     </a>
+
                   </div>
                 </div>
               </div>
@@ -93,29 +96,28 @@ Confirm you want to add these invoices to the credit note (S085)
               
               
              
-              <p style="margin-top: 20px;"><b>Current cost total: <span id="valuesTotal">0</span></b></p>
-              <p style="margin-top: -10px;"><b>Treatments added: <span id="treatmentsTotal">0</span></p></b>
-              
-              
-              
+              <p style="margin-top: 20px;">
+                This credit note will contain <b><span id="treatmentsTotal">0</span></b> treatments totalling <b><span id="valuesTotal">£0.00</span></b>.
+              </p>
 
-                <div class="nhsuk-form-group" id="treatments-section">
-                  <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
-                    <thead role="rowgroup" class="nhsuk-table__head" id="treatments">
-                      <tr role="row">
-                        <th role="columnheader" scope="col">Treatment ID<br>(Invoice ID)</th>
-                        <th role="columnheader" scope="col">First name</th>
-                        <th role="columnheader" scope="col">Last name</th>
-                        <th role="columnheader" scope="col">Entitlement</th>
-                        <th role="columnheader" scope="col">Initial cost (£)</th>
-                        <th role="columnheader" scope="col">Current cost (£) </th>
-                        <th role="columnheader" scope="col">Agreement</th>
-                        <th role="columnheader" scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody class="nhsuk-table__body"></tbody>
-                  </table>
-                </div>
+              <div class="nhsuk-form-group" id="treatments-section">
+                <table role="table" id="reviewTreatmentsTable" class="nhsuk-table-responsive">
+                  <thead role="rowgroup" class="nhsuk-table__head">
+                    <tr role="row">
+                      <th role="columnheader" scope="col">Treatment ID<br>(Invoice ID)</th>
+                      <th role="columnheader" scope="col">First name</th>
+                      <th role="columnheader" scope="col">Last name</th>
+                      <th role="columnheader" scope="col">Entitlement</th>
+                      <th role="columnheader" scope="col">Initial cost (£)</th>
+                      <th role="columnheader" scope="col">Current cost (£)</th>
+                      <th role="columnheader" scope="col">Agreement</th>
+                      <th role="columnheader" scope="col">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody class="nhsuk-table__body" id="reviewTreatmentsBody"></tbody>
+                </table>
+              </div>
 
               
               
@@ -131,8 +133,9 @@ Confirm you want to add these invoices to the credit note (S085)
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+
   const addMoreTreatmentsBtn = document.getElementById("add-more-treatments-button");
-  const tbody = document.querySelector(".nhsuk-table__body");
+  const tbody = document.getElementById("reviewTreatmentsBody");
   const treatmentsSection = document.getElementById("treatments-section");
   const noTreatmentsMessage = document.getElementById("no-treatments-message");
   const confirmButton = document.getElementById("confirm-button");
@@ -140,29 +143,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const valuesTotalEl = document.getElementById("valuesTotal");
   const pagination = document.getElementById("pagination");
 
-  // Load from sessionStorage
-  let selectedTreatments = JSON.parse(sessionStorage.getItem("selectedTreatments")) || [];
+  // Load selected treatments from sessionStorage
+  let selectedTreatments = JSON.parse(
+    sessionStorage.getItem("selectedTreatments")
+  ) || [];
 
-  // --- Utility: total current cost ---
+  // Calculate current cost
   function getValueCount(treatment) {
-    return parseFloat(treatment.currentCost || 0);
+  return parseFloat(treatment.initialCost) || 0;
   }
 
-  // --- Helper: escape HTML ---
-  function escapeHtml(s) {
-    if (s === undefined || s === null) return "";
-    return String(s).replace(/[&<>"']/g, function (m) {
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+  // Escape HTML
+  function escapeHtml(value) {
+    if (value === undefined || value === null) return "";
+
+    return String(value).replace(/[&<>"']/g, function (m) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[m];
     });
   }
 
-  // --- Render treatments ---
+  // Render selected treatments
   function renderTreatments() {
+
     if (!tbody) return;
 
     tbody.innerHTML = "";
 
     if (!selectedTreatments.length) {
+
       if (treatmentsSection) treatmentsSection.style.display = "none";
       if (pagination) pagination.style.display = "none";
       if (noTreatmentsMessage) noTreatmentsMessage.style.display = "block";
@@ -194,21 +208,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let totalValues = 0;
 
-    selectedTreatments.forEach(treatment => {
+    selectedTreatments.forEach(function (treatment) {
+
       const tr = document.createElement("tr");
+
+      tr.className = "nhsuk-table__row";
       tr.dataset.id = treatment.id;
 
       tr.innerHTML = `
-        <td>${escapeHtml(treatment.id)}</td>
-        <td>${escapeHtml(treatment.firstName)}</td>
-        <td>${escapeHtml(treatment.lastName)}</td>
-        <td>${escapeHtml(treatment.entitlement)}</td>
-        <td>${escapeHtml(treatment.initialCost)}</td>
-        <td>${escapeHtml(treatment.currentCost)}</td>
-        <td>${escapeHtml(treatment.agreement)}</td>
-        <td>
-          <a href="#" class="nhsuk-link remove-treatment" data-id="${escapeHtml(treatment.id)}">
+        <td role="cell" class="nhsuk-table__cell">
+          <span class="nhsuk-table-responsive__heading">
+            Treatment ID (Invoice ID)
+          </span>
+          <span>
+            ${escapeHtml(treatment.id)}<br>
+            (${escapeHtml(treatment.invoiceId || '')})
+          </span>
+        </td>
+
+        <td role="cell" class="nhsuk-table__cell">
+          <span class="nhsuk-table-responsive__heading">First name</span>
+          <span>${escapeHtml(treatment.firstName)}</span>
+        </td>
+
+        <td role="cell" class="nhsuk-table__cell">
+          <span class="nhsuk-table-responsive__heading">Last name</span>
+          <span>${escapeHtml(treatment.lastName)}</span>
+        </td>
+
+        <td role="cell" class="nhsuk-table__cell">
+          <span class="nhsuk-table-responsive__heading">Entitlement</span>
+          <span>${escapeHtml(treatment.entitlement)}</span>
+        </td>
+
+        <td role="cell" class="nhsuk-table__cell">
+          <span class="nhsuk-table-responsive__heading">Initial cost (£)</span>
+          <span>${escapeHtml(treatment.initialCost)}</span>
+        </td>
+
+        <td role="cell" class="nhsuk-table__cell">
+          <span class="nhsuk-table-responsive__heading">Current cost (£)</span>
+          <span>${escapeHtml(treatment.currentCost)}</span>
+        </td>
+
+        <td role="cell" class="nhsuk-table__cell">
+          <span class="nhsuk-table-responsive__heading">Agreement</span>
+          <span>${escapeHtml(treatment.agreement)}</span>
+        </td>
+
+        <td role="cell" class="nhsuk-table__cell">
+          <span class="nhsuk-table-responsive__heading">Action</span>
+          <a href="#"
+             class="nhsuk-link remove-treatment"
+             data-id="${escapeHtml(treatment.id)}">
             Remove
+            <span class="nhsuk-u-visually-hidden">
+              ${escapeHtml(treatment.firstName)} ${escapeHtml(treatment.lastName)}
+            </span>
           </a>
         </td>
       `;
@@ -216,9 +272,10 @@ document.addEventListener("DOMContentLoaded", function () {
       tbody.appendChild(tr);
 
       totalValues += getValueCount(treatment);
+
     });
 
-    // Format as GBP
+    // Format total as GBP
     if (valuesTotalEl) {
       valuesTotalEl.textContent = totalValues.toLocaleString("en-GB", {
         style: "currency",
@@ -226,6 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
+    // Enable confirmation
     if (confirmButton) {
       confirmButton.disabled = false;
       confirmButton.classList.remove("nhsuk-button--disabled");
@@ -236,38 +294,60 @@ document.addEventListener("DOMContentLoaded", function () {
       addMoreTreatmentsBtn.classList.remove("nhsuk-button--primary");
       addMoreTreatmentsBtn.classList.add("nhsuk-button--secondary");
     }
+
   }
 
-  // --- Remove treatment ---
+  // Remove treatment
   if (tbody) {
+
     tbody.addEventListener("click", function (e) {
+
       const btn = e.target.closest(".remove-treatment");
+
       if (!btn) return;
 
-      e.preventDefault(); // 🔥 IMPORTANT FIX
+      e.preventDefault();
 
       const id = btn.dataset.id;
 
-      selectedTreatments = selectedTreatments.filter(t => String(t.id) !== String(id));
-      sessionStorage.setItem("selectedTreatments", JSON.stringify(selectedTreatments));
+      selectedTreatments = selectedTreatments.filter(
+        function (treatment) {
+          return String(treatment.id) !== String(id);
+        }
+      );
+
+      sessionStorage.setItem(
+        "selectedTreatments",
+        JSON.stringify(selectedTreatments)
+      );
 
       renderTreatments();
+
     });
+
   }
 
-  // --- Form safety ---
-  const form = document.querySelector('form[action="check-treatments-added-to-credit-note"]');
+  // Prevent submitting with no treatments
+  const form = document.querySelector(
+    'form[action="check-treatments-added-to-credit-note"]'
+  );
+
   if (form) {
+
     form.addEventListener("submit", function (e) {
+
       if (!selectedTreatments.length) {
         e.preventDefault();
         alert("You have removed all treatments. To continue, add treatments.");
       }
+
     });
+
   }
 
-  // --- Init ---
+  // Initial render
   renderTreatments();
+
 });
 </script>
 

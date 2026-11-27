@@ -1,0 +1,137 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /views/layout.html -->
+{% extends 'layout-sidebar.html' %}
+<!-- 
+  In /views/layout.html you can:
+    - change the header and footer 
+    - add custom CSS and JavaScript
+-->
+
+<!-- Set the page title inside the pageTitle block -->
+{% block pageTitle %}
+Credit note documents
+{% endblock %}
+
+<!-- Breadcrumb goes inside the beforeContent block -->
+{% block beforeContent %}
+<!--start breadcrumb-->
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="credit-notes">View Claim ID (Credit notes)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">View Credit Note ID (Credit note summary)</li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="uk-claims-search-results">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      Search results
+    </a>
+
+  </div>
+</nav>
+<!--end breadcrumb-->
+{% endblock %}
+
+<!-- Your page content goes inside the content block -->
+<!-- More info and code for the page layout can be found at https://beta.nhs.uk/service-manual/styles-components-patterns/layout -->
+{% block content %}
+<div class="nhsBSA-sidebar-container">
+    <div class="nhsBSA-sidebar-wrapper">
+      <div class="nhsBSA-sidebar-content">
+        <div class="nhsuk-width-container-fluid">
+          <div class="nhsuk-main-wrapper" id="maincontent">
+
+            
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <h1 class="nhsuk-heading-l" style="margin-bottom: 20px;">
+                  Claim ID 100005 - Credit note ID 8191113<br>
+                  Credit note documents
+                </h1>
+              </div>
+            </div>
+            
+            <form action="credit-note-documents" method="post">
+
+            
+            <nav class="nhsuk-secondary-navigation" aria-label="Primary navigation" style="background-color:#f0f4f5;">
+              <ul class="nhsuk-secondary-navigation__list">
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="treatments-within-credit-note">Treatments included</a>
+                    <span class="nhsuk-u-visually-hidden">View the treatments included in credit note 8191113</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="s087-contestations">S087 credit note contestations</a>
+                    <span class="nhsuk-u-visually-hidden">View the S087 credit note contestations within credit note 8191113</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" aria-current="page"href="credit-note-documents">Credit note documents</a>
+                    <span class="nhsuk-u-visually-hidden">View the documents within credit note 8191113</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="credit-note-summary">Credit note summary</a>
+                    <span class="nhsuk-u-visually-hidden">View the summary for credit note 8191113</span>
+                </li>
+
+                <li class="nhsuk-secondary-navigation__item">
+                  <a class="nhsuk-secondary-navigation__link" href="credit-note-history">Credit note history</a>
+                    <span class="nhsuk-u-visually-hidden">View the history of credit note 8191113</span>
+                </li>
+              </ul>
+            </nav>
+  
+            <hr style="border-bottom:1px solid #ccc; margin:0">
+            <!--end secondary navigation-->
+
+            <br><br>
+
+            <!-- start of documents list -->
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-two-thirds">
+              
+              <dl class="nhsuk-summary-list">
+                {% if data.creditNoteStatus in ['treatments-credited'] %}
+                <div class="nhsuk-summary-list__row">
+                   <dt class="nhsuk-summary-list__key" id="re-submission-letter">S085 XML file for RINA credit note</dt>
+                   <dd class="nhsuk-summary-list__actions">
+                      <a aria-label="View file to print or download S085 XML file" href="#" id="s085XML" target="_new">
+                         <span id="letter_print_text">View file to print or download</span>
+                      </a>
+                   </dd>
+                </div>
+                {% endif %}
+              </dl>
+
+
+            </div>
+          </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

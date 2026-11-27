@@ -1,0 +1,377 @@
+
+{% extends 'layout-sidebar.html' %}
+
+{% block pageTitle %}
+Credit note treatment details
+{% endblock %}
+
+{% block beforeContent %}
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+  <div class="nhsuk-width-container-fluid">
+    <div class="nhsuk-grid-row">
+      <div class="nhsuk-grid-column-full">
+        <ol class="nhsuk-breadcrumb__list">
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-actual-cost">UK claims (Actual cost search)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="../uk-claims-search-results-found">Search results</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="credit-notes">View Claim ID (Credit notes)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            <a class="nhsuk-breadcrumb__link" href="treatments-within-credit-note">View Credit Note ID (Treatments included)</a>
+          </li>
+          <li class="nhsuk-breadcrumb__list-item">
+            View details (Treatment details)
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <a class="nhsuk-back-link" href="treatments-within-credit-note">
+      <span class="nhsuk-u-visually-hidden">Back to </span>
+      View Credit note ID (Treatments included)
+    </a>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+{# Identify the selected treatment #}
+{% set treatment = data['credit-note-treatment'] or 'Charlie' %}
+
+{# Retrieve treatment-specific status and credit details #}
+{% set status = (data.treatmentStatuses or {})[treatment] %}
+{% set treatmentDetails = (data.creditedTreatmentDetails or {})[treatment] or {} %}
+
+{# Set the treatment-specific information #}
+{% if treatment == 'Charlie' %}
+
+  {% set firstName = 'Charlie' %}
+  {% set lastName = 'Brooks' %}
+  {% set treatmentId = '559015570' %}
+  {% set personRecordId = '28273618' %}
+  {% set personalIdentificationNumber = '34567890' %}
+  {% set initialCost = '300.00' %}
+
+{% elif treatment == 'Joel' %}
+
+  {% set firstName = 'Joel' %}
+  {% set lastName = 'Diaz' %}
+  {% set treatmentId = '559015572' %}
+  {% set personRecordId = '26283666' %}
+  {% set personalIdentificationNumber = '27738327' %}
+  {% set initialCost = '499.00' %}
+
+{% else %}
+
+  {% set firstName = 'Elijah' %}
+  {% set lastName = 'Hill' %}
+  {% set treatmentId = '559015577' %}
+  {% set personRecordId = '26283666' %}
+  {% set personalIdentificationNumber = '27294471' %}
+  {% set initialCost = '55.00' %}
+
+{% endif %}
+
+{# Original treatment dates #}
+{% set currentStartDate = '01/03/2025' %}
+{% set currentEndDate = '05/03/2025' %}
+
+{# Retrieve the crediting answers for this treatment #}
+{% set partialCredit = treatmentDetails['partially-credit-treatment-cost'] or 'No' %}
+{% set fullPeriod = treatmentDetails['credit-full-treatment-period'] or 'No' %}
+
+{# Determine the amount being credited #}
+{% if partialCredit == 'Yes' %}
+  {% set costToCredit = treatmentDetails['treatment-cost-to-credit'] or '30.00' %}
+{% else %}
+  {% set costToCredit = initialCost %}
+{% endif %}
+
+{# Retrieve the reason for crediting #}
+{% set reason = treatmentDetails['reason-for-crediting-treatment'] or 'Reason for crediting treatment cost explained here.' %}
+
+{# Retrieve the dates entered during the credit journey #}
+{% set startDay = treatmentDetails['treatment-start-date-to-credit-day'] or '01' %}
+{% set startMonth = treatmentDetails['treatment-start-date-to-credit-month'] or '03' %}
+{% set startYear = treatmentDetails['treatment-start-date-to-credit-year'] or '2025' %}
+
+{% set endDay = treatmentDetails['treatment-end-date-to-credit-day'] or '05' %}
+{% set endMonth = treatmentDetails['treatment-end-date-to-credit-month'] or '03' %}
+{% set endYear = treatmentDetails['treatment-end-date-to-credit-year'] or '2025' %}
+
+{# Determine the period being credited #}
+{% if partialCredit == 'No' or fullPeriod == 'Yes' %}
+
+  {% set creditedStartDate = currentStartDate %}
+  {% set creditedEndDate = currentEndDate %}
+
+{% else %}
+
+  {% set startDay = startDay | int %}
+  {% set startMonth = startMonth | int %}
+  {% set endDay = endDay | int %}
+  {% set endMonth = endMonth | int %}
+
+  {% if startDay < 10 %}
+    {% set startDay = '0' ~ startDay %}
+  {% endif %}
+
+  {% if startMonth < 10 %}
+    {% set startMonth = '0' ~ startMonth %}
+  {% endif %}
+
+  {% if endDay < 10 %}
+    {% set endDay = '0' ~ endDay %}
+  {% endif %}
+
+  {% if endMonth < 10 %}
+    {% set endMonth = '0' ~ endMonth %}
+  {% endif %}
+
+  {% set creditedStartDate = startDay ~ '/' ~ startMonth ~ '/' ~ startYear %}
+  {% set creditedEndDate = endDay ~ '/' ~ endMonth ~ '/' ~ endYear %}
+
+{% endif %}
+
+<div class="nhsBSA-sidebar-container">
+  <div class="nhsBSA-sidebar-wrapper">
+    <div class="nhsBSA-sidebar-content">
+      <div class="nhsuk-width-container-fluid">
+        <div class="nhsuk-main-wrapper" id="maincontent">
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+              <h1 class="nhsuk-heading-l">
+                Claim ID 100005 - Credit note ID 8191113<br>
+                Details of treatment ID {{ treatmentId }}
+              </h1>
+            </div>
+
+            <div class="nhsuk-grid-column-one-half" style="text-align: right;">
+              {% if not status %}
+                <div class="nhsuk-button-group" style="display: inline-flex;">
+                  <a href="partially-credit-treatment-cost" class="nhsuk-button nhsuk-button--secondary">
+                    Enter credit amount
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="nhsuk-grid-row">
+            <div class="nhsuk-grid-column-one-half">
+              <div class="nhsuk-card">
+                <div class="nhsuk-card__content">
+
+                  <dl class="nhsuk-summary-list">
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Person record ID
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {{ personRecordId }}
+                      </dd>
+                      <dd class="nhsuk-summary-list__actions">
+                        <a href="#">
+                          View<span class="nhsuk-u-visually-hidden"> person record</span>
+                        </a>
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        First name
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {{ firstName }}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Last name
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {{ lastName }}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Personal identification number
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {{ personalIdentificationNumber }}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Entitlement
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        EHIC-Article 62
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Country of claim
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        France (FR)
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Agreement type
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        TCA
+                      </dd>
+                    </div>
+
+                    {% if status %}
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Treatment status
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {{ status }}
+                        </dd>
+                      </div>
+                    {% endif %}
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Treatment start date
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {{ currentStartDate }}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Treatment end date
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {{ currentEndDate }}
+                      </dd>
+                    </div>
+
+                    <div class="nhsuk-summary-list__row">
+                      <dt class="nhsuk-summary-list__key">
+                        Initial cost (£)
+                      </dt>
+                      <dd class="nhsuk-summary-list__value">
+                        {{ initialCost }}
+                      </dd>
+                    </div>
+
+                    {% if status == 'Credited' %}
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Credited treatment start date
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {{ creditedStartDate }}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Credited treatment end date
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {{ creditedEndDate }}
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Credited treatment cost (£)
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          {{ costToCredit }}
+                        </dd>
+                      </div>
+
+                      {% if reason %}
+                        <div class="nhsuk-summary-list__row">
+                          <dt class="nhsuk-summary-list__key">
+                            Reason for crediting treatment cost
+                          </dt>
+                          <dd class="nhsuk-summary-list__value">
+                            {{ reason }}
+                          </dd>
+                        </div>
+                      {% endif %}
+
+                    {% endif %}
+
+                  </dl>
+
+                </div>
+              </div>
+            </div>
+
+            {% if data.treatmentStatus == 'contested' %}
+              <div class="nhsuk-grid-column-one-half">
+                <div class="nhsuk-card">
+                  <div class="nhsuk-card__content">
+
+                    <dl class="nhsuk-summary-list">
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Reason for contestation
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          X
+                        </dd>
+                      </div>
+
+                      <div class="nhsuk-summary-list__row">
+                        <dt class="nhsuk-summary-list__key">
+                          Contested cost (£)
+                        </dt>
+                        <dd class="nhsuk-summary-list__value">
+                          X
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <div class="button-container">
+                      <div class="action-buttons">
+                        <button class="nhsuk-button nhsuk-button--secondary" style="margin-top: 10px;" type="submit" id="acceptContestationButton" name="action" value="accept-contestation">
+                          Accept contestation
+                        </button>
+
+                        <button class="nhsuk-button nhsuk-button--secondary" style="margin-top: 10px;" type="submit" id="rejectContestationButton" name="action" value="reject-contestation">
+                          Reject contestation
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

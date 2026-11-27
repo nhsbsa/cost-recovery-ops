@@ -168,168 +168,124 @@ Select treatments to add to resubmission
           
 
          <!-- Start of Treatments table -->
-         <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
-          <thead role="rowgroup" class="nhsuk-table__head" id="treatments">
-            <tr role="row">
-              <th role="columnheader" class="" scope="col">
-                <a class="claim-clear-search-link select-all-link"
-                  href="#"
-                  id="select-all-link">
-                  <span>Select all<span class="nhsuk-u-visually-hidden">treatments listed</span></span>
-                </a>
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Treatment ID<br>(Invoice ID)
-              </th>
-              <th role="columnheader" class="" scope="col">
-                First name
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Last name
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Entitlement
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Initial cost (£)
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Current cost (£)
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Agreement
-              </th>
-              <th role="columnheader" class="" scope="col">
-                Action
-              </th>
-            </tr>
-          </thead>
+          <table role="table" id="treatmentsTable" class="nhsuk-table-responsive">
+            <thead role="rowgroup" class="nhsuk-table__head" id="treatments">
+              <tr role="row">
+                <th role="columnheader" scope="col">
+                  <a class="claim-clear-search-link select-all-link"
+                    href="#"
+                    id="select-all-link">
+                    <span>Select all<span class="nhsuk-u-visually-hidden"> treatments listed</span></span>
+                  </a>
+                </th>
+                <th role="columnheader" scope="col">
+                  Treatment ID<br>(Invoice ID)
+                </th>
+                <th role="columnheader" scope="col">First name</th>
+                <th role="columnheader" scope="col">Last name</th>
+                <th role="columnheader" scope="col">Entitlement</th>
+                <th role="columnheader" scope="col">Initial cost (£)</th>
+                <th role="columnheader" scope="col">Current cost (£)</th>
+                <th role="columnheader" scope="col">Agreement</th>
+                <th role="columnheader" scope="col">Action</th>
+              </tr>
+            </thead>
 
             <tbody class="nhsuk-table__body">
-              <tr role="row" class="nhsuk-table__row">
-                <td role="cell" class="nhsuk-table__cell">
-                  <fieldset class="nhsuk-fieldset">
-                    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden"><span class="nhsuk-u-visually-hidden">checkboxes</span></legend>
+
+              {% set treatments = [
+                { id: '559015575', invoice: '283838282', first: 'Barbara', last: 'Bennett', entitlement: 'EHIC', initial: '560.00', current: '560.00', agreement: 'TCA' },
+                { id: '559015570', invoice: '282839442', first: 'Charlie', last: 'Brooks', entitlement: 'EHIC', initial: '300.00', current: '300.00', agreement: 'TCA' },
+                { id: '559015567', invoice: '282831284', first: 'Aspyn', last: 'Davies', entitlement: 'EHIC', initial: '668.00', current: '668.00', agreement: 'TCA' },
+                { id: '559015572', invoice: '228291723', first: 'Joel', last: 'Diaz', entitlement: 'EHIC', initial: '499.00', current: '499.00', agreement: 'TCA' },
+                { id: '559015580', invoice: '227221729', first: 'Harry', last: 'Hernandez', entitlement: 'EHIC', initial: '802.00', current: '802.00', agreement: 'TCA' },
+                { id: '559015577', invoice: '219231700', first: 'Elijah', last: 'Hill', entitlement: 'EHIC', initial: '55.00', current: '55.00', agreement: 'TCA' },
+                { id: '559015566', invoice: '229279927', first: 'Sandra', last: 'Hughes', entitlement: 'EHIC', initial: '646.00', current: '646.00', agreement: 'TCA' },
+                { id: '559015578', invoice: '238282788', first: 'Scott', last: 'Hughes', entitlement: 'EHIC', initial: '182.00', current: '182.00', agreement: 'TCA' }
+              ] %}
+
+              {% for treatment in treatments %}
+                <tr role="row" class="nhsuk-table__row">
+                  <td role="cell" class="nhsuk-table__cell">
                     <div class="nhsuk-checkboxes">
-                        <div class="nhsuk-checkboxes__item ">
-                          <div>
-                            <input class="treatment-checkbox nhsuk-checkboxes__input"
-                            type="checkbox" onclick="hideBanner();"
-                            value="338223274"
-                            id="checkboxId_01"
-                            name="selectedTreatments"
-                            data-firstname="John"
-                            data-lastname="Doe"
-                            data-entitlement="EHIC"
-                            data-initialcost="200.00"
-                            data-currentcost="200.00"
-                            data-agreement="TCA">
-                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkboxId_01">
-                                <span class="nhsuk-u-visually-hidden">All checkboxes</span>
-                              </label>
-                          </div>
-                        </div>
+                      <div class="nhsuk-checkboxes__item">
+                        <input
+                          class="treatment-checkbox nhsuk-checkboxes__input"
+                          type="checkbox"
+                          onclick="hideBanner();"
+                          value="{{ treatment.id }}"
+                          id="checkboxId_{{ loop.index }}"
+                          name="selectedTreatments"
+                          data-invoiceid="{{ treatment.invoice }}"
+                          data-firstname="{{ treatment.first }}"
+                          data-lastname="{{ treatment.last }}"
+                          data-entitlement="{{ treatment.entitlement }}"
+                          data-initialcost="{{ treatment.initial }}"
+                          data-currentcost="{{ treatment.current }}"
+                          data-agreement="{{ treatment.agreement }}"
+                        >
+                        <label
+                          class="nhsuk-label nhsuk-checkboxes__label"
+                          for="checkboxId_{{ loop.index }}">
+                          <span class="nhsuk-u-visually-hidden">
+                            Select treatment {{ treatment.id }} for {{ treatment.first }} {{ treatment.last }}
+                          </span>
+                        </label>
+                      </div>
                     </div>
-                  </fieldset>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Treatment ID<br>(Invoice ID)</span>
-                  <span>338223274<br>
-                    (283838282)</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">First name</span>
-                  <span>John</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Last name</span>
-                  <span>Doe</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
-                  <span>EHIC</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Initial cost (£)</span>
-                  <span>200.00</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Current cost (£)</span>
-                  <span>200.00</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Agreement</span>
-                  <span>TCA</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Action</span>
-                  <span><a href="../s1/account/personal-details">View patient record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
-                </td>
-              </tr>
-    
-              <tr role="row" class="nhsuk-table__row">
-                <td role="cell" class="nhsuk-table__cell">
-                  <fieldset class="nhsuk-fieldset">
-                    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--s nhsuk-u-visually-hidden"><span class="nhsuk-u-visually-hidden">checkboxes</span></legend>
-                    <div class="nhsuk-checkboxes">
-                        <div class="nhsuk-checkboxes__item ">
-                          <div>
-                            <input class="treatment-checkbox nhsuk-checkboxes__input"
-                            type="checkbox" onclick="hideBanner();"
-                            value="338223275"
-                            id="checkboxId_02"
-                            name="selectedTreatments"
-                            data-firstname="Jane"
-                            data-lastname="Doe"
-                            data-entitlement="EHIC"
-                            data-initialcost="300.00"
-                            data-currentcost="300.00"
-                            data-agreement="TCA">
-                              <label class="nhsuk-label nhsuk-checkboxes__label" for="checkboxId_02">
-                                <span class="nhsuk-u-visually-hidden">All checkboxes</span>
-                              </label>
-                          </div>
-                        </div>
-                    </div>
-                  </fieldset>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Treatment ID<br>(Invoice ID)</span>
-                  <span>338223275<br>
-                  (282839442)</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">First name</span>
-                  <span>Jane</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Last name</span>
-                  <span>Doe</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Entitlement</span>
-                  <span>EHIC</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Initial cost (£)</span>
-                  <span>300.00</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Current cost (£)</span>
-                  <span>300.00</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Agreement</span>
-                  <span>TCA</span>
-                </td>
-                <td role="cell" class="nhsuk-table__cell">
-                  <span class="nhsuk-table-responsive__heading">Action</span>
-                  <span><a href="../s1/account/dependant/personal-details">View patient record</a><span class="nhsuk-u-visually-hidden">for John Doe</span></span>
-                </td>
-              </tr>
+                  </td>
+
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Treatment ID<br>(Invoice ID)</span>
+                    <span>{{ treatment.id }}<br>({{ treatment.invoice }})</span>
+                  </td>
+
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">First name</span>
+                    <span>{{ treatment.first }}</span>
+                  </td>
+
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Last name</span>
+                    <span>{{ treatment.last }}</span>
+                  </td>
+
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Entitlement</span>
+                    <span>{{ treatment.entitlement }}</span>
+                  </td>
+
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Initial cost (£)</span>
+                    <span>{{ treatment.initial }}</span>
+                  </td>
+
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Current cost (£)</span>
+                    <span>{{ treatment.current }}</span>
+                  </td>
+
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Agreement</span>
+                    <span>{{ treatment.agreement }}</span>
+                  </td>
+
+                  <td role="cell" class="nhsuk-table__cell">
+                    <span class="nhsuk-table-responsive__heading">Action</span>
+                    <span>
+                      <a href="../s1/account/personal-details">
+                        View patient record
+                      </a>
+                      <span class="nhsuk-u-visually-hidden">
+                        for {{ treatment.first }} {{ treatment.last }}
+                      </span>
+                    </span>
+                  </td>
+                </tr>
+              {% endfor %}
 
             </tbody>
-         </table>
+          </table>
          
 
           </form>
@@ -342,60 +298,81 @@ Select treatments to add to resubmission
 
 {% endblock %}
 
+{
 {% block pageScripts %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-      const checkboxes = document.querySelectorAll(".treatment-checkbox");
-      const addTreatmentsButton = document.getElementById("add-treatments-button"); 
-      const selectAllLink = document.getElementById("select-all-link");
-  
-      // Restore previous selections
-      const saved = JSON.parse(sessionStorage.getItem("selectedTreatments")) || [];
-      checkboxes.forEach(cb => {
-          cb.checked = saved.some(t => t.id === cb.value);
-      });
-  
-      // --- Shared helpers ---
+
+    const checkboxes = document.querySelectorAll(".treatment-checkbox");
+    const addTreatmentsButton = document.getElementById("add-treatments-button");
+    const selectAllLink = document.getElementById("select-all-link");
+
+    // Restore previous selections
+    const saved = JSON.parse(sessionStorage.getItem("selectedTreatments")) || [];
+
+    checkboxes.forEach(cb => {
+      cb.checked = saved.some(t => String(t.id) === String(cb.value));
+    });
+
+    // --- Shared helpers ---
     function updateButtonState() {
-        const anyChecked = [...checkboxes].some(cb => cb.checked);
-        addTreatmentsButton.style.pointerEvents = anyChecked ? "auto" : "none"; 
-    }
-  
-      function saveSelectedTreatments() {
-          const selectedTreatments = [...checkboxes]
-              .filter(cb => cb.checked)
-              .map(cb => ({
-                  id: cb.value,
-                  firstName: cb.dataset.firstname,
-                  lastName: cb.dataset.lastname,
-                  entitlement: cb.dataset.entitlement,
-                  initialCost: cb.dataset.initialcost, 
-                  currentCost: cb.dataset.currentcost,
-                  agreement: cb.dataset.agreement
-              }));
-  
-        console.log("Saving treatments:", selectedTreatments); // Debugging
-        sessionStorage.setItem("selectedTreatments", JSON.stringify(selectedTreatments));
-    }
-  
-      // Checkbox change
-      checkboxes.forEach(cb => {
-          cb.addEventListener("change", () => {
-              updateButtonState();
-              saveSelectedTreatments();
-          });
-      });
-  
-      if (selectAllLink) {
-        selectAllLink.addEventListener("click", function (e) {
-            e.preventDefault();
-            checkboxes.forEach(cb => { cb.checked = true; });
-            updateButtonState();
-            saveSelectedTreatments();
-        });
+      const anyChecked = [...checkboxes].some(cb => cb.checked);
+
+      if (addTreatmentsButton) {
+        addTreatmentsButton.style.pointerEvents = anyChecked ? "auto" : "none";
+        addTreatmentsButton.setAttribute("aria-disabled", String(!anyChecked));
+      }
     }
 
-      updateButtonState();
+    // --- Save selected treatments ---
+    function saveSelectedTreatments() {
+
+      const selectedTreatments = [...checkboxes]
+        .filter(cb => cb.checked)
+        .map(cb => ({
+          id: cb.value,
+          invoiceId: cb.dataset.invoiceid,
+          firstName: cb.dataset.firstname,
+          lastName: cb.dataset.lastname,
+          entitlement: cb.dataset.entitlement,
+          initialCost: cb.dataset.initialcost,
+          currentCost: cb.dataset.currentcost,
+          agreement: cb.dataset.agreement
+        }));
+
+      console.log("Saving treatments:", selectedTreatments);
+
+      sessionStorage.setItem(
+        "selectedTreatments",
+        JSON.stringify(selectedTreatments)
+      );
+    }
+
+    // --- Checkbox change ---
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", () => {
+        updateButtonState();
+        saveSelectedTreatments();
+      });
+    });
+
+    // --- Select all treatments ---
+    if (selectAllLink) {
+      selectAllLink.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        checkboxes.forEach(cb => {
+          cb.checked = true;
+        });
+
+        updateButtonState();
+        saveSelectedTreatments();
+      });
+    }
+
+    // --- Initial state ---
+    updateButtonState();
+
   });
-  </script>
+</script>
 {% endblock %}
